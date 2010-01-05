@@ -1,0 +1,74 @@
+.background {
+	background-color: f7f7ef
+; font-size: 11pt; font-style: normal
+	}
+body {
+	background-color: f7f7ef
+; font-size: 11pt; font-style: normal
+	}
+.bordercolor {  border: 1px solid #31659C; font-size: 9pt}
+.button_query {  margin-top: auto; width: auto; border: thin none #FFFFFF; font-size: 11pt; font-style: normal}
+.banner {
+	background-color: #336699;
+	font-size: 9pt;
+	color: #FFFFFF;
+	text-align: center;
+	height: 24px;
+
+
+}
+.checkbox {  border: thin #FFFFFF ridge; background-color: #00FF66; font-size: 11pt; font-style: normal}
+.font_define {  font-size: 9pt}
+td {
+	font-size: 9pt;
+}
+.input1 {
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #eeeeee;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #eeeeee;
+	font-size: 9pt;
+	background-color: #cccccc;
+	color: #000000;
+	height: 30px;
+
+
+}
+.input2 {
+	border: 1px solid #336699;
+}
+a {
+	color: #003366;
+}
+a:hover {
+	color: #000000;
+	text-decoration: none;
+}
+.textarea1{
+	overflow:hidden;
+	border:0px solid red;
+	background-color:white;
+	font-size: 18px;
+	line-height: 30px;
+	font-weight: bold;
+	font-family: "·ÂËÎ_GB2312";
+}
+.textarea2{background-color:white;}
+.textarea3 {
+	font-size: 14px;
+	font-weight: normal;
+	line-height: normal;
+	border: thin groove #FFFFFF;
+	overflow: auto;
+	width: auto;
+
+
+}
+.title {
+	font-family: "ºÚÌå";
+	font-size: 18pt;
+}
