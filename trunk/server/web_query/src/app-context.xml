@@ -48,5 +48,5 @@
 	<!-- 需要由spring注入的bean定义 -->
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
-
+	<bean id="SearchDAO" class="com.basesoft.modules.search.SearchDAO"></bean>
 </beans>
