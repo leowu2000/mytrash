@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="server"
+  name="web_query"
   id="myeclipse.1262180215343"
   context-root="/"
   j2ee-spec="5.0"
-  archive="server.war">
+  archive="web_query.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

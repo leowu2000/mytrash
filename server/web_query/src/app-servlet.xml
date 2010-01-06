@@ -8,6 +8,7 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<value>
+				/search.do=SearchController
 			</value>
 		</property>
 	</bean>
@@ -28,5 +29,6 @@
     </bean>
 
 <!-- 定义上面urlMapping所对应的类 -->
+	<bean name="SearchController" class="com.basesoft.modules.search.SearchController" />
 </beans>
 
