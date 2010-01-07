@@ -8,6 +8,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.basesoft.core.CommonController;
+import com.basesoft.core.PageList;
 
 public class SearchController extends CommonController {
 
@@ -19,6 +20,7 @@ public class SearchController extends CommonController {
 			HttpServletResponse response, ModelAndView mv) throws Exception {
 		// TODO Auto-generated method stub
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
+		int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 		
 		if("main".equals(action)){//主页查询
 			//信息类型
@@ -43,7 +45,7 @@ public class SearchController extends CommonController {
 			
 			String sql = "";
 			//根据所选信息类型确定检索的表及select语句的头
-			searchDAO.getSortinfosql(select_sortinfo);
+			PageList listResult = searchDAO.getResult(select_sortinfo,select_sort,xzqh,lysx,date_start,date_end,text_fill,check_projectname,check_unit,check_title, page);
 		}
 		
 		return null;
