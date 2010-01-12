@@ -28,6 +28,7 @@ MM_reloadPage(true);
 %>
 <frameset  onload="javascript:setinit(170);" name="rowsset"  rows="0,*" frameborder="NO" border="0" framespacing="0" cols="*"> 
   <frame name="queryFrame" scrolling="NO" noresize src="/modules/search/search_main.jsp" >
+  <frame name="result">
 </frameset>
 <noframes>
 <body bgcolor="#FFFFFF" text="#000000"  >

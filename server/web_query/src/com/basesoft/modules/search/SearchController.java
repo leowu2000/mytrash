@@ -43,15 +43,34 @@ public class SearchController extends CommonController {
 			//信息标题
 			String check_title = ServletRequestUtils.getStringParameter(request, "check_title", "");
 			
-			String sql = "";
-			//根据所选信息类型确定检索的表及select语句的头
-			PageList listResult = searchDAO.getResult(select_sortinfo,select_sort,xzqh,lysx,date_start,date_end,text_fill,check_projectname,check_unit,check_title, page);
+			if("qbxx".equals(select_sortinfo)){//全部信息
+				
+			}else {
+				//根据检索条件检索出的结果
+				PageList listResult = searchDAO.getResult(select_sortinfo,select_sort,xzqh,lysx,date_start,date_end,text_fill,check_projectname,check_unit,check_title, page);
+				
+				if("yxzt".equals(select_sortinfo)){//查询运行状态
+					mv = new ModelAndView("/modules/result/result_yxzt");
+				}else if("xqxx".equals(select_sortinfo)){//查询险情信息类型
+					mv = new ModelAndView("/modules/result/result_xqxx");
+				}else if("fxjb".equals(select_sortinfo)){//查询防汛简报
+					mv = new ModelAndView("/modules/result/result_fxjb");
+				}else if("fxxd".equals(select_sortinfo)){//查询防汛行动
+					mv = new ModelAndView("/modules/result/result_yxzt.jsp");
+				}else if("zqbg".equals(select_sortinfo)){//查询灾情报告
+					mv = new ModelAndView("/modules/result/result_zqbg");
+				}else if("hqbg".equals(select_sortinfo)){//查询旱情报告
+					mv = new ModelAndView("/modules/result/result_yxzt.jsp");
+				}
+				
+				mv.addObject("pageList", listResult);
+			}
 		}
 		
-		return null;
+		return mv;
 	}
 
-	public void setSearhDAO(SearchDAO searchDAO) {
+	public void setSearchDAO(SearchDAO searchDAO) {
 		this.searchDAO = searchDAO;
 	}
 	
