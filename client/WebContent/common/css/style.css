@@ -1,0 +1,160 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #E2EFF4;
+	SCROLLBAR-SHADOW-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR: #5C9ABC;
+	SCROLLBAR-ARROW-COLOR: #5C9ABC;
+	SCROLLBAR-DARKSHADOW-COLOR: #5C9ABC;
+	SCROLLBAR-BASE-COLOR: #FFFFFF;
+}
+td {
+	font-size: 9pt;
+}
+.input1 {
+	height: 21px;
+	width: 151px;
+	background-image: url(input1.jpg);
+	border: 0px;
+	left: 5px;
+	top: 5px;
+	right: 5px;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.input2 {
+	height: 21px;
+	width: 123px;
+	background-image: url(input1.jpg);
+	border: 0px;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-left: 5px;
+
+
+}
+.btn1 {
+	padding-top: 3px;
+
+}
+a {
+	text-decoration: none;
+	color: #484833;
+
+}
+a:hover {
+	text-decoration: underline;
+	color: #6B6B4B;
+
+}
+.back1 {
+	background-repeat: no-repeat;
+}
+.back2 {
+	background-repeat: repeat-x;
+}
+.back3 {
+	background-repeat: repeat-x;
+	background-position: bottom;
+
+}
+.p14 {
+	font-size: 14px;
+	padding-top: 2px;
+	font-weight: bolder;
+
+}
+.tree {
+	padding-left: 5px;
+
+}
+input {
+	border: 1px solid #484833;
+}
+
+.input3 {
+	border: 0px solid #484833;
+}.z {
+	border: thin groove #DED196;
+}
+.inputwh {
+	background-color: #EDF7DF;
+	border: 0px none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.style {
+	FONT-SIZE: 12px;
+	WIDTH: 100%;
+	COLOR: #004F00;
+	POSITION: relative;
+	text-align: left;
+	font-weight: normal;
+	padding-left: 15px;
+	padding-right: 10px;
+}
+.style4 {
+	font-size: 20px;
+	font-weight: bold;
+	color: #17548A;
+}
+
+.divStyle{
+	PADDING-RIGHT:10px;
+	OVERFLOW-Y:auto;
+	OVERFLOW-X:no;
+	PADDING-LEFT:10px;
+	SCROLLBAR-FACE-COLOR: #E2EFF4;
+	SCROLLBAR-SHADOW-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR: #5C9ABC;
+	SCROLLBAR-ARROW-COLOR: #5C9ABC;
+	SCROLLBAR-DARKSHADOW-COLOR: #5C9ABC;
+	SCROLLBAR-BASE-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR:#ffffff;
+	PADDING-BOTTOM:0px;
+	OVERFLOW:auto;
+	WIDTH:100%;
+	COLOR:blue;
+	
+	LINE-HEIGHT:100%;
+	PADDING-TOP:0px;
+	LETTER-SPACING:1pt;
+	HEIGHT:400;
+	TEXT-ALIGN:left
+}
+.lines{
+	color: #ff0000; 
+	background-color: #F9FEF3; 
+	border: #A59D9D;
+	border-style: solid; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px;
+}
+#menuBar {
+	position: absolute;
+	right: -202px;
+	width: 0px;
+	top: 0px;
+	clip: rect()
+}
+
+#glider {
+	position: absolute;
+	right: 200px;
+	top: 0px;
+	width: 0px
+}
+
+#mainDIV{ 
+	border:0px; 
+	text-align:left; 
+} 
+#contentDIV{ 
+	width:100%; 
+	border:0px; 
+	margin:0 auto;
+	height:100px;
+	overflow-x:scroll;
+}
