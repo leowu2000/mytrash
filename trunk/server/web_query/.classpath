@@ -6,10 +6,11 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-2.5.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-web-2.5.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-webmvc-2.5.6.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/kingbasejdbc4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-dbcp-1.2.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-pool.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-fileupload-1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/kingbasejdbc3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-collections-3.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

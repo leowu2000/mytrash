@@ -19,7 +19,7 @@ public abstract class CommonController extends AbstractController {
 		ModelAndView mv = null;
 		try {
 			mv = beforeHandleRequestInternal(request, response, mv);
-			if (mv == null) {
+			if (mv != null) {
 				mv = doHandleRequestInternal(request, response, mv);
 			}
 			mv = afterHandleRequestInternal(request, response, mv);
