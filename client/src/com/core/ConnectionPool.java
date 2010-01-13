@@ -9,10 +9,10 @@ public class ConnectionPool {
 	
 	public static void main(String args[]) throws Exception {
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-		String dburl = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=f:\\cpjdb.mdb";
+		String dburl = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=f:\\hpjdb.mdb";
 		Connection conn = DriverManager.getConnection(dburl);
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from tb_lysx1 where Mid(CTCD,1,2)=MID('AC000000',1,2) and Mid(CTCD,1,5)<>MID('AC000000',1,5)");
+		ResultSet rs = stmt.executeQuery("select Mid('AAA00001',2,6) ,ctcd from tb_lysx1");
 		System.out.println("行政区划名称\t省市县名称");
 		while (rs.next()) {
 			System.out.println(rs.getString(1) + "\t" + new String(rs.getString(2).getBytes(),"GB2312"));

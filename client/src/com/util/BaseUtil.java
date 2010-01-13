@@ -142,7 +142,6 @@ public class BaseUtil {
 		try{
 			conn = ConnectionPool.getConnection(path);
 			String sql = "select * from tb_lysx1 where Mid(CTCD,1,2)=MID('"+parentcode+"',1,2) and Mid(CTCD,1,5)<>MID('"+parentcode+"',1,5)";
-			System.out.println(sql);
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){

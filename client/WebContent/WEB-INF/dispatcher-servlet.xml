@@ -27,8 +27,10 @@
 		<property name="mappings">
 			<props>
 				<prop key="/hello.do">helloController</prop>
+				<prop key="/buiness.do">BuinessController</prop>
 			</props>
 		</property>
 	</bean>
 	<bean id="helloController" class="com.buiness.action.HelloController" />
+	<bean id="BuinessController" class="com.buiness.action.BuinessController" />
 </beans>

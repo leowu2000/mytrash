@@ -67,40 +67,6 @@ function runChkAll() {
  }
 }
 
-function submitOper(oper) {
-    noChecked=0;
-    str=document.all.RECORDID;
-    if(str == null){len=0;}else{len=str.length;}
-    if(!(len>=0)) {
-        if(str.checked)
-            noChecked=1;
-        else
-            noChecked=0;
-    }else{
-        val=0;
-        for(i=0;i<len;i++) {
-            if(str[i].checked==1) {
-                val=1;
-                break;
-            }
-        }
-        noChecked=val;
-    }
-    if(noChecked==1) {
-        if(oper=="delete") {
-            if (window.confirm('删除后不能恢复，请确认')) { 
-				document.forms[0].action.value="deleteReportData";
-                document.forms[0].submit();
-            }
-        }
-        if(oper=="goAuditPage") {
-				document.forms[0].action.value="goAuditPage";
-                document.forms[0].submit();
-        }
-    }else
-        alert("未选择任何记录");
-}
-
 function fPopUpCalendarDlg(ctrlobj)
 {
 	showx = event.screenX - event.offsetX - 4 - 210 ; // + deltaX;
@@ -139,7 +105,7 @@ function compareDate(DateOne,DateTwo)
 function checkNan(obj,name){
 	if(obj.value!=""){
 		if(isNaN(obj.value)){
-			alert(name+"只接受数字，请重新输入");
+			alert(name+"ֻ�������֣���������д");
 			obj.value="";
 			return false;
 		}
@@ -197,77 +163,5 @@ function printpage(m_printpage1){
     window.print(); 
     document.body.innerHTML = oldstr;
     return true;
-}
-
-function checkText(obj,name,type,len){
-	if(len!="0"){
-		if(type=="N"){
-			if(isNaN(obj.value)){
-				alert("'"+name+"'只接受数字请重新输入!");
-				obj.value="";
-			}else{
-				if(len.indexOf(",")>0){
-					var result=len.split(",");
-					var poi = obj.value.indexOf(".");
-					if(poi>0){
-						if(poi>result[0]){
-							alert("'"+name+"'输入格式:"+result[0]+"位整数"+result[1]+"位小数");
-							obj.value="0";
-							return false;
-						}
-						var detail = obj.value.length-poi-1;
-						if(detail>result[1]){
-							alert("'"+name+"'输入格式:"+result[0]+"位整数"+result[1]+"位小数");
-							obj.value="0";
-							return false;
-						}
-					}else{
-						if(obj.value.length>result[0]){
-							alert("'"+name+"'输入格式:"+result[0]+"位整数"+result[1]+"位小数");
-							obj.value="0";
-							return false;
-						}
-					}
-				}else{
-					if(obj.value.length>len){
-						alert("'"+name+"'输入格式:"+len+"位整数");
-						obj.value="0";
-						return false;
-					}
-				}
-			}
-		}else{
-			if(obj.value.length>len){
-				alert("'"+name+"'输入格式：'"+len+"个字符");
-				obj.value="";
-				return false;
-			}
-		}
-	}
-}
-
-function showPicResult(id){
-	var tbid = "HY_DP_C";
-	var year = "2009";
-	var dateid = "DT";
-	var filid = "P";
-	//TITLE,TABLEWIDTH,TABLEHEIGHT,BASEVALUE
-	var title = "";
-	var width = 600;
-	var height = 400;
-	
-	var mons="1,2,3,4,5,6,7,8,9,10,11,12";
-	var baseval="";
-
-	var url="";
-	if(id=="1"){
-		url += "/query/chartday.jsp?tbid="+tbid+"&year="+year+"&dateid="+dateid+"&filid="+filid;
-		
-	}else{
-		url += "/query/chartmonth.jsp?tbid="+tbid+"&year="+year+"&dateid="+dateid+"&filid="+filid;
-	}
-	url +="&title="+title+"&height="+height+"&width="+width+"&baseval="+baseval+"&mons="+mons;
-	url=encodeURI(url);
-	window.open (url, '', 'height='+height+', width='+width+', top=200, left=300, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no');
 }
 
