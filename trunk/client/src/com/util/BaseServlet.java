@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.buiness.dao.BuinessDao;
+import com.buiness.form.PrjBean;
+
 public class BaseServlet extends HttpServlet{
 	public BaseServlet() {
 		super();
@@ -27,7 +30,11 @@ public class BaseServlet extends HttpServlet{
 		//cntcd,PROVNM
 		String path = request.getRealPath("/");
 		String type = request.getParameter("type");
-
+		String val = request.getParameter("val");
+		String hlxx[]={"","","",""};
+		if(val!=null &&val.length()>0){
+			hlxx= BuinessDao.getPrjLyxx(val, path).split("-"); 
+		}
 		if("load".trim().equals(type)){
 			String result="";
 			String result_z="";
@@ -93,7 +100,10 @@ public class BaseServlet extends HttpServlet{
 			if(lysl1List !=null && lysl1List.size()>0){
 				for(int i=0;i<lysl1List.size();i++){
 					LysxBean bean = (LysxBean)lysl1List.get(i);
-					result_lysx1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+					if(hlxx[0].trim().equals(bean.getCTNM().trim()))
+						result_lysx1 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_lysx1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
 			
@@ -101,21 +111,30 @@ public class BaseServlet extends HttpServlet{
 			if(lysl2List !=null && lysl2List.size()>0){
 				for(int i=0;i<lysl2List.size();i++){
 					LysxBean bean = (LysxBean)lysl2List.get(i);
-					result_lysx2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+					if(hlxx[1].trim().equals(bean.getCTNM().trim()))
+						result_lysx2 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_lysx2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
 			List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, ((LysxBean)lysl2List.get(0)).getCTCD());
 			if(zl1List !=null && zl1List.size()>0){
 				for(int i=0;i<zl1List.size();i++){
 					LysxBean bean = (LysxBean)zl1List.get(i);
-					result_zl1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+					if(hlxx[2].trim().equals(bean.getCTNM().trim()))
+						result_zl1 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_zl1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
 			List<LysxBean> zl2List = BaseUtil.getZliuList_two(path, ((LysxBean)zl1List.get(0)).getCTCD());
 			if(zl2List !=null && zl2List.size()>0){
 				for(int i=0;i<zl2List.size();i++){
 					LysxBean bean = (LysxBean)zl2List.get(i);
-					result_zl2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+					if(hlxx[3].trim().equals(bean.getCTNM().trim()))
+						result_zl2 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_zl2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
 			result_z = result_head_z+result_z+result_detail_z;
