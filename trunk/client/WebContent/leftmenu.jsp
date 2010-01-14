@@ -29,7 +29,7 @@ body {
 } 
 
 #nav li { 
-    background:#B6BDD2; /*一级目录的背景色*/ 
+    background:#B3D8DE; /*一级目录的背景色*/ 
     border-bottom:#FFF 1px solid; /*下面的一条白边*/ 
     float:left; 
     /*float：left,本不应该设置，但由于在Firefox不能正常显示 
@@ -37,7 +37,7 @@ body {
 } 
 
 #nav li a:hover{ 
-    background:#CC0000;    /*一级目录onMouseOver显示的背景色*/ 
+    background:#F45201;    /*一级目录onMouseOver显示的背景色*/ 
 } 
 
 #nav a:link  { 
@@ -77,7 +77,7 @@ body {
     color:#F3F3F3; 
     text-decoration:none; 
     font-weight:normal; 
-    background:#CC0000; 
+    background:#F45201; 
     /* 二级onmouseover的字体颜色、背景色*/ 
 } 
 
@@ -104,7 +104,8 @@ body {
 </style> 
 </head> 
 
-<body> 
+
+<body  background="/images/0729left_bg.jpg"> 
 <div id="PARENT"> 
 <ul id="nav"> 
 <li><a href="#Menu=ChildMenu1"  onclick="DoMenu('ChildMenu1')"><b>数据维护</b></a> 
