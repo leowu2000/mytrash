@@ -43,10 +43,10 @@ function helpSubmt(){
     <td background="/images/0729top_bg.jpg">&nbsp;</td>
     <td width="314" align="right" valign="top" background="/images/0729top_02.jpg"><table width="314" height="82" border="0" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="171" height="59">&nbsp;</td>
-        <td width="37" align="left"><a href="index.jsp" target="_top" class="whitefount" title="点击返回首页">首页</a></td>
-        <td width="37" align="left"><a href="#" class="whitefount" onclick="javascript:helpSubmt()" title="点击查看帮助">帮助</a></td>
-        <td width="72" align="left"><a href="logout.jsp" class="whitefount" title="点击退出系统">退出</a></td>
+        <td width="171" height="59" background="/images/0729top_bg.jpg">&nbsp;</td>
+        <td width="37" align="left" background="/images/0729top_bg.jpg"><a href="index.jsp" target="_top" class="whitefount" title="点击返回首页">首页</a></td>
+        <td width="37" align="left" background="/images/0729top_bg.jpg"><a href="#" class="whitefount" onclick="javascript:helpSubmt()" title="点击查看帮助">帮助</a></td>
+        <td width="72" align="left" background="/images/0729top_bg.jpg"><a href="logout.jsp" class="whitefount" title="点击退出系统">退出</a></td>
       </tr>
     </table></td>
   </tr>
