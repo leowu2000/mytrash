@@ -31,10 +31,16 @@ public class BaseServlet extends HttpServlet{
 		String path = request.getRealPath("/");
 		String type = request.getParameter("type");
 		String val = request.getParameter("val");
+		String cntcd = request.getParameter("cntcd");
 		String hlxx[]={"","","",""};
 		if(val!=null &&val.length()>0){
 			hlxx= BuinessDao.getPrjLyxx(val, path).split("-"); 
 		}
+		String xzqh[] = {"","",""};
+		if(cntcd!=null &&cntcd.length()>0){
+			xzqh= BuinessDao.getXzqhxx(cntcd,path).split("-");
+		}
+		
 		if("load".trim().equals(type)){
 			String result="";
 			String result_z="";
@@ -68,7 +74,10 @@ public class BaseServlet extends HttpServlet{
 			if(sxList !=null && sxList.size()>0){
 				for(int i=0;i<sxList.size();i++){
 					TbcntBean bean = (TbcntBean)sxList.get(i);
-					result_z +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
+					if(xzqh[0].trim().equals(bean.getCntcd()))
+						result_z +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
+					else
+						result_z +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 			}
 			
@@ -76,7 +85,10 @@ public class BaseServlet extends HttpServlet{
 			if(sList !=null && sList.size()>0){
 				for(int i=0;i<sList.size();i++){
 					TbcntBean bean = (TbcntBean)sList.get(i);
-					result_s +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
+					if(xzqh[1].trim().equals(bean.getCntcd()))
+						result_z +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
+					else
+						result_z +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 //				TbcntBean bean = (TbcntBean)sList.get(0);
 //				result_s+="<option value='"+bean.getCntcd().substring(0,3)+"200'>"+bean.getProvnm().trim().substring(0,3)+"½¼ÇøÏØ</option>";
@@ -85,7 +97,10 @@ public class BaseServlet extends HttpServlet{
 			if(xList !=null && xList.size()>0){
 				for(int i=0;i<xList.size();i++){
 					TbcntBean bean = (TbcntBean)xList.get(i);
-					result_x +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
+					if(xzqh[2].trim().equals(bean.getCntcd()))
+						result_z +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
+					else
+						result_z +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 			}
 			List<GclbBean> gcglList = BaseUtil.getGclbList(path);
