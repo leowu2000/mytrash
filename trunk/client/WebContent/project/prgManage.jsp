@@ -40,6 +40,7 @@
 	background-color: #E8EFFF;
 	text-align:center;
 }
+
 -->
 </style>
 <% 
@@ -75,7 +76,7 @@ function toEdit(){
 	}else{
 		if(result.lastIndexOf(",")>0){
 			alert("您一次只能修改一条记录!");
-		}else{
+		}else{			
 			document.frm.IDs.value=result;
 			document.frm.action="/buiness.do";
 			document.frm.actionType.value="peredit";
