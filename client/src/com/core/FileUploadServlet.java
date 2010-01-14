@@ -40,6 +40,7 @@ public class FileUploadServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			
 			request.getRequestDispatcher("").forward(
 					request, response);return;
 		} catch (Exception ex) {
