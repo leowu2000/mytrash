@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>无标题文档</title>
+<title>综合查询Frame</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script language="javascript" src="../script/common.js"></script>
+<script language="javascript" src="../../script/common.js"></script>
 
 <script language="JavaScript">
 <!--
@@ -27,7 +27,7 @@ MM_reloadPage(true);
 
 %>
 <frameset  onload="javascript:setinit(170);" name="rowsset"  rows="0,*" frameborder="NO" border="0" framespacing="0" cols="*"> 
-  <frame name="queryFrame" scrolling="NO" noresize src="../modules/search/search_main.jsp" >
+  <frame name="queryFrame" scrolling="NO" noresize src="../search/search_multi.jsp" >
   <frame name="result">
 </frameset>
 <noframes>

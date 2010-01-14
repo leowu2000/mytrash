@@ -9,7 +9,7 @@ List list = pageList.getList();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>运行状态</title>
+    <title>险情信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/common.js"></script>
@@ -43,9 +43,10 @@ List list = pageList.getList();
     <%
 	}else {
 	%>                                                                                        
-	<td width="30%">工程名称</td>
-    <td width="30%">填报单位名称</td>
-    <td width="20%">填报时间</td>                                                                                                         
+		<td  width="25%">险情名称</td>
+        <td  width="15%">工程名称</td>
+        <td  width="25%">填报单位名称</td>
+        <td  width="20%">填报时间</td>                                                                                                         
 	</tr>                                                                                                                    
                                                                                                                                  
 <%  
@@ -54,10 +55,11 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-	<td align='center'> <INPUT type="checkbox" id ="check<%=i %>" name="check<%=i %>" value="<%=map.get("PJRNO") %>" ></td>     
-	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_yxzt_z.asp?id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>  
-	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_yxzt_z.asp?id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTDPCD")%></a></td>                                                                                              
-	<td align='center'> <%=map.get("WTDPDT")%></td>                                                                                                
+	<td align='center'> <INPUT type="checkbox" id ="check<%=i %>" name="check<%=i %>" value="<%=map.get("DNCNO") %>" ></td>     
+	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_xq_z.asp?id=<%=map.get("DNCNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("DNCNM")%></a></td>  
+	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_xq_z.asp?id=<%=map.get("DNCNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("pjnm")%></a></td>
+	<td align='center'> <%=map.get("WTDPCD")%></td>                                                                                              
+	<td align='center'> <%=map.get("WTDPDT")%></td>                                                                                                 
 	</tr>                                                                                                                    
 <%            
 	}                                                                                                       

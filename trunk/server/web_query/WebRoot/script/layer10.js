@@ -14,62 +14,62 @@ document.write("<table width='100%' border='0'  align='center' cellpadding='0' c
 document.write("<tr><td width='20%'></td><td>");
 document.write("<table width='90%' border='0'  align='center' cellpadding='0' cellspacing='1' bgcolor='#336699' >");
 document.write("<tr align='center'>");
-document.write("<td width='30%' height='25' bgcolor='#E4E1D6'>³öÏÕ²¿Î»</td>");
+document.write("<td width='30%' height='25' bgcolor='#E4E1D6'>å‡ºé™©éƒ¨ä½</td>");
 document.write("<td width='20%' height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable21'>");
 document.write("</font></td>");        
-document.write("<td width='30%' height='25' bgcolor='#E4E1D6'>ÇÀÏÕ·½°¸</td>");
+document.write("<td width='30%' height='25' bgcolor='#E4E1D6'>æŠ¢é™©æ–¹æ¡ˆ</td>");
 document.write("<td width='20%' height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable22'>");
 document.write("</font></td></tr>");        
 
 document.write("<tr align='center'>");
-document.write("<td height='25' bgcolor='#E4E1D6'>ÇÀÏÕ×ÊÔ´Åä±¸</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>æŠ¢é™©èµ„æºé…å¤‡</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable23'>");
 document.write("</font></td>");        
-document.write("<td height='25' bgcolor='#E4E1D6'>ÈºÖÚÍ¶Èë</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>ç¾¤ä¼—æŠ•å…¥</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable24'>");
 document.write("</font></td></tr>");        
 
 document.write("<tr align='center'>");
-document.write("<td height='25' bgcolor='#E4E1D6'>½â·Å¾üÍ¶Èë</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>è§£æ”¾å†›æŠ•å…¥</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable25'>");
 document.write("</font></td>");        
-document.write("<td height='25' bgcolor='#E4E1D6'>Îä¾¯Í¶Èë</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>æ­¦è­¦æŠ•å…¥</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable26'>");
 document.write("</font></td></tr>");        
     
 document.write("<tr align='center'>");
-document.write("<td height='25' bgcolor='#E4E1D6'>½øÕ¹¼°½á¹û</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>è¿›å±•åŠç»“æœ</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable27'>");
 document.write("</font></td>");        
-document.write("<td height='25' bgcolor='#E4E1D6'>¿ÉÄÜÓ°Ïì·¶Î§</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>å¯èƒ½å½±å“èŒƒå›´</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable28'>");
 document.write("</font></td></tr>");        
 
 document.write("<tr align='center'>");
-document.write("<td height='25' bgcolor='#E4E1D6'>ÏÕÇéÔ­Òò·ÖÎö</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>é™©æƒ…åŸå› åˆ†æ</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable29'>");
 document.write("</font></td>");        
-document.write("<td height='25' bgcolor='#E4E1D6'>ÏÕÇé·¢Õ¹Ç÷ÊÆ</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>é™©æƒ…å‘å±•è¶‹åŠ¿</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable30'>");
 document.write("</font></td></tr>");        
         
 document.write("<tr align='center'>");
-document.write("<td height='25' bgcolor='#E4E1D6'>µ±Ç°ÔËĞĞË®Î»</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>å½“å‰è¿è¡Œæ°´ä½</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable31'>");
 document.write("</font></td>");        
-document.write("<td height='25' bgcolor='#E4E1D6'>ÇÀÏÕÊ±ÆøÏó×´¿ö</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>æŠ¢é™©æ—¶æ°”è±¡çŠ¶å†µ</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable32'>");
 document.write("</font></td></tr>");        
         
 document.write("<tr align='center'>");
-document.write("<td height='25' bgcolor='#E4E1D6'>Î´À´Ë®ÎÄÆøÏó×´¿ö</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>æœªæ¥æ°´æ–‡æ°”è±¡çŠ¶å†µ</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable33'>");
 document.write("</font></td>");        
-document.write("<td height='25' bgcolor='#E4E1D6'>²¹³äÃèÊö</td>");
+document.write("<td height='25' bgcolor='#E4E1D6'>è¡¥å……æè¿°</td>");
 document.write("<td height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable34'>");
 document.write("</font></td></tr>");        
 document.write("<tr height='25'><td height='25'> </td></tr>");
-document.write("<tr  align='center'><td align='center'><input type='button' name='button' value='¹Ø  ±Õ' onclick='self.close();' class='input1'></td></tr>")          
+document.write("<tr  align='center'><td align='center'><input type='button' name='button' value='å…³  é—­' onclick='self.close();' class='input1'></td></tr>")          
 document.write("</table>");
 document.write("</td>");
 document.write("</tr>");

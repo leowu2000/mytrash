@@ -14,7 +14,7 @@ function checkall(){
 	for(var i = 0; i<input1.length; i++){
         	checkChar = input1.charAt(i);
         	if (checkChar == "'") {
-        		alert("ÊäÈë¿òÖÐÓÐ·Ç·¨×Ö·û ' £¡");
+        		alert("è¾“å…¥æ¡†ä¸­æœ‰éžæ³•å­—ç¬¦ ' ï¼");
         		text_titleobj.select();
         		text_titleobj.focus();
         		return false;
@@ -24,7 +24,7 @@ function checkall(){
 	for(var i = 0; i<input2.length; i++){
         	checkChar = input2.charAt(i);
         	if (checkChar == "'") {
-        		alert("ÊäÈë¿òÖÐÓÐ·Ç·¨×Ö·û ' £¡");
+        		alert("è¾“å…¥æ¡†ä¸­æœ‰éžæ³•å­—ç¬¦ ' ï¼");
         		text_fillobj.select();
         		text_fillobj.focus();
         		return false;

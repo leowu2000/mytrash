@@ -1,8 +1,8 @@
 /*********************************************************************
-*  ¹¦ÄÜ¸ÅÊö£ºÏìÓ¦Êó±êÊÂ¼ş£¬ÏÔÊ¾ÎÄµµĞÅÏ¢
-*  ĞÂ½¨Ê±¼ä£ºÎ´Öª
-*  ×÷Õß£º    Ú±Ãû
-*  ĞŞ¸ÄÂÄÀú£ºÕûÀí·½·¨display()ºÍhide()£¬Ìí¼Ó×¢ÊÍ			2003/03/12	liubo
+*  åŠŸèƒ½æ¦‚è¿°ï¼šå“åº”é¼ æ ‡äº‹ä»¶ï¼Œæ˜¾ç¤ºæ–‡æ¡£ä¿¡æ¯
+*  æ–°å»ºæ—¶é—´ï¼šæœªçŸ¥
+*  ä½œè€…ï¼š    è¯’å
+*  ä¿®æ”¹å±¥å†ï¼šæ•´ç†æ–¹æ³•display()å’Œhide()ï¼Œæ·»åŠ æ³¨é‡Š			2003/03/12	liubo
 *
 *
 **********************************************************************
@@ -42,17 +42,17 @@ function display2(str21,str22,str23,str24,str25,str26,str27,str28,str29,str30,st
 	lable21.innerHTML=str21; 
 	lable22.innerHTML=str22; 
 	lable23.innerHTML=str23;
-	str24 = str24 + " ÈË"; 
+	str24 = str24 + " äºº"; 
 	lable24.innerHTML=str24; 
-	str25 = str25 + " ÈË"; 
+	str25 = str25 + " äºº"; 
 	lable25.innerHTML=str25; 
-	str26 = str26 + " ÈË"; 
+	str26 = str26 + " äºº"; 
 	lable26.innerHTML=str26; 
 	lable27.innerHTML=str27; 
 	lable28.innerHTML=str28; 
 	lable29.innerHTML=str29; 
 	lable30.innerHTML=str30; 
-	str31 = str31 + " Ã×"
+	str31 = str31 + " ç±³"
 	lable31.innerHTML=str31;
 	lable32.innerHTML=str32; 
 	lable33.innerHTML=str33; 

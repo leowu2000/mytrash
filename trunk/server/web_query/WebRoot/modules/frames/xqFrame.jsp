@@ -3,7 +3,7 @@
 <head>
 <title>无标题文档</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script language="javascript" src="../script/common.js"></script>
+<script language="javascript" src="../../script/common.js"></script>
 
 <script language="JavaScript">
 <!--
@@ -16,22 +16,12 @@ MM_reloadPage(true);
 // -->
 </script>
 </head>
-<%
-	//command  = trim(Request("command"))
-	//check_projectname  = trim(Request("check_projectname"))
-	//check_unit  = trim(Request("check_unit"))
-	//check_title  = trim(Request("check_title"))
-	//text_fill  = trim(Request("text_fill"))
-	
-	//'session("select_sortinfo") = "default"
-
-%>
-<frameset  onload="javascript:setinit(170);" name="rowsset"  rows="0,*" frameborder="NO" border="0" framespacing="0" cols="*"> 
-  <frame name="queryFrame" scrolling="NO" noresize src="../modules/search/search_main.jsp" >
-  <frame name="result">
+<frameset onload="javascript:setinit(55);"  name="rowsset" rows="0,*" frameborder="NO" border="0" framespacing="0" cols="*"> 
+  <frame name="queryFrame" scrolling="NO" noresize src="../search/search_xq.jsp">
+  <frame name="result" >
 </frameset>
 <noframes>
-<body bgcolor="#FFFFFF" text="#000000"  >
+<body>
 </body>
 </noframes> 
 </html>

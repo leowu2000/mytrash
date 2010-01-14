@@ -1,5 +1,5 @@
-//³õÊ¼»¯Îª0£¬ÎªÕÛµş×´Ì¬
-//µã»÷ºó±äÎª1£¬ÎªÕ¹¿ª×´Ì¬
+//åˆå§‹åŒ–ä¸º0ï¼Œä¸ºæŠ˜å çŠ¶æ€
+//ç‚¹å‡»åå˜ä¸º1ï¼Œä¸ºå±•å¼€çŠ¶æ€
 var changedflage;
 changedflage = 0;
 
@@ -82,7 +82,7 @@ function checkin(checkinput){
 
         	checkChar = input.charAt(i);
         	if (checkChar == "'") {
-        		alert("ÊäÈë¿òÖĞÓĞ·Ç·¨×Ö·û ' £¡");
+        		alert("è¾“å…¥æ¡†ä¸­æœ‰éæ³•å­—ç¬¦ ' ï¼");
         		checkinputobj.select();
         		checkinputobj.focus();
         		return false;
@@ -101,7 +101,7 @@ function checkin(checkinput){
     function window.onbeforeprint()
       {
       div1.style.visibility="hidden";
-      window.alert("´òÓ¡¹¤×÷¾ÍĞ÷£¬¿ªÊ¼´òÓ¡!");
+      window.alert("æ‰“å°å·¥ä½œå°±ç»ªï¼Œå¼€å§‹æ‰“å°!");
       history.go(-1);
       }
     function window.onafterprint()
