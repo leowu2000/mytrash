@@ -1,4 +1,4 @@
-//´ò¿ªÒ»¸öĞÂ´°¿Ú£¬Êä³ö·ûºÏÌõ¼şµÄÑ¡Ôñ½á¹û
+//æ‰“å¼€ä¸€ä¸ªæ–°çª—å£ï¼Œè¾“å‡ºç¬¦åˆæ¡ä»¶çš„é€‰æ‹©ç»“æœ
 function openWin(){
 
 
@@ -11,11 +11,11 @@ for(i=0;i<myform.length;i++){
 	    isArray=1;
 	}
 if(!isArray){
-	    alert("Ö»ÓĞÒ»¸ö¼ÇÂ¼,²»ÄÜ½øĞĞÉ¸Ñ¡"); 
+	    alert("åªæœ‰ä¸€ä¸ªè®°å½•,ä¸èƒ½è¿›è¡Œç­›é€‰"); 
 	    return(0);
 	    }	
 if (totalSelected==0) { 
-	   alert("Ã»ÓĞÑ¡Ôñ£¬ÇëÔÚ¸´Ñ¡¿òÀïÑ¡ÔñĞèÒªµÄ¼ÍÂ¼");
+	   alert("æ²¡æœ‰é€‰æ‹©ï¼Œè¯·åœ¨å¤é€‰æ¡†é‡Œé€‰æ‹©éœ€è¦çš„çºªå½•");
 	   return(0);
 	  	}
 
@@ -30,7 +30,7 @@ newWin.document.open();
 var tempStr=
 '<html>'+
 '<head>'+
-'<title>·ÀÑ´¼ò±¨²éÑ¯½á¹û</title>'+
+'<title>é˜²æ±›ç®€æŠ¥æŸ¥è¯¢ç»“æœ</title>'+
 '<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\">'+
 '<link rel=\"stylesheet\" href=\"../script/main.css\"><script language=\"javascript\">';
 newWin.document.writeln(tempStr);	
@@ -59,33 +59,33 @@ tempStr='<form id=\"selectform\">'+
 newWin.document.writeln(tempStr);
 tempStr='<tr bgcolor=\"#D6E0EA\"> '+
       '<td height=\"27\" colspan=\"7\"> '+
-        '<div align=\"center\"><b><font color=\"#0000FF\" face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"3\">²éÑ¯½á¹û£¨'+totalSelected+'£© '+
-          '<input type=\"button\" onClick=\"openWin();window.close();\" value=\"É¸Ñ¡½á¹û\" class=\"white\" name=\"button\">'+
+        '<div align=\"center\"><b><font color=\"#0000FF\" face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"3\">æŸ¥è¯¢ç»“æœï¼ˆ'+totalSelected+'ï¼‰ '+
+          '<input type=\"button\" onClick=\"openWin();window.close();\" value=\"ç­›é€‰ç»“æœ\" class=\"white\" name=\"button\">'+
           '</font></b></div>'+
       '</td>';
 newWin.document.writeln(tempStr);         
 tempStr=  '</tr>'+
     '<tr bgcolor=\"#D6E0EA\"> '+
       '<td width=\"5%\" height=\"32\"> '+
-        '<div align=\"center\"><font size=\"3\" ><b><font size=\"2\">É¸Ñ¡</font></b></font></div>'+
+        '<div align=\"center\"><font size=\"3\" ><b><font size=\"2\">ç­›é€‰</font></b></font></div>'+
       '</td>';
 newWin.document.writeln(tempStr);         
 tempStr='<td width=\"12%\" height=\"32\"> '+
-        '<div align=\"center\"><font size=\"3\" ><b><font size=\"2\">ÆÚÊı</font></b></font></div>'
+        '<div align=\"center\"><font size=\"3\" ><b><font size=\"2\">æœŸæ•°</font></b></font></div>'
       +'</td>';
 newWin.document.writeln(tempStr);         
 
 tempStr= '<td width=\"39%\" height=\"32\"> '+
-        '<div align=\"center\"><font size=\"3\" color=\"#000066\"><b><font size=\"2\">ÉÏ±¨Ê±¼ä</font></b></font></div>'+
+        '<div align=\"center\"><font size=\"3\" color=\"#000066\"><b><font size=\"2\">ä¸ŠæŠ¥æ—¶é—´</font></b></font></div>'+
       '</td>';
 newWin.document.writeln(tempStr);         
 tempStr='<td colspan=\"4\" height=\"32\" width=\"22%\"> '+
-        '<div align=\"center\"><font color=\"#000066\"><b><font size=\"2\">Ìî±¨µ¥Î»</font></b></font></div>'+
+        '<div align=\"center\"><font color=\"#000066\"><b><font size=\"2\">å¡«æŠ¥å•ä½</font></b></font></div>'+
       '</td>'+
     '</tr>';
 newWin.document.writeln(tempStr);       
    
-//Ñ­»·ÁĞ³öÑ¡Ôñ½á¹û
+//å¾ªç¯åˆ—å‡ºé€‰æ‹©ç»“æœ
 
 var bgColor=null;
 var temp=null; 

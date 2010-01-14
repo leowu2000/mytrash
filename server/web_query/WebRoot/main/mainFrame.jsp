@@ -13,7 +13,7 @@
     <frame src="left.htm" name="leftFrame" scrolling="NO" noresize>
     <frameset rows="20,*" cols="*" framespacing="0" frameborder="no" border="0">
       <frame src="line.htm" scrolling="no" name="lineFrame" >
-      <frame src="searchFrame.jsp" name="mainFrame">
+      <frame src="../modules/frames/multiFrame.jsp" name="mainFrame">
    </frameset>
   </frameset>
   <frame src="bottom.htm" scrolling="no" name = "button">

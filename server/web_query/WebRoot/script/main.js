@@ -1,38 +1,38 @@
-//´ò¿ªÒ»¸öĞÂ´°¿Ú£¬Êä³ö·ûºÏÌõ¼şµÄÑ¡Ôñ½á¹û
+//æ‰“å¼€ä¸€ä¸ªæ–°çª—å£ï¼Œè¾“å‡ºç¬¦åˆæ¡ä»¶çš„é€‰æ‹©ç»“æœ
 function direct_change(directname){
 
-//×ÛºÏ²éÑ¯
+//ç»¼åˆæŸ¥è¯¢
 if (directname == "zhcx"){
 	mainFrame.location="../interface/frameset_multcond.asp"
-//ÏÕÇé²éÑ¯
+//é™©æƒ…æŸ¥è¯¢
 }else if(directname == "xqcx"){
 
-//ÔËĞĞ×´Ì¬	
+//è¿è¡ŒçŠ¶æ€	
 }else if(directname == "yxzt"){
 
-//·ÀÑ´ĞĞ¶¯
+//é˜²æ±›è¡ŒåŠ¨
 }else if(directname == "fxxd"){
 
 	Window.mainFrame.location="../interface/Frameset_fxxq.asp.asp"
-//·ÀÑ´¼ò±¨
+//é˜²æ±›ç®€æŠ¥
 }else if(directname == "fxjb"){
 
-//ÔÖÇé²éÑ¯
+//ç¾æƒ…æŸ¥è¯¢
 }else if(directname == "zqcx"){
 
-//¶àÃ½Ìå
+//å¤šåª’ä½“
 }else if(directname == "dmt"){
 
-//ÀúÊ·×ÊÁÏ
+//å†å²èµ„æ–™
 }else if(directname == "lszl"){
 
-//ºµÇé²éÑ¯
+//æ—±æƒ…æŸ¥è¯¢
 }else if(directname == "hqcx"){
 
-//»áÉÌĞÅÏ¢	
+//ä¼šå•†ä¿¡æ¯	
 }else if(directname == "hsxx"){
 
-//ÓÃ»§¹ÜÀí
+//ç”¨æˆ·ç®¡ç†
 }else if(directname == "yhgl"){
 
 }

@@ -10,13 +10,13 @@ month=curdate.getMonth();
 month=month+1;
 day=curdate.getDate();
 day=day;
-htmlstring="´Ó"+"<select name='select_year_s' id='select_year_s' onChange='displayMonth(select_year_s)'>";
+htmlstring="ä»"+"<select name='select_year_s' id='select_year_s' onChange='displayMonth(select_year_s)'>";
 stryear=""
 stryear=stryear+"<option value="+year+" selected>"+year+"</option>";
 stryear=stryear+"<option value="+year1+">"+year1+"</option>";
 stryear=stryear+"<option value="+year2+">"+year2+"</option>";
 stryear=stryear+"</select>"
-stryear=stryear+"Äê";
+stryear=stryear+"å¹´";
 htmlstring=htmlstring+stryear;
 htmlstring=htmlstring+"<select name='select_mon_s' id='select_mon_s' onChange='displayDay(select_mon_s)'>";
 strmonth=""
@@ -36,7 +36,7 @@ for (i=10;i<13;i++)
 	  str1="<option value="+i+">"+i+"</option>";
 	strmonth=strmonth+str1;
 }
-strmonth=strmonth+"</select>ÔÂ";
+strmonth=strmonth+"</select>æœˆ";
 htmlstring=htmlstring+strmonth;
 htmlstring=htmlstring+"<select name='select_day_s' id='select_day_s'>";
 for (i=1;i<10;i++)
@@ -59,8 +59,8 @@ if (month==4 ||month==6 ||month==9 ||month==11){
 	  htmlstring=htmlstring+"<option value="+i+">"+i+"</option>";
 
 }
-htmlstring=htmlstring+"</select>ÈÕ";
-htmlstring=htmlstring+"£ µ½£ "+"<select name='select_year_e' id='select_year_e' onChange='displayMonth(select_year_e)'>";
+htmlstring=htmlstring+"</select>æ—¥";
+htmlstring=htmlstring+"î—±åˆ°î—±"+"<select name='select_year_e' id='select_year_e' onChange='displayMonth(select_year_e)'>";
 htmlstring=htmlstring+stryear;
 htmlstring=htmlstring+"<select name='select_mon_e' id='select_mon_e'  onChange='displayDay(select_mon_e)'>";
 htmlstring=htmlstring+strmonth;
@@ -114,17 +114,17 @@ if (month==4 ||month==6 ||month==9 ||month==11){
 		htmlstring=htmlstring+str1;
 	}
 }
-htmlstring=htmlstring+"</select>ÈÕ";
+htmlstring=htmlstring+"</select>æ—¥";
 document.write(htmlstring);
 
 
-///ÏÔÊ¾ÔÂ·İ
+///æ˜¾ç¤ºæœˆä»½
 function displayMonth(year_type) 
 {
 //
 }
 
-///ÏÔÊ¾ÈÕÆÚ
+///æ˜¾ç¤ºæ—¥æœŸ
 function displayDay(month_type) 
 {
 //	var objselect_mon_e=document.getElementById("select_mon_e");

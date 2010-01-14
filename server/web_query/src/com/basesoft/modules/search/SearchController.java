@@ -44,6 +44,7 @@ public class SearchController extends CommonController {
 			String check_title = ServletRequestUtils.getStringParameter(request, "check_title", "");
 			
 			if("qbxx".equals(select_sortinfo)){//全部信息
+				mv = new ModelAndView("/modules/result/result_qbxx");
 				
 			}else {
 				//根据检索条件检索出的结果
@@ -56,11 +57,11 @@ public class SearchController extends CommonController {
 				}else if("fxjb".equals(select_sortinfo)){//查询防汛简报
 					mv = new ModelAndView("/modules/result/result_fxjb");
 				}else if("fxxd".equals(select_sortinfo)){//查询防汛行动
-					mv = new ModelAndView("/modules/result/result_yxzt.jsp");
+					mv = new ModelAndView("/modules/result/result_fxxd.jsp");
 				}else if("zqbg".equals(select_sortinfo)){//查询灾情报告
-					mv = new ModelAndView("/modules/result/result_zqbg");
+					mv = new ModelAndView("/modules/result/result_zqg");
 				}else if("hqbg".equals(select_sortinfo)){//查询旱情报告
-					mv = new ModelAndView("/modules/result/result_yxzt.jsp");
+					mv = new ModelAndView("/modules/result/result_hqbg.jsp");
 				}
 				
 				mv.addObject("pageList", listResult);
