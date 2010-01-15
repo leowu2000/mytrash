@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>无标题文档</title>
+<title>险情查询Frame</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script language="javascript" src="../../script/common.js"></script>
 
@@ -16,12 +16,8 @@ MM_reloadPage(true);
 // -->
 </script>
 </head>
-<frameset onload="javascript:setinit(55);"  name="rowsset" rows="0,*" frameborder="NO" border="0" framespacing="0" cols="*"> 
-  <frame name="queryFrame" scrolling="NO" noresize src="../search/search_xq.jsp">
-  <frame name="result" >
-</frameset>
-<noframes>
-<body>
+<body bgcolor="#FFFFFF" text="#000000"  >
+<iframe name="queryFrame" height='60' width='100%' style="display:none" scrolling="NO" frameborder='0' src="../search/search_xq.jsp" ></iframe>
+<iframe name="result" width="100%" frameborder='0'></iframe>
 </body>
-</noframes> 
 </html>

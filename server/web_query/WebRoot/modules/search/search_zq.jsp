@@ -10,15 +10,15 @@
 </head>
 
 <BODY topmargin="3"  class="font_define">
-<form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=xq" target="result">
+<form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=zq" target="result">
   <div id="query" > 
     <div id="Layer3" style="position:absolute; width:400px; height:20px; z-index:2; left: 280px; top: 93px; background-color: #00CC33; layer-background-color: #00CC33; border: 1px none #000000; visibility: hidden"></div>
     <table width="98%" border="0" cellspacing="1" bgcolor="#336699" class="font_define">
       <tr align="center"> 
-        <td bgcolor="#336699"><strong><font color="#FFFFFF">险情名称</font></strong></td>
-        <td bgcolor="#FFFFFF"> <input name="text_title" id="text_title" class="input2" > </td>
-        <td bgcolor="#336699"><strong><font color="#FFFFFF">填报单位</font></strong></td>
-        <td bgcolor="#FFFFFF"> <input name="text_fill" id="text_fill" class="input2" > </td>
+        <td><font color="#FFFFFF">标题</font></td>
+        <td bgcolor="#FFFFFF"> <input name="text_title" class="input2" > </td>
+        <td><font color="#FFFFFF">填报单位</font></td>
+        <td bgcolor="#FFFFFF"> <input name="text_fill" class="input2" > </td>
         <td rowspan="2" bgcolor="#FFFFFF"><input id=submit_query name=submit_query type=submit value=查询 class="input1"></td>
       </tr>
       <tr align="center"> 
@@ -27,6 +27,8 @@
 			从<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
 			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
 		</td>
+      </tr>
+    </table> 
       </tr>
     </table>
   </div>  
