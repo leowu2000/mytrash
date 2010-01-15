@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>险情查询面板</title>
+<title>旱情查询面板</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../css/main.css" type="text/css">
 <script language="javascript" src="../../script/common.js"></script>
@@ -10,7 +10,7 @@
 </head>
 
 <BODY topmargin="3"  class="font_define">
-<form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=zq" target="result">
+<form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=hq" target="result">
   <div id="query" > 
     <div id="Layer3" style="position:absolute; width:400px; height:20px; z-index:2; left: 280px; top: 93px; background-color: #00CC33; layer-background-color: #00CC33; border: 1px none #000000; visibility: hidden"></div>
     <table width="98%" border="0" cellspacing="1" bgcolor="#336699" class="font_define">
@@ -28,7 +28,7 @@
 			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
 		</td>
       </tr>
-    </table> 
+    </table>
   </div>  
 </form>
 

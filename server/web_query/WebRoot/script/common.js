@@ -1,3 +1,6 @@
+/**
+ * 变换查询图标  显示查询面板
+ */
 function changeimg(){
   var mytd = document.getElementById('mytd');
   if(mytd==null){
@@ -6,6 +9,10 @@ function changeimg(){
   mytd.innerHTML = "<a href='#' onClick='backimg();'><img src='images/up.gif' border='0' width='51' height='15'></a>";
   parent.mainFrame.document.getElementById('queryFrame').style.display='';
 }
+
+/**
+ * 变换查询图标  隐藏查询面板
+ */
 function backimg(){
   var mytd = document.getElementById('mytd');
   if(mytd==null){
@@ -14,6 +21,16 @@ function backimg(){
   mytd.innerHTML = "<a href='#' onClick='changeimg();'><img src='images/down.gif' border='0' width='51' height='15'></a>";
   parent.mainFrame.document.getElementById('queryFrame').style.display='none';
 }
+
+/**
+ * 定义iframe高度
+ * @param int qHeight 查询面板高度
+ */
+function IFrameResize(qHeight){
+	document.getElementById("queryFrame").height = qHeight;
+	document.getElementById("result").height = document.body.offsetHeight - qHeight - 30;
+}
+
 //初始化为0，为折叠状态
 //点击后变为1，为展开状态
 var changedflage;
