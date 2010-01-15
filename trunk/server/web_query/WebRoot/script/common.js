@@ -1,3 +1,19 @@
+function changeimg(){
+  var mytd = document.getElementById('mytd');
+  if(mytd==null){
+  	mytd = parent.lineFrame.document.getElementById('mytd');
+  }
+  mytd.innerHTML = "<a href='#' onClick='backimg();'><img src='images/up.gif' border='0' width='51' height='15'></a>";
+  parent.mainFrame.document.getElementById('queryFrame').style.display='';
+}
+function backimg(){
+  var mytd = document.getElementById('mytd');
+  if(mytd==null){
+  	mytd = parent.lineFrame.document.getElementById('mytd');
+  }
+  mytd.innerHTML = "<a href='#' onClick='changeimg();'><img src='images/down.gif' border='0' width='51' height='15'></a>";
+  parent.mainFrame.document.getElementById('queryFrame').style.display='none';
+}
 //初始化为0，为折叠状态
 //点击后变为1，为展开状态
 var changedflage;
@@ -98,13 +114,13 @@ function checkin(checkinput){
       {div1.style.visibility="hidden";
        window.print()       
       }
-    function window.onbeforeprint()
+    function onbeforeprint()
       {
       div1.style.visibility="hidden";
       window.alert("打印工作就绪，开始打印!");
       history.go(-1);
       }
-    function window.onafterprint()
+    function onafterprint()
       {
       div1.style.visibility="visible";
      

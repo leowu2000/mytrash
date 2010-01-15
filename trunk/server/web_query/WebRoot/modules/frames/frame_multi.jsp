@@ -26,12 +26,8 @@ MM_reloadPage(true);
 	//'session("select_sortinfo") = "default"
 
 %>
-<frameset  onload="javascript:setinit(170);" name="rowsset"  rows="0,*" frameborder="NO" border="0" framespacing="0" cols="*"> 
-  <frame name="queryFrame" scrolling="NO" noresize src="../search/search_multi.jsp" >
-  <frame name="result">
-</frameset>
-<noframes>
 <body bgcolor="#FFFFFF" text="#000000"  >
+<iframe name="queryFrame" height='170' width='100%' style="display:none" scrolling="NO" frameborder='0' src="../search/search_multi.jsp" ></iframe>
+<iframe name="result" width="100%" frameborder='0'></iframe>
 </body>
-</noframes> 
 </html>

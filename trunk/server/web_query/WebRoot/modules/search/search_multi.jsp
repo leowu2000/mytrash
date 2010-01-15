@@ -65,8 +65,8 @@ function init(){
       <tr align="center"> 
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
         <td colspan="3" align="left" bgcolor="#FFFFFF">
-			从<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({position:{top:0},readOnly:true})">到
-			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({position:{top:0},readOnly:true})">
+			从<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
+			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
 		</td>
       </tr>
       <tr align="center"> 
