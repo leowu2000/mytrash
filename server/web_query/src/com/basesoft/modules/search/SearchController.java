@@ -1,9 +1,11 @@
 package com.basesoft.modules.search;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +15,6 @@ import com.basesoft.core.PageList;
 public class SearchController extends CommonController {
 
 	SearchDAO searchDAO;
-	JdbcTemplate jdbcTemplate;
 	
 	@Override
 	protected ModelAndView doHandleRequestInternal(HttpServletRequest request,
@@ -66,6 +67,38 @@ public class SearchController extends CommonController {
 				
 				mv.addObject("pageList", listResult);
 			}
+		}else if("search_consult".equals(action)){
+			mv = new ModelAndView("/modules/search/search_consult.jsp");
+			
+			int xq_count,yx_count,fx_count,zq_count,total_count;
+		    xq_count = 0;
+		    yx_count = 0;
+		    fx_count = 0;
+		    zq_count = 0;
+		    
+			List list = searchDAO.getHistory();
+			
+			for(int i=0;i<list.size();i++){
+				Map map = (Map)list.get(i);
+				String type = map.get("type")==null?"":map.get("type").toString();
+				if("1".equals(type)){//运行状态
+					yx_count = yx_count + 1;
+				}else if("2".equals(type)){//险情
+					xq_count = xq_count + 1;
+				}else if("3".equals(type)){//防汛行动
+					fx_count = fx_count + 1;
+				}else if("4".equals(type)){//灾情
+					zq_count = zq_count + 1;
+				}
+			}
+			total_count = yx_count + xq_count + fx_count + zq_count;
+			
+			mv.addObject("xq_count", xq_count);
+			mv.addObject("yx_count", yx_count);
+			mv.addObject("fx_count", fx_count);
+			mv.addObject("zq_count", zq_count);
+			mv.addObject("total_count", total_count);
+			return mv;
 		}
 		
 		return mv;
@@ -75,8 +108,4 @@ public class SearchController extends CommonController {
 		this.searchDAO = searchDAO;
 	}
 	
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
 }
