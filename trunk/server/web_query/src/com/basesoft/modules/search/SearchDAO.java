@@ -651,4 +651,9 @@ public class SearchDAO {
 		List list1 = jdbcTemplate.queryForList(sqlData1);
 		int count1 = jdbcTemplate.queryForInt(sqlCount1);
 	}
+	
+	public List getHistory(){
+		String sql = "select * from tb_hs";
+		return jdbcTemplate.queryForList(sql);
+	}
 }
