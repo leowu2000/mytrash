@@ -8,34 +8,6 @@
 </head>
 <style type="text/css">
 <!--
-.lt1{
-
-	font-family: "宋体";
-	font-size: 9pt;
-	font-weight: normal;
-	color: #484833;
-	text-decoration: none;
-	text-align:center;
-	background-color: #FFFFFF;
-}
-.lt2 {
-
-	font-family: "宋体";
-	font-size: 9pt;
-	font-weight: normal;
-	color: #484833;
-	text-decoration: none;
-	text-align:center;
-	background-color: #F2F5EB;
-}
-.title {
-	font-size: 10pt;
-	padding-top: 2px;
-	font-weight: bolder;
-	color: #000000;
-	background-color: #E8EFFF;
-	text-align:center;
-}
 -->
 </style>
 <script language="JAVASCRIPT">
@@ -50,7 +22,7 @@ function toEdit(){
 </script>
 <body>
 <table width="95%" align="center">
-	<tr><td align="center" ><span  class="style4">防汛简报管理</span></td></tr>
+	<tr><td align="center" ><span  class="style4">防汛抗旱简报管理</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">

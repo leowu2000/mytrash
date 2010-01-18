@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=GBK"%>
+<%@ page import="com.util.*" %>
+<%@ page import="com.fredck.FCKeditor.FCKeditor"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
@@ -6,182 +8,64 @@
 %> 
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
 </head>
 <style type="text/css">
 <!--
-.lt1{
 
-	font-family: "å®‹ä½“";
-	font-size: 9pt;
-	font-weight: normal;
-	color: #484833;
-	text-decoration: none;
-	text-align:center;
-	background-color: #FFFFFF;
-}
-.lt2 {
-
-	font-family: "å®‹ä½“";
-	font-size: 9pt;
-	font-weight: normal;
-	color: #484833;
-	text-decoration: none;
-	text-align:center;
-	background-color: #F2F5EB;
-}
-.title {
-	font-size: 10pt;
-	padding-top: 2px;
-	font-weight: bolder;
-	color: #000000;
-	background-color: #E8EFFF;
-	text-align:center;
-}
-.title2 {
-	font-size: 10pt;
-	padding-top: 2px;
-	font-weight: bolder;
-	color: #000000;
-	background-color: #E8EFFF;
-	text-align:left;
-}
 -->
 </style>
 
 <script language="JAVASCRIPT">
-function toAdd(){
-	location.href="/project/prgAdd.jsp";
+function toBack(){
+	location.href="/project/prgManage.jsp";
 }
-function loadSelect(){
-	if(window.XMLHttpRequest){ //Mozilla
-	    var xmlHttpReq=new XMLHttpRequest();
-	  }else if(window.ActiveXObject){
-	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	  }
-	  xmlHttpReq.open("GET", "/BaseServlet?type=load", false);
-	  xmlHttpReq.send(null);
-	 var result = xmlHttpReq.responseText;
-	 var val = result.split(";");
-	 SHENG.innerHTML=val[0];
-	 SHI.innerHTML=val[1];
-	 XIAN.innerHTML=val[2];
-	 GCLB.innerHTML=val[3];
-	 LY.innerHTML=val[4];
-	 SX.innerHTML=val[5];
-	 ZL1.innerHTML=val[6];
-	 ZL2.innerHTML=val[7];
-}
-function changeValue(style,type,obj){
-	if(window.XMLHttpRequest){ //Mozilla
-    	var xmlHttpReq=new XMLHttpRequest();
-	  }else if(window.ActiveXObject){
-	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	  }
-	 // alert("/BaseServlet?type=change&changeObjName="+style+"&changeType="+type+"&changeVal="+obj.value);
-	  xmlHttpReq.open("GET", "/BaseServlet?type=change&changeObjName="+style+"&changeType="+type+"&changeVal="+obj.value, false);
-	  xmlHttpReq.send(null);
-	  var result = xmlHttpReq.responseText;
-	  if(style=='sx'){
-		  if(type=='1'){
-			  var val = result.split(";");
-			  SHI.innerHTML=val[0];
-			  XIAN.innerHTML=val[1];
-			}else{
-				XIAN.innerHTML=result;
-			}
-	  }
-	  if(style=="ly"){
-			if(type=="1"){
-				 var val = result.split(";");
-				 SX.innerHTML=val[0];
-				 ZL1.innerHTML=val[1];
-				 ZL2.innerHTML=val[2];
-			}
-			if(type=="2"){
-				 var val = result.split(";");
-				 ZL1.innerHTML=val[0];
-				 ZL2.innerHTML=val[1];
-			}
-			if(type=="3"){
-				ZL2.innerHTML=result;
-			}
-		}
-	}
+
 </script>
-<body>
+<body scroll="auto">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">æ–°å¢å·¥æƒ…ä¿¡æ¯</span></td></tr>
+	<tr><td align="center" ><span  class="style4">ĞÂÔö·ÀÑ´¿¹ºµ¼ò±¨</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
+<input type="hidden" name="actionType" value=""/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title">å·¥ç¨‹åç§°[A]:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value=""/></td>
-		<td nowrap align="center" class="title">å·¥ç¨‹ç±»åˆ«[C]:</td>
-		<td  bgcolor="#FFFFFF">
-			<DIV id="GCLB"></DIV>
+		<td nowrap align="center" class="title" width="30%" >µ¥Î»</td>
+		<td nowrap align="center" class="title"  colspan="4">µÚ<input type="text" class="lines" value="" size="8"/> ÆÚ</td>
+		<td nowrap align="center" class="title" width="30%" ><%=UtilDateTime.nowDateStringCN() %></td>
+	</tr>
+	<tr height="25" >
+		<td align="center" class="title">±êÌâ:</td>
+		<td align="center" class="title" colspan="3">
+		<input type="text" name="" value="" size="25"/></td>
+		<td align="center" class="title2">¸½¼ş:</td>
+		<td bgcolor="#FFFFFF">
+		<input type="file" name="UpFile" size="20"> 
 		</td>
 	</tr>
-	<tr bgcolor="#FFFFFF">
-		<td colspan="2" valign="top">
-			<table width="100%" border="0">
-			<tr align="left" class="title2" height="30">
-				<td colspan="2">æ‰€å±åœ°åŒº</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">çœ/ç›´è¾–å¸‚[P]:</td>
-				<td bgcolor="#FFFFFF">
-						<DIV id="SHENG"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">å¸‚/åœ°åŒº[S]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="SHI"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">åŒº/å¿[D]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="XIAN"></DIV>
-				</td>
-				</tr>
-			</table>
-		</td>
-		<td colspan="2">
-			<table width="100%" border="0">
-			<tr align="left" class="title2" height="30">
-				<td colspan="2">æ‰€å±æµåŸŸæ°´ç³»</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">æµåŸŸ[V]:</td>
-				<td bgcolor="#FFFFFF" colspan="5">
-					<DIV id="LY"></DIV>
-				</td>
-			</tr>
-			<tr height="25" >
-				<td nowrap align="center" class="title2">æ°´ç³»[W]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="SX"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">ä¸€çº§æ”¯æµ[B]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="ZL1"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">äºŒçº§æ”¯æµ[T]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="ZL2"></DIV>
-				</td>
-			</tr>
-			</table>
-		</td>	
+	<tr height="25" >
+	<td class="title" colspan="6">
+	<%	           
+	    FCKeditor oFCKeditor3 ;
+	    oFCKeditor3 = new FCKeditor( request, "PRE_DYNAMIC") ;
+	    oFCKeditor3.setBasePath( "/FCKeditor/" ) ;
+		oFCKeditor3.setToolbarSet( "NowUse" ) ;
+	    oFCKeditor3.setHeight("260");
+	    //oFCKeditor.setValue( content==null?"":content );
+	    out.println(oFCKeditor3.create());
+     %>
+	</td>
+	</tr>
+	<tr height="25" >
+		<td nowrap align="center" class="title">Ç©·¢(Q):</td>
+		<td bgcolor="#FFFFFF"><input type="text" name="" value="" /></td>
+		<td nowrap align="center" class="title">ÉóºË(H):</td>
+		<td bgcolor="#FFFFFF"><input type="text" name="" value=""/></td>
+		<td nowrap align="center" class="title">Äâ¸å(N):</td>
+		<td bgcolor="#FFFFFF"><input type="text" name="" value="" /></td>
 	</tr>
 </table>
 </form>
@@ -189,9 +73,9 @@ function changeValue(style,type,obj){
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="ä¿  å­˜" onclick="">
+	<input type="button" name="" value="±£  ´æ" onclick="javascript:submiting()">
 	&nbsp;
-	<input type="button" name="" value="è¿”  å›" onclick="">
+	<input type="button" name="" value="·µ  »Ø" onclick="javascript:toBack()">
 	</tr>
 </table>
 </body>
