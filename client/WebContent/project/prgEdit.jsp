@@ -20,42 +20,7 @@
 </head>
 <style type="text/css">
 <!--
-.lt1{
 
-	font-family: "ËÎÌו";
-	font-size: 9pt;
-	font-weight: normal;
-	color: #484833;
-	text-decoration: none;
-	text-align:center;
-	background-color: #FFFFFF;
-}
-.lt2 {
-
-	font-family: "ËÎÌו";
-	font-size: 9pt;
-	font-weight: normal;
-	color: #484833;
-	text-decoration: none;
-	text-align:center;
-	background-color: #F2F5EB;
-}
-.title {
-	font-size: 10pt;
-	padding-top: 2px;
-	font-weight: bolder;
-	color: #000000;
-	background-color: #E8EFFF;
-	text-align:center;
-}
-.title2 {
-	font-size: 10pt;
-	padding-top: 2px;
-	font-weight: bolder;
-	color: #000000;
-	background-color: #E8EFFF;
-	text-align:left;
-}
 -->
 </style>
 
