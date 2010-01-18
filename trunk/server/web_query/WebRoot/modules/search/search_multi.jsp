@@ -9,7 +9,14 @@
 <script language="javascript" src="../../script/lysxtop.js"></script>
 <script type="text/javascript">
 function init(){
-  //document.getElementById('fxxq').submit();
+  var keywords = parent.parent.leftFrame.document.getElementById('text_fill').value;
+  if(!keywords==''){
+    document.getElementById('text_fill').value = keywords;
+    document.getElementById('check_projectname').checked = 'true';
+    document.getElementById('check_unit').checked = 'true';
+    document.getElementById('check_title').checked = 'true';
+  }
+  document.getElementById('fxxq').submit();
 }
 </script>
 <link rel="stylesheet" href="../../css/main.css" type="text/css">

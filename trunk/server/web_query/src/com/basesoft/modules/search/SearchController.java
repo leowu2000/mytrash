@@ -58,17 +58,17 @@ public class SearchController extends CommonController {
 				}else if("fxjb".equals(select_sortinfo)){//查询防汛简报
 					mv = new ModelAndView("/modules/result/result_fxjb");
 				}else if("fxxd".equals(select_sortinfo)){//查询防汛行动
-					mv = new ModelAndView("/modules/result/result_fxxd.jsp");
+					mv = new ModelAndView("/modules/result/result_fxxd");
 				}else if("zqbg".equals(select_sortinfo)){//查询灾情报告
 					mv = new ModelAndView("/modules/result/result_zqg");
 				}else if("hqbg".equals(select_sortinfo)){//查询旱情报告
-					mv = new ModelAndView("/modules/result/result_hqbg.jsp");
+					mv = new ModelAndView("/modules/result/result_hqbg");
 				}
 				
 				mv.addObject("pageList", listResult);
 			}
 		}else if("search_consult".equals(action)){
-			mv = new ModelAndView("/modules/search/search_consult.jsp");
+			mv = new ModelAndView("/modules/search/search_consult");
 			
 			int xq_count,yx_count,fx_count,zq_count,total_count;
 		    xq_count = 0;
@@ -76,7 +76,7 @@ public class SearchController extends CommonController {
 		    fx_count = 0;
 		    zq_count = 0;
 		    
-			List list = searchDAO.getHistory();
+			List list = searchDAO.getHS();
 			
 			for(int i=0;i<list.size();i++){
 				Map map = (Map)list.get(i);
