@@ -190,7 +190,7 @@ public class SearchDAO {
 			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
 				sql = sql + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "')  and ";
 			}
-			sql = sql + " 1 = 1  order by st.WTDPDT desc ";
+			sql = sql + " order by st.WTDPDT desc ";
 			//set rs = conn.Execute (UCASE(sql))
 					
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			
@@ -214,22 +214,17 @@ public class SearchDAO {
 				}
 			}
 			if(temp_flage == true){
-				sql = sql + ") ";
+				sql = sql + ") and ";
 			}					
 			
 			//按日期区间查询
 			String tempstr1 = date_start;
 			String tempstr2 = date_end;
-			if(temp_flage == true){
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " and (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-				}
-			}else{
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-				}
+			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+				sql = sql + "(WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
 			}	
-			sql = sql + " and 1 = 1 order by WTDT desc ";
+			
+			sql = sql + " 1 = 1 order by WTDT desc ";
 			//set rs = conn.Execute (UCASE(sql))
 					
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
@@ -253,22 +248,17 @@ public class SearchDAO {
 				}
 			}
 			if(temp_flage2 == true){
-				sql = sql + ") ";
+				sql = sql + ") and ";
 			}
 			
 			//按日期区间查询
 			String tempstr1 = date_start;
 			String tempstr2 = date_end;
-			if(temp_flage2 == true){
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " and  (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-				}
-			}else{
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "')";
-				}
+			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+				sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
 			}
-			sql = sql + " and 1 = 1 order by WTDT desc";
+			
+			sql = sql + " 1 = 1 order by WTDT desc";
 			//set rs = conn.Execute (UCASE(sql))
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
@@ -294,22 +284,16 @@ public class SearchDAO {
 				}
 			}
 			if(temp_flage3 == true){
-				sql = sql + ") ";
+				sql = sql + ") and ";
 			}
 
 			//按日期区间查询
 			String tempstr1 = date_start;
 			String tempstr2 = date_end;
-			if(temp_flage3 == true){
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " and  (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-				}
-			}else{
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "')";
-				}
+			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+				sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
 			}
-			sql = sql + " and 1 = 1 order by WTDT desc";
+			sql = sql + " 1 = 1 order by WTDT desc";
 			//set rs = conn.Execute (UCASE(sql))
 					
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
@@ -332,22 +316,16 @@ public class SearchDAO {
 				}
 			}
 			if(temp_flage4 == true){
-				sql = sql + ") ";
+				sql = sql + ") and ";
 			}
 
 			//按日期区间查询
 			String tempstr1 = date_start;
 			String tempstr2 = date_end;
-			if(temp_flage4 == true){
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " and  (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-				}
-			}else{
-				if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-					sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-				}
+			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+				sql = sql + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
 			}
-			sql = sql + " and 1 = 1 order by WTDT desc";
+			sql = sql + " 1 = 1 order by WTDT desc";
 			//set rs = conn.Execute (UCASE(sql))
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
@@ -461,8 +439,10 @@ public class SearchDAO {
 		//按日期区间查询
 		String tempstr1 = date_start;
 		String tempstr2 = date_end;
-		sql1 = sql1 + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "')  and ";
-		sql1 = sql1 + " 1 = 1 order by st.WTDPDT desc";
+		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+			sql1 = sql1 + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "') ";
+		}
+		sql1 = sql1 + " order by st.WTDPDT desc";
 //============================================================================================================
 			//把工程运行表同工程表相互关联
 		String sql2 = "select st.* from tb_pjrcn st,tb_pj pj where st.pjno = pj.pjno ";
@@ -528,8 +508,11 @@ public class SearchDAO {
 			//do nothing
 		}
 		
-		sql2 = sql2 + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "')  and ";
-		sql2 = sql2 + " 1 = 1  order by st.WTDPDT desc";
+		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+			sql2 = sql2 + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "') ";
+		}
+		
+		sql2 = sql2 + " order by st.WTDPDT desc";
 			
 //============================================================================================================
 		
@@ -551,16 +534,15 @@ public class SearchDAO {
 			}
 		}
 		if(atemp_flage == true){
-			sql3 = sql3 + ") ";
+			sql3 = sql3 + ") and ";
 		}
 		
 		//按日期区间查询
-		if(atemp_flage == true){
-			sql3 = sql3 + " and (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-		}else{
-			sql3 = sql3 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-		}
-		sql3 = sql3 + " and 1 = 1 order by WTDT desc";
+		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+			sql3 = sql3 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
+		}	
+			
+		sql3 = sql3 + " 1 = 1 order by WTDT desc";
 			
 //============================================================================================================
 		//防汛行动
@@ -580,15 +562,14 @@ public class SearchDAO {
 			}
 		}
 		if(atemp_flage2 == true){
-			sql4 = sql4 + ") ";
+			sql4 = sql4 + ") and ";
 		}
 		//按日期区间查询
-		if(atemp_flage2 == true){
-			sql4 = sql4 + " and  (WTDT >= '" + tempstr1 + "'  and  WTDT <= '" + tempstr2 + "') ";
-		}else{
-			sql4 = sql4 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "')";
+		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+			sql4 = sql4 + " (WTDT >= '" + tempstr1 + "'  and  WTDT <= '" + tempstr2 + "') and ";
 		}
-		sql4 = sql4 + " and 1 = 1 order by WTDT desc";
+		
+		sql4 = sql4 + " 1 = 1 order by WTDT desc";
 			
 //============================================================================================================
 		//防汛行动
@@ -608,15 +589,14 @@ public class SearchDAO {
 			}
 		}
 		if(atemp_flage3 == true){
-			sql5 = sql5 + ") ";
+			sql5 = sql5 + ") and ";
 		}
 		//按日期区间查询
-		if(atemp_flage3 == true){
-			sql5 = sql5 + " and  (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
-		}else{
-			sql5 = sql5 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "')";
+		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+			sql5 = sql5 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
 		}
-		sql5 = sql5 + " and 1 = 1 order by WTDT desc";
+		
+		sql5 = sql5 + " 1 = 1 order by WTDT desc";
 //============================================================================================================
 		String sql6 = "select * from tb_qt where ";
 		boolean atemp_flage4 = false;
@@ -633,15 +613,16 @@ public class SearchDAO {
 			}
 		}
 		if(atemp_flage4 == true){
-			sql6 = sql6 + ") ";
+			sql6 = sql6 + ") and ";
 		}
 		//按日期区间查询
-		if(atemp_flage4 == true){
-			sql6 = sql6 + " and  (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
+		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
+			sql6 = sql6 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
 		}else{
 			sql6 = sql6 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
 		}
-		sql6 = sql6 + " and 1 = 1 order by WTDT desc";
+		
+		sql6 = sql6 + " nd 1 = 1 order by WTDT desc";
 		
 		//查询数据
 		List list = new ArrayList();
@@ -652,7 +633,11 @@ public class SearchDAO {
 		int count1 = jdbcTemplate.queryForInt(sqlCount1);
 	}
 	
-	public List getHistory(){
+	/**
+	 * 取得会商记录
+	 * @return
+	 */
+	public List getHS(){
 		String sql = "select * from tb_hs";
 		return jdbcTemplate.queryForList(sql);
 	}

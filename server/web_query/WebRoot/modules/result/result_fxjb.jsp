@@ -67,10 +67,11 @@ List list = pageList.getList();
         <td colspan="6" height="1"></td>
       </tr>                                                                                                                               
 	<tr>                                                                                                                     
-	<td colspan="2">
-<table  class="font_define">
+	<td colspan="6">
+<table  class="font_define" width="100%">
 	<tr>
-	<td align='center'>                                                                                                                      
+	<td align='right'>     
+	<%=pageInfo.getHtml("/search.do?action=main") %>                                                                                                                 
 	</td>	
 	</tr>
 </table>
