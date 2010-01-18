@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=GBK"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
@@ -6,6 +6,7 @@
 %> 
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
@@ -14,7 +15,7 @@
 <!--
 .lt1{
 
-	font-family: "å®‹ä½“";
+	font-family: "ËÎÌå";
 	font-size: 9pt;
 	font-weight: normal;
 	color: #484833;
@@ -24,7 +25,7 @@
 }
 .lt2 {
 
-	font-family: "å®‹ä½“";
+	font-family: "ËÎÌå";
 	font-size: 9pt;
 	font-weight: normal;
 	color: #484833;
@@ -52,8 +53,8 @@
 </style>
 
 <script language="JAVASCRIPT">
-function toAdd(){
-	location.href="/project/prgAdd.jsp";
+function toBack(){
+	location.href="/project/prgManage.jsp";
 }
 function loadSelect(){
 	if(window.XMLHttpRequest){ //Mozilla
@@ -110,17 +111,52 @@ function changeValue(style,type,obj){
 			}
 		}
 	}
+function submiting(){
+	//´ÓÊı¾İ¿âÖĞ²éÑ¡²é¿´ÄÇÊÇ·ñ´æÔÚÍ¬ÃûÍ¬Á÷ÓòµÄ¹¤³ÌĞÅÏ¢Èç¹û´æÔÚ·µ»ØÌáÊ¾ĞÅÏ¢·ñÔòÔö¼Óµ½Êı¾İ¿â.
+	var gclb = document.forms[0].selectgcgl.value;
+	var cntcd = document.forms[0].selectx.value;
+	var hldm = document.forms[0].selectzl2.value;
+	document.forms[0].gclb.value=gclb;
+	document.forms[0].cntcd.value=cntcd;
+	document.forms[0].hldm.value=hldm;
+	var gcnm = document.forms[0].PJNM.value;
+	if(gcnm==""){
+		alert("¹¤³ÌÃû³Æ²»ÄÜÎª¿Õ,ÇëÌîĞ´!");
+		return false;
+	}
+	if(window.XMLHttpRequest){ //Mozilla
+    	var xmlHttpReq=new XMLHttpRequest();
+	  }else if(window.ActiveXObject){
+	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	  }
+	xmlHttpReq.open("GET", "/Check?type=prg&gcnm="+gcnm+"&gclb="+gclb+"&cntcd="+cntcd+"&hldm="+hldm, false);
+	xmlHttpReq.send(null);
+	var result = xmlHttpReq.responseText;
+	alert(result);
+	if(result=="true"){
+		alert("ÏµÍ³ÖĞ´æÔÚÏàÍ¬µÄ¹¤³ÌÃû³Æ,ÇëÖØĞÂÌîĞ´!");
+		return false;
+	}else{
+		document.forms[0].action="/buiness.do";
+		document.forms[0].actionType.value="add";
+		document.forms[0].submit();
+	}
+}
 </script>
 <body onload="loadSelect()">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">æ–°å¢å·¥æƒ…ä¿¡æ¯</span></td></tr>
+	<tr><td align="center" ><span  class="style4">ĞÂÔö¹¤ÇéĞÅÏ¢</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
+<input type="hidden" name="actionType" value=""/>
+<input type="hidden" name="gclb" value="">
+<input type="hidden" name="cntcd" value="">
+<input type="hidden" name="hldm" value="">
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title">å·¥ç¨‹åç§°[A]:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value=""/></td>
-		<td nowrap align="center" class="title">å·¥ç¨‹ç±»åˆ«[C]:</td>
+		<td nowrap align="center" class="title">¹¤³ÌÃû³Æ[A]:</td>
+		<td bgcolor="#FFFFFF"><input type="text" name="PJNM" value=""/></td>
+		<td nowrap align="center" class="title">¹¤³ÌÀà±ğ[C]:</td>
 		<td  bgcolor="#FFFFFF">
 			<DIV id="GCLB"></DIV>
 		</td>
@@ -129,22 +165,22 @@ function changeValue(style,type,obj){
 		<td colspan="2" valign="top">
 			<table width="100%" border="0">
 			<tr align="left" class="title2" height="30">
-				<td colspan="2">æ‰€å±åœ°åŒº</td>
+				<td colspan="2">ËùÊôµØÇø</td>
 			</tr>
 			<tr>
-				<td nowrap align="center" class="title2">çœ/ç›´è¾–å¸‚[P]:</td>
+				<td nowrap align="center" class="title2">Ê¡/Ö±Ï½ÊĞ[P]:</td>
 				<td bgcolor="#FFFFFF">
 						<DIV id="SHENG"></DIV>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap align="center" class="title2">å¸‚/åœ°åŒº[S]:</td>
+				<td nowrap align="center" class="title2">ÊĞ/µØÇø[S]:</td>
 				<td  bgcolor="#FFFFFF">
 					<DIV id="SHI"></DIV>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap align="center" class="title2">åŒº/å¿[D]:</td>
+				<td nowrap align="center" class="title2">Çø/ÏØ[D]:</td>
 				<td  bgcolor="#FFFFFF">
 					<DIV id="XIAN"></DIV>
 				</td>
@@ -154,28 +190,28 @@ function changeValue(style,type,obj){
 		<td colspan="2">
 			<table width="100%" border="0">
 			<tr align="left" class="title2" height="30">
-				<td colspan="2">æ‰€å±æµåŸŸæ°´ç³»</td>
+				<td colspan="2">ËùÊôÁ÷ÓòË®Ïµ</td>
 			</tr>
 			<tr>
-				<td nowrap align="center" class="title2">æµåŸŸ[V]:</td>
+				<td nowrap align="center" class="title2">Á÷Óò[V]:</td>
 				<td bgcolor="#FFFFFF" colspan="5">
 					<DIV id="LY"></DIV>
 				</td>
 			</tr>
 			<tr height="25" >
-				<td nowrap align="center" class="title2">æ°´ç³»[W]:</td>
+				<td nowrap align="center" class="title2">Ë®Ïµ[W]:</td>
 				<td  bgcolor="#FFFFFF">
 					<DIV id="SX"></DIV>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap align="center" class="title2">ä¸€çº§æ”¯æµ[B]:</td>
+				<td nowrap align="center" class="title2">Ò»¼¶Ö§Á÷[B]:</td>
 				<td  bgcolor="#FFFFFF">
 					<DIV id="ZL1"></DIV>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap align="center" class="title2">äºŒçº§æ”¯æµ[T]:</td>
+				<td nowrap align="center" class="title2">¶ş¼¶Ö§Á÷[T]:</td>
 				<td  bgcolor="#FFFFFF">
 					<DIV id="ZL2"></DIV>
 				</td>
@@ -189,9 +225,9 @@ function changeValue(style,type,obj){
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="ä¿  å­˜" onclick="">
+	<input type="button" name="" value="±£  ´æ" onclick="javascript:submiting()">
 	&nbsp;
-	<input type="button" name="" value="è¿”  å›" onclick="">
+	<input type="button" name="" value="·µ  »Ø" onclick="javascript:toBack()">
 	</tr>
 </table>
 </body>
