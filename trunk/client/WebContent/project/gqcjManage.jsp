@@ -32,7 +32,7 @@
 	font-size: 10pt;
 	padding-top: 2px;
 	font-weight: bolder;
-	color: #000000;
+	color: #15428B;
 	background-color: #E8EFFF;
 	text-align:center;
 }

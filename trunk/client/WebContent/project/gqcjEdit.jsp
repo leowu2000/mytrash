@@ -113,7 +113,7 @@ function changeValue(style,type,obj){
 </script>
 <body onload="loadSelect()">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">新增工情信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">修改工情信息</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
