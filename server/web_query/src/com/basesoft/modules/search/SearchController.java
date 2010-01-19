@@ -45,30 +45,30 @@ public class SearchController extends CommonController {
 			String check_title = ServletRequestUtils.getStringParameter(request, "check_title", "");
 			
 			if("qbxx".equals(select_sortinfo)){//全部信息
-				mv = new ModelAndView("/modules/result/result_qbxx");
+				mv = new ModelAndView("modules/result/result_qbxx");
 				
 			}else {
 				//根据检索条件检索出的结果
 				PageList listResult = searchDAO.getResult(select_sortinfo,select_sort,xzqh,lysx,date_start,date_end,text_fill,check_projectname,check_unit,check_title, page);
 				
 				if("yxzt".equals(select_sortinfo)){//查询运行状态
-					mv = new ModelAndView("/modules/result/result_yxzt");
+					mv = new ModelAndView("modules/result/result_yxzt");
 				}else if("xqxx".equals(select_sortinfo)){//查询险情信息类型
-					mv = new ModelAndView("/modules/result/result_xqxx");
+					mv = new ModelAndView("modules/result/result_xqxx");
 				}else if("fxjb".equals(select_sortinfo)){//查询防汛简报
-					mv = new ModelAndView("/modules/result/result_fxjb");
+					mv = new ModelAndView("modules/result/result_fxjb");
 				}else if("fxxd".equals(select_sortinfo)){//查询防汛行动
-					mv = new ModelAndView("/modules/result/result_fxxd");
+					mv = new ModelAndView("modules/result/result_fxxd");
 				}else if("zqbg".equals(select_sortinfo)){//查询灾情报告
-					mv = new ModelAndView("/modules/result/result_zqg");
+					mv = new ModelAndView("modules/result/result_zqg");
 				}else if("hqbg".equals(select_sortinfo)){//查询旱情报告
-					mv = new ModelAndView("/modules/result/result_hqbg");
+					mv = new ModelAndView("modules/result/result_hqbg");
 				}
 				
 				mv.addObject("pageList", listResult);
 			}
 		}else if("search_consult".equals(action)){
-			mv = new ModelAndView("/modules/search/search_consult");
+			mv = new ModelAndView("modules/search/search_consult");
 			
 			int xq_count,yx_count,fx_count,zq_count,total_count;
 		    xq_count = 0;
@@ -99,6 +99,19 @@ public class SearchController extends CommonController {
 			mv.addObject("zq_count", zq_count);
 			mv.addObject("total_count", total_count);
 			return mv;
+		}else if("xq".equals(action)){
+			//险情标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//填报单位
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//上报时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getXq(text_title, text_fill, date_start, date_end, page);
+		
+			mv = new ModelAndView("modules/result/result_xq");
+			mv.addObject("pageList", pageList);
 		}
 		
 		return mv;
