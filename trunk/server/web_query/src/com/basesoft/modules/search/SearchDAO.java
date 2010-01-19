@@ -33,7 +33,7 @@ public class SearchDAO {
 	 */
 	public PageList getResult(String select_sortinfo, String select_sort, String xzqh, String lysx, String date_start, String date_end, String text_fill, String check_projectname, String check_unit, String check_title, int page){
 		String sql = "";
-		int pagesize = 20;
+		int pagesize = 10;
 		int start = pagesize*(page - 1) + 1;
 		int end = pagesize*page;
 		
@@ -618,11 +618,9 @@ public class SearchDAO {
 		//按日期区间查询
 		if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
 			sql6 = sql6 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') and ";
-		}else{
-			sql6 = sql6 + " (WTDT >= '" + tempstr1 + "' and  WTDT <= '" + tempstr2 + "') ";
 		}
 		
-		sql6 = sql6 + " nd 1 = 1 order by WTDT desc";
+		sql6 = sql6 + " 1 = 1 order by WTDT desc";
 		
 		//查询数据
 		List list = new ArrayList();
@@ -640,5 +638,47 @@ public class SearchDAO {
 	public List getHS(){
 		String sql = "select * from tb_hs";
 		return jdbcTemplate.queryForList(sql);
+	}
+	
+	/**
+	 * 获取险情信息
+	 * @param text_title 险情标题
+	 * @param text_fill 填报单位
+	 * @param date_start 上报起始时间
+	 * @param date_end 上报截止时间
+	 * @param page 页码
+	 * @return
+	 */
+	public PageList getXq(String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		sql = "select * from tb_stdnc sc,tb_st st where sc.sttpcd = st.sttpcd ";
+		if(!"".equals(text_title)){
+			sql = sql + " and sc.dncnm like  '%" + text_title + "%' ";
+		}
+		if(!"".equals(text_fill)){
+			sql = sql + " and sc.WTDPCD like '%" +  text_fill + "%' ";
+		}
+		if(!"".equals(date_start)&&!"".equals(date_end)){
+			sql = sql + " and sc.WTDPDT >= '" + date_start + "' and  sc.WTDPDT <= '" + date_end + "' ";
+		}
+		
+		sql = sql + " order by sc.wtdpdt desc";
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
 	}
 }

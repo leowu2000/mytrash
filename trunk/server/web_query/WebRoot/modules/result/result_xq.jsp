@@ -9,7 +9,7 @@ List list = pageList.getList();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>防汛简报</title>
+    <title>险情信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/common.js"></script>
@@ -32,21 +32,21 @@ List list = pageList.getList();
         <td bgcolor="#FFFFFF">        
         <table  width="100%" border="0" class="font_define">                                                                                                                  
 	<tr  class="banner">
-		<td align='center'> 选择</td>
+	<td align='center'> 选择</td>
 	<%
     if (list.size()==0){
     %>
     
-    	<td align='center'> 
-			没有满足条件的记录！！！    
-    	</td>
+    <td align='center'> 
+		没有满足条件的记录！！！    
+    </td>
     <%
 	}else {
 	%>                                                                                        
-		<td width="10%">期</td>
-        <td width="35%">标题</td>
-        <td width="20%">填报单位名称</td>
-        <td width="15%">填报时间</td>                                                                                                        
+		<td  width="25%">险情名称</td>
+        <td  width="20%">建筑物名称</td>
+        <td  width="20%">填报单位名称</td>
+        <td  width="20%">填报时间</td>                                                                                                        
 	</tr>                                                                                                                    
                                                                                                                                  
 <%  
@@ -55,11 +55,11 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-	<td align='center'> <INPUT type="checkbox" id ="check<%=i %>" name="check<%=i %>" value="<%=map.get("RPJINCD") %>" ></td>     
-	<td><a href="javascript:openUrl('../edit_fold/edit_fxjb_z.asp?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("ISSUE")%></a></td>  
-	<td><a href="javascript:openUrl('../edit_fold/edit_fxjb_z.asp?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTTT")%></a></td>
-	<td><%=map.get("WTDPCD")%></td>                                                                                              
-	<td><%=map.get("WTDT")%></td>                                                                                                 
+	<td align='center'> <INPUT type="checkbox" id ="check<%=i %>" name="check<%=i %>" value="<%=map.get("DNCNO") %>" ></td>     
+	<td align="left"><a href="javascript:openUrl('../edit_fold/edit_xq.asp?id=<%=map.get("dncno")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage() %>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("dncnm")%></a></td>
+        <td align="center"><a href="javascript:openUrl('../edit_fold/edit_xq.asp?id=<%=map.get("dncno")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("stnm")%></a></td>
+        <td align="left"><%=map.get("WTDPCD")%></td>
+        <td align="center"><%=map.get("WTDPDT")%></td>                                                                                                
 	</tr>                                                                                                                    
 <%            
 	}                                                                                                       

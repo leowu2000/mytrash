@@ -7,9 +7,14 @@
 <script language="javascript" src="../../script/common.js"></script>
 <script language="javascript" src="../../script/xq.js"></script>
 <script src="../../script/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+function init(){
+  document.getElementById('fxxq').submit();
+}
+</script>
 </head>
 
-<BODY topmargin="3"  class="font_define">
+<BODY topmargin="3"  class="font_define" onload="init();">
 <form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=xq" target="result">
   <div id="query" > 
     <div id="Layer3" style="position:absolute; width:400px; height:20px; z-index:2; left: 280px; top: 93px; background-color: #00CC33; layer-background-color: #00CC33; border: 1px none #000000; visibility: hidden"></div>
