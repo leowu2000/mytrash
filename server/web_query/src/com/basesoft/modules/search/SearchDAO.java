@@ -681,4 +681,46 @@ public class SearchDAO {
 		
 		return pageList;
 	}
+	
+	/**
+	 * 获取灾情信息
+	 * @param text_title 标题
+	 * @param text_fill 填报单位
+	 * @param date_start 上报起始时间
+	 * @param date_end 上报截止时间
+	 * @param page 页码
+	 * @return
+	 */
+	public PageList getZq(String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		sql = "select * from tb_sd where ";
+		if(!"".equals(text_title)){
+			sql = sql + " WTTT like  '%" +  text_title + "%' and ";
+		}
+		if(!"".equals(text_fill)){
+			sql = sql + " WTDPCD like '%" +  text_fill + "%' and ";
+		}
+		if(!"".equals(date_start)&&!"".equals(date_end)){
+			sql = sql + " WTDT >= '" + date_start + "' and  WTDT <= '" + date_end + "' and";
+		}
+		
+		sql = sql + " 1 = 1  order by wtdt desc";
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
+	}
 }
