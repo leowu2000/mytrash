@@ -125,6 +125,31 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_zq");
 			mv.addObject("pageList", pageList);
+		}else if("hq".equals(action)){
+			//标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//填报单位
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//上报时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getHq(text_title, text_fill, date_start, date_end, page);
+			
+			mv = new ModelAndView("modules/result/result_hq");
+			mv.addObject("pageList", pageList);
+		}else if("yxzt".equals(action)){
+			//标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//填报单位
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//上报时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getYxzt(text_title, text_fill, date_start, date_end, page);
+			
+			mv = new ModelAndView("modules/result/result_yxzt2");
 		}
 		
 		return mv;

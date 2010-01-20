@@ -656,13 +656,13 @@ public class SearchDAO {
 		int end = pagesize*page;
 		
 		sql = "select * from tb_stdnc sc,tb_st st where sc.sttpcd = st.sttpcd ";
-		if(!"".equals(text_title)){
+		if(!"".equals(text_title)){//按标题查询
 			sql = sql + " and sc.dncnm like  '%" + text_title + "%' ";
 		}
-		if(!"".equals(text_fill)){
+		if(!"".equals(text_fill)){//按填报单位查询
 			sql = sql + " and sc.WTDPCD like '%" +  text_fill + "%' ";
 		}
-		if(!"".equals(date_start)&&!"".equals(date_end)){
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
 			sql = sql + " and sc.WTDPDT >= '" + date_start + "' and  sc.WTDPDT <= '" + date_end + "' ";
 		}
 		
@@ -698,17 +698,105 @@ public class SearchDAO {
 		int end = pagesize*page;
 		
 		sql = "select * from tb_sd where ";
-		if(!"".equals(text_title)){
+		if(!"".equals(text_title)){//按标题查询
 			sql = sql + " WTTT like  '%" +  text_title + "%' and ";
 		}
-		if(!"".equals(text_fill)){
+		if(!"".equals(text_fill)){//按填报单位查询
 			sql = sql + " WTDPCD like '%" +  text_fill + "%' and ";
 		}
-		if(!"".equals(date_start)&&!"".equals(date_end)){
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
 			sql = sql + " WTDT >= '" + date_start + "' and  WTDT <= '" + date_end + "' and";
 		}
 		
 		sql = sql + " 1 = 1  order by wtdt desc";
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
+	}
+	
+	/**
+	 * 获取旱情信息
+	 * @param text_title 标题
+	 * @param text_fill 填报单位
+	 * @param date_start 上报起始时间
+	 * @param date_end 上报截止时间
+	 * @param page 页码
+	 * @return
+	 */
+	public PageList getHq(String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		sql = "select * from tb_qt where ";
+		//按标题查询
+		if(!"".equals(text_title)){
+			sql = sql + " WTTT like  '%" +  text_title + "%' and ";
+		}
+		//按填报单位查询
+		if(!"".equals(text_fill)){
+			sql = sql + " WTDPCD like '%" +  text_fill + "%' and ";
+		}
+		//按日期区间查询
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
+			sql = sql + " WTDT >= '" + date_start + "' and  WTDT <= '" + date_end + "' and";
+		}
+		sql = sql + " 1 = 1  order by wtdt desc";
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
+	}
+	
+	/**
+	 * 获取运行状态
+	 * @param text_title 标题
+	 * @param text_fill 填报单位
+	 * @param date_start 上报起始时间
+	 * @param date_end 上报截止时间
+	 * @param page 页码
+	 * @return
+	 */
+	public PageList getYxzt(String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		sql = "select * from tb_pjrcn pj,tb_gclb gc where pj.gcfldm = gc.gcfldm and ";
+		//按工程名查询
+		if(!"".equals(text_title)){
+			sql = sql + " pj.PJNM like  '%" +  text_title + "%' and ";
+		}
+		//按填报单位查询
+		if(!"".equals(text_fill)){
+			sql = sql + " pj.WTDPCD like '%" +  text_fill + "%' and ";
+		}
+		//按日期区间查询
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
+			sql = sql + " pj.WTDPDT >= '" + date_start + "' and  pj.WTDPDT <= '" + date_end + "' and";
+		}
+		sql = sql + " order by pj.wtdpdt desc";
 		
 		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
 		String sqlCount = "select count(*) from (" + sql + ")" + "";
