@@ -112,6 +112,19 @@ public class SearchController extends CommonController {
 		
 			mv = new ModelAndView("modules/result/result_xq");
 			mv.addObject("pageList", pageList);
+		}else if("zq".equals(action)){
+			//标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//填报单位
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//上报时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getZq(text_title, text_fill, date_start, date_end, page);
+			
+			mv = new ModelAndView("modules/result/result_zq");
+			mv.addObject("pageList", pageList);
 		}
 		
 		return mv;
