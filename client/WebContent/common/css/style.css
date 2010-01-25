@@ -105,6 +105,16 @@ input{
 	border-bottom-width: 1px; 
 	border-left-width: 1px;
 }
+.input_btn{
+	color: #484833; 
+	background-color: #F9FEF3; 
+	border: #A59D9D;
+	border-style: solid; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px;
+}
 #menuBar {
 	position: absolute;
 	right: -202px;
@@ -155,4 +165,27 @@ input{
 	color: #15428B;
 	background-color: #E8EFFF;
 	text-align:left;
+}
+.divStyle{
+	PADDING-RIGHT:0px;
+	OVERFLOW-Y:auto;
+	OVERFLOW-X:auto;
+	PADDING-LEFT:0px;
+	SCROLLBAR-FACE-COLOR: #E2EFF4;
+	SCROLLBAR-SHADOW-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR: #5C9ABC;
+	SCROLLBAR-ARROW-COLOR: #5C9ABC;
+	SCROLLBAR-DARKSHADOW-COLOR: #5C9ABC;
+	SCROLLBAR-BASE-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR:#ffffff;
+	PADDING-BOTTOM:0px;
+	OVERFLOW:auto;
+	WIDTH:100%;
+	COLOR:blue;
+	
+	LINE-HEIGHT:100%;
+	PADDING-TOP:0px;
+	LETTER-SPACING:1pt;
+	HEIGHT:150;
+	TEXT-ALIGN:left
 }

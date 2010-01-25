@@ -11,7 +11,7 @@ Ext.onReady(function(){
     var tabs = new Ext.TabPanel({
         renderTo:'SKDIV',
         resizeTabs:true, // turn on tab resizing
-        minTabWidth: 125,
+        minTabWidth: 160,
         tabWidth:135,
         enableTabScroll:true,
         width:750,
@@ -32,43 +32,43 @@ Ext.onReady(function(){
             title: '坝基完好状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="BJWHZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '坝体稳定状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="BTWDZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '护坡护岸稳定情况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="HPHAWDQK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '通讯手段及状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="TXSDJZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '泄水建筑物状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="XSJZWZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '泄能工完好状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="XNGWHZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '闸门、起闭机状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="ZMQBJZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
     }
 

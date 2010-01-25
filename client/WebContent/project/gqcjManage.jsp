@@ -53,22 +53,16 @@ function toEdit(){
 	<tr><td align="center" ><span  class="style4">工程采集信息</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
-<table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
+<table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
 		<td nowrap align="center" class="title">工程名称</td>
-		<td nowrap align="center" class="title">险情分类</td>
-		<td nowrap align="center" class="title">出险部位</td>
-		<td nowrap align="center" class="title">险情标题</td>
 		<td nowrap align="center" class="title">填报单位</td>
 		<td nowrap align="center" class="title">出险时间</td>
 	</tr>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value=""></td>
 		<td>工程名称</td>
-		<td>险情分类</td>
-		<td>出险部位</td>
-		<td>险情标题</td>
 		<td>填报单位</td>
 		<td>出险时间</td>
 	</tr>

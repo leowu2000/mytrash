@@ -55,6 +55,7 @@ public class BuinessDao {
 		        }
 		      }
 		      sSQL += " from " + tablename + " " + where;
+		      System.out.println("--------------"+sSQL);
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				Map<Object,Object> hamap = new HashMap<Object,Object>();
@@ -149,6 +150,7 @@ public class BuinessDao {
 		}
 		return list;
 	}
+	
 	public static String getPrjLb(String prjncd,String PATH){
 		String gclb="";
 		Connection conn = null;
@@ -256,5 +258,42 @@ public class BuinessDao {
 		}
 		return xzqhxx;
 	}
+	/**
+	 * SaveDangerData()======保存险情信息
+	 * StrXQFLDM = Right(Trim(CboDangerClass.Text), 4)
+     * 根据工程险情分类代码找出险情分类表名
+     * SqlString = "select name from xianqing where fldm='" & StrXQFLDM & "'"
+	 * SqlString = "select * from tb_stdnc where dncno=" & pintDNCNO
+	 * SqlString = "select * from " & pStrDangerClassTb & " where dncno=" & pintDNCNO
+	 * 初始化出险部位显示框
+	 * SqlString = "select * from tb_st where pjno=" & IntPJNO & " order by sttpcd"
+	 * 险情信息
+	 * SqlString = "select * from tb_stdnc where dncno=" & mIntCurrentProDNCNO
+	 * SqlString = "select * from tb_st where sttpcd=" & IntSTTPCD
+	 * 
+	 * If Run Then
+     *    '如果是工程运行信息
+     *    '从工程运行媒体表中得到相关信息
+     *   SqlString = "select * from tb_pjr_m where pjrno=" & NO & " order by zlbm"
+     * Else
+     *    '如果是工程险情信息
+     *     '从工程险情媒体表中得到相关信息
+     *   SqlString = "select * from tb_stdnc_m where dncno=" & NO & " order by zlbm"
+     * End If
+     * If OptProRunSituation.Value Then
+     *   '在工程运行信息状态下
+     *  '从工程运行媒体表中得到工程运行信息流水号
+     *  SqlString = "select * from tb_pjr_m where zlbm=" & MSGList.TextMatrix(MSGList.Row, 0)
+     *  RstRequre.Open SqlString, GetDataADOConn, adOpenStatic, adLockOptimistic
+     *  NO = RstRequre!PJRNO
+     *	ElseIf OptProDanger.Value Then
+     *  '在工程险情信息状态下
+     *  '从工程险情媒体表中得到工程险情信息流水号
+     *  SqlString = "select * from tb_stdnc_m where zlbm=" & MSGList.TextMatrix(MSGList.Row, 0)
+     *  RstRequre.Open SqlString, GetDataADOConn, adOpenStatic, adLockOptimistic
+     *  NO = RstRequre!DNCNO
+     *  End If
+     * 
+	 */
 	
 }

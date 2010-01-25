@@ -32,55 +32,55 @@ Ext.onReady(function(){
             title: '补充描述',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="BCMS"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '抢险方案',
             iconCls: 'tabs',
-            html: '<textarea cols="100" rows="9" name="JXFA"></textarea>',
-            closable:true
+            html: '<textarea cols="100" rows="9" name="QXFA"></textarea>',
+            closable:false
         }).show();
         tabs.add({
             title: '抢险资源配备',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="JXZYPB"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '进展及结果',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="JZJJG"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '险情原因分析',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="XQYYFX"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '险情发展趋势',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="XQFZQS"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '可能影响范围',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="KNYXFW"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '抢险时气象',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="QXSQX"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '未来水文气象',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="9" name="WLSWQS"></textarea>',
-            closable:true
+            closable:false
         }).show();
     }
 
