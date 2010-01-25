@@ -12,10 +12,11 @@ public class ConnectionPool {
 		String dburl = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=f:\\hpjdb.mdb";
 		Connection conn = DriverManager.getConnection(dburl);
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select Mid('AAA00001',2,6) ,ctcd from tb_lysx1");
+//		ResultSet rs = stmt.executeQuery("select Mid('AAA00001',2,6) ,ctcd from tb_lysx1");
+		ResultSet rs = stmt.executeQuery("select ZLBM,TITLE from TB_STDNC_M  WHERE PJRNO=3");
 		System.out.println("行政区划名称\t省市县名称");
 		while (rs.next()) {
-			System.out.println(rs.getString(1) + "\t" + new String(rs.getString(2).getBytes(),"GB2312"));
+			System.out.println(rs.getInt(1) + "\t" + new String(rs.getString(2).getBytes(),"GB2312"));
 		}
 		rs.close();
 		stmt.close();

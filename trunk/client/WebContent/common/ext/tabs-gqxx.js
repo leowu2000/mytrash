@@ -32,19 +32,19 @@ Ext.onReady(function(){
             title: '险情预测',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="XQYC"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '堤防建筑状况',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="DFJZZK"></textarea>',
-            closable:true
+            closable:false
         }).show();
         tabs.add({
             title: '其他',
             iconCls: 'tabs',
             html: '<textarea cols="100" rows="6" name="QT"></textarea>',
-            closable:true
+            closable:false
         }).show();
     }
 
