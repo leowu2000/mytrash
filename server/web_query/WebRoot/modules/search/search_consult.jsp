@@ -21,11 +21,11 @@
   <div id="query" > 
     <table width="100%" border="0" cellspacing="1" bgcolor="#336699" class="font_define">
       <tr align="center" bgcolor="#FFFFFF"> 
-        <td width="10%" height="25"><font color="#003366">险情〈<a href="result_consult.asp?type=2" target="result"><%=xq_count%>条</a>〉</font></td>
-        <td width="10%" height="25"><font color="#003366">灾情〈<a href="result_consult.asp?type=4"  target="result"><%=zq_count%>条</a>〉</font></td>
-        <td width="13%" height="25"><font color="#003366">运行状态〈<a href="result_consult.asp?type=1"  target="result"><%=yx_count%>条</a>〉</font></td>
-        <td width="13%" height="25"><font color="#003366">防汛行动〈<a href="result_consult.asp?type=3"  target="result"><%=fx_count%>条</a>〉</font></td>
-        <td width="10%" height="25"><font color="#003366">全部查看〈<a style="cursor:hand" onclick="javascript:window.open('result_consult.asp?type=a','all', 'fullscreen=yes');parent.result.location='result_consult.asp?type=a&parentfile=defalutfile'" target="result"><%=total_count%>条</a>〉</font></td>
+        <td width="10%" height="25"><font color="#003366">险情〈<a href="search.do?action=consult&type=2" target="result"><%=xq_count%>条</a>〉</font></td>
+        <td width="10%" height="25"><font color="#003366">灾情〈<a href="search.do?action=consult&type=4"  target="result"><%=zq_count%>条</a>〉</font></td>
+        <td width="13%" height="25"><font color="#003366">运行状态〈<a href="search.do?action=consult&type=1"  target="result"><%=yx_count%>条</a>〉</font></td>
+        <td width="13%" height="25"><font color="#003366">防汛行动〈<a href="search.do?action=consult&type=3"  target="result"><%=fx_count%>条</a>〉</font></td>
+        <td width="10%" height="25"><font color="#003366">全部查看〈<a style="cursor:hand" onclick="javascript:window.open('search.do?action=consult&type=a','all', 'fullscreen=yes');parent.result.location='search.do?action=consult&type=a&parentfile=defalutfile'" target="result"><%=total_count%>条</a>〉</font></td>
         <td width="10%" height="25"><font color="#003366"><a href="result_consult_manager.asp"  target="result">会商管理</a></font></td>
       </tr>
     </table>
