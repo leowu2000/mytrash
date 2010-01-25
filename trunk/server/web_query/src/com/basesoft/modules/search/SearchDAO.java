@@ -811,4 +811,182 @@ public class SearchDAO {
 		
 		return pageList;
 	}
+	
+	/**
+	 * 获取防汛行动
+	 * @param text_title 标题
+	 * @param text_fill 填报单位
+	 * @param date_start 上报起始时间
+	 * @param date_end 上报截止时间
+	 * @param page 页码
+	 * @return
+	 */
+	public PageList getFxxd(String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		sql = "select * from tb_fpacti where ";
+		//按标题查询
+		if(!"".equals(text_title)){
+			sql = sql + " WTTT like  '%" +  text_title + "%' and ";
+		}
+		//按填报单位查询
+		if(!"".equals(text_fill)){
+			sql = sql + " WTDPCD like '%" +  text_fill + "%' and ";
+		}
+		//按日期区间查询
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
+			sql = sql + " WTDT >= '" + date_start + "' and  WTDT <= '" + date_end + "' and";
+		}		
+		sql = sql + " 1 = 1  order by wtdt desc";
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
+	}
+	
+	/**
+	 * 获取防汛简报
+	 * @param text_title 标题
+	 * @param text_fill 填报单位
+	 * @param date_start 上报起始时间
+	 * @param date_end 上报截止时间
+	 * @param page 页码
+	 * @return
+	 */
+	public PageList getFxjb(String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		sql = "select * from tb_fxjb where";
+		//按标题查询
+		if(!"".equals(text_title)){
+			sql = sql + " WTTT like  '%" +  text_title + "%' and ";
+		}
+		//按填报单位查询
+		if(!"".equals(text_title)){
+			sql = sql + " WTDPCD like '%" +  text_fill + "%' and ";
+		}
+		//按日期区间查询
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
+			sql = sql + " WTDT >= '" + date_start + "' and  WTDT <= '" + date_end + "' and ";
+		}	
+		sql = sql + " 1=1 order by wtdt desc";
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
+	}
+	
+	public PageList getMedia(String radiob_gclb, String radiob_gs, String text_title, String text_fill, String date_start, String date_end, int page){
+		String sql = "";
+		int pagesize = 10;
+		int start = pagesize*(page - 1) + 1;
+		int end = pagesize*page;
+		
+		if("xq".equals(radiob_gclb.trim())){//险情
+			sql = "select * from tb_stdnc_m sm,tb_stdnc st where sm.dncno = st.dncno and ";
+		}else if("yxzt".equals(radiob_gclb.trim())){//运行状态
+			sql = "select * from tb_pjr_m pm,tb_pjrcn pj where pm.pjrno = pj.pjrno and ";
+		}else if("zq".equals(radiob_gclb.trim())){//灾情
+			sql = "select * from tb_sd_m sm,tb_sd sd where sm.rpjincd = sd.rpjincd and ";
+		}else if("fxxd".equals(radiob_gclb.trim())){//防汛行动
+			sql = "select * from tb_fpacti_m fm,tb_fpacti fp where fm.rpjincd = fp.rpjincd and ";
+		}
+		//按标题查询
+		if(!"".equals(text_title)){
+			sql = sql + " title like  '%" +  text_title + "%' and ";
+		}
+		//按内容描述查询
+		if(!"".equals(text_title)){
+			sql = sql + " nrms like '%" +  text_fill + "%' and ";
+		}
+		//图片格式
+		if("tp".equals(radiob_gs.trim())){//图片
+			sql = sql + " wjgs = 'jpg' and ";
+		}else if("lx".equals(radiob_gs.trim())){
+			sql = sql + " wjgs <> 'jpg' and ";
+		}
+		//按日期区间查询
+		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
+			if("yxzt".equals(radiob_gclb.trim())){
+				sql = sql + " pm.DTCDT >= '" + date_start + "' and  pm.DTCDT <= '" + date_end + "' and ";
+			}else {
+				sql = sql + " DTCDT >= '" + date_start + "' and  DTCDT <= '" + date_end + "' and ";
+			}
+		}
+		
+		if("yxzt".equals(radiob_gclb.trim())){
+			sql = sql + " 1 = 1 order by pm.dtcdt desc";
+		}else {
+			sql = sql + " 1 = 1 order by dtcdt desc";
+		}
+		
+		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
+		String sqlCount = "select count(*) from (" + sql + ")" + "";
+		
+		List listData = jdbcTemplate.queryForList(sqlData);
+		int count = jdbcTemplate.queryForInt(sqlCount);
+		
+		PageList pageList = new PageList();
+		PageInfo pageInfo = new PageInfo(page, count);
+		pageList.setList(listData);
+		pageList.setPageInfo(pageInfo);
+		
+		return pageList;
+	}
+	
+	/**
+	 * 获得会商运行状态
+ 	 * @return
+	 */
+	public List<?> getConsultYxzt(){
+		return jdbcTemplate.queryForList("select * from tb_pjrcn pjr,tb_pj pj,tb_gclb gc,tb_cnt cnt where cnt.cntcd =pj.cntcd and pj.pjno = pjr.pjno and pjr.gcfldm = gc.gcfldm and pjrno in (select bh from tb_hs where type = 1) order by pjr.wtdpdt desc");
+	}
+	
+	/**
+	 * 获得会商险情
+ 	 * @return
+	 */
+	public List<?> getConsultXq(){
+		return jdbcTemplate.queryForList("select * from tb_stdnc std,tb_pj pj,tb_xqfl xq where xq.xqfldm = std.xqfldm  and pj.pjno = std.pjno and dncno in (select bh from tb_hs where type = 2)");
+	}
+
+	/**
+	 * 获得会商防汛行动
+ 	 * @return
+	 */
+	public List<?> getConsultFxxd(){
+		return jdbcTemplate.queryForList("select * from tb_fpacti where rpjincd in (select bh from tb_hs where type = 3)");
+	}
+	
+	/**
+	 * 获得会商灾情
+ 	 * @return
+	 */
+	public List<?> getConsultZq(){
+		return jdbcTemplate.queryForList("select * from tb_sd where rpjincd in (select bh from tb_hs where type = 4)");
+	}
 }

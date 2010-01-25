@@ -31,14 +31,11 @@ function init(){
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>信息类型</strong></font></td>
         <td align="left" bgcolor="#FFFFFF"> <select name="select_sortinfo" id=select_sortinfo size="1" >
             <option value="qbxx" selected>全部信息</option>
-            <OPTION 
-        value="yxzt">运行状态</OPTION>
+            <OPTION value="yxzt">运行状态</OPTION>
             <OPTION value="xqxx">险情</OPTION>
-            <OPTION 
-        value="fxjb">防汛简报</OPTION>
+            <OPTION value="fxjb">防汛简报</OPTION>
             <OPTION value="fxxd">防汛行动</OPTION>
-            <OPTION 
-        value="zqbg">灾情报告</OPTION>
+            <OPTION value="zqbg">灾情报告</OPTION>
             <OPTION value="hqbg">旱情报告</OPTION>
           </select> 
           <!--input type="checkbox" name="checkbox_media" value="true"-->

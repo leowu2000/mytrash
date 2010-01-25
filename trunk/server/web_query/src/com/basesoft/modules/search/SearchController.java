@@ -150,6 +150,73 @@ public class SearchController extends CommonController {
 			PageList pageList = searchDAO.getYxzt(text_title, text_fill, date_start, date_end, page);
 			
 			mv = new ModelAndView("modules/result/result_yxzt2");
+			mv.addObject("pageList", pageList);
+		}else if("fxxd".equals(action)){
+			//标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//填报单位
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//上报时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getFxxd(text_title, text_fill, date_start, date_end, page);
+			
+			mv = new ModelAndView("modules/result/result_fxxd");
+			mv.addObject("pageList", pageList);
+		}else if("fxjb".equals(action)){
+			//标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//填报单位
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//上报时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getFxjb(text_title, text_fill, date_start, date_end, page);
+			
+			mv = new ModelAndView("modules/result/result_fxjb");
+			mv.addObject("pageList", pageList);
+		}else if("media".equals(action)){
+			//工程类别
+			String radiob_gclb = ServletRequestUtils.getStringParameter(request, "radiob_gclb", "");
+			//文件格式
+			String radiob_gs = ServletRequestUtils.getStringParameter(request, "radiob_gs", "");
+			//标题
+			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+			//内容描述
+			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+			//采集时间
+			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+			
+			PageList pageList = searchDAO.getMedia(radiob_gclb, radiob_gs, text_title, text_fill, date_start, date_end, page);
+			
+			mv = new ModelAndView("modules/result/result_media");
+			mv.addObject("pageList", pageList);
+		}else if("consult".equals(action)){
+			//会商类别
+			String type = ServletRequestUtils.getStringParameter(request, "type", "");
+			String parentfile = ServletRequestUtils.getStringParameter(request, "parentfile", "");
+			
+			mv = new ModelAndView("modules/result/result_consult");
+			mv.addObject("type", type);
+			mv.addObject("parentfile", parentfile);
+			
+			String sql = "";
+			if("1".equals(type)||"a".equals(type)){//运行状态
+				List listYxzt = searchDAO.getConsultYxzt();
+				mv.addObject("listYxzt", listYxzt);
+			}else if("2".equals(type)||"a".equals(type)){//险情
+				List listXq = searchDAO.getConsultXq();
+				mv.addObject("listXq", listXq);
+			}else if("3".equals(type)||"a".equals(type)){//防汛行动
+				List listFxxd = searchDAO.getConsultFxxd();
+				mv.addObject("listFxxd", listFxxd);
+			}else if("4".equals(type)||"a".equals(type)){//灾情
+				List listZq = searchDAO.getConsultZq();
+				mv.addObject("listZq", listZq);
+			}
 		}
 		
 		return mv;
