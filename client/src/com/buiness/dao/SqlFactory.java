@@ -1,5 +1,6 @@
 package com.buiness.dao;
 
+import com.buiness.form.DetailBean;
 import com.buiness.form.PJRCNBean;
 import com.buiness.form.PrjBean;
 import com.buiness.form.RSRBean;
@@ -8,11 +9,12 @@ import com.core.UUIdFactory;
 import com.util.UtilDateTime;
 
 public class SqlFactory {
+	
 	public static String insertSQL_PJRCNBean(PJRCNBean bean,String path,PrjBean prjBean){
 		String sSQL = "INSERT INTO TB_PJRCN(PJRNO,PJNO,DTCDT,PJNM,"
 			+"GCFLDM,DNCFC,RDERESCN,WTDPCD,WTDPDT,NT)VALUES("
 			+UUIdFactory.getMaxId(path, "TB_PJRCN")+","//运行编号
-			+bean.getPJNO()+",#"//工程编号
+			+prjBean.getPJNO()+",#"//工程编号
 			+UtilDateTime.nowDateString()+"#,'"//检测时间
 			+prjBean.getPJNM()+"','"//工程名称
 			+bean.getGCFLDM()+"','"//工程分类代码
@@ -24,14 +26,15 @@ public class SqlFactory {
 		System.out.println(sSQL);
 		return sSQL;
 	}
+	
 	public static String insertSQL_STDNCBean(STDNCBean bean,String path){
-		String sSQL = "INSERT TB_STDNC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,XQFLDM,DNCGR," +
+		String sSQL = "INSERT INTO TB_STDNC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,XQFLDM,DNCGR," +
 				"DAGPLCCH,DAGLO,RDEPL,RDERESCN,TPN,PLAPN,PLIPN,RDECNRL,DNCCUAN,DNCESTDV,DNCPBNFZ,RZ,WTHCN" +
 				",FHYWTHCN,DNCADDSC,WTDPCD,WTDPDT)VALUES("
-				+UUIdFactory.getMaxId(path, "TB_PJRCN")+","//险情编号
+				+bean.getDNCNO()+","//险情编号
 				+bean.getPJNO()+",'"//工程编号
-				+bean.getSTTPCD()+"','"//建筑物编码
-				+bean.getDAGTM()+"','"//出险时间
+				+bean.getSTTPCD()+"',#"//建筑物编码
+				+bean.getDAGTM()+"#,'"//出险时间
 				+bean.getDNCNM()+"','"//险情名称
 				+bean.getXQFLDM()+"','"//险情分类代码
 				+bean.getDNCGR()+"','"//险情级别
@@ -50,18 +53,18 @@ public class SqlFactory {
 				+bean.getWTHCN()+"','"//抢险时气象情况
 				+bean.getFHYWTHCN()+"','"//未来水文气象情况
 				+bean.getDNCADDSC()+"','"//补充描述
-				+bean.getWTDPCD()+"','"//填报单位名称
-				+bean.getWTDPDT()+"')";//填报时间
+				+bean.getWTDPCD()+"',#"//填报单位名称
+				+UtilDateTime.nowDateString()+"#)";//填报时间
 		System.out.println(sSQL);
 		return sSQL;
 	}
 	
-	public static String insertSQL_PSRBean(RSRBean bean,String path,PrjBean prjBean){
+	public static String insertSQL_RSRBean(RSRBean bean,String path,PrjBean prjBean){
 		String sSQL = "INSERT INTO TB_RSR (PJRNO,PJNO,DTCDT,PJNM,RSCLS,RV,RZ,RQ,DFPFCN,DBSTBCN," +
 				"BRBPPFCN,ESPFCN,EDDPFCN,GTHOPFCN,COMMCN)VALUES("
-				+UUIdFactory.getMaxId(path, "TB_PJRCN")+","
+				+UUIdFactory.getMaxId(path, "TB_RSR")+","
 				+prjBean.getPJNO()+",#"
-				+UtilDateTime.nowDateString()+"#,'"// 运行编号
+				+UtilDateTime.nowDateString()+"#,'"
 				+prjBean.getPJNM()+"','"// 工程名称
 				+bean.getRSCLS()+"',"// 水库类别(良好/尚好/病险库)
 				+bean.getRV()+","// 当前库容(万立方米)
@@ -78,4 +81,192 @@ public class SqlFactory {
 		return sSQL;
 	}
 	
+	public static String insertSQL_DNCDetailBean(DetailBean bean,String path,String XQFLDM){
+		String dinarySubsql=bean.getDNCNO()+","+bean.getPJNO()+","+bean.getSTTPCD()+",#"+bean.getDAGTM()+"#,'"+bean.getDNCNM()+"'";
+		String insertSql ="";
+		//D001	决口				TB_BURDSC	
+		if("D001".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_BURDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"DSSPN,INPN,DTHPN,WRHS,CRPDSSAR,SCDMFMAR,DRCECLS,"
+						+"BUW,BUVL,BUZDF,BUQ,BURLDGL)VALUES("
+						+dinarySubsql
+						+","+bean.getDSSPN()+","+bean.getINPN()+","+bean.getDTHPN()+","+bean.getWRHS()+","+bean.getCRPDSSAR()
+						+","+bean.getSCDMFMAR()+","+bean.getDRCECLS()
+						+","+bean.getBUW()+","+bean.getBUVL()+","+bean.getBUZDF()+","+bean.getBUQ()+",'"+bean.getBURLDGL()+"')";
+		//D002	漫溢				TB_OVFLDSC
+		if("D002".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_OVFLDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"OVFLL,OVFLZ,DSQ)VALUES("
+						+dinarySubsql
+						+","+bean.getOVFLL()+","+bean.getOVFLZ()+","+bean.getDSQ()+")";
+		//D003	漏洞				TB_LKDSC
+		if("D003".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_LKDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"LKGTU,"
+						+"LKDMT,LKQ,LKWTLH,LKSAR)VALUES("
+						+dinarySubsql
+						+",'"+bean.getLKGTU()
+						+"',"+bean.getLKDMT()+","+bean.getLKQ()+","+bean.getLKWTLH()+","+bean.getLKSAR()+")";
+		//D004	管涌				TB_PPDSC
+		if("D004".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_PPDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"LKGTU,"
+						+"TODFTDI,"
+						+"PPQ,WTLH,PPSAR)VALUES("
+						+dinarySubsql
+						+",'"+bean.getLKGTU()
+						+"',"+bean.getPPQ()
+						+","+bean.getTODFTDI()+","+bean.getWTLH()+","+bean.getPPSAR()+")";
+		//D005	陷坑				TB_PITDSC
+		if("D005".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_PITDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"TODFTDI,"
+						+"SBDSP,SBAR)VALUES("
+						+dinarySubsql
+						+","+bean.getTODFTDI()
+						+","+bean.getSBDSP()+","+bean.getSBAR()+")";
+		//D006	滑坡 			TB_SLDSC
+		if("D006".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_SLDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"SLUPAG,"
+						+"SLBU)VALUES("
+						+dinarySubsql
+						+","+bean.getSLUPAG()+","+bean.getSLBU()+")";
+		//D007	淘刷				TB_UNDSC
+		if("D007".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_UNDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"TODFTDI,"
+						+"UNDAR,UNDD,UNDL)VALUES("
+						+dinarySubsql
+						+","+bean.getTODFTDI()
+						+","+bean.getUNDAR()+","+bean.getUNDD()+","+bean.getUNDL()+")";
+		//D008	裂缝				TB_CRDSC
+		if("D008".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_CRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"CRDR,CRD,CRL,CRW)VALUES("
+						+dinarySubsql
+						+",'"+bean.getCRDR()+"',"+bean.getCRD()+","+bean.getCRL()+","+bean.getCRW()+")";
+		//D009	崩岸				TB_CVDSC
+		if("D009".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_CVDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"TODFTDI,"
+						+"WDQ,"
+						+"CVL,CVBU,RVH,FLCNDSC)VALUES("
+						+dinarySubsql
+						+","+bean.getTODFTDI()
+						+","+bean.getWDQ()
+						+","+bean.getCVL()+","+bean.getCVBU()+","+bean.getRVH()+",'"+bean.getFLCNDSC()+"')";
+		//D010	渗水				TB_SPDSC
+		if("D010".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_SPDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"SPAR,SPQ)VALUES("
+						+dinarySubsql
+						+","+bean.getSPAR()+","+bean.getSPQ()+")";
+		//D011	 浪坎 			TB_BLBAD
+		if("D011".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_BLBAD (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"WDQ,"
+						+"BLH,WNS)VALUES("
+						+dinarySubsql
+						+","+bean.getWDQ()
+						+","+bean.getBLH()+","+bean.getWNS()+")";
+		//D012	滑动				TB_SLUDSC
+		if("D012".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_SLUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"SLUPAG"
+						+"SLUDSP,SLUTP,SLUGLCN)VALUES("
+						+dinarySubsql
+						+","+bean.getSLUPAG()
+						+","+bean.getSLUDSP()+","+bean.getSLUTP()+",'"+bean.getSLUGLCN()+"')";
+		//D013	启闭失灵			TB_HOMLFDSC
+		if("D013".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_HOMLFDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"POWCUT,HOMLF,GSDST,MLFCN)VALUES("
+						+dinarySubsql
+						+",'"+bean.getPOWCUT()+"','"+bean.getHOMLF()+"','"+bean.getGSDST()+"','"+bean.getMLFCN()+"')";
+		//D014	闸门破坏			TB_GTWRDSC
+		if("D014".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_GTWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"WRDSC,WRQ)VALUES("
+						+dinarySubsql
+						+",'"+bean.getWRDSC()+"',"+bean.getWRQ()+")";
+		//D015	溃坝				TB_BRDMDSC
+		if("D015".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_BRDMDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"DSSPN,INPN,DTHPN,WRHS,CRPDSSAR,SCDMFMAR,DRCECLS,"
+						+"PJPS,BRDMLDGL,BRDMW,BRZDMCDI,BRV,BRDMQ)VALUES("
+						+dinarySubsql
+						+","+bean.getDSSPN()+","+bean.getINPN()+","+bean.getDTHPN()+","+bean.getWRHS()
+						+","+bean.getCRPDSSAR()+","+bean.getSCDMFMAR()+","+bean.getDRCECLS()
+						+",'"+bean.getPJPS()+"','"+bean.getBRDMLDGL()+"',"+bean.getBRDMW()+","+bean.getBRZDMCDI()
+						+","+bean.getBRV()+","+bean.getBRDMQ()+")";
+		//D016	倾覆				TB_OVTUDSC
+		if("D016".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_OVTUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"OVTUDR,OVTUAG)VALUES("
+						+dinarySubsql
+						+",'"+bean.getOVTUDR()
+						+"',"+bean.getOVTUAG()+")";
+		//D017	应力过大			TB_STREXDSC
+		if("D017".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_STREXDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"MXTNST,MXCMST,CONGR,ASTR)VALUES("
+						+dinarySubsql
+						+","+bean.getMXTNST()+","+bean.getMXCMST()+",'"+bean.getCONGR()+"',"+bean.getASTR()+")";
+		//D018	坍塌				TB_SLIDSC
+		if("D018".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_SLIDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"SLIAR,SLIMS)VALUES("
+						+dinarySubsql
+						+","+bean.getSLIAR()+","+bean.getSLIMS()+")";
+		//D019	堵塞				TB_PLUDSC
+		if("D019".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_PLUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"PLTNM,PLTBU)VALUES("
+						+dinarySubsql
+						+",'"+bean.getPLTNM()+"',"+bean.getPLTBU()+")";
+		//D020	基础破坏			TB_BSWRDSC
+		if("D020".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_BSWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"GRNSPDSC,GROVCHWR,GRNUSB)VALUES("
+						+dinarySubsql
+						+",'"+bean.getGRNSPDSC()+"','"+bean.getGROVCHWR()+"',"+bean.getGRNUSB()+")";
+		//D021	消能工破坏		TB_EDDWRDSC
+		if("D021".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_EDDWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"APWR,WSTWR)VALUES("
+						+dinarySubsql
+						+",'"+bean.getAPWR()+"','"+bean.getWSTWR()+"')";
+		//D022	基础排水失效		TB_BSWPLPDS
+		if("D022".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_BSWPLPDS (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"WPPLU,WPEQML)VALUES("
+						+dinarySubsql
+						+",'"+bean.getWPPLU()+"','"+bean.getWPEQML()+"')";
+		//D023	洞身破坏 			TB_HBWRDSC
+		if("D023".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_HBWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"WRAR,"
+						+"LNINF,HBGLCN,WRMS)VALUES("
+						+dinarySubsql
+						+","+bean.getWRAR()
+						+",'"+bean.getLNINF()+"','"+bean.getHBGLCN()+"',"+bean.getWRMS()+")";
+		//D024	控导工程局部破坏	TB_CLPJPRWR
+		if("D024".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_CLPJPRWR (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"WRAR,"
+						+"WRGLCN,WRD,WRL)VALUES("
+						+dinarySubsql
+						+","+bean.getWRAR()
+						+",'"+bean.getWRGLCN()+"',"+bean.getWRD()+","+bean.getWRL()+")";
+		//D025	控导工程冲毁		TB_CLPJSCDN
+		if("D025".trim().equals(XQFLDM.toUpperCase()))
+			insertSql = "INSERT INTO TB_CLPJSCDN (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+						+"SCDMGLCN,SCDMBU,SCDML,SCDMD)VALUES("
+						+dinarySubsql
+						+",'"+bean.getSCDMGLCN()+"',"+bean.getSCDMBU()+","+bean.getSCDML()+","+bean.getSCDMD()+")";
+		System.out.println(XQFLDM+"::"+insertSql);
+		return insertSql;
+	}
+
 }

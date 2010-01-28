@@ -12,22 +12,50 @@
 </head>
 <style type="text/css">
 <!--
+.lt1{
+
+	font-family: "宋体";
+	font-size: 9pt;
+	font-weight: normal;
+	color: #484833;
+	text-decoration: none;
+	text-align:center;
+	background-color: #FFFFFF;
+}
+.lt2 {
+
+	font-family: "宋体";
+	font-size: 9pt;
+	font-weight: normal;
+	color: #484833;
+	text-decoration: none;
+	text-align:center;
+	background-color: #F2F5EB;
+}
+.title {
+	font-size: 10pt;
+	padding-top: 2px;
+	font-weight: bolder;
+	color: #15428B;
+	background-color: #E8EFFF;
+	text-align:center;
+}
 -->
 </style>
 <script language="JAVASCRIPT">
 function toAdd(){
-	document.forms[0].action="/report/fxjbAdd.jsp";
+	document.forms[0].action="/project/gqyxAdd.jsp";
 	document.forms[0].submit();
 }
 function toEdit(){
-	document.forms[0].action="/report/fxjbEdit.jsp";
+	document.forms[0].action="/project/gqcjEdit.jsp";
 	document.forms[0].submit();
 }
 </script>
 <% 
 	String path = request.getRealPath("/");
 
-	List<FXJBBean> records = BuinessDao.getAllFxjbcList(path); 
+	List<PJRCNBean> records = BuinessDao.getAllPjrcnList(path); 
 	String pageStr = request.getParameter("page"); 
 	int currentPage = 1; 
 	if (pageStr != null) 
@@ -37,7 +65,7 @@ function toEdit(){
 %> 
 <body>
 <table width="95%" align="center">
-	<tr><td align="center" ><span  class="style4">防汛抗旱简报管理</span></td></tr>
+	<tr><td align="center" ><span  class="style4">工程运行状态</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="IDs"/>
@@ -57,28 +85,31 @@ function toEdit(){
 	</td>
 	</tr>
 </table>
-<table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
+<table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
-		<td nowrap align="center" class="title">简报标题</td>
-		<td nowrap align="center" class="title">简报期数</td>
+		<td nowrap align="center" class="title">工程名称</td>
+		<td nowrap align="center" class="title">检测时间</td>
+		<td nowrap align="center" class="title">险情预测</td>
 		<td nowrap align="center" class="title">填报单位</td>
 		<td nowrap align="center" class="title">填报时间</td>
 	</tr>
 	<%if(records!=null && records.size()>0){
 		for(int i=pUtil.getFromIndex();i<pUtil.getToIndex();i++){
-			FXJBBean bean = (FXJBBean)records.get(i);
+			PJRCNBean bean = (PJRCNBean)records.get(i);
 	%>
 	<tr  bgcolor="#FFFFFF">
-		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getRPJINCD() %>"></td>
-		<td><%=bean.getWTTT()%></td>
-		<td><%=bean.getISSUE()%></td>
-		<td><%=bean.getWTDPCD()%></td>
-		<td><%=bean.getWTDT()%></td>
+		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getPJRNO() %>"></td>
+		<td><%=bean.getPJNM() %></td>
+		<td><%=bean.getDTCDT() %></td>
+		<td><%=bean.getDNCFC() %></td>
+		<td><%=bean.getWTDPCD() %></td>
+		<td><%=bean.getWTDPDT() %></td>
 	</tr>
 	<%
 		}
 	} %>
+	
 </table>
 </form>
 <br/>

@@ -8,7 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.buiness.form.FPACTIBean;
+import com.buiness.form.FXJBBean;
+import com.buiness.form.HQBean;
+import com.buiness.form.PJRCNBean;
 import com.buiness.form.PrjBean;
+import com.buiness.form.SDBean;
+import com.buiness.form.STDNCBean;
 import com.core.ConnectionPool;
 
 public class BuinessDao {
@@ -151,6 +157,151 @@ public class BuinessDao {
 		return list;
 	}
 	
+	public static List<PJRCNBean> getAllPjrcnList(String PATH){
+		List<PJRCNBean> list = new ArrayList<PJRCNBean>();
+		String sSQL = "select * from TB_PJRCN ";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				PJRCNBean bean = new PJRCNBean();
+				bean = bean.getPJRCNBeanFromRs(rs);
+				list.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public static List<STDNCBean> getAllStdncList(String PATH){
+		List<STDNCBean> list = new ArrayList<STDNCBean>();
+		String sSQL = "select * from TB_STDNC ";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				STDNCBean bean = new STDNCBean();
+				bean = bean.getSTDNCBeanFromRs(rs);
+				list.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return list;
+	}
+	public static List<FXJBBean> getAllFxjbcList(String PATH){
+		List<FXJBBean> list = new ArrayList<FXJBBean>();
+		String sSQL = "select * from TB_FXJB ";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				FXJBBean bean = new FXJBBean();
+				bean = bean.getFXJBBeanFromRs(rs);
+				list.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return list;
+	}
+	public static List<HQBean> getAllHqList(String PATH){
+		List<HQBean> list = new ArrayList<HQBean>();
+		String sSQL = "select * from TB_QT ";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				HQBean bean = new HQBean();
+				bean = bean.getHQBeanFromRs(rs);
+				list.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return list;
+	}
+	public static List<FPACTIBean> getAllFpactiList(String PATH){
+		List<FPACTIBean> list = new ArrayList<FPACTIBean>();
+		String sSQL = "select * from TB_FPACTI ";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				FPACTIBean bean = new FPACTIBean();
+				bean = bean.getFPACTIBeanFromRs(rs);
+				list.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return list;
+	}
+	public static List<SDBean> getAllSdList(String PATH){
+		List<SDBean> list = new ArrayList<SDBean>();
+		String sSQL = "select * from TB_SD ";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				SDBean bean = new SDBean();
+				bean = bean.getSDBeanFromRs(rs);
+				list.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return list;
+	}
 	public static String getPrjLb(String prjncd,String PATH){
 		String gclb="";
 		Connection conn = null;

@@ -164,4 +164,40 @@ function printpage(m_printpage1){
     document.body.innerHTML = oldstr;
     return true;
 }
-
+function uplaodReportPhotos(tbname){
+	var title = document.getElementById('TITLE').value;
+	var time = document.getElementById('DTCDT').value;
+	var filepath = document.getElementById('UpFile').value;
+	var zpms = document.getElementById('NRMS').value;
+	var dncid = document.getElementById('DNCNO').value;
+	if(filepath==""){
+		alert("请选择文件.");
+		return false;
+	}
+	if(title==""){
+		alert("请填写照片标题.");
+		return false;
+	}
+	if(time==""){
+		alert("请填写时间");
+		return false;
+	}
+	if(window.XMLHttpRequest){ //Mozilla
+    	var xmlHttpReq=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	}
+	xmlHttpReq.open("GET", "/FileUploadServlet?type=report&tabname="+tbname+"&zpbtvalue="+title+"&time="+time
+			+"&zpmsvalue="+zpms+"&filepath="+filepath+"&DNCNO="+dncid, false);
+	xmlHttpReq.send(null);
+	var result = xmlHttpReq.responseText;
+	PICLIST.innerHTML=result;
+}
+function submitingReport(tbname){
+	if(document.getElementById('MAINTITLE').value==""){
+		alert("请填写报告标题.");
+		return false;
+	}
+	document.getElementById('TABLENAME').value=tbname;
+	document.frm.submit();
+}

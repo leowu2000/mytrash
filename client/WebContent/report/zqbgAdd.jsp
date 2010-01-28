@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=GBK"%>
 <%@ page import="com.util.*" %>
+<%@ page import="com.core.*" %>
 <%@ page import="com.fredck.FCKeditor.FCKeditor"%>
 <% 
+	String relPath = request.getRealPath("/"); 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
@@ -44,70 +46,67 @@ function PreviewImg(imgFile)
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">新增灾情报告</span></td></tr>
 </table>
-<form name="frm" action=""  method="POST" enctype="multipart/form-data">
-<input type="hidden" name="actionType" value=""/>
+<form name="frm" action="/buiness.do"  method="POST">
+<input type="hidden" name="TABLENAME" value=""/>
+<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_SD") %>"/>
+<input type="hidden" name="WTDPCD" value="WTDPCD"/>
+<input type="hidden" name="FILEDNAME" value="SDDSC"/>
+<input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
+<input type="hidden" name="actionType" value="add_report"/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title" width="30%" >单位</td>
-		<td nowrap align="center" class="title"  colspan="4">第<input type="text" class="lines" value="" size="8"/> 期</td>
+		<td nowrap align="center" class="title"  colspan="4">单位</td>
 		<td nowrap align="center" class="title" width="30%" ><%=UtilDateTime.nowDateStringCN() %></td>
 	</tr>
 	<tr height="25" >
 		<td align="center" class="title" >灾情标题:</td>
 		<td align="center" class="title2" colspan="5">
-		<input type="text" name="" value="" size="50"/></td>
+		<input type="text" name="MAINTITLE" value="" size="50"/></td>
 	</tr>
 	<tr height="25" >
 	<td class="title" colspan="6">
 	<%	           
-	    FCKeditor oFCKeditor3 ;
-	    oFCKeditor3 = new FCKeditor( request, "PRE_DYNAMIC") ;
-	    oFCKeditor3.setBasePath( "/FCKeditor/" ) ;
-		oFCKeditor3.setToolbarSet( "NowUse" ) ;
-	    oFCKeditor3.setHeight("200");
+	    FCKeditor oFCKeditor ;
+	    oFCKeditor = new FCKeditor( request, "CONTENT") ;
+	    oFCKeditor.setBasePath( "/FCKeditor/" ) ;
+		oFCKeditor.setToolbarSet( "NowUse" ) ;
+	    oFCKeditor.setHeight("200");
 	    //oFCKeditor.setValue( content==null?"":content );
-	    out.println(oFCKeditor3.create());
+	    out.println(oFCKeditor.create());
      %>
 	</td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title" colspan="2">照片列表</td> 
 		<td nowrap class="title">照片标题</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="" value=""/></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value=""/></td>
 		<td nowrap class="title2">选择照片</td> 
 		<td class="title2"><input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
 	</tr>
 	<tr height="25" >
-		<td bgcolor="#FFFFFF" colspan="2" rowspan="3">&nbsp;</td>
+		<td bgcolor="#FFFFFF" colspan="2" rowspan="3"><div id="PICLIST" class="divStyle"></div></td>
 		<td nowrap class="title">拍摄时间:</td> 
-		<td bgcolor="#FFFFFF"><input type="text" class="lines" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
+		<td bgcolor="#FFFFFF"><input type="text" class="lines" name="DTCDT" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
 		<td class="title" rowspan="2" colspan="2"><div id="newPreview" ></div></td>
 	</tr>
 	<tr height="80" >
 		<td nowrap class="title">照片描述</td> 
-		<td bgcolor="#FFFFFF"><textarea rows="6" cols="20"></textarea></td>
+		<td bgcolor="#FFFFFF"><textarea rows="6" cols="20" name="NRMS"></textarea></td>
 		
 	</tr>
 	<tr>
 		<td class="title" colspan="4">
-			<input type="button" name="" value="保存照片" onclick="javascript:uplaodPhotos()"/>
+			<input type="button" name="" value="保存照片" onclick="javascript:uplaodReportPhotos('TB_SD_M')"/>
 		</td>
-	</tr>
-	<tr height="25" >
-		<td nowrap align="center" class="title">签发(Q):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value="" /></td>
-		<td nowrap align="center" class="title">审核(H):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value=""/></td>
-		<td nowrap align="center" class="title">拟稿(N):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value="" /></td>
 	</tr>
 </table>
 </form>
-<br/>
+
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="保  存" onclick="javascript:submiting()">
+	<input type="button" name="" value="保  存" onclick="javascript:submitingReport('TB_SD')">
 	&nbsp;
 	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>

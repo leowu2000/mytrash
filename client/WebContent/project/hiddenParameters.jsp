@@ -1,7 +1,20 @@
 <%@ page contentType="text/html;charset=GBK"%>
+<%@ page import="com.core.*" %>
+<%
+	String relPath = request.getRealPath("/");
+%>
+<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_STDNC") %>"/>
 <input type="hidden" name="filepath" value=""/>
 <input type="hidden" name="actionType" value=""/>
 <input type="hidden" name="SAVETYPES" value=""/>
+<!-- disable 后不能取到,在disable之前为其赋值-->
+<input type="hidden" name="GCNAME" value=""/>
+<input type="hidden" name="DNCNM" value=""/>
+<input type="hidden" name="XQFLDM" value=""/>
+<input type="hidden" name="STTPCD" value=""/>
+<input type="hidden" name="WTDPCD" value=""/>
+<input type="hidden" name="DAGTM" value=""/>
+
 <!-- 工程运行状态 -->
 <input type="hidden" name="XQYC" value=""/>
 <input type="hidden" name="DFJZZK" value=""/>

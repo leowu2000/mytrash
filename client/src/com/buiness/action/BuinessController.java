@@ -1,5 +1,10 @@
 package com.buiness.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +18,7 @@ import com.buiness.form.PJRCNBean;
 import com.buiness.form.PrjBean;
 import com.buiness.form.RSRBean;
 import com.buiness.form.STDNCBean;
+import com.core.ConnectionPool;
 import com.core.UUIdFactory;
 
 public class BuinessController implements Controller {
@@ -49,28 +55,80 @@ public class BuinessController implements Controller {
 		}
 		if("add_gqcj".trim().equals(actionType)){
 			String SAVETYPES = request.getParameter("SAVETYPES");
-			
 			PrjBean prjBean = BuinessDao.findBySql("select * from TB_PJ where PJNO="+request.getParameter("GCNAME"),path);
 			if("1".trim().equals(SAVETYPES)){
-				PJRCNBean bean = _getPJRCNBeanFromRequest(request,response);
+				PJRCNBean bean = _getPJRCNBeanFromRequest(request);
+				int DNCNO = UUIdFactory.getMaxId(path, "TB_PJRCN");
+				bean.setPJNO(String.valueOf(DNCNO));
 				String sSQL  = SqlFactory.insertSQL_PJRCNBean(bean, path,prjBean);
 				BuinessDao.insertDB(sSQL, path);
-				RSRBean rsrbean = _getRSRBeanFromRquest(request,response);
-				String sSQL2  = SqlFactory.insertSQL_PSRBean(rsrbean, path,prjBean);
+				RSRBean rsrbean = _getRSRBeanFromRquest(request);
+				String sSQL2  = SqlFactory.insertSQL_RSRBean(rsrbean, path,prjBean);
 				BuinessDao.insertDB(sSQL2, path);
 			}
 			if("2".trim().equals(SAVETYPES)){
 				String sSQL = "";
-				STDNCBean bean = _getSTDNCeanFromRequest(request,response);
-				sSQL = SqlFactory.insertSQL_STDNCBean(bean, path);
+				String DNCNO = request.getParameter("DNCNO");
+				System.out.println(DNCNO);
+				STDNCBean bean = _getSTDNCeanFromRequest(request);
+				//保存主表信息
+				bean.setDNCNO(String.valueOf(DNCNO));
+				sSQL  = SqlFactory.insertSQL_STDNCBean(bean, path);
+				BuinessDao.insertDB(sSQL, path);
+				//获取并保存资表信息
+				DetailBean dBean = _getDetailBeanFromRquest(request,bean.getXQFLDM());
+				sSQL  = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean.getXQFLDM());
 				BuinessDao.insertDB(sSQL, path);
 			}
+			
 			return new ModelAndView("project/gqcjManage");
+		}
+		if("add_fxjb".trim().equals(actionType)){//新增防汛简报信息
+			String ISSUE = request.getParameter("ISSUE");
+			String QF = new String(request.getParameter("QF").getBytes("ISO-8859-1"),"GBK");
+			String SH = new String(request.getParameter("SH").getBytes("ISO-8859-1"),"GBK");
+			String NG = new String(request.getParameter("NG").getBytes("ISO-8859-1"),"GBK");
+			String WTTT = new String(request.getParameter("WTTT").getBytes("ISO-8859-1"),"GBK");
+			String WTDT = new String(request.getParameter("WTDT").getBytes("ISO-8859-1"),"GBK");
+			String ACTICO = new String(request.getParameter("ACTICO").getBytes("ISO-8859-1"),"GBK");
+			String WTDPCD = new String(request.getParameter("WTDPCD").getBytes("ISO-8859-1"),"GBK");
+			String filepath = new String(request.getParameter("UpFile").getBytes("ISO-8859-1"),"GBK");
+			int RPJINCD = UUIdFactory.getMaxId(path, "TB_FXJB");
+			String sSQL = "INSERT INTO TB_FXJB(RPJINCD,ISSUE,WTDT,ACTICO,QF,SH,NG,WTDPCD,WTTT)VALUES("
+				+RPJINCD+","+ISSUE+",#"+WTDT+"#,'"+ACTICO+"','"+QF+"','"+SH+"','"+NG+"','"
+				+WTDPCD+"','"+WTTT+"')";
+			//主表
+			BuinessDao.insertDB(sSQL, path);
+			Connection conn = ConnectionPool.getConnection(path);
+			String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,LXZP) values(?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			File f = new File(filepath);
+			FileInputStream fis = new FileInputStream(f);
+			pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M"));
+			pstmt.setString(2, String.valueOf(RPJINCD));
+			pstmt.setBinaryStream(3, fis, (int) f.length());
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+			return new ModelAndView("report/fxjbManage");
+		}
+		if("add_report".trim().equals(actionType)){
+			String DNCNO = request.getParameter("DNCNO");
+			String WTDPCD = new String(request.getParameter("WTDPCD").getBytes("ISO-8859-1"),"GBK");
+			String TABLENAME = request.getParameter("TABLENAME");
+			String WTDT = request.getParameter("WTDT");
+			String MAINTITLE = new String(request.getParameter("MAINTITLE").getBytes("ISO-8859-1"),"GBK");
+			String CONTENT = new String(request.getParameter("CONTENT").getBytes("ISO-8859-1"),"GBK");
+			String FILEDNAME = request.getParameter("FILEDNAME");
+			String newSQL = "INSERT INTO "+TABLENAME+"(RPJINCD,WTTT,WTDT,WTDPCD,"+FILEDNAME+")VALUES("+DNCNO+",'"+MAINTITLE+"',#"+WTDT+"#,'"+WTDPCD+"','"+CONTENT+"')";
+			System.out.println(newSQL);
+			BuinessDao.insertDB(newSQL, path);
+			return new ModelAndView("report/"+TABLENAME+"Manage");
 		}
 		return null;
    }
-	public static PJRCNBean _getPJRCNBeanFromRequest(HttpServletRequest request,
-            HttpServletResponse response)throws Exception{
+	
+	public static PJRCNBean _getPJRCNBeanFromRequest(HttpServletRequest request)throws Exception{
 		PJRCNBean bean = new PJRCNBean();
 		String DNCFC = new String(request.getParameter("XQYC").getBytes("ISO-8859-1"),"GBK");
 		String RDERESCN = new String(request.getParameter("DFJZZK").getBytes("ISO-8859-1"),"GBK");
@@ -89,50 +147,53 @@ public class BuinessController implements Controller {
 		bean.setNT(NT==null?"":NT);//其它
 		return bean;
 	}
-	public static STDNCBean _getSTDNCeanFromRequest(HttpServletRequest request,
-            HttpServletResponse response)throws Exception{
+	
+	public static STDNCBean _getSTDNCeanFromRequest(HttpServletRequest request)throws Exception{
 		STDNCBean bean = new STDNCBean();
 		String DNCNM = new String(request.getParameter("DNCNM").getBytes("ISO-8859-1"),"GBK");//险情名称
-		String RDEPL = new String(request.getParameter("RDEPL").getBytes("ISO-8859-1"),"GBK");//抢险方案
-		String RDERESCN = new String(request.getParameter("RDERESCN").getBytes("ISO-8859-1"),"GBK");//抢险资源配备
-		String RDECNRL =  new String(request.getParameter("RDECNRL").getBytes("ISO-8859-1"),"GBK");//进展及结果
-		String DNCCUAN =  new String(request.getParameter("DNCCUAN").getBytes("ISO-8859-1"),"GBK");//险情原因分析
-		String DNCESTDV = new String(request.getParameter("DNCESTDV").getBytes("ISO-8859-1"),"GBK");//险情发展趋势
-		String DNCPBNFZ = new String(request.getParameter("DNCPBNFZ").getBytes("ISO-8859-1"),"GBK");//可能影响范围
-		String WTHCN = new String(request.getParameter("WTHCN").getBytes("ISO-8859-1"),"GBK");//抢险时气象情况
-		String FHYWTHCN = new String(request.getParameter("FHYWTHCN").getBytes("ISO-8859-1"),"GBK");//未来水文气象情况
-		String DNCADDSC = new String(request.getParameter("DNCADDSC").getBytes("ISO-8859-1"),"GBK");//补充描述
+		String RDEPL = new String(request.getParameter("QXFA").getBytes("ISO-8859-1"),"GBK");//抢险方案
+		String RDERESCN = new String(request.getParameter("QXZYPB").getBytes("ISO-8859-1"),"GBK");//抢险资源配备
+		String RDECNRL =  new String(request.getParameter("JZJJG").getBytes("ISO-8859-1"),"GBK");//进展及结果
+		String DNCCUAN =  new String(request.getParameter("XQYYFX").getBytes("ISO-8859-1"),"GBK");//险情原因分析
+		String DNCESTDV = new String(request.getParameter("XQFZQS").getBytes("ISO-8859-1"),"GBK");//险情发展趋势
+		String DNCPBNFZ = new String(request.getParameter("KNYXFW").getBytes("ISO-8859-1"),"GBK");//可能影响范围
+		String WTHCN = new String(request.getParameter("QXSQX").getBytes("ISO-8859-1"),"GBK");//抢险时气象情况
+		String FHYWTHCN = new String(request.getParameter("WLSWQX").getBytes("ISO-8859-1"),"GBK");//未来水文气象情况
+		String DNCADDSC = new String(request.getParameter("BCMS").getBytes("ISO-8859-1"),"GBK");//补充描述
 		String WTDPCD = new String(request.getParameter("WTDPCD").getBytes("ISO-8859-1"),"GBK");//填报单位名称
+		String DNCGR = new String(request.getParameter("DNCGR").getBytes("ISO-8859-1"),"GBK");//险情级别
+		String DAGPLCCH = new String(request.getParameter("DAGPLCCH").getBytes("ISO-8859-1"),"GBK");//出险地点桩号
+		String DAGLO = new String(request.getParameter("DAGLO").getBytes("ISO-8859-1"),"GBK");//出险部位
 		
-		bean.setDNCNO(request.getParameter("DNCNO")==null?"":request.getParameter("DNCNO"));//险情编号
-		bean.setPJNO(request.getParameter("PJNO")==null?"":request.getParameter("PJNO"));//工程编号
-		bean.setSTTPCD(request.getParameter("STTPCD")==null?"":request.getParameter("STTPCD"));//建筑物编码
-		bean.setDAGTM(request.getParameter("DAGTM")==null?"":request.getParameter("DAGTM"));//出险时间
 		bean.setDNCNM(DNCNM==null?"":DNCNM);//险情名称
-		bean.setXQFLDM(request.getParameter("XQFLDM")==null?"":request.getParameter("XQFLDM"));//险情分类代码
-		bean.setDNCGR(request.getParameter("DNCGR")==null?"":request.getParameter("DNCGR"));//险情级别
-		bean.setDAGPLCCH(request.getParameter("DAGPLCCH")==null?"":request.getParameter("DAGPLCCH"));//出险地点桩号
-		bean.setDAGLO(request.getParameter("DAGLO")==null?"":request.getParameter("DAGLO"));//出险部位
+		bean.setDNCGR(DNCGR==null?"":DNCGR);//险情级别
 		bean.setRDEPL(RDEPL==null?"":RDEPL);//抢险方案
 		bean.setRDERESCN(RDERESCN==null?"":RDERESCN);//抢险资源配备
-		bean.setTPN(request.getParameter("TPN")==null?"":request.getParameter("TPN"));//群众投入(人)
-		bean.setPLAPN(request.getParameter("PLAPN")==null?"":request.getParameter("PLAPN"));//解放军投入(人)
-		bean.setPLIPN(request.getParameter("PLIPN")==null?"":request.getParameter("PLIPN"));//武警投入(人)
 		bean.setRDECNRL(RDECNRL==null?"":RDECNRL);//进展及结果
 		bean.setDNCCUAN(DNCCUAN==null?"":DNCCUAN);//险情原因分析
 		bean.setDNCESTDV(DNCESTDV==null?"":DNCESTDV);//险情发展趋势
 		bean.setDNCPBNFZ(DNCPBNFZ==null?"":DNCPBNFZ);//可能影响范围
-		bean.setRZ(request.getParameter("RZ")==null?"":request.getParameter("RZ"));//当前运行水位(米)
 		bean.setWTHCN(WTHCN==null?"":WTHCN);//抢险时气象情况
 		bean.setFHYWTHCN(FHYWTHCN==null?"":FHYWTHCN);//未来水文气象情况
 		bean.setDNCADDSC(DNCADDSC==null?"":DNCADDSC);//补充描述
 		bean.setWTDPCD(WTDPCD==null?"":WTDPCD);//填报单位名称
+		bean.setDAGPLCCH(DAGPLCCH==null?"":DAGPLCCH);//出险地点桩号
+		bean.setDAGLO(DAGLO==null?"":DAGLO);//出险部位
+		
+		bean.setDNCNO(request.getParameter("DNCNO")==null?"":request.getParameter("DNCNO"));//险情编号
+		bean.setPJNO(request.getParameter("GCNAME")==null?"":request.getParameter("GCNAME"));//工程编号
+		bean.setSTTPCD(request.getParameter("STTPCD")==null?"":request.getParameter("STTPCD"));//建筑物编码
+		bean.setDAGTM(request.getParameter("DAGTM")==null?"":request.getParameter("DAGTM"));//出险时间
+		bean.setXQFLDM(request.getParameter("XQFLDM")==null?"":request.getParameter("XQFLDM"));//险情分类代码
+		bean.setTPN(request.getParameter("TPN")==null?"":request.getParameter("TPN"));//群众投入(人)
+		bean.setPLAPN(request.getParameter("PLAPN")==null?"":request.getParameter("PLAPN"));//解放军投入(人)
+		bean.setPLIPN(request.getParameter("PLIPN")==null?"":request.getParameter("PLIPN"));//武警投入(人)
+		bean.setRZ(request.getParameter("RZ")==null?"":request.getParameter("RZ"));//当前运行水位(米)
 		bean.setWTDPDT(request.getParameter("WTDPDT")==null?"":request.getParameter("WTDPDT"));//填报时间
 		return bean;
 	}
 	
-	public static RSRBean _getRSRBeanFromRquest(HttpServletRequest request,
-            HttpServletResponse response)throws Exception{
+	public static RSRBean _getRSRBeanFromRquest(HttpServletRequest request)throws Exception{
 		RSRBean bean = new RSRBean();
 		String BJWHZK = new String(request.getParameter("BJWHZK").getBytes("ISO-8859-1"),"GBK");//坝基完好状况
 		String BTWDZK = new String(request.getParameter("BTWDZK").getBytes("ISO-8859-1"),"GBK");//坝体稳定情况
@@ -160,14 +221,13 @@ public class BuinessController implements Controller {
 		return bean;
 	}
 	
-	public static DetailBean _getDetailBeanFromRquest(HttpServletRequest request,
-            HttpServletResponse response,String XQFL)throws Exception{
+	public static DetailBean _getDetailBeanFromRquest(HttpServletRequest request,String XQFL)throws Exception{
 		DetailBean bean = new DetailBean();
 		bean.setDNCNO(request.getParameter("DNCNO"));		//险情编号
-		bean.setPJNO(request.getParameter("PJNO"));		//工程编号
+		bean.setPJNO(request.getParameter("GCNAME"));		//工程编号
 		bean.setSTTPCD(request.getParameter("STTPCD"));		//建筑物编码
 		bean.setDAGTM(request.getParameter("DAGTM"));		//出险时间
-		bean.setDNCNM(request.getParameter("DNCNM"));		//险情名称
+		bean.setDNCNM(new String(request.getParameter("DNCNM").getBytes("ISO-8859-1"),"GBK"));		//险情名称
 		if("D004".trim().equals(XQFL)||"D003".trim().equals(XQFL)){
 			String LKGTU = new String(request.getParameter("LKGTU").getBytes("ISO-8859-1"),"GBK");
 			bean.setLKGTU(LKGTU==null?"":LKGTU);		//漏水混清	==D004==D003

@@ -10,7 +10,7 @@ public class STDNCBean {
 	private String DNCNM;//险情名称
 	private String XQFLDM;//险情分类代码
 	private String DNCGR;//险情级别
-	private String DAGPLCCH;//出险地点桩号
+	private String DAGPLCCH;//出险地点桩号	
 	private String DAGLO;//出险部位
 	private String RDEPL;//抢险方案
 	private String RDERESCN;//抢险资源配备
@@ -175,7 +175,7 @@ public class STDNCBean {
 		WTDPDT = wTDPDT;
 	}
 	
-	public static STDNCBean getPJRCNBeanFromRs(ResultSet rs){
+	public static STDNCBean getSTDNCBeanFromRs(ResultSet rs){
 		STDNCBean bean = new STDNCBean();
 		try{
 			bean.setDNCNO(rs.getString("DNCNO"));//险情编号

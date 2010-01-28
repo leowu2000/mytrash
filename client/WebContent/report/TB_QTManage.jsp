@@ -12,11 +12,12 @@
 </head>
 <style type="text/css">
 <!--
+
 -->
 </style>
 <script language="JAVASCRIPT">
 function toAdd(){
-	document.forms[0].action="/report/fxjbAdd.jsp";
+	document.forms[0].action="/report/hqxxAdd.jsp";
 	document.forms[0].submit();
 }
 function toEdit(){
@@ -27,17 +28,17 @@ function toEdit(){
 <% 
 	String path = request.getRealPath("/");
 
-	List<FXJBBean> records = BuinessDao.getAllFxjbcList(path); 
+	List<HQBean> records = BuinessDao.getAllHqList(path); 
 	String pageStr = request.getParameter("page"); 
 	int currentPage = 1; 
 	if (pageStr != null) 
 	currentPage = Integer.parseInt(pageStr); 
 	PageUtil pUtil = new PageUtil(10, records.size(), currentPage); 
 	currentPage = pUtil.getCurrentPage(); 
-%> 
+%>
 <body>
 <table width="95%" align="center">
-	<tr><td align="center" ><span  class="style4">防汛抗旱简报管理</span></td></tr>
+	<tr><td align="center" ><span  class="style4">旱情信息管理</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="IDs"/>
@@ -60,19 +61,17 @@ function toEdit(){
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
-		<td nowrap align="center" class="title">简报标题</td>
-		<td nowrap align="center" class="title">简报期数</td>
+		<td nowrap align="center" class="title">旱情标题</td>
 		<td nowrap align="center" class="title">填报单位</td>
-		<td nowrap align="center" class="title">填报时间</td>
+		<td nowrap align="center" class="title">填报日期</td>
 	</tr>
 	<%if(records!=null && records.size()>0){
 		for(int i=pUtil.getFromIndex();i<pUtil.getToIndex();i++){
-			FXJBBean bean = (FXJBBean)records.get(i);
+			HQBean bean = (HQBean)records.get(i);
 	%>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getRPJINCD() %>"></td>
 		<td><%=bean.getWTTT()%></td>
-		<td><%=bean.getISSUE()%></td>
 		<td><%=bean.getWTDPCD()%></td>
 		<td><%=bean.getWTDT()%></td>
 	</tr>
