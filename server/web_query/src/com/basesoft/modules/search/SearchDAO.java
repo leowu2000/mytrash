@@ -5,17 +5,12 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.basesoft.core.CommonDAO;
 import com.basesoft.core.PageInfo;
 import com.basesoft.core.PageList;
 
-public class SearchDAO {
+public class SearchDAO extends CommonDAO{
 
-	private JdbcTemplate jdbcTemplate;
-	
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
-		this.jdbcTemplate = jdbcTemplate;
-	}
-	
 	/**
 	 * 综合查询，根据条件生成结果
 	 * @param select_sortinfo 信息类型

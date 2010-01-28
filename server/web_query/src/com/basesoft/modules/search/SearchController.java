@@ -67,7 +67,7 @@ public class SearchController extends CommonController {
 				
 				mv.addObject("pageList", listResult);
 			}
-		}else if("search_consult".equals(action)){
+		}else if("search_consult".equals(action)){//会商查询
 			mv = new ModelAndView("modules/search/search_consult");
 			
 			int xq_count,yx_count,fx_count,zq_count,total_count;
@@ -99,7 +99,7 @@ public class SearchController extends CommonController {
 			mv.addObject("zq_count", zq_count);
 			mv.addObject("total_count", total_count);
 			return mv;
-		}else if("xq".equals(action)){
+		}else if("xq".equals(action)){//险情查询
 			//险情标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 			//填报单位
@@ -112,7 +112,7 @@ public class SearchController extends CommonController {
 		
 			mv = new ModelAndView("modules/result/result_xq");
 			mv.addObject("pageList", pageList);
-		}else if("zq".equals(action)){
+		}else if("zq".equals(action)){//灾情查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 			//填报单位
@@ -125,7 +125,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_zq");
 			mv.addObject("pageList", pageList);
-		}else if("hq".equals(action)){
+		}else if("hq".equals(action)){//旱情查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 			//填报单位
@@ -138,7 +138,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_hq");
 			mv.addObject("pageList", pageList);
-		}else if("yxzt".equals(action)){
+		}else if("yxzt".equals(action)){//运行状态查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 			//填报单位
@@ -151,7 +151,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_yxzt2");
 			mv.addObject("pageList", pageList);
-		}else if("fxxd".equals(action)){
+		}else if("fxxd".equals(action)){//防汛行动查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 			//填报单位
@@ -164,7 +164,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_fxxd");
 			mv.addObject("pageList", pageList);
-		}else if("fxjb".equals(action)){
+		}else if("fxjb".equals(action)){//防汛简报查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 			//填报单位
@@ -177,7 +177,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_fxjb");
 			mv.addObject("pageList", pageList);
-		}else if("media".equals(action)){
+		}else if("media".equals(action)){//多媒体查询
 			//工程类别
 			String radiob_gclb = ServletRequestUtils.getStringParameter(request, "radiob_gclb", "");
 			//文件格式
@@ -194,7 +194,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_media");
 			mv.addObject("pageList", pageList);
-		}else if("consult".equals(action)){
+		}else if("consult".equals(action)){//会商查询
 			//会商类别
 			String type = ServletRequestUtils.getStringParameter(request, "type", "");
 			String parentfile = ServletRequestUtils.getStringParameter(request, "parentfile", "");

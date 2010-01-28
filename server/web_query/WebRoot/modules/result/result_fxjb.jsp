@@ -56,8 +56,8 @@ List list = pageList.getList();
 %>                                                                                                                               
 	<tr>
 	<td align='center'> <INPUT type="checkbox" id ="check<%=i %>" name="check<%=i %>" value="<%=map.get("RPJINCD") %>" ></td>     
-	<td><a href="javascript:openUrl('../edit_fold/edit_fxjb_z.asp?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("ISSUE")%></a></td>  
-	<td><a href="javascript:openUrl('../edit_fold/edit_fxjb_z.asp?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTTT")%></a></td>
+	<td><a href="javascript:openUrl('detail.do?action=fxjb?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("ISSUE")%></a></td>  
+	<td><a href="javascript:openUrl('detail.do?action=fxjb?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("WTTT")%></a></td>
 	<td><%=map.get("WTDPCD")%></td>                                                                                              
 	<td><%=map.get("WTDT")%></td>                                                                                                 
 	</tr>                                                                                                                    
