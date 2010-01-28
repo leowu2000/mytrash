@@ -47,6 +47,7 @@ function per_Submit(){
 		}
 		if(val=="D001"){
 			//D001//D001决口TB_BURDSC
+			alert(window("XQFLFRAME").document.getElementById("BURLDGL").value);
 			document.form1.BUW.value=window("XQFLFRAME").document.getElementById("BUW").value;//决口宽度(米)
 			document.form1.BUVL.value=window("XQFLFRAME").document.getElementById("BUVL").value;//决口流速(米/秒)
 			document.form1.BUZDF.value=window("XQFLFRAME").document.getElementById("BUZDF").value;//决口水头差(米)
@@ -285,18 +286,20 @@ function getGcmessage(id){
 function chkCheckBoxChs(obj){
 	if (obj.value=="2")
 	{
-		document.getElementById('XQFLDM').disabled=false;
-		document.getElementById('DNCNM').disabled=false;
-		document.getElementById('DAGLO').disabled=false;
+		document.getElementById('XQFL').disabled=false;
+		document.getElementById('XQBT').disabled=false;
+		document.getElementById('CXBW').disabled=false;
+		DATEDESC.innerHTML="出险时间[T]";
 		return false;
 	}
 	else
 	{
-		document.getElementById('XQFLDM').disabled=true; 
-		document.getElementById('DNCNM').value="";
-		document.getElementById('DNCNM').disabled=true;
-		document.getElementById('DAGLO').value="";
-		document.getElementById('DAGLO').disabled=true;
+		document.getElementById('XQFL').disabled=true; 
+		document.getElementById('XQBT').value="";
+		document.getElementById('XQBT').disabled=true;
+		document.getElementById('CXBW').value="";
+		document.getElementById('CXBW').disabled=true;
+		DATEDESC.innerHTML="采集时间[T]";
 		return false;
 	}
 }
@@ -307,14 +310,14 @@ function getRadioValue(name){
 			return objs[i].value;
 	}
 }
-function uplaodPhotos(){
-	var gcmc = document.getElementById('GCNAME').value;
+function uploadPhotos(){
+	var gcmc = document.getElementById('PJNM').value;
 	if(gcmc==""){
 		alert("请选择工程名称！");
 		return false;
 	}
-	if(confirm("增加图片信息后，工程名称将不能更改，请确认工程名称\n点击确定直接保存，点击取消修改工程名称")){
-		var gcbh = document.getElementById('GCNAME').value;
+	if(confirm("增加图片信息后，险情基本信息,将不能更改，请确认工程名称\n险情类别等,点击确定直接保存，点击取消修改工程名称")){
+		var gcbh = document.getElementById('PJNM').value;
 		var type = getRadioValue("myradio");
 		var zpbt = document.getElementById('ZPBT').value;
 		var zpms = document.getElementById('ZPMS').value;
@@ -335,32 +338,37 @@ function uplaodPhotos(){
 		if(zpms==""){alert("请填写照片描述！");return false;}
 		var type = getRadioValue("myradio");
 		if(type==2){
-			if(document.getElementById('XQFLDM').value==""){
+			if(document.getElementById('XQFL').value==""){
 				alert("请填写险情标题！");
 				return false;
 			} 
-			if(confirm("添加多媒体信息后，险情类别 不能更改，请确认是否继续\n" +
-					"点击确定继续，点击取消修改险情类别")){
-				if(window.XMLHttpRequest){ //Mozilla
-					var xmlHttpReq=new XMLHttpRequest();
-				}else if(window.ActiveXObject){
-					var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-				}
-				xmlHttpReq.open("GET", "/FileUploadServlet?type=upload&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
-						+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcbh+"" +
-								"&xqfldm="+document.getElementById('XQFLDM').value+"" +
-								"&DAGLO="+document.getElementById('DAGLO').value+"" +
-								"&xqbt="+document.getElementById('DNCNM').value+"" +
-								"&WTDPCD="+document.getElementById('WTDPCD').value, false);
-				xmlHttpReq.send(null);
-				var result = xmlHttpReq.responseText;
-				PICLIST.innerHTML=result;
-				document.getElementById('GCNAME').disabled=true;
-				document.getElementById('DNCNM').disabled=true;
-				document.getElementById('WTDPCD').disabled=true;
-				document.getElementById('DAGLO').disabled=true;
-				document.getElementById('XQFLDM').disabled=true;
+			if(window.XMLHttpRequest){ //Mozilla
+				var xmlHttpReq=new XMLHttpRequest();
+			}else if(window.ActiveXObject){
+				var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 			}
+			xmlHttpReq.open("GET", "/FileUploadServlet?type=upload&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
+					+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcbh+"" +
+							"&xqfldm="+document.getElementById('XQFL').value+"" +
+							"&STTPCD="+document.getElementById('CXBW').value+"" +
+							"&xqbt="+document.getElementById('XQBT').value+"" +
+							"&WTDPCD="+document.getElementById('TBDW').value+
+							"&DNCNO="+document.getElementById("DNCNO").value, false);
+			xmlHttpReq.send(null);
+			var result = xmlHttpReq.responseText;
+			PICLIST.innerHTML=result;
+			document.getElementById('GCNAME').value=gcmc;
+			document.getElementById('DNCNM').value=document.getElementById('XQBT').value;
+			document.getElementById('XQFLDM').value = document.getElementById('XQFL').value;
+			document.getElementById('STTPCD').value = document.getElementById('CXBW').value;
+			document.getElementById('WTDPCD').value = document.getElementById('TBDW').value;
+			document.getElementById('DAGTM').value=document.getElementById('CJSJ').value;
+			document.getElementById('PJNM').disabled=true;
+			document.getElementById('XQBT').disabled=true;
+			document.getElementById('TBDW').disabled=true;
+			document.getElementById('CXBW').disabled=true;
+			document.getElementById('XQFL').disabled=true;
+			document.getElementById('CJSJ').disabled=true;
 		}
 		else{
 			if(window.XMLHttpRequest){ //Mozilla
@@ -373,45 +381,15 @@ function uplaodPhotos(){
 			xmlHttpReq.send(null);
 			var result = xmlHttpReq.responseText;
 			PICLIST.innerHTML=result;
-			document.getElementById('GCNAME').disabled=true;
+			document.getElementById('GCNAME').value=document.getElementById('PJNM').value;
+			document.getElementById('PJNM').disabled=true;
 		}
+		document.getElementById("SAVEMAINMSG").disabled=false;
 	}
 }
-function viewThePic(picid){
 
-	var type = getRadioValue("myradio");
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
-	xmlHttpReq.open("GET", "/FileUploadServlet?type=viewpic&saveType="+type+"&picid="+picid, false);
-	xmlHttpReq.send(null);
-	var results = xmlHttpReq.responseText;
-	var val = results.split(",");
-	document.getElementById('ZPBT').value=val[0];
-	document.getElementById('ZPMS').value=val[2];
-	document.getElementById('CJSJ').value=val[1];
-	
-	warnForm.action="viewPic.jsp?from=asdf&type=jpeg&zlbm="+picid;
-	warnForm.target="saveFrm";
-	warnForm.submit();
-	setTimeout("viewDataImg('<%=picpath%>')","1000");
-}
-//图片预览区域代码
-function viewDataImg(value) 
-{ 
-
-	//新的预览代码，支持 IE6、IE7。 
-	var newPreview = document.getElementById("newPreview"); 
-	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = value; 
-	newPreview.style.width = "150px"; 
-	newPreview.style.height = "100px"; 
-	newPreview.style.border= "6px double #ccc";
-}
 function deletePIC(picid){
-	var gcbh = document.getElementById('GCNAME').value;
+	var gcbh = document.getElementById('PJNM').value;
 	var type = getRadioValue("myradio");
 	if(confirm("删除后不能恢复，是否继续？")){
 		if(window.XMLHttpRequest){ //Mozilla

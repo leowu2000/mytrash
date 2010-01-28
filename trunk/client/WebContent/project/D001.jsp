@@ -44,9 +44,8 @@ margin:0px auto; padding:0px;
 	</tr>
 	<tr>
 		<td class="title" colspan="2">决口处地质地形条件</td>
-		<td  bgcolor="#FFFFFF" colspan="6"><textarea rows="4" cols="80" name="BURLDGL"></textarea></td>
+		<td  bgcolor="#FFFFFF" colspan="6"><textarea id="BURLDGL" name="BURLDGL" rows="4" cols="80" ></textarea></td>
 	</tr>
-
 </table>
 </div>
 </body>

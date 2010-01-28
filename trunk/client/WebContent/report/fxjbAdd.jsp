@@ -23,24 +23,28 @@
 function toBack(){
 	location.href="/project/prgManage.jsp";
 }
-
+function submiting(){
+	document.frm.submit();
+}
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">新增防汛抗旱简报</span></td></tr>
 </table>
-<form name="frm" action="" method="post">
-<input type="hidden" name="actionType" value=""/>
+<form name="frm" action="/buiness.do" method="post">
+<input type="hidden" name="actionType" value="add_fxjb"/>
+<input type="hidden" name="WTDPCD" value="WTDPCD"/>
+<input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title" width="30%" >单位</td>
-		<td nowrap align="center" class="title"  colspan="4">第<input type="text" class="lines" value="" size="8"/> 期</td>
+		<td nowrap align="center" class="title"  colspan="4">第<input type="text" class="lines" name="ISSUE" value="" size="8"/> 期</td>
 		<td nowrap align="center" class="title" width="30%" ><%=UtilDateTime.nowDateStringCN() %></td>
 	</tr>
 	<tr height="25" >
 		<td align="center" class="title">标题:</td>
 		<td align="center" class="title" colspan="3">
-		<input type="text" name="" value="" size="25"/></td>
+		<input type="text" name="WTTT" value="" size="25"/></td>
 		<td align="center" class="title2">附件:</td>
 		<td bgcolor="#FFFFFF">
 		<input type="file" name="UpFile" size="20"> 
@@ -50,7 +54,7 @@ function toBack(){
 	<td class="title" colspan="6">
 	<%	           
 	    FCKeditor oFCKeditor3 ;
-	    oFCKeditor3 = new FCKeditor( request, "PRE_DYNAMIC") ;
+	    oFCKeditor3 = new FCKeditor( request, "ACTICO") ;
 	    oFCKeditor3.setBasePath( "/FCKeditor/" ) ;
 		oFCKeditor3.setToolbarSet( "NowUse" ) ;
 	    oFCKeditor3.setHeight("260");
@@ -61,11 +65,11 @@ function toBack(){
 	</tr>
 	<tr height="25" >
 		<td nowrap align="center" class="title">签发(Q):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value="" /></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="QF" value="" /></td>
 		<td nowrap align="center" class="title">审核(H):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value=""/></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="SH" value=""/></td>
 		<td nowrap align="center" class="title">拟稿(N):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="" value="" /></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="NG" value="" /></td>
 	</tr>
 </table>
 </form>

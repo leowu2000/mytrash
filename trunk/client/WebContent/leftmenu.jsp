@@ -111,15 +111,16 @@ body {
 <li><a href="#Menu=ChildMenu1"  onclick="DoMenu('ChildMenu1')"><b>数据维护</b></a> 
     <ul id="ChildMenu1" class="collapsed"> 
     <li><a href="/project/prgManage.jsp" target="mainFrame">工程管理</a></li> 
-    <li><a href="/project/gqcjManage.jsp" target="mainFrame">工情采集管理</a></li> 
+    <li><a href="/project/gqxqManage.jsp" target="mainFrame">工程险情</a></li> 
+    <li><a href="/project/gqyxManage.jsp" target="mainFrame">工程运行状态</a></li> 
     </ul> 
 </li> 
 <li><a href="#Menu=ChildMenu2" onclick="DoMenu('ChildMenu2')"><b>报告管理</b></a> 
     <ul id="ChildMenu2" class="collapsed"> 
     <li><a href="/report/fxjbManage.jsp" target="mainFrame">防汛简报</a></li> 
-    <li><a href="/report/fxxdManage.jsp" target="mainFrame">防汛行动</a></li> 
-    <li><a href="/report/zqbgManage.jsp" target="mainFrame">灾情报告</a></li> 
-    <li><a href="/report/hqxxManage.jsp" target="mainFrame">旱情信息</a></li> 
+    <li><a href="/report/TB_FPACTIManage.jsp" target="mainFrame">防汛行动</a></li> 
+    <li><a href="/report/TB_SDManage.jsp" target="mainFrame">灾情报告</a></li> 
+    <li><a href="/report/TB_QTManage.jsp" target="mainFrame">旱情信息</a></li> 
     </ul> 
 </li> 
 <li><a href="#Menu=ChildMenu3" onclick="DoMenu('ChildMenu3')"><b>数据上传</b></a> 
