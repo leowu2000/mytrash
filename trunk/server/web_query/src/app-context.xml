@@ -49,4 +49,5 @@
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
 	<bean id="searchDAO" class="com.basesoft.modules.search.SearchDAO"></bean>
+	<bean id="detailDAO" class="com.basesoft.modules.detail.DetailDAO"></bean>
 </beans>
