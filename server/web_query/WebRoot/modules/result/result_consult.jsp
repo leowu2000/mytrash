@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="org.springframework.web.context.support.*,org.springframework.context.*,org.springframework.jdbc.core.JdbcTemplate" %>
+<HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script language="javascript" src="../../script/openurl.js"></script>
