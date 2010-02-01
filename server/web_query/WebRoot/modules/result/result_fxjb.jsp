@@ -32,7 +32,6 @@ List list = pageList.getList();
         <td bgcolor="#FFFFFF">        
         <table  width="100%" border="0" class="font_define">                                                                                                                  
 	<tr  class="banner">
-		<td align='center'> 选择</td>
 	<%
     if (list.size()==0){
     %>
@@ -55,7 +54,6 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-	<td align='center'> <INPUT type="checkbox" id ="check<%=i %>" name="check<%=i %>" value="<%=map.get("RPJINCD") %>" ></td>     
 	<td><a href="javascript:openUrl('detail.do?action=fxjb?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("ISSUE")%></a></td>  
 	<td><a href="javascript:openUrl('detail.do?action=fxjb?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("WTTT")%></a></td>
 	<td><%=map.get("WTDPCD")%></td>                                                                                              
