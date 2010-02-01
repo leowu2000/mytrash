@@ -1,3 +1,6 @@
+function init(){
+  document.getElementById('fxxq').submit();
+}
 /**
  * 变换查询图标  显示查询面板
  */

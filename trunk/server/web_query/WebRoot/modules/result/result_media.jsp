@@ -9,7 +9,7 @@ List list = pageList.getList();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>运行状态</title>
+    <title>旱情信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/common.js"></script>
@@ -42,10 +42,10 @@ List list = pageList.getList();
     <%
 	}else {
 	%>                                                                                        
-		<td width="30%" class="banner">工程名称</td>
-   		<td width="15%" class="banner">工程类别</td>
-        <td width="30%" class="banner">填报单位名称</td>
-        <td width="20%" class="banner">填报时间</td>                                                                                                        
+		<td width="15%" align="center">示例图</td>
+        <td width="35%" align="center">标题</td>
+        <td width="15%" align="center">文件格式</td>
+        <td width="25%" align="center">采集时间</td>                                                                                                       
 	</tr>                                                                                                                    
                                                                                                                                  
 <%  
@@ -54,10 +54,20 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-        <td><a href="javascript:openUrl('../edit_fold/edit_yxzt.asp?id=<%=map.get("PJRNO")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>
-        <td align="center"><a href="javascript:openUrl('../edit_fold/edit_yxzt.asp?id=<%=map.get("PJRNO")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("gcflmc")%></a></td>
-        <td><%=map.get("WTDPCD")%></td>
-        <td align="center"><%=map.get("WTDPDT")%></td>                                                                                            
+       <td align="center">
+	       <a href="javascript:openUrl('../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD")%>&WJGS=<%=map.get("WJGS")%>',800,550,0)">
+		   <%if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"JPG".equals(map.get("WJGS").toString().toLowerCase())){ %>
+		       <img src="../edit_fold/imgout.asp?tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" width=30 height=30> 
+		   <%}else{ %>
+		   	   <img src="../image/lx.gif" width=30 height=30> 
+		   <%} %>
+		   </a>
+		</td>
+        <td align="">
+			<a href="javascript:openUrl('../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD")%>&WJGS=<%=map.get("WJGS")%>',800,550,0)"><%=map.get("title")%></a>
+		</td>
+        <td align="center"><%=map.get("wjgs")%></td>
+		<td align="center"><%=map.get("dtcdt")%></td>                                                                                        
 	</tr>                                                                                                                    
 <%            
 	}                                                                                                       
