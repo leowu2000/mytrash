@@ -791,7 +791,7 @@ public class SearchDAO extends CommonDAO{
 		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
 			sql = sql + " pj.WTDPDT >= '" + date_start + "' and  pj.WTDPDT <= '" + date_end + "' and";
 		}
-		sql = sql + " order by pj.wtdpdt desc";
+		sql = sql + " 1=1 order by pj.wtdpdt desc";
 		
 		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
 		String sqlCount = "select count(*) from (" + sql + ")" + "";

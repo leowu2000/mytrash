@@ -9,7 +9,7 @@
 <script src="../../script/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 </head>
 
-<BODY topmargin="3"  class="font_define">
+<BODY topmargin="3"  class="font_define" onload="init();">
 <form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=fxjb" target="result">
   <div id="query" > 
     <div id="Layer3" style="position:absolute; width:400px; height:20px; z-index:2; left: 280px; top: 93px; background-color: #00CC33; layer-background-color: #00CC33; border: 1px none #000000; visibility: hidden"></div>
