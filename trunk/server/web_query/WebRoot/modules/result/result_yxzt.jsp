@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.basesoft.core.PageList"%>
 <%@ page import="com.basesoft.core.PageInfo"%>
+<%@page import="com.basesoft.util.StringUtil"%>
 <%
 PageList pageList = (PageList)request.getAttribute("pageList");
 PageInfo pageInfo = pageList.getPageInfo();

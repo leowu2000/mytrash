@@ -27,6 +27,7 @@ public class DetailController extends CommonController {
 			
 			String id = ServletRequestUtils.getStringParameter(request, "id", "");
 			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
+			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
 			
 			//得到防汛简报和防汛简报多媒体信息
 			Map mapFxjb = detailDAO.getFxjb(id);
@@ -37,6 +38,22 @@ public class DetailController extends CommonController {
 			mv.addObject("page", page);
 			mv.addObject("mapFxjb", mapFxjb);
 			mv.addObject("listFxjb_m", listFxjb_m);
+		}else if("fxxd".equals(action)){
+			mv = new ModelAndView("modules/detail/detail_fxxd");
+			
+			String id = ServletRequestUtils.getStringParameter(request, "id", "");
+			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
+			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
+			
+			//得到防汛简报和防汛简报多媒体信息
+			Map mapFxxd = detailDAO.getFxxd(id);
+			List listFxxd_m = detailDAO.getFxxd_m(id);
+			
+			mv.addObject("id", id);
+			mv.addObject("tbdw", tbdw);
+			mv.addObject("page", page);
+			mv.addObject("mapFxxd", mapFxxd);
+			mv.addObject("listFxxd_m", listFxxd_m);
 		}
 		
 		return mv;

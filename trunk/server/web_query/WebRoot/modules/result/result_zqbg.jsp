@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.basesoft.core.PageList"%>
 <%@ page import="com.basesoft.core.PageInfo"%>
+<%@page import="com.basesoft.util.StringUtil"%>
 <%
 PageList pageList = (PageList)request.getAttribute("pageList");
 PageInfo pageInfo = pageList.getPageInfo();
@@ -55,7 +56,7 @@ List list = pageList.getList();
 	<tr>
 	<td><a href="javascript:openUrl('../edit_fold/edit_zq_z.asp?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTTT")%></a></td>
 	<td><a href="javascript:openUrl('../edit_fold/edit_zq_z.asp?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTDPCD")%></a></td>                                                                                              
-	<td><%=map.get("WTDT")%></td>                                                                                                
+	<td><%=StringUtil.DateToString((Date)map.get("WTDT"),"yyyy-MM-dd") %></td>                                                                                                
 	</tr>                                                                                                                    
 <%            
 	}                                                                                                       

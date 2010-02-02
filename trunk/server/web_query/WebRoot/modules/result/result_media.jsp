@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.basesoft.core.PageList"%>
 <%@ page import="com.basesoft.core.PageInfo"%>
+<%@page import="com.basesoft.util.StringUtil"%>
 <%
 PageList pageList = (PageList)request.getAttribute("pageList");
 PageInfo pageInfo = pageList.getPageInfo();
@@ -9,7 +10,7 @@ List list = pageList.getList();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>旱情信息</title>
+    <title>多媒体信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/common.js"></script>
@@ -67,7 +68,7 @@ List list = pageList.getList();
 			<a href="javascript:openUrl('../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD")%>&WJGS=<%=map.get("WJGS")%>',800,550,0)"><%=map.get("title")%></a>
 		</td>
         <td align="center"><%=map.get("wjgs")%></td>
-		<td align="center"><%=map.get("dtcdt")%></td>                                                                                        
+		<td align="center"><%=StringUtil.DateToString((Date)map.get("dtcdt"),"yyyy-MM-dd") %></td>                                                                                        
 	</tr>                                                                                                                    
 <%            
 	}                                                                                                       
