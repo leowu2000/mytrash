@@ -2,7 +2,7 @@
 <%@ page import="com.basesoft.util.*" %>
 <%
 	Map mapFxjb = (Map)request.getAttribute("mapFxjb");
-	List listFxjb_m = (List)request.getAttribute("list_Fxjb_m");
+	List listFxjb_m = (List)request.getAttribute("listFxjb_m");
 	String tbdw = request.getAttribute("tbdw").toString();
 	String pageNum = request.getAttribute("page").toString();
 	String id = request.getAttribute("id").toString();
@@ -52,7 +52,7 @@
 		    <%if("JPG".equals(mapFxjb_m.get("WJGS").toString().toUpperCase())||"JPG".equals(mapFxjb_m.get("WJGS").toString().toLowerCase())){ %>
 	       	  <img src="imgout.asp?tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='info_fxjb.asp?fxxd_pId=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
 	        <%}else{%>
-	       	  <img src="../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='info_fxjb.asp?fxxd_pId=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+	       	  <img src="../../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='info_fxjb.asp?fxxd_pId=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
 	    	<%}%>
 		    <td>
 		  </tr>
@@ -79,7 +79,7 @@
           </tr>
           <tr align="center"> 
             <td height="6"><%=tbdw %></td>
-            <td height="6" ><%=mapFxjb.get("WTDT") %></td>
+            <td height="6" ><%=StringUtil.DateToString((Date)mapFxjb.get("WTDT"),"yyyy-MM-dd") %></td>
           </tr>
           <tr align="center"> 
             <td height="12" colspan="2">&nbsp; </td>

@@ -24,4 +24,22 @@ public class DetailDAO extends CommonDAO {
 	public List<?> getFxjb_m(String id){
 		return jdbcTemplate.queryForList("SELECT * FROM TB_FXJB_M WHERE RPJINCD = '" + id + "'");
 	}
+	
+	/**
+	 * 获取防汛行动信息
+	 * @param id
+	 * @return
+	 */
+	public Map getFxxd(String id){
+		return jdbcTemplate.queryForMap("SELECT * FROM TB_FPACTI WHERE RPJINCD = '" + id + "'");
+	}
+	
+	/**
+	 * 获取防汛行动多媒体信息
+	 * @param id
+	 * @return
+	 */
+	public List<?> getFxxd_m(String id){
+		return jdbcTemplate.queryForList("SELECT * FROM TB_FPACTI_M WHERE RPJINCD = '" + id + "'");
+	}
 }
