@@ -6,6 +6,15 @@
 	String tbdw = request.getAttribute("tbdw").toString();
 	String pageNum = request.getAttribute("page").toString();
 	String id = request.getAttribute("id").toString();
+	
+	int mediawidth = 1000/(listFxjb_m.size() + 1);
+	int mediaheight = 600/(listFxjb_m.size() + 1);
+	if(mediawidth<100){
+		mediawidth = 100;
+	}
+	if(mediaheight<60){
+		mediaheight	= 60;
+	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -16,8 +25,8 @@
 <script language="javascript" src="../../script/onmouseover.js">
 </script>
 <link rel="stylesheet" href="../../css/main.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312"></head>
-<body background="../main/images/back.gif">
+</head>
+<body background="../../images/back.gif">
 <script language="JavaScript" src="../script/layer10.js"></script>
 <p>&nbsp;</p>
 <form name="form1" method="post" action="../interface/result_fxjb.asp" target="parent.result"> 
@@ -50,9 +59,9 @@
 		  <tr align="middle" height="80"> 
 	        <td class="bordercolor"  height="80">		
 		    <%if("JPG".equals(mapFxjb_m.get("WJGS").toString().toUpperCase())||"JPG".equals(mapFxjb_m.get("WJGS").toString().toLowerCase())){ %>
-	       	  <img src="imgout.asp?tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='info_fxjb.asp?fxxd_pId=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+	       	  <img src="media.do?action=image&tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="border=0; height=<%=mediaheight %>;width=<%=mediawidth %>; z-index:8;"> 
 	        <%}else{%>
-	       	  <img src="../../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='info_fxjb.asp?fxxd_pId=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+	       	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
 	    	<%}%>
 		    <td>
 		  </tr>

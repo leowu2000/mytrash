@@ -58,9 +58,9 @@ List list = pageList.getList();
        <td align="center">
 	       <a href="javascript:openUrl('../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD")%>&WJGS=<%=map.get("WJGS")%>',800,550,0)">
 		   <%if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"JPG".equals(map.get("WJGS").toString().toLowerCase())){ %>
-		       <img src="../edit_fold/imgout.asp?tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" width=30 height=30> 
+		       <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" width=30 height=30> 
 		   <%}else{ %>
-		   	   <img src="../image/lx.gif" width=30 height=30> 
+		   	   <img src="../../images/lx.gif" width=30 height=30> 
 		   <%} %>
 		   </a>
 		</td>

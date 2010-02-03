@@ -6,6 +6,15 @@
 	String tbdw = request.getAttribute("tbdw").toString();
 	String pageNum = request.getAttribute("page").toString();
 	String id = request.getAttribute("id").toString();
+	
+	int mediawidth = 1000/(listFxxd_m.size() + 1);
+	int mediaheight = 600/(listFxxd_m.size() + 1);
+	if(mediawidth<100){
+		mediawidth = 100;
+	}
+	if(mediaheight<60){
+		mediaheight	= 60;
+	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -13,12 +22,11 @@
     <title>防汛行动详细信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
-<script language="javascript" src="../../script/onmouseover.js">
-</script>
-<link rel="stylesheet" href="../../css/main.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312"></head>
-<body background="../main/images/back.gif">
-<script language="JavaScript" src="../script/layer10.js"></script>
+	<script language="javascript" src="../../script/onmouseover.js"></script>
+	<script language="JavaScript" src="../script/layer10.js"></script>
+	<link rel="stylesheet" href="../../css/main.css" type="text/css">
+</head>
+<body background="../../images/back.gif">
 <p>&nbsp;</p>
 <form name="form1" method="post" action="../interface/result_fxxd.asp" target="result"> 
   <table width="68%" align="center" border="0" cellspacing="1" cellpadding="0">
@@ -30,10 +38,10 @@
       </td>
     </tr>
     <tr> 
-      <td width="47%" height="25" align="center" bgcolor="#FFFFFF">
+      <td width="49%" height="25" align="center" bgcolor="#FFFFFF">
         <div align="left"><%=tbdw %></div>
       </td>
-      <td width="53%" height="25" align="center" bgcolor="#FFFFFF"><div align="right"></div>
+      <td width="51%" height="25" align="center" bgcolor="#FFFFFF"><div align="right"></div>
         <div align="right"><%=StringUtil.DateToString((Date)mapFxxd.get("WTDT"),"yyyy-MM-dd") %></div>
       </td>
     </tr>
@@ -58,9 +66,9 @@
 		  <tr align="middle" height="80"> 
 		    <td height="80">		
 		<%if("JPG".equals(mapFxxd_m.get("WJGS").toString().trim().toUpperCase())||"JPG".equals(mapFxxd_m.get("WJGS").toString().trim().toLowerCase())){ %>
-        	  <img src="media.do?action=imageout&tablename=TB_FPACTI_M&media_id=<%=mapFxxd_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100;z-index:8;" onClick="window.location='info_fxxd.asp?fxxd_pId=<%=mapFxxd_m.get("ZLBM")%>&amp;title=<%=mapFxxd_m.get("TITLE")%>&amp;dtcdt=<%=mapFxxd_m.get("DTCDT")%>&amp;tbdw=<%=tbdw%>&amp;fileName=<%=fileName%>&amp;WJGS=<%=mapFxxd_m.get("WJGS")%>'"> 
+        	  <img src="media.do?action=image&tablename=TB_FPACTI_M&media_id=<%=mapFxxd_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="border=0; height=<%=mediaheight %>;width=<%=mediawidth %>;z-index:8;"> 
         <%}else{  %>
-        	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='info_fxxd.asp?fxxd_pId=<%=mapFxxd_m.get("ZLBM")%>&amp;title=<%=mapFxxd_m.get("TITLE")%>&amp;dtcdt=<%=mapFxxd_m.get("DTCDT")%>&amp;tbdw=<%=tbdw%>&amp;fileName=<%=fileName%>&amp;WJGS=<%=mapFxxd_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+        	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapFxxd_m.get("ZLBM")%>&title=<%=mapFxxd_m.get("TITLE")%>&dtcdt=<%=mapFxxd_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxxd_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         <%}%>
 			</td>
 		  </tr>
@@ -73,6 +81,7 @@
 <%	
 	}
 %>
+	<tr height="28"><td height="28"></td></tr>
   </table>
   <table width="68%" border="0" cellspacing="0" align="center" cellpadding="0" class="bordercolor">
     <tr> 
@@ -83,7 +92,7 @@
     <tr> 
       <td height="80"> 
         <div align="center">
-          <textarea name="text_detail" cols="81%" style="border=0 solid #002200" rows="10" wrap="VIRTUAL" readonly class="button_query">
+          <textarea name="text_detail" cols="68%" style="border=0 solid #002200" rows="10" wrap="VIRTUAL" readonly class="button_query">
 		    <%=mapFxxd.get("ACTICO") %>  
           </textarea>
         </div>

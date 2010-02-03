@@ -54,7 +54,7 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-        <td align="left"><a href="javascript:openUrl('../edit_fold/edit_hq.asp?id=<%=map.get("RPJINCD")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTTT")%></a></td>
+        <td align="left"><a href="javascript:openUrl('detail.do?action=hq&id=<%=map.get("RPJINCD")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTTT")%></a></td>
         <td align="left"><%=map.get("WTDPCD")%></td>
         <td align="center"><%=StringUtil.DateToString((Date)map.get("WTDT"),"yyyy-MM-dd") %></td>                                                                                            
 	</tr>                                                                                                                    
