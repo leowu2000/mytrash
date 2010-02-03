@@ -19,7 +19,7 @@ public class MediaController extends CommonController {
 			HttpServletResponse response, ModelAndView mv) throws Exception {
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
 		
-		if("imageout".equals(action)){
+		if("image".equals(action)){
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String pId = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
