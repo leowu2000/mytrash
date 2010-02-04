@@ -76,7 +76,7 @@ public class DetailDAO extends CommonDAO {
 	 * @return
 	 */
 	public List<?> getXq_m(String id){
-		return jdbcTemplate.queryForList("SELECT * FROM TB_STDNC_M WHERE RPJINCD = '" + id + "'");
+		return jdbcTemplate.queryForList("SELECT * FROM TB_STDNC_M WHERE dncno = '" + id + "'");
 	}
 	
 	/**
@@ -86,5 +86,41 @@ public class DetailDAO extends CommonDAO {
 	 */
 	public Map getXq_s(String id){
 		return jdbcTemplate.queryForMap("select * from tb_stdnc sc,tb_st st where sc.sttpcd = st.sttpcd  and sc.dncno = '" + id + "'");
+	}
+	
+	/**
+	 * 获取运行状态
+	 * @param id
+	 * @return
+	 */
+	public Map getYxzt(String id){
+		return jdbcTemplate.queryForMap("select * from tb_pjrcn pjr,tb_pj pj,tb_gclb gc,tb_cnt cnt where cnt.cntcd =pj.cntcd and pj.pjno = pjr.pjno and pjr.gcfldm = gc.gcfldm and pjrno = '" + id + "'");
+	}
+	
+	/**
+	 * 获取运行状态多媒体信息
+	 * @param id
+	 * @return
+	 */
+	public List<?> getYxzt_m(String id){
+		return jdbcTemplate.queryForList("SELECT * FROM TB_PJR_M WHERE PJRNO = '" + id + "'");
+	}
+	
+	/**
+	 * 获取灾情信息
+	 * @param id
+	 * @return
+	 */
+	public Map getZq(String id){
+		return jdbcTemplate.queryForMap("SELECT * FROM TB_SD WHERE RPJINCD = '" + id + "'");
+	}
+	
+	/**
+	 * 获取灾情状态多媒体信息
+	 * @param id
+	 * @return
+	 */
+	public List<?> getZq_m(String id){
+		return jdbcTemplate.queryForList("SELECT * FROM TB_SD_M WHERE RPJINCD = '" + id + "'");
 	}
 }
