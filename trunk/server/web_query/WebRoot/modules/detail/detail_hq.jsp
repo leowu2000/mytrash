@@ -19,7 +19,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>防汛行动详细信息</title>
+    <title>旱情详细信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/onmouseover.js"></script>

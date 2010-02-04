@@ -20,7 +20,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>防汛行动详细信息</title>
+    <title>险情详细信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/onmouseover.js"></script>
@@ -69,7 +69,7 @@
 		  <tr align="middle" height="80"> 
 		    <td height="80">		
 			  <%if("JPG".equals(mapXq_m.get("WJGS").toString().trim().toUpperCase())||"JPG".equals(mapXq_m.get("WJGS").toString().trim().toLowerCase())){ %>
-        	  <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=mapXq_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=<%=mediaheight%>;width=<%=mediawidth%>; z-index:8;"> 
+        	  <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=mapXq_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="border=0; height=<%=mediaheight%>;width=<%=mediawidth%>; z-index:8;"> 
         	  <%}else{%>
         	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapXq_m.get("ZLBM")%>&title=<%=mapXq_m.get("TITLE")%>&dtcdt=<%=mapXq_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapXq_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         	  <%}%>
