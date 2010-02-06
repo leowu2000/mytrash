@@ -15,6 +15,7 @@
 %>
 <%
 	String PATH = request.getRealPath("/");
+	String tbid = request.getParameter("tbid");
 	// 如果你想将输出包含在一个jsp中，可以用img标签调用本jsp
 	// <img src="pic.jsp?from=file&type=jpeg&src=c:\img\test.jpg">
 
@@ -38,7 +39,7 @@
 	{
 		Connection conn = ConnectionPool.getConnection(PATH);
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select LXZP from TB_PJR_M WHERE ZLBM="+ID);
+		ResultSet rs = stmt.executeQuery("select LXZP from "+tbid+" WHERE ZLBM="+ID);
 		if (rs.next()) {
 			in = (InputStream)rs.getBinaryStream("LXZP");
 		}
@@ -54,13 +55,4 @@
 	fos.flush(); 
 	in.close(); 
 	fos.close(); 
-
-	//if (in != null) {
-	//	byte[] b = new byte[1024];
-	//	int len;
-	//	while ((len = in.read(b)) != -1) {
-	//		response.getOutputStream().write("",0,b);
-	//	}
-	//	in.close();
-	//}
 %>

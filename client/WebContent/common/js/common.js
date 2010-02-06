@@ -165,11 +165,24 @@ function printpage(m_printpage1){
     return true;
 }
 function uplaodReportPhotos(tbname){
+	var check = document.getElementById('PICLIST').innerHTML;
 	var title = document.getElementById('TITLE').value;
 	var time = document.getElementById('DTCDT').value;
 	var filepath = document.getElementById('UpFile').value;
 	var zpms = document.getElementById('NRMS').value;
 	var dncid = document.getElementById('DNCNO').value;
+	var filedetail;
+	if(filepath==""){alert("请选择上传照片！");return false;}
+	if(filepath!=""){
+		var poi = filepath.lastIndexOf(".");
+		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
+		if(detail!="JPG" && detail!="JPEG" && detail!="GIF" && detail!="BMP"){
+			alert("不支持的文件格式，请重新选择！");
+			return false;
+		}
+	}
+	var delFlg;
+	if(check=="")delFlg=1;else delFlg=2;//保存照片的时候是否首先执行删除操作的标志位
 	if(filepath==""){
 		alert("请选择文件.");
 		return false;
@@ -188,16 +201,41 @@ function uplaodReportPhotos(tbname){
 		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	}
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=report&tabname="+tbname+"&zpbtvalue="+title+"&time="+time
-			+"&zpmsvalue="+zpms+"&filepath="+filepath+"&DNCNO="+dncid, false);
+			+"&zpmsvalue="+zpms+"&filepath="+filepath+"&detailvalue="+filedetail+"&DNCNO="+dncid+"&delFlg="+delFlg, false);
 	xmlHttpReq.send(null);
 	var result = xmlHttpReq.responseText;
 	PICLIST.innerHTML=result;
+	document.getElementById('NRMS').value="";
+	document.getElementById('TITLE').value="";
 }
 function submitingReport(tbname){
 	if(document.getElementById('MAINTITLE').value==""){
-		alert("请填写报告标题.");
+		alert("请填写标题.");
 		return false;
 	}
 	document.getElementById('TABLENAME').value=tbname;
 	document.frm.submit();
+}
+
+function toDel(){
+	var result="";
+	var str = document.forms[0].RECORDID;
+	for(var i=0;i<str.length;i++){
+		if(str[i].checked==true){
+			if(result=="")
+				result = str[i].value;
+			else
+				result +=","+ str[i].value;
+		}
+	}
+	if(result==""){
+		alert("您没有选择任何记录!");
+	}else{
+		if(confirm("删除记录会删除所有相关信息,并且删除后不能恢复,是否继续?")){
+			document.frm.IDs.value=result;
+			document.frm.action="/buiness.do";
+			document.frm.actionType.value="del";
+			document.frm.submit();
+		}
+	}
 }

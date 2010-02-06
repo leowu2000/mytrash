@@ -45,7 +45,7 @@ public class FPACTIBean {
 	public static FPACTIBean getFPACTIBeanFromRs(ResultSet rs){
 		FPACTIBean bean = new FPACTIBean();
 		try{
-			bean.setRPJINCD(rs.getString("RPJINCD"));		//行动编号
+			bean.setRPJINCD(String.valueOf(rs.getInt("RPJINCD")));		//行动编号
 			bean.setWTTT(rs.getString("WTTT"));		//填报标题
 			bean.setWTDT(rs.getString("WTDT"));		//填报时间
 			bean.setACTICO(rs.getString("ACTICO"));		//防汛行动内容

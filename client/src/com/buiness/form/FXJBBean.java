@@ -78,8 +78,8 @@ public class FXJBBean {
 	public static FXJBBean getFXJBBeanFromRs(ResultSet rs){
 		FXJBBean bean = new FXJBBean();
 		try{
-			bean.setRPJINCD(rs.getString("RPJINCD")); //简报编号
-			bean.setISSUE(rs.getString("ISSUE")); //期
+			bean.setRPJINCD(String.valueOf(rs.getInt("RPJINCD"))); //简报编号
+			bean.setISSUE(String.valueOf(rs.getInt("ISSUE"))); //期
 			bean.setWTDT(rs.getString("WTDT")); //填报日期
 			bean.setACTICO(rs.getString("ACTICO")) ;//正文
 			bean.setNT1(rs.getString("NT1")); //抄报

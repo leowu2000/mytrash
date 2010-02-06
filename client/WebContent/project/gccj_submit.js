@@ -14,12 +14,7 @@ function per_Submit(){
 		document.form1.KNYXFW.value=window("main1").document.getElementById("KNYXFW").value;//可能影响范围
 		document.form1.QXSQX.value=window("main1").document.getElementById("QXSQX").value;//抢险时气象
 		document.form1.WLSWQX.value=window("main1").document.getElementById("WLSWQS").value;//未来水文气象
-
-		//document.form1.DNCNO.value=window("XQFLFRAME").document.getElementById("DNCNO").value;//险情编号
-		//document.form1.PJNO.value=window("XQFLFRAME").document.getElementById("PJNO").value;//工程编号
-		//document.form1.STTPCD.value=window("XQFLFRAME").document.getElementById("STTPCD").value;//建筑物编码
-		//document.form1.DAGTM.value=window("XQFLFRAME").document.getElementById("DAGTM").value;//出险时间
-		//document.form1.DNCNM.value=window("XQFLFRAME").document.getElementById("DNCNM").value;//险情名称
+		alert(document.form1.XQFLDM.value);
 		var val = document.form1.XQFLDM.value;
 		if(val=="D004"||val=="D003"){
 			document.form1.LKGTU.value=window("XQFLFRAME").document.getElementById("LKGTU").value;//漏水混清==D004==D003
@@ -47,7 +42,7 @@ function per_Submit(){
 		}
 		if(val=="D001"){
 			//D001//D001决口TB_BURDSC
-			alert(window("XQFLFRAME").document.getElementById("BURLDGL").value);
+			//alert(window("XQFLFRAME").document.getElementById("BURLDGL").value);
 			document.form1.BUW.value=window("XQFLFRAME").document.getElementById("BUW").value;//决口宽度(米)
 			document.form1.BUVL.value=window("XQFLFRAME").document.getElementById("BUVL").value;//决口流速(米/秒)
 			document.form1.BUZDF.value=window("XQFLFRAME").document.getElementById("BUZDF").value;//决口水头差(米)
@@ -255,6 +250,13 @@ function showDetail(){
 		return false;
 	}
 	var radioValue = getRadioValue("myradio");
+	if(radioValue==2){
+		var xqbt = document.getElementById('DNCNM').value;
+		if(xqbt==""){
+			alert("请填写险情标题！");
+			return false;
+		}
+	}
 	if(radioValue==1){
 		GCXQ.style.display="none";
 		YXZT.style.display="inline";
@@ -282,6 +284,7 @@ function getGcmessage(id){
 	var val = result.split("|");
   	GCMESSAGE.innerHTML = val[0];
   	PICLIST.innerHTML=val[1];
+  	
 }
 function chkCheckBoxChs(obj){
 	if (obj.value=="2")
@@ -304,25 +307,29 @@ function chkCheckBoxChs(obj){
 	}
 }
 function getRadioValue(name){
-	var objs = document.getElementsByName(name);
-	for(var i=0;i<objs.length;i++){
-		if(objs[i].checked)
-			return objs[i].value;
-	}
+	//var objs = document.getElementsByName(name);
+	//for(var i=0;i<objs.length;i++){
+	//	if(objs[i].checked)
+	//		return objs[i].value;
+	//}
+	return document.getElementById('myradio').value;
 }
 function uploadPhotos(){
-	var gcmc = document.getElementById('PJNM').value;
+	var gcmc = document.getElementById('GCNAME').value;
 	if(gcmc==""){
 		alert("请选择工程名称！");
 		return false;
 	}
-	if(confirm("增加图片信息后，险情基本信息,将不能更改，请确认工程名称\n险情类别等,点击确定直接保存，点击取消修改工程名称")){
-		var gcbh = document.getElementById('PJNM').value;
-		var type = getRadioValue("myradio");
+	//if(confirm("增加图片信息后，险情基本信息,将不能更改，请确认工程名称\n险情类别等,点击确定直接保存，点击取消修改工程名称")){
+		var gcbh = document.getElementById('GCNAME').value;
+
+		var type = document.getElementById('myradio').value;
+		
 		var zpbt = document.getElementById('ZPBT').value;
 		var zpms = document.getElementById('ZPMS').value;
-		var cjsj = document.getElementById('CJSJ').value;
+		var cjsj = document.getElementById('DAGTM').value;
 		var filedir = document.getElementById('UpFile').value;
+		var tname = document.getElementById('tabname').value;
 		var filedetail;
 		if(filedir==""){alert("请选择上传照片！");return false;}
 		if(filedir!=""){
@@ -336,9 +343,10 @@ function uploadPhotos(){
 		if(zpbt==""){alert("请填写照片标题！");return false;}
 		if(cjsj==""){alert("请填写采集时间！");return false;}
 		if(zpms==""){alert("请填写照片描述！");return false;}
-		var type = getRadioValue("myradio");
+		var check = document.getElementById('PICLIST').innerHTML;
+		if(check=="")delFlg=1;else delFlg=2;//保存照片的时候是否首先执行删除操作的标志位
 		if(type==2){
-			if(document.getElementById('XQFL').value==""){
+			if(document.getElementById('DNCNM').value==""){
 				alert("请填写险情标题！");
 				return false;
 			} 
@@ -347,28 +355,20 @@ function uploadPhotos(){
 			}else if(window.ActiveXObject){
 				var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 			}
-			xmlHttpReq.open("GET", "/FileUploadServlet?type=upload&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
+			xmlHttpReq.open("GET", "/FileUploadServlet?type=report&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
 					+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcbh+"" +
-							"&xqfldm="+document.getElementById('XQFL').value+"" +
-							"&STTPCD="+document.getElementById('CXBW').value+"" +
-							"&xqbt="+document.getElementById('XQBT').value+"" +
-							"&WTDPCD="+document.getElementById('TBDW').value+
-							"&DNCNO="+document.getElementById("DNCNO").value, false);
+							"&xqfldm="+document.getElementById('XQFLDM').value+"" +
+							"&STTPCD="+document.getElementById('STTPCD').value+"" +
+							"&xqbt="+document.getElementById('DNCNM').value+"" +
+							"&WTDPCD="+document.getElementById('WTDPCD').value+
+							"&DNCNO="+document.getElementById("DNCNO").value+
+							"&delFlg="+delFlg+"&tabname="+tname, false);
 			xmlHttpReq.send(null);
 			var result = xmlHttpReq.responseText;
 			PICLIST.innerHTML=result;
-			document.getElementById('GCNAME').value=gcmc;
-			document.getElementById('DNCNM').value=document.getElementById('XQBT').value;
-			document.getElementById('XQFLDM').value = document.getElementById('XQFL').value;
-			document.getElementById('STTPCD').value = document.getElementById('CXBW').value;
-			document.getElementById('WTDPCD').value = document.getElementById('TBDW').value;
-			document.getElementById('DAGTM').value=document.getElementById('CJSJ').value;
-			document.getElementById('PJNM').disabled=true;
-			document.getElementById('XQBT').disabled=true;
-			document.getElementById('TBDW').disabled=true;
-			document.getElementById('CXBW').disabled=true;
-			document.getElementById('XQFL').disabled=true;
-			document.getElementById('CJSJ').disabled=true;
+			document.getElementById('UpFile').value="";
+			document.getElementById('ZPMS').value="";
+			document.getElementById('ZPBT').value="";
 		}
 		else{
 			if(window.XMLHttpRequest){ //Mozilla
@@ -376,20 +376,19 @@ function uploadPhotos(){
 			}else if(window.ActiveXObject){
 				var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 			}
-			xmlHttpReq.open("GET", "/FileUploadServlet?type=upload&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
-					+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcbh, false);
+			xmlHttpReq.open("GET", "/FileUploadServlet?type=report&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
+					+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&DNCNO="+gcbh
+					+"&delFlg="+delFlg+"&tabname="+tname, false);
 			xmlHttpReq.send(null);
 			var result = xmlHttpReq.responseText;
 			PICLIST.innerHTML=result;
-			document.getElementById('GCNAME').value=document.getElementById('PJNM').value;
-			document.getElementById('PJNM').disabled=true;
+			document.getElementById('ZPMS').value="";
+			document.getElementById('ZPBT').value="";
 		}
-		document.getElementById("SAVEMAINMSG").disabled=false;
-	}
 }
 
 function deletePIC(picid){
-	var gcbh = document.getElementById('PJNM').value;
+	var gcbh = document.getElementById('GCNAME').value;
 	var type = getRadioValue("myradio");
 	if(confirm("删除后不能恢复，是否继续？")){
 		if(window.XMLHttpRequest){ //Mozilla

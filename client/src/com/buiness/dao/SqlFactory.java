@@ -13,7 +13,7 @@ public class SqlFactory {
 	public static String insertSQL_PJRCNBean(PJRCNBean bean,String path,PrjBean prjBean){
 		String sSQL = "INSERT INTO TB_PJRCN(PJRNO,PJNO,DTCDT,PJNM,"
 			+"GCFLDM,DNCFC,RDERESCN,WTDPCD,WTDPDT,NT)VALUES("
-			+UUIdFactory.getMaxId(path, "TB_PJRCN")+","//运行编号
+			+UUIdFactory.getMaxId(path, "TB_PJRCN","PJRNO")+","//运行编号
 			+prjBean.getPJNO()+",#"//工程编号
 			+UtilDateTime.nowDateString()+"#,'"//检测时间
 			+prjBean.getPJNM()+"','"//工程名称
@@ -23,7 +23,6 @@ public class SqlFactory {
 			+bean.getWTDPCD()+"',#"//填报单位名称
 			+UtilDateTime.nowDateString()+"#,'"//填报时间
 			+bean.getNT()+"')";//其它
-		System.out.println(sSQL);
 		return sSQL;
 	}
 	
@@ -55,14 +54,13 @@ public class SqlFactory {
 				+bean.getDNCADDSC()+"','"//补充描述
 				+bean.getWTDPCD()+"',#"//填报单位名称
 				+UtilDateTime.nowDateString()+"#)";//填报时间
-		System.out.println(sSQL);
 		return sSQL;
 	}
 	
 	public static String insertSQL_RSRBean(RSRBean bean,String path,PrjBean prjBean){
 		String sSQL = "INSERT INTO TB_RSR (PJRNO,PJNO,DTCDT,PJNM,RSCLS,RV,RZ,RQ,DFPFCN,DBSTBCN," +
 				"BRBPPFCN,ESPFCN,EDDPFCN,GTHOPFCN,COMMCN)VALUES("
-				+UUIdFactory.getMaxId(path, "TB_RSR")+","
+				+UUIdFactory.getMaxId(path, "TB_RSR","PJRNO")+","
 				+prjBean.getPJNO()+",#"
 				+UtilDateTime.nowDateString()+"#,'"
 				+prjBean.getPJNM()+"','"// 工程名称
@@ -77,7 +75,6 @@ public class SqlFactory {
 				+bean.getEDDPFCN()+"','"// 消能工完好状况
 				+bean.getGTHOPFCN()+"','"// 闸门、启闭机完好状况
 				+bean.getCOMMCN()+"')";
-		System.out.println(sSQL);
 		return sSQL;
 	}
 	
@@ -120,10 +117,8 @@ public class SqlFactory {
 		//D005	陷坑				TB_PITDSC
 		if("D005".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO TB_PITDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
-						+"TODFTDI,"
 						+"SBDSP,SBAR)VALUES("
 						+dinarySubsql
-						+","+bean.getTODFTDI()
 						+","+bean.getSBDSP()+","+bean.getSBAR()+")";
 		//D006	滑坡 			TB_SLDSC
 		if("D006".trim().equals(XQFLDM.toUpperCase()))
@@ -164,7 +159,7 @@ public class SqlFactory {
 						+","+bean.getSPAR()+","+bean.getSPQ()+")";
 		//D011	 浪坎 			TB_BLBAD
 		if("D011".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_BLBAD (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO TB_BLBADSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"WDQ,"
 						+"BLH,WNS)VALUES("
 						+dinarySubsql
@@ -173,11 +168,12 @@ public class SqlFactory {
 		//D012	滑动				TB_SLUDSC
 		if("D012".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO TB_SLUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
-						+"SLUPAG"
+						+"SLUPAG,"
 						+"SLUDSP,SLUTP,SLUGLCN)VALUES("
 						+dinarySubsql
 						+","+bean.getSLUPAG()
 						+","+bean.getSLUDSP()+","+bean.getSLUTP()+",'"+bean.getSLUGLCN()+"')";
+
 		//D013	启闭失灵			TB_HOMLFDSC
 		if("D013".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO TB_HOMLFDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"

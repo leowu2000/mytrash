@@ -1,6 +1,9 @@
 package com.buiness.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -8,14 +11,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.buiness.form.DetailBean;
 import com.buiness.form.FPACTIBean;
 import com.buiness.form.FXJBBean;
 import com.buiness.form.HQBean;
 import com.buiness.form.PJRCNBean;
 import com.buiness.form.PrjBean;
+import com.buiness.form.RSRBean;
 import com.buiness.form.SDBean;
 import com.buiness.form.STDNCBean;
+import com.buiness.form.SubTempBean;
 import com.core.ConnectionPool;
+import com.core.UUIdFactory;
 
 public class BuinessDao {
 	/**
@@ -61,11 +68,48 @@ public class BuinessDao {
 		        }
 		      }
 		      sSQL += " from " + tablename + " " + where;
-		      System.out.println("--------------"+sSQL);
+
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				Map<Object,Object> hamap = new HashMap<Object,Object>();
 				hamap.put("id", rs.getString(columns[0]));
+				hamap.put("value",  rs.getString(columns[1]));
+				resultList.add(hamap);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return resultList;
+	}
+	
+	public static List<Map<Object,Object>> getSelectListInt(String tablename, String[] columns,
+            String PATH,String where){
+		List<Map<Object,Object>> resultList = new ArrayList<Map<Object,Object>>();
+		Connection conn = null;
+		String sSQL = "";
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			for (int i = 0; i < columns.length; i++) {
+		        if (i == 0) {
+		          sSQL = "select " + columns[i];
+		        }
+		        else {
+		          sSQL += "," + columns[i];
+		        }
+		      }
+		      sSQL += " from " + tablename + " " + where;
+
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				Map<Object,Object> hamap = new HashMap<Object,Object>();
+				hamap.put("id", rs.getInt(columns[0]));
 				hamap.put("value",  rs.getString(columns[1]));
 				resultList.add(hamap);
 			}
@@ -86,6 +130,22 @@ public class BuinessDao {
 			conn = ConnectionPool.getConnection(PATH);
 			Statement stmt = conn.createStatement();
 			stmt.execute(SQL);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+	}
+	public static void updateDB(String SQL,String PATH){
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(SQL);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{
@@ -142,7 +202,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				PrjBean bean = new PrjBean();
-				bean = bean.getPrjBeanFromRs(rs);
+				bean = PrjBean.getPrjBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -156,7 +216,53 @@ public class BuinessDao {
 		}
 		return list;
 	}
+	public static String idToNameChange(String PATH,String tablename, String columns,
+            String where){
+		String value="";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			String sSQL = "select "+columns+" from "+tablename+" where "+where;
+			ResultSet rs = stmt.executeQuery(sSQL);
+			if(rs.next()){
+				value=rs.getString(1);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return value;
+	}
 	
+	public static String getIdFromNameChange(String PATH,String tablename, String columns,
+            String where){
+		String value="";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			String sSQL = "select "+columns+" from "+tablename+" where "+where;
+			ResultSet rs = stmt.executeQuery(sSQL);
+			if(rs.next()){
+				value=String.valueOf(rs.getInt(1));
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return value;
+	}
 	public static List<PJRCNBean> getAllPjrcnList(String PATH){
 		List<PJRCNBean> list = new ArrayList<PJRCNBean>();
 		String sSQL = "select * from TB_PJRCN ";
@@ -167,7 +273,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				PJRCNBean bean = new PJRCNBean();
-				bean = bean.getPJRCNBeanFromRs(rs);
+				bean = PJRCNBean.getPJRCNBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -182,6 +288,50 @@ public class BuinessDao {
 		return list;
 	}
 	
+	public static PJRCNBean findPjrcnById(String PATH,String pjrno){
+		PJRCNBean bean = new PJRCNBean();
+		String sSQL = "select * from TB_PJRCN WHERE PJRNO="+pjrno;
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = PJRCNBean.getPJRCNBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
+	public static RSRBean findRsrById(String PATH,String pjrno){
+		RSRBean bean = new RSRBean();
+		String sSQL = "select * from TB_RSR WHERE PJRNO="+pjrno;
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = RSRBean.getPJRCNBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
 	public static List<STDNCBean> getAllStdncList(String PATH){
 		List<STDNCBean> list = new ArrayList<STDNCBean>();
 		String sSQL = "select * from TB_STDNC ";
@@ -192,7 +342,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				STDNCBean bean = new STDNCBean();
-				bean = bean.getSTDNCBeanFromRs(rs);
+				bean = STDNCBean.getSTDNCBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -205,6 +355,29 @@ public class BuinessDao {
 			}
 		}
 		return list;
+	}
+	public static STDNCBean findStdncById(String PATH,String DNCNO){
+		STDNCBean bean = new STDNCBean();
+		String sSQL = "select * from TB_STDNC WHERE DNCNO="+DNCNO;
+		System.out.println(sSQL);
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = STDNCBean.getSTDNCBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
 	}
 	public static List<FXJBBean> getAllFxjbcList(String PATH){
 		List<FXJBBean> list = new ArrayList<FXJBBean>();
@@ -216,7 +389,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				FXJBBean bean = new FXJBBean();
-				bean = bean.getFXJBBeanFromRs(rs);
+				bean = FXJBBean.getFXJBBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -230,6 +403,95 @@ public class BuinessDao {
 		}
 		return list;
 	}
+	
+	public static FXJBBean findFxjbcByID(String PATH,String RPJINCD){
+		FXJBBean bean = new FXJBBean();
+		String sSQL = "select * from TB_FXJB where RPJINCD="+RPJINCD;
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = FXJBBean.getFXJBBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
+	public static FPACTIBean findFpactiByID(String PATH,String RPJINCD){
+		FPACTIBean bean = new FPACTIBean();
+		String sSQL = "select * from TB_FPACTI where RPJINCD="+RPJINCD;
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = FPACTIBean.getFPACTIBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
+	public static SDBean findSDByID(String PATH,String RPJINCD){
+		SDBean bean = new SDBean();
+		String sSQL = "select * from TB_SD where RPJINCD="+RPJINCD;
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = SDBean.getSDBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
+	public static HQBean findHQByID(String PATH,String RPJINCD){
+		HQBean bean = new HQBean();
+		String sSQL = "select * from TB_QT where RPJINCD="+RPJINCD;
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				bean = HQBean.getHQBeanFromRs(rs);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
 	public static List<HQBean> getAllHqList(String PATH){
 		List<HQBean> list = new ArrayList<HQBean>();
 		String sSQL = "select * from TB_QT ";
@@ -240,7 +502,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				HQBean bean = new HQBean();
-				bean = bean.getHQBeanFromRs(rs);
+				bean = HQBean.getHQBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -264,7 +526,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				FPACTIBean bean = new FPACTIBean();
-				bean = bean.getFPACTIBeanFromRs(rs);
+				bean = FPACTIBean.getFPACTIBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -288,7 +550,7 @@ public class BuinessDao {
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while(rs.next()){
 				SDBean bean = new SDBean();
-				bean = bean.getSDBeanFromRs(rs);
+				bean = SDBean.getSDBeanFromRs(rs);
 				list.add(bean);
 			}
 		}catch(Exception ex){
@@ -446,5 +708,196 @@ public class BuinessDao {
      *  End If
      * 
 	 */
+	public static void deleteTempMedia(String path){
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(path);
+			Statement stmt = conn.createStatement();
+			String sSQL = "delete from tb_sub_temp";
+			stmt.executeUpdate(sSQL);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+	}
+	public static List<SubTempBean> getMediaList(String path,String parentno,String tbid){
+		List<SubTempBean> beanList = new ArrayList<SubTempBean>();
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(path);
+			Statement stmt = conn.createStatement();
+			String sSQL = "select * from tb_sub_temp where RARENTNO="+parentno+" and tbno='"+tbid+"'";
+			System.out.println(sSQL);
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next()){
+				SubTempBean bean = SubTempBean.getSubTempBeanFromRs(rs);
+				beanList.add(bean);
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return beanList;
+	}
+	public static void insertTempMedia(String path,
+			String parentno,String datetime,
+			String title,String wjgs,String nrms,
+			String fieldir,String tbid){
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(path);
+			Statement stmt = conn.createStatement();
+			String sSQL = "INSERT INTO TB_SUB_TEMP(ZLBM,RARENTNO,DTCDT,TITLE,WJGS,NRMS,LXZP,TBNO) "
+						+"values("+UUIdFactory.getMaxId(path, "TB_SUB_TEMP","ZLBM")
+						+","+parentno
+						+",#"+datetime
+						+"#,'"+title
+						+"','"+wjgs
+						+"','"+nrms
+						+"','"+fieldir
+						+"','"+tbid+"')";
+			System.out.println(sSQL);
+			stmt.executeUpdate(sSQL);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+	}
 	
+	public static void toInsertDbList(String path,
+			String tbid,String mainSql,String subsql,
+			List<SubTempBean> beanlist){
+		String parentName="";
+		Connection conn = null;
+		try{
+			conn = ConnectionPool.getConnection(path);
+			Statement stmt = conn.createStatement();
+			stmt.execute(mainSql);
+			if(!"".trim().equals(subsql))
+				stmt.execute(subsql);
+			if(beanlist!=null && beanlist.size()>0)
+				if("TB_FPACTI_M".trim().equals(tbid)
+						||"TB_QT_M".trim().equals(tbid)
+						||"TB_SD_M".trim().equals(tbid))
+					parentName="RPJINCD";
+				if("TB_PJR_M".trim().equals(tbid))
+					parentName="PJRNO";
+				if("TB_STDNC_M".trim().equals(tbid.trim()))
+					parentName="DNCNO";
+				
+				for(int i=0;i<beanlist.size();i++){
+					SubTempBean bean = (SubTempBean)beanlist.get(i);
+					String subSql = "INSERT INTO "+tbid+" (ZLBM,"+parentName+",DTCDT,TITLE,WJGS,NRMS,LXZP) values(?,?,?,?,?,?,?)";
+					PreparedStatement pstmt = conn.prepareStatement(subSql);
+					File f = new File(bean.getLXZP());
+					FileInputStream fis = new FileInputStream(f);
+					pstmt.setInt(1, UUIdFactory.getMaxId(path, tbid,"ZLBM"));
+					pstmt.setString(2, bean.getRARENTNO());
+					pstmt.setString(3, bean.getDTCDT());
+					pstmt.setString(4, bean.getTITLE());
+					pstmt.setString(5, bean.getWJGS());
+					pstmt.setString(6, bean.getNRMS());
+					pstmt.setBinaryStream(7, fis, (int) f.length());
+					pstmt.executeUpdate();
+					pstmt.close();
+				}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+	}
+	
+	public static DetailBean getDetailBean(String path,String pjno,
+			String dncno,String XQFLDM){
+		DetailBean bean = new DetailBean();
+		Connection conn = null;
+		String tabname="";
+		//D001	¾ö¿Ú				TB_BURDSC	
+		if("D001".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_BURDSC";
+		//D002	ÂþÒç				TB_OVFLDSC
+		if("D002".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_OVFLDSC";
+		//D003	Â©¶´				TB_LKDSC
+		if("D003".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_LKDSC";
+		//D004	¹ÜÓ¿				TB_PPDSC
+		if("D004".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_PPDSC";
+		//D005	ÏÝ¿Ó				TB_PITDSC
+		if("D005".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_PITDSC";
+		//D006	»¬ÆÂ 			TB_SLDSC
+		if("D006".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_SLDSC";
+		//D007	ÌÔË¢				TB_UNDSC
+		if("D007".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_UNDSC";
+		//D008	ÁÑ·ì				TB_CRDSC
+		if("D008".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_CRDSC";
+		//D009	±À°¶				TB_CVDSC
+		if("D009".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_CVDSC";
+		//D010	ÉøË®				TB_SPDSC
+		if("D010".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_SPDSC";
+		//D011	 ÀË¿² 			TB_BLBADSC
+		if("D011".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_BLBADSC";
+		//D012	»¬¶¯				TB_SLUDSC
+		if("D012".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_SLUDSC";
+		//D013	Æô±ÕÊ§Áé			TB_HOMLFDSC
+		if("D013".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_HOMLFDSC";
+		//D014	Õ¢ÃÅÆÆ»µ			TB_GTWRDSC
+		if("D014".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_GTWRDSC";
+		//D015	À£°Ó				TB_BRDMDSC
+		if("D015".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_BRDMDSC";
+		//D016	Çã¸²				TB_OVTUDSC
+		if("D016".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_OVTUDSC";
+		//D017	Ó¦Á¦¹ý´ó			TB_STREXDSC
+		if("D017".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_STREXDSC";
+		//D018	Ì®Ëú				TB_SLIDSC
+		if("D018".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_SLIDSC";
+		//D019	¶ÂÈû				TB_PLUDSC
+		if("D019".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_PLUDSC";
+		//D020	»ù´¡ÆÆ»µ			TB_BSWRDSC
+		if("D020".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_BSWRDSC";
+		//D021	ÏûÄÜ¹¤ÆÆ»µ		TB_EDDWRDSC
+		if("D021".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_EDDWRDSC";
+		//D022	»ù´¡ÅÅË®Ê§Ð§		TB_BSWPLPDS
+		if("D022".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_BSWPLPDS";
+		//D023	¶´ÉíÆÆ»µ 			TB_HBWRDSC
+		if("D023".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_HBWRDSC";
+		//D024	¿Øµ¼¹¤³Ì¾Ö²¿ÆÆ»µ	TB_CLPJPRWR
+		if("D024".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_CLPJPRWR";
+		//D025	¿Øµ¼¹¤³Ì³å»Ù		TB_CLPJSCDN
+		if("D025".trim().equals(XQFLDM.toUpperCase()))tabname = "TB_CLPJSCDN";
+		try{
+			conn = ConnectionPool.getConnection(path);
+			String sSQL = "SELECT * FROM "+tabname+" WHERE PJNO="+pjno+" AND DNCNO="+dncno;
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while(rs.next())
+				bean = DetailBean.getDetailBeanFromRs(rs, XQFLDM);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try{
+				ConnectionPool.freeConnection(conn);
+			}catch(Exception fe){
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
 }

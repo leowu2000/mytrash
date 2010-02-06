@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=GBK"%>
+<%@ page import="com.buiness.dao.*" %>
+<%@ page import="com.buiness.form.*" %>
+<%@ page import="com.util.*" %>
+<%@ page import="java.util.*" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
@@ -10,17 +14,24 @@
 margin:0px auto; padding:0px;
 }
 </style>
+<%
+	String path = request.getRealPath("/");
+	String DNCNO = request.getParameter("DNCNO");
+	DNCNO=DNCNO==null?"0":DNCNO;
+	String PJNO = request.getParameter("PJNO");
+	PJNO=PJNO==null?"0":PJNO;
+	DetailBean bean = BuinessDao.getDetailBean(path,PJNO,DNCNO,"D014");
+	
+%>
 <body>
 <div align="center"> 
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
-		<td class="title" rowspan="2">闸门破坏</td>
+		<!-- <td class="title" rowspan="2">闸门破坏</td>-->
 		<td class="title" height="25">失事时流量</td>
-		<td  bgcolor="#FFFFFF"><input type="text" name="WRQ" value="0"/>立方米/秒</td>
-	</tr>
-	<tr>
+		<td  bgcolor="#FFFFFF"><input type="text" name="WRQ" value="<%=bean.getWRQ() %>"/>立方米/秒</td>
 		<td class="title">破坏形式</td>
-		<td  bgcolor="#FFFFFF" ><textarea rows="4" cols="80" name="WRDSC"></textarea></td>
+		<td  bgcolor="#FFFFFF" width="40%"><textarea rows="4" cols="50" name="WRDSC"  style="width:100%"><%=bean.getWRDSC() %></textarea></td>
 	</tr>
 
 </table>

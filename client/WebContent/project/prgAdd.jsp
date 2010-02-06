@@ -97,7 +97,6 @@ function submiting(){
 	xmlHttpReq.open("GET", "/Check?type=prg&gcnm="+gcnm+"&gclb="+gclb+"&cntcd="+cntcd+"&hldm="+hldm, false);
 	xmlHttpReq.send(null);
 	var result = xmlHttpReq.responseText;
-	alert(result);
 	if(result=="true"){
 		alert("系统中存在相同的工程名称,请重新填写!");
 		return false;
@@ -126,63 +125,32 @@ function submiting(){
 			<DIV id="GCLB"></DIV>
 		</td>
 	</tr>
-	<tr bgcolor="#FFFFFF">
-		<td colspan="2" valign="top">
-			<table width="100%" border="0">
-			<tr align="left" class="title2" height="30">
-				<td colspan="2">所属地区</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">省/直辖市[P]:</td>
-				<td bgcolor="#FFFFFF">
-						<DIV id="SHENG"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">市/地区[S]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="SHI"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">区/县[D]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="XIAN"></DIV>
-				</td>
-				</tr>
-			</table>
-		</td>
-		<td colspan="2">
-			<table width="100%" border="0">
-			<tr align="left" class="title2" height="30">
-				<td colspan="2">所属流域水系</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">流域[V]:</td>
-				<td bgcolor="#FFFFFF" colspan="5">
-					<DIV id="LY"></DIV>
-				</td>
-			</tr>
-			<tr height="25" >
-				<td nowrap align="center" class="title2">水系[W]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="SX"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">一级支流[B]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="ZL1"></DIV>
-				</td>
-			</tr>
-			<tr>
-				<td nowrap align="center" class="title2">二级支流[T]:</td>
-				<td  bgcolor="#FFFFFF">
-					<DIV id="ZL2"></DIV>
-				</td>
-			</tr>
-			</table>
-		</td>	
+	<tr align="left" class="title2" height="30">
+		<td colspan="2">所属地区</td>
+		<td colspan="2">所属流域水系</td>
+	</tr>
+	<tr>
+		<td nowrap align="center" class="title2">省/直辖市[P]:</td>
+		<td bgcolor="#FFFFFF"><DIV id="SHENG"></DIV></td>
+		<td nowrap align="center" class="title2">流域[V]:</td>
+		<td bgcolor="#FFFFFF" ><DIV id="LY"></DIV></td>
+	</tr>
+	<tr>
+		<td nowrap align="center" class="title2">市/地区[S]:</td>
+		<td  bgcolor="#FFFFFF"><DIV id="SHI"></DIV></td>
+		<td nowrap align="center" class="title2">水系[W]:</td>
+		<td  bgcolor="#FFFFFF"><DIV id="SX"></DIV></td>
+	</tr>
+	<tr align="left" class="title2" height="30">
+		<td nowrap align="center" class="title2">区/县[D]:</td>
+		<td  bgcolor="#FFFFFF"><DIV id="XIAN"></DIV></td>
+		<td nowrap align="center" class="title2">一级支流[B]:</td>
+		<td  bgcolor="#FFFFFF"><DIV id="ZL1"></DIV></td>
+	</tr>
+	<tr>
+		<td  bgcolor="#FFFFFF" colspan="2"></td>
+		<td nowrap align="center" class="title2">二级支流[T]:</td>
+		<td  bgcolor="#FFFFFF"><DIV id="ZL2"></DIV></td>
 	</tr>
 </table>
 </form>

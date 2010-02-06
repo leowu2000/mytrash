@@ -44,7 +44,7 @@ public class HQBean {
 	public static HQBean getHQBeanFromRs(ResultSet rs){
 		HQBean bean = new HQBean();
 		try{
-			bean.setRPJINCD(rs.getString("RPJINCD"));	//其它情况编号
+			bean.setRPJINCD(String.valueOf(rs.getInt("RPJINCD")));	//其它情况编号
 			bean.setWTTT(rs.getString("WTTT"));		//填报标题
 			bean.setWTDT(rs.getString("WTDT"));		//填报时间
 			bean.setACTICO(rs.getString("ACTICO"));		//其它情况内容

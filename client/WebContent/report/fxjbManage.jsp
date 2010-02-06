@@ -20,8 +20,27 @@ function toAdd(){
 	document.forms[0].submit();
 }
 function toEdit(){
-	document.forms[0].action="/report/fxjbEdit.jsp";
-	document.forms[0].submit();
+	var result="";
+	var str = document.forms[0].RECORDID;
+	for(var i=0;i<str.length;i++){
+		if(str[i].checked==true){
+			if(result=="")
+				result = str[i].value;
+			else
+				result +=","+ str[i].value;
+		}
+	}
+	if(result==""){
+		alert("您没有选择任何记录!");
+	}else{
+		if(result.lastIndexOf(",")>0){
+			alert("您一次只能修改一条记录!");
+		}else{			
+			document.forms[0].action="/report/fxjbEdit.jsp?RPJINCD="+result;
+			document.forms[0].submit();
+		}
+	}
+	
 }
 </script>
 <% 
@@ -71,7 +90,7 @@ function toEdit(){
 	%>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getRPJINCD() %>"></td>
-		<td><%=bean.getWTTT()%></td>
+		<td><a href="fxjbView.jsp?RPJINCD=<%=bean.getRPJINCD() %>" title="点击查看详细信息"><%=bean.getWTTT()%></a></td>
 		<td><%=bean.getISSUE()%></td>
 		<td><%=bean.getWTDPCD()%></td>
 		<td><%=bean.getWTDT()%></td>

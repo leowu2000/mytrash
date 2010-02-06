@@ -32,6 +32,7 @@ public class BaseServlet extends HttpServlet{
 		String type = request.getParameter("type");
 		String val = request.getParameter("val");
 		String cntcd = request.getParameter("cntcd");
+		
 		String hlxx[]={"","","",""};
 		if(val!=null &&val.length()>0){
 			hlxx= BuinessDao.getPrjLyxx(val, path).split("-"); 
@@ -74,21 +75,23 @@ public class BaseServlet extends HttpServlet{
 			String result_detail_zl2="</select>";
 
 			List<TbcntBean> sxList = BaseUtil.getAllSXList(path);
+			String shbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[0]+"'");
 			if(sxList !=null && sxList.size()>0){
 				for(int i=0;i<sxList.size();i++){
 					TbcntBean bean = (TbcntBean)sxList.get(i);
-					if(xzqh[0].trim().equals(bean.getCntcd()))
+					if(shbm.trim().equals(bean.getCntcd()))
 						result_z +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
 					else
 						result_z +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 			}
 			
-			List<TbcntBean> sList = BaseUtil.getAllSHList(path, ((TbcntBean)sxList.get(0)).getCntcd());
+			List<TbcntBean> sList = BaseUtil.getAllSHList(path, shbm==""?((TbcntBean)sxList.get(0)).getCntcd():shbm);
+			String sbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[1]+"'");
 			if(sList !=null && sList.size()>0){
 				for(int i=0;i<sList.size();i++){
 					TbcntBean bean = (TbcntBean)sList.get(i);
-					if(xzqh[1].trim().equals(bean.getCntcd()))
+					if(sbm.trim().equals(bean.getCntcd()))
 						result_s +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
 					else
 						result_s +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
@@ -96,56 +99,64 @@ public class BaseServlet extends HttpServlet{
 //				TbcntBean bean = (TbcntBean)sList.get(0);
 //				result_s+="<option value='"+bean.getCntcd().substring(0,3)+"200'>"+bean.getProvnm().trim().substring(0,3)+"½¼ÇøÏØ</option>";
 			}
-			List<TbcntBean> xList = BaseUtil.getAllXList(path, ((TbcntBean)sList.get(0)).getCntcd());
+			
+			List<TbcntBean> xList = BaseUtil.getAllXList(path, sbm==""?((TbcntBean)sList.get(0)).getCntcd():sbm);
+			String xianbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[2]+"'");
 			if(xList !=null && xList.size()>0){
 				for(int i=0;i<xList.size();i++){
 					TbcntBean bean = (TbcntBean)xList.get(i);
-					if(xzqh[2].trim().equals(bean.getCntcd()))
+					if(xianbm.trim().equals(bean.getCntcd()))
 						result_x +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
 					else
 						result_x +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 			}
 			List<GclbBean> gcglList = BaseUtil.getGclbList(path);
+			String gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
 			if(gcglList !=null && gcglList.size()>0){
 				for(int i=0;i<gcglList.size();i++){
 					GclbBean bean = (GclbBean)gcglList.get(i);
+					if(gclb.trim().equals(bean.getGCFLDM()))
+						result_gcgl +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
 					result_gcgl +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
 				}
 			}
 			
 			List<LysxBean> lysl1List = BaseUtil.getLysxList_one(path);
+			String LY_one = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[0]+"'");
 			if(lysl1List !=null && lysl1List.size()>0){
 				for(int i=0;i<lysl1List.size();i++){
 					LysxBean bean = (LysxBean)lysl1List.get(i);
-					if(hlxx[0].trim().equals(bean.getCTNM().trim()))
+					if(LY_one.trim().equals(bean.getCTCD().trim()))
 						result_lysx1 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
 					else
 						result_lysx1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
 			
-			List<LysxBean> lysl2List = BaseUtil.getLysxList_two(path,((LysxBean)lysl1List.get(0)).getCTCD());
+			List<LysxBean> lysl2List = BaseUtil.getLysxList_two(path,LY_one==""?((LysxBean)lysl1List.get(0)).getCTCD():LY_one);
+			String LY_two = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[1]+"'");
 			if(lysl2List !=null && lysl2List.size()>0){
 				for(int i=0;i<lysl2List.size();i++){
 					LysxBean bean = (LysxBean)lysl2List.get(i);
-					if(hlxx[1].trim().equals(bean.getCTNM().trim()))
+					if(LY_two.trim().equals(bean.getCTCD().trim()))
 						result_lysx2 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
 					else
 						result_lysx2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
-			List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, ((LysxBean)lysl2List.get(0)).getCTCD());
+			List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, LY_two==""?((LysxBean)lysl2List.get(0)).getCTCD():LY_two);
+			String LY_zone = BuinessDao.idToNameChange(path,"tb_lysx", "CTCD",  "CTNM='"+hlxx[2]+"'");
 			if(zl1List !=null && zl1List.size()>0){
 				for(int i=0;i<zl1List.size();i++){
 					LysxBean bean = (LysxBean)zl1List.get(i);
-					if(hlxx[2].trim().equals(bean.getCTNM().trim()))
+					if(LY_zone.trim().equals(bean.getCTCD().trim()))
 						result_zl1 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
 					else
 						result_zl1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
-			List<LysxBean> zl2List = BaseUtil.getZliuList_two(path, ((LysxBean)zl1List.get(0)).getCTCD());
+			List<LysxBean> zl2List = BaseUtil.getZliuList_two(path, LY_zone==""?((LysxBean)zl1List.get(0)).getCTCD():LY_zone);
 			if(zl2List !=null && zl2List.size()>0){
 				for(int i=0;i<zl2List.size();i++){
 					LysxBean bean = (LysxBean)zl2List.get(i);
@@ -168,6 +179,26 @@ public class BaseServlet extends HttpServlet{
 			response.setHeader("Charset", "gb2312");
 			response.addHeader("Cache-Control", "no-cache");
 			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+		}
+		if("viewload".trim().equals(type)){
+			String result="";
+			String result_z=xzqh[0];
+			String result_s=xzqh[1];
+			String result_x=xzqh[2];
+			
+			String result_gcgl=BuinessDao.idToNameChange(path,"TB_GCLB", "GCFLMC",  "gcfldm=Mid('"+val+"',1,1)");;
+			
+			String result_lysx1=hlxx[0];
+			String result_lysx2=hlxx[1];
+			String result_zl1=hlxx[2];
+			String result_zl2=hlxx[3];
+
+			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
+			response.setContentType("text/xml");
+			response.setHeader("Charset", "gb2312");
+			response.addHeader("Cache-Control", "no-cache");
+			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+			
 		}
 		if("change".trim().equals(type)){
 			String changeObjName = request.getParameter("changeObjName");

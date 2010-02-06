@@ -21,8 +21,27 @@ function toAdd(){
 	document.forms[0].submit();
 }
 function toEdit(){
-	document.forms[0].action="/report/fxjbEdit.jsp";
-	document.forms[0].submit();
+	var result="";
+	var str = document.forms[0].RECORDID;
+	for(var i=0;i<str.length;i++){
+		if(str[i].checked==true){
+			if(result=="")
+				result = str[i].value;
+			else
+				result +=","+ str[i].value;
+		}
+	}
+	if(result==""){
+		alert("您没有选择任何记录!");
+	}else{
+		if(result.lastIndexOf(",")>0){
+			alert("您一次只能修改一条记录!");
+		}else{			
+			document.forms[0].action="/report/hqxxEdit.jsp?RPJINCD="+result;
+			document.forms[0].submit();
+		}
+	}
+	
 }
 </script>
 <% 
@@ -42,6 +61,10 @@ function toEdit(){
 </table>
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="IDs"/>
+<input type="hidden" value="TB_QT" name="towhere"/>
+<input type="hidden" value="" name="actionType"/>
+<input type="hidden" value="RPJINCD,ZLBM" name="PKFILED"/>
+<input type="hidden" value="TB_QT,TB_QT_M" name="TBID"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
 <table border="0" align="center" width="95%" >
 	<tr>
@@ -71,7 +94,7 @@ function toEdit(){
 	%>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getRPJINCD() %>"></td>
-		<td><%=bean.getWTTT()%></td>
+		<td><a href="hqxxView.jsp?RPJINCD=<%=bean.getRPJINCD() %>" title="点击查看详细信息"><%=bean.getWTTT()%></a></td>
 		<td><%=bean.getWTDPCD()%></td>
 		<td><%=bean.getWTDT()%></td>
 	</tr>
@@ -89,7 +112,7 @@ function toEdit(){
 	&nbsp;
 	<input type="button" name="" value="修  改" onclick="javascript:toEdit()">
 	&nbsp;
-	<input type="button" name="" value="删  除" onclick=""></td>
+	<input type="button" name="" value="删  除" onclick="javascript:toDel()"></td>
 	</tr>
 </table>
 </body>

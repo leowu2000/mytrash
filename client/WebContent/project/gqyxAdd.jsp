@@ -64,8 +64,8 @@ function viewDataImg(value)
 	var newPreview = document.getElementById("newPreview"); 
 	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
 	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = value; 
-	newPreview.style.width = "150px"; 
-	newPreview.style.height = "100px"; 
+	newPreview.style.width = "170px"; 
+	newPreview.style.height = "120px"; 
 	newPreview.style.border= "6px double #ccc";
 }
 </script>
@@ -80,156 +80,32 @@ function viewDataImg(value)
  </form>
 <form name="form1" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
+<input type="hidden" name="myradio" value="1"></input>
+<input type="hidden" name="WTDPCD" value=""/>
+<input type="hidden" name="tabname" value="TB_PJR_M"></input>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title2">
-			<input type="radio" id="myradio" name="myradio" value="1" checked onclick="javascript:chkCheckBoxChs(this)">工程运行状态[R]
-			<input type="radio" id="myradio" name="myradio" value="2" onclick="javascript:chkCheckBoxChs(this)">工程险情[G]
-		</td>
-		<td nowrap align="center" class="title">
+		<td nowrap align="center" class="title" colspan="6">
 		<DIV id="GCMESSAGE"></DIV>
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor="#FFFFFF" width="30%" align="center">
-		<table border="0" width="100%" height="100%" border="1" >
-			<tr height="25" >
-				<td nowrap class="title">工程名称[B]:</td>
-				<td bgcolor="#FFFFFF">
-				
-				<select name="PJNM" onchange="javascript:getGcmessage(this.value)">
-				<option value="">--工程名称--</option>
-					<%if(beanList!=null && beanList.size()>0){
-						for(int i=0;i<beanList.size();i++){
-							PrjBean bean = beanList.get(i);
-				%>
-					<option value="<%=bean.getPJNO() %>"><%=bean.getPJNM() %></option>
-				<%
-						}
-					} %>
-				</select>
-				</td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">险情分类[C]:</td>
-				<td bgcolor="#FFFFFF">
-					<select name="XQFL" disabled="true">
-					<%if(resultList!=null && resultList.size()>0){
-					for(int i=0;i<resultList.size();i++){
-						Map<Object,Object> map = (Map<Object,Object>)resultList.get(i);
-						%>
-							<option value="<%=map.get("id")%>" %><%=map.get("value")%></option>
-						<%
-					}} %>
-					</select>
-				</td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">出险部位[P]:</td>
-				<td bgcolor="#FFFFFF"><input type="text" name="CXBW" value="" disabled="true"/></td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">险情标题[N]:</td>
-				<td bgcolor="#FFFFFF"><input type="text" name="XQBT" value=""  disabled="true"/></td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">填报单位[U]:</td>
-				<td bgcolor="#FFFFFF"><input type="text" name="TBDW" value=""/></td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title"><div id="DATEDESC">采集时间[T]</div></td>
-				<td class="title2"><input type="text" name="CJSJ" value="<%=UtilDateTime.nowDateString() %>"/></td>
-			</tr>
-		</table>
-		</td>
-		<td bgcolor="#FFFFFF" >
-		<table border="0" width="100%" height="100%" bgcolor="#CCCCCC">
-			<tr>
-				<td nowrap class="title" width="30%">照片列表</td>
-				<td nowrap class="title">预览区域</td>
-				<td nowrap class="title2">照片标题[H]</td>
-				<td nowrap class="title2"><input type="text" name="ZPBT" value=""/></td>
-			</tr>
-			<tr>
-				<td bgcolor="#FFFFFF" rowspan="3"><div id="PICLIST" class="divStyle"></div></td>
-				<td bgcolor="#FFFFFF" rowspan="3">
-				<div id="newPreview" ></div>
-				</td>
-				<td height="20" nowrap class="title2" colspan="2">照片:
-				<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);">　</td>
-			</tr>
-			<tr>
-				<td nowrap class="title">照片描述</td>
-				<td bgcolor="#FFFFFF" ><textarea rows="6" cols="26" name="ZPMS"></textarea></td>
-			</tr>
-			<tr>
-				<td class="title" colspan="2">
-					<input type="button" name="" value="保存照片" onclick="javascript:uploadPhotos()"/>&nbsp;&nbsp;&nbsp;
-					<!-- 
-					<input type="button" name="SAVEMAINMSG" value="详细信息" onclick="javascript:showDetail()" disabled=true/>
-					 -->
-					 <input type="button" name="SAVEMAINMSG" value="详细信息" onclick="javascript:showDetail()"/>
-				</td>
-			</tr>
-		</table>
-		</td>
-	</tr>
-</table>
-<div id="GCXQ" style="display:none">
-<table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
-
-	<tr height="25" >
-		<td rowspan="3" class="title">险情</td>
-		<td nowrap class="title">险情级别:</td>
-		<td bgcolor="#FFFFFF">
-			<select name="DNCGR">
-				<option value="一般险情">一般险情</option>
-				<option value="较大险情">较大险情</option>
-				<option value="重大险情">重大险情</option>
+		<td height="25" nowrap class="title">工程名称[B]:</td>
+		<td height="25"  bgcolor="#FFFFFF">
+			<select name="GCNAME" onchange="javascript:getGcmessage(this.value)">
+			<option value="">--工程名称--</option>
+				<%if(beanList!=null && beanList.size()>0){
+					for(int i=0;i<beanList.size();i++){
+						PrjBean bean = beanList.get(i);
+			%>
+				<option value="<%=bean.getPJNO() %>"><%=bean.getPJNM() %></option>
+			<%
+					}
+				} %>
 			</select>
 		</td>
-		<td nowrap class="title">出险地点:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value="" size="10"/></td>
-		<td nowrap class="title">出险部位:</td>
-		<td bgcolor="#FFFFFF" colspan="5"><input type="text" name="DAGLO" value=""/></td>
-	</tr>
-	
-	<tr height="25" >
-		<td nowrap class="title">解放军投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="0" size="8"/>人<font color="red">*</font></td>
-		<td nowrap class="title">武警投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="PLIPN" value="0" size="8"/>人<font color="red">*</font></td>
-		<td nowrap class="title">群众投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="0" size="8"/>人<font color="red">*</font></td>
-		<td nowrap class="title" >当前水位:</td>
-		<td bgcolor="#FFFFFF" colspan=3><input type="text" name="RZ" value="0" size="8"/>米<font color="red">*</font></td>
-	</tr>
-	<tr height="25">
-		<td bgcolor="#FFFFFF" colspan="10">
-		<iframe id="main1" frameborder="0" marginwidth="0" marginheight="0" src="gcxqLoader.jsp" height="198" width="800">
-		</iframe>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" colspan="11">
-		<iframe id="XQFLFRAME" frameborder="0" marginwidth="0" marginheight="0" src="" height="100%" width="100%"></iframe>
-		</td>
-	</tr>
-</table>
-</div>
-<div id="YXZT" style="display:none">
-<table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
-
-	<tr height="25" >
-		<td class="title">工程运行状态</td>
-		<td  bgcolor="#FFFFFF" colspan=7>
-		<iframe id="main2" frameborder="0" marginwidth="0" marginheight="0" src="yxztLoader.jsp" height="150" width="800">
-		</iframe>
-		</td>
-	</tr>
-
-	<tr height="25" >
-		<td rowspan="3" class="title">水库</td>
+		<td height="25" nowrap class="title">采集时间[T]:</td>
+		<td height="25" bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>"/></td>
 		<td nowrap class="title">水库类别:</td>
 		<td bgcolor="#FFFFFF">
 		<select name="RSCLS">
@@ -238,25 +114,47 @@ function viewDataImg(value)
 				<option value="2">病险库</option>
 			</select>
 		</td>
-		<td nowrap class="title">当前运行水位:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="0" size="8"/>米<font color="red">*</font></td>
 	</tr>
 	<tr height="25" >
+		
+		<td nowrap class="title">当前运行水位:</td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="0" size="8"/>米<font color="red">*</font></td>
 		<td nowrap class="title">当前库容:</td>
 		<td bgcolor="#FFFFFF" ><input type="text" name="RV" value="0" size="8"/>万立方米<font color="red">*</font></td>
 		<td nowrap class="title">当前泻量:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RQ" value="0" size="8"/>立方米/秒<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="0" size="8"/>立方米/秒<font color="red">*</font></td>
 	</tr>
-	<tr height="25" >
-		<td  bgcolor="#FFFFFF" colspan="7">
-		<iframe id="main3" frameborder="0" marginwidth="0" marginheight="0" src="skLoader.jsp" height="155" width="800">
+	<tr>
+		<td bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="main2" frameborder="0" marginwidth="0" marginheight="0" src="yxztLoader.jsp" height="130" width="800">
 		</iframe>
 		</td>
 	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="main3" frameborder="0" marginwidth="0" marginheight="0" src="skLoader.jsp" height="135" width="800">
+		</iframe>
+		</td>
+	</tr>
+	<tr>
+		<td height="25" nowrap class="title">照片标题[H]:</td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="ZPBT" value=""/></td>
+		<td height="25" nowrap class="title">选择照片:</td>
+		<td height="25"  bgcolor="#FFFFFF" colspan="3">
+		<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);">
+		<input type="button" name="" value="添加照片" onclick="javascript:uploadPhotos()"/>
+		</td>
+		
+	</tr>
+	<tr>
+		<td height="25" nowrap class="title">照片描述</td>
+		<td bgcolor="#FFFFFF"><textarea rows="6" cols="22" name="ZPMS"></textarea></td>
+		<td bgcolor="#FFFFFF"  colspan="2"><div id="PICLIST" class="divStyle"></div></td>
+		<td colspan="2" bgcolor="#FFFFFF" align="center"><div id="newPreview" ></div></td>
+	</tr>
 </table>
-</div>
 </form>
-<br/>
+
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
