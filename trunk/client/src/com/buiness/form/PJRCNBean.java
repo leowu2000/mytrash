@@ -8,11 +8,11 @@ public class PJRCNBean {
 	private String DTCDT;//检测时间
 	private String PJNM;//工程名称
 	private String GCFLDM;//工程分类代码
-	private String DNCFC;//险情预测
-	private String RDERESCN;//抢险资源配备
+	private String DNCFC="险情预测";//险情预测
+	private String RDERESCN="抢险资源配备";//抢险资源配备
 	private String WTDPCD;//填报单位名称
 	private String WTDPDT;//填报时间
-	private String NT;//其它
+	private String NT="其它";//其它
 	public String getPJRNO() {
 		return PJRNO;
 	}
@@ -77,8 +77,8 @@ public class PJRCNBean {
 	public static PJRCNBean getPJRCNBeanFromRs(ResultSet rs){
 		PJRCNBean bean = new PJRCNBean();
 		try{
-			bean.setPJRNO(rs.getString("PJRNO"));//运行编号
-			bean.setPJNO(rs.getString("PJNO"));//工程编号
+			bean.setPJRNO(String.valueOf(rs.getInt("PJRNO")));//运行编号
+			bean.setPJNO(String.valueOf(rs.getInt("PJNO")));//工程编号
 			bean.setDTCDT(rs.getString("DTCDT"));//检测时间
 			bean.setPJNM(rs.getString("PJNM"));//工程名称
 			bean.setGCFLDM(rs.getString("GCFLDM"));//工程分类代码

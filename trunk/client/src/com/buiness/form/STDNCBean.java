@@ -12,23 +12,21 @@ public class STDNCBean {
 	private String DNCGR;//险情级别
 	private String DAGPLCCH;//出险地点桩号	
 	private String DAGLO;//出险部位
-	private String RDEPL;//抢险方案
-	private String RDERESCN;//抢险资源配备
+	private String RDEPL="抢险方案";//抢险方案
+	private String RDERESCN="抢险资源配备";//抢险资源配备
 	private String TPN;//群众投入(人)
 	private String PLAPN;//解放军投入(人)
 	private String PLIPN;//武警投入(人)
-	private String RDECNRL;//进展及结果
-	private String DNCCUAN;//险情原因分析
-	private String DNCESTDV;//险情发展趋势
-	private String DNCPBNFZ;//可能影响范围
+	private String RDECNRL="进展及结果";//进展及结果
+	private String DNCCUAN="险情原因分析";//险情原因分析
+	private String DNCESTDV="险情发展趋势";//险情发展趋势
+	private String DNCPBNFZ="可能影响范围";//可能影响范围
 	private String RZ;//当前运行水位(米)
-	private String WTHCN;//抢险时气象情况
-	private String FHYWTHCN;//未来水文气象情况
-	private String DNCADDSC;//补充描述
+	private String WTHCN="抢险时气象情况";//抢险时气象情况
+	private String FHYWTHCN="未来水文气象情况";//未来水文气象情况
+	private String DNCADDSC="补充描述";//补充描述
 	private String WTDPCD;//填报单位名称
 	private String WTDPDT;//填报时间
-	
-	
 	
 	public String getDAGLO() {
 		return DAGLO;
@@ -178,9 +176,9 @@ public class STDNCBean {
 	public static STDNCBean getSTDNCBeanFromRs(ResultSet rs){
 		STDNCBean bean = new STDNCBean();
 		try{
-			bean.setDNCNO(rs.getString("DNCNO"));//险情编号
-			bean.setPJNO(rs.getString("PJNO"));//工程编号
-			bean.setSTTPCD(rs.getString("STTPCD"));//建筑物编码
+			bean.setDNCNO(String.valueOf(rs.getInt("DNCNO")));//险情编号
+			bean.setPJNO(String.valueOf(rs.getInt("PJNO")));//工程编号
+			bean.setSTTPCD(String.valueOf(rs.getInt("STTPCD")));//建筑物编码
 			bean.setDAGTM(rs.getString("DAGTM"));//出现hijian
 			bean.setDNCNM(rs.getString("DNCNM"));//险情名称
 			bean.setXQFLDM(rs.getString("XQFLDM"));//险情分类嗲马

@@ -13,6 +13,9 @@
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/common/ext/ext-all.css" /> 
+<script type="text/javascript" src="/common/ext/ext-base.js"></script>
+<script type="text/javascript" src="/common/ext/ext-all.js"></script>
 <script Language="JavaScript" src="gccj_submit.js"></script>
 </head>
 <style type="text/css">
@@ -49,9 +52,9 @@ function viewThePic(picid){
 	var val = results.split(",");
 	document.getElementById('ZPBT').value=val[0];
 	document.getElementById('ZPMS').value=val[2];
-	document.getElementById('CJSJ').value=val[1];
+	document.getElementById('DAGTM').value=val[1];
 	
-	warnForm.action="viewPic.jsp?from=asdf&type=jpeg&zlbm="+picid;
+	warnForm.action="viewPic.jsp?from=asdf&type=jpeg&zlbm="+picid+"&tbid=TB_STDNC_M";
 	warnForm.target="saveFrm";
 	warnForm.submit();
 	setTimeout("viewDataImg('<%=picpath%>')","1000");
@@ -59,7 +62,7 @@ function viewThePic(picid){
 //图片预览区域代码
 function viewDataImg(value) 
 { 
-
+	
 	//新的预览代码，支持 IE6、IE7。 
 	var newPreview = document.getElementById("newPreview"); 
 	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
@@ -67,6 +70,62 @@ function viewDataImg(value)
 	newPreview.style.width = "150px"; 
 	newPreview.style.height = "100px"; 
 	newPreview.style.border= "6px double #ccc";
+}
+function getGcmessage2(id){
+	var type = getRadioValue("myradio");
+	if(window.XMLHttpRequest){ //Mozilla
+    	var xmlHttpReq=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	}
+	xmlHttpReq.open("GET", "/FileUploadServlet?type=gqcj&saveType="+type+"&changeVal="+id, false);
+	xmlHttpReq.send(null);
+	var result = xmlHttpReq.responseText;
+	var val = result.split("|");
+  	GCMESSAGE.innerHTML = val[0];
+  	PICLIST.innerHTML=val[1];
+	Ext.onReady(function(){
+		show.innerHTML="";
+	        Ext.QuickTips.init();
+	 
+	        // 格式化数据，数据也可采用json数据
+	        var ds = new Ext.data.Store({
+	                //proxy: new Ext.data.MemoryProxy(data), // 数据源
+	                proxy: new Ext.data.HttpProxy({   
+	                    url: 'loadInputSelect.jsp?prjid='+id  
+	                }),
+	                reader: new Ext.data.ArrayReader({}, [ // 如何解析
+	                    {name: 'id'},
+	                    {name: 'name'}                           
+	                ])
+	        });
+	        ds.load();  
+	    
+	        var storeList = new Ext.form.ComboBox({ 
+	        		id:'STTPCD',       
+	                store: ds,
+	                valueField:'id',     //option的值
+	                typeAhead: true,
+	                editable:true,//默认为true，false为禁止手写和联想功能
+	                displayField: 'name',//option的显示文本
+	                triggerAction: 'all',
+	                emptyText:'请选择',
+	                mode: 'local',
+	                selectOnFocus:true,
+	                renderTo:'show',
+	                width:135
+	        });
+	        //取得option值函数
+	       // function getVal(){
+	        //    var val = storeList.getValue();//取得option值
+	        //    alert(val);
+	        //}
+	
+	       // storeList.on('select', getVal);//当选择时触发该函数
+	});
+}
+function updateXQFLFRAME(obj){
+	window.frames["XQFLFRAME"].location.href=obj.value+".jsp";
 }
 </script>
 <body scroll="auto">
@@ -80,24 +139,20 @@ function viewDataImg(value)
  </form>
 <form name="form1" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
+<input type="hidden" name="myradio" value="2"></input>
+<input type="hidden" name="STTNM" value=""></input>
+<input type="hidden" name="tabname" value="TB_STDNC_M"></input>
+
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title2">
-			<input type="radio" id="myradio" name="myradio" value="1" checked onclick="javascript:chkCheckBoxChs(this)">工程运行状态[R]
-			<input type="radio" id="myradio" name="myradio" value="2" onclick="javascript:chkCheckBoxChs(this)">工程险情[G]
-		</td>
-		<td nowrap align="center" class="title">
+		<td nowrap align="center" class="title" colspan="6">
 		<DIV id="GCMESSAGE"></DIV>
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor="#FFFFFF" width="30%" align="center">
-		<table border="0" width="100%" height="100%" border="1" >
-			<tr height="25" >
-				<td nowrap class="title">工程名称[B]:</td>
-				<td bgcolor="#FFFFFF">
-				
-				<select name="PJNM" onchange="javascript:getGcmessage(this.value)">
+		<td height="25" nowrap class="title">工程名称[B]:</td>
+		<td height="25"  bgcolor="#FFFFFF">
+				<select name="GCNAME" onchange="javascript:getGcmessage2(this.value)">
 				<option value="">--工程名称--</option>
 					<%if(beanList!=null && beanList.size()>0){
 						for(int i=0;i<beanList.size();i++){
@@ -107,13 +162,10 @@ function viewDataImg(value)
 				<%
 						}
 					} %>
-				</select>
-				</td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">险情分类[C]:</td>
-				<td bgcolor="#FFFFFF">
-					<select name="XQFL" disabled="true">
+				</select></td>
+		<td height="25" nowrap class="title">险情分类[C]:</td>
+		<td height="25"  bgcolor="#FFFFFF">
+					<select name="XQFLDM" onchange="javascript:updateXQFLFRAME(this)">
 					<%if(resultList!=null && resultList.size()>0){
 					for(int i=0;i<resultList.size();i++){
 						Map<Object,Object> map = (Map<Object,Object>)resultList.get(i);
@@ -121,65 +173,21 @@ function viewDataImg(value)
 							<option value="<%=map.get("id")%>" %><%=map.get("value")%></option>
 						<%
 					}} %>
-					</select>
-				</td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">出险部位[P]:</td>
-				<td bgcolor="#FFFFFF"><input type="text" name="CXBW" value="" disabled="true"/></td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">险情标题[N]:</td>
-				<td bgcolor="#FFFFFF"><input type="text" name="XQBT" value=""  disabled="true"/></td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title">填报单位[U]:</td>
-				<td bgcolor="#FFFFFF"><input type="text" name="TBDW" value=""/></td>
-			</tr>
-			<tr height="25" >
-				<td nowrap class="title"><div id="DATEDESC">采集时间[T]</div></td>
-				<td class="title2"><input type="text" name="CJSJ" value="<%=UtilDateTime.nowDateString() %>"/></td>
-			</tr>
-		</table>
-		</td>
-		<td bgcolor="#FFFFFF" >
-		<table border="0" width="100%" height="100%" bgcolor="#CCCCCC">
-			<tr>
-				<td nowrap class="title" width="30%">照片列表</td>
-				<td nowrap class="title">预览区域</td>
-				<td nowrap class="title2">照片标题[H]</td>
-				<td nowrap class="title2"><input type="text" name="ZPBT" value=""/></td>
-			</tr>
-			<tr>
-				<td bgcolor="#FFFFFF" rowspan="3"><div id="PICLIST" class="divStyle"></div></td>
-				<td bgcolor="#FFFFFF" rowspan="3">
-				<div id="newPreview" ></div>
-				</td>
-				<td height="20" nowrap class="title2" colspan="2">照片:
-				<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);">　</td>
-			</tr>
-			<tr>
-				<td nowrap class="title">照片描述</td>
-				<td bgcolor="#FFFFFF" ><textarea rows="6" cols="26" name="ZPMS"></textarea></td>
-			</tr>
-			<tr>
-				<td class="title" colspan="2">
-					<input type="button" name="" value="保存照片" onclick="javascript:uploadPhotos()"/>&nbsp;&nbsp;&nbsp;
-					<!-- 
-					<input type="button" name="SAVEMAINMSG" value="详细信息" onclick="javascript:showDetail()" disabled=true/>
-					 -->
-					 <input type="button" name="SAVEMAINMSG" value="详细信息" onclick="javascript:showDetail()"/>
-				</td>
-			</tr>
-		</table>
-		</td>
+					</select></td>
+		<td height="25" nowrap class="title">填报单位[U]:</td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="WTDPCD" value=""/></td>
+		
 	</tr>
-</table>
-<div id="GCXQ" style="display:none">
-<table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
-
+	<tr>
+		<td height="25" nowrap class="title">险情标题[N]:</td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DNCNM" value=""/></td>
+		<td height="25" nowrap class="title">建筑物[P]:</td>
+		<td height="25"  bgcolor="#FFFFFF"><div id="show"></div></td>
+		<!--<input type="text" name="STTPCD" value=""/>-->
+		<td height="25" nowrap class="title">采集时间[T]:</td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>"/></td>
+	</tr>
 	<tr height="25" >
-		<td rowspan="3" class="title">险情</td>
 		<td nowrap class="title">险情级别:</td>
 		<td bgcolor="#FFFFFF">
 			<select name="DNCGR">
@@ -189,34 +197,50 @@ function viewDataImg(value)
 			</select>
 		</td>
 		<td nowrap class="title">出险地点:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value="" size="10"/></td>
-		<td nowrap class="title">出险部位:</td>
-		<td bgcolor="#FFFFFF" colspan="5"><input type="text" name="DAGLO" value=""/></td>
-	</tr>
-	
-	<tr height="25" >
+		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value=""/></td>
 		<td nowrap class="title">解放军投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="0" size="8"/>人<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="0" />人<font color="red">*</font></td>
+	</tr>
+	<tr height="25" >
 		<td nowrap class="title">武警投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="PLIPN" value="0" size="8"/>人<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="PLIPN" value="0" />人<font color="red">*</font></td>
 		<td nowrap class="title">群众投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="0" size="8"/>人<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="0"/>人<font color="red">*</font></td>
 		<td nowrap class="title" >当前水位:</td>
-		<td bgcolor="#FFFFFF" colspan=3><input type="text" name="RZ" value="0" size="8"/>米<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="RZ" value="0" />米<font color="red">*</font></td>
+	</tr>
+	<tr height="25" >
+	<td nowrap class="title">出险部位:</td>
+		<td bgcolor="#FFFFFF" colspan="5"><input type="text" name="DAGLO" value="" style="width:100%"/></td>
 	</tr>
 	<tr height="25">
-		<td bgcolor="#FFFFFF" colspan="10">
-		<iframe id="main1" frameborder="0" marginwidth="0" marginheight="0" src="gcxqLoader.jsp" height="198" width="800">
+		<td bgcolor="#FFFFFF" colspan="10" align="center">
+		<iframe id="main1" frameborder="0" marginwidth="0" marginheight="0" src="gcxqLoader.jsp" height="135" width="800">
 		</iframe>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="11">
-		<iframe id="XQFLFRAME" frameborder="0" marginwidth="0" marginheight="0" src="" height="100%" width="100%"></iframe>
+		<iframe id="XQFLFRAME" frameborder="0" marginheight="1" marginwidth="1"  align="middle" onload="this.height=XQFLFRAME.document.body.scrollHeight" src="D001.jsp" height="100%" width="100%"></iframe>
 		</td>
 	</tr>
+	<tr height="30">
+		<td height="25" nowrap class="title">照片标题[H]:</td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="ZPBT" value=""/></td>
+		<td height="25" nowrap class="title">选择照片:</td>
+		<td bgcolor="#FFFFFF" colspan="4" >
+		<input type="file" name="UpFile" onchange="javascript:PreviewImg(this);">&nbsp;&nbsp;<input type="button" name="" value="添加照片" onclick="javascript:uploadPhotos()"/></td>
+		
+	</tr>
+	<tr>
+		<td height="25" nowrap class="title">照片描述</td>
+		<td bgcolor="#FFFFFF"><textarea rows="6" cols="22" name="ZPMS"  style="width:100%"></textarea></td>
+		<td height="25" nowrap class="title">照片列表</td>
+		<td bgcolor="#FFFFFF" ><div id="PICLIST" class="divStyle"></div></td>
+		<td colspan="2" bgcolor="#FFFFFF" align="center"><div id="newPreview" ></div></td>
+	</tr>
 </table>
-</div>
+<!--
 <div id="YXZT" style="display:none">
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 
@@ -227,7 +251,6 @@ function viewDataImg(value)
 		</iframe>
 		</td>
 	</tr>
-
 	<tr height="25" >
 		<td rowspan="3" class="title">水库</td>
 		<td nowrap class="title">水库类别:</td>
@@ -254,7 +277,7 @@ function viewDataImg(value)
 		</td>
 	</tr>
 </table>
-</div>
+</div>-->
 </form>
 <br/>
 <table border="0"  width="95%" align="center">

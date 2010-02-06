@@ -4,138 +4,138 @@ import java.sql.ResultSet;
 
 public class DetailBean {
 	
-	private String DNCNO;		//险情编号
-	private String PJNO;		//工程编号
-	private String STTPCD;		//建筑物编码
-	private String DAGTM;		//出险时间
-	private String DNCNM;		//险情名称
+	private String DNCNO="";		//险情编号
+	private String PJNO="";		//工程编号
+	private String STTPCD="";		//建筑物编码
+	private String DAGTM="";		//出险时间
+	private String DNCNM="";		//险情名称
 	
-	private String LKGTU;		//漏水混清				==D004==D003
+	private String LKGTU="";		//漏水混清				==D004==D003
 	
-	private String SLUPAG;		//滑坡面角度(度)			==D006==D012
+	private String SLUPAG="";		//滑坡面角度(度)			==D006==D012
 	
-	private String TODFTDI;		//距堤脚距离(米)			==D007==D009==D003==D004
+	private String TODFTDI="";		//距堤脚距离(米)			==D007==D009==D003==D004
 	
-	private String WDQ;//河道流量(立方米/秒)				==D011==D009
+	private String WDQ="";//河道流量(立方米/秒)				==D011==D009
 	
-	private String DSSPN;		//受灾人口(人)			==D001==D015
-	private String INPN;		//受伤人口(人)			==D001==D015
-	private String DTHPN;		//死亡人口(人)			==D001==D015
-	private String WRHS;		//倒塌房屋(间)			==D001==D015
-	private String CRPDSSAR;	//农作物受灾面积(公顷)	==D001==D015
-	private String SCDMFMAR;	//毁坏耕地面积(公顷)		==D001==D015
-	private String DRCECLS;		//直接经济损失(万元)		==D001==D015
+	private String DSSPN="";		//受灾人口(人)			==D001==D015
+	private String INPN="";		//受伤人口(人)			==D001==D015
+	private String DTHPN="";		//死亡人口(人)			==D001==D015
+	private String WRHS="";		//倒塌房屋(间)			==D001==D015
+	private String CRPDSSAR="";	//农作物受灾面积(公顷)	==D001==D015
+	private String SCDMFMAR="";	//毁坏耕地面积(公顷)		==D001==D015
+	private String DRCECLS="";		//直接经济损失(万元)		==D001==D015
 	
-	private String WRAR;		//破坏面积(平方米)		==D023==D024
+	private String WRAR="";		//破坏面积(平方米)		==D023==D024
 	//D001	决口				TB_BURDSC
-	private String BUW;			//决口宽度(米)
-	private String BUVL;		//决口流速(米/秒)
-	private String BUZDF;		//决口水头差(米)
-	private String BUQ;			//决口流量(立方米/秒)
-	private String BURLDGL;		//决口处地形地质条件
+	private String BUW="";			//决口宽度(米)
+	private String BUVL="";		//决口流速(米/秒)
+	private String BUZDF="";		//决口水头差(米)
+	private String BUQ="";			//决口流量(立方米/秒)
+	private String BURLDGL="";		//决口处地形地质条件
 	//D002	漫溢				TB_OVFLDSC
-	private String OVFLL;		//漫溢长度(米)
-	private String OVFLZ;		//漫溢水位(米)
-	private String DSQ;			//漫溢流量(立方米/秒)
+	private String OVFLL="";		//漫溢长度(米)
+	private String OVFLZ="";		//漫溢水位(米)
+	private String DSQ="";			//漫溢流量(立方米/秒)
 	//D003	漏洞				TB_LKDSC
-	private String LKDMT;		//漏洞直径(米)
-	private String LKQ;			//漏洞流量(升/秒)
-	private String LKWTLH;		//漏洞水柱高(米)
+	private String LKDMT="";		//漏洞直径(米)
+	private String LKQ="";			//漏洞流量(升/秒)
+	private String LKWTLH="";		//漏洞水柱高(米)
 
-	private String LKSAR;		//已形成漏洞群面积(平方米)
+	private String LKSAR="";		//已形成漏洞群面积(平方米)
 	//D004	管涌				TB_PPDSC
-	private String PPQ;			//管涌流量(升/秒)
-	private String WTLH;		//水柱高(米)
+	private String PPQ="";			//管涌流量(升/秒)
+	private String WTLH="";		//水柱高(米)
 	
-	private String PPSAR;		//已形成管涌群面积(平方米)
+	private String PPSAR="";		//已形成管涌群面积(平方米)
 	//D005	陷坑				TB_PITDSC
-	private String SBDSP;		//陷坑深度(米)
-	private String SBAR;		//陷坑面积(平方米)
+	private String SBDSP="";		//陷坑深度(米)
+	private String SBAR="";		//陷坑面积(平方米)
 	
 	//D006	滑坡 			TB_SLDSC
-	private String SLBU;		//滑坡体积(立方米)
+	private String SLBU="";		//滑坡体积(立方米)
 	
 	//D007	淘刷				TB_UNDSC
-	private String UNDAR;		//淘刷面积(平方米)
-	private String UNDD;		//淘刷深度(米)
-	private String UNDL;		//淘刷长度(米)
+	private String UNDAR="";		//淘刷面积(平方米)
+	private String UNDD="";		//淘刷深度(米)
+	private String UNDL="";		//淘刷长度(米)
 	
 	//D008	裂缝				TB_CRDSC
-	private String CRDR;		//裂缝方向
-	private String CRD;			//裂缝深度(米)
-	private String CRL;			//裂缝长度(米)
-	private String CRW;			//裂缝宽度(厘米)
+	private String CRDR="";		//裂缝方向
+	private String CRD="";			//裂缝深度(米)
+	private String CRL="";			//裂缝长度(米)
+	private String CRW="";			//裂缝宽度(厘米)
 	
 	//D009	崩岸				TB_CVDSC
 	
-	private String CVL;			//崩塌长度(米)
-	private String CVBU;		//崩塌体积(立方米)
-	private String RVH;			//河岸高度(米)
-	private String FLCNDSC;		//水流情况描述
+	private String CVL="";			//崩塌长度(米)
+	private String CVBU="";		//崩塌体积(立方米)
+	private String RVH="";			//河岸高度(米)
+	private String FLCNDSC="";		//水流情况描述
 	//D010	渗水				TB_SPDSC
-	private String SPAR;		//渗水面积(平方米)
-	private String SPQ;			//SPQ
+	private String SPAR="";		//渗水面积(平方米)
+	private String SPQ="";			//SPQ
 	//D011	 浪坎 			TB_BLBAD
-	private String BLH;			//浪高(米)
-	private String WNS;			//风速(级)
+	private String BLH="";			//浪高(米)
+	private String WNS="";			//风速(级)
 	//D012	滑动				TB_SLUDSC
-	private String SLUDSP;		//滑动位移(米)
-	private String SLUTP;		//滑动类型
-	private String SLUGLCN;		//滑动面地质情况
+	private String SLUDSP="";		//滑动位移(米)
+	private String SLUTP="";		//滑动类型
+	private String SLUGLCN="";		//滑动面地质情况
 	//D013	启闭失灵			TB_HOMLFDSC
-	private String POWCUT;		//停电
-	private String HOMLF;		//启闭机失灵
-	private String GSDST;		//闸门井变形
-	private String MLFCN;		//失灵时开启状况
+	private String POWCUT="";		//停电
+	private String HOMLF="";		//启闭机失灵
+	private String GSDST="";		//闸门井变形
+	private String MLFCN="";		//失灵时开启状况
 	//D014	闸门破坏			TB_GTWRDSC
-	private String WRDSC;		//破坏形式
-	private String WRQ;			//失事时流量(立方米/秒)
+	private String WRDSC="";		//破坏形式
+	private String WRQ="";			//失事时流量(立方米/秒)
 	//D015	溃坝				TB_BRDMDSC
-	private String BRDMW;		//溃坝宽度(米)
-	private String PJPS;		//工程现状
-	private String BRZDMCDI;	//库水位距堤顶距离(米)
-	private String BRV;			//溃坝时库容(万立方米)
-	private String BRDMQ;		//溃坝流量(立方米/秒)
-	private String BRDMLDGL;	//溃坝处地形、地质条件
+	private String BRDMW="";		//溃坝宽度(米)
+	private String PJPS="";		//工程现状
+	private String BRZDMCDI="";	//库水位距堤顶距离(米)
+	private String BRV="";			//溃坝时库容(万立方米)
+	private String BRDMQ="";		//溃坝流量(立方米/秒)
+	private String BRDMLDGL="";	//溃坝处地形、地质条件
 	//D016	倾覆				TB_OVTUDSC
-	private String OVTUDR;		//倾覆方向
-	private String OVTUAG;		//倾覆角度(度)
+	private String OVTUDR="";		//倾覆方向
+	private String OVTUAG="";		//倾覆角度(度)
 	//D017	应力过大			TB_STREXDSC
-	private String MXTNST;		//最大拉应力(牛/平方毫米)
-	private String MXCMST;		//最大压应力(牛/平方毫米)
-	private String CONGR;		//混凝土标号
-	private String ASTR;		//允许应力值(牛/平方毫米)
+	private String MXTNST="";		//最大拉应力(牛/平方毫米)
+	private String MXCMST="";		//最大压应力(牛/平方毫米)
+	private String CONGR="";		//混凝土标号
+	private String ASTR="";		//允许应力值(牛/平方毫米)
 	//D018	坍塌				TB_SLIDSC
-	private String SLIAR;		//坍塌面积(平方米)
-	private String SLIMS;		//坍塌方量(立方米)
+	private String SLIAR="";		//坍塌面积(平方米)
+	private String SLIMS="";		//坍塌方量(立方米)
 	//D019	堵塞				TB_PLUDSC
-	private String PLTNM;		//堵塞物名称
-	private String PLTBU;		//堵塞物体积(立方米)
+	private String PLTNM="";		//堵塞物名称
+	private String PLTBU="";		//堵塞物体积(立方米)
 	//D020	基础破坏			TB_BSWRDSC
-	private String GRNSPDSC;	//基础渗漏描述
-	private String GRNUSB;		//据传不均匀沉降(米)
-	private String GROVCHWR;	//基础超载破坏
+	private String GRNSPDSC="";	//基础渗漏描述
+	private String GRNUSB="";		//据传不均匀沉降(米)
+	private String GROVCHWR="";	//基础超载破坏
 	
 	//D021	消能工破坏		TB_EDDWRDSC
-	private String APWR;		//底板掀起
-	private String WSTWR;		//止水破坏
+	private String APWR="";		//底板掀起
+	private String WSTWR="";		//止水破坏
 	//D022		基础排水失效		TB_BSWPLPDS
-	private String WPPLU;		//排水孔堵塞
-	private String WPEQML;		//排水设备失灵
+	private String WPPLU="";		//排水孔堵塞
+	private String WPEQML="";		//排水设备失灵
 	//D023	洞身破坏 			TB_HBWRDSC
-	private String WRMS;//破坏方量(立方米)
-	private String LNINF;//对衬砌造成的影响
-	private String HBGLCN;//洞身地质情况
+	private String WRMS="";//破坏方量(立方米)
+	private String LNINF="";//对衬砌造成的影响
+	private String HBGLCN="";//洞身地质情况
 	//D024	控导工程局部破坏	TB_CLPJPRWR
 	
-	private String WRD;			//破坏深度(米)
-	private String WRL;			//破坏长度(米)
-	private String WRGLCN;		//破坏处地质情况
+	private String WRD="";			//破坏深度(米)
+	private String WRL="";			//破坏长度(米)
+	private String WRGLCN="";		//破坏处地质情况
 	//D025	控导工程冲毁		TB_CLPJSCDN
-	private String SCDMBU;		//冲毁体积(立方米)
-	private String SCDML;		//冲毁长度(米)
-	private String SCDMD;		//冲毁深度(米)
-	private String SCDMGLCN;	//冲毁处地质情况
+	private String SCDMBU="";		//冲毁体积(立方米)
+	private String SCDML="";		//冲毁长度(米)
+	private String SCDMD="";		//冲毁深度(米)
+	private String SCDMGLCN="";	//冲毁处地质情况
 	
 	public String getDNCNO() {
 		return DNCNO;

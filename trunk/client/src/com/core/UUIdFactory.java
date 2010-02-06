@@ -11,10 +11,10 @@ public class UUIdFactory {
 	 * @param tablename
 	 * @return
 	 */
-	public static int getMaxId(String path,String tablename){
+	public static int getMaxId(String path,String tablename,String fileid){
 		int id=1;
 		Connection conn = null;
-		String sql = "select count(*) from "+tablename;
+		String sql = "select max("+fileid+") from "+tablename;
 		try{
 			conn = ConnectionPool.getConnection(path);
 			Statement stmt = conn.createStatement();

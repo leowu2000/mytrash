@@ -21,7 +21,7 @@
 
 <script language="JAVASCRIPT">
 function toBack(){
-	location.href="/project/prgManage.jsp";
+	location.href="/report/fxjbManage.jsp";
 }
 function submiting(){
 	document.frm.submit();
@@ -36,14 +36,15 @@ function submiting(){
 <input type="hidden" name="WTDPCD" value="WTDPCD"/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
-	<tr height="25" >
+	<!-- <tr height="25" >
 		<td nowrap align="center" class="title" width="30%" >单位</td>
 		<td nowrap align="center" class="title"  colspan="4">第<input type="text" class="lines" name="ISSUE" value="" size="8"/> 期</td>
 		<td nowrap align="center" class="title" width="30%" ><%=UtilDateTime.nowDateStringCN() %></td>
-	</tr>
+	</tr>-->
 	<tr height="25" >
+		<td nowrap align="center" class="title">第<input type="text" class="lines" name="ISSUE" value="" size="8"/> 期</td>
 		<td align="center" class="title">标题:</td>
-		<td align="center" class="title" colspan="3">
+		<td align="center" class="title" colspan="2">
 		<input type="text" name="WTTT" value="" size="25"/></td>
 		<td align="center" class="title2">附件:</td>
 		<td bgcolor="#FFFFFF">

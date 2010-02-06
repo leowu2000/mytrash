@@ -41,31 +41,23 @@ public class FileUploadServlet extends HttpServlet {
 			String gclsh = request.getParameter("gclsh");
 			String saveType = request.getParameter("saveType");
 			String filedir = request.getParameter("filepath");//report 共用
-			String cjsj = request.getParameter("cjsjvalue");
+			String time = request.getParameter("cjsjvalue");
 			String zpbt = request.getParameter("zpbtvalue");//report 共用
 			String zpms = request.getParameter("zpmsvalue");
 			String detail = request.getParameter("detailvalue");
+			String delFlg = request.getParameter("delFlg");
+			String tabname = request.getParameter("tabname");
+
 			Connection conn = null;
 			String result = "";
 			String DNCNO = request.getParameter("DNCNO");//report 共用
 			if("report".trim().equals(type)){
-				String time = request.getParameter("time");
-				String tabname = request.getParameter("tabname");
+				time=time==""?request.getParameter("time"):time;
 				conn = ConnectionPool.getConnection(path);
-				String sql = "";
-				sql = "INSERT INTO "+tabname+"(ZLBM,RPJINCD,DTCDT,TITLE,LXZP) values(?,?,?,?,?)";
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				File f = new File(filedir);
-				FileInputStream fis = new FileInputStream(f);
-				pstmt.setInt(1, UUIdFactory.getMaxId(path, tabname));
-				pstmt.setString(2, DNCNO);
-				pstmt.setString(3, time);
-				pstmt.setString(4, zpbt);
-				pstmt.setBinaryStream(5, fis, (int) f.length());
-				pstmt.executeUpdate();
-				pstmt.close();
-				conn.close();
-				List picList = BuinessDao.getSelectList(tabname,new String[]{"ZLBM","TITLE"},path,"WHERE RPJINCD="+DNCNO);
+				if("1".trim().equals(delFlg))
+					BuinessDao.deleteTempMedia(path);
+				BuinessDao.insertTempMedia(path, DNCNO, time, zpbt, detail, zpms, filedir, tabname);
+				List picList = BuinessDao.getSelectList("TB_SUB_TEMP",new String[]{"ZLBM","TITLE"},path,"WHERE RARENTNO="+DNCNO+" and TBNO='"+tabname+"'");
 				if(picList!=null && picList.size()>0){
 					for(int i=0;i<picList.size();i++){
 						Map<Object,Object> map = (Map<Object,Object>)picList.get(i);
@@ -73,6 +65,8 @@ public class FileUploadServlet extends HttpServlet {
 					}
 				}
 			}
+/**
+ * *
 			if("upload".trim().equals(type)){
 				try{
 					conn = ConnectionPool.getConnection(path);
@@ -82,7 +76,7 @@ public class FileUploadServlet extends HttpServlet {
 						PreparedStatement pstmt = conn.prepareStatement(sql);
 						File f = new File(filedir);
 						FileInputStream fis = new FileInputStream(f);
-						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_PJR_M"));
+						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_PJR_M","ZLBM"));
 						pstmt.setString(2, gclsh);
 						pstmt.setString(3, cjsj);
 						pstmt.setString(4, zpbt);
@@ -110,7 +104,7 @@ public class FileUploadServlet extends HttpServlet {
 						PreparedStatement pstmt = conn.prepareStatement(sql);
 						File f = new File(filedir);
 						FileInputStream fis = new FileInputStream(f);
-						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_STDNC_M"));
+						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_STDNC_M","ZLBM"));
 						pstmt.setString(2, DNCNO);
 						pstmt.setString(3, cjsj);
 						pstmt.setString(4, zpbt);
@@ -142,6 +136,7 @@ public class FileUploadServlet extends HttpServlet {
 				}
 				
 			}
+			*/
 			if("viewpic".trim().equals(type)){
 				try{
 					conn = ConnectionPool.getConnection(path);
