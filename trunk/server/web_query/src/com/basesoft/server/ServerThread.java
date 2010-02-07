@@ -26,7 +26,7 @@ class ServerThread extends Thread {
         int backPack;
         byte sockSendByte;
 
-        ServerFrame serverMyFrame;
+//        ServerFrame serverMyFrame;
 
         //分割附加信息变量
         String SockFileFlag="";
@@ -49,12 +49,17 @@ class ServerThread extends Thread {
 	boolean LogFileExist=false;
 
         public ServerThread(ServerFrame parent,Socket s) {
-           this.serverMyFrame=parent;
-           serverMyFrame.ConnectNum++;
-           serverMyFrame.ServerListInfo("数据接收编号："+serverMyFrame.ConnectNum);
-           ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
+//           this.serverMyFrame=parent;
+//           serverMyFrame.ConnectNum++;
+//           ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
            this.clientRequest=s;
         }
+        public ServerThread(Socket s) {
+//          this.serverMyFrame=parent;
+//          serverMyFrame.ConnectNum++;
+//          ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
+          this.clientRequest=s;
+       }
         public synchronized void run(){
         	int m=0;
         	byte[] SockData=new byte[256];
@@ -80,7 +85,6 @@ class ServerThread extends Thread {
                 	if(!SockAddtion.trim().equals("")){
                 	System.out.println("附加信息转化为字节：");
                 	StringCopy(SockAddtion);
-                	serverMyFrame.ServerListInfo(SockFileDanWei+"(正在上传数据......)");
                 	ContentLogFile("发送单位是："+SockFileDanWei);
                 	byte[] buffer=new byte[MAX_SIZE];
                 	if(SockFileFlag.equals("SSGQ")){
@@ -143,7 +147,6 @@ class ServerThread extends Thread {
 								}
 								System.out.println("已全部收完!");
 								SendPack(-4);
-								serverMyFrame.ServerListInfo(SockFileDanWei+":"+"续传......数据传输成功!!");
 								ContentLogFile(SockFileDanWei+":"+"续传......数据传输成功!!");
 
                 					}
@@ -214,7 +217,6 @@ class ServerThread extends Thread {
 			}
 			System.out.println("已全部收完!");
 			SendPack(-4);
-			serverMyFrame.ServerListInfo(SockFileDanWei+":"+"数据传输成功!!");
 			ContentLogFile(SockFileDanWei+":"+"数据传输成功!!");
 			}//判断m是否小于总的包数
 
@@ -252,7 +254,7 @@ class ServerThread extends Thread {
    			if (DataDbQuery.beginCopyData()){
    				System.out.println("入库成功!!");
    				SendPack(-2);
-   				System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
+//   				System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
    				try{
    					DataIn.close();
    					outputFile.close();
@@ -268,7 +270,6 @@ class ServerThread extends Thread {
    				catch(Exception e){
    					System.out.println("删除日志文件和数据库文件出错："+e.getMessage());
    				}
-   				serverMyFrame.ServerListInfo(SockFileDanWei+":"+"传输的数据已经成功入库!");
    				System.out.println("写完列表框日志");
    				ContentLogFile(SockFileDanWei+":"+"传输的数据已经成功入库!");
    				System.out.println("写完主要日志");
@@ -277,7 +278,6 @@ class ServerThread extends Thread {
    				System.out.println("第一次入库出故障!!");
    				SendPack(-3);
    				ContentLogFile("第一次入库之后出错");
-   				serverMyFrame.ServerListInfo(SockFileDanWei+":"+"入库出故障!!");
   				ContentLogFile(SockFileDanWei+":"+"入库出故障!!");
 
   				//入库不成功，允许重传一次
@@ -339,7 +339,6 @@ class ServerThread extends Thread {
 				}
 				System.out.println("已全部收完!");
 				SendPack(-4);
-				serverMyFrame.ServerListInfo("发送单位"+SockFileDanWei+":"+"文件传输完毕!!");
 				ContentLogFile("发送单位是："+SockFileDanWei+":"+"文件传输完毕!!");
 				//调用入库模块
 				//DataDbQuery.setMdbFileName(SockFileName+".mdb");
@@ -369,7 +368,7 @@ class ServerThread extends Thread {
    					SendPack(-2);
    					//clientRequest.close();
    					//serverMyFrame.ConnectNum--;
-   					System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
+//   					System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
    					try{
    						DataIn.close();
    						outputFile.close();
@@ -385,7 +384,6 @@ class ServerThread extends Thread {
    					catch(Exception e){
    						System.out.println("删除日志文件和数据库文件出错："+e.getMessage());
    					}
-   					serverMyFrame.ServerListInfo("发送单位"+SockFileDanWei+":"+"好了，这次入库成功!!");
    					ContentLogFile("发送单位"+SockFileDanWei+":"+"好了，这次入库成功!!");
    				}
    				else{
@@ -402,7 +400,6 @@ class ServerThread extends Thread {
    						System.out.println("已关闭接收文件数据流出错"+e.getMessage());
    					}
    					//randomFile.close();
-   					serverMyFrame.ServerListInfo(SockFileDanWei+":"+"入库再次出故障，可能数据文件有问题!!");
    					ContentLogFile(SockFileDanWei+":"+"入库再次出故障，可能数据文件有问题!!");
    				}
    			}
@@ -410,7 +407,6 @@ class ServerThread extends Thread {
 		}//end 结束RUN里的TRY
                 catch(IOException e){
                 	System.out.println("接收数据抛出的异常!"+e.getMessage());
-                	serverMyFrame.ServerListInfo(SockFileDanWei+":"+"已断开＆文件没有传输完毕!");
                 	ContentLogFile(SockFileDanWei+":"+"已断开＆文件没有传输完毕!");
                 }
                 finally{
@@ -423,8 +419,8 @@ class ServerThread extends Thread {
    					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
    				}
                 		//randomFile.close();
-                		serverMyFrame.ConnectNum--;
-                		System.out.println("线程数目"+serverMyFrame.ConnectNum);
+//                		serverMyFrame.ConnectNum--;
+//                		System.out.println("线程数目"+serverMyFrame.ConnectNum);
                 		try{
 	                		clientRequest.close();
                 		}
@@ -434,7 +430,7 @@ class ServerThread extends Thread {
                 		System.out.println("结束");
                 	}
                 	catch(Exception e){
-                		serverMyFrame.ConnectNum--;
+//                		serverMyFrame.ConnectNum--;
                 		System.out.println("结束出错!!"+e.getMessage());
                 	}
 
@@ -678,7 +674,7 @@ class ServerThread extends Thread {
         	}
     	}
     	public void destroy(){
-    		System.out.println("线程数目"+serverMyFrame.ConnectNum);
+//    		System.out.println("线程数目"+serverMyFrame.ConnectNum);
    	}
 
       	//检查接受到的文件是否是ZIP扩展名？是则释放之

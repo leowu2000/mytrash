@@ -7,6 +7,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.basesoft.server.MainThread;
 import com.basesoft.server.Server;
 
 public class AppListener implements ServletContextListener {
@@ -44,8 +45,9 @@ public class AppListener implements ServletContextListener {
 		// * (IOException e) { logger.error("启动Kingbase失败...");
 		// * e.printStackTrace(); }
 		// */
-		new Server(); 
-	}
+		Thread s = new MainThread();
+		s.setDaemon(true);// 设置线程为后台线程，使tomcat重启的时候自动退出。
+		s.start();	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
 	}
