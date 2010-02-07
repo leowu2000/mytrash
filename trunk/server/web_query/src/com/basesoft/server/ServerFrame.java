@@ -5,7 +5,6 @@ package com.basesoft.server;
  * @author：Administrator
  */
 import java.awt.Component;
-import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -314,12 +313,7 @@ public void actionPerformed(ActionEvent event){
 	if(arg.equals("HelpAbout")){
 	}
 	else if(arg.equals("LookLog")){
-		String title=new String("查看日志");
-		String fileName=new String("人大金仓发送日志文件.log");
-		Dialog mDialog=new MessageDialog(ivjServerMyFrame,title,null, null,500,400,fileName);
-		mDialog.setVisible(true);
 	}
-	
 	else if(arg.equals("ExitServer")){
 		System.exit(0);
 	}
