@@ -354,9 +354,6 @@ public void ServerListRemove(int index){
 public void ServerListClear(){
 	ivjserverList.removeAll();
 }
-public void ServerListInfo(String info){
-	ivjserverList.add(info);	
-}
 public void center(Component C) {
      Dimension SS = C.getToolkit().getScreenSize();
      Dimension CS = C.getSize();
