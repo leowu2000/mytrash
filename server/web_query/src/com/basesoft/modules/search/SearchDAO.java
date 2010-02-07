@@ -1,9 +1,9 @@
 package com.basesoft.modules.search;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.Map;
 
 import com.basesoft.core.CommonDAO;
 import com.basesoft.core.PageInfo;
@@ -353,13 +353,10 @@ public class SearchDAO extends CommonDAO{
 	 * @param check_projectname 工程名称
 	 * @param check_unit 填报单位
 	 * @param check_title 信息标题
-	 * @param page 页码
 	 * @return 
 	 */
-	public void getAllResults(String select_sort, String xzqh, String lysx, String date_start, String date_end, String text_fill, String check_projectname, String check_unit, String check_title, int page){
-		int pagesize = 20;
-		int start = pagesize*(page - 1) + 1;
-		int end = pagesize*page;
+	public Map getAllResults(String select_sort, String xzqh, String lysx, String date_start, String date_end, String text_fill, String check_projectname, String check_unit, String check_title){
+		Map mapResult = new HashMap();
 		
 		//把险情表同工程表相互关联
 		String sql1 = "select st.* from tb_stdnc st,tb_pj pj where st.pjno = pj.pjno ";
@@ -618,12 +615,29 @@ public class SearchDAO extends CommonDAO{
 		sql6 = sql6 + " 1 = 1 order by WTDT desc";
 		
 		//查询数据
-		List list = new ArrayList();
 		
-		String sqlData1 = "select * from( select A.*, ROWNUM RN from (" + sql1 + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;
-		String sqlCount1 = "select count(*) from (" + sql1 + ")" + "";
-		List list1 = jdbcTemplate.queryForList(sqlData1);
-		int count1 = jdbcTemplate.queryForInt(sqlCount1);
+		sql1 = "select * from( select A.*, ROWNUM RN from (" + sql1 + ") A where ROWNUM<=" + 500 + ") WHERE RN>=" + 0;
+		sql2 = "select * from( select A.*, ROWNUM RN from (" + sql2 + ") A where ROWNUM<=" + 500 + ") WHERE RN>=" + 0;
+		sql3 = "select * from( select A.*, ROWNUM RN from (" + sql3 + ") A where ROWNUM<=" + 500 + ") WHERE RN>=" + 0;
+		sql4 = "select * from( select A.*, ROWNUM RN from (" + sql4 + ") A where ROWNUM<=" + 500 + ") WHERE RN>=" + 0;
+		sql5 = "select * from( select A.*, ROWNUM RN from (" + sql5 + ") A where ROWNUM<=" + 500 + ") WHERE RN>=" + 0;
+		sql6 = "select * from( select A.*, ROWNUM RN from (" + sql6 + ") A where ROWNUM<=" + 500 + ") WHERE RN>=" + 0;
+		
+		List list1 = jdbcTemplate.queryForList(sql1);
+		List list2 = jdbcTemplate.queryForList(sql2);
+		List list3 = jdbcTemplate.queryForList(sql3);
+		List list4 = jdbcTemplate.queryForList(sql4);
+		List list5 = jdbcTemplate.queryForList(sql5);
+		List list6 = jdbcTemplate.queryForList(sql6);
+		
+		mapResult.put("listXq", list1);
+		mapResult.put("listYxzt", list2);
+		mapResult.put("listFxjb", list3);
+		mapResult.put("listFxxd", list4);
+		mapResult.put("listZq", list5);
+		mapResult.put("listHq", list6);
+		
+		return mapResult;
 	}
 	
 	/**

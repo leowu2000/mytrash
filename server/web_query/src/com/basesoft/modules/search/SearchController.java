@@ -48,6 +48,9 @@ public class SearchController extends CommonController {
 			if("qbxx".equals(select_sortinfo)){//全部信息
 				mv = new ModelAndView("modules/result/result_qbxx");
 				
+				Map mapQbxx = searchDAO.getAllResults(select_sort, xzqh, lysx, date_start, date_end, text_fill, check_projectname, check_unit, check_title);
+				
+				mv.addObject("mapQbxx", mapQbxx);
 			}else {
 				//根据检索条件检索出的结果
 				PageList listResult = searchDAO.getResult(select_sortinfo,select_sort,xzqh,lysx,date_start,date_end,text_fill,check_projectname,check_unit,check_title, page);
