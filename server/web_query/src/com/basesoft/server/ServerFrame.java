@@ -312,10 +312,6 @@ public void actionPerformed(ActionEvent event){
 	String arg=event.getActionCommand();
 	System.out.println(arg);
 	if(arg.equals("HelpAbout")){
-		//String message=new String("这是网络传输服务端,Copy Right kingbase。时间：2001-9-18");
-		String title=new String("关于");
-		Dialog MessageDialog=new DialogBase(ivjServerMyFrame,title, "yes", null, null);
-		MessageDialog.setVisible(true);
 	}
 	else if(arg.equals("LookLog")){
 		String title=new String("查看日志");
