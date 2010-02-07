@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,6 +13,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.text.DateFormat;
+import java.util.zip.CRC32;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 class ServerThread extends Thread {
 	//SOCK流的变量
@@ -688,16 +692,118 @@ class ServerThread extends Thread {
           if (s.toUpperCase().equals(".ZIP"))
           {
              strDataFileName =  zipFileName.substring(0, zipFileName.length()-4);
-
-             extractZipFile b = new extractZipFile();
-             b.setZipFileName( zipFileName );
-             b.setSourceFileName( strDataFileName );
-             b.setOutputFileName( strDataFileName );
-             return b.extractFile();
+             return extractFile(zipFileName,strDataFileName,strDataFileName);
           }
           else
           {
              return true;
           }
       }
+
+
+      public boolean extractFile(String zipFileName,String sourceFileName,String outputFileName)
+      {
+       if ( zipFileName.equals("") )
+       {
+          System.out.println("您没有指定压缩文件名称。");
+          return false;
+       }
+
+       if ( sourceFileName.equals("") )
+       {
+          System.out.println("您没有指定要解压缩哪一个文件。");
+          return false;
+       }
+       if ( outputFileName.equals("") )
+       {
+          System.out.println("您没有指定解压缩到哪个文件。");
+          return false;
+       }
+       
+       byte buffer[] = new byte[1024];
+       try //1
+       {
+          //open archive file
+          FileInputStream stream = new FileInputStream( zipFileName );
+          System.out.println("\nzipFileName :" +zipFileName );
+          
+          ZipInputStream zipStream = new ZipInputStream( stream );
+
+          
+          //find archive entry
+          ZipEntry zipExtract = null;
+          while(true)
+          {
+          	try
+          	   {
+             	   zipExtract = zipStream.getNextEntry();
+          	   }
+      	catch(Exception e)
+      	   {
+      	    System.out.println("\nextractFile：找不到入口："+e.getMessage() + "\n");
+      	   }
+             if (zipExtract == null)
+                {
+                System.out.println("\n\nZIP包中没有文件：" + sourceFileName+"\n\n");
+                break;
+                }
+             if (zipExtract.getName().equals(sourceFileName))
+                {
+                System.out.println("\n\nZIP包中的文件名：" + sourceFileName+"\n\n");
+                break;
+                }
+             zipStream.closeEntry();
+          }
+          
+          if (zipExtract == null || !zipExtract.getName().equals(sourceFileName))
+          {
+             stream.close();
+             System.out.println("在"+ zipFileName +"中找不到要展开的文件："+ sourceFileName);
+             return false;
+          }
+          //create output file
+          FileOutputStream output = new FileOutputStream(outputFileName);
+          
+          //check store CRC
+          long crcReq = zipExtract.getCrc();
+          CRC32 crc = new CRC32();
+          
+          //read input & write to output
+          while(true)
+          {
+             int nRead = zipStream.read(buffer,0,buffer.length);
+             if (nRead <= 0)
+             {
+              break;  
+             }
+             
+             output.write(buffer,0,nRead);
+             crc.update(buffer,0,nRead);
+          }
+          
+          //close all
+          output.close();
+          zipStream.closeEntry();
+          stream.close();
+          
+          //check CRC value, if avaiable
+          if ( crcReq != -1 && crc.getValue() != crcReq )
+          {
+             System.out.println(outputFileName + "CRC 校验错误。");
+             return false;
+          }
+          
+       }
+       catch(Exception e)
+       {
+          System.out.println("错误："+e.getMessage());
+          return false;
+       }
+       
+      System.out.println("文件" + sourceFileName + "已经被解压缩为："+ outputFileName);
+
+      return true;
+
+      }	
+
 }
