@@ -71,6 +71,15 @@ public class DetailDAO extends CommonDAO {
 	}
 	
 	/**
+	 * 获取险情信息
+	 * @param id
+	 * @return
+	 */
+	public Map getXq1(String id){
+		return jdbcTemplate.queryForMap("select * from tb_stdnc std,tb_pj pj,tb_xqfl xq where xq.xqfldm = std.xqfldm and pj.pjno = std.pjno and  dncno = '" + id + "'");
+	}
+	
+	/**
 	 * 获取险情多媒体信息
 	 * @param id
 	 * @return

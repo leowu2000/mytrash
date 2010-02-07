@@ -27,7 +27,6 @@ MM_reloadPage(true);
 	ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 	JdbcTemplate jdbcTemplate = (JdbcTemplate)ctx.getBean("jdbcTemplate");
 	
-	String tbdw = request.getAttribute("tbdw").toString();
 	String commandtype = request.getAttribute("type").toString();
 	
 	//全部信息
@@ -94,13 +93,13 @@ MM_reloadPage(true);
 	    		String altStr6 = "长 度:" + size + "kb";
 	    		String altStr7 = "介绍:"; 
 	    
-				if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"jpg".equals(map.get("WJGS").toString().toLowerCase())){
+				if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 %>
-        <img src="../edit_fold/imgout.asp?tablename=TB_PJR_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_yxzt.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
+        <img src="media.do?action=image&tablename=TB_PJR_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_yxzt.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapYxzt.get("wtdpdt") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
 <% 		
         		}else
 %>
-        <img src="../../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_yxzt.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+        <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_yxzt.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapYxzt.get("wtdpdt") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
 <%
 			}
 %>
@@ -179,19 +178,19 @@ MM_reloadPage(true);
         		int size = 8000/1024;
 	    		String altStr1 = "编 号:" + map.get("ZLBM");
 	    		String altStr2 = "标  题:" + map.get("TITLE");
-	    		String altStr3 = "采集单位:";
+	    		String altStr3 = "采集单位:" + mapXq.get("WTDPCD");
 	    		String altStr4 = "采集时间:" + map.get("DTCDT");
 	    		String altStr5 = "文件名:" + fileName;
 	    		String altStr6 = "长 度:" + size + "kb";
 	    		String altStr7 = "介绍:";
 
-	    		if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"jpg".equals(map.get("WJGS").toString().toLowerCase())){
+	    		if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 		 %>
-        <img src="../edit_fold/imgout.asp?tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)"  onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
+        <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)"  onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=image_detail&id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapXq.get("wtdpcd") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
         <% 
 	    		}else{
 	    %>
-        <img src="../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+        <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapXq.get("wtdpcd") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         <%
 	    		}
        		}
@@ -217,7 +216,7 @@ MM_reloadPage(true);
             <td width="30%" height="29" bgcolor="#FFFFFF"><font color=#000000><%=mapXq.get("dagplcch")%></font></td>
           </tr>
           <tr align="center" bgcolor="#FFFFFF"> 
-            <td colspan="4"> <input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="if(this.value=='详细信息'){openUrl('../edit_fold/detailinfo_xq.asp?DNCNO=<%=mapXq.get("DNCNO")%>',400,300,top);this.value='关闭信息'}else{this.value='详细信息';closeUrl('../edit_fold/detailinfo_xq.asp?DNCNO=<%=mapXq.get("DNCNO")%>')}" class="input1"> 
+            <td colspan="4"> <input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="if(this.value=='详细信息'){openUrl('detail.do?action=xq&id=<%=mapXq.get("DNCNO")%>',400,300,top);this.value='关闭信息'}else{this.value='详细信息';closeUrl('../edit_fold/detailinfo_xq.asp?DNCNO=<%=mapXq.get("DNCNO")%>')}" class="input1"> 
             </td>
           </tr>
         </table></td>
@@ -273,17 +272,17 @@ MM_reloadPage(true);
         		int size = 8000/1024;
 	    		String altStr1 = "编 号:" + map.get("ZLBM");
 	    		String altStr2 = "标  题:" + map.get("TITLE");
-	    		String altStr3 = "采集单位:" ;
+	    		String altStr3 = "采集单位:" + map.get("WTDPCD");
 	    		String altStr4 = "采集时间:" + map.get("DTCDT");
 	    		String altStr5 = "文件名:" + fileName;
 	    		String altStr6 = "长 度:" + size + "kb";
 	        	String altStr7 = "介绍:"; 
 	    
-	        	if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"jpg".equals(map.get("WJGS").toString().toLowerCase())){
+	        	if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 	%>
-        <img src="../edit_fold/imgout.asp?tablename=TB_FPACTI_M&amp;media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_fxxd.asp?fxxd_pId=<%=map.get("ZLBM")%>&amp;title=<%=map.get("TITLE")%>&amp;dtcdt=<%=map.get("DTCDT")%>&amp;tbdw=<%=tbdw%>&amp;fileName=<%=fileName%>&amp;WJGS=<%=map.get("WJGS")%>'"> 
+        <img src="media.do?action=image&tablename=TB_FPACTI_M&amp;media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_fxxd.asp?fxxd_pId=<%=map.get("ZLBM")%>&amp;title=<%=map.get("TITLE")%>&amp;dtcdt=<%=map.get("DTCDT")%>&amp;tbdw=<%=map.get("WTDPCD") %>&amp;fileName=<%=fileName%>&amp;WJGS=<%=map.get("WJGS")%>'"> 
         <% 	}else{  %>
-        <img src="../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_fxxd.asp?fxxd_pId=<%=map.get("ZLBM")%>&amp;title=<%=map.get("TITLE")%>&amp;dtcdt=<%=map.get("DTCDT")%>&amp;tbdw=<%=tbdw%>&amp;fileName=<%=fileName%>&amp;WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+        <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_fxxd.asp?fxxd_pId=<%=map.get("ZLBM")%>&amp;title=<%=map.get("TITLE")%>&amp;dtcdt=<%=map.get("DTCDT")%>&amp;tbdw=<%=map.get("WTDPCD") %>&amp;fileName=<%=fileName%>&amp;WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         <%
         	}
 		}
@@ -343,17 +342,17 @@ MM_reloadPage(true);
         		int size = 8000/1024;
 	    		String altStr1 = "编 号:" + map.get("ZLBM");
 	    		String altStr2 = "标  题:" + map.get("TITLE");
-	    		String altStr3 = "采集单位:";
+	    		String altStr3 = "采集单位:" + map.get("WTDPCD");
 	    		String altStr4 = "采集时间:" + map.get("DTCDT");
 	    		String altStr5 = "文件名:" + fileName;
 	    		String altStr6 = "长 度:" + size + "kb";
 	    		String altStr7="介绍:";
 	    
-	    		if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"jpg".equals(map.get("WJGS").toString().toLowerCase())){
+	    		if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 		 %>
-       		<img src="../edit_fold/imgout.asp?tablename=TB_SD_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_zq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
+       		<img src="media.do?action=image&tablename=TB_SD_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_zq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
          <% 	}else{  %>
-            <img src="../image/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_zq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+            <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_zq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
          <%
           		}
 			}

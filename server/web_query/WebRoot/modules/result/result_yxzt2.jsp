@@ -55,8 +55,8 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-        <td><a href="javascript:openUrl('../edit_fold/edit_yxzt.asp?id=<%=map.get("PJRNO")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>
-        <td align="center"><a href="javascript:openUrl('../edit_fold/edit_yxzt.asp?id=<%=map.get("PJRNO")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("gcflmc")%></a></td>
+        <td><a href="javascript:openUrl('detail.do?action=yxzt&id=<%=map.get("PJRNO")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>
+        <td align="center"><a href="javascript:openUrl('detail.do?action=yxzt&id=<%=map.get("PJRNO")%>&curent_pagecount=<%=pageList.getPageInfo().getCurPage()%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("gcflmc")%></a></td>
         <td><%=map.get("WTDPCD")%></td>
         <td align="center"><%=StringUtil.DateToString((Date)map.get("WTDPDT"),"yyyy-MM-dd") %></td>                                                                                            
 	</tr>                                                                                                                    

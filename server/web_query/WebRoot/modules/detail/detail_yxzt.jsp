@@ -38,7 +38,7 @@
     </tr>
     <tr align="center"> 
       <td height="30" bgcolor="#FFFFFF"  ><div align="left"><%=mapYxzt.get("provnm")%></div></td>
-      <td height="30" bgcolor="#FFFFFF" ><div align="right"><%=mapYxzt.get("wtdpdt")%></div></td>
+      <td height="30" bgcolor="#FFFFFF" ><div align="right"><%=StringUtil.DateToString((Date)mapYxzt.get("wtdpdt"), "yyyy-MM-dd")%></div></td>
     </tr>
   </table>
   <table width="68%" border="0"  align="center" cellspacing="0" cellpadding="0" class="bordercolor">
@@ -51,7 +51,7 @@
 	    String altStr1 = "编 号:" + mapYxzt_m.get("ZLBM");
 	    String altStr2 = "标  题:" + mapYxzt_m.get("TITLE");
 	    String altStr3 = "采集单位:" + tbdw;
-	    String altStr4 = "采集时间:" + mapYxzt_m.get("DTCDT");
+	    String altStr4 = "采集时间:" + StringUtil.DateToString((Date)mapYxzt.get("DTCDT"), "yyyy-MM-dd");
 	    String altStr5 = "文件名:" + fileName;
 	    String altStr6 = "长 度:" + size + "kb";
 	    String altStr7 = "介绍:"; 
@@ -83,7 +83,7 @@
       <td height="1" colspan="4" bgcolor="#336699"> <font color="#FFFFFF">&nbsp;</font></tr>
     <tr align="center"> 
       <td width="20%" height="25" bgcolor="#E4E1D6" >检测时间</td>
-      <td width="30%" height="25" bgcolor="#FFFFFF" ><%=mapYxzt.get("dtcdt")%></td>
+      <td width="30%" height="25" bgcolor="#FFFFFF" ><%=StringUtil.DateToString((Date)mapYxzt.get("dtcdt"), "yyyy-MM-dd")%></td>
       <td width="20%" height="25" bgcolor="#E4E1D6">工程类别</td>
       <td width="30%" height="25" bgcolor="#FFFFFF"><%=mapYxzt.get("gcflmc")%></td>
     </tr>
