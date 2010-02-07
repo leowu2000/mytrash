@@ -1,5 +1,6 @@
 package com.basesoft.modules.search;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -204,19 +205,28 @@ public class SearchController extends CommonController {
 			mv.addObject("parentfile", parentfile);
 			
 			String sql = "";
+			List listYxzt = new ArrayList();
+			List listXq = new ArrayList();
+			List listFxxd = new ArrayList();
+			List listZq = new ArrayList();
+			
 			if("1".equals(type)||"a".equals(type)){//运行状态
-				List listYxzt = searchDAO.getConsultYxzt();
-				mv.addObject("listYxzt", listYxzt);
-			}else if("2".equals(type)||"a".equals(type)){//险情
-				List listXq = searchDAO.getConsultXq();
-				mv.addObject("listXq", listXq);
-			}else if("3".equals(type)||"a".equals(type)){//防汛行动
-				List listFxxd = searchDAO.getConsultFxxd();
-				mv.addObject("listFxxd", listFxxd);
-			}else if("4".equals(type)||"a".equals(type)){//灾情
-				List listZq = searchDAO.getConsultZq();
-				mv.addObject("listZq", listZq);
+				listYxzt = searchDAO.getConsultYxzt();
 			}
+			if("2".equals(type)||"a".equals(type)){//险情
+				listXq = searchDAO.getConsultXq();
+			}
+			if("3".equals(type)||"a".equals(type)){//防汛行动
+				listFxxd = searchDAO.getConsultFxxd();
+			}
+			if("4".equals(type)||"a".equals(type)){//灾情
+				listZq = searchDAO.getConsultZq();
+			}
+			
+			mv.addObject("listYxzt", listYxzt);
+			mv.addObject("listXq", listXq);
+			mv.addObject("listFxxd", listFxxd);
+			mv.addObject("listZq", listZq);
 		}
 		
 		return mv;

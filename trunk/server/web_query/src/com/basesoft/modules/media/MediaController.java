@@ -34,6 +34,8 @@ public class MediaController extends CommonController {
 			response.getOutputStream().write(b);
 			response.getOutputStream().close();
 			return null;
+		}else if("image_detail".equals(action)){
+			
 		}
 		
 		return null;

@@ -55,8 +55,8 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-	<td><a href="javascript:openUrl('detail.do?action=fxjb?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("ISSUE")%></a></td>  
-	<td><a href="javascript:openUrl('detail.do?action=fxjb?id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("WTTT")%></a></td>
+	<td><a href="javascript:openUrl('detail.do?action=fxjb&id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("ISSUE")%></a></td>  
+	<td><a href="javascript:openUrl('detail.do?action=fxjb&id=<%=map.get("RPJINCD")%>&tbdw=<%=map.get("WTDPCD")%>&page=<%=pageList.getPageInfo().getCurPage() %>',800,550,0)"><%=map.get("WTTT")%></a></td>
 	<td><%=map.get("WTDPCD")%></td>                                                                                              
 	<td><%=StringUtil.DateToString((Date)map.get("WTDT"),"yyyy-MM-dd") %></td>                                                                                                 
 	</tr>                                                                                                                    

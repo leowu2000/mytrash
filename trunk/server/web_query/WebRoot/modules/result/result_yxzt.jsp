@@ -54,8 +54,8 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_yxzt_z.asp?id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>  
-	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_yxzt_z.asp?id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTDPCD")%></a></td>                                                                                              
+	<td align='center'> <a href="javascript:openUrl('detail.do?action=yxzt&id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>  
+	<td align='center'> <a href="javascript:openUrl('detail.do?action=yxzt&id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTDPCD")%></a></td>                                                                                              
 	<td align='center'> <%=map.get("WTDPDT")%></td>                                                                                                
 	</tr>                                                                                                                    
 <%            

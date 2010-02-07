@@ -55,8 +55,8 @@ List list = pageList.getList();
 		Map map = (Map)list.get(i);
 %>                                                                                                                               
 	<tr>
-	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_xq_z.asp?id=<%=map.get("DNCNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("DNCNM")%></a></td>  
-	<td align='center'> <a href="javascript:openUrl('../edit_fold/edit_xq_z.asp?id=<%=map.get("DNCNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("pjnm")%></a></td>
+	<td align='center'> <a href="javascript:openUrl('detail.do?action=xq&id=<%=map.get("DNCNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("DNCNM")%></a></td>  
+	<td align='center'> <a href="javascript:openUrl('detail.do?action=xq&id=<%=map.get("DNCNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("pjnm")%></a></td>
 	<td align='center'> <%=map.get("WTDPCD")%></td>                                                                                              
 	<td align='center'> <%=StringUtil.DateToString((Date)map.get("WTDPDT"),"yyyy-MM-dd") %></td>                                                                                                 
 	</tr>                                                                                                                    
