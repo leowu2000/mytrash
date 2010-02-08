@@ -13,10 +13,15 @@ public class ConnectionPool {
 		Connection conn = DriverManager.getConnection(dburl);
 		Statement stmt = conn.createStatement();
 //		ResultSet rs = stmt.executeQuery("select Mid('AAA00001',2,6) ,ctcd from tb_lysx1");
-		ResultSet rs = stmt.executeQuery("select ZLBM,TITLE from TB_STDNC_M  WHERE PJRNO=3");
-		System.out.println("行政区划名称\t省市县名称");
+		ResultSet rs = stmt.executeQuery("select * from TB_LYSX1");
+//		System.out.println("行政区划名称\t省市县名称");
 		while (rs.next()) {
-			System.out.println(rs.getInt(1) + "\t" + new String(rs.getString(2).getBytes(),"GB2312"));
+			String aa = rs.getString(3);
+			if(aa==null)
+				aa="";
+			if(!"".trim().equals(aa))
+				aa = new String(aa.getBytes(),"GB2312");
+			System.out.println("insert into TB_LYSX1(CTCD,CTNM,NT)VALUES('"+rs.getString(1) + "','" + new String(rs.getString(2).getBytes(),"GB2312").trim()+"','"+aa+"');");
 		}
 		rs.close();
 		stmt.close();

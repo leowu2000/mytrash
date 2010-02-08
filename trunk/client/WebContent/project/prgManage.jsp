@@ -94,10 +94,10 @@ function toEdit(){
 <table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td><input name=all class="input3" onclick="rcheckall()" type="checkbox" value="9999" ></td>
-		<td nowrap align="center" class="title">工程名称</td>
-		<td nowrap align="center" class="title">工程类别</td>
-		<td nowrap align="center" class="title">所属地区</td>
-		<td nowrap align="center" class="title">所属流域</td>
+		<td nowrap align="center" class="title_center">工程名称</td>
+		<td nowrap align="center" class="title_center">工程类别</td>
+		<td nowrap align="center" class="title_center">所属地区</td>
+		<td nowrap align="center" class="title_center">所属流域</td>
 	</tr>
 	<%
 		if(records!=null && records.size()>0){
