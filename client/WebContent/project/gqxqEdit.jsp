@@ -7,6 +7,26 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+
+	String path = request.getRealPath("/");
+	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
+	List<PrjBean> beanList = BuinessDao.getAllList(path);
+	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
+
+    String RPJINCD = request.getParameter("RPJINCD");
+    RPJINCD=RPJINCD==null?"":RPJINCD;
+    String arr[] = null;
+    String PJNO = "";
+    String DNCNO = "0";
+    String XQFLDM = "";
+    if(!"".trim().equals(RPJINCD)){
+    	arr = RPJINCD.split(";");
+    	PJNO = arr[0];
+    	DNCNO = arr[1];
+    	XQFLDM =arr[2];
+    }
+    STDNCBean stdncbean = BuinessDao.findStdncById(path,DNCNO);
+    
 %> 
 <html>
 <head>
@@ -31,14 +51,19 @@
 
 -->
 </style>
-<%
-	String path = request.getRealPath("/");
-	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
-	List<PrjBean> beanList = BuinessDao.getAllList(path);
-	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
-%>
-<script language="JAVASCRIPT">
 
+<script language="JAVASCRIPT">
+var w=0;
+var h=0;
+window.onresize = function(){
+	var ww = document.documentElement.clientWidth;
+	var hh = document.documentElement.clientHeight;
+	if(ww!=w || hh!=h){
+		w=ww;
+		h=hh;
+		document.getElementById("main1").width=ww*0.98;
+	}
+}
 function viewThePic(picid){
 
 	var type = getRadioValue("myradio");
@@ -73,6 +98,7 @@ function viewDataImg(value)
 	newPreview.style.border= "6px double #ccc";
 }
 function getGcmessage2(id){
+	var sttcd='<%=stdncbean.getWTDPCD() %>';
 	var type = getRadioValue("myradio");
 	if(window.XMLHttpRequest){ //Mozilla
     	var xmlHttpReq=new XMLHttpRequest();
@@ -113,9 +139,13 @@ function getGcmessage2(id){
 	                emptyText:'请选择',
 	                mode: 'local',
 	                selectOnFocus:true,
+	                
 	                renderTo:'show',
 	                width:135
 	        });
+	        storeList.on('load', function() {   
+	        	STTPCD.setValue(sttcd);   
+	        });  
 	        //取得option值函数
 	       // function getVal(){
 	        //    var val = storeList.getValue();//取得option值
@@ -129,7 +159,7 @@ function updateXQFLFRAME(obj){
 	window.frames["XQFLFRAME"].location.href=obj.value+".jsp";
 }
 </script>
-<body scroll="auto">
+<body scroll="auto" onload="javascript:getGcmessage2('<%=PJNO %>')">
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">新增工情险情</span></td></tr>
 </table>
@@ -141,6 +171,7 @@ function updateXQFLFRAME(obj){
 <form name="form1" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="2"></input>
+
 <input type="hidden" name="STTNM" value=""></input>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 
@@ -152,77 +183,60 @@ function updateXQFLFRAME(obj){
 	</tr>
 	<tr>
 		<td height="25" nowrap class="title">工程名称[B]:</td>
-		<td height="25"  bgcolor="#FFFFFF">
-				<select name="GCNAME" onchange="javascript:getGcmessage2(this.value)">
-				<option value="">--工程名称--</option>
-					<%if(beanList!=null && beanList.size()>0){
-						for(int i=0;i<beanList.size();i++){
-							PrjBean bean = beanList.get(i);
-				%>
-					<option value="<%=bean.getPJNO() %>"><%=bean.getPJNM() %></option>
-				<%
-						}
-					} %>
-				</select></td>
+		<td height="25"  bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_PJ", "PJNM", "PJNO="+PJNO) %>
+		<input type="hidden" name="GCNAME" value="<%=PJNO %>"></td>
 		<td height="25" nowrap class="title">险情分类[C]:</td>
-		<td height="25"  bgcolor="#FFFFFF">
-					<select name="XQFLDM" onchange="javascript:updateXQFLFRAME(this)">
-					<%if(resultList!=null && resultList.size()>0){
-					for(int i=0;i<resultList.size();i++){
-						Map<Object,Object> map = (Map<Object,Object>)resultList.get(i);
-						%>
-							<option value="<%=map.get("id")%>" %><%=map.get("value")%></option>
-						<%
-					}} %>
-					</select></td>
+		<td height="25"  bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_XQFL", "XQFLMC", "XQFLDM='"+XQFLDM+"'")%>
+		<input type="hidden" name="XQFLDM" value="<%= XQFLDM%>"></td>
 		<td height="25" nowrap class="title">填报单位[U]:</td>
-		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="WTDPCD" value=""/></td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="WTDPCD" value="<%=stdncbean.getWTDPCD() %>"/></td>
 		
 	</tr>
 	<tr>
 		<td height="25" nowrap class="title">险情标题[N]:</td>
-		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DNCNM" value=""/></td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DNCNM" value="<%=stdncbean.getDNCNM() %>"/></td>
 		<td height="25" nowrap class="title">建筑物[P]:</td>
-		<td height="25"  bgcolor="#FFFFFF"><div id="show"></div></td>
-		<!--<input type="text" name="STTPCD" value=""/>-->
+		<td height="25"  bgcolor="#FFFFFF">
+		<div id="show"></div>
+		</td>
 		<td height="25" nowrap class="title">采集时间[T]:</td>
-		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>"/></td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=stdncbean.getDAGTM() %>"/></td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title">险情级别:</td>
 		<td bgcolor="#FFFFFF">
 			<select name="DNCGR">
-				<option value="一般险情">一般险情</option>
-				<option value="较大险情">较大险情</option>
-				<option value="重大险情">重大险情</option>
+				<option value="一般险情" <%if(stdncbean.getDNCGR().trim().equals("一般险情")){ %>selected<%} %>>一般险情</option>
+				<option value="较大险情" <%if(stdncbean.getDNCGR().trim().equals("较大险情")){ %>selected<%} %>>较大险情</option>
+				<option value="重大险情" <%if(stdncbean.getDNCGR().trim().equals("重大险情")){ %>selected<%} %>>重大险情</option>
 			</select>
 		</td>
 		<td nowrap class="title">出险地点:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value=""/></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value="<%=stdncbean.getDAGPLCCH() %>"/></td>
 		<td nowrap class="title">解放军投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="0" />人<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="<%=stdncbean.getPLAPN() %>" />人<font color="red">*</font></td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title">武警投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="PLIPN" value="0" />人<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="PLIPN" value="<%=stdncbean.getPLIPN() %>" />人<font color="red">*</font></td>
 		<td nowrap class="title">群众投入:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="0"/>人<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="<%=stdncbean.getTPN() %>"/>人<font color="red">*</font></td>
 		<td nowrap class="title" >当前水位:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="RZ" value="0" />米<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="RZ" value="<%=stdncbean.getRZ() %>" />米<font color="red">*</font></td>
 	</tr>
 	<tr height="25" >
 	<td nowrap class="title">出险部位:</td>
-		<td bgcolor="#FFFFFF" colspan="5"><input type="text" name="DAGLO" value="" style="width:100%"/></td>
+		<td bgcolor="#FFFFFF" colspan="5"><input type="text" name="DAGLO" value="<%=stdncbean.getDAGLO() %>" style="width:100%"/></td>
 	</tr>
 	<tr height="25">
-		<td bgcolor="#FFFFFF" colspan="10" width="100%"><!-- gcxqLoader.jsp -->
+		<td bgcolor="#FFFFFF" colspan="10">
 		<iframe id="main1" scrolling="no" frameborder="0" marginwidth="1" marginheight="1" src="gcxqLoader.jsp" height="150" width="100%" >
 		</iframe>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="11">
-		<iframe id="XQFLFRAME" frameborder="0" marginheight="1" marginwidth="1"  align="middle" onload="this.height=XQFLFRAME.document.body.scrollHeight" src="D001.jsp" height="100%" width="100%"></iframe>
+		<iframe id="XQFLFRAME" frameborder="0" marginheight="1" marginwidth="1"  align="middle" onload="this.height=XQFLFRAME.document.body.scrollHeight" src="<%=XQFLDM %>.jsp?PJNO=<%=PJNO %>&DNCNO=<%=DNCNO %>" height="100%" width="100%"></iframe>
 		</td>
 	</tr>
 	<tr height="30">
@@ -241,6 +255,44 @@ function updateXQFLFRAME(obj){
 		<td colspan="2" bgcolor="#FFFFFF" align="center"><div id="newPreview" ></div></td>
 	</tr>
 </table>
+<!--
+<div id="YXZT" style="display:none">
+<table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
+
+	<tr height="25" >
+		<td class="title">工程运行状态</td>
+		<td  bgcolor="#FFFFFF" colspan=7>
+		<iframe id="main2" frameborder="0" marginwidth="0" marginheight="0" src="yxztLoader.jsp" height="150" width="800">
+		</iframe>
+		</td>
+	</tr>
+	<tr height="25" >
+		<td rowspan="3" class="title">水库</td>
+		<td nowrap class="title">水库类别:</td>
+		<td bgcolor="#FFFFFF">
+		<select name="RSCLS">
+				<option value="1">良好</option>
+				<option value="2">尚好</option>
+				<option value="2">病险库</option>
+			</select>
+		</td>
+		<td nowrap class="title">当前运行水位:</td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="0" size="8"/>米<font color="red">*</font></td>
+	</tr>
+	<tr height="25" >
+		<td nowrap class="title">当前库容:</td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RV" value="0" size="8"/>万立方米<font color="red">*</font></td>
+		<td nowrap class="title">当前泻量:</td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RQ" value="0" size="8"/>立方米/秒<font color="red">*</font></td>
+	</tr>
+	<tr height="25" >
+		<td  bgcolor="#FFFFFF" colspan="7">
+		<iframe id="main3" frameborder="0" marginwidth="0" marginheight="0" src="skLoader.jsp" height="155" width="800">
+		</iframe>
+		</td>
+	</tr>
+</table>
+</div>-->
 </form>
 <br/>
 <table border="0"  width="95%" align="center">

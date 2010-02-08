@@ -156,15 +156,15 @@ input{
 	font-weight: bolder;
 	color: #15428B;
 	background-color: #E8EFFF;
-	text-align:center;
+	text-align:left;
 }
-.title2 {
+.title_center {
 	font-size: 10pt;
 	padding-top: 2px;
 	font-weight: bolder;
 	color: #15428B;
 	background-color: #E8EFFF;
-	text-align:left;
+	text-align:center;
 }
 .divStyle{
 	PADDING-RIGHT:0px;

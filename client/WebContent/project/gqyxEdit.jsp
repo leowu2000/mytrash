@@ -7,6 +7,15 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+    
+    String path = request.getRealPath("/");
+	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
+	List<PrjBean> beanList = BuinessDao.getAllList(path);
+	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
+	
+	String RPJINCD = request.getParameter("RPJINCD");
+	PJRCNBean pjrcbbean = BuinessDao.findPjrcnById(path,RPJINCD);
+	RSRBean rsrbean = BuinessDao.findRsrById(path,RPJINCD);
 %> 
 <html>
 <head>
@@ -28,13 +37,8 @@
 
 -->
 </style>
-<%
-	String path = request.getRealPath("/");
-	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
-	List<PrjBean> beanList = BuinessDao.getAllList(path);
-	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
-%>
 <script language="JAVASCRIPT">
+
 function viewThePic(picid){
 
 	var type = getRadioValue("myradio");
@@ -91,48 +95,39 @@ function viewDataImg(value)
 	</tr>
 	<tr>
 		<td height="25" nowrap class="title">工程名称[B]:</td>
-		<td height="25"  bgcolor="#FFFFFF">
-			<select name="GCNAME" onchange="javascript:getGcmessage(this.value)">
-			<option value="">--工程名称--</option>
-				<%if(beanList!=null && beanList.size()>0){
-					for(int i=0;i<beanList.size();i++){
-						PrjBean bean = beanList.get(i);
-			%>
-				<option value="<%=bean.getPJNO() %>"><%=bean.getPJNM() %></option>
-			<%
-					}
-				} %>
-			</select>
+		<td height="25"  bgcolor="#FFFFFF"><%=pjrcbbean.getPJNM() %>
+			<input type="hidden" name="GCNAME" value="<%=pjrcbbean.getPJNO() %>">
 		</td>
 		<td height="25" nowrap class="title">采集时间[T]:</td>
-		<td height="25" bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>"/></td>
+		<td height="25" bgcolor="#FFFFFF">
+		<input type="text" name="DAGTM" value="<%=pjrcbbean.getDTCDT() %>"/></td>
 		<td nowrap class="title">水库类别:</td>
 		<td bgcolor="#FFFFFF">
 		<select name="RSCLS">
-				<option value="1">良好</option>
-				<option value="2">尚好</option>
-				<option value="2">病险库</option>
+				<option value="1" >良好</option>
+				<option value="2" >尚好</option>
+				<option value="2" >病险库</option>
 			</select>
 		</td>
 	</tr>
 	<tr height="25" >
 		
 		<td nowrap class="title">当前运行水位:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="0" size="8"/>米<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="<%=rsrbean.getRZ() %>" size="8"/>米<font color="red">*</font></td>
 		<td nowrap class="title">当前库容:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RV" value="0" size="8"/>万立方米<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RV" value="<%=rsrbean.getRV() %>" size="8"/>万立方米<font color="red">*</font></td>
 		<td nowrap class="title">当前泻量:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="0" size="8"/>立方米/秒<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="<%=rsrbean.getRQ() %>" size="8"/>立方米/秒<font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="main2" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="yxztLoader.jsp" height="145" width="100%">
+		<iframe id="main2" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="yxztLoader.jsp?RPJINCD=<%=RPJINCD %>" height="130" width="100%">
 		</iframe>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="main3" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="skLoader.jsp" height="145" width="100%">
+		<iframe id="main3" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="skLoader.jsp?RPJINCD=<%=RPJINCD %>" height="135" width="100%">
 		</iframe>
 		</td>
 	</tr>

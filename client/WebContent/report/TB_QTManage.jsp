@@ -84,9 +84,9 @@ function toEdit(){
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
-		<td nowrap align="center" class="title">旱情标题</td>
-		<td nowrap align="center" class="title">填报单位</td>
-		<td nowrap align="center" class="title">填报日期</td>
+		<td nowrap align="center" class="title_center">旱情标题</td>
+		<td nowrap align="center" class="title_center">填报单位</td>
+		<td nowrap align="center" class="title_center">填报日期</td>
 	</tr>
 	<%if(records!=null && records.size()>0){
 		for(int i=pUtil.getFromIndex();i<pUtil.getToIndex();i++){

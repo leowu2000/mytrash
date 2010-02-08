@@ -133,31 +133,31 @@ function submiting(){
 			<DIV id="GCLB"></DIV>
 		</td>
 	</tr>
-	<tr align="left" class="title2" height="30">
+	<tr align="left" class="title_center" height="30">
 		<td colspan="2">所属地区</td>
 		<td colspan="2">所属流域水系</td>
 	</tr>
 	<tr>
-		<td nowrap align="center" class="title2">省/直辖市[P]:</td>
+		<td nowrap align="center" class="title">省/直辖市[P]:</td>
 		<td bgcolor="#FFFFFF"><DIV id="SHENG"></DIV></td>
-		<td nowrap align="center" class="title2">流域[V]:</td>
+		<td nowrap align="center" class="title">流域[V]:</td>
 		<td bgcolor="#FFFFFF" ><DIV id="LY"></DIV></td>
 	</tr>
 	<tr>
-		<td nowrap align="center" class="title2">市/地区[S]:</td>
+		<td nowrap align="center" class="title">市/地区[S]:</td>
 		<td  bgcolor="#FFFFFF"><DIV id="SHI"></DIV></td>
-		<td nowrap align="center" class="title2">水系[W]:</td>
+		<td nowrap align="center" class="title">水系[W]:</td>
 		<td  bgcolor="#FFFFFF"><DIV id="SX"></DIV></td>
 	</tr>
 	<tr align="left" class="title2" height="30">
-		<td nowrap align="center" class="title2">区/县[D]:</td>
+		<td nowrap align="center" class="title">区/县[D]:</td>
 		<td  bgcolor="#FFFFFF"><DIV id="XIAN"></DIV></td>
-		<td nowrap align="center" class="title2">一级支流[B]:</td>
+		<td nowrap align="center" class="title">一级支流[B]:</td>
 		<td  bgcolor="#FFFFFF"><DIV id="ZL1"></DIV></td>
 	</tr>
 	<tr>
 		<td  bgcolor="#FFFFFF" colspan="2"></td>
-		<td nowrap align="center" class="title2">二级支流[T]:</td>
+		<td nowrap align="center" class="title">二级支流[T]:</td>
 		<td  bgcolor="#FFFFFF"><DIV id="ZL2"></DIV></td>
 	</tr>
 </table>
