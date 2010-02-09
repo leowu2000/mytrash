@@ -39,7 +39,6 @@ MM_reloadPage(true);
 		String parentfile = request.getAttribute("parentfile").toString();
 		if(!"defalutfile".equals(parentfile)){
 %>	
-	    <input type="button" name="button" value="关闭窗口" onclick="parent.focus();window.close()" class="input1">
 <%
 		}
 %>

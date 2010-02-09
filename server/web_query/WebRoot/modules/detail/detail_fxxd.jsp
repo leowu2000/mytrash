@@ -25,10 +25,26 @@
 	<script language="javascript" src="../../script/onmouseover.js"></script>
 	<script language="JavaScript" src="../script/layer10.js"></script>
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<script type="text/javascript">
+	function addConsult(){
+	  if(window.XMLHttpRequest){ //Mozilla 
+      	var xmlHttpReq=new XMLHttpRequest();
+      }else if(window.ActiveXObject){
+ 	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+      }
+      xmlHttpReq.open("GET", "consult.do?action=add&type=fxxd&id=<%=id %>", false);
+      xmlHttpReq.send();
+      if(xmlHttpReq.responseText!=''){
+        alert(xmlHttpReq.responseText);
+      }
+	  parent.focus();
+	  window.close();
+	}
+	</script>
 </head>
 <body background="../../images/back.gif">
 <p>&nbsp;</p>
-<form name="form1" method="post" action="../interface/result_fxxd.asp" target="result"> 
+<form name="form1" method="post" action="consult.do?action=add&type=fxxd"> 
   <table width="68%" align="center" border="0" cellspacing="1" cellpadding="0">
     <tr> 
       <td  height="25" colspan="2" align="center" class="title" ><div align="left"></div>
@@ -107,10 +123,8 @@
     <tr>
       <td align="center">  
   		<input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
-    	<input type="hidden" id="curent_pagecount" name="curent_pagecount" value="<%=pageNum%>">
-        <input type="hidden" name="row_count" value="1">
-    	<input type="hidden" name="command" value="-1">
-    	<input type="hidden" name="check1" value="<%=id%>">
+  		<input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1">
+    	<input type="hidden" name="id" value="<%=id%>">
       </td>
     </tr>
   </table>
