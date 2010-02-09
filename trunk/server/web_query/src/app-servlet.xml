@@ -11,6 +11,7 @@
 				/search.do=SearchController
 				/detail.do=DetailController
 				/media.do=MediaController
+				/consult.do=ConsultController
 			</value>
 		</property>
 	</bean>
@@ -34,5 +35,6 @@
 	<bean name="SearchController" class="com.basesoft.modules.search.SearchController" />
 	<bean name="DetailController" class="com.basesoft.modules.detail.DetailController" />
 	<bean name="MediaController" class="com.basesoft.modules.media.MediaController" />
+	<bean name="ConsultController" class="com.basesoft.modules.consult.ConsultController"></bean>
 </beans>
 

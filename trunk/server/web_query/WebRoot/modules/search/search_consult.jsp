@@ -26,7 +26,7 @@
         <td width="13%" height="25"><font color="#003366">运行状态〈<a href="search.do?action=consult&type=1"  target="result"><%=yx_count%>条</a>〉</font></td>
         <td width="13%" height="25"><font color="#003366">防汛行动〈<a href="search.do?action=consult&type=3"  target="result"><%=fx_count%>条</a>〉</font></td>
         <td width="10%" height="25"><font color="#003366">全部查看〈<a href="search.do?action=consult&type=a" target="result"><%=total_count%>条</a>〉</font></td>
-        <td width="10%" height="25"><font color="#003366"><a href="result_consult_manager.asp"  target="result">会商管理</a></font></td>
+        <td width="10%" height="25"><font color="#003366"><a href="consult.do?action=manage"  target="result">会商管理</a></font></td>
       </tr>
     </table>
   </div>  

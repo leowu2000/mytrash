@@ -51,4 +51,5 @@
 	<bean id="searchDAO" class="com.basesoft.modules.search.SearchDAO"></bean>
 	<bean id="detailDAO" class="com.basesoft.modules.detail.DetailDAO"></bean>
 	<bean id="mediaDAO" class="com.basesoft.modules.media.MediaDAO"></bean>
+	<bean id="consultDAO" class="com.basesoft.modules.consult.ConsultDAO"></bean>
 </beans>

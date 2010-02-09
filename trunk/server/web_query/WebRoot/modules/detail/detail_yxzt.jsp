@@ -25,6 +25,22 @@
 	<script language="javascript" src="../../script/onmouseover.js"></script>
 	<script language="JavaScript" src="../script/layer10.js"></script>
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<script type="text/javascript">
+	function addConsult(){
+	  if(window.XMLHttpRequest){ //Mozilla 
+      	var xmlHttpReq=new XMLHttpRequest();
+      }else if(window.ActiveXObject){
+ 	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+      }
+      xmlHttpReq.open("GET", "consult.do?action=add&type=yxzt&id=<%=id %>", false);
+      xmlHttpReq.send();
+      if(xmlHttpReq.responseText!=''){
+        alert(xmlHttpReq.responseText);
+      }
+	  parent.focus();
+	  window.close();
+	}
+	</script>
 </head>
 <body background="../../images/back.gif">
 <p>&nbsp;</p>
@@ -110,11 +126,8 @@
     <tr height="25"><td height="25" align="center"></td></tr>
     <tr>
       <td align="center">
-        <input type="button" name="button2" value="返　　回" onClick="parent.focus();window.close()" class="input1"> 
-        <INPUT type="hidden" id=curent_pagecount name=curent_pagecount value="<%=pageNum%>">
-    	<input type="hidden" name="row_count" value="1">
-    	<input type="hidden" name="command" value="-1">
-    	<input type="hidden" name="check1" value="<%=mapYxzt.get("pjrno")%>">
+        <input type="button" name="button2" value="返　　回" onClick="parent.focus();window.close()" class="input1">
+        <input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1"> 
       </td>
 	</tr>
   </table>
