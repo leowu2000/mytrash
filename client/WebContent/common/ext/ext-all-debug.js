@@ -209,8 +209,63 @@ Ext.DomHelper = function(){
             }
             throw 'Illegal insertion point -> "' + where + '"';
         },
-
-        
+        /**
+ insertHtml:function(where, el, html){  
+         where = where.toLowerCase();  
+         if(el.insertAdjacentHTML){  
+             switch(where){  
+                 case "beforebegin":  
+                      el.insertAdjacentHTML('BeforeBegin', html);  
+                    return el.previousSibling;  
+                 case "afterbegin":  
+                      el.insertAdjacentHTML('AfterBegin', html);  
+                     return el.firstChild;  
+                 case "beforeend":  
+                      el.insertAdjacentHTML('BeforeEnd', html);  
+                     return el.lastChild;  
+                 case "afterend":  
+                      el.insertAdjacentHTML('AfterEnd', html);  
+                     return el.nextSibling;  
+              }  
+             throw 'Illegal insertion point -> "' + where + '"';  
+          }  
+         var range = el.ownerDocument.createRange();  
+         var frag;  
+         switch(where){  
+              case "beforebegin":  
+                  range.setStartBefore(el);  
+                  frag = range.createContextualFragment(html);  
+                  el.parentNode.insertBefore(frag, el);  
+                 return el.previousSibling;  
+              case "afterbegin":  
+                 if(el.firstChild){  
+                     range.setStartBefore(el.firstChild);  
+                      frag = range.createContextualFragment(html);  
+                      el.insertBefore(frag, el.firstChild);  
+                     return el.firstChild;  
+                  }else{  
+                      el.innerHTML = html;  
+                     return el.firstChild;  
+                  }  
+             case "beforeend":  
+                 if(el.lastChild){  
+                      range.setStartAfter(el.lastChild);  
+                      frag = range.createContextualFragment(html);  
+                      el.appendChild(frag);  
+                     return el.lastChild;  
+                  }else{  
+                      el.innerHTML = html;  
+                    return el.lastChild;  
+                  }  
+             case "afterend":  
+                  range.setStartAfter(el);  
+                  frag = range.createContextualFragment(html);  
+                  el.parentNode.insertBefore(frag, el.nextSibling);  
+                 return el.nextSibling;  
+              }  
+             throw 'Illegal insertion point -> "' + where + '"';  
+      }  ,
+        */
         insertBefore : function(el, o, returnElement){
             return doInsert(el, o, returnElement, beforebegin);
         },

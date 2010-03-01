@@ -8,9 +8,9 @@
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
     
-    String path = request.getRealPath("/");
-	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
-	List<PrjBean> beanList = BuinessDao.getAllList(path);
+    String path = request.getSession().getServletContext().getRealPath("/");
+	
+	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	
 	String RPJINCD = request.getParameter("RPJINCD");
@@ -38,54 +38,20 @@
 -->
 </style>
 <script language="JAVASCRIPT">
-
-function viewThePic(picid){
-
-	var type = getRadioValue("myradio");
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
-	xmlHttpReq.open("GET", "/FileUploadServlet?type=viewpic&saveType="+type+"&picid="+picid, false);
-	xmlHttpReq.send(null);
-	var results = xmlHttpReq.responseText;
-	var val = results.split(",");
-	document.getElementById('ZPBT').value=val[0];
-	document.getElementById('ZPMS').value=val[2];
-	document.getElementById('CJSJ').value=val[1];
-	
-	warnForm.action="viewPic.jsp?from=asdf&type=jpeg&zlbm="+picid;
-	warnForm.target="saveFrm";
-	warnForm.submit();
-	setTimeout("viewDataImg('<%=picpath%>')","1000");
+function toBack(){
+	location.href="/project/gqyxManage.jsp";
 }
-//图片预览区域代码
-function viewDataImg(value) 
-{ 
 
-	//新的预览代码，支持 IE6、IE7。 
-	var newPreview = document.getElementById("newPreview"); 
-	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = value; 
-	newPreview.style.width = "170px"; 
-	newPreview.style.height = "120px"; 
-	newPreview.style.border= "6px double #ccc";
-}
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">新增运行状态信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">修改运行状态信息</span></td></tr>
 </table>
-<iframe name="saveFrm" src="" frameborder="0" scrolling="no" width="0" height="0">
-<!--显示图片专用  -->
-</iframe>
-<form name="warnForm" action="" method="post">
- </form>
 <form name="form1" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="1"></input>
 <input type="hidden" name="WTDPCD" value=""/>
+<input type="hidden" name="DNCNO" value="<%=RPJINCD %>"/>
 <input type="hidden" name="tabname" value="TB_PJR_M"></input>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
@@ -113,49 +79,40 @@ function viewDataImg(value)
 	<tr height="25" >
 		
 		<td nowrap class="title">当前运行水位:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="<%=rsrbean.getRZ() %>" size="8"/>米<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RZ" value="<%=rsrbean.getRZ()==null?"":rsrbean.getRZ() %>" size="8"/>米<font color="red">*</font></td>
 		<td nowrap class="title">当前库容:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RV" value="<%=rsrbean.getRV() %>" size="8"/>万立方米<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RV" value="<%=rsrbean.getRV()==null?"":rsrbean.getRV() %>" size="8"/>万立方米<font color="red">*</font></td>
 		<td nowrap class="title">当前泻量:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="<%=rsrbean.getRQ() %>" size="8"/>立方米/秒<font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="<%=rsrbean.getRQ()==null?"":rsrbean.getRQ()  %>" size="8"/>立方米/秒<font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="main2" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="yxztLoader.jsp?RPJINCD=<%=RPJINCD %>" height="130" width="100%">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="/common/picEdit.jsp?tbid=TB_PJR_M&DNCNO=<%=RPJINCD %>&PKNAME=PJRNO" height="160" width="100%">
 		</iframe>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="main3" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="skLoader.jsp?RPJINCD=<%=RPJINCD %>" height="135" width="100%">
+		<iframe id="main2" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="yxztLoader.jsp?RPJINCD=<%=RPJINCD %>" height="145" width="100%">
 		</iframe>
 		</td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">照片标题[H]:</td>
-		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="ZPBT" value=""/></td>
-		<td height="25" nowrap class="title">选择照片:</td>
-		<td height="25"  bgcolor="#FFFFFF" colspan="3">
-		<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);">
-		<input type="button" name="" value="添加照片" onclick="javascript:uploadPhotos()"/>
+		<td bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="main3" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="skLoader.jsp?RPJINCD=<%=RPJINCD %>" height="145" width="100%">
+		</iframe>
 		</td>
-		
 	</tr>
-	<tr>
-		<td height="25" nowrap class="title">照片描述</td>
-		<td bgcolor="#FFFFFF"><textarea rows="6" cols="22" name="ZPMS"></textarea></td>
-		<td bgcolor="#FFFFFF"  colspan="2"><div id="PICLIST" class="divStyle"></div></td>
-		<td colspan="2" bgcolor="#FFFFFF" align="center"><div id="newPreview" ></div></td>
-	</tr>
+	
 </table>
 </form>
 
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="保  存" onclick="javascript:per_Submit()">
+	<input type="button" name="" value="保  存" onclick="javascript:per_Submit('edit_gqcj')">
 	&nbsp;
-	<input type="button" name="" value="返  回" onclick="javascript:viewThePic('1')">
+	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
 </body>

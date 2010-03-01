@@ -5,8 +5,9 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.fredck.FCKeditor.FCKeditor"%>
 <% 
-	String relPath = request.getRealPath("/");
-	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
+	String relPath = request.getSession().getServletContext().getRealPath("/");
+	String picpath = request.getSession().getServletContext().getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
+	String fromwhere = request.getParameter("fromwhere");
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
@@ -82,9 +83,11 @@ function viewDataImg(value)
 }
 </script>
 <body scroll="auto">
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">查看 防汛行动</span></td></tr>
 </table>
+<%} %>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_FPACTI","RPJINCD") %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
@@ -95,32 +98,12 @@ function viewDataImg(value)
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td align="center" class="title">行动标题:</td>
-		<td align="center" class="title2" colspan="5">
+		<td align="center" class="title" colspan="5">
 		<%=bean.getWTTT() %></td>
 	</tr>
-	<tr height="25" >
-		<td nowrap class="title">照片标题</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value=""/></td>
-		<td nowrap class="title">拍摄时间</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="DTCDT" class="lines" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
-		<td nowrap class="title2" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
-	</tr>
-	<tr height="25" >
-		<td nowrap class="title" colspan="2">照片描述</td> 
-		<td nowrap class="title" colspan="2">照片列表</td> 
-		<td nowrap class="title" colspan="2">照片预览
-			<input type="button" name="" value="添加照片" onclick="javascript:uplaodReportPhotos('TB_FPACTI_M')"/>
-		</td>
-	</tr>
-	<tr height="25" >
-		<td bgcolor="#FFFFFF" colspan="2">
-			<textarea rows="6" cols="33" name="NRMS"></textarea>
-		</td> 
-		<td bgcolor="#FFFFFF" colspan="2">
-			<div id="PICLIST" class="divStyle"></div>
-		</td> 
-		<td bgcolor="#FFFFFF" colspan="2" align="center">
-			<div id="newPreview" ></div>
+	<tr>
+		<td bgcolor="#FFFFFF" colspan="11">
+		<iframe id="ZPFRAME" scrolling="no" frameborder="0" marginheight="1" marginwidth="1" src="/common/picViewer.jsp?tbid=TB_FPACTI_M" height="170" width="100%"></iframe>
 		</td>
 	</tr>
 	<tr height="25" >
@@ -131,7 +114,7 @@ function viewDataImg(value)
 	
 </table>
 </form>
-
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
@@ -140,5 +123,6 @@ function viewDataImg(value)
 	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
+<%} %>
 </body>
 </html>

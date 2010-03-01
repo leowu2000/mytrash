@@ -1,5 +1,6 @@
 package com.buiness.dao;
 
+import com.buiness.form.ConfigBean;
 import com.buiness.form.DetailBean;
 import com.buiness.form.PJRCNBean;
 import com.buiness.form.PrjBean;
@@ -25,7 +26,18 @@ public class SqlFactory {
 			+bean.getNT()+"')";//ÆäËü
 		return sSQL;
 	}
-	
+	public static String insertSql_ConfigBean(ConfigBean bean,String path){
+		String sSQL = "INSERT INTO TB_CONFIG("
+				+"CLIENT_TYPE,XZQH_S,XZQH_SI,XZQH_X,LYSX_LY,LYSX_SX,LYSX_YJZL,LYSX_EJZL,"
+				+"SERVER_NAME,SERVER_IP,SERVER_PORT,TBDW,BSDW,FXZRR,LXDH,QF,NG,SH)VALUES("
+				+"'"+bean.getCLIENT_TYPE()+"','"+bean.getXZQH_S()+"','"+bean.getXZQH_SI()
+				+"','"+bean.getXZQH_X()+"','"+bean.getLYSX_LY()+"','"+bean.getLYSX_SX()
+				+"','"+bean.getLYSX_YJZL()+"','"+bean.getLYSX_EJZL()+"','"+bean.getSERVER_NAME()
+				+"','"+bean.getSERVER_IP()+"','"+bean.getSERVER_PORT()+"','"+bean.getTBDW()
+				+"','"+bean.getBSDW()+"','"+bean.getFXZRR()
+				+"','"+bean.getLXDH()+"','"+bean.getQF()+"','"+bean.getNG()+"','"+bean.getSH()+"')";
+		return sSQL ;
+	}
 	public static String insertSQL_STDNCBean(STDNCBean bean,String path){
 		String sSQL = "INSERT INTO TB_STDNC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,XQFLDM,DNCGR," +
 				"DAGPLCCH,DAGLO,RDEPL,RDERESCN,TPN,PLAPN,PLIPN,RDECNRL,DNCCUAN,DNCESTDV,DNCPBNFZ,RZ,WTHCN" +
@@ -60,7 +72,7 @@ public class SqlFactory {
 	public static String insertSQL_RSRBean(RSRBean bean,String path,PrjBean prjBean){
 		String sSQL = "INSERT INTO TB_RSR (PJRNO,PJNO,DTCDT,PJNM,RSCLS,RV,RZ,RQ,DFPFCN,DBSTBCN," +
 				"BRBPPFCN,ESPFCN,EDDPFCN,GTHOPFCN,COMMCN)VALUES("
-				+UUIdFactory.getMaxId(path, "TB_RSR","PJRNO")+","
+				+bean.getPJRNO()+","
 				+prjBean.getPJNO()+",#"
 				+UtilDateTime.nowDateString()+"#,'"
 				+prjBean.getPJNM()+"','"// ¹¤³ÌÃû³Æ
@@ -79,11 +91,12 @@ public class SqlFactory {
 	}
 	
 	public static String insertSQL_DNCDetailBean(DetailBean bean,String path,String XQFLDM){
+		String tablename = BuinessDao.getXqFlTabname(path, XQFLDM);
 		String dinarySubsql=bean.getDNCNO()+","+bean.getPJNO()+","+bean.getSTTPCD()+",#"+bean.getDAGTM()+"#,'"+bean.getDNCNM()+"'";
 		String insertSql ="";
 		//D001	¾ö¿Ú				TB_BURDSC	
 		if("D001".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_BURDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"DSSPN,INPN,DTHPN,WRHS,CRPDSSAR,SCDMFMAR,DRCECLS,"
 						+"BUW,BUVL,BUZDF,BUQ,BURLDGL)VALUES("
 						+dinarySubsql
@@ -92,13 +105,13 @@ public class SqlFactory {
 						+","+bean.getBUW()+","+bean.getBUVL()+","+bean.getBUZDF()+","+bean.getBUQ()+",'"+bean.getBURLDGL()+"')";
 		//D002	ÂþÒç				TB_OVFLDSC
 		if("D002".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_OVFLDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"OVFLL,OVFLZ,DSQ)VALUES("
 						+dinarySubsql
 						+","+bean.getOVFLL()+","+bean.getOVFLZ()+","+bean.getDSQ()+")";
 		//D003	Â©¶´				TB_LKDSC
 		if("D003".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_LKDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"LKGTU,"
 						+"LKDMT,LKQ,LKWTLH,LKSAR)VALUES("
 						+dinarySubsql
@@ -106,7 +119,7 @@ public class SqlFactory {
 						+"',"+bean.getLKDMT()+","+bean.getLKQ()+","+bean.getLKWTLH()+","+bean.getLKSAR()+")";
 		//D004	¹ÜÓ¿				TB_PPDSC
 		if("D004".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_PPDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"LKGTU,"
 						+"TODFTDI,"
 						+"PPQ,WTLH,PPSAR)VALUES("
@@ -116,20 +129,20 @@ public class SqlFactory {
 						+","+bean.getTODFTDI()+","+bean.getWTLH()+","+bean.getPPSAR()+")";
 		//D005	ÏÝ¿Ó				TB_PITDSC
 		if("D005".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_PITDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"SBDSP,SBAR)VALUES("
 						+dinarySubsql
 						+","+bean.getSBDSP()+","+bean.getSBAR()+")";
 		//D006	»¬ÆÂ 			TB_SLDSC
 		if("D006".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_SLDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"SLUPAG,"
 						+"SLBU)VALUES("
 						+dinarySubsql
 						+","+bean.getSLUPAG()+","+bean.getSLBU()+")";
 		//D007	ÌÔË¢				TB_UNDSC
 		if("D007".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_UNDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"TODFTDI,"
 						+"UNDAR,UNDD,UNDL)VALUES("
 						+dinarySubsql
@@ -137,13 +150,13 @@ public class SqlFactory {
 						+","+bean.getUNDAR()+","+bean.getUNDD()+","+bean.getUNDL()+")";
 		//D008	ÁÑ·ì				TB_CRDSC
 		if("D008".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_CRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"CRDR,CRD,CRL,CRW)VALUES("
 						+dinarySubsql
 						+",'"+bean.getCRDR()+"',"+bean.getCRD()+","+bean.getCRL()+","+bean.getCRW()+")";
 		//D009	±À°¶				TB_CVDSC
 		if("D009".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_CVDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"TODFTDI,"
 						+"WDQ,"
 						+"CVL,CVBU,RVH,FLCNDSC)VALUES("
@@ -153,13 +166,13 @@ public class SqlFactory {
 						+","+bean.getCVL()+","+bean.getCVBU()+","+bean.getRVH()+",'"+bean.getFLCNDSC()+"')";
 		//D010	ÉøË®				TB_SPDSC
 		if("D010".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_SPDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"SPAR,SPQ)VALUES("
 						+dinarySubsql
 						+","+bean.getSPAR()+","+bean.getSPQ()+")";
 		//D011	 ÀË¿² 			TB_BLBAD
 		if("D011".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_BLBADSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"WDQ,"
 						+"BLH,WNS)VALUES("
 						+dinarySubsql
@@ -167,7 +180,7 @@ public class SqlFactory {
 						+","+bean.getBLH()+","+bean.getWNS()+")";
 		//D012	»¬¶¯				TB_SLUDSC
 		if("D012".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_SLUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"SLUPAG,"
 						+"SLUDSP,SLUTP,SLUGLCN)VALUES("
 						+dinarySubsql
@@ -176,19 +189,19 @@ public class SqlFactory {
 
 		//D013	Æô±ÕÊ§Áé			TB_HOMLFDSC
 		if("D013".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_HOMLFDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"POWCUT,HOMLF,GSDST,MLFCN)VALUES("
 						+dinarySubsql
 						+",'"+bean.getPOWCUT()+"','"+bean.getHOMLF()+"','"+bean.getGSDST()+"','"+bean.getMLFCN()+"')";
 		//D014	Õ¢ÃÅÆÆ»µ			TB_GTWRDSC
 		if("D014".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_GTWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"WRDSC,WRQ)VALUES("
 						+dinarySubsql
 						+",'"+bean.getWRDSC()+"',"+bean.getWRQ()+")";
 		//D015	À£°Ó				TB_BRDMDSC
 		if("D015".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_BRDMDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"DSSPN,INPN,DTHPN,WRHS,CRPDSSAR,SCDMFMAR,DRCECLS,"
 						+"PJPS,BRDMLDGL,BRDMW,BRZDMCDI,BRV,BRDMQ)VALUES("
 						+dinarySubsql
@@ -198,50 +211,50 @@ public class SqlFactory {
 						+","+bean.getBRV()+","+bean.getBRDMQ()+")";
 		//D016	Çã¸²				TB_OVTUDSC
 		if("D016".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_OVTUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"OVTUDR,OVTUAG)VALUES("
 						+dinarySubsql
 						+",'"+bean.getOVTUDR()
 						+"',"+bean.getOVTUAG()+")";
 		//D017	Ó¦Á¦¹ý´ó			TB_STREXDSC
 		if("D017".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_STREXDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"MXTNST,MXCMST,CONGR,ASTR)VALUES("
 						+dinarySubsql
 						+","+bean.getMXTNST()+","+bean.getMXCMST()+",'"+bean.getCONGR()+"',"+bean.getASTR()+")";
 		//D018	Ì®Ëú				TB_SLIDSC
 		if("D018".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_SLIDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"SLIAR,SLIMS)VALUES("
 						+dinarySubsql
 						+","+bean.getSLIAR()+","+bean.getSLIMS()+")";
 		//D019	¶ÂÈû				TB_PLUDSC
 		if("D019".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_PLUDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"PLTNM,PLTBU)VALUES("
 						+dinarySubsql
 						+",'"+bean.getPLTNM()+"',"+bean.getPLTBU()+")";
 		//D020	»ù´¡ÆÆ»µ			TB_BSWRDSC
 		if("D020".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_BSWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"GRNSPDSC,GROVCHWR,GRNUSB)VALUES("
 						+dinarySubsql
 						+",'"+bean.getGRNSPDSC()+"','"+bean.getGROVCHWR()+"',"+bean.getGRNUSB()+")";
 		//D021	ÏûÄÜ¹¤ÆÆ»µ		TB_EDDWRDSC
 		if("D021".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_EDDWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"APWR,WSTWR)VALUES("
 						+dinarySubsql
 						+",'"+bean.getAPWR()+"','"+bean.getWSTWR()+"')";
 		//D022	»ù´¡ÅÅË®Ê§Ð§		TB_BSWPLPDS
 		if("D022".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_BSWPLPDS (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"WPPLU,WPEQML)VALUES("
 						+dinarySubsql
 						+",'"+bean.getWPPLU()+"','"+bean.getWPEQML()+"')";
 		//D023	¶´ÉíÆÆ»µ 			TB_HBWRDSC
 		if("D023".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_HBWRDSC (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"WRAR,"
 						+"LNINF,HBGLCN,WRMS)VALUES("
 						+dinarySubsql
@@ -249,7 +262,7 @@ public class SqlFactory {
 						+",'"+bean.getLNINF()+"','"+bean.getHBGLCN()+"',"+bean.getWRMS()+")";
 		//D024	¿Øµ¼¹¤³Ì¾Ö²¿ÆÆ»µ	TB_CLPJPRWR
 		if("D024".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_CLPJPRWR (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"WRAR,"
 						+"WRGLCN,WRD,WRL)VALUES("
 						+dinarySubsql
@@ -257,7 +270,7 @@ public class SqlFactory {
 						+",'"+bean.getWRGLCN()+"',"+bean.getWRD()+","+bean.getWRL()+")";
 		//D025	¿Øµ¼¹¤³Ì³å»Ù		TB_CLPJSCDN
 		if("D025".trim().equals(XQFLDM.toUpperCase()))
-			insertSql = "INSERT INTO TB_CLPJSCDN (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
+			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
 						+"SCDMGLCN,SCDMBU,SCDML,SCDMD)VALUES("
 						+dinarySubsql
 						+",'"+bean.getSCDMGLCN()+"',"+bean.getSCDMBU()+","+bean.getSCDML()+","+bean.getSCDMD()+")";

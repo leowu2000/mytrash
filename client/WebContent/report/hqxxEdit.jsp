@@ -49,7 +49,7 @@ function PreviewImg(imgFile)
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">旱情信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">修改旱情信息</span></td></tr>
 </table>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_QT","RPJINCD") %>"/>
@@ -61,7 +61,7 @@ function PreviewImg(imgFile)
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td align="center" class="title" >旱情标题:</td>
-		<td align="center" class="title2" colspan="5">
+		<td align="center" class="title" colspan="5">
 		<input type="text" name="MAINTITLE" value="<%=bean.getWTTT() %>" size="50"/></td>
 	</tr>
 	<tr height="25" >
@@ -69,7 +69,7 @@ function PreviewImg(imgFile)
 		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value=""/></td>
 		<td nowrap class="title">拍摄时间</td> 
 		<td bgcolor="#FFFFFF"><input type="text" name="DTCDT" class="lines" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
-		<td nowrap class="title2" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
+		<td nowrap class="title" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title" colspan="2">照片描述</td> 

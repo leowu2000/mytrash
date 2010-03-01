@@ -116,7 +116,7 @@ function submiting(){
 </script>
 <body onload="loadSelect()">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">新增工情信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">修改工程信息</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <input type="hidden" name="actionType" value=""/>

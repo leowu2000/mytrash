@@ -7,7 +7,8 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
-    String path = request.getRealPath("/");
+    String fromwhere = request.getParameter("fromwhere");
+	String path = request.getSession().getServletContext().getRealPath("/");
     String RPJINCD = request.getParameter("RPJINCD");
     FXJBBean bean = BuinessDao.findFxjbcByID(path,RPJINCD);
     String content = bean.getACTICO();
@@ -34,9 +35,11 @@ function submiting(){
 }
 </script>
 <body scroll="auto">
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">防汛抗旱简报</span></td></tr>
 </table>
+<%} %>
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="add_fxjb"/>
 <input type="hidden" name="subActionType" value="update"/>
@@ -52,7 +55,7 @@ function submiting(){
 	<tr height="25" >
 		<td align="center" class="title">标题:</td>
 		<td align="center" bgcolor="#FFFFFF" colspan="3"><%=bean.getWTTT() %></td>
-		<td align="center" class="title2">附件:</td>
+		<td align="center" class="title">附件:</td>
 		<td bgcolor="#FFFFFF">
 		<input type="file" name="UpFile" size="20"> 
 		</td>
@@ -72,6 +75,7 @@ function submiting(){
 	</tr>
 </table>
 </form>
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <br/>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
@@ -81,5 +85,6 @@ function submiting(){
 	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
+<%} %>
 </body>
 </html>

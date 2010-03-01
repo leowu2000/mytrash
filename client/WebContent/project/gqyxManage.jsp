@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
+<script Language="JavaScript" src="/common/My97DatePicker/WdatePicker.js"></script>
 </head>
 <style type="text/css">
 <!--
@@ -50,12 +51,18 @@ function toAdd(){
 function toEdit(){
 	var result="";
 	var str = document.forms[0].RECORDID;
-	for(var i=0;i<str.length;i++){
-		if(str[i].checked==true){
-			if(result=="")
-				result = str[i].value;
-			else
-				result +=","+ str[i].value;
+	if(str.length==undefined){
+		if(document.forms[0].RECORDID.checked){
+			result=document.forms[0].RECORDID.value;
+		}
+	}else{
+		for(var i=0;i<str.length;i++){
+			if(str[i].checked==true){
+				if(result=="")
+					result = str[i].value;
+				else
+					result +=","+ str[i].value;
+			}
 		}
 	}
 	if(result==""){
@@ -69,12 +76,26 @@ function toEdit(){
 		}
 	}
 }
+function SearchSubmit(){
+	document.frm.action="/buiness.do";
+	document.frm.actionType.value="search";
+	document.frm.submit();
+}
 </script>
 <% 
-	String path = request.getRealPath("/");
-
-	List<PJRCNBean> records = BuinessDao.getAllPjrcnList(path); 
-	String pageStr = request.getParameter("page"); 
+	String path = request.getSession().getServletContext().getRealPath("/");
+	String iswhere = (String)request.getAttribute("isWhere");
+	String gcmc_s =  (String)request.getAttribute("gcmc_s");
+	String jcsj_s =  (String)request.getAttribute("jcsj_s");
+	String jcsj_e =  (String)request.getAttribute("jcsj_e");
+	iswhere=iswhere==null?"":iswhere;
+	jcsj_e=jcsj_e==null?"":jcsj_e;
+	jcsj_s=jcsj_s==null?"":jcsj_s;
+	gcmc_s=gcmc_s==null?"":gcmc_s;
+	List<PrjBean> beanList = BuinessDao.getAllList(path,"1=1");
+	List<PJRCNBean> records = BuinessDao.getAllPjrcnList(path,iswhere); 
+	String pageStr = (String)request.getAttribute("page"); 
+	pageStr=pageStr==null?"1":pageStr;
 	int currentPage = 1; 
 	if (pageStr != null) 
 	currentPage = Integer.parseInt(pageStr); 
@@ -86,8 +107,34 @@ function toEdit(){
 	<tr><td align="center" ><span  class="style4">工程运行状态</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
+<table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
+	<tr height="25" >
+		<td nowrap class="title">工程名称:</td>
+		<td bgcolor="#FFFFFF">
+		<select name="gcmc_s">
+				<option value="">--</option>
+					<%if(beanList!=null && beanList.size()>0){
+						for(int i=0;i<beanList.size();i++){
+							PrjBean bean = beanList.get(i);
+				%>
+					<option value="<%=bean.getPJNO() %>" <%if(gcmc_s.trim().equals(bean.getPJNO())) {%>selected<%} %>><%=bean.getPJNM() %></option>
+				<%
+						}
+					} %>
+				</select>
+		</td>
+		<td nowrap class="title">检测时间:</td>
+		<td bgcolor="#FFFFFF">
+		<input type="text" value="" size="15" onClick="WdatePicker({skin:'blue'})"  name="jcsj_s" value="<%=jcsj_s %>" readonly>至
+		<input type="text" value="" size="15" onClick="WdatePicker({skin:'blue'})"  name="jcsj_e" value="<%=jcsj_e %>" readonly></td>
+		<td bgcolor="#FFFFFF" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
+	</tr>
+</table>
 <input type="hidden" value="" name="actionType"/>
+<input type="hidden" value="yxzt" name="searchType"/>
 <input type="hidden" value="" name="IDs"/>
+<input type="hidden" value="gqyx" name="towhere"/>
+<input type="hidden" value="<%=iswhere %>" name="iswhere"/>
 <input type="hidden" value="TB_PJRCN" name="TBID"/>
 <input type="hidden" value="PJRNO" name="PKFILED"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
@@ -121,7 +168,7 @@ function toEdit(){
 	%>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getPJRNO() %>"></td>
-		<td><%=bean.getPJNM() %></td>
+		<td><a href="/project/gqyxView.jsp?RPJINCD=<%=bean.getPJRNO() %>" title="点击查看详细信息"><%=bean.getPJNM() %></a></td>
 		<td><%=bean.getDTCDT() %></td>
 		<td><%=bean.getDNCFC() %></td>
 		<td><%=bean.getWTDPCD() %></td>

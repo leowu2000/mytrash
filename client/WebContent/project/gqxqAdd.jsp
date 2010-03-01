@@ -2,6 +2,7 @@
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.*" %>
+<%@ page import="com.core.*" %>
 <%@ page import="java.util.*" %>
 <% 
     response.setHeader("Pragma","No-cache"); 
@@ -32,46 +33,16 @@
 -->
 </style>
 <%
-	String path = request.getRealPath("/");
-	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
-	List<PrjBean> beanList = BuinessDao.getAllList(path);
+	String path = request.getSession().getServletContext().getRealPath("/");
+	//String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 %>
 <script language="JAVASCRIPT">
-
-function viewThePic(picid){
-
-	var type = getRadioValue("myradio");
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
-	xmlHttpReq.open("GET", "/FileUploadServlet?type=viewpic&saveType="+type+"&picid="+picid, false);
-	xmlHttpReq.send(null);
-	var results = xmlHttpReq.responseText;
-	var val = results.split(",");
-	document.getElementById('ZPBT').value=val[0];
-	document.getElementById('ZPMS').value=val[2];
-	document.getElementById('DAGTM').value=val[1];
-	
-	warnForm.action="viewPic.jsp?from=asdf&type=jpeg&zlbm="+picid+"&tbid=TB_STDNC_M";
-	warnForm.target="saveFrm";
-	warnForm.submit();
-	setTimeout("viewDataImg('<%=picpath%>')","1000");
+function toBack(){
+	location.href="/project/gqxqManage.jsp";
 }
-//图片预览区域代码
-function viewDataImg(value) 
-{ 
-	
-	//新的预览代码，支持 IE6、IE7。 
-	var newPreview = document.getElementById("newPreview"); 
-	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = value; 
-	newPreview.style.width = "150px"; 
-	newPreview.style.height = "100px"; 
-	newPreview.style.border= "6px double #ccc";
-}
+
 function getGcmessage2(id){
 	var type = getRadioValue("myradio");
 	if(window.XMLHttpRequest){ //Mozilla
@@ -81,10 +52,11 @@ function getGcmessage2(id){
 	}
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=gqcj&saveType="+type+"&changeVal="+id, false);
 	xmlHttpReq.send(null);
-	var result = xmlHttpReq.responseText;
-	var val = result.split("|");
-  	GCMESSAGE.innerHTML = val[0];
-  	PICLIST.innerHTML=val[1];
+	GCMESSAGE.innerHTML = xmlHttpReq.responseText;
+	
+	//var val = result.split("|");
+  	//GCMESSAGE.innerHTML = val[0];
+  	//PICLIST.innerHTML=val[1];
 	Ext.onReady(function(){
 		show.innerHTML="";
 	        Ext.QuickTips.init();
@@ -128,6 +100,28 @@ function getGcmessage2(id){
 function updateXQFLFRAME(obj){
 	window.frames["XQFLFRAME"].location.href=obj.value+".jsp";
 }
+function viewThePic(picid){
+
+	var type = getRadioValue("myradio");
+	if(window.XMLHttpRequest){ //Mozilla
+		var xmlHttpReq=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	}
+	xmlHttpReq.open("GET", "/FileUploadServlet?type=viewpic&saveType="+type+"&picid="+picid, false);
+	xmlHttpReq.send(null);
+	var results = xmlHttpReq.responseText;
+	var val = results.split(",");
+	//document.getElementById('ZPBT').value=val[0];
+	//document.getElementById('ZPMS').value=val[2];
+	//document.getElementById('CJSJ').value=val[1];
+	var newPreview = document.getElementById("newPreview"); 
+	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
+	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = val[3]; 
+	newPreview.style.width = "150px"; 
+	newPreview.style.height = "100px"; 
+	newPreview.style.border= "6px double #ccc";
+}
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
@@ -140,13 +134,14 @@ function updateXQFLFRAME(obj){
  </form>
 <form name="form1" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
+<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(path, "TB_STDNC","DNCNO") %>"/>
 <input type="hidden" name="myradio" value="2"></input>
 <input type="hidden" name="STTNM" value=""></input>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title" colspan="6">
+		<td nowrap align="center" class="title_center" colspan="6">
 		<DIV id="GCMESSAGE"></DIV>
 		</td>
 	</tr>
@@ -214,17 +209,6 @@ function updateXQFLFRAME(obj){
 	<td nowrap class="title">出险部位:</td>
 		<td bgcolor="#FFFFFF" colspan="5"><input type="text" name="DAGLO" value="" style="width:100%"/></td>
 	</tr>
-	<tr height="25">
-		<td bgcolor="#FFFFFF" colspan="10" width="100%"><!-- gcxqLoader.jsp -->
-		<iframe id="main1" scrolling="no" frameborder="0" marginwidth="1" marginheight="1" src="gcxqLoader.jsp" height="150" width="100%" >
-		</iframe>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" colspan="11">
-		<iframe id="XQFLFRAME" frameborder="0" marginheight="1" marginwidth="1"  align="middle" onload="this.height=XQFLFRAME.document.body.scrollHeight" src="D001.jsp" height="100%" width="100%"></iframe>
-		</td>
-	</tr>
 	<tr height="30">
 		<td height="25" nowrap class="title">照片标题[H]:</td>
 		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="ZPBT" value=""/></td>
@@ -240,15 +224,27 @@ function updateXQFLFRAME(obj){
 		<td bgcolor="#FFFFFF" ><div id="PICLIST" class="divStyle"></div></td>
 		<td colspan="2" bgcolor="#FFFFFF" align="center"><div id="newPreview" ></div></td>
 	</tr>
+	<tr height="25">
+		<td bgcolor="#FFFFFF" colspan="10" width="100%"><!-- gcxqLoader.jsp -->
+		<iframe id="main1" scrolling="no" frameborder="0" marginwidth="1" marginheight="1" src="gcxqLoader.jsp" height="150" width="100%" >
+		</iframe>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" colspan="11">
+		<iframe id="XQFLFRAME" frameborder="0" marginheight="1" marginwidth="1"  align="middle" onload="this.height=XQFLFRAME.document.body.scrollHeight" src="D001.jsp" height="100%" width="100%"></iframe>
+		</td>
+	</tr>
+	
 </table>
 </form>
 <br/>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="保  存" onclick="javascript:per_Submit()">
+	<input type="button" name="" value="保  存" onclick="javascript:per_Submit('add_gqcj')">
 	&nbsp;
-	<input type="button" name="" value="返  回" onclick="javascript:viewThePic('1')">
+	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
 </body>

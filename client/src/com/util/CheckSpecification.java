@@ -43,7 +43,7 @@ public class CheckSpecification extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String path = request.getRealPath("/");
+		String path = request.getSession().getServletContext().getRealPath("/");
 		String type = request.getParameter("type");
 		if("prg".trim().equals(type)){
 			//生成工程代码

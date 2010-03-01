@@ -885,96 +885,96 @@ public class DetailBean {
 			bean.setLKGTU(rs.getString("LKGTU"));		//漏水混清	==D004==D003
 		}
 		if("D006".trim().equals(XQFL)||"D012".trim().equals(XQFL)){
-			bean.setSLUPAG(rs.getString("SLUPAG"));		//滑坡面角度(度)	==D006==D012
+			bean.setSLUPAG(String.valueOf(rs.getFloat("SLUPAG")));		//滑坡面角度(度)	==D006==D012
 		}
 		if("D007".trim().equals(XQFL)||"D009".trim().equals(XQFL)
 				||"D004".trim().equals(XQFL)||"D005".trim().equals(XQFL)){
-			bean.setTODFTDI(rs.getString("TODFTDI"));		//距堤脚距离(米)	==D007==D009==D003==D004
+			bean.setTODFTDI(String.valueOf(rs.getFloat("TODFTDI")));		//距堤脚距离(米)	==D007==D009==D003==D004
 		}
 		if("D009".trim().equals(XQFL)||"D011".trim().equals(XQFL)){
-			bean.setWDQ(rs.getString("WDQ"));//河道流量(立方米/秒)	==D011==D009
+			bean.setWDQ(String.valueOf(rs.getFloat("WDQ")));//河道流量(立方米/秒)	==D011==D009
 		}
 		if("D001".trim().equals(XQFL)||"D015".trim().equals(XQFL)){
-			bean.setDSSPN(rs.getString("DSSPN"));		//受灾人口(人)	==D001==D015
-			bean.setINPN(rs.getString("INPN"));		//受伤人口(人)	==D001==D015
-			bean.setDTHPN(rs.getString("DTHPN"));		//死亡人口(人)	==D001==D015
-			bean.setWRHS(rs.getString("WRHS"));		//倒塌房屋(间)	==D001==D015
-			bean.setCRPDSSAR(rs.getString("CRPDSSAR"));	//农作物受灾面积(公顷)	==D001==D015
-			bean.setSCDMFMAR(rs.getString("SCDMFMAR"));	//毁坏耕地面积(公顷)	==D001==D015
-			bean.setDRCECLS(rs.getString("DRCECLS"));		//直接经济损失(万元)		==D001==D015
+			bean.setDSSPN(String.valueOf(rs.getFloat("DSSPN")));		//受灾人口(人)	==D001==D015
+			bean.setINPN(String.valueOf(rs.getFloat("INPN")));		//受伤人口(人)	==D001==D015
+			bean.setDTHPN(String.valueOf(rs.getFloat("DTHPN")));		//死亡人口(人)	==D001==D015
+			bean.setWRHS(String.valueOf(rs.getFloat("WRHS")));		//倒塌房屋(间)	==D001==D015
+			bean.setCRPDSSAR(String.valueOf(rs.getFloat("CRPDSSAR")));	//农作物受灾面积(公顷)	==D001==D015
+			bean.setSCDMFMAR(String.valueOf(rs.getFloat("SCDMFMAR")));	//毁坏耕地面积(公顷)	==D001==D015
+			bean.setDRCECLS(String.valueOf(rs.getFloat("DRCECLS")));		//直接经济损失(万元)		==D001==D015
 		}
 		if("D023".trim().equals(XQFL)||"D024".trim().equals(XQFL)){
-			bean.setWRAR(rs.getString("WRAR"));		//破坏面积(平方米)	==D023==D024
+			bean.setWRAR(String.valueOf(rs.getFloat("WRAR")));		//破坏面积(平方米)	==D023==D024
 		}
 		if("D001".trim().equals(XQFL)){
 			//D001	决口				TB_BURDSC
-			bean.setBUW(rs.getString("BUW"));			//决口宽度(米)
-			bean.setBUVL(rs.getString("BUVL"));		//决口流速(米/秒)
-			bean.setBUZDF(rs.getString("BUZDF"));		//决口水头差(米)
-			bean.setBUQ(rs.getString("BUQ"));			//决口流量(立方米/秒)
+			bean.setBUW(String.valueOf(rs.getFloat("BUW")));			//决口宽度(米)
+			bean.setBUVL(String.valueOf(rs.getFloat("BUVL")));		//决口流速(米/秒)
+			bean.setBUZDF(String.valueOf(rs.getFloat("BUZDF")));		//决口水头差(米)
+			bean.setBUQ(String.valueOf(rs.getFloat("BUQ")));			//决口流量(立方米/秒)
 			bean.setBURLDGL(rs.getString("BURLDGL"));		//决口处地形地质条件
 		}
 		if("D002".trim().equals(XQFL)){
 			//D002	漫溢				TB_OVFLDSC
-			bean.setOVFLL(rs.getString("OVFLL"));		//漫溢长度(米)
-			bean.setOVFLZ(rs.getString("OVFLZ"));		//漫溢水位(米)
-			bean.setDSQ(rs.getString("DSQ"));			//漫溢流量(立方米/秒)
+			bean.setOVFLL(String.valueOf(rs.getFloat("OVFLL")));		//漫溢长度(米)
+			bean.setOVFLZ(String.valueOf(rs.getFloat("OVFLZ")));		//漫溢水位(米)
+			bean.setDSQ(String.valueOf(rs.getFloat("DSQ")));			//漫溢流量(立方米/秒)
 		}
 		if("D003".trim().equals(XQFL)){
 			//D003	漏洞				TB_LKDSC
-			bean.setLKDMT(rs.getString("LKDMT"));		//漏洞直径(米)
-			bean.setLKQ(rs.getString("LKQ"));			//漏洞流量(升/秒)
-			bean.setLKWTLH(rs.getString("LKWTLH"));		//漏洞水柱高(米)
-			bean.setLKSAR(rs.getString("LKSAR"));		//已形成漏洞群面积(平方米)
+			bean.setLKDMT(String.valueOf(rs.getFloat("LKDMT")));		//漏洞直径(米)
+			bean.setLKQ(String.valueOf(rs.getFloat("LKQ")));			//漏洞流量(升/秒)
+			bean.setLKWTLH(String.valueOf(rs.getFloat("LKWTLH")));		//漏洞水柱高(米)
+			bean.setLKSAR(String.valueOf(rs.getFloat("LKSAR")));		//已形成漏洞群面积(平方米)
 		}
 		if("D004".trim().equals(XQFL)){
 			//D004	管涌				TB_PPDSC
-			bean.setPPQ(rs.getString("PPQ"));			//管涌流量(升/秒)
-			bean.setWTLH(rs.getString("WTLH"));		//水柱高(米)
-			bean.setPPSAR(rs.getString("PPSAR"));		//已形成管涌群面积(平方米)
+			bean.setPPQ(String.valueOf(rs.getFloat("PPQ")));			//管涌流量(升/秒)
+			bean.setWTLH(String.valueOf(rs.getFloat("WTLH")));		//水柱高(米)
+			bean.setPPSAR(String.valueOf(rs.getFloat("PPSAR")));		//已形成管涌群面积(平方米)
 		}
 		if("D005".trim().equals(XQFL)){
 			//D005	陷坑				TB_PITDSC
-			bean.setSBDSP(rs.getString("SBDSP"));		//陷坑深度(米)
-			bean.setSBAR(rs.getString("SBAR"));		//陷坑面积(平方米)
+			bean.setSBDSP(String.valueOf(rs.getFloat("SBDSP")));		//陷坑深度(米)
+			bean.setSBAR(String.valueOf(rs.getFloat("SBAR")));		//陷坑面积(平方米)
 		}
 		if("D006".trim().equals(XQFL)){
 			//D006	滑坡 			TB_SLDSC
-			bean.setSLBU(rs.getString("SLBU"));		//滑坡体积(立方米)
+			bean.setSLBU(String.valueOf(rs.getFloat("SLBU")));		//滑坡体积(立方米)
 		}
 		if("D007".trim().equals(XQFL)){
 			//D007	淘刷				TB_UNDSC
-			bean.setUNDAR(rs.getString("UNDAR"));		//淘刷面积(平方米)
-			bean.setUNDD(rs.getString("UNDD"));		//淘刷深度(米)
-			bean.setUNDL(rs.getString("UNDL"));		//淘刷长度(米)
+			bean.setUNDAR(String.valueOf(rs.getFloat("UNDAR")));		//淘刷面积(平方米)
+			bean.setUNDD(String.valueOf(rs.getFloat("UNDD")));		//淘刷深度(米)
+			bean.setUNDL(String.valueOf(rs.getFloat("UNDL")));		//淘刷长度(米)
 		}
 		if("D008".trim().equals(XQFL)){
 			//D008	裂缝				TB_CRDSC
 			bean.setCRDR(rs.getString("CRDR"));		//裂缝方向
-			bean.setCRD(rs.getString("CRD"));			//裂缝深度(米)
-			bean.setCRL(rs.getString("CRL"));			//裂缝长度(米)
-			bean.setCRW(rs.getString("CRW"));			//裂缝宽度(厘米)
+			bean.setCRD(String.valueOf(rs.getFloat("CRD")));			//裂缝深度(米)
+			bean.setCRL(String.valueOf(rs.getFloat("CRL")));			//裂缝长度(米)
+			bean.setCRW(String.valueOf(rs.getFloat("CRW")));			//裂缝宽度(厘米)
 		}
 		if("D009".trim().equals(XQFL)){
 			//D009	崩岸				TB_CVDSC
-			bean.setCVL(rs.getString("CVL"));			//崩塌长度(米)
-			bean.setCVBU(rs.getString("CVBU"));		//崩塌体积(立方米)
-			bean.setRVH(rs.getString("RVH"));			//河岸高度(米)
+			bean.setCVL(String.valueOf(rs.getFloat("CVL")));			//崩塌长度(米)
+			bean.setCVBU(String.valueOf(rs.getFloat("CVBU")));		//崩塌体积(立方米)
+			bean.setRVH(String.valueOf(rs.getFloat("RVH")));			//河岸高度(米)
 			bean.setFLCNDSC(rs.getString("FLCNDSC"));		//水流情况描述
 		}
 		if("D010".trim().equals(XQFL)){
 			//D010	渗水				TB_SPDSC
-			bean.setSPAR(rs.getString("SPAR"));		//渗水面积(平方米)
+			bean.setSPAR(String.valueOf(rs.getFloat("SPAR")));		//渗水面积(平方米)
 			bean.setSPQ(rs.getString("SPQ"));			//SPQ
 		}
 		if("D011".trim().equals(XQFL)){
 			//D011	 浪坎 			TB_BLBAD
-			bean.setBLH(rs.getString("BLH"));			//浪高(米)
-			bean.setWNS(rs.getString("WNS"));			//风速(级)
+			bean.setBLH(String.valueOf(rs.getFloat("BLH")));			//浪高(米)
+			bean.setWNS(String.valueOf(rs.getFloat("WNS")));			//风速(级)
 		}
 		if("D012".trim().equals(XQFL)){
 			//D012	滑动				TB_SLUDSC
-			bean.setSLUDSP(rs.getString("SLUDSP"));		//滑动位移(米)
+			bean.setSLUDSP(String.valueOf(rs.getFloat("SLUDSP")));		//滑动位移(米)
 			bean.setSLUTP(rs.getString("SLUTP"));		//滑动类型
 			bean.setSLUGLCN(rs.getString("SLUGLCN"));		//滑动面地质情况
 		}
@@ -992,39 +992,39 @@ public class DetailBean {
 		}
 		if("D015".trim().equals(XQFL)){
 			//D015	溃坝				TB_BRDMDSC
-			bean.setBRDMW(rs.getString("BRDMW"));		//溃坝宽度(米)
+			bean.setBRDMW(String.valueOf(rs.getFloat("BRDMW")));		//溃坝宽度(米)
 			bean.setPJPS(rs.getString("PJPS"));		//工程现状
-			bean.setBRZDMCDI(rs.getString("BRZDMCDI"));	//库水位距堤顶距离(米)
-			bean.setBRV(rs.getString("BRV"));			//溃坝时库容(万立方米)
-			bean.setBRDMQ(rs.getString("BRDMQ"));		//溃坝流量(立方米/秒)
+			bean.setBRZDMCDI(String.valueOf(rs.getFloat("BRZDMCDI")));	//库水位距堤顶距离(米)
+			bean.setBRV(String.valueOf(rs.getFloat("BRV")));			//溃坝时库容(万立方米)
+			bean.setBRDMQ(String.valueOf(rs.getFloat("BRDMQ")));		//溃坝流量(立方米/秒)
 			bean.setBRDMLDGL(rs.getString("BRDMLDGL"));	//溃坝处地形、地质条件
 		}
 		if("D016".trim().equals(XQFL)){
 			//D016	倾覆				TB_OVTUDSC
 			bean.setOVTUDR(rs.getString("OVTUDR"));		//倾覆方向
-			bean.setOVTUAG(rs.getString("OVTUAG"));		//倾覆角度(度)
+			bean.setOVTUAG(String.valueOf(rs.getFloat("OVTUAG")));		//倾覆角度(度)
 		}
 		if("D017".trim().equals(XQFL)){
 			//D017	应力过大			TB_STREXDSC
-			bean.setMXTNST(rs.getString("MXTNST"));		//最大拉应力(牛/平方毫米)
-			bean.setMXCMST(rs.getString("MXCMST"));		//最大压应力(牛/平方毫米)
+			bean.setMXTNST(String.valueOf(rs.getFloat("MXTNST")));		//最大拉应力(牛/平方毫米)
+			bean.setMXCMST(String.valueOf(rs.getFloat("MXCMST")));		//最大压应力(牛/平方毫米)
 			bean.setCONGR(rs.getString("CONGR"));		//混凝土标号
-			bean.setASTR(rs.getString("ASTR"));		//允许应力值(牛/平方毫米)
+			bean.setASTR(String.valueOf(rs.getFloat("ASTR")));		//允许应力值(牛/平方毫米)
 		}
 		if("D018".trim().equals(XQFL)){
 			//D018	坍塌				TB_SLIDSC
-			bean.setSLIAR(rs.getString("SLIAR"));		//坍塌面积(平方米)
-			bean.setSLIMS(rs.getString("SLIMS"));		//坍塌方量(立方米)
+			bean.setSLIAR(String.valueOf(rs.getFloat("SLIAR")));		//坍塌面积(平方米)
+			bean.setSLIMS(String.valueOf(rs.getFloat("SLIMS")));		//坍塌方量(立方米)
 		}
 		if("D019".trim().equals(XQFL)){
 			//D019	堵塞				TB_PLUDSC
 			bean.setPLTNM(rs.getString("PLTNM"));		//堵塞物名称
-			bean.setPLTBU(rs.getString("PLTBU"));		//堵塞物体积(立方米)
+			bean.setPLTBU(String.valueOf(rs.getFloat("PLTBU")));		//堵塞物体积(立方米)
 		}
 		if("D020".trim().equals(XQFL)){
 			//D020	基础破坏			TB_BSWRDSC
 			bean.setGRNSPDSC(rs.getString("GRNSPDSC"));	//基础渗漏描述
-			bean.setGRNUSB(rs.getString("GRNUSB"));		//据传不均匀沉降(米)
+			bean.setGRNUSB(String.valueOf(rs.getFloat("GRNUSB")));		//据传不均匀沉降(米)
 			bean.setGROVCHWR(rs.getString("GROVCHWR"));	//基础超载破坏
 		}
 		if("D021".trim().equals(XQFL)){
@@ -1039,21 +1039,21 @@ public class DetailBean {
 		}
 		if("D023".trim().equals(XQFL)){
 			//D023	洞身破坏 			TB_HBWRDSC
-			bean.setWRMS(rs.getString("WRMS"));//破坏方量(立方米)
+			bean.setWRMS(String.valueOf(rs.getFloat("WRMS")));//破坏方量(立方米)
 			bean.setLNINF(rs.getString("LNINF"));//对衬砌造成的影响
 			bean.setHBGLCN(rs.getString("HBGLCN"));//洞身地质情况
 		}
 		if("D024".trim().equals(XQFL)){
 			//D024	控导工程局部破坏	TB_CLPJPRWR
-			bean.setWRD(rs.getString("WRD"));			//破坏深度(米)
-			bean.setWRL(rs.getString("WRL"));			//破坏长度(米)
+			bean.setWRD(String.valueOf(rs.getFloat("WRD")));			//破坏深度(米)
+			bean.setWRL(String.valueOf(rs.getFloat("WRL")));			//破坏长度(米)
 			bean.setWRGLCN(rs.getString("WRGLCN"));		//破坏处地质情况
 		}
 		if("D025".trim().equals(XQFL)){
 			//D025	控导工程冲毁		TB_CLPJSCDN
-			bean.setSCDMBU(rs.getString("SCDMBU"));		//冲毁体积(立方米)
-			bean.setSCDML(rs.getString("SCDML"));		//冲毁长度(米)
-			bean.setSCDMD(rs.getString("SCDMD"));		//冲毁深度(米)
+			bean.setSCDMBU(String.valueOf(rs.getFloat("SCDMBU")));		//冲毁体积(立方米)
+			bean.setSCDML(String.valueOf(rs.getFloat("SCDML")));		//冲毁长度(米)
+			bean.setSCDMD(String.valueOf(rs.getFloat("SCDMD")));		//冲毁深度(米)
 			bean.setSCDMGLCN(rs.getString("SCDMGLCN"));	//冲毁处地质情况
 		}
 		}catch(Exception ex){

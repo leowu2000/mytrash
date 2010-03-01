@@ -63,8 +63,8 @@ public class SubTempBean {
 	public static SubTempBean getSubTempBeanFromRs(ResultSet rs){
 		SubTempBean bean = new SubTempBean();
 		try{
-			bean.setZLBM(rs.getString("ZLBM"));
-			bean.setRARENTNO(rs.getString("RARENTNO"));
+			bean.setZLBM(String.valueOf(rs.getInt("ZLBM")));
+			bean.setRARENTNO(String.valueOf(rs.getInt("RARENTNO")));
 			bean.setDTCDT(rs.getString("DTCDT"));
 			bean.setTITLE(rs.getString("TITLE"));
 			bean.setWJGS(rs.getString("WJGS"));

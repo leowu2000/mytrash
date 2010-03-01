@@ -17,10 +17,20 @@
 -->
 </style>
 <% 
-	String path = request.getRealPath("/");
-
-	List<PrjBean> records = BuinessDao.getAllList(path); 
+	String path = request.getSession().getServletContext().getRealPath("/");
+	String iswhere = (String)request.getAttribute("isWhere");
+	String gcmc_s = (String)request.getAttribute("gcmc_s");
+	String gclb_s = (String)request.getAttribute("gclb_s");
+	String ly_s = (String)request.getAttribute("ly_s");
+	String dq_s = (String)request.getAttribute("dq_s");
+	gcmc_s=gcmc_s==null?"":gcmc_s;
+	gclb_s=gclb_s==null?"":gclb_s;
+	ly_s=ly_s==null?"":ly_s;
+	dq_s=dq_s==null?"":dq_s;
+	iswhere=iswhere==null?"":iswhere;
+	List<PrjBean> records = BuinessDao.getAllList(path,iswhere); 
 	String pageStr = request.getParameter("page"); 
+	pageStr=pageStr==null?"1":pageStr;
 	int currentPage = 1; 
 	if (pageStr != null) 
 	currentPage = Integer.parseInt(pageStr); 
@@ -39,15 +49,35 @@ function viewThePrg(id){
 	document.frm.actionType.value="view";
 	document.frm.submit();
 }
+function loadGclb(lb,dq,ly){
+	if(window.XMLHttpRequest){ //Mozilla
+	    var xmlHttpReq=new XMLHttpRequest();
+	  }else if(window.ActiveXObject){
+	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	  }
+	  xmlHttpReq.open("GET", "/BaseServlet?type=loadSearch&lb="+lb+"&dq="+dq+"&ly="+ly, false);
+	  xmlHttpReq.send(null);
+	 var result = xmlHttpReq.responseText;
+	 var val = result.split(";");
+	 GCLB.innerHTML=val[0];
+	 XZQH.innerHTML=val[1];
+	 LYXX.innerHTML=val[2];
+}
 function toEdit(){
 	var result="";
 	var str = document.forms[0].RECORDID;
-	for(var i=0;i<str.length;i++){
-		if(str[i].checked==true){
-			if(result=="")
-				result = str[i].value;
-			else
-				result +=","+ str[i].value;
+	if(str.length==undefined){
+		if(document.forms[0].RECORDID.checked){
+			result=document.forms[0].RECORDID.value;
+		}
+	}else{
+		for(var i=0;i<str.length;i++){
+			if(str[i].checked==true){
+				if(result=="")
+					result = str[i].value;
+				else
+					result +=","+ str[i].value;
+			}
 		}
 	}
 	if(result==""){
@@ -63,30 +93,61 @@ function toEdit(){
 		}
 	}
 }
+function SearchSubmit(){
+	document.frm.action="/buiness.do";
+	document.frm.actionType.value="search";
+	document.frm.submit();
+}
+function doQuery(page){
+	alert(page);
+	document.frm.page.value=page;
+	document.frm.action="/buiness.do";
+	document.frm.actionType.value="topage";
+	document.frm.submit();
+}
 </script>
-<body>
+<body onload="loadGclb('<%=gclb_s %>','<%=dq_s %>','<%=ly_s %>')">
 <table width="95%" align="center">
-	<tr><td align="center" ><span  class="style4">工程信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">工程管理</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="actionType"/>
+<input type="hidden" value="prj" name="searchType"/>
 <input type="hidden" value="" name="IDs"/>
+<input type="hidden" value="prg" name="towhere"/>
+<input type="hidden" value="<%=pageStr %>" name="page"/>
+<input type="hidden" value="<%=iswhere %>" name="iswhere"/>
 <input type="hidden" value="TB_PJ" name="TBID"/>
 <input type="hidden" value="PJNO" name="PKFILED"/>
 <input type="hidden" value="" name="gclsh"/>
 
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
+<table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
+	<tr height="25" >
+		<td nowrap class="title">工程名称:</td>
+		<td bgcolor="#FFFFFF"><input type="text" name="gcmc_s" value="<%=gcmc_s %>"/> </td>
+		<td nowrap class="title">工程类别:</td>
+		<td bgcolor="#FFFFFF"> <DIV id="GCLB"></DIV></td>
+		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
+	</tr>
+	<tr>
+		<td nowrap class="title">所属地区:</td>
+		<td bgcolor="#FFFFFF" > <DIV id="XZQH"></DIV> </td>
+		<td nowrap class="title">流域:</td>
+		<td bgcolor="#FFFFFF" ><DIV id="LYXX"></DIV>  </td>
+	</tr>
+</table>
 <table border="0" align="center" width="95%" >
 	<tr>
 		<td width=100% bgcolor="#FFFFFF" align="right"> 
 		共<%=pUtil.getRecordCount()%>条记录  每页显示<%=pUtil.getPageSize()%>条 
 		<%if(currentPage>1) {%>
-		<a href="/project/prgManage.jsp?page=1" ><img src="/images/shouye.GIF" border="0"></a> 
-		<a href="/project/prgManage.jsp?page=<%=(currentPage - 1)%>"><img src="/images/shangyiye.GIF" border="0"></a> 
+		<a href="javascript:doQuery(1)" ><img src="/images/shouye.GIF" border="0"></a> 
+		<a href="javascript:doQuery(<%=(currentPage - 1)%>)"><img src="/images/shangyiye.GIF" border="0"></a> 
 		<%} %>
 		<%if(pUtil.getPageCount()>currentPage) {%>
-		<a href="/project/prgManage.jsp?page=<%=(currentPage + 1)%>"><img src="/images/xiayiye.GIF" border="0"></a> 
-		<a href="/project/prgManage.jsp?page=<%=pUtil.getPageCount()%>"><img src="/images/moye.GIF" border="0"></a> 
+		<a href="javascript:doQuery(<%=(currentPage + 1)%>)"><img src="/images/xiayiye.GIF" border="0"></a> 
+		<a href="javascript:doQuery(<%=pUtil.getPageCount()%>)"><img src="/images/moye.GIF" border="0"></a> 
 		<%} %>
 	</td>
 	</tr>
@@ -117,8 +178,7 @@ function toEdit(){
 <br/>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
-	<td><input type="button" name="" value="查  询">
-	&nbsp;
+	<td>
 	<input type="button" name="" value="新  增" onclick="javascript:toAdd()">
 	&nbsp;
 	<input type="button" name="" value="修  改" onclick="javascript:toEdit()">

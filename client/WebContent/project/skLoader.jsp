@@ -7,7 +7,7 @@
 <html>
 <head>
 <%
-	String path = request.getRealPath("/");
+	String path = request.getSession().getServletContext().getRealPath("/");
 	String RPJINCD = request.getParameter("RPJINCD");
 	RSRBean rsrbean = BuinessDao.findRsrById(path,RPJINCD);
 	
@@ -56,41 +56,46 @@ Ext.onReady(function() {
 		            iconCls: 'tabs',
 		            html: '<textarea cols="50" rows="5" name="BJWHZK" style="width:99%"><%=rsrbean.getDFPFCN()%></textarea>',
 		            closable:false
-		        },{
-		            title: '坝体稳定状况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="BTWDZK" style="width:99%"><%=rsrbean.getDBSTBCN()%></textarea>',
-		            closable:false
-		        },{
-		            title: '护坡护岸稳定情况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="HPHAWDQK" style="width:99%"><%=rsrbean.getBRBPPFCN()%></textarea>',
-		            closable:false
-		        },{
-		            title: '通讯手段及状况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="TXSDJZK" style="width:99%"><%=rsrbean.getCOMMCN()%></textarea>',
-		            closable:false
-		        },{
-		            title: '泄水建筑物状况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="XSJZWZK" style="width:99%"><%=rsrbean.getESPFCN()%></textarea>',
-		            closable:false
-		        },{
-		            title: '泄能工完好状况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="XNGWHZK" style="width:99%"><%=rsrbean.getEDDPFCN()%></textarea>',
-		            closable:false
-		        },{
-		            title: '闸门、起闭机状况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="ZMQBJZK" style="width:99%"><%=rsrbean.getGTHOPFCN()%></textarea>',
-		            closable:false
 		        }
 			]
 		}
 	}).show();
-	
+	Ext.getCmp('myTPanel2').add({
+        title: '坝体稳定状况',
+        iconCls: 'tabs',
+        html: '<textarea cols="50" rows="5" name="BTWDZK" style="width:99%"><%=rsrbean.getDBSTBCN()%></textarea>',
+        closable:false
+    }).show();
+	Ext.getCmp('myTPanel2').add({
+        title: '护坡护岸稳定情况',
+        iconCls: 'tabs',
+        html: '<textarea cols="50" rows="5" name="HPHAWDQK" style="width:99%"><%=rsrbean.getBRBPPFCN()%></textarea>',
+        closable:false
+    }).show();
+	Ext.getCmp('myTPanel2').add({
+        title: '通讯手段及状况',
+        iconCls: 'tabs',
+        html: '<textarea cols="50" rows="5" name="TXSDJZK" style="width:99%"><%=rsrbean.getCOMMCN()%></textarea>',
+        closable:false
+    }).show();
+	Ext.getCmp('myTPanel2').add({
+        title: '泄水建筑物状况',
+        iconCls: 'tabs',
+        html: '<textarea cols="50" rows="5" name="XSJZWZK" style="width:99%"><%=rsrbean.getESPFCN()%></textarea>',
+        closable:false
+    }).show();
+	Ext.getCmp('myTPanel2').add({
+        title: '泄能工完好状况',
+        iconCls: 'tabs',
+        html: '<textarea cols="50" rows="5" name="XNGWHZK" style="width:99%"><%=rsrbean.getEDDPFCN()%></textarea>',
+        closable:false
+    }).show();
+	Ext.getCmp('myTPanel2').add({
+        title: '闸门、起闭机状况',
+        iconCls: 'tabs',
+        html: '<textarea cols="50" rows="5" name="ZMQBJZK" style="width:99%"><%=rsrbean.getGTHOPFCN()%></textarea>',
+        closable:false
+    }).show();
 	// Add a bunch of tabs dynamically
 
 });

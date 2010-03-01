@@ -50,12 +50,18 @@ function toAdd(){
 function toEdit(){
 	var result="";
 	var str = document.forms[0].RECORDID;
-	for(var i=0;i<str.length;i++){
-		if(str[i].checked==true){
-			if(result=="")
-				result = str[i].value;
-			else
-				result +=","+ str[i].value;
+	if(str.length==undefined){
+		if(document.forms[0].RECORDID.checked){
+			result=document.forms[0].RECORDID.value;
+		}
+	}else{
+		for(var i=0;i<str.length;i++){
+			if(str[i].checked==true){
+				if(result=="")
+					result = str[i].value;
+				else
+					result +=","+ str[i].value;
+			}
 		}
 	}
 	if(result==""){
@@ -69,12 +75,28 @@ function toEdit(){
 		}
 	}
 }
+function SearchSubmit(){
+	document.frm.action="/buiness.do";
+	document.frm.actionType.value="search";
+	document.frm.submit();
+}
 </script>
 <% 
-	String path = request.getRealPath("/");
+	String path = request.getSession().getServletContext().getRealPath("/");
+	String iswhere = (String)request.getAttribute("isWhere");
+	String gcmc_s = (String)request.getAttribute("gcmc_s");
+	String xqfldm_s = (String)request.getAttribute("xqfldm_s");
+	String xqmc_s = (String)request.getAttribute("xqmc_s");
+	gcmc_s=gcmc_s==null?"":gcmc_s;
+	xqmc_s=xqmc_s==null?"":xqmc_s;
+	xqfldm_s=xqfldm_s==null?"":xqfldm_s;
+	iswhere=iswhere==null?"":iswhere;
+	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
+	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 
-	List<STDNCBean> records = BuinessDao.getAllStdncList(path); 
-	String pageStr = request.getParameter("page"); 
+	List<STDNCBean> records = BuinessDao.getAllStdncList(path,iswhere); 
+	String pageStr = (String)request.getAttribute("page"); 
+	pageStr=pageStr==null?"1":pageStr;
 	int currentPage = 1; 
 	if (pageStr != null) 
 	currentPage = Integer.parseInt(pageStr); 
@@ -87,10 +109,49 @@ function toEdit(){
 </table>
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="actionType"/>
+<input type="hidden" value="gcxq" name="searchType"/>
 <input type="hidden" value="" name="IDs"/>
+<input type="hidden" value="gqxq" name="towhere"/>
+<input type="hidden" value="<%=iswhere %>" name="iswhere"/>
 <input type="hidden" value="DNCNO" name="PKFILED"/>
 <input type="hidden" value="TB_STDNC" name="TBID"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
+<table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
+	<tr height="25" >
+		<td nowrap class="title">工程名称:</td>
+		<td bgcolor="#FFFFFF">
+		<select name="gcmc_s">
+				<option value="">--</option>
+					<%if(beanList!=null && beanList.size()>0){
+						for(int i=0;i<beanList.size();i++){
+							PrjBean bean = beanList.get(i);
+				%>
+					<option value="<%=bean.getPJNO() %>" <%if(gcmc_s.trim().equals(bean.getPJNO())){ %>selected=true<%} %>><%=bean.getPJNM() %></option>
+				<%
+						}
+					} %>
+				</select>
+		</td>
+		<td nowrap class="title">险情分类:</td>
+		<td bgcolor="#FFFFFF"> 
+		<select name="xqfldm_s" >
+		<option value="">--</option>
+			<%if(resultList!=null && resultList.size()>0){
+			for(int i=0;i<resultList.size();i++){
+				Map<Object,Object> map = (Map<Object,Object>)resultList.get(i);
+				%>
+					<option value="<%=map.get("id")%>" <%if(xqfldm_s.trim().equals(map.get("id"))){ %>selected=true<%} %>><%=map.get("value")%></option>
+				<%
+			}} %>
+			</select>
+		</td>
+		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
+	</tr>
+	<tr>
+		<td nowrap class="title">险情名称:</td>
+		<td bgcolor="#FFFFF" colspan="3"><input type="text" name="xqmc_s" value="<%= xqmc_s%>"></input></td>
+	</tr>
+</table>
 <table border="0" align="center" width="95%" >
 	<tr>
 		<td width=100% bgcolor="#FFFFFF" align="right"> 
@@ -122,7 +183,7 @@ function toEdit(){
 	%>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getPJNO() %>;<%=bean.getDNCNO()%>;<%=bean.getXQFLDM() %>"></td>
-		<td><%=BuinessDao.idToNameChange(path,"TB_PJ", "PJNM", "PJNO="+bean.getPJNO())%></td>
+		<td><a href="/project/gqxqView.jsp?RPJINCD=<%=bean.getPJNO() %>;<%=bean.getDNCNO()%>;<%=bean.getXQFLDM() %>" title="点击查看详细信息"><%=BuinessDao.idToNameChange(path,"TB_PJ", "PJNM", "PJNO="+bean.getPJNO())%></a></td>
 		<td><%=bean.getDNCNM()%></td>
 		<td><%=BuinessDao.idToNameChange(path,"TB_XQFL", "XQFLMC", "XQFLDM='"+bean.getXQFLDM()+"'")%></td>
 		<td><%=bean.getDAGTM()%></td>
