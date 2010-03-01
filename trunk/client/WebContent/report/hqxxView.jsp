@@ -5,7 +5,8 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.fredck.FCKeditor.FCKeditor"%>
 <% 
-	String relPath = request.getRealPath("/"); 
+	String relPath = request.getSession().getServletContext().getRealPath("/"); 
+	String fromwhere = request.getParameter("fromwhere");
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
@@ -48,9 +49,11 @@ function PreviewImg(imgFile)
 }
 </script>
 <body scroll="auto">
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">旱情信息</span></td></tr>
 </table>
+<%} %>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_QT","RPJINCD") %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
@@ -96,6 +99,7 @@ function PreviewImg(imgFile)
 	</tr>
 </table>
 </form>
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
@@ -104,5 +108,6 @@ function PreviewImg(imgFile)
 	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
+<%} %>
 </body>
 </html>

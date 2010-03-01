@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%>
 <%
     String id = request.getParameter("prjid")==null?"":request.getParameter("prjid");
-	String path = request.getRealPath("/");
+	String path = request.getSession().getServletContext().getRealPath("/");
 	BuinessDao buDAO = new BuinessDao();
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectListInt("TB_ST",new String[]{"STTPCD","STNM"},path,"where PJNO="+id+"");
     StringBuffer sb = new StringBuffer("");
@@ -24,7 +24,7 @@
     response.setHeader("Cache-Control","no-store");    
     response.setHeader("Pragma","no-cache");    
     response.setDateHeader("Expires", 0);   
-    
+    System.out.println(sb);
     response.getWriter().write(sb.toString());
     response.getWriter().close();
 %>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <%
-	String path = request.getRealPath("/");
+	String path = request.getSession().getServletContext().getRealPath("/");
 	String RPJINCD = request.getParameter("RPJINCD");
 	PJRCNBean pjrcbbean = BuinessDao.findPjrcnById(path,RPJINCD);
 %>
@@ -15,19 +15,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=gbk">
     <title>Advanced Tabs</title>
     <link rel="stylesheet" type="text/css" href="/common/ext/ext-all.css" />
-    <!-- GC -->
- 	<!-- LIBS -->
  	<script type="text/javascript" src="/common/ext/ext-base.js"></script>
- 	<!-- ENDLIBS -->
     <script type="text/javascript" src="/common/ext/ext-all-debug.js"></script>
     <link rel="stylesheet" type="text/css" href="/common/ext/tab-scroller-menu.css" />
     <script type="text/javascript" src="/common/ext/TabScrollerMenu.js"></script>
-    <!-- Common Styles for the examples -->
     <link rel="stylesheet" type="text/css" href="/common/ext/examples.css" />
 <script language="javascript">
 Ext.onReady(function() {
 	Ext.QuickTips.init();
-	// Create our instance of tabScrollerMenu
 	var scrollerMenu = new Ext.ux.TabScrollerMenu({
 		maxText  : 15,
 		pageSize : 5
@@ -55,23 +50,26 @@ Ext.onReady(function() {
 		            iconCls: 'tabs',
 		            html: '<textarea cols="50" rows="5" name="XQYC" style="width:99%"><%=pjrcbbean.getDNCFC()%></textarea>',
 		            closable:false
-		        },
-		        {
-		            title: '堤防建筑状况',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="DFJZZK" style="width:99%"><%=pjrcbbean.getRDERESCN()%></textarea>',
-		            closable:false
-		        },
-		        {
-		            title: '其他',
-		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="QT" style="width:99%"><%=pjrcbbean.getNT()%></textarea>',
-		            closable:false
-		        }
+		        }		        
 			]
 		}
 	}).show();
-	
+	Ext.getCmp('myTPanel').add(
+			{
+	            title: '堤防建筑状况',
+	            iconCls: 'tabs',
+	            html: '<textarea cols="50" rows="5" name="DFJZZK" style="width:99%"><%=pjrcbbean.getRDERESCN()%></textarea>',
+	            closable:false
+	        }
+	).show();
+	Ext.getCmp('myTPanel').add(
+			{
+	            title: '其他',
+	            iconCls: 'tabs',
+	            html: '<textarea cols="50" rows="5" name="QT" style="width:99%"><%=pjrcbbean.getNT()%></textarea>',
+	            closable:false
+	        }
+	).show();
 	// Add a bunch of tabs dynamically
 
 });

@@ -46,7 +46,7 @@ function submiting(){
 		<td align="center" class="title">标题:</td>
 		<td align="center" class="title" colspan="2">
 		<input type="text" name="WTTT" value="" size="25"/></td>
-		<td align="center" class="title2">附件:</td>
+		<td align="center" class="title">附件:</td>
 		<td bgcolor="#FFFFFF">
 		<input type="file" name="UpFile" size="20"> 
 		</td>

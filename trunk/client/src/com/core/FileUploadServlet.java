@@ -1,10 +1,7 @@
 package com.core;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.buiness.dao.BuinessDao;
 import com.buiness.form.PrjBean;
+import com.buiness.form.SubTempBean;
 
 public class FileUploadServlet extends HttpServlet {
 
@@ -36,125 +34,48 @@ public class FileUploadServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String path = request.getRealPath("/");
+			String path = request.getSession().getServletContext().getRealPath("/");
 			String type=request.getParameter("type");
-			String gclsh = request.getParameter("gclsh");
-			String saveType = request.getParameter("saveType");
-			String filedir = request.getParameter("filepath");//report 共用
+			
 			String time = request.getParameter("cjsjvalue");
-			String zpbt = request.getParameter("zpbtvalue");//report 共用
-			String zpms = request.getParameter("zpmsvalue");
+			
 			String detail = request.getParameter("detailvalue");
 			String delFlg = request.getParameter("delFlg");
 			String tabname = request.getParameter("tabname");
 
 			Connection conn = null;
+			String result_head="<table width='100%'>";
 			String result = "";
+			String result_detail="</table>";
 			String DNCNO = request.getParameter("DNCNO");//report 共用
 			if("report".trim().equals(type)){
+				String filedir = new String(request.getParameter("filepath").getBytes("ISO-8859-1"),"GBK");//report 共用
+				String zpbt = new String(request.getParameter("zpbtvalue").getBytes("ISO-8859-1"),"GBK");//report 共用
+				String zpms = new String(request.getParameter("zpmsvalue").getBytes("ISO-8859-1"),"GBK");
 				time=time==""?request.getParameter("time"):time;
 				conn = ConnectionPool.getConnection(path);
 				if("1".trim().equals(delFlg))
 					BuinessDao.deleteTempMedia(path);
 				BuinessDao.insertTempMedia(path, DNCNO, time, zpbt, detail, zpms, filedir, tabname);
-				List picList = BuinessDao.getSelectList("TB_SUB_TEMP",new String[]{"ZLBM","TITLE"},path,"WHERE RARENTNO="+DNCNO+" and TBNO='"+tabname+"'");
+				List picList = BuinessDao.getMediaList(path, DNCNO, tabname);
 				if(picList!=null && picList.size()>0){
 					for(int i=0;i<picList.size();i++){
-						Map<Object,Object> map = (Map<Object,Object>)picList.get(i);
-							result+="<a href='#' onclick='javascript:viewTheReportPic("+map.get("id")+")'>"+map.get("value")+"</a>\t<img src='/images/small_delete.gif' onclick='javascript:deletePIC("+map.get("id")+")' border=0 style='cursor:hand' title='点击删除图片'><br/>";
+						SubTempBean bean = (SubTempBean)picList.get(i);
+							result+="<tr><td><a href='#' onclick='javascript:viewThePic("+bean.getZLBM()+")'>"+bean.getTITLE()+"</a></td><td><img src='/images/small_delete.gif' onclick='javascript:deletePIC("+bean.getZLBM()+")' border=0 style='cursor:hand' title='点击删除图片'></td></tr>";
 					}
 				}
+				result = result_head+result+result_detail;
 			}
-/**
- * *
-			if("upload".trim().equals(type)){
-				try{
-					conn = ConnectionPool.getConnection(path);
-					String sql = "";
-					if("1".trim().equals(saveType)){//运行状态
-						sql = "INSERT INTO TB_PJR_M(ZLBM,PJRNO,DTCDT,TITLE,WJGS,NRMS,LXZP) values(?,?,?,?,?)";
-						PreparedStatement pstmt = conn.prepareStatement(sql);
-						File f = new File(filedir);
-						FileInputStream fis = new FileInputStream(f);
-						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_PJR_M","ZLBM"));
-						pstmt.setString(2, gclsh);
-						pstmt.setString(3, cjsj);
-						pstmt.setString(4, zpbt);
-						pstmt.setString(5, detail);
-						pstmt.setString(6, zpms);
-						pstmt.setBinaryStream(7, fis, (int) f.length());
-						pstmt.executeUpdate();
-						pstmt.close();
-						conn.close();
-					}
-					if("2".trim().equals(saveType)){//险情信息
-						
-//						String xqfldm = request.getParameter("XQFL");
-//						String xqbt = request.getParameter("XQBT");
-//						String DAGLO = request.getParameter("CXBW");
-//						String WTDPCD = request.getParameter("TBDW");
-//						int id = UUIdFactory.getMaxId(path, "TB_PJR_M");
-//						String mainSQL = "INSERT INTO TB_STDNC (DNCNO,PJNO,STTPCD,DNCNM,XQFLDM,WTDPCD)" +
-//								"VALUES("+id+","+gclsh+","+DAGLO+",'"+xqbt+"'"+xqfldm+"','"+WTDPCD+"')";
-//						Statement stmt = conn.createStatement();
-//						stmt.execute(mainSQL);
-						//ZLBM	DNCND	DTCDT	TITLE	WJGS	NRMS	LXZP
-						//资料编码,险情编号,采集时间,标题,文件格式,内容描述,录像照片
-						sql = "INSERT INTO TB_STDNC_M(ZLBM,DNCNO,DTCDT,TITLE,WJGS,NRMS,LXZP) values(?,?,?,?,?,?,?)";
-						PreparedStatement pstmt = conn.prepareStatement(sql);
-						File f = new File(filedir);
-						FileInputStream fis = new FileInputStream(f);
-						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_STDNC_M","ZLBM"));
-						pstmt.setString(2, DNCNO);
-						pstmt.setString(3, cjsj);
-						pstmt.setString(4, zpbt);
-						pstmt.setString(5, detail);
-						pstmt.setString(6, zpms);
-						pstmt.setBinaryStream(7, fis, (int) f.length());
-						pstmt.executeUpdate();
-						pstmt.close();
-						conn.close();
-					}
-					
-				}catch(Exception ex){
-					ex.printStackTrace();
-				}
-				List<Map<Object,Object>> picList = null;
-				if("1".trim().equals(saveType)){//运行状态
-					picList = BuinessDao.getSelectList("TB_PJR_M",new String[]{"ZLBM","TITLE"},path,"WHERE PJRNO="+gclsh);
-				}
-				if("2".trim().equals(saveType)){//险情信息
-					//ZLBM	DNCND	DTCDT	TITLE	WJGS	NRMS	LXZP
-					//资料编码,险情编号,采集时间,标题,文件格式,内容描述,录像照片
-					picList = BuinessDao.getSelectList("TB_STDNC_M",new String[]{"ZLBM","TITLE"},path,"WHERE DNCNO="+DNCNO);
-				}
-				if(picList!=null && picList.size()>0){
-					for(int i=0;i<picList.size();i++){
-						Map<Object,Object> map = (Map<Object,Object>)picList.get(i);
-							result+="<a href='#' onclick='javascript:viewThePic("+map.get("id")+")'>"+map.get("value")+"</a>\t<img src='/images/small_delete.gif' onclick='javascript:deletePIC("+map.get("id")+")' border=0 style='cursor:hand' title='点击删除图片'><br/>";
-					}
-				}
-				
-			}
-			*/
 			if("viewpic".trim().equals(type)){
 				try{
 					conn = ConnectionPool.getConnection(path);
 
 					String id=request.getParameter("picid");
-					String strsql="";
-					if("1".trim().equals(saveType)){//运行状态
-						strsql = "SELECT * FROM TB_PJR_M WHERE ZLBM="+id;
-					}
-					if("2".trim().equals(saveType)){//险情信息
-						//ZLBM	DNCND	DTCDT	TITLE	WJGS	NRMS	LXZP
-						//资料编码,险情编号,采集时间,标题,文件格式,内容描述,录像照片
-						strsql = "SELECT * FROM TB_STDNC_M WHERE ZLBM="+id;
-					}
+					String strsql= "SELECT * FROM TB_SUB_TEMP WHERE ZLBM="+id;
 					Statement stmt= conn.createStatement();
 					ResultSet rs = stmt.executeQuery(strsql);
 					if(rs.next()){
-						result = rs.getString("TITLE")+","+rs.getString("DTCDT")+","+rs.getString("NRMS");
+						result = rs.getString("TITLE")+","+rs.getString("DTCDT")+","+rs.getString("NRMS")+","+rs.getString("LXZP");
 					}
 					rs.close();
 					stmt.close();
@@ -169,38 +90,19 @@ public class FileUploadServlet extends HttpServlet {
 
 				String id=request.getParameter("picid");
 				String strsql="";
-				if("1".trim().equals(saveType)){//运行状态
-					strsql = "delete FROM TB_PJR_M WHERE ZLBM="+id;
-				}
-				if("2".trim().equals(saveType)){//险情信息
-					//ZLBM	DNCND	DTCDT	TITLE	WJGS	NRMS	LXZP
-					//资料编码,险情编号,采集时间,标题,文件格式,内容描述,录像照片
-					List dnlist = BuinessDao.getSelectList("TB_STDNC_M",new String[]{"DNCNO","ZLBM"},path,"WHERE ZLBM="+id);
-					if(dnlist != null && dnlist.size()>0){
-						Map<Object,Object> map = (Map<Object,Object>)dnlist.get(0);
-						DNCNO = map.get("id").toString();
-					}
-					strsql = "delete FROM TB_STDNC_M WHERE ZLBM="+id;
-				}
+					strsql = "delete FROM TB_SUB_TEMP WHERE ZLBM="+id;
 				Statement stmt= conn.createStatement();
 				stmt.executeUpdate(strsql);
 				stmt.close();
 				conn.close();
-				List<Map<Object,Object>> picList = null;
-				if("1".trim().equals(saveType)){//运行状态
-					picList = BuinessDao.getSelectList("TB_PJR_M",new String[]{"ZLBM","TITLE"},path,"WHERE PJRNO="+gclsh);
-				}
-				if("2".trim().equals(saveType)){//险情信息
-					//ZLBM	DNCND	DTCDT	TITLE	WJGS	NRMS	LXZP
-					//资料编码,险情编号,采集时间,标题,文件格式,内容描述,录像照片
-					picList = BuinessDao.getSelectList("TB_STDNC_M",new String[]{"ZLBM","TITLE"},path,"WHERE DNCNO="+DNCNO);
-				}
+				List picList = BuinessDao.getMediaList(path, DNCNO, tabname);
 				if(picList!=null && picList.size()>0){
 					for(int i=0;i<picList.size();i++){
-						Map<Object,Object> map = (Map<Object,Object>)picList.get(i);
-							result+="<a href='#' onclick='javascript:viewThePic("+map.get("id")+")'>"+map.get("value")+"</a>\t<img src='/images/small_delete.gif' onclick='javascript:deletePIC("+map.get("id")+")' border=0 style='cursor:hand' title='点击删除图片'><br/>";
+						SubTempBean bean = (SubTempBean)picList.get(i);
+							result+="<tr><td><a href='#' onclick='javascript:viewThePic("+bean.getZLBM()+")'>"+bean.getTITLE()+"</a></td><td><img src='/images/small_delete.gif' onclick='javascript:deletePIC("+bean.getZLBM()+")' border=0 style='cursor:hand' title='点击删除图片'></td></tr>";
 					}
 				}
+				result = result_head+result+result_detail;
 				
 			}
 			if("gqcj".trim().equals(type)){
@@ -211,26 +113,8 @@ public class FileUploadServlet extends HttpServlet {
 				String provnm = BuinessDao.getPrjCntname(bean.getCNTCD(), path);
 				String gclyxx = BuinessDao.getPrjLyxx(bean.getPJNMCD(), path);
 				String temp = provnm+"-"+gclyxx;
-				String pictemp ="";
-				List<Map<Object,Object>> picList = null;
-
-				if("1".trim().equals(saveType)){//运行状态
-					picList = BuinessDao.getSelectList("TB_PJR_M",new String[]{"ZLBM","TITLE"},path,"WHERE PJRNO="+id);
-					if(picList!=null && picList.size()>0){
-						for(int i=0;i<picList.size();i++){
-							Map<Object,Object> map = (Map<Object,Object>)picList.get(i);
-							pictemp+="<a href='#' onclick='javascript:viewThePic("+map.get("id")+")'>"+map.get("value")+"</a>\t<img src='/images/small_delete.gif' onclick='javascript:deletePIC("+map.get("id")+")' border=0 style='cursor:hand' title='点击删除图片'><br/>";
-						}
-					}
-				}
-				if("2".trim().equals(saveType)){//险情信息
-					//ZLBM	DNCND	DTCDT	TITLE	WJGS	NRMS	LXZP
-					//资料编码,险情编号,采集时间,标题,文件格式,内容描述,录像照片
-//					picList = BuinessDao.getSelectList("TB_STDNC_M",new String[]{"ZLBM","TITLE"},path,"WHERE DNCNO="+id);
-					pictemp="";
-				}
 				
-				result=temp+"|"+pictemp;
+				result=temp;
 				
 			}
 			response.setContentType("text/xml");

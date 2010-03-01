@@ -125,7 +125,7 @@ body {
 </li> 
 <li><a href="#Menu=ChildMenu3" onclick="DoMenu('ChildMenu3')"><b>数据上传</b></a> 
     <ul id="ChildMenu3" class="collapsed"> 
-    <li><a href="#">数据上传</a></li> 
+    <li><a href="/sys/uploadManage.jsp" target="mainFrame">数据上传</a></li> 
     </ul> 
 </li> 
 <li><a href="#Menu=ChildMenu4" onclick="DoMenu('ChildMenu4')"><b>系统维护</b></a> 
@@ -135,7 +135,7 @@ body {
     <li><a href="#">压缩数据库</a></li> 
     <li><a href="#">清空数据库</a></li> 
     <li><a href="#">查看日志</a></li>
-    <li><a href="#">参数设置</a></li>
+    <li><a href="/sys/config.jsp" target="mainFrame">参数设置</a></li>
     </ul> 
 </li> 
 </ul> 

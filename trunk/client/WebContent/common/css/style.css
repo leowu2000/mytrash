@@ -153,6 +153,7 @@ input{
 .title {
 	font-size: 10pt;
 	padding-top: 2px;
+	padding-left:5px;
 	font-weight: bolder;
 	color: #15428B;
 	background-color: #E8EFFF;

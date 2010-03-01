@@ -1,4 +1,4 @@
-function per_Submit(){
+function per_Submit(type){
 	var radioValue = getRadioValue("myradio");
 	if(document.getElementById('GCNAME').value==""){
 		alert("请选择工程名称！");
@@ -14,7 +14,6 @@ function per_Submit(){
 		document.form1.KNYXFW.value=window("main1").document.getElementById("KNYXFW").value;//可能影响范围
 		document.form1.QXSQX.value=window("main1").document.getElementById("QXSQX").value;//抢险时气象
 		document.form1.WLSWQX.value=window("main1").document.getElementById("WLSWQS").value;//未来水文气象
-		alert(document.form1.XQFLDM.value);
 		var val = document.form1.XQFLDM.value;
 		if(val=="D004"||val=="D003"){
 			document.form1.LKGTU.value=window("XQFLFRAME").document.getElementById("LKGTU").value;//漏水混清==D004==D003
@@ -218,7 +217,7 @@ function per_Submit(){
 		document.form1.ZMQBJZK.value=window("main3").document.getElementById("ZMQBJZK").value;//闸门、起闭机状况
 	}
 	document.form1.action="/buiness.do";
-	document.getElementById('actionType').value="add_gqcj";
+	document.getElementById('actionType').value=type;
 	document.getElementById('SAVETYPES').value=radioValue;
 	document.form1.submit();
 }
@@ -230,8 +229,8 @@ function PreviewImg(imgFile)
 	if(filedir!=""){
 		var poi = filedir.lastIndexOf(".");
 		var detail = filedir.substring(poi+1,filedir.length).toUpperCase();
-		if(detail!="JPG" && detail!="JPEG" && detail!="GIF" && detail!="BMP"){
-			alert("不支持的文件格式，请重新选择！");
+		if(detail!="JPG" && detail!="MPG"){
+			alert("不支持的文件格式，请选择jpg图片文件，或者mpg多媒体文件！");
 			return false;
 		}
 	}
@@ -280,10 +279,7 @@ function getGcmessage(id){
 	}
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=gqcj&saveType="+type+"&changeVal="+id, false);
 	xmlHttpReq.send(null);
-	var result = xmlHttpReq.responseText;
-	var val = result.split("|");
-  	GCMESSAGE.innerHTML = val[0];
-  	PICLIST.innerHTML=val[1];
+  	GCMESSAGE.innerHTML = xmlHttpReq.responseText;
   	
 }
 function chkCheckBoxChs(obj){
@@ -307,11 +303,6 @@ function chkCheckBoxChs(obj){
 	}
 }
 function getRadioValue(name){
-	//var objs = document.getElementsByName(name);
-	//for(var i=0;i<objs.length;i++){
-	//	if(objs[i].checked)
-	//		return objs[i].value;
-	//}
 	return document.getElementById('myradio').value;
 }
 function uploadPhotos(){
@@ -335,7 +326,7 @@ function uploadPhotos(){
 		if(filedir!=""){
 			var poi = filedir.lastIndexOf(".");
 			detail = filedir.substring(poi+1,filedir.length).toUpperCase();
-			if(detail!="JPG" && detail!="JPEG" && detail!="GIF" && detail!="BMP"){
+			if(detail!="JPG" && detail!="MPG" ){
 				alert("不支持的文件格式，请重新选择！");
 				return false;
 			}
@@ -377,18 +368,21 @@ function uploadPhotos(){
 				var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 			}
 			xmlHttpReq.open("GET", "/FileUploadServlet?type=report&saveType="+type+"&filepath="+filedir+"&cjsjvalue="+cjsj
-					+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&DNCNO="+gcbh
+					+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&DNCNO="+document.getElementById("DNCNO").value
 					+"&delFlg="+delFlg+"&tabname="+tname, false);
 			xmlHttpReq.send(null);
 			var result = xmlHttpReq.responseText;
 			PICLIST.innerHTML=result;
 			document.getElementById('ZPMS').value="";
 			document.getElementById('ZPBT').value="";
+			document.getElementById('UpFile').value="";
 		}
 }
 
 function deletePIC(picid){
 	var gcbh = document.getElementById('GCNAME').value;
+	var DNCNO = document.getElementById('DNCNO').value;
+	var tablename = document.getElementById('tabname').value;
 	var type = getRadioValue("myradio");
 	if(confirm("删除后不能恢复，是否继续？")){
 		if(window.XMLHttpRequest){ //Mozilla
@@ -396,7 +390,8 @@ function deletePIC(picid){
 		}else if(window.ActiveXObject){
 			var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 		}
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=del&saveType="+type+"&picid="+picid+"&gclsh="+gcbh, false);
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=del&saveType="+type
+				+"&picid="+picid+"&DNCNO="+DNCNO+"&tabname="+tablename, false);
 		xmlHttpReq.send(null);
 		var result = xmlHttpReq.responseText;
 		PICLIST.innerHTML=result;

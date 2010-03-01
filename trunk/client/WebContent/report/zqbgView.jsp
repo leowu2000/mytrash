@@ -5,7 +5,8 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.fredck.FCKeditor.FCKeditor"%>
 <% 
-	String relPath = request.getRealPath("/"); 
+	String relPath = request.getSession().getServletContext().getRealPath("/");
+	String fromwhere = request.getParameter("fromwhere");
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
@@ -48,9 +49,11 @@ function PreviewImg(imgFile)
 }
 </script>
 <body>
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">新增灾情报告</span></td></tr>
+	<tr><td align="center" ><span  class="style4">查看灾情报告</span></td></tr>
 </table>
+<%} %>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="TABLENAME" value=""/>
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_SD","RPJINCD") %>"/>
@@ -61,7 +64,7 @@ function PreviewImg(imgFile)
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td align="center" class="title" >灾情标题:</td>
-		<td align="center" class="title2" colspan="5">
+		<td align="center" class="title" colspan="5">
 		<%=bean.getWTTT() %></td>
 	</tr>
 	<tr height="25" >
@@ -69,7 +72,7 @@ function PreviewImg(imgFile)
 		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value=""/></td>
 		<td nowrap class="title">拍摄时间</td> 
 		<td bgcolor="#FFFFFF"><input type="text" name="DTCDT" class="lines" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
-		<td nowrap class="title2" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
+		<td nowrap class="title" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title" colspan="2">照片描述</td> 
@@ -96,7 +99,7 @@ function PreviewImg(imgFile)
 	</tr>
 </table>
 </form>
-
+<%if(!"upload".trim().equals(fromwhere)) {%>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
@@ -105,5 +108,6 @@ function PreviewImg(imgFile)
 	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
+<%} %>
 </body>
 </html>

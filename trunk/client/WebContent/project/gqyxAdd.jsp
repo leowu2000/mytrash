@@ -2,6 +2,7 @@
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.*" %>
+<%@ page import="com.core.*" %>
 <%@ page import="java.util.*" %>
 <% 
     response.setHeader("Pragma","No-cache"); 
@@ -29,12 +30,15 @@
 -->
 </style>
 <%
-	String path = request.getRealPath("/");
-	String picpath = request.getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
-	List<PrjBean> beanList = BuinessDao.getAllList(path);
+	String path = request.getSession().getServletContext().getRealPath("/");
+	String picpath = request.getSession().getServletContext().getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\")+"demo.jpg";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 %>
 <script language="JAVASCRIPT">
+function toBack(){
+	window.location.href="/project/gqyxManage.jsp";
+}
 function viewThePic(picid){
 
 	var type = getRadioValue("myradio");
@@ -47,25 +51,14 @@ function viewThePic(picid){
 	xmlHttpReq.send(null);
 	var results = xmlHttpReq.responseText;
 	var val = results.split(",");
-	document.getElementById('ZPBT').value=val[0];
-	document.getElementById('ZPMS').value=val[2];
-	document.getElementById('CJSJ').value=val[1];
-	
-	warnForm.action="viewPic.jsp?from=asdf&type=jpeg&zlbm="+picid;
-	warnForm.target="saveFrm";
-	warnForm.submit();
-	setTimeout("viewDataImg('<%=picpath%>')","1000");
-}
-//图片预览区域代码
-function viewDataImg(value) 
-{ 
-
-	//新的预览代码，支持 IE6、IE7。 
+	//document.getElementById('ZPBT').value=val[0];
+	//document.getElementById('ZPMS').value=val[2];
+	//document.getElementById('CJSJ').value=val[1];
 	var newPreview = document.getElementById("newPreview"); 
 	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = value; 
-	newPreview.style.width = "170px"; 
-	newPreview.style.height = "120px"; 
+	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = val[3]; 
+	newPreview.style.width = "150px"; 
+	newPreview.style.height = "100px"; 
 	newPreview.style.border= "6px double #ccc";
 }
 </script>
@@ -73,19 +66,15 @@ function viewDataImg(value)
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">新增运行状态信息</span></td></tr>
 </table>
-<iframe name="saveFrm" src="" frameborder="0" scrolling="no" width="0" height="0">
-<!--显示图片专用  -->
-</iframe>
-<form name="warnForm" action="" method="post">
- </form>
 <form name="form1" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="1"></input>
 <input type="hidden" name="WTDPCD" value=""/>
+<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(path, "TB_PJRCN","PJRNO") %>"/>
 <input type="hidden" name="tabname" value="TB_PJR_M"></input>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title" colspan="6">
+		<td nowrap class="title_center" colspan="6">
 		<DIV id="GCMESSAGE"></DIV>
 		</td>
 	</tr>
@@ -125,18 +114,6 @@ function viewDataImg(value)
 		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="0" size="8"/>立方米/秒<font color="red">*</font></td>
 	</tr>
 	<tr>
-		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="main2" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="yxztLoader.jsp" height="145" width="100%">
-		</iframe>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="main3" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="skLoader.jsp" height="145" width="100%">
-		</iframe>
-		</td>
-	</tr>
-	<tr>
 		<td height="25" nowrap class="title">照片标题[H]:</td>
 		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="ZPBT" value=""/></td>
 		<td height="25" nowrap class="title">选择照片:</td>
@@ -152,15 +129,27 @@ function viewDataImg(value)
 		<td bgcolor="#FFFFFF"  colspan="2"><div id="PICLIST" class="divStyle"></div></td>
 		<td colspan="2" bgcolor="#FFFFFF" align="center"><div id="newPreview" ></div></td>
 	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="main2" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="yxztLoader.jsp" height="145" width="100%">
+		</iframe>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="main3" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src="skLoader.jsp" height="145" width="100%">
+		</iframe>
+		</td>
+	</tr>
 </table>
 </form>
 
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="保  存" onclick="javascript:per_Submit()">
+	<input type="button" name="" value="保  存" onclick="javascript:per_Submit('add_gqcj')">
 	&nbsp;
-	<input type="button" name="" value="返  回" onclick="javascript:viewThePic('1')">
+	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>
 </body>

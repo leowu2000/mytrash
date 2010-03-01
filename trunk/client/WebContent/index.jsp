@@ -8,11 +8,10 @@
   <frame src="top.jsp">
   <frameset rows="*" cols="135,*" framespacing="0" frameborder="NO" border="0">
   	<frame src="leftmenu.jsp" name="leftFrame" scrolling="no" noresize>
-    <frame src="rightmenu.jsp" name="mainFrame" scrolling="no" noresize>
+    <frame src="/buiness.do?actionType=login" name="mainFrame" scrolling="auto" noresize>
     <!-- <frame id="DoAction" name="DoAction" src="About:_blank" noresize> -->
   </frameset>
 </frameset>
 <noframes><body>
-
 </body></noframes>
 </html>

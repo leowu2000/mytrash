@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=GBK"%>
 <%@ page import="com.core.*" %>
-<%
-	String relPath = request.getRealPath("/");
-%>
-<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_STDNC","DNCNO") %>"/>
+
 <input type="hidden" name="filepath" value=""/>
 <input type="hidden" name="actionType" value=""/>
 <input type="hidden" name="SAVETYPES" value=""/>
