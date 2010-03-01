@@ -21,9 +21,9 @@ public class MediaController extends CommonController {
 		
 		if("image".equals(action)){
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
-			String pId = ServletRequestUtils.getStringParameter(request,"media_id","");
+			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
-			Map map = mediaDAO.getImage(tablename, pId);
+			Map map = mediaDAO.getImage(tablename, media_id);
 			
 			byte[] b = (byte[])map.get("lxzp");
 			
@@ -34,7 +34,7 @@ public class MediaController extends CommonController {
 			response.getOutputStream().write(b);
 			response.getOutputStream().close();
 			return null;
-		}else if("image_detail".equals(action)){
+		}else if("video".equals(action)){
 			
 		}
 		
