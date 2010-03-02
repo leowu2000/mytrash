@@ -9,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.util.zip.CRC32;
@@ -19,9 +17,7 @@ import java.util.zip.ZipInputStream;
 
 class ServerThread extends Thread {
 	//SOCK流的变量
-	Socket clientRequest;
-        InputStream in;
-        OutputStream out;
+	Socket clientSocket;
         DataInputStream DataIn;
         DataOutputStream DataOut;
         //接收文件数据的变量
@@ -39,10 +35,9 @@ class ServerThread extends Thread {
         String SockFileCreatDate="";
         String SockFileDanWei="";
         int SockBlockSize;
-        int sockSendPack=0;
+        int totalPack=0;
         boolean remainIsExist=false;
         int remainTotal=0;
-        //static final int MAX_SIZE=4096;
         int MAX_SIZE;
 
         //文件操作变量
@@ -56,109 +51,100 @@ class ServerThread extends Thread {
 //           this.serverMyFrame=parent;
 //           serverMyFrame.ConnectNum++;
 //           ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
-           this.clientRequest=s;
+           this.clientSocket=s;
         }
         public ServerThread(Socket s) {
 //          this.serverMyFrame=parent;
 //          serverMyFrame.ConnectNum++;
 //          ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
-          this.clientRequest=s;
+          this.clientSocket=s;
        }
         public synchronized void run(){
-        	int m=0;
-        	byte[] SockData=new byte[256];
+        	int curPack=0;
+        	byte[] socketData=new byte[256];
                 FileOutputStream outputFile=null;
                 try{
-                	in =clientRequest.getInputStream();
-              		out=clientRequest.getOutputStream();
-              		DataIn=new DataInputStream(in);
-              		DataOut=new DataOutputStream(out);
+              		DataIn=new DataInputStream(clientSocket.getInputStream());
+              		DataOut=new DataOutputStream(clientSocket.getOutputStream());
+              	}catch(IOException e){
+              		e.printStackTrace();
               	}
-              	catch(IOException e){
-              		System.out.println("SOCKET 流出错：" + e.getMessage());
-        	}
                 try{
                 	try{
-                		DataIn.read(SockData);
+                		DataIn.read(socketData);
                 	}catch(IOException e1){
                 		System.out.println("接收信息包出错！"+e1.getMessage());
-                		}
+                	}
+                	
                 	System.out.println("开始接收文件：");
-                	ByteToString(SockData);
+                	ByteToString(socketData);
                 	System.out.println("附加信息："+SockAddtion);
+                	
                 	if(!SockAddtion.trim().equals("")){
-                	System.out.println("附加信息转化为字节：");
-                	StringCopy(SockAddtion);
+                	formatInfo(SockAddtion);
                 	ContentLogFile("发送单位是："+SockFileDanWei);
+                	
                 	byte[] buffer=new byte[MAX_SIZE];
                 	if(SockFileFlag.equals("SSGQ")){
                 		System.out.println("检查日志文件：");
-                		FileIsExist(SockFileName);
+                		checkLogFileExist(SockFileName);
                 		if (LogFileExist) {
                 			try{
-                			CheckLogFile(SockFileName);
+                				CheckLogFile(SockFileName);
+                			}catch(Exception e1){
+                				System.out.println("检查完日志文件:"+e1.getMessage());
+                				nCheckFile=3;
                 			}
-					catch(Exception e1){
-						System.out.println("检查完日志文件:"+e1.getMessage());
-						nCheckFile=3;
-						}
                 			System.out.println("检查完日志文件:"+nCheckFile);
                 			switch(nCheckFile){
                 				case 1:
                 					remainPack=ExistPack;
                 					System.out.println("最后的包数"+remainPack);
-                					if (remainPack<sockSendPack-1 && remainPack>0){
-                						m=ExistPack+1;
-                						System.out.println("续传！返回客户端包数:"+m);
-                						SendPack(m);
-                						//outputFile=new FileOutputStream(SockFileName+".mdb",true);
+                					if (remainPack<totalPack-1 && remainPack>0){
+                						curPack=ExistPack+1;
+                						System.out.println("续传！返回客户端包数:"+curPack);
+                						SendPack(curPack);
                 						outputFile=new FileOutputStream(SockFileName,true);
-
-                						//输入
-
-								System.out.println("开始发送的包数："+m);
-								for(int i=m;i<sockSendPack;i++){
-									DataIn.readFully(buffer,0,MAX_SIZE);
-									DataIn.skip(1);
-									outputFile.write(buffer,0,MAX_SIZE);
-									DeleteLogFile(SockFileName);
-									WriteLog(SockFileFlag,SockFileName);
-									WriteLog(SockFileName,SockFileName);
-									WriteLog(SockFileLen,SockFileName);
-									WriteLog(SockFileCreatDate,SockFileName);
-									WriteLog(SockFileDanWei,SockFileName);
-									WriteLog(m,SockFileName);
-									m++;
-									SendPack(m);
-								}
-								if(remainTotal!=0){
-									System.out.println("接收余数！");
-									DataIn.readFully(buffer,0,remainTotal);
-									outputFile.write(buffer,0,remainTotal);
-								}
-								else{
-									System.out.println("接收最后一个包！");
-									DataIn.readFully(buffer,0,MAX_SIZE);
-									DataIn.skip(1);
-									outputFile.write(buffer,0,MAX_SIZE);
-									DeleteLogFile(SockFileName);
-									WriteLog(SockFileFlag,SockFileName);
-									WriteLog(SockFileName,SockFileName);
-									WriteLog(SockFileLen,SockFileName);
-									WriteLog(SockFileCreatDate,SockFileName);
-									WriteLog(SockFileDanWei,SockFileName);
-									WriteLog(m,SockFileName);
-								}
-								System.out.println("已全部收完!");
-								SendPack(-4);
-								ContentLogFile(SockFileDanWei+":"+"续传......数据传输成功!!");
-
-                					}
-                					else{
+                						System.out.println("开始发送的包数："+curPack);
+										for(int i=curPack;i<totalPack;i++){
+											DataIn.readFully(buffer,0,MAX_SIZE);
+//											DataIn.skip(1);
+											outputFile.write(buffer,0,MAX_SIZE);
+											DeleteLogFile(SockFileName);
+											WriteLog(SockFileFlag,SockFileName);
+											WriteLog(SockFileName,SockFileName);
+											WriteLog(SockFileLen,SockFileName);
+											WriteLog(SockFileCreatDate,SockFileName);
+											WriteLog(SockFileDanWei,SockFileName);
+											WriteLog(curPack,SockFileName);
+											curPack++;
+											SendPack(curPack);
+										}
+										if(remainTotal!=0){
+											System.out.println("接收余数！");
+											DataIn.readFully(buffer,0,remainTotal);
+											outputFile.write(buffer,0,remainTotal);
+										}
+										else{
+											System.out.println("接收最后一个包！");
+											DataIn.readFully(buffer,0,MAX_SIZE);
+//											DataIn.skip(1);
+											outputFile.write(buffer,0,MAX_SIZE);
+											DeleteLogFile(SockFileName);
+											WriteLog(SockFileFlag,SockFileName);
+											WriteLog(SockFileName,SockFileName);
+											WriteLog(SockFileLen,SockFileName);
+											WriteLog(SockFileCreatDate,SockFileName);
+											WriteLog(SockFileDanWei,SockFileName);
+											WriteLog(curPack,SockFileName);
+										}
+										System.out.println("已全部收完!");
+										SendPack(-4);
+										ContentLogFile(SockFileDanWei+":"+"续传......数据传输成功!!");
+                					}else{
                 						System.out.println("入库未成功");
                 						SendPack(-3);
                 						ContentLogFile("开始检查到入库出错");
-
                 					}
                 					break;
                 				case 2:
@@ -174,127 +160,112 @@ class ServerThread extends Thread {
                 					SendPack(0);
                 					break;
                 			}
-                		}
-                		else{
+                		}else{
                 			System.out.println("日志文件不存在，并返回客户端包数0:");
                 			SendPack(0);
                 		}
-                	}
-                	else{
+                	}else{
                 		System.out.println("传来的文件有误！");
                 	}
-			if (m<sockSendPack){
-			System.out.println("新的传输数据");
-			outputFile=new FileOutputStream(SockFileName);
-
-			for(int i=m;i<sockSendPack;i++){
-				DataIn.readFully(buffer,0,MAX_SIZE);
-				DataIn.skip(1);
-				outputFile.write(buffer,0,MAX_SIZE);
-				DeleteLogFile(SockFileName);
-				WriteLog(SockFileFlag,SockFileName);
-				WriteLog(SockFileName,SockFileName);
-				WriteLog(SockFileLen,SockFileName);
-				WriteLog(SockFileCreatDate,SockFileName);
-				WriteLog(SockFileDanWei,SockFileName);
-				WriteLog(m,SockFileName);
-				m++;
-				SendPack(m);
+			if (curPack<totalPack){
+				System.out.println("新的传输数据");
+				outputFile=new FileOutputStream(SockFileName);
+	
+				for(int i=curPack;i<totalPack;i++){
+					DataIn.readFully(buffer,0,MAX_SIZE);
+//					DataIn.skip(1);
+					outputFile.write(buffer,0,MAX_SIZE);
+					DeleteLogFile(SockFileName);
+					WriteLog(SockFileFlag,SockFileName);
+					WriteLog(SockFileName,SockFileName);
+					WriteLog(SockFileLen,SockFileName);
+					WriteLog(SockFileCreatDate,SockFileName);
+					WriteLog(SockFileDanWei,SockFileName);
+					WriteLog(curPack,SockFileName);
+					curPack++;
+					SendPack(curPack);
+				}
+				if(remainTotal!=0){
+					System.out.println("接收余数!");
+					DataIn.readFully(buffer,0,remainTotal);
+					outputFile.write(buffer,0,remainTotal);
+				}else{
+					System.out.println("接收最后一个包!");
+					DataIn.readFully(buffer,0,MAX_SIZE);
+//					DataIn.skip(1);
+					outputFile.write(buffer,0,MAX_SIZE);
+					DeleteLogFile(SockFileName);
+					WriteLog(SockFileFlag,SockFileName);
+					WriteLog(SockFileName,SockFileName);
+					WriteLog(SockFileLen,SockFileName);
+					WriteLog(SockFileCreatDate,SockFileName);
+					WriteLog(SockFileDanWei,SockFileName);
+					WriteLog(curPack,SockFileName);
+				}
+				System.out.println("已全部收完!");
+				SendPack(-4);
+				ContentLogFile(SockFileDanWei+":"+"数据传输成功!!");
 			}
-			if(remainTotal!=0){
-				System.out.println("接收余数!");
-				DataIn.readFully(buffer,0,remainTotal);
-				outputFile.write(buffer,0,remainTotal);
-			}
-			else{
-				System.out.println("接收最后一个包!");
-				DataIn.readFully(buffer,0,MAX_SIZE);
-				DataIn.skip(1);
-				outputFile.write(buffer,0,MAX_SIZE);
-				DeleteLogFile(SockFileName);
-				WriteLog(SockFileFlag,SockFileName);
-				WriteLog(SockFileName,SockFileName);
-				WriteLog(SockFileLen,SockFileName);
-				WriteLog(SockFileCreatDate,SockFileName);
-				WriteLog(SockFileDanWei,SockFileName);
-				WriteLog(m,SockFileName);
-			}
-			System.out.println("已全部收完!");
-			SendPack(-4);
-			ContentLogFile(SockFileDanWei+":"+"数据传输成功!!");
-			}//判断m是否小于总的包数
 
 			//调用入库模块
 			System.out.println("调用入库模块!");
 			DbQuery DataDbQuery=new DbQuery("");
 
-                        // 如果是ZIP文件先解压缩
-                        if ( (SockFileName.substring(SockFileName.length()-4).toUpperCase().equals(".ZIP")) )
-                        {
-                           if ( !extractZipedMdbFile(SockFileName) )
-                           	{
-                           	System.out.println(SockFileName + "解压缩失败。");
-                           	}
-			   //先判断SockFileName扩展名是否是。ZIP？
-			   //DataDbQuery.setMdbFileName(SockFileName);
+            // 如果是ZIP文件先解压缩
+				if ((SockFileName.substring(SockFileName.length() - 4)
+						.toUpperCase().equals(".ZIP"))) {
+					if (!extractZipedMdbFile(SockFileName)) {
+						System.out.println(SockFileName + "解压缩失败。");
+					}
+					// 先判断SockFileName扩展名是否是。ZIP？
+					// DataDbQuery.setMdbFileName(SockFileName);
 
-			   // 将 .ZIP 4个字符去掉，成为释放后的MDB文件。以此文件入库。
-			   String strMdbFileName = SockFileName.substring(0, SockFileName.length()-4);
-			   DataDbQuery.setMdbFileName( strMdbFileName );
-                           System.out.println("收到ZIP文件是:"+SockFileName+" , 解压缩后的文件是" + strMdbFileName);
-			}
-			else
-			{
-			   DataDbQuery.setMdbFileName( SockFileName );
-			}
+					// 将 .ZIP 4个字符去掉，成为释放后的MDB文件。以此文件入库。
+					String strMdbFileName = SockFileName.substring(0,
+							SockFileName.length() - 4);
+					DataDbQuery.setMdbFileName(strMdbFileName);
+					System.out.println("收到ZIP文件:" + SockFileName
+							+ " , 解压缩后文件" + strMdbFileName);
+				} else {
+					DataDbQuery.setMdbFileName(SockFileName);
+				}
 
    			try{
    				Thread.sleep(1000);
-   			}
-   			catch(InterruptedException e){
+   			}catch(InterruptedException e){
    				System.out.println("阻塞状态出错"+e.getMessage());
    			}
 
    			if (DataDbQuery.beginCopyData()){
    				System.out.println("入库成功!!");
    				SendPack(-2);
-//   				System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
    				try{
    					DataIn.close();
    					outputFile.close();
-   				}
-   				catch(Exception e){
+   				}catch(Exception e){
    					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
    				}
    				System.out.println("已关闭完接收文件数据流");
    				try{
    					DeleteLogFile(SockFileName);
    					DeleteMdbFile(SockFileName);
-   				}
-   				catch(Exception e){
+   				}catch(Exception e){
    					System.out.println("删除日志文件和数据库文件出错："+e.getMessage());
    				}
-   				System.out.println("写完列表框日志");
-   				ContentLogFile(SockFileDanWei+":"+"传输的数据已经成功入库!");
-   				System.out.println("写完主要日志");
-   			}
-   			else{
+   			}else{
    				System.out.println("第一次入库出故障!!");
    				SendPack(-3);
    				ContentLogFile("第一次入库之后出错");
-  				ContentLogFile(SockFileDanWei+":"+"入库出故障!!");
-
   				//入库不成功，允许重传一次
   				System.out.println("入库出故障,重传一次!!");
 
   				try{
    					outputFile.close();
-   				}
-   				catch(Exception e){
+   				}catch(Exception e){
    					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
    				}
   				DataIn.readFully(buffer,0,MAX_SIZE);
-				DataIn.skip(1);
+//				DataIn.skip(1);
 
   				//outputFile=new FileOutputStream(SockFileName+".mdb");
   				outputFile=new FileOutputStream(SockFileName);
@@ -306,12 +277,12 @@ class ServerThread extends Thread {
 				WriteLog(SockFileLen,SockFileName);
 				WriteLog(SockFileCreatDate,SockFileName);
 				WriteLog(SockFileDanWei,SockFileName);
-				WriteLog(m,SockFileName);
+				WriteLog(curPack,SockFileName);
 				SendPack(0);
-  				m=1;
-  				for(int i=m;i<sockSendPack;i++){
+  				curPack=1;
+  				for(int i=curPack;i<totalPack;i++){
 					DataIn.readFully(buffer,0,MAX_SIZE);
-					DataIn.skip(1);
+//					DataIn.skip(1);
 					outputFile.write(buffer,0,MAX_SIZE);
 					DeleteLogFile(SockFileName);
 					WriteLog(SockFileFlag,SockFileName);
@@ -319,19 +290,18 @@ class ServerThread extends Thread {
 					WriteLog(SockFileLen,SockFileName);
 					WriteLog(SockFileCreatDate,SockFileName);
 					WriteLog(SockFileDanWei,SockFileName);
-					WriteLog(m,SockFileName);
-					m++;
-					SendPack(m);
+					WriteLog(curPack,SockFileName);
+					curPack++;
+					SendPack(curPack);
 				}
 				if(remainTotal!=0){
 					System.out.println("接收余数!");
 					DataIn.readFully(buffer,0,remainTotal);
 					outputFile.write(buffer,0,remainTotal);
-				}
-				else{
+				}else{
 					System.out.println("接收最后一个包!");
 					DataIn.readFully(buffer,0,MAX_SIZE);
-					DataIn.skip(1);
+//					DataIn.skip(1);
 					outputFile.write(buffer,0,MAX_SIZE);
 					DeleteLogFile(SockFileName);
 					WriteLog(SockFileFlag,SockFileName);
@@ -339,7 +309,7 @@ class ServerThread extends Thread {
 					WriteLog(SockFileLen,SockFileName);
 					WriteLog(SockFileCreatDate,SockFileName);
 					WriteLog(SockFileDanWei,SockFileName);
-					WriteLog(m,SockFileName);
+					WriteLog(curPack,SockFileName);
 				}
 				System.out.println("已全部收完!");
 				SendPack(-4);
@@ -347,101 +317,89 @@ class ServerThread extends Thread {
 				//调用入库模块
 				//DataDbQuery.setMdbFileName(SockFileName+".mdb");
 
-                                // 如果是ZIP文件先解压缩
-                                if ( (SockFileName.substring(SockFileName.length()-4).toUpperCase().equals(".ZIP")) )
-                                {
-                           	    if ( !extractZipedMdbFile(SockFileName) )
-                           		{
-                           		System.out.println(SockFileName + "解压缩失败。");
-                           	        }
-			           //先判断SockFileName扩展名是否是。ZIP？
-			           //DataDbQuery.setMdbFileName(SockFileName);
+                // 如果是ZIP文件先解压缩
+					if ((SockFileName.substring(SockFileName.length() - 4)
+							.toUpperCase().equals(".ZIP"))) {
+						if (!extractZipedMdbFile(SockFileName)) {
+							System.out.println(SockFileName + "解压缩失败。");
+						}
+						// 将 .ZIP 4个字符去掉，成为释放后的MDB文件。以此文件入库。
+						String strMdbFileName = SockFileName.substring(0,
+								SockFileName.length() - 4);
+						DataDbQuery.setMdbFileName(strMdbFileName);
+						System.out.println("收到ZIP文件是:" + SockFileName
+								+ " , 解压缩后的文件是" + strMdbFileName);
+					} else {
+						DataDbQuery.setMdbFileName(SockFileName);
+					}
 
-			           // 将 .ZIP 4个字符去掉，成为释放后的MDB文件。以此文件入库。
-			           String strMdbFileName = SockFileName.substring(0, SockFileName.length()-4);
-			           DataDbQuery.setMdbFileName( strMdbFileName );
-                                   System.out.println("收到ZIP文件是:"+SockFileName+" , 解压缩后的文件是" + strMdbFileName);
-			        }
-			        else
-			        {
-			           DataDbQuery.setMdbFileName(SockFileName);
-			        }
-
-				if (DataDbQuery.beginCopyData()){
-   					System.out.println("最后入库成功!!");
-   					SendPack(-2);
-   					//clientRequest.close();
-   					//serverMyFrame.ConnectNum--;
-//   					System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
-   					try{
-   						DataIn.close();
-   						outputFile.close();
-   					}
-   					catch(Exception e){
-   						System.out.println("已关闭接收文件数据流出错"+e.getMessage());
-   					}
-   					//randomFile.close();
-   					try{
-   						DeleteLogFile(SockFileName);
-   						DeleteMdbFile(SockFileName);
-   					}
-   					catch(Exception e){
-   						System.out.println("删除日志文件和数据库文件出错："+e.getMessage());
-   					}
-   					ContentLogFile("发送单位"+SockFileDanWei+":"+"好了，这次入库成功!!");
-   				}
-   				else{
-   					System.out.println("入库再次出故障!!,请退出");
-   					SendPack(-5);
-
-   					//serverMyFrame.ConnectNum--;
-
-   					try{
-   						DataIn.close();
-   						outputFile.close();
-   					}
-   					catch(Exception e){
-   						System.out.println("已关闭接收文件数据流出错"+e.getMessage());
-   					}
-   					//randomFile.close();
-   					ContentLogFile(SockFileDanWei+":"+"入库再次出故障，可能数据文件有问题!!");
-   				}
+				if (DataDbQuery.beginCopyData()) {
+						System.out.println("最后入库成功!!");
+						SendPack(-2);
+						// clientRequest.close();
+						// serverMyFrame.ConnectNum--;
+						// System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
+						try {
+							DataIn.close();
+							outputFile.close();
+						} catch (Exception e) {
+							System.out.println("已关闭接收文件数据流出错" + e.getMessage());
+						}
+						// randomFile.close();
+						try {
+							DeleteLogFile(SockFileName);
+							DeleteMdbFile(SockFileName);
+						} catch (Exception e) {
+							System.out.println("删除日志文件和数据库文件出错："
+									+ e.getMessage());
+						}
+						ContentLogFile("发送单位" + SockFileDanWei + ":"
+								+ "好了，这次入库成功!!");
+					} else {
+						System.out.println("入库再次出故障!!,请退出");
+						SendPack(-5);
+						// serverMyFrame.ConnectNum--;
+						try {
+							DataIn.close();
+							outputFile.close();
+						} catch (Exception e) {
+							System.out.println("已关闭接收文件数据流出错" + e.getMessage());
+						}
+						// randomFile.close();
+						ContentLogFile(SockFileDanWei + ":"
+								+ "入库再次出故障，可能数据文件有问题!!");
+					}
    			}
-   		}//end 结束附加信息为空的结束符
-		}//end 结束RUN里的TRY
-                catch(IOException e){
+   		}
+		}catch(IOException e){
                 	System.out.println("接收数据抛出的异常!"+e.getMessage());
-                	ContentLogFile(SockFileDanWei+":"+"已断开＆文件没有传输完毕!");
-                }
-                finally{
+        }finally{
                 	try{
                 		try{
-   					DataIn.close();
-   					outputFile.close();
-   				}
-   				catch(Exception e){
-   					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
-   				}
+		   					DataIn.close();
+		   					outputFile.close();
+		   				}catch(Exception e){
+		   					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
+		   				}
                 		//randomFile.close();
 //                		serverMyFrame.ConnectNum--;
 //                		System.out.println("线程数目"+serverMyFrame.ConnectNum);
                 		try{
-	                		clientRequest.close();
-                		}
-                		catch(Exception e){
+	                		clientSocket.close();
+                		}catch(Exception e){
                 			System.out.println("关闭单个SOCKET流出错"+e.getMessage());
                 		}
                 		System.out.println("结束");
                 	}
                 	catch(Exception e){
 //                		serverMyFrame.ConnectNum--;
-                		System.out.println("结束出错!!"+e.getMessage());
+                		e.printStackTrace();
                 	}
-
                 }
 	}
+        
 	//将附加信息分割出来
-	public void StringCopy(String strAdd){
+	public void formatInfo(String strAdd){
 		try{
 			String str;
 			str=strAdd.trim();
@@ -472,8 +430,8 @@ class ServerThread extends Thread {
 			MAX_SIZE=SockBlockSize;
 			int filelen=Integer.parseInt(SockFileLen.trim());
 			if(SockBlockSize!=0){
-			sockSendPack=(int)filelen/SockBlockSize;
-			remainTotal=filelen-(sockSendPack)*SockBlockSize;
+			totalPack=(int)filelen/SockBlockSize;
+			remainTotal=filelen-(totalPack)*SockBlockSize;
 			if((filelen%SockBlockSize)==0){
 				remainIsExist=true;
 				System.out.println("正好被整除!");
@@ -483,11 +441,10 @@ class ServerThread extends Thread {
 				System.out.println("余字节数:"+remainTotal);
 			}
 			}
-			System.out.println("返回客户端包数:"+sockSendPack);
+			System.out.println("返回客户端包数:"+totalPack);
 		}
 		catch(Exception e){
 			System.out.println("附加信息有错!!"+e.getMessage());
-
 		}
 	}
 
@@ -522,7 +479,7 @@ class ServerThread extends Thread {
 
 	}
 	//判断文件是否存在
-	public void FileIsExist(String strFileName){
+	public void checkLogFileExist(String strFileName){
 		logFile=new File(strFileName+".log");
 		if (logFile.exists()){
 			LogFileExist=true;
@@ -637,9 +594,7 @@ class ServerThread extends Thread {
 		}
 		catch(IOException e){
 			System.out.println("检查日志文件出错！"+e.getMessage());
-
 		}
-
 	}
 	//将字节转换为字符串
 	public void ByteToString(byte[] byteTemp){
@@ -651,33 +606,28 @@ class ServerThread extends Thread {
 	}
 	//发送数字给客户
 	public void SendPack(int pack){
-		String str;
-		byte[] strByte=new byte[10];
-		str=Integer.toString(pack);
-		strByte=str.getBytes();
 		try{
-			DataOut.write(strByte,0,strByte.length);
-		}
-		catch(Exception e){
-			System.out.println("返回包数出错："+e.getMessage());
-
+			DataOut.write(new String(pack+"#").getBytes());
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
-	//
+
 	protected void finalize(){
-        	if (clientRequest != null) {
+        	if (clientSocket != null) {
             		try {
                 		//serverMyFrame.ConnectNum--;
-                		clientRequest.close();
+                		clientSocket.close();
             		}
             		catch (IOException e) {
                 		e.printStackTrace();
                 		System.out.println("释放出错!"+e.getMessage());
             		}
-            		clientRequest = null;
+            		clientSocket = null;
         	}
-    	}
-    	public void destroy(){
+    }
+	
+    public void destroy(){
 //    		System.out.println("线程数目"+serverMyFrame.ConnectNum);
    	}
 
@@ -689,17 +639,13 @@ class ServerThread extends Thread {
          System.out.println("extract文件："+zipFileName);
 
          //if (zipFileName.substring(zipFileName.length()-4).toUpperCase().equals(".ZIP"))
-          if (s.toUpperCase().equals(".ZIP"))
-          {
+          if (s.toUpperCase().equals(".ZIP")){
              strDataFileName =  zipFileName.substring(0, zipFileName.length()-4);
              return extractFile(zipFileName,strDataFileName,strDataFileName);
-          }
-          else
-          {
+          }else{
              return true;
           }
       }
-
 
       public boolean extractFile(String zipFileName,String sourceFileName,String outputFileName)
       {
@@ -729,34 +675,26 @@ class ServerThread extends Thread {
           
           ZipInputStream zipStream = new ZipInputStream( stream );
 
-          
           //find archive entry
           ZipEntry zipExtract = null;
-          while(true)
-          {
-          	try
-          	   {
+          while(true){
+          	try{
              	   zipExtract = zipStream.getNextEntry();
+          	   }catch(Exception e){
+          		   e.printStackTrace();
           	   }
-      	catch(Exception e)
-      	   {
-      	    System.out.println("\nextractFile：找不到入口："+e.getMessage() + "\n");
-      	   }
-             if (zipExtract == null)
-                {
+             if (zipExtract == null){
                 System.out.println("\n\nZIP包中没有文件：" + sourceFileName+"\n\n");
                 break;
                 }
-             if (zipExtract.getName().equals(sourceFileName))
-                {
+             if (zipExtract.getName().equals(sourceFileName)){
                 System.out.println("\n\nZIP包中的文件名：" + sourceFileName+"\n\n");
                 break;
                 }
              zipStream.closeEntry();
           }
           
-          if (zipExtract == null || !zipExtract.getName().equals(sourceFileName))
-          {
+          if (zipExtract == null || !zipExtract.getName().equals(sourceFileName)){
              stream.close();
              System.out.println("在"+ zipFileName +"中找不到要展开的文件："+ sourceFileName);
              return false;
@@ -772,38 +710,25 @@ class ServerThread extends Thread {
           while(true)
           {
              int nRead = zipStream.read(buffer,0,buffer.length);
-             if (nRead <= 0)
-             {
-              break;  
-             }
-             
+             if (nRead <= 0) break;  
              output.write(buffer,0,nRead);
              crc.update(buffer,0,nRead);
           }
-          
           //close all
           output.close();
           zipStream.closeEntry();
           stream.close();
-          
           //check CRC value, if avaiable
-          if ( crcReq != -1 && crc.getValue() != crcReq )
-          {
+          if ( crcReq != -1 && crc.getValue() != crcReq ){
              System.out.println(outputFileName + "CRC 校验错误。");
              return false;
           }
-          
-       }
-       catch(Exception e)
-       {
+       }catch(Exception e){
           System.out.println("错误："+e.getMessage());
           return false;
        }
-       
       System.out.println("文件" + sourceFileName + "已经被解压缩为："+ outputFileName);
-
       return true;
-
       }	
 
 }
