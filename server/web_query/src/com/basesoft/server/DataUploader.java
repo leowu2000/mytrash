@@ -4,18 +4,18 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client {
-	int BLOCK_SIZE=1024;
+public class DataUploader {
+	int BLOCK_SIZE = 10240;
 
 	public static void main(String[] args) {
-		Client c = new Client();
+		DataUploader data = new DataUploader();
 		try {
-			c.send("d:/141030356.mdb.zip");
+			String ip = "127.0.0.1";
+			data.upload(ip, 9292, "d:/upload.mdb.zip");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -23,22 +23,20 @@ public class Client {
 		}
 	}
 
-	private void send(String fileName) throws UnknownHostException, IOException {
+	private void upload(String ip, int port, String fileName)
+			throws UnknownHostException, IOException {
+		Socket server = new Socket(ip, port);
 		File f = new File(fileName);
-		String m_FileName2 = f.getName();
-		String m_FileLen = f.length() + "";
-		String m_FileTime = "";
-		String m_FileDepart = "毕节防办";
-		int MAX_SIZE = 1024;
-		Socket server = new Socket("localhost", 9292);
+		String fName = f.getName();
+		long fLen = f.length();
+		String fTime = "";
+		String fDepart = "毕节防办";
 
-		DataOutputStream out = new DataOutputStream(server
-				.getOutputStream());
+		DataOutputStream out = new DataOutputStream(server.getOutputStream());
 		InputStreamReader in = new InputStreamReader(server.getInputStream());
-		String head = "SSGQ" + "#" + m_FileName2 + "#" + m_FileLen + "#"
-				+ m_FileTime + "#" + m_FileDepart + "#" + MAX_SIZE + "#";
+		String head = "SSGQ" + "#" + fName + "#" + fLen + "#" + fTime + "#"
+				+ fDepart + "#" + BLOCK_SIZE + "#";
 		out.write(head.getBytes());
-//		out.flush();
 
 		char[] cs = new char[10];
 		while (in.read(cs) > 0) {
@@ -47,33 +45,27 @@ public class Client {
 			int pack = Integer.parseInt(data.substring(0, data.indexOf("#")));
 			if (pack >= 0) {
 				System.out.println(pack);
-				byte[] bytes = readFileByRandomAccess(fileName,pack*BLOCK_SIZE);
+				byte[] bytes = readFileByRandomAccess(fileName, pack
+						* BLOCK_SIZE);
 				out.write(bytes);
 				out.flush();
-				System.out.println("写入块："+pack+" :"+bytes.toString());
+				System.out.println("写入块：" + pack + " :" + bytes.toString());
 			}
+			if (pack == -4)
+				break;
 			cs = new char[10];
 		}
 		in.close();
 		server.close();
 	}
 
-	/**
-	 * 随机读取文件内容
-	 * @param fileName  文件名
-	 */
-	public byte[] readFileByRandomAccess(String fileName,int beginIndex) {
+	public byte[] readFileByRandomAccess(String fileName, int beginIndex) {
 		RandomAccessFile randomFile = null;
 		try {
-			// 打开一个随机访问文件流，按只读方式
 			randomFile = new RandomAccessFile(fileName, "r");
-			// 文件长度，字节数
-			long fileLength = randomFile.length();
-			// 将读文件的开始位置移到beginIndex位置。
 			randomFile.seek(beginIndex);
 			byte[] bytes = new byte[BLOCK_SIZE];
-			int byteread = 0;
-			byteread = randomFile.read(bytes);
+			randomFile.read(bytes);
 			return bytes;
 		} catch (IOException e) {
 			e.printStackTrace();
