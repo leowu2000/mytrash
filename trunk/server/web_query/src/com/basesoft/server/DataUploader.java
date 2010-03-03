@@ -15,12 +15,18 @@ public class DataUploader {
 		DataUploader data = new DataUploader();
 		try {
 			String ip = "127.0.0.1";
-			data.upload(ip, 9292, "d:/upload.mdb.zip");
+			data.upload(ip, 9292, "d:/141030356.mdb.zip");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		// char[] cs = new char[10];
+		// cs[0]='1';cs[1]='2';
+		// System.out.println(cs);
+		// String aa = new String(cs).trim();
+		// System.out.println(aa);
 	}
 
 	private void upload(String ip, int port, String fileName)
@@ -40,14 +46,13 @@ public class DataUploader {
 
 		char[] cs = new char[10];
 		while (in.read(cs) > 0) {
-			String data = new String(cs);
-			System.out.println(data);
-			int pack = Integer.parseInt(data.substring(0, data.indexOf("#")));
+			String data = String.valueOf(cs).trim();
+			int pack = Integer.parseInt(data);
 			if (pack >= 0) {
-				System.out.println(pack);
 				byte[] bytes = readFileByRandomAccess(fileName, pack
 						* BLOCK_SIZE);
 				out.write(bytes);
+				out.write('\0');
 				out.flush();
 				System.out.println("写入块：" + pack + " :" + bytes.toString());
 			}
