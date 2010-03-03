@@ -108,7 +108,7 @@ class ServerThread extends Thread {
                 						System.out.println("开始发送的包数："+curPack);
 										for(int i=curPack;i<totalPack;i++){
 											DataIn.readFully(buffer,0,MAX_SIZE);
-//											DataIn.skip(1);
+											DataIn.skip(1);
 											outputFile.write(buffer,0,MAX_SIZE);
 											DeleteLogFile(SockFileName);
 											WriteLog(SockFileFlag,SockFileName);
@@ -128,7 +128,7 @@ class ServerThread extends Thread {
 										else{
 											System.out.println("接收最后一个包！");
 											DataIn.readFully(buffer,0,MAX_SIZE);
-//											DataIn.skip(1);
+											DataIn.skip(1);
 											outputFile.write(buffer,0,MAX_SIZE);
 											DeleteLogFile(SockFileName);
 											WriteLog(SockFileFlag,SockFileName);
@@ -173,7 +173,7 @@ class ServerThread extends Thread {
 	
 				for(int i=curPack;i<totalPack;i++){
 					DataIn.readFully(buffer,0,MAX_SIZE);
-//					DataIn.skip(1);
+					DataIn.skip(1);
 					outputFile.write(buffer,0,MAX_SIZE);
 					DeleteLogFile(SockFileName);
 					WriteLog(SockFileFlag,SockFileName);
@@ -192,7 +192,7 @@ class ServerThread extends Thread {
 				}else{
 					System.out.println("接收最后一个包!");
 					DataIn.readFully(buffer,0,MAX_SIZE);
-//					DataIn.skip(1);
+					DataIn.skip(1);
 					outputFile.write(buffer,0,MAX_SIZE);
 					DeleteLogFile(SockFileName);
 					WriteLog(SockFileFlag,SockFileName);
@@ -265,7 +265,7 @@ class ServerThread extends Thread {
    					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
    				}
   				DataIn.readFully(buffer,0,MAX_SIZE);
-//				DataIn.skip(1);
+				DataIn.skip(1);
 
   				//outputFile=new FileOutputStream(SockFileName+".mdb");
   				outputFile=new FileOutputStream(SockFileName);
@@ -282,7 +282,7 @@ class ServerThread extends Thread {
   				curPack=1;
   				for(int i=curPack;i<totalPack;i++){
 					DataIn.readFully(buffer,0,MAX_SIZE);
-//					DataIn.skip(1);
+					DataIn.skip(1);
 					outputFile.write(buffer,0,MAX_SIZE);
 					DeleteLogFile(SockFileName);
 					WriteLog(SockFileFlag,SockFileName);
@@ -301,7 +301,7 @@ class ServerThread extends Thread {
 				}else{
 					System.out.println("接收最后一个包!");
 					DataIn.readFully(buffer,0,MAX_SIZE);
-//					DataIn.skip(1);
+					DataIn.skip(1);
 					outputFile.write(buffer,0,MAX_SIZE);
 					DeleteLogFile(SockFileName);
 					WriteLog(SockFileFlag,SockFileName);
@@ -607,7 +607,7 @@ class ServerThread extends Thread {
 	//发送数字给客户
 	public void SendPack(int pack){
 		try{
-			DataOut.write(new String(pack+"#").getBytes());
+			DataOut.write(new String(pack+"").getBytes());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
