@@ -16,7 +16,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 class ServerThread extends Thread {
-	//SOCK流的变量
 	Socket clientSocket;
         DataInputStream DataIn;
         DataOutputStream DataOut;
@@ -26,14 +25,13 @@ class ServerThread extends Thread {
         int backPack;
         byte sockSendByte;
 
-//        ServerFrame serverMyFrame;
-
         //分割附加信息变量
         String SockFileFlag="";
         String SockFileName="";
         String SockFileLen="";
         String SockFileCreatDate="";
         String SockFileDanWei="";
+        
         int SockBlockSize;
         int totalPack=0;
         boolean remainIsExist=false;
@@ -345,7 +343,6 @@ class ServerThread extends Thread {
 						} catch (Exception e) {
 							System.out.println("已关闭接收文件数据流出错" + e.getMessage());
 						}
-						// randomFile.close();
 						try {
 							DeleteLogFile(SockFileName);
 							DeleteMdbFile(SockFileName);
@@ -365,44 +362,40 @@ class ServerThread extends Thread {
 						} catch (Exception e) {
 							System.out.println("已关闭接收文件数据流出错" + e.getMessage());
 						}
-						// randomFile.close();
 						ContentLogFile(SockFileDanWei + ":"
 								+ "入库再次出故障，可能数据文件有问题!!");
 					}
    			}
    		}
 		}catch(IOException e){
-                	System.out.println("接收数据抛出的异常!"+e.getMessage());
+        	System.out.println("接收数据抛出的异常!"+e.getMessage());
         }finally{
-                	try{
-                		try{
-		   					DataIn.close();
-		   					outputFile.close();
-		   				}catch(Exception e){
-		   					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
-		   				}
-                		//randomFile.close();
-//                		serverMyFrame.ConnectNum--;
-//                		System.out.println("线程数目"+serverMyFrame.ConnectNum);
-                		try{
-	                		clientSocket.close();
-                		}catch(Exception e){
-                			System.out.println("关闭单个SOCKET流出错"+e.getMessage());
-                		}
-                		System.out.println("结束");
-                	}
-                	catch(Exception e){
-//                		serverMyFrame.ConnectNum--;
-                		e.printStackTrace();
-                	}
-                }
+        	try {
+				try {
+					DataIn.close();
+					outputFile.close();
+				} catch (Exception e) {
+					System.out.println("已关闭接收文件数据流出错" + e.getMessage());
+				}
+				// serverMyFrame.ConnectNum--;
+				// System.out.println("线程数目"+serverMyFrame.ConnectNum);
+				try {
+					clientSocket.close();
+				} catch (Exception e) {
+					System.out.println("关闭单个SOCKET流出错" + e.getMessage());
+				}
+				System.out.println("结束");
+			} catch (Exception e) {
+				// serverMyFrame.ConnectNum--;
+				e.printStackTrace();
+			}
+		}
 	}
         
-	//将附加信息分割出来
+	// 将附加信息分割出来
 	public void formatInfo(String strAdd){
 		try{
-			String str;
-			str=strAdd.trim();
+			String str=strAdd.trim();
 			int len1=str.indexOf("#");
 			SockFileFlag=new String(str.substring(0,len1));
 			String str1=new String(str.substring(len1+1));
@@ -509,10 +502,7 @@ class ServerThread extends Thread {
 		logFile=new File(strFileName+".log");
 		if (logFile.exists()){
 			try{
-				if(logFile.delete()){
-					//System.out.println("已成功删除日志文件!");
-				}
-				else{
+				if(!logFile.delete()){
 					System.out.println("无法删除日志文件!");
 				}
 			}
@@ -520,83 +510,75 @@ class ServerThread extends Thread {
 				System.out.println("删除日志文件出错!"+e.getMessage());
 				logFile.delete();
 			}
-
-		}
-		else{
-			System.out.println("日志文件不存在！");
 		}
 	}
 	//写主要的日志的文件
-	public void ContentLogFile(String info){
-		try{
-			File f=new File("人大金仓发送日志文件.log");
+	public void ContentLogFile(String info) {
+		try {
+			File f = new File("人大金仓发送日志文件.log");
 			long maxSizeOfLogFile = 1000000;
-			if (f.length()>=maxSizeOfLogFile){
-				File fLogBak = new File("人大金仓发送日志文件"+f.lastModified()+".log");
-      				f.renameTo( fLogBak );
-      			}
-      			FileWriter logWriter=new FileWriter(("人大金仓发送日志文件.log"),true);
+			if (f.length() >= maxSizeOfLogFile) {
+				File fLogBak = new File("人大金仓发送日志文件" + f.lastModified()
+						+ ".log");
+				f.renameTo(fLogBak);
+			}
+			FileWriter logWriter = new FileWriter(("人大金仓发送日志文件.log"), true);
 			BufferedWriter logBuffered = new BufferedWriter(logWriter, 512);
 			DateFormat dFull = DateFormat.getDateTimeInstance();
-			logBuffered.write("接收时间是："+(dFull.format(new java.util.Date())).toString()+";"+info);
-      			logBuffered.newLine();
-      			logBuffered.flush();
-      			logBuffered.close();
-      		}
-      		catch(IOException e){
-      			System.out.println("写主要日志文件出错!!"+e.getMessage());
-      		}
-      	}
-      	//判断与传输文件是否相同
-      	public void CheckLogFile(String strFileName){
-		String strFileFlag=null;
-		String sFileName=null;
-		String strFileLen=null;
-		String strFileCreatDate=null;
-		String strFileDanWei=null;
-		String strFilePack=null;
-		try{
-			FileReader fReader=new FileReader(strFileName+".log");
-			BufferedReader bufReader=new BufferedReader(fReader,512);
-			try{
-				strFileFlag=(bufReader.readLine()).trim();
-				sFileName=(bufReader.readLine()).trim();
-				strFileLen=(bufReader.readLine()).trim();
-				strFileCreatDate=(bufReader.readLine()).trim();
-				strFileDanWei=(bufReader.readLine()).trim();
-				strFilePack=(bufReader.readLine()).trim();
-			}
-			catch(NullPointerException e1){
-
-				//strException strExce=new strException(e1);
-				System.out.println("检查日志文件出错！取字符问题！"+e1.getMessage());
-				bufReader.close();
-			}
-			if (strFileFlag.equals(SockFileFlag)&&
-				sFileName.equals(SockFileName)&&
-					strFileLen.equals(SockFileLen)&&
-						strFileDanWei.equals(SockFileDanWei)){
-				if(strFileCreatDate.equals(SockFileCreatDate)){
-					nCheckFile=1;
-					ExistPack=Integer.parseInt(strFilePack);
-					System.out.println("检查日志文件的包数并返回："+ExistPack);
-				}
-				else{
-					nCheckFile=2;
-					System.out.println("文件日期不一样!!");
-					ExistPack=0;
-				}
-			}
-			else{
-				System.out.println("与日志文件不符合!!");
-				nCheckFile=3;
-			}
-		}
-		catch(IOException e){
-			System.out.println("检查日志文件出错！"+e.getMessage());
+			logBuffered.write("接收时间是："
+					+ (dFull.format(new java.util.Date())).toString() + ";"
+					+ info);
+			logBuffered.newLine();
+			logBuffered.flush();
+			logBuffered.close();
+		} catch (IOException e) {
+			System.out.println("写主要日志文件出错!!" + e.getMessage());
 		}
 	}
-	//将字节转换为字符串
+      	// 判断与传输文件是否相同
+	public void CheckLogFile(String strFileName) {
+		String strFileFlag = null;
+		String sFileName = null;
+		String strFileLen = null;
+		String strFileCreatDate = null;
+		String strFileDanWei = null;
+		String strFilePack = null;
+		try {
+			FileReader fReader = new FileReader(strFileName + ".log");
+			BufferedReader bufReader = new BufferedReader(fReader, 512);
+			try {
+				strFileFlag = (bufReader.readLine()).trim();
+				sFileName = (bufReader.readLine()).trim();
+				strFileLen = (bufReader.readLine()).trim();
+				strFileCreatDate = (bufReader.readLine()).trim();
+				strFileDanWei = (bufReader.readLine()).trim();
+				strFilePack = (bufReader.readLine()).trim();
+			} catch (NullPointerException e1) {
+				System.out.println("检查日志文件出错！取字符问题！" + e1.getMessage());
+				bufReader.close();
+			}
+			if (strFileFlag.equals(SockFileFlag)
+					&& sFileName.equals(SockFileName)
+					&& strFileLen.equals(SockFileLen)
+					&& strFileDanWei.equals(SockFileDanWei)) {
+				if (strFileCreatDate.equals(SockFileCreatDate)) {
+					nCheckFile = 1;
+					ExistPack = Integer.parseInt(strFilePack);
+					System.out.println("检查日志文件的包数并返回：" + ExistPack);
+				} else {
+					nCheckFile = 2;
+					System.out.println("文件日期不一样!!");
+					ExistPack = 0;
+				}
+			} else {
+				System.out.println("与日志文件不符合!!");
+				nCheckFile = 3;
+			}
+		} catch (IOException e) {
+			System.out.println("检查日志文件出错！" + e.getMessage());
+		}
+	}
+	// 将字节转换为字符串
 	public void ByteToString(byte[] byteTemp){
 		byte[] strTemp=new byte[256];
 		for(int i=0;i<256;i++){
@@ -613,122 +595,118 @@ class ServerThread extends Thread {
 		}
 	}
 
-	protected void finalize(){
-        	if (clientSocket != null) {
-            		try {
-                		//serverMyFrame.ConnectNum--;
-                		clientSocket.close();
-            		}
-            		catch (IOException e) {
-                		e.printStackTrace();
-                		System.out.println("释放出错!"+e.getMessage());
-            		}
-            		clientSocket = null;
-        	}
-    }
+	protected void finalize() {
+		if (clientSocket != null) {
+			try {
+				// serverMyFrame.ConnectNum--;
+				clientSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			clientSocket = null;
+		}
+	}
 	
-    public void destroy(){
-//    		System.out.println("线程数目"+serverMyFrame.ConnectNum);
-   	}
+    public void destroy() {
+		// System.out.println("线程数目"+serverMyFrame.ConnectNum);
+	}
 
-      	//检查接受到的文件是否是ZIP扩展名？是则释放之
-      public boolean extractZipedMdbFile(String zipFileName)
-      {
-         String strDataFileName = "";
-         String s =zipFileName.substring(zipFileName.length()-4);
-         System.out.println("extract文件："+zipFileName);
+      	// 检查接受到的文件是否是ZIP扩展名？是则释放之
+	public boolean extractZipedMdbFile(String zipFileName) {
+		String strDataFileName = "";
+		String s = zipFileName.substring(zipFileName.length() - 4);
+		System.out.println("extract文件：" + zipFileName);
 
-         //if (zipFileName.substring(zipFileName.length()-4).toUpperCase().equals(".ZIP"))
-          if (s.toUpperCase().equals(".ZIP")){
-             strDataFileName =  zipFileName.substring(0, zipFileName.length()-4);
-             return extractFile(zipFileName,strDataFileName,strDataFileName);
-          }else{
-             return true;
-          }
-      }
+		if (s.toUpperCase().equals(".ZIP")) {
+			strDataFileName = zipFileName
+					.substring(0, zipFileName.length() - 4);
+			return extractFile(zipFileName, strDataFileName, strDataFileName);
+		} else {
+			return true;
+		}
+	}
 
-      public boolean extractFile(String zipFileName,String sourceFileName,String outputFileName)
-      {
-       if ( zipFileName.equals("") )
-       {
-          System.out.println("您没有指定压缩文件名称。");
-          return false;
-       }
+	public boolean extractFile(String zipFileName, String sourceFileName,
+			String outputFileName) {
+		if (zipFileName.equals("")) {
+			System.out.println("您没有指定压缩文件名称。");
+			return false;
+		}
 
-       if ( sourceFileName.equals("") )
-       {
-          System.out.println("您没有指定要解压缩哪一个文件。");
-          return false;
-       }
-       if ( outputFileName.equals("") )
-       {
-          System.out.println("您没有指定解压缩到哪个文件。");
-          return false;
-       }
-       
-       byte buffer[] = new byte[1024];
-       try //1
-       {
-          //open archive file
-          FileInputStream stream = new FileInputStream( zipFileName );
-          System.out.println("\nzipFileName :" +zipFileName );
-          
-          ZipInputStream zipStream = new ZipInputStream( stream );
+		if (sourceFileName.equals("")) {
+			System.out.println("您没有指定要解压缩哪一个文件。");
+			return false;
+		}
+		if (outputFileName.equals("")) {
+			System.out.println("您没有指定解压缩到哪个文件。");
+			return false;
+		}
 
-          //find archive entry
-          ZipEntry zipExtract = null;
-          while(true){
-          	try{
-             	   zipExtract = zipStream.getNextEntry();
-          	   }catch(Exception e){
-          		   e.printStackTrace();
-          	   }
-             if (zipExtract == null){
-                System.out.println("\n\nZIP包中没有文件：" + sourceFileName+"\n\n");
-                break;
-                }
-             if (zipExtract.getName().equals(sourceFileName)){
-                System.out.println("\n\nZIP包中的文件名：" + sourceFileName+"\n\n");
-                break;
-                }
-             zipStream.closeEntry();
-          }
-          
-          if (zipExtract == null || !zipExtract.getName().equals(sourceFileName)){
-             stream.close();
-             System.out.println("在"+ zipFileName +"中找不到要展开的文件："+ sourceFileName);
-             return false;
-          }
-          //create output file
-          FileOutputStream output = new FileOutputStream(outputFileName);
-          
-          //check store CRC
-          long crcReq = zipExtract.getCrc();
-          CRC32 crc = new CRC32();
-          
-          //read input & write to output
-          while(true)
-          {
-             int nRead = zipStream.read(buffer,0,buffer.length);
-             if (nRead <= 0) break;  
-             output.write(buffer,0,nRead);
-             crc.update(buffer,0,nRead);
-          }
-          //close all
-          output.close();
-          zipStream.closeEntry();
-          stream.close();
-          //check CRC value, if avaiable
-          if ( crcReq != -1 && crc.getValue() != crcReq ){
-             System.out.println(outputFileName + "CRC 校验错误。");
-             return false;
-          }
-       }catch(Exception e){
-          System.out.println("错误："+e.getMessage());
-          return false;
-       }
-      System.out.println("文件" + sourceFileName + "已经被解压缩为："+ outputFileName);
-      return true;
-      }	
+		byte buffer[] = new byte[1024];
+		try //1
+		{
+			//open archive file
+			FileInputStream stream = new FileInputStream(zipFileName);
+			System.out.println("\nzipFileName :" + zipFileName);
 
+			ZipInputStream zipStream = new ZipInputStream(stream);
+
+			//find archive entry
+			ZipEntry zipExtract = null;
+			while (true) {
+				try {
+					zipExtract = zipStream.getNextEntry();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (zipExtract == null) {
+					System.out.println("\n\nZIP包中没有文件：" + sourceFileName
+							+ "\n\n");
+					break;
+				}
+				if (zipExtract.getName().equals(sourceFileName)) {
+					System.out.println("\n\nZIP包中的文件名：" + sourceFileName
+							+ "\n\n");
+					break;
+				}
+				zipStream.closeEntry();
+			}
+
+			if (zipExtract == null
+					|| !zipExtract.getName().equals(sourceFileName)) {
+				stream.close();
+				System.out.println("在" + zipFileName + "中找不到要展开的文件："
+						+ sourceFileName);
+				return false;
+			}
+			//create output file
+			FileOutputStream output = new FileOutputStream(outputFileName);
+
+			//check store CRC
+			long crcReq = zipExtract.getCrc();
+			CRC32 crc = new CRC32();
+
+			//read input & write to output
+			while (true) {
+				int nRead = zipStream.read(buffer, 0, buffer.length);
+				if (nRead <= 0)
+					break;
+				output.write(buffer, 0, nRead);
+				crc.update(buffer, 0, nRead);
+			}
+			output.close();
+			zipStream.closeEntry();
+			stream.close();
+			//check CRC value, if avaiable
+			if (crcReq != -1 && crc.getValue() != crcReq) {
+				System.out.println(outputFileName + "CRC 校验错误。");
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("错误：" + e.getMessage());
+			return false;
+		}
+		System.out.println("文件" + sourceFileName + "已经被解压缩为：" + outputFileName);
+		return true;
+	}
 }

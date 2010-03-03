@@ -1,9 +1,11 @@
 package com.basesoft.server;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DbQuery {
 	Connection DbConn = null;
@@ -55,15 +57,18 @@ public class DbQuery {
 
 		System.out.println("要处理的文件是：" + strInputMdbFileName);
 		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + strInputMdbFileName;
-		String sUserName = DefaultSetting.getUserName();
-		String sPassword = DefaultSetting.getPassword();
 
 		Connection cnSource, cnTarget;
 		// cnSource用于连接初始化参数指出的Access文件；
 		// cnTarget用于连接后台数据库
-		cnSource = newConnection(sURL, sUserName, sPassword);
-		cnTarget = newConnection(DefaultSetting.getUrl(), DefaultSetting
-				.getUserName(), DefaultSetting.getPassword());
+		Properties p = new Properties();
+		try {
+			p.load(this.getClass().getResourceAsStream("/jdbc.properties"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		cnSource = newConnection(sURL, "admin", "");
+		cnTarget = newConnection(p.getProperty("datasource.jdbcUrl"), p.getProperty("datasource.username"), p.getProperty("datasource.password"));
 
 		if (cnSource == null || cnTarget == null) {
 			System.out.println("连接失败。请检查连接的ODBC参数设置是否正确；文件是否存在。");
