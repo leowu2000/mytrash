@@ -3,6 +3,7 @@ package com.basesoft.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Properties;
 
 public class MainThread extends Thread{
 	@Override
@@ -11,7 +12,9 @@ public class MainThread extends Thread{
 		Socket request = null;
 		Thread receiveThread = null;
 		try {
-			int default_port = Integer.parseInt(DefaultSetting.getPort().trim());
+			Properties p = new Properties();
+			p.load(this.getClass().getResourceAsStream("/config.properties"));
+			int default_port = Integer.parseInt(p.getProperty("Port"));
 			rServer = new ServerSocket(default_port);
 			System.out.println("The server is ready!Port: " + default_port);
 //super.ServerListPort("欢迎使用实时工情数据接收服务");

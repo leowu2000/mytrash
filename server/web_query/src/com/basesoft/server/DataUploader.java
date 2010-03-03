@@ -54,7 +54,7 @@ public class DataUploader {
 				out.write(bytes);
 				out.write('\0');
 				out.flush();
-				System.out.println("写入块：" + pack + " :" + bytes.toString());
+				System.out.println("写入块：" + pack + " :" + bytes.length);
 			}
 			if (pack == -4)
 				break;
