@@ -10,192 +10,163 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataCopy
-{
-  public DataCopy() 
-  {}
+public class DataCopy {
+	public DataCopy() {
+	}
   
-  //本函数返回指定编码对应的工情详情名称表： 大写字符串
-//没有匹配的内容则返回空字符串
-private String getRunDetailTable(String flbm)
-{
-   //*工程分类代码到具体表名的函数    
-   int i=0;
-   String  str1=new String(flbm);
-   String[][] tableNameArray={{"B","TB_RSR"},{"D","TB_DKR"},{"E","TB_DKR"},
-       {"F","TB_STOFLER"},{"H","TB_DKR"},{"K","TB_WLR"},{"N","TB_COWAPJ"},
-       {"P","TB_DKR"}};
-   
-   for (i=0;i<tableNameArray.length;i++)
-       if ((str1.toUpperCase()).equals(tableNameArray[i][0]))
-	  	return((tableNameArray[i][1]).toUpperCase());
-   return "";
-}
-
-//本函数返回指定编码对应的险情详情名称表：大写字符串
-//没有匹配的内容则返回空字符串
-private String getDangerDetailTable(String flbm)  
-{
-   /*险情分类代码转换到具体表名的函数*/
-   int i=0;
-   String  str1=new String(flbm);
-   String[][] tableNameArray={{"D001","TB_BURDSC"},{"D002","TB_OVFLDSC"},
-        {"D003","TB_LKDSC"},{"D004","TB_PPDSC"},{"D005","TB_PITDSC"},
-        {"D006","TB_SLDSC"},{"D007","TB_UNDSC"},{"D008","TB_CRDSC"},
-        {"D009","TB_CVDSC"},{"D010","TB_SPDSC"},{"D011","TB_BLBADSC"},
-        {"D012","TB_SLUDSC"},{"D013","TB_HOMLFDSC"},{"D014","TB_GTWRDSC"},
-        {"D015","TB_BRDMDSC"},{"D016","TB_OVTUDSC"},{"D017","TB_STREXDSC"},
-        {"D018","TB_SLIDSC"},{"D019","TB_PLUDSC"},{"D020","TB_BSWRDSC"},
-        {"D021","TB_EDDWRDSC"},{"D022","TB_BSWPLPDS"},{"D023","TB_HBWRDSC"},
-        {"D024","TB_CLPJPRWR"},{"D025","TB_CLPJSCDN"}};
-   
-   for (i=0;i<tableNameArray.length;i++)
-      if ((str1.toUpperCase()).equals(tableNameArray[i][0]))
-         return((tableNameArray[i][1]).toUpperCase());
-
-   return("");
-}
-
-//返回指定元集合的字段列表
-private String getAllFieldList(ResultSetMetaData oResultSetmetaData)
-{
-   String sFieldList = "";
-   try
-      {  
-      //获取字段个数：
-      int numOfCols = oResultSetmetaData.getColumnCount();
-      int i;
-   
-      //将字段名称连接起来，以，分隔
-      for(i=1; i<=numOfCols; i++)
-         {
-	 sFieldList = sFieldList + oResultSetmetaData.getColumnName(i);
-         if (i < numOfCols) sFieldList = sFieldList + ",";
-         };
-      }
-   catch(SQLException e)
-	{
-	System.out.println("getAllFieldList():错误描述："+e.getMessage());
-	return "";
-	}
-   return sFieldList;
-}
-
-//返回要插入值的参数串；输入参数是字段的个数
-private String getAllValueParaList(ResultSetMetaData oResultSetmetaData)
-{
-
-String sValueParaList = "";
-//将字段名称连接起来，以，分隔
-try
-   {  
-   int numOfCols = oResultSetmetaData.getColumnCount();
-   int i;   
-   for(i=1; i<=numOfCols; i++)
-      {
-      sValueParaList = sValueParaList + "?";
-      if (i<numOfCols) sValueParaList = sValueParaList + ",";
-      };
-   }
-catch(SQLException e)
-   {
-	System.out.println("getAllValueParaList():错误描述："+e.getMessage());
-	return "";
-   }
-
-return sValueParaList ;
-}
-
-
-// 检查当前后台表中有没有lxzp字段
-boolean existLxzpField(ResultSetMetaData oResultSetmetaData)
-{
-   boolean hasLxzp = false;
-   try
-      {  
-      //获取字段个数：
-      int numOfCols = oResultSetmetaData.getColumnCount();
-      int i;
-   
-      for(i=1; i<=numOfCols; i++)
-         {
-		 if (oResultSetmetaData.getColumnName(i).equalsIgnoreCase("lxzp")) 
-			 {
-			 hasLxzp = true;
-			 break;
-			 }
-         };
-      }
-   catch(SQLException e)
-	{
-	System.out.println("getNonLobFieldList():错误描述："+e.getMessage());
-	return false;
+  // 本函数返回指定编码对应的工情详情名称表： 大写字符串
+	private String getRunDetailTable(String flbm) {
+		// *工程分类代码到具体表名的函数
+		int i = 0;
+		String str1 = new String(flbm);
+		String[][] tableNameArray = { { "B", "TB_RSR" }, { "D", "TB_DKR" },
+				{ "E", "TB_DKR" }, { "F", "TB_STOFLER" }, { "H", "TB_DKR" },
+				{ "K", "TB_WLR" }, { "N", "TB_COWAPJ" }, { "P", "TB_DKR" } };
+		for (i = 0; i < tableNameArray.length; i++)
+			if ((str1.toUpperCase()).equals(tableNameArray[i][0]))
+				return ((tableNameArray[i][1]).toUpperCase());
+		return "";
 	}
 
-   return hasLxzp ;
-}
+	// 本函数返回指定编码对应的险情详情名称表：大写字符串
+	private String getDangerDetailTable(String flbm) {
+		/* 险情分类代码转换到具体表名的函数 */
+		int i = 0;
+		String str1 = new String(flbm);
+		String[][] tableNameArray = { { "D001", "TB_BURDSC" },
+				{ "D002", "TB_OVFLDSC" }, { "D003", "TB_LKDSC" },
+				{ "D004", "TB_PPDSC" }, { "D005", "TB_PITDSC" },
+				{ "D006", "TB_SLDSC" }, { "D007", "TB_UNDSC" },
+				{ "D008", "TB_CRDSC" }, { "D009", "TB_CVDSC" },
+				{ "D010", "TB_SPDSC" }, { "D011", "TB_BLBADSC" },
+				{ "D012", "TB_SLUDSC" }, { "D013", "TB_HOMLFDSC" },
+				{ "D014", "TB_GTWRDSC" }, { "D015", "TB_BRDMDSC" },
+				{ "D016", "TB_OVTUDSC" }, { "D017", "TB_STREXDSC" },
+				{ "D018", "TB_SLIDSC" }, { "D019", "TB_PLUDSC" },
+				{ "D020", "TB_BSWRDSC" }, { "D021", "TB_EDDWRDSC" },
+				{ "D022", "TB_BSWPLPDS" }, { "D023", "TB_HBWRDSC" },
+				{ "D024", "TB_CLPJPRWR" }, { "D025", "TB_CLPJSCDN" } };
+		for (i = 0; i < tableNameArray.length; i++)
+			if ((str1.toUpperCase()).equals(tableNameArray[i][0]))
+				return ((tableNameArray[i][1]).toUpperCase());
+		return "";
+	}
 
-// 从工情数据库中获取指定序列名的未曾使用的序列值
-private synchronized  int getNextSequence(Connection cnTarget, String tableName)
-{
-int nSequence;
-String strDatabaseProductName="";
-try
-   {
-   DatabaseMetaData myDBMetaData = cnTarget.getMetaData();
-   strDatabaseProductName = myDBMetaData.getDatabaseProductName();	  
-   strDatabaseProductName = strDatabaseProductName.toUpperCase();
-   }
-catch(SQLException e)
-   {
-	e.printStackTrace();
-   return -1;
-   }
+	// 返回指定元集合的字段列表
+	private String getAllFieldList(ResultSetMetaData oResultSetmetaData) {
+		String sFieldList = "";
+		try {
+			// 获取字段个数：
+			int numOfCols = oResultSetmetaData.getColumnCount();
+			int i;
+			// 将字段名称连接起来，以，分隔
+			for (i = 1; i <= numOfCols; i++) {
+				sFieldList = sFieldList + oResultSetmetaData.getColumnName(i);
+				if (i < numOfCols)
+					sFieldList = sFieldList + ",";
+			}
+		} catch (SQLException e) {
+			System.out.println("getAllFieldList():错误描述：" + e.getMessage());
+			return "";
+		}
+		return sFieldList;
+	}
 
-   try
-      {
-      String strSql="select nextValue from tb_sequence where TableName = '"+tableName+"'".toUpperCase() ;
-      PreparedStatement myStmt = cnTarget.prepareStatement( strSql.toUpperCase() );
-      ResultSet rsCursor = myStmt.executeQuery();
+	// 返回要插入值的参数串；输入参数是字段的个数
+	private String getAllValueParaList(ResultSetMetaData oResultSetmetaData) {
+		String sValueParaList = "";
+		// 将字段名称连接起来，以，分隔
+		try {
+			int numOfCols = oResultSetmetaData.getColumnCount();
+			int i;
+			for (i = 1; i <= numOfCols; i++) {
+				sValueParaList = sValueParaList + "?";
+				if (i < numOfCols)
+					sValueParaList = sValueParaList + ",";
+			}
+		} catch (SQLException e) {
+			System.out.println("getAllValueParaList():错误描述：" + e.getMessage());
+			return "";
+		}
+		return sValueParaList;
+	}
 
-       //若结果为空则在序号表中增加该序号名和序号值：初始化 1
-      if ( !rsCursor.next() )
-	     {
-		  strSql = "insert into tb_sequence (tableName,NextValue) values('"+tableName.toUpperCase()+"',"+10000+")";
-          myStmt.close();        
-          myStmt = cnTarget.prepareStatement( strSql.toUpperCase() ) ;
-	      myStmt.executeUpdate() ;
-          myStmt.close();
-          return 10001;
-          }
-       else
-          {
-	      nSequence = rsCursor.getInt("NEXTVALUE");
-          rsCursor.close();
-		  myStmt.close();
-	       strSql =  "update tb_sequence set NextValue=NextValue+1 where TableName = '"+tableName.toUpperCase()+"'".toUpperCase() ;
-	       myStmt = cnTarget.prepareStatement( strSql );
-	       myStmt.executeUpdate() ;
-	       myStmt.close(); 
-	       return nSequence + 1;
-          }
-      }
-   catch(SQLException e)
-      {
-	   e.printStackTrace();
-      return -1;
-      }
-}
 
-//清空参数数组
-private void resetParameters(String[] strUpdateFieldName, Object[] iNewValue,  String[] strSequenceName)
-{
+	// 检查当前后台表中有没有lxzp字段
+	boolean existLxzpField(ResultSetMetaData oResultSetmetaData) {
+		boolean hasLxzp = false;
+		try {
+			// 获取字段个数：
+			int numOfCols = oResultSetmetaData.getColumnCount();
+			int i;
+			for (i = 1; i <= numOfCols; i++) {
+				if (oResultSetmetaData.getColumnName(i)
+						.equalsIgnoreCase("lxzp")) {
+					hasLxzp = true;
+					break;
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("getNonLobFieldList():错误描述：" + e.getMessage());
+			return false;
+		}
+		return hasLxzp;
+	}
+
+	//获取指定序列名的未曾使用的序列值
+	private synchronized int getNextSequence(Connection cnTarget,
+			String tableName) {
+		int nSequence;
+		String strDatabaseProductName = "";
+		try {
+			DatabaseMetaData myDBMetaData = cnTarget.getMetaData();
+			strDatabaseProductName = myDBMetaData.getDatabaseProductName();
+			strDatabaseProductName = strDatabaseProductName.toUpperCase();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+
+		try {
+			String strSql = "select nextValue from tb_sequence where TableName = '"
+					+ tableName + "'".toUpperCase();
+			PreparedStatement myStmt = cnTarget.prepareStatement(strSql);
+			ResultSet rsCursor = myStmt.executeQuery();
+			// 若结果为空则在序号表中增加该序号名和序号值：初始化 1
+			if (!rsCursor.next()) {
+				strSql = "insert into tb_sequence (tableName,NextValue) values('"
+						+ tableName.toUpperCase() + "'," + 10000 + ")";
+				myStmt.close();
+				myStmt = cnTarget.prepareStatement(strSql.toUpperCase());
+				myStmt.executeUpdate();
+				myStmt.close();
+				return 10001;
+			} else {
+				nSequence = rsCursor.getInt("NEXTVALUE");
+				rsCursor.close();
+				myStmt.close();
+				strSql = "update tb_sequence set NextValue=NextValue+1 where TableName = '"
+						+ tableName.toUpperCase() + "'".toUpperCase();
+				myStmt = cnTarget.prepareStatement(strSql);
+				myStmt.executeUpdate();
+				myStmt.close();
+				return nSequence + 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	// 清空参数数组
+	private void resetParameters(String[] strUpdateFieldName,
+			Object[] iNewValue, String[] strSequenceName) {
 		for (int i = 0; i < strSequenceName.length; i++) {
 			strUpdateFieldName[i] = "";
 			iNewValue[i] = 0;
 			strSequenceName[i] = "";
 		}
-}
+	}
 
 // 预先检查需要赋值的字段和参数数组，如果是需要对应的流水号的则先获取其流水号并写入到
 // 对应位置；
@@ -221,7 +192,6 @@ for (i=0; i<strSequenceName.length; i++)
 */
 
 /* 从一个变长的char类型字段中获取二进制形式的数据，返回一个字节数组 */
-// 专门对付text、clob类型的字段 呜呜呜呜 写了一天呀 活着还有什么意思。。。
 public byte[] getClobFieldBytes(ResultSet sourceResultSet, String fieldName) 
 {
 byte[] wbytes = null;
@@ -268,21 +238,15 @@ finally
         }
       }
     }
-    //System.out.println("getBytes " + fieldName + " - " + new String(wbytes));
-
     return wbytes;
-    // 返回一个字节数组
-} // 从 text字段读取内容返回字节数组的 getClobFieldBytes 函数结束
+}
 
 /* 从一个变长二进制字段中获取二进制形式的数据，返回一个字节数组 */
-// 专门对付image、blob类型的字段 
 public byte[] getBlobFieldBytes(ResultSet sourceResultSet, String fieldName) 
 {
 byte[] wbytes = null;
-
 //byte[] wbytes = "0x".getBytes();  //sql server 6.5要求二进制流前先有 0x 
 InputStream wbin = null;
-
 try 
    {
    	System.out.println(" enter getBlobFieldBytes\n");
@@ -306,7 +270,6 @@ catch(SQLException e)
    System.out.println( info );
    return null;
    }
-
 catch(IOException e)
    {
    String info = "getBlobFieldBytes发生错误\n错误信息：" + e.getMessage();
@@ -328,15 +291,10 @@ finally
         }
       }
     }
-    //System.out.println("getBytes " + fieldName + " - " + new String(wbytes));
-
     return wbytes;
-    // 返回一个字节数组
-} // 从 一个变长二进制字段读取内容返回字节数组的 getBlobFieldBytes 函数结束
+}
 
-
-// 本函数用于预编译SQL语句需要
-// 对非lob类型的字段进行绑定参数
+// 本函数用于预编译SQL语句需要对非blob类型的字段进行绑定参数
 private boolean bindInsertValues(Connection cnTarget,PreparedStatement pStmt, 
 	String strParaTableName, ResultSet sourceRS,	ResultSetMetaData targetMetaData, ResultSetMetaData sourceMetaData, 
    	String[] strUpdateFieldName, Object[] iNewValue, String[] strSequenceName,	
@@ -360,11 +318,9 @@ try
       sourceFieldName = sourceMetaData.getColumnName(i).toUpperCase();
       sourceColTypeName = sourceMetaData.getColumnTypeName(i).toUpperCase();
 	  System.out.println("来自ACCESS：第 " + i + " 个字段" + sourceFieldName + "类型是 " + sourceColTypeName);
-
        // 设置是否是需要单独绑定为整数(或者是字符串)的字段标志变量？
       boolean isUpdateFieldName = false;
-      try  
-         {
+      try{
          for (int k = 0; k < strUpdateFieldName.length; k++)
             {
             if ( strUpdateFieldName[k].equalsIgnoreCase( targetFieldName ) ) {
@@ -460,18 +416,15 @@ try
       
     System.out.println("going to execute……");
 	pStmt.execute();
-   }
-catch(SQLException e)
-   {
-	e.printStackTrace();
-    return false;
-   };
-   return true;
+   } catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	return true;
 }
 
 // 从cnSource源中将指定表中所有符合条件的记录复制到cnTarget连接的工情数据库中
    // *** 本函数针对只需要对一个字段用固定序号替换的情形
-   // 
    // cnSource：源连接，cnTarget：目的连接
    // strTableName：要复制的表名称； strFilter：过滤条件表达式
    // strUpdateFieldName：需要单独赋值的字段名称, iNewValue：对应的值整型,
