@@ -164,68 +164,21 @@ function printpage(m_printpage1){
     document.body.innerHTML = oldstr;
     return true;
 }
-function uplaodReportPhotos(tbname){
-	var check = document.getElementById('PICLIST').innerHTML;
-	var title = document.getElementById('TITLE').value;
-	var time = document.getElementById('DTCDT').value;
-	var filepath = document.getElementById('UpFile').value;
-	var zpms = document.getElementById('NRMS').value;
-	var dncid = document.getElementById('DNCNO').value;
-	var filedetail;
-	if(filepath==""){alert("请选择上传照片！");return false;}
-	if(filepath!=""){
-		var poi = filepath.lastIndexOf(".");
-		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
-		if(detail!="JPG" && detail!="JPEG" && detail!="GIF" && detail!="BMP"){
-			alert("不支持的文件格式，请重新选择！");
-			return false;
-		}
-	}
-	var delFlg;
-	if(check=="")delFlg=1;else delFlg=2;//保存照片的时候是否首先执行删除操作的标志位
-	if(filepath==""){
-		alert("请选择文件.");
-		return false;
-	}
-	if(title==""){
-		alert("请填写照片标题.");
-		return false;
-	}
-	if(time==""){
-		alert("请填写时间");
-		return false;
-	}
-	if(window.XMLHttpRequest){ //Mozilla
-    	var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
-	xmlHttpReq.open("GET", "/FileUploadServlet?type=report&tabname="+tbname+"&zpbtvalue="+title+"&time="+time
-			+"&zpmsvalue="+zpms+"&filepath="+filepath+"&detailvalue="+filedetail+"&DNCNO="+dncid+"&delFlg="+delFlg, false);
-	xmlHttpReq.send(null);
-	var result = xmlHttpReq.responseText;
-	PICLIST.innerHTML=result;
-	document.getElementById('NRMS').value="";
-	document.getElementById('TITLE').value="";
-}
-function submitingReport(tbname){
-	if(document.getElementById('MAINTITLE').value==""){
-		alert("请填写标题.");
-		return false;
-	}
-	document.getElementById('TABLENAME').value=tbname;
-	document.frm.submit();
-}
-
 function toDel(){
 	var result="";
 	var str = document.forms[0].RECORDID;
-	for(var i=0;i<str.length;i++){
-		if(str[i].checked==true){
-			if(result=="")
-				result = str[i].value;
-			else
-				result +=","+ str[i].value;
+	if(str.length==undefined){
+		if(document.forms[0].RECORDID.checked){
+			result=document.forms[0].RECORDID.value;
+		}
+	}else{
+		for(var i=0;i<str.length;i++){
+			if(str[i].checked==true){
+				if(result=="")
+					result = str[i].value;
+				else
+					result +=","+ str[i].value;
+			}
 		}
 	}
 	if(result==""){
@@ -237,5 +190,156 @@ function toDel(){
 			document.frm.actionType.value="del";
 			document.frm.submit();
 		}
+	}
+}
+//图片预览区域代码
+function viewDataImg(value) 
+{ 
+
+	//新的预览代码，支持 IE6、IE7。 
+	var newPreview = document.getElementById("newPreview"); 
+	//newPreview.style.filter="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);";
+	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = value; 
+	newPreview.style.width = "150px"; 
+	newPreview.style.height = "100px"; 
+	newPreview.style.border= "6px double #ccc";
+}
+function PreviewImg(imgFile) 
+{ 
+	//新的预览代码，支持 IE6、IE7。 
+	var newPreview = document.getElementById("newPreview"); 
+	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgFile.value; 
+	newPreview.style.width = "150px"; 
+	newPreview.style.height = "100px"; 
+	newPreview.style.border= "6px double #ccc";
+}
+function pre_updateThePic(picid,type,tablename,filePath){
+	document.frm.uptype.value=type;
+	if(window.XMLHttpRequest){ //Mozilla
+		var xmlHttpReq=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	}
+	if(type==1)
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
+	if(type==2)
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename=TB_SUB_TEMP&picid="+picid, false);
+	xmlHttpReq.send(null);
+	var results = xmlHttpReq.responseText;
+	if(val=="")
+		alert("数据查询失败,请重试!");
+	else{
+		viewDataImg(filePath);
+		var val = results.split(";");
+		document.frm.picid.value=picid;
+		document.frm.TITLE.value=val[0];
+		document.frm.DTCDT.value=val[1];
+		document.frm.NRMS.value=val[2];
+		showupfile.style.display="none";
+		thfiles.style.display="inline";
+		document.frm.addbutton.disabled=true;
+		document.frm.editbutton.disabled=false;
+		document.frm.cancelbutton.disabled=false;
+		thfiles.innerHTML=val[0]+"&nbsp;&nbsp;&nbsp;&nbsp;<a href=javascript:delMeditSubmit('"+picid+"','"+tablename+"') title='点击删除多媒体信息'><img src='/images/small_delete.gif' border='0'></img></a>";
+	}
+}
+function cancelPhotos(){
+	document.frm.TITLE.value="";
+	document.frm.DTCDT.value="";
+	document.frm.NRMS.value="";
+	showupfile.style.display="inline";
+	thfiles.style.display="none";
+	//清空file值
+	var obj = document.getElementById("UpFile");
+	obj.outerHTML = obj.outerHTML;
+	//清空图片预览区域
+	var objIMG = document.getElementById("newPreview");
+	objIMG.outerHTML =objIMG.outerHTML;
+	document.frm.addbutton.disabled=false;
+	document.frm.editbutton.disabled=true;
+	document.frm.cancelbutton.disabled=true;
+}
+function delMeditSubmit(id,tablename){
+	if(confirm("删除后不能恢复,是否继续?")){
+		if(window.XMLHttpRequest){ //Mozilla
+			var xmlHttpReq=new XMLHttpRequest();
+		}else if(window.ActiveXObject){
+			var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+		}
+		var type = document.frm.uptype.value;
+		if(type==1)
+			xmlHttpReq.open("GET", "/FileUploadServlet?type=delpic&tablename="+tablename+"&picid="+id, false);
+		if(type==2)
+			xmlHttpReq.open("GET", "/FileUploadServlet?type=delpic&tablename=TB_SUB_TEMP&picid="+id, false);
+		xmlHttpReq.send(null);
+		var results = xmlHttpReq.responseText;
+		if("sucess"==results){
+			showupfile.style.display="inline";
+			thfiles.style.display="none";
+			document.frm.TITLE.value="";
+			document.frm.DTCDT.value="";
+			document.frm.NRMS.value="";
+			showupfile.style.display="inline";
+			thfiles.style.display="none";
+			document.frm.addbutton.disabled=false;
+			document.frm.editbutton.disabled=true;
+			document.frm.cancelbutton.disabled=true;
+			//清空file值
+			var obj = document.getElementById("UpFile");
+			obj.outerHTML = obj.outerHTML;
+			//清空图片预览区域
+			var objIMG = document.getElementById("newPreview");
+			objIMG.outerHTML =objIMG.outerHTML;
+			document.frames('ZPFRAME').location.reload();
+		}
+	}
+}
+function updateMediaMsg(tablename){
+	var name = document.frm.TITLE.value;
+	var cjsj = document.frm.DTCDT.value;
+	var desc = document.frm.NRMS.value;
+	var type = document.frm.uptype.value;
+
+	if(name==""){
+		alert("标题不能为空.");
+		return false;
+	}
+	if(cjsj==""){
+		alert("拍摄时间不能为空.");
+		return false;
+	}
+	if(desc==""){
+		alert("照片描述不能为空.");
+		return false;
+	}
+	if(window.XMLHttpRequest){ //Mozilla
+		var xmlHttpReq=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+	}
+	if(type==1)
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=updateMediaMsg&tablename="+tablename+"&picid="
+					+document.frm.picid.value+"&title="+name+"&dtcdt="+cjsj+"&nrms="+desc, false);
+	if(type==2)
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=updateMediaMsg&tablename=TB_SUB_TEMP&picid="
+				+document.frm.picid.value+"&title="+name+"&dtcdt="+cjsj+"&nrms="+desc, false);
+	xmlHttpReq.send(null);
+	var results = xmlHttpReq.responseText;
+	if("sucess"==results){
+		document.frm.TITLE.value="";
+		document.frm.DTCDT.value="";
+		document.frm.NRMS.value="";
+		showupfile.style.display="inline";
+		thfiles.style.display="none";
+		//清空file值
+		var obj = document.getElementById("UpFile");
+		obj.outerHTML = obj.outerHTML;
+		//清空图片预览区域
+		var objIMG = document.getElementById("newPreview");
+		objIMG.outerHTML =objIMG.outerHTML;
+		document.frm.addbutton.disabled=false;
+		document.frm.editbutton.disabled=true;
+		document.frm.cancelbutton.disabled=true;
+		document.frames('ZPFRAME').location.reload();
 	}
 }

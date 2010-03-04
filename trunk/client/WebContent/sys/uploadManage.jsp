@@ -4,6 +4,7 @@
 <%@ page import="com.util.page.*" %>
 <%@ page import="com.util.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <html>
 <head>
 <title></title>
@@ -101,10 +102,10 @@ function view_submit(){
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="IDs"/>
 <input type="hidden" value="" name="actionType"/>
-<input type="hidden" value="fxjb" name="towhere"/>
+<input type="hidden" value="upload" name="towhere"/>
 <input type="hidden" value="<%=pageStr %>" name="page"/>
 <input type="hidden" value="<%=iswhere %>" name="iswhere"/>
-<input type="hidden" value="fxjb" name="searchType"/>
+<input type="hidden" value="upload" name="searchType"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 		<tr height="25" >

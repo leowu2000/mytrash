@@ -9,11 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.buiness.dao.BuinessDao;
+import com.buiness.form.ConfigBean;
 import com.core.UUIdFactory;
+import com.util.OutputLog;
 import com.util.RandomAccessFileExample;
 import com.util.ToZipFile;
 import com.util.UploadBean;
 import com.util.UploadDB;
+import com.util.UtilDateTime;
 
 public class UploadDbController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -21,9 +24,9 @@ public class UploadDbController implements Controller {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		String actionType = request.getParameter("actionType");
 		if("upload".trim().equals(actionType)){
-			//将上传数据信息拷备到TB_PICKREC中
 			String delSQL = "delete from TB_PICKREC";
 			BuinessDao.updateDB(delSQL, path);
+			//将上传数据信息拷备到TB_PICKREC中
 			List<UploadBean> records = UploadDB.getUploadRecords(path);
 			if(records!=null && records.size()>0){
 				for(int i=0;i<records.size();i++){
@@ -44,11 +47,19 @@ public class UploadDbController implements Controller {
 			boolean flg = UploadDB.copySendDataToUploadDatabase(path);
 			if(flg){//压缩数据库
 				String oldfile="upload.mdb";
-				String newfile="dbback.mdb";
+				String newfile=UtilDateTime.nowString()+".mdb";
 				RandomAccessFileExample.doAccess(path,oldfile, newfile);
-				ToZipFile.zipFile(path+newfile,path+"upload.zip");
+				ToZipFile.zipFile(path+newfile,path+newfile+".zip");
+				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t准备上传数据\t压缩数据成功...");
 			}
+			OutputLog.outputLog(path, "============================================================");
 			//连接远程服务器，开始传送数据
+			ConfigBean configBean = (ConfigBean)request.getSession().getAttribute("configBean");
+			String ipAddress = configBean.getSERVER_IP();
+			String serverName = configBean.getSERVER_NAME();
+			String serverPort = configBean.getSERVER_NAME();
+			
+			
 		}
 		return null;
 	}

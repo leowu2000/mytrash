@@ -22,7 +22,8 @@
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
-<script Language="JavaScript" src="gccj_submit.js"></script>
+<script Language="JavaScript" src="/common/js/projectCommon.js"></script>
+<script Language="JavaScript" src="/common/js/common.js"></script>
 </head>
 <style type="text/css">
 <!--
@@ -48,7 +49,7 @@ function toBack(){
 	<tr><td align="center" ><span  class="style4">查看运行状态信息</span></td></tr>
 </table>
 <%} %>
-<form name="form1" method="POST"> 
+<form name="frm" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="1"/>
 <input type="hidden" name="WTDPCD" value=""/>
@@ -84,11 +85,20 @@ function toBack(){
 		<td nowrap class="title">当前泻量:</td>
 		<td bgcolor="#FFFFFF"><%=rsrbean.getRQ() %>立方米/秒</td>
 	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="ZPFRAME" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="/common/picViewer.jsp?tbid=TB_PJR_M&DNCNO=<%=RPJINCD %>&PKNAME=PJRNO" height="130" width="100%">
-		</iframe>
-		</td>
+	<tr height="25" bgcolor="#FFFFFF" >
+		<td nowrap class="title">照片标题:</td> 
+		<td bgcolor="#FFFFFF" colspan="4"><div id="TITLE">&nbsp;</div></td>
+		<td bgcolor="#FFFFFF" rowspan="2" align="center"><div id="newPreview" ></div></td>
+	</tr>
+	<tr bgcolor="#FFFFFF" height="60" >
+		<td nowrap class="title">照片描述:</td> 
+		<td bgcolor="#FFFFFF" colspan="4"><div id="NRMS">&nbsp;</div></td>		
+	</tr>
+	<tr height="25" >
+		<td nowrap bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/picView.jsp?temp= <%=Math.random()%>&tablename=TB_PJR_M&pkvalue=<%=RPJINCD %>&pkname=PJRNO" height="110" width="100%">
+		</iframe>	
+		</td> 
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="6" align="center">

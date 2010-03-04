@@ -134,7 +134,7 @@ body {
     <li><a href="#">恢复数据库</a></li> 
     <li><a href="#">压缩数据库</a></li> 
     <li><a href="#">清空数据库</a></li> 
-    <li><a href="#">查看日志</a></li>
+    <li><a href="/sys/syslog.jsp" target="mainFrame">查看日志</a></li>
     <li><a href="/sys/config.jsp" target="mainFrame">参数设置</a></li>
     </ul> 
 </li> 

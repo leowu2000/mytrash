@@ -42,8 +42,9 @@ margin:0px auto; padding:0px;
 			<%if(bean.getLKGTU().trim().equals("2")) {%>浑<%} %>
 		</td>
 		<td nowrap class="title">漏洞群面积:</td>
-		<td bgcolor="#FFFFFF" colspan="4"><%=bean.getLKSAR() %> 平方米</td>
-		
+		<td bgcolor="#FFFFFF"><%=bean.getLKSAR() %> 平方米</td>
+		<td nowrap class="title">漏洞水柱高:</td>
+		<td bgcolor="#FFFFFF" ><%=bean.getLKWTLH() %> 米</td>
 	</tr>
 </table>
 </div>

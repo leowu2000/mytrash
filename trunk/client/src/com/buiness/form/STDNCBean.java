@@ -187,9 +187,9 @@ public class STDNCBean {
 			bean.setDAGLO(rs.getString("DAGLO"));//出险部位
 			bean.setRDEPL(rs.getString("RDEPL"));//抢险方案
 			bean.setRDERESCN(rs.getString("RDERESCN"));//抢险资源配备
-			bean.setTPN(String.valueOf(rs.getFloat("TPN")));//群众投入(人)
-			bean.setPLAPN(String.valueOf(rs.getFloat("PLAPN")));//解放军投入(人)
-			bean.setPLIPN(String.valueOf(rs.getFloat("PLIPN")));//武警投入(人)
+			bean.setTPN(String.valueOf(rs.getInt("TPN")));//群众投入(人)
+			bean.setPLAPN(String.valueOf(rs.getInt("PLAPN")));//解放军投入(人)
+			bean.setPLIPN(String.valueOf(rs.getInt("PLIPN")));//武警投入(人)
 			bean.setRDECNRL(rs.getString("RDECNRL"));//进展及结果
 			bean.setDNCCUAN(rs.getString("DNCCUAN"));//险情原因分析
 			bean.setDNCESTDV(rs.getString("DNCESTDV"));//险情发展趋势

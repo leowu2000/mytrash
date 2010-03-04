@@ -15,7 +15,6 @@
 <% 
 	String path = request.getSession().getServletContext().getRealPath("/");
 	String num = request.getParameter("num");
-	System.out.println("----------"+num);
 	String tbname = request.getParameter("tbname");
 	if("TB_STDNC".trim().equals(tbname)){//ÏÕÇé
 		

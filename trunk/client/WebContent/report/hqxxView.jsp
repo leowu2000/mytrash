@@ -4,12 +4,13 @@
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.fredck.FCKeditor.FCKeditor"%>
+<%@ include file="/common/session.jsp"%>
 <% 
-	String relPath = request.getSession().getServletContext().getRealPath("/"); 
 	String fromwhere = request.getParameter("fromwhere");
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+    RandomAccessFileExample.delAllFile(relPath+"\\\\common\\\\pic");
     String RPJINCD = request.getParameter("RPJINCD");
     HQBean bean = BuinessDao.findHQByID(relPath,RPJINCD);
     String content = bean.getACTICO();
@@ -20,6 +21,7 @@
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
+<script Language="JavaScript" src="/common/js/reportCommon.js"></script>
 </head>
 <style type="text/css">
 <!--
@@ -37,63 +39,44 @@ borde:6px double #ccc;
 function toBack(){
 	location.href="/report/TB_QTManage.jsp";
 }
-function PreviewImg(imgFile) 
-{ 
- 
-	//新的预览代码，支持 IE6、IE7。 
-	var newPreview = document.getElementById("newPreview"); 
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgFile.value; 
-	newPreview.style.width = "150px"; 
-	newPreview.style.height = "100px"; 
-	newPreview.style.border= "6px double #ccc";
-}
 </script>
 <body scroll="auto">
 <%if(!"upload".trim().equals(fromwhere)) {%>
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">旱情信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4"><%=bean.getWTTT() %></span></td></tr>
 </table>
 <%} %>
 <form name="frm" action="/buiness.do"  method="POST">
-<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_QT","RPJINCD") %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
-<input type="hidden" name="WTDPCD" value="WTDPCD"/>
+<input type="hidden" name="picid" value=""/>
+<input type="hidden" name="check" value="1"/><!-- 是否删除多媒体临时表数据标志1,删除,2不删除 -->
+<input type="hidden" name="uptype" value=""/>
+<input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="FILEDNAME" value="ACTICO"/>
 <input type="hidden" name="TABLENAME" value=""/>
-<input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
-	<tr height="25" >
-		<td align="center" class="title" >旱情标题:</td>
-		<td align="center" class="title2" colspan="5">
-		<%=bean.getWTTT() %></td>
+	<tr bgcolor="#FFFFFF" >
+		<td nowrap class="title" width="20%">照片标题:</td> 
+		<td bgcolor="#FFFFFF" width="40%"><div id="TITLE">&nbsp;</div></td>
+		
+		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
+	</tr>
+	<tr>
+		<td nowrap class="title">拍摄时间:</td> 
+		<td bgcolor="#FFFFFF" ><div id="DTCDT">&nbsp;</div></td>
+	</tr>
+	<tr height="25" bgcolor="#FFFFFF" >
+		<td nowrap class="title">照片描述:</td> 
+		<td bgcolor="#FFFFFF"><div id="NRMS">&nbsp;</div></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title">照片标题</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value=""/></td>
-		<td nowrap class="title">拍摄时间</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="DTCDT" class="lines" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
-		<td nowrap class="title2" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
-	</tr>
-	<tr height="25" >
-		<td nowrap class="title" colspan="2">照片描述</td> 
-		<td nowrap class="title" colspan="2">照片列表</td> 
-		<td nowrap class="title" colspan="2">照片预览
-			<input type="button" name="" value="添加照片" onclick="javascript:uplaodReportPhotos('TB_FPACTI_M')"/>
-		</td>
-	</tr>
-	<tr height="25" >
-		<td bgcolor="#FFFFFF" colspan="2">
-			<textarea rows="6" cols="33" name="NRMS"></textarea>
+		<td nowrap bgcolor="#FFFFFF" colspan="4" align="center">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/picView.jsp?temp= <%=Math.random()%>&tablename=TB_QT_M&pkvalue=<%=RPJINCD %>&pkname=RPJINCD" height="110" width="100%">
+		</iframe>	
 		</td> 
-		<td bgcolor="#FFFFFF" colspan="2">
-			<div id="PICLIST" class="divStyle"></div>
-		</td> 
-		<td bgcolor="#FFFFFF" colspan="2" align="center">
-			<div id="newPreview" ></div>
-		</td>
 	</tr>
 	<tr height="25" >
-	<td bgcolor="#FFFFFF" colspan="6" align="center">
+	<td bgcolor="#FFFFFF" colspan="6" align="left">
 	<%=content%>
 	</td>
 	</tr>
@@ -103,8 +86,6 @@ function PreviewImg(imgFile)
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="保  存" onclick="javascript:submitingReport('TB_QT')">
-	&nbsp;
 	<input type="button" name="" value="返  回" onclick="javascript:toBack()">
 	</tr>
 </table>

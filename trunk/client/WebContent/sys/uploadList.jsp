@@ -40,13 +40,6 @@ function upload_submit(){
 	String path = request.getSession().getServletContext().getRealPath("/");
 	
 	List<UploadBean> records = UploadDB.getUploadRecords(path);
-	
-	String pageStr = (String)request.getAttribute("page");  
-	int currentPage = 1; 
-	if (pageStr != null) 
-	currentPage = Integer.parseInt(pageStr); 
-	PageUtil pUtil = new PageUtil(10, records.size(), currentPage); 
-	currentPage = pUtil.getCurrentPage(); 
 %> 
 <body>
 <table width="95%" align="center">
@@ -56,25 +49,9 @@ function upload_submit(){
 <input type="hidden" value="" name="IDs"/>
 <input type="hidden" value="" name="actionType"/>
 <input type="hidden" value="fxjb" name="towhere"/>
-<input type="hidden" value="<%=pageStr %>" name="page"/>
+
 <input type="hidden" value="" name="iswhere"/>
 <input type="hidden" value="fxjb" name="searchType"/>
-<input type="hidden" value="<%=currentPage %>" name="currentPage"/>
-<table border="0" align="center" width="98%" >
-	<tr>
-		<td width=100% bgcolor="#FFFFFF" align="right"> 
-		共选择上传数据<font color="red"> <%=pUtil.getRecordCount()%> </font>条  每页显示<%=pUtil.getPageSize()%>条 
-		<%if(currentPage>1) {%>
-		<a href="javascript:doQuery(1)" ><img src="/images/shouye.GIF" border="0"></a> 
-		<a href="javascript:doQuery(<%=(currentPage - 1)%>)"><img src="/images/shangyiye.GIF" border="0"></a> 
-		<%} %>
-		<%if(pUtil.getPageCount()>currentPage) {%>
-		<a href="javascript:doQuery(<%=(currentPage + 1)%>)"><img src="/images/xiayiye.GIF" border="0"></a> 
-		<a href="javascript:doQuery(<%=pUtil.getPageCount()%>)"><img src="/images/moye.GIF" border="0"></a> 
-		<%} %>
-	</td>
-	</tr>
-</table>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
@@ -84,7 +61,7 @@ function upload_submit(){
 		<td nowrap align="center" class="title_center">填报单位</td>
 	</tr>
 	<%if(records!=null && records.size()>0){
-		for(int i=pUtil.getFromIndex();i<pUtil.getToIndex();i++){
+		for(int i=0;i<records.size();i++){
 			UploadBean bean = (UploadBean)records.get(i);
 	%>
 	<tr  bgcolor="#FFFFFF">
