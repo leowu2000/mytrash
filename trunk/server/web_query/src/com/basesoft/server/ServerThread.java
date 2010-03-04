@@ -52,9 +52,6 @@ class ServerThread extends Thread {
            this.clientSocket=s;
         }
         public ServerThread(Socket s) {
-//          this.serverMyFrame=parent;
-//          serverMyFrame.ConnectNum++;
-//          ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
           this.clientSocket=s;
        }
         public synchronized void run(){
@@ -207,41 +204,36 @@ class ServerThread extends Thread {
 
 			//调用入库模块
 			System.out.println("调用入库模块!");
-			DbQuery DataDbQuery=new DbQuery("");
+			DbQuery db=new DbQuery("");
 
-            // 如果是ZIP文件先解压缩
-				if ((SockFileName.substring(SockFileName.length() - 4)
-						.toUpperCase().equals(".ZIP"))) {
-					if (!extractZipedMdbFile(SockFileName)) {
-						System.out.println(SockFileName + "解压缩失败。");
-					}
-					// 先判断SockFileName扩展名是否是。ZIP？
-					// DataDbQuery.setMdbFileName(SockFileName);
-
-					// 将 .ZIP 4个字符去掉，成为释放后的MDB文件。以此文件入库。
-					String strMdbFileName = SockFileName.substring(0,
+			if ((SockFileName.toLowerCase().endsWith(".zip"))) {
+					String strDataFileName = SockFileName.substring(0,
 							SockFileName.length() - 4);
-					DataDbQuery.setMdbFileName(strMdbFileName);
-					System.out.println("收到ZIP文件:" + SockFileName
-							+ " , 解压缩后文件" + strMdbFileName);
+					if (!extractFile(SockFileName, strDataFileName,
+							strDataFileName)) {
+						System.out.println(SockFileName + "解压失败。");
+					}
+					db.setMdbFileName(strDataFileName);
+					System.out.println("收到ZIP文件:" + SockFileName + " , 解压后"
+							+ strDataFileName);
 				} else {
-					DataDbQuery.setMdbFileName(SockFileName);
+					db.setMdbFileName(SockFileName);
 				}
 
-   			try{
-   				Thread.sleep(1000);
-   			}catch(InterruptedException e){
-   				System.out.println("阻塞状态出错"+e.getMessage());
-   			}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 
-   			if (DataDbQuery.beginCopyData()){
+   			if (db.beginCopyData()){
    				System.out.println("入库成功!!");
    				SendPack(-2);
    				try{
    					DataIn.close();
    					outputFile.close();
    				}catch(Exception e){
-   					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
+   					e.printStackTrace();
    				}
    				System.out.println("已关闭完接收文件数据流");
    				try{
@@ -260,12 +252,11 @@ class ServerThread extends Thread {
   				try{
    					outputFile.close();
    				}catch(Exception e){
-   					System.out.println("已关闭接收文件数据流出错"+e.getMessage());
+   					System.out.println("关闭接收文件数据流出错"+e.getMessage());
    				}
   				DataIn.readFully(buffer,0,MAX_SIZE);
 				DataIn.skip(1);
 
-  				//outputFile=new FileOutputStream(SockFileName+".mdb");
   				outputFile=new FileOutputStream(SockFileName);
 
   				outputFile.write(buffer,0,MAX_SIZE);
@@ -311,27 +302,21 @@ class ServerThread extends Thread {
 				}
 				System.out.println("已全部收完!");
 				SendPack(-4);
-				ContentLogFile("发送单位是："+SockFileDanWei+":"+"文件传输完毕!!");
 				//调用入库模块
-				//DataDbQuery.setMdbFileName(SockFileName+".mdb");
-
-                // 如果是ZIP文件先解压缩
-					if ((SockFileName.substring(SockFileName.length() - 4)
-							.toUpperCase().equals(".ZIP"))) {
-						if (!extractZipedMdbFile(SockFileName)) {
+					if ((SockFileName.toLowerCase().endsWith(".zip"))) {
+						String strDataFileName = SockFileName.substring(0,
+								SockFileName.length() - 4);
+						if (!extractFile(SockFileName, strDataFileName, strDataFileName)) {
 							System.out.println(SockFileName + "解压缩失败。");
 						}
-						// 将 .ZIP 4个字符去掉，成为释放后的MDB文件。以此文件入库。
-						String strMdbFileName = SockFileName.substring(0,
-								SockFileName.length() - 4);
-						DataDbQuery.setMdbFileName(strMdbFileName);
+						db.setMdbFileName(strDataFileName);
 						System.out.println("收到ZIP文件是:" + SockFileName
-								+ " , 解压缩后的文件是" + strMdbFileName);
+								+ " , 解压缩后的文件是" + strDataFileName);
 					} else {
-						DataDbQuery.setMdbFileName(SockFileName);
+						db.setMdbFileName(SockFileName);
 					}
 
-				if (DataDbQuery.beginCopyData()) {
+				if (db.beginCopyData()) {
 						System.out.println("最后入库成功!!");
 						SendPack(-2);
 						// clientRequest.close();
@@ -355,7 +340,6 @@ class ServerThread extends Thread {
 					} else {
 						System.out.println("入库再次出故障!!,请退出");
 						SendPack(-5);
-						// serverMyFrame.ConnectNum--;
 						try {
 							DataIn.close();
 							outputFile.close();
@@ -377,16 +361,13 @@ class ServerThread extends Thread {
 				} catch (Exception e) {
 					System.out.println("已关闭接收文件数据流出错" + e.getMessage());
 				}
-				// serverMyFrame.ConnectNum--;
-				// System.out.println("线程数目"+serverMyFrame.ConnectNum);
 				try {
 					clientSocket.close();
 				} catch (Exception e) {
 					System.out.println("关闭单个SOCKET流出错" + e.getMessage());
 				}
-				System.out.println("结束");
+				System.out.println("连接结束");
 			} catch (Exception e) {
-				// serverMyFrame.ConnectNum--;
 				e.printStackTrace();
 			}
 		}
@@ -608,40 +589,14 @@ class ServerThread extends Thread {
 	}
 	
     public void destroy() {
-		// System.out.println("线程数目"+serverMyFrame.ConnectNum);
-	}
-
-      	// 检查接受到的文件是否是ZIP扩展名？是则释放之
-	public boolean extractZipedMdbFile(String zipFileName) {
-		String strDataFileName = "";
-		String s = zipFileName.substring(zipFileName.length() - 4);
-		System.out.println("extract文件：" + zipFileName);
-
-		if (s.toUpperCase().equals(".ZIP")) {
-			strDataFileName = zipFileName
-					.substring(0, zipFileName.length() - 4);
-			return extractFile(zipFileName, strDataFileName, strDataFileName);
-		} else {
-			return true;
-		}
 	}
 
 	public boolean extractFile(String zipFileName, String sourceFileName,
 			String outputFileName) {
-		if (zipFileName.equals("")) {
-			System.out.println("您没有指定压缩文件名称。");
+		if (zipFileName.equals("")||sourceFileName.equals("")||outputFileName.equals("")) {
+			System.out.println("没有指定文件名称。");
 			return false;
 		}
-
-		if (sourceFileName.equals("")) {
-			System.out.println("您没有指定要解压缩哪一个文件。");
-			return false;
-		}
-		if (outputFileName.equals("")) {
-			System.out.println("您没有指定解压缩到哪个文件。");
-			return false;
-		}
-
 		byte buffer[] = new byte[1024];
 		try //1
 		{

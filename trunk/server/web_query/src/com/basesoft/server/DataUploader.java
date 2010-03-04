@@ -15,7 +15,7 @@ public class DataUploader {
 		DataUploader data = new DataUploader();
 		try {
 			String ip = "127.0.0.1";
-			data.upload(ip, 9292, "d:/141030356.mdb.zip");
+			data.upload(ip, 9292, "d:/upload.mdb.zip");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
