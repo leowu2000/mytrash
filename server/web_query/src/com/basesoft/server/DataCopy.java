@@ -11,9 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataCopy {
-	public DataCopy() {
-	}
-  
   // 本函数返回指定编码对应的工情详情名称表： 大写字符串
 	private String getRunDetailTable(String flbm) {
 		// *工程分类代码到具体表名的函数
@@ -406,7 +403,7 @@ try
 	 
       //必须先将数据读取出来存放到对象里面：
       //对同一个字段不能两次getObject读否则将扔出异常
-			objAcceptData = sourceRS.getObject(i );
+			objAcceptData = sourceRS.getObject(targetFieldName);
 			if(objAcceptData==null)
 				pStmt.setNull(i, java.sql.Types.LONGVARCHAR);
 			else
@@ -570,8 +567,6 @@ private boolean copyAllRecord(Connection cnSource, Connection cnTarget,
 	   return false;
 	  }
    }
-
-
 //从 cnSource 连接中复制和工程有关的信息的 cnTarget 连接中
 public boolean copyPJ(Connection cnSource, Connection cnTarget)
 {
@@ -594,7 +589,7 @@ String[] strSequenceName = {"","","",""};
          targetPJNO = getNextSequence(cnTarget, "TB_PJ");
          //先清空参数数组
          resetParameters( strUpdateFieldName, iNewValue, strSequenceName );
-         strUpdateFieldName[0]="PJNO"; iNewValue[0] = targetPJNO;//strSequenceName[0]="PJ.NEXTVAL";
+         strUpdateFieldName[0]="PJNO"; iNewValue[0] = targetPJNO;
 		 ++current;
          
 		 if (!copyCurrentRecord(sourceRS, cnSource,cnTarget, "TB_PJ", 

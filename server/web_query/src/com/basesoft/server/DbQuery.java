@@ -27,7 +27,6 @@ public class DbQuery {
 					.newInstance();
 			DriverManager.registerDriver(sourceDriver);
 			// 获取后台数据库的驱动程序名称
-//			strDriverName = DefaultSetting.getDriverName();
 			strDriverName = "com.kingbase.Driver";
 			Driver targetDriver = (Driver) Class.forName(strDriverName)
 					.newInstance();
@@ -54,13 +53,9 @@ public class DbQuery {
 	// 开始复制文件
 	public boolean beginCopyData() {
 		boolean executeResult = true;
-
 		System.out.println("要处理的文件是：" + strInputMdbFileName);
 		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + strInputMdbFileName;
-
 		Connection cnSource, cnTarget;
-		// cnSource用于连接初始化参数指出的Access文件；
-		// cnTarget用于连接后台数据库
 		Properties p = new Properties();
 		try {
 			p.load(this.getClass().getResourceAsStream("/jdbc.properties"));
@@ -68,7 +63,9 @@ public class DbQuery {
 			e1.printStackTrace();
 		}
 		cnSource = newConnection(sURL, "admin", "");
-		cnTarget = newConnection(p.getProperty("datasource.jdbcUrl"), p.getProperty("datasource.username"), p.getProperty("datasource.password"));
+		cnTarget = newConnection(p.getProperty("datasource.jdbcUrl"), p
+				.getProperty("datasource.username"), p
+				.getProperty("datasource.password"));
 
 		if (cnSource == null || cnTarget == null) {
 			System.out.println("连接失败。请检查连接的ODBC参数设置是否正确；文件是否存在。");

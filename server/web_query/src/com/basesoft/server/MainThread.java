@@ -18,7 +18,7 @@ public class MainThread extends Thread {
 			rServer = new ServerSocket(default_port);
 			while (true) {
 				request = rServer.accept();
-				System.out.println("sock is connected");
+				System.out.println("客户端已连接");
 				receiveThread = new ServerThread(request);
 				receiveThread.start();
 				try {
@@ -36,5 +36,4 @@ public class MainThread extends Thread {
 			e.printStackTrace();
 		}
 	}
-
 }
