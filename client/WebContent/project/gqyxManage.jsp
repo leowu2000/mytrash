@@ -3,6 +3,7 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.page.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <html>
 <head>
 <title>实时工情信息采集传输管理</title>
@@ -135,8 +136,8 @@ function SearchSubmit(){
 <input type="hidden" value="" name="IDs"/>
 <input type="hidden" value="gqyx" name="towhere"/>
 <input type="hidden" value="<%=iswhere %>" name="iswhere"/>
-<input type="hidden" value="TB_PJRCN" name="TBID"/>
-<input type="hidden" value="PJRNO" name="PKFILED"/>
+<input type="hidden" value="TB_PJRCN,TB_PJR_M,TB_RSR" name="TBID"/>
+<input type="hidden" value="PJRNO,PJRNO,PJRNO" name="PKFILED"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
 <table border="0" align="center" width="95%" >
 	<tr>
@@ -183,8 +184,7 @@ function SearchSubmit(){
 <br/>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
-	<td><input type="button" name="" value="查  询">
-	&nbsp;
+	<td>
 	<input type="button" name="" value="新  增" onclick="javascript:toAdd()">
 	&nbsp;
 	<input type="button" name="" value="修  改" onclick="javascript:toEdit()">

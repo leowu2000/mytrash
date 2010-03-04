@@ -55,7 +55,7 @@ public class UtilDateTime {
         return df.format(new Date());
     }
     public static String nowDateStringCN() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分");
         return df.format(new Date());
     }
     /**

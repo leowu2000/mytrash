@@ -142,8 +142,8 @@ public class RSRBean {
 	public static RSRBean getPJRCNBeanFromRs(ResultSet rs){
 		RSRBean bean = new RSRBean();
 		try{
-			bean.setPJRNO(rs.getString("PJRNO"));//运行编号
-			bean.setPJNO(rs.getString("PJNO"));//工程编号
+			bean.setPJRNO(String.valueOf(rs.getInt("PJRNO")));//运行编号
+			bean.setPJNO(String.valueOf(rs.getInt("PJNO")));//工程编号
 			bean.setDTCDT(rs.getString("DTCDT"));//检测时间
 			bean.setPJNM(rs.getString("PJNM"));//工程名称
 			bean.setRSCLS(rs.getString("RSCLS"));//水库类别(良好/尚好/病险库)

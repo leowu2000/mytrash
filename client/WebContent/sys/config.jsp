@@ -10,7 +10,8 @@
     ConfigBean bean = BuinessDao.findConfigBean(path);
     String val = bean.getXZQH_S()+"-"+bean.getXZQH_SI()+"-"+bean.getXZQH_X();
     String cntcd = bean.getLYSX_LY()+"-"+bean.getLYSX_SX()+"-"+bean.getLYSX_YJZL()+"-"+bean.getLYSX_EJZL();
-
+	String msg = (String)request.getAttribute("msg");
+	msg=msg==null?"":msg;
     
 %> 
 <html>
@@ -125,6 +126,9 @@ function getRadioValue(){
 </table>
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="parames"/>
+<table width="90%" align="center">
+	<tr><td align="center" style='FONT-SIZE: 12px;color:red'><%=msg %></td></tr>
+</table>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap class="title">°²×°Î»ÖÃ</td>

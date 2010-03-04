@@ -24,7 +24,6 @@
     response.setHeader("Cache-Control","no-store");    
     response.setHeader("Pragma","no-cache");    
     response.setDateHeader("Expires", 0);   
-    System.out.println(sb);
     response.getWriter().write(sb.toString());
     response.getWriter().close();
 %>

@@ -888,17 +888,17 @@ public class DetailBean {
 			bean.setSLUPAG(String.valueOf(rs.getFloat("SLUPAG")));		//滑坡面角度(度)	==D006==D012
 		}
 		if("D007".trim().equals(XQFL)||"D009".trim().equals(XQFL)
-				||"D004".trim().equals(XQFL)||"D005".trim().equals(XQFL)){
+				||"D004".trim().equals(XQFL)||"D003".trim().equals(XQFL)){
 			bean.setTODFTDI(String.valueOf(rs.getFloat("TODFTDI")));		//距堤脚距离(米)	==D007==D009==D003==D004
 		}
 		if("D009".trim().equals(XQFL)||"D011".trim().equals(XQFL)){
 			bean.setWDQ(String.valueOf(rs.getFloat("WDQ")));//河道流量(立方米/秒)	==D011==D009
 		}
 		if("D001".trim().equals(XQFL)||"D015".trim().equals(XQFL)){
-			bean.setDSSPN(String.valueOf(rs.getFloat("DSSPN")));		//受灾人口(人)	==D001==D015
-			bean.setINPN(String.valueOf(rs.getFloat("INPN")));		//受伤人口(人)	==D001==D015
-			bean.setDTHPN(String.valueOf(rs.getFloat("DTHPN")));		//死亡人口(人)	==D001==D015
-			bean.setWRHS(String.valueOf(rs.getFloat("WRHS")));		//倒塌房屋(间)	==D001==D015
+			bean.setDSSPN(String.valueOf(rs.getInt("DSSPN")));		//受灾人口(人)	==D001==D015
+			bean.setINPN(String.valueOf(rs.getInt("INPN")));		//受伤人口(人)	==D001==D015
+			bean.setDTHPN(String.valueOf(rs.getInt("DTHPN")));		//死亡人口(人)	==D001==D015
+			bean.setWRHS(String.valueOf(rs.getInt("WRHS")));		//倒塌房屋(间)	==D001==D015
 			bean.setCRPDSSAR(String.valueOf(rs.getFloat("CRPDSSAR")));	//农作物受灾面积(公顷)	==D001==D015
 			bean.setSCDMFMAR(String.valueOf(rs.getFloat("SCDMFMAR")));	//毁坏耕地面积(公顷)	==D001==D015
 			bean.setDRCECLS(String.valueOf(rs.getFloat("DRCECLS")));		//直接经济损失(万元)		==D001==D015

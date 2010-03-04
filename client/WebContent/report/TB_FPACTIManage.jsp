@@ -3,6 +3,7 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.page.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <html>
 <head>
 <title>实时工情信息采集传输管理</title>
@@ -98,7 +99,7 @@ function doQuery(page){
 <input type="hidden" value="" name="actionType"/>
 <input type="hidden" value="<%=pageStr %>" name="page"/>
 <input type="hidden" value="<%=iswhere %>" name="iswhere"/>
-<input type="hidden" value="RPJINCD,ZLBM" name="PKFILED"/>
+<input type="hidden" value="RPJINCD,RPJINCD" name="PKFILED"/>
 <input type="hidden" value="TB_FPACTI,TB_FPACTI_M" name="TBID"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
@@ -107,8 +108,8 @@ function doQuery(page){
 		<td bgcolor="#FFFFFF"><input type="text" size="15" name="bt_s" value="<%=bt_s %>"></td>
 		<td nowrap class="title">填报时间:</td>
 		<td bgcolor="#FFFFFF">
-		<input type="text" value="" size="15" name="tbsj_s" onClick="WdatePicker({skin:'blue'})"  value="<%=tbsj_s %>" readonly>至
-		<input type="text" value="" size="15" name="tbsj_e" onClick="WdatePicker({skin:'blue'})"  value="<%=tbsj_e %>" readonly></td>
+		<input type="text" size="15" name="tbsj_s" onClick="WdatePicker({skin:'blue'})"  value="<%=tbsj_s %>" readonly>至
+		<input type="text" size="15" name="tbsj_e" onClick="WdatePicker({skin:'blue'})"  value="<%=tbsj_e %>" readonly></td>
 		<td bgcolor="#FFFFFF" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
 	</tr>
 </table>

@@ -11,7 +11,9 @@
 <input type="hidden" name="STTPCD" value=""/>
 <input type="hidden" name="WTDPCD" value=""/>
 <input type="hidden" name="DAGTM" value=""/>-->
-
+<input type="hidden" name="picid" value=""/>
+<input type="hidden" name="check" value="1"/><!-- 是否删除多媒体临时表数据标志1,删除,2不删除 -->
+<input type="hidden" name="uptype" value=""/>
 <!-- 工程运行状态 -->
 <input type="hidden" name="XQYC" value=""/>
 <input type="hidden" name="DFJZZK" value=""/>

@@ -11,58 +11,83 @@ public class SubTempBean {
 	private String NRMS;
 	private String LXZP;
 	private String TBNO;
+	private String TEMPNAME;
+
+	public String getTEMPNAME() {
+		return TEMPNAME;
+	}
+
+	public void setTEMPNAME(String tEMPNAME) {
+		TEMPNAME = tEMPNAME;
+	}
+
 	public String getZLBM() {
 		return ZLBM;
 	}
+
 	public void setZLBM(String zLBM) {
 		ZLBM = zLBM;
 	}
+
 	public String getRARENTNO() {
 		return RARENTNO;
 	}
+
 	public void setRARENTNO(String rARENTNO) {
 		RARENTNO = rARENTNO;
 	}
+
 	public String getDTCDT() {
 		return DTCDT;
 	}
+
 	public void setDTCDT(String dTCDT) {
 		DTCDT = dTCDT;
 	}
+
 	public String getTITLE() {
 		return TITLE;
 	}
+
 	public void setTITLE(String tITLE) {
 		TITLE = tITLE;
 	}
+
 	public String getWJGS() {
 		return WJGS;
 	}
+
 	public void setWJGS(String wJGS) {
 		WJGS = wJGS;
 	}
+
 	public String getNRMS() {
 		return NRMS;
 	}
+
 	public void setNRMS(String nRMS) {
 		NRMS = nRMS;
 	}
+
 	public String getLXZP() {
 		return LXZP;
 	}
+
 	public void setLXZP(String lXZP) {
 		LXZP = lXZP;
 	}
+
 	public String getTBNO() {
 		return TBNO;
 	}
+
 	public void setTBNO(String tBNO) {
 		TBNO = tBNO;
 	}
-	
-	public static SubTempBean getSubTempBeanFromRs(ResultSet rs){
+
+	public static SubTempBean getSubTempBeanFromRs(ResultSet rs) {
 		SubTempBean bean = new SubTempBean();
-		try{
+		try {
 			bean.setZLBM(String.valueOf(rs.getInt("ZLBM")));
 			bean.setRARENTNO(String.valueOf(rs.getInt("RARENTNO")));
 			bean.setDTCDT(rs.getString("DTCDT"));
@@ -71,7 +96,10 @@ public class SubTempBean {
 			bean.setNRMS(rs.getString("NRMS"));
 			bean.setLXZP(rs.getString("LXZP"));
 			bean.setTBNO(rs.getString("TBNO"));
-		}catch(Exception ex){ex.printStackTrace();}
-		return bean;
+			//bean.setTEMPNAME(rs.getString("TEMPNAME"));
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
+		return bean;
+	}
 }

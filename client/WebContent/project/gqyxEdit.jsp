@@ -9,7 +9,7 @@
     response.setDateHeader("Expires", 0); 
     
     String path = request.getSession().getServletContext().getRealPath("/");
-	
+    BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
 	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	
@@ -22,7 +22,9 @@
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
-<script Language="JavaScript" src="gccj_submit.js"></script>
+<script Language="JavaScript" src="/common/js/projectCommon.js"></script>
+<script Language="JavaScript" src="/common/js/common.js"></script>
+<script Language="JavaScript" src="/common/My97DatePicker/WdatePicker.js"></script>
 </head>
 <style type="text/css">
 <!--
@@ -41,18 +43,18 @@
 function toBack(){
 	location.href="/project/gqyxManage.jsp";
 }
-
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
 	<tr><td align="center" ><span  class="style4">修改运行状态信息</span></td></tr>
 </table>
-<form name="form1" method="POST"> 
+<form name="frm" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="1"></input>
 <input type="hidden" name="WTDPCD" value=""/>
 <input type="hidden" name="DNCNO" value="<%=RPJINCD %>"/>
 <input type="hidden" name="tabname" value="TB_PJR_M"></input>
+<input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title" colspan="6">
@@ -85,11 +87,35 @@ function toBack(){
 		<td nowrap class="title">当前泻量:</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="RQ" value="<%=rsrbean.getRQ()==null?"":rsrbean.getRQ()  %>" size="8"/>立方米/秒<font color="red">*</font></td>
 	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="ZPFRAME" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" src="/common/picEdit.jsp?tbid=TB_PJR_M&DNCNO=<%=RPJINCD %>&PKNAME=PJRNO" height="160" width="100%">
-		</iframe>
+	<tr height="25" bgcolor="#FFFFFF" >
+		<td nowrap class="title" >选择照片:</td>
+		<td bgcolor="#FFFFFF" colspan="2">
+		<div id="thfiles"  style="display:none"></div>
+		<div id="showupfile" style="display:inline"><input type="file" id="UpFile" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </div>
 		</td>
+		<td nowrap class="title">照片标题:</td> 
+		<td bgcolor="#FFFFFF" ><input type="text" name="TITLE" value=""/></td>
+		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
+	</tr>
+	<tr bgcolor="#FFFFFF" >
+		<td nowrap class="title">照片描述:</td> 
+		<td bgcolor="#FFFFFF" colspan="4">
+		<textarea rows="3" cols="10" name="NRMS" style="width:100%"></textarea>
+		</td>		
+	</tr>
+	
+	<tr height="25" >
+		<td bgcolor="#FFFFFF" align="right" colspan="5">
+			<input type="button" name="addbutton" value="添  加" onclick="javascript:uplaodReportPhotos('TB_PJR_M')"/>&nbsp;&nbsp;
+			<input type="button" name="editbutton" value="修  改" disabled onclick="javascript:updateMediaMsg('TB_PJR_M')"/>&nbsp;&nbsp;
+			<input type="button" name="cancelbutton" value="取  消" disabled onclick="javascript:cancelPhotos()"/>&nbsp;&nbsp;
+		</td>
+	</tr>
+	<tr height="25" >
+		<td nowrap bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/pic.jsp?temp= <%=Math.random()%>&tablename=TB_PJR_M&pkvalue=<%=RPJINCD%>&pkname=PJRNO" height="110" width="100%">
+		</iframe>	
+		</td> 
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" colspan="6" align="center">

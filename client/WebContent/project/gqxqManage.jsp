@@ -3,6 +3,7 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.page.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <html>
 <head>
 <title>实时工情信息采集传输管理</title>
@@ -75,6 +76,31 @@ function toEdit(){
 		}
 	}
 }
+function toDelete(){
+	var result="";
+	var str = document.forms[0].RECORDID;
+	if(str.length==undefined){
+		if(document.forms[0].RECORDID.checked){
+			result=document.forms[0].RECORDID.value;
+		}
+	}else{
+		for(var i=0;i<str.length;i++){
+			if(str[i].checked==true){
+				if(result=="")
+					result = str[i].value;
+				else
+					result +=","+ str[i].value;
+			}
+		}
+	}
+	if(result==""){
+		alert("您没有选择任何记录!");
+	}else{			
+		document.forms[0].action="/buiness.do";
+		document.frm.actionType.value="delgcxq";
+		document.forms[0].submit();
+	}
+}
 function SearchSubmit(){
 	document.frm.action="/buiness.do";
 	document.frm.actionType.value="search";
@@ -113,8 +139,8 @@ function SearchSubmit(){
 <input type="hidden" value="" name="IDs"/>
 <input type="hidden" value="gqxq" name="towhere"/>
 <input type="hidden" value="<%=iswhere %>" name="iswhere"/>
-<input type="hidden" value="DNCNO" name="PKFILED"/>
-<input type="hidden" value="TB_STDNC" name="TBID"/>
+<input type="hidden" value="DNCNO,DNCNO" name="PKFILED"/>
+<input type="hidden" value="TB_STDNC,TB_STDNC_M" name="TBID"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
@@ -198,13 +224,13 @@ function SearchSubmit(){
 <br/>
 <table border="0"  width="95%" align="center">
 	<tr align="center">
-	<td><input type="button" name="" value="查  询">
+	<td>
 	&nbsp;
 	<input type="button" name="" value="新  增" onclick="javascript:toAdd()">
 	&nbsp;
 	<input type="button" name="" value="修  改" onclick="javascript:toEdit()">
 	&nbsp;
-	<input type="button" name="" value="删  除" onclick="javascript:toDel()"></td>
+	<input type="button" name="" value="删  除" onclick="javascript:toDelete()"></td>
 	</tr>
 </table>
 </body>

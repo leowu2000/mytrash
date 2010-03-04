@@ -112,11 +112,11 @@ public class SqlFactory {
 		//D003	Â©¶´				TB_LKDSC
 		if("D003".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
-						+"LKGTU,"
+						+"LKGTU,TODFTDI,"
 						+"LKDMT,LKQ,LKWTLH,LKSAR)VALUES("
 						+dinarySubsql
-						+",'"+bean.getLKGTU()
-						+"',"+bean.getLKDMT()+","+bean.getLKQ()+","+bean.getLKWTLH()+","+bean.getLKSAR()+")";
+						+",'"+bean.getLKGTU()+"',"+bean.getTODFTDI()
+						+","+bean.getLKDMT()+","+bean.getLKQ()+","+bean.getLKWTLH()+","+bean.getLKSAR()+")";
 		//D004	¹ÜÓ¿				TB_PPDSC
 		if("D004".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"

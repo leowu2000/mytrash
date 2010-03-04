@@ -15,7 +15,7 @@ margin:0px auto; padding:0px;
 }
 </style>
 <%
-	String path = request.getRealPath("/");
+	String path = request.getSession().getServletContext().getRealPath("/");
 	String DNCNO = request.getParameter("DNCNO");
 	DNCNO=DNCNO==null?"0":DNCNO;
 	String PJNO = request.getParameter("PJNO");

@@ -49,7 +49,7 @@ public class SDBean {
 	public static SDBean getSDBeanFromRs(ResultSet rs){
 		SDBean bean = new SDBean();
 		try{
-			bean.setRPJINCD(rs.getString("RPJINCD"));	//灾情编号
+			bean.setRPJINCD(String.valueOf(rs.getInt("RPJINCD")));	//灾情编号
 			bean.setWTTT(rs.getString("WTTT"));		//填报标题
 			bean.setWTDT(rs.getString("WTDT"));		//填报时间
 			bean.setSDDSC(rs.getString("SDDSC"));		//灾情描述

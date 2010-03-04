@@ -57,14 +57,6 @@ public class FileUploadServlet extends HttpServlet {
 				if("1".trim().equals(delFlg))
 					BuinessDao.deleteTempMedia(path);
 				BuinessDao.insertTempMedia(path, DNCNO, time, zpbt, detail, zpms, filedir, tabname);
-				List picList = BuinessDao.getMediaList(path, DNCNO, tabname);
-				if(picList!=null && picList.size()>0){
-					for(int i=0;i<picList.size();i++){
-						SubTempBean bean = (SubTempBean)picList.get(i);
-							result+="<tr><td><a href='#' onclick='javascript:viewThePic("+bean.getZLBM()+")'>"+bean.getTITLE()+"</a></td><td><img src='/images/small_delete.gif' onclick='javascript:deletePIC("+bean.getZLBM()+")' border=0 style='cursor:hand' title='µã»÷É¾³ýÍ¼Æ¬'></td></tr>";
-					}
-				}
-				result = result_head+result+result_detail;
 			}
 			if("viewpic".trim().equals(type)){
 				try{
@@ -116,6 +108,32 @@ public class FileUploadServlet extends HttpServlet {
 				
 				result=temp;
 				
+			}
+			if("delpic".trim().equals(type)){
+				String tablename=request.getParameter("tablename");
+				String picid = request.getParameter("picid");
+				BuinessDao.deleteDB("delete from "+tablename+" where zlbm="+picid, path);
+				result="sucess";
+			}
+			if("pre_updatepic".trim().equals(type)){
+				String tablename=request.getParameter("tablename");
+				String picid = request.getParameter("picid");
+				SubTempBean bean = BuinessDao.findMediaBeanById(path, picid, tablename);
+				if(bean!=null)
+					result=bean.getTITLE()+";"+bean.getDTCDT()+";"+bean.getNRMS();
+				else
+					result="";
+			}
+			if("updateMediaMsg".trim().equals(type)){
+				String tablename=request.getParameter("tablename");
+				String picid = request.getParameter("picid");
+				String title = new String(request.getParameter("title").getBytes("ISO-8859-1"),"GBK");
+				String dtcdt= request.getParameter("dtcdt");
+				String nrms= new String(request.getParameter("nrms").getBytes("ISO-8859-1"),"GBK");
+				BuinessDao.updateDB("update "+tablename+" set title='"+title+"',dtcdt=#"+dtcdt
+						+"#,nrms='"+nrms+"' where zlbm="+picid, path);
+				
+				result="sucess";
 			}
 			response.setContentType("text/xml");
 			response.setHeader("Charset", "gb2312");

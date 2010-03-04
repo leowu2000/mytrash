@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=GBK"%>
 <%@ page import="com.util.*" %>
 <%@ page import="com.fredck.FCKeditor.FCKeditor"%>
+<%@ include file="/common/session.jsp"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
@@ -33,7 +34,7 @@ function submiting(){
 </table>
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="add_fxjb"/>
-<input type="hidden" name="WTDPCD" value="WTDPCD"/>
+<input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<!-- <tr height="25" >
@@ -42,7 +43,7 @@ function submiting(){
 		<td nowrap align="center" class="title" width="30%" ><%=UtilDateTime.nowDateStringCN() %></td>
 	</tr>-->
 	<tr height="25" >
-		<td nowrap align="center" class="title">第<input type="text" class="lines" name="ISSUE" value="" size="8"/> 期</td>
+		<td nowrap align="center" class="title"><%=configBean.getTBDW() %> 第<input type="text" class="lines" name="ISSUE" value="" size="8"/> 期</td>
 		<td align="center" class="title">标题:</td>
 		<td align="center" class="title" colspan="2">
 		<input type="text" name="WTTT" value="" size="25"/></td>
@@ -66,11 +67,11 @@ function submiting(){
 	</tr>
 	<tr height="25" >
 		<td nowrap align="center" class="title">签发(Q):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="QF" value="" /></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="QF" value="<%=configBean.getQF() %>" /></td>
 		<td nowrap align="center" class="title">审核(H):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="SH" value=""/></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="SH" value="<%=configBean.getSH() %>"/></td>
 		<td nowrap align="center" class="title">拟稿(N):</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="NG" value="" /></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="NG" value="<%=configBean.getNG() %>" /></td>
 	</tr>
 </table>
 </form>

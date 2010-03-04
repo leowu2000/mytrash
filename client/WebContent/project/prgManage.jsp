@@ -3,6 +3,7 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.page.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <html>
 <head>
 <title>实时工情信息采集传输管理</title>

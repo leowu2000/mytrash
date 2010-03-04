@@ -143,11 +143,11 @@ public class UploadSqlFactory {
 		//D003	Â©¶´				TB_LKDSC
 		if("D003".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"
-						+"LKGTU,"
+						+"LKGTU,TODFTDI,"
 						+"LKDMT,LKQ,LKWTLH,LKSAR)VALUES("
 						+dinarySubsql
-						+",'"+rs.getString("LKGTU")
-						+"',"+rs.getInt("LKDMT")+","+rs.getInt("LKQ")+","+rs.getInt("LKWTLH")+","+rs.getInt("LKSAR")+")";
+						+",'"+rs.getString("LKGTU")+"',"+rs.getString("TODFTDI")
+						+","+rs.getInt("LKDMT")+","+rs.getInt("LKQ")+","+rs.getInt("LKWTLH")+","+rs.getInt("LKSAR")+")";
 		//D004	¹ÜÓ¿				TB_PPDSC
 		if("D004".trim().equals(XQFLDM.toUpperCase()))
 			insertSql = "INSERT INTO "+tablename+" (DNCNO,PJNO,STTPCD,DAGTM,DNCNM,"

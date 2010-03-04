@@ -31,7 +31,7 @@ margin:0px auto; padding:0px;
 		<td class="title2" height="25">排水孔堵塞:</td>
 		<td bgcolor="#FFFFFF" width="35%"> <%=bean.getWPPLU() %> </td>
 		<td class="title2">排水设备失灵:</td>
-		<td bgcolor="#FFFFFF" width="35%"> <%=bean.getWPEQML() %> ></td>
+		<td bgcolor="#FFFFFF" width="35%"> <%=bean.getWPEQML() %> </td>
 	</tr>
 </table>
 </div>

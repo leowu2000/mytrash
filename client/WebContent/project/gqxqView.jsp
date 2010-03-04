@@ -31,11 +31,11 @@
 <head>
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
-<script Language="JavaScript" src="/common/js/common.js"></script>
 <link rel="stylesheet" type="text/css" href="/common/ext/ext-all.css" /> 
 <script type="text/javascript" src="/common/ext/ext-base.js"></script>
 <script type="text/javascript" src="/common/ext/ext-all.js"></script>
-<script Language="JavaScript" src="gccj_submit.js"></script>
+<script Language="JavaScript" src="/common/js/projectCommon.js"></script>
+<script Language="JavaScript" src="/common/js/common.js"></script>
 </head>
 <style type="text/css">
 <!--
@@ -91,12 +91,8 @@ function updateXQFLFRAME(obj){
 	<tr><td align="center" ><span  class="style4">查看工情险情</span></td></tr>
 </table>
 <%} %>
-<iframe name="saveFrm" src="" frameborder="0" scrolling="no" width="0" height="0">
 
-</iframe>
-<form name="warnForm" action="" method="post">
- </form>
-<form name="form1" method="POST"> 
+<form name="frm" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="2"></input>
 
@@ -132,30 +128,41 @@ function updateXQFLFRAME(obj){
 		<td bgcolor="#FFFFFF"><%=stdncbean.getDNCGR().trim()%></td>
 		<td nowrap class="title">出险地点:</td>
 		<td bgcolor="#FFFFFF"> <%=stdncbean.getDAGPLCCH() %> </td>
-		<td nowrap class="title">解放军投入:</td>
-		<td bgcolor="#FFFFFF"> <%=stdncbean.getPLAPN() %> 人</td>
+		<td nowrap class="title">出险部位:</td>
+		<td bgcolor="#FFFFFF" > <%=stdncbean.getDAGLO() %> </td>
+		
 	</tr>
 	<tr height="25" >
+		<td nowrap class="title">解放军投入:</td>
+		<td bgcolor="#FFFFFF"> <%=stdncbean.getPLAPN() %> 人</td>
 		<td nowrap class="title">武警投入:</td>
 		<td bgcolor="#FFFFFF"><%=stdncbean.getPLIPN() %> 人</td>
 		<td nowrap class="title">群众投入:</td>
 		<td bgcolor="#FFFFFF"><%=stdncbean.getTPN() %> 人 </td>
-		<td nowrap class="title" >当前水位:</td>
-		<td bgcolor="#FFFFFF"> <%=stdncbean.getRZ() %> 米 </td>
 	</tr>
 	<tr height="25" >
-	<td nowrap class="title">出险部位:</td>
-		<td bgcolor="#FFFFFF" colspan="5"> <%=stdncbean.getDAGLO() %> </td>
+		<td nowrap class="title" >当前水位:</td>
+		<td bgcolor="#FFFFFF" colspan="4"><%=stdncbean.getRZ() %> 米</td>
+		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
+	</tr>
+	<tr height="25" bgcolor="#FFFFFF" >
+		<td nowrap class="title">照片标题:</td> 
+		<td bgcolor="#FFFFFF" colspan="4"><div id="TITLE">&nbsp;</div></td>
+	</tr>
+	<tr bgcolor="#FFFFFF" height="50" >
+		<td nowrap class="title">照片描述:</td> 
+		<td bgcolor="#FFFFFF" colspan="4"><div id="NRMS">&nbsp;</div></td>		
+	</tr>
+	<tr height="25" >
+		<td nowrap bgcolor="#FFFFFF" colspan="6" align="center">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/picView.jsp?temp= <%=Math.random()%>&tablename=TB_STDNC_M&pkvalue=<%=stdncbean.getDNCNO() %>&pkname=DNCNO" height="110" width="100%">
+		</iframe>	
+		</td> 
 	</tr>
 	<tr height="25">
 		<td bgcolor="#FFFFFF" colspan="10">
 		<iframe id="main1" scrolling="no" frameborder="0" marginwidth="1" marginheight="1" src="/project/gcxqViewLoader.jsp?PJNO=<%=PJNO %>&DNCNO=<%=DNCNO %>" height="150" width="100%" >
 		</iframe>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" colspan="11">
-		<iframe id="ZPFRAME" scrolling="no" frameborder="0" marginheight="1" marginwidth="1" src="/common/picViewer.jsp?tbid=TB_STDNC_M&DNCNO=<%=DNCNO %>&PKNAME=DNCNO" height="130" width="100%"></iframe>
 		</td>
 	</tr>
 	<tr>

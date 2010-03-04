@@ -10,6 +10,7 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+    RandomAccessFileExample.delAllFile(relPath+"\\\\common\\\\pic");
     String RPJINCD = request.getParameter("RPJINCD");
     SDBean bean = BuinessDao.findSDByID(relPath,RPJINCD);
     String content = bean.getSDDSC();
@@ -20,15 +21,16 @@
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
+<script Language="JavaScript" src="/common/js/reportCommon.js"></script>
 </head>
 <style type="text/css">
 <!--
 #newPreview
 {
-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
-width :150px; 
-height:100px; 
-borde:6px double #ccc;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+	width :150px; 
+	height:100px; 
+	borde:6px double #ccc;
 }
 -->
 </style>
@@ -37,63 +39,45 @@ borde:6px double #ccc;
 function toBack(){
 	location.href="/report/TB_SDManage.jsp";
 }
-function PreviewImg(imgFile) 
-{ 
- 
-	//新的预览代码，支持 IE6、IE7。 
-	var newPreview = document.getElementById("newPreview"); 
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgFile.value; 
-	newPreview.style.width = "150px"; 
-	newPreview.style.height = "100px"; 
-	newPreview.style.border= "6px double #ccc";
-}
+
 </script>
 <body>
 <%if(!"upload".trim().equals(fromwhere)) {%>
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">查看灾情报告</span></td></tr>
+	<tr><td align="center" ><span  class="style4"><%=bean.getWTTT() %></span></td></tr>
 </table>
 <%} %>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="TABLENAME" value=""/>
-<input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(relPath, "TB_SD","RPJINCD") %>"/>
-<input type="hidden" name="WTDPCD" value="WTDPCD"/>
+<input type="hidden" name="picid" value=""/>
+<input type="hidden" name="check" value="1"/><!-- 是否删除多媒体临时表数据标志1,删除,2不删除 -->
+<input type="hidden" name="uptype" value=""/>
 <input type="hidden" name="FILEDNAME" value="SDDSC"/>
-<input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
-	<tr height="25" >
-		<td align="center" class="title" >灾情标题:</td>
-		<td align="center" class="title" colspan="5">
-		<%=bean.getWTTT() %></td>
+
+	<tr bgcolor="#FFFFFF" >
+		<td nowrap class="title" width="20%">照片标题:</td> 
+		<td bgcolor="#FFFFFF" width="40%"><div id="TITLE">&nbsp;</div></td>
+		
+		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
+	</tr>
+	<tr>
+		<td nowrap class="title">拍摄时间:</td> 
+		<td bgcolor="#FFFFFF" ><div id="DTCDT">&nbsp;</div></td>
+	</tr>
+	<tr height="25" bgcolor="#FFFFFF" >
+		<td nowrap class="title">照片描述:</td> 
+		<td bgcolor="#FFFFFF"><div id="NRMS">&nbsp;</div></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title">照片标题</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value=""/></td>
-		<td nowrap class="title">拍摄时间</td> 
-		<td bgcolor="#FFFFFF"><input type="text" name="DTCDT" class="lines" value="<%=UtilDateTime.nowDateString() %>" size="18"/></td>
-		<td nowrap class="title" colspan="2">选择照片<input type="file" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </td>
-	</tr>
-	<tr height="25" >
-		<td nowrap class="title" colspan="2">照片描述</td> 
-		<td nowrap class="title" colspan="2">照片列表</td> 
-		<td nowrap class="title" colspan="2">照片预览
-			<input type="button" name="" value="添加照片" onclick="javascript:uplaodReportPhotos('TB_FPACTI_M')"/>
-		</td>
-	</tr>
-	<tr height="25" >
-		<td bgcolor="#FFFFFF" colspan="2">
-			<textarea rows="6" cols="33" name="NRMS"></textarea>
+		<td nowrap bgcolor="#FFFFFF" colspan="4" align="center">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/picView.jsp?temp= <%=Math.random()%>&tablename=TB_SD_M&pkvalue=<%=RPJINCD %>&pkname=RPJINCD" height="110" width="100%">
+		</iframe>	
 		</td> 
-		<td bgcolor="#FFFFFF" colspan="2">
-			<div id="PICLIST" class="divStyle"></div>
-		</td> 
-		<td bgcolor="#FFFFFF" colspan="2" align="center">
-			<div id="newPreview" ></div>
-		</td>
 	</tr>
 	<tr height="25" >
-	<td bgcolor="#FFFFFF" colspan="6" align="center">
+	<td bgcolor="#FFFFFF" colspan="4">
 	<%=content%>
 	</td>
 	</tr>
