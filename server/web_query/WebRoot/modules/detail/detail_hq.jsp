@@ -69,7 +69,7 @@
 		  <tr align="middle" height="80"> 
 		    <td height="80">		
 			<%if("JPG".equals(mapHq_m.get("WJGS").toString().trim().toUpperCase())||"JPG".equals(mapHq_m.get("WJGS").toString().trim().toLowerCase())){ %>
-        	  <img src="media.do?action=image&tablename=TB_QT_M&media_id=<%=mapHq_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="border=0; height=<%=mediaheight%>;width=<%=mediawidth%>; z-index:8;"> 
+        	  <img src="media.do?action=image&tablename=TB_QT_M&media_id=<%=mapHq_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='../modules/view/view_hq.jsp?media_id=<%=mapHq_m.get("ZLBM")%>&title=<%=mapHq_m.get("TITLE") %>&dtcdt=<%=mapHq_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapHq_m.get("WJGS") %>&DETAIL=<%=mapHq_m.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight%>;width=<%=mediawidth%>; z-index:8;"> 
         	<%}else{%>
         	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapHq_m.get("ZLBM")%>&title=<%=mapHq_m.get("TITLE")%>&dtcdt=<%=mapHq_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapHq_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         	<%}%>
