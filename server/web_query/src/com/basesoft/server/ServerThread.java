@@ -239,6 +239,8 @@ class ServerThread extends Thread {
    				try{
    					DeleteLogFile(SockFileName);
    					DeleteMdbFile(SockFileName);
+					DeleteMdbFile(SockFileName.substring(0,
+							SockFileName.length() - 4));
    				}catch(Exception e){
    					System.out.println("删除日志文件和数据库文件出错："+e.getMessage());
    				}
@@ -319,9 +321,6 @@ class ServerThread extends Thread {
 				if (db.beginCopyData()) {
 						System.out.println("最后入库成功!!");
 						SendPack(-2);
-						// clientRequest.close();
-						// serverMyFrame.ConnectNum--;
-						// System.out.println("已关闭第"+serverMyFrame.ConnectNum+"个连接");
 						try {
 							DataIn.close();
 							outputFile.close();
@@ -331,6 +330,8 @@ class ServerThread extends Thread {
 						try {
 							DeleteLogFile(SockFileName);
 							DeleteMdbFile(SockFileName);
+							DeleteMdbFile(SockFileName.substring(0,
+									SockFileName.length() - 4));
 						} catch (Exception e) {
 							System.out.println("删除日志文件和数据库文件出错："
 									+ e.getMessage());
