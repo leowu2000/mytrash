@@ -15,7 +15,7 @@ public class DataUploader {
 		DataUploader data = new DataUploader();
 		try {
 			String ip = "127.0.0.1";
-			data.upload(ip, 9292, "d:/upload.mdb.zip");
+			data.upload(ip, 9292, "d:/20100308173421.mdb.zip");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -29,7 +29,7 @@ public class DataUploader {
 		// System.out.println(aa);
 	}
 
-	private void upload(String ip, int port, String fileName)
+	public void upload(String ip, int port, String fileName)
 			throws UnknownHostException, IOException {
 		Socket server = new Socket(ip, port);
 		File f = new File(fileName);
