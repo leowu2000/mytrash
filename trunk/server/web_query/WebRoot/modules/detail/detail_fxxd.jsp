@@ -82,7 +82,7 @@
 		  <tr align="middle" height="80"> 
 		    <td height="80">		
 		<%if("JPG".equals(mapFxxd_m.get("WJGS").toString().trim().toUpperCase())||"JPG".equals(mapFxxd_m.get("WJGS").toString().trim().toLowerCase())){ %>
-        	  <img src="media.do?action=image&tablename=TB_FPACTI_M&media_id=<%=mapFxxd_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='../modules/view/view_fxxd.jsp?media_id=<%=mapFxxd_m.get("ZLBM")%>&title=<%=mapFxxd_m.get("TITLE") %>&dtcdt=<%=mapFxxd_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapFxxd_m.get("WJGS") %>&DETAIL=<%=mapFxxd.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight %>;width=<%=mediawidth %>;z-index:8;"> 
+        	  <img src="media.do?action=image&tablename=TB_FPACTI_M&media_id=<%=mapFxxd_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='../modules/view/view_fxxd.jsp?media_id=<%=mapFxxd_m.get("ZLBM")%>&title=<%=mapFxxd_m.get("TITLE") %>&dtcdt=<%=mapFxxd_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapFxxd_m.get("WJGS") %>&DETAIL=<%=mapFxxd_m.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight %>;width=<%=mediawidth %>;z-index:8;"> 
         <%}else{  %>
         	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapFxxd_m.get("ZLBM")%>&title=<%=mapFxxd_m.get("TITLE")%>&dtcdt=<%=mapFxxd_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxxd_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         <%}%>
@@ -108,9 +108,9 @@
     <tr> 
       <td height="80"> 
         <div align="center">
-          <textarea name="text_detail" cols="68%" style="border=0 solid #002200" rows="10" wrap="VIRTUAL" readonly class="button_query">
+          <div name="text_detail" style="border=0 solid #002200" wrap="VIRTUAL" readonly class="button_query">
 		    <%=mapFxxd.get("ACTICO") %>  
-          </textarea>
+          </div>
         </div>
         <br>
       </td>

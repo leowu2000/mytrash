@@ -104,7 +104,7 @@
     	  <tr> 
       		<td> 
         	  <div align="center">
-          		<textarea name="text_detail" cols="60%" style="border=0;solid #002200" rows="10"  readonly ><%=mapFxjb.get("ACTICO") %></textarea>
+          		<div name="text_detail" style="border=0;solid #002200"  readonly ><%=mapFxjb.get("ACTICO") %></div>
         	  </div>
         	  <br>
       		</td>
