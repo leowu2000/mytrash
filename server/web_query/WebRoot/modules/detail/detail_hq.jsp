@@ -94,9 +94,9 @@
     <tr>
       <td height="80">
     	<div align="center">
-    	  <textarea name="text_detail" cols="68%" style="border=0 solid #002200" rows="10" readonly wrap="VIRTUAL" class="button_query" > 
+    	  <div name="text_detail" style="border=0 solid #002200" readonly wrap="VIRTUAL" class="button_query" > 
 				<%=mapHq.get("ACTICO") %> 
-          </textarea>
+          </div>
         </div>
         <br>
       </td>

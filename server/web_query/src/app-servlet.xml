@@ -12,6 +12,7 @@
 				/detail.do=DetailController
 				/media.do=MediaController
 				/consult.do=ConsultController
+				/login.do=LoginController
 			</value>
 		</property>
 	</bean>
@@ -36,5 +37,6 @@
 	<bean name="DetailController" class="com.basesoft.modules.detail.DetailController" />
 	<bean name="MediaController" class="com.basesoft.modules.media.MediaController" />
 	<bean name="ConsultController" class="com.basesoft.modules.consult.ConsultController"></bean>
+	<bean name="LoginController" class="com.basesoft.modules.login.LoginController"></bean>
 </beans>
 

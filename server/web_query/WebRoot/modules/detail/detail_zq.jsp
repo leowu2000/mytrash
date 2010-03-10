@@ -91,9 +91,9 @@
     </tr>
 	<tr align="center">
 	  <td height="80">
-    	<textarea name="text_detail" cols="68%" style="border=0 solid #002200 " rows="8" readonly wrap="VIRTUAL" class="button_query">
+    	<div name="text_detail" style="border=0 solid #002200 " readonly wrap="VIRTUAL" class="button_query">
           <%=mapZq.get("SDDSC") %>  
-        </textarea>
+        </div>
       </td>
     </tr>
   </table>

@@ -18,7 +18,7 @@
 		document.all.Layer2.style.posTop=document.all.Layer1.style.posTop+document.all.Layer1.offsetHeight+10;
 		document.all.Layer3.style.posTop=document.all.Layer2.style.posTop+document.all.Layer2.offsetHeight+10;
 		document.all.Layer3.style.posLeft=document.all.Layer1.style.posLeft;
-		document.all.ss.value=(document.all.Layer3.style.posTop/469).substring(0,4);
+		document.all.ss.value=document.all.Layer3.style.posTop/469;
 	}
 
 	//放大缩小的函数
@@ -82,7 +82,7 @@
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tbody>
       <tr> 
-        <td colspan="2"><textarea name="text_detail" cols="72%" rows="8" class="textarea3"><%=detail %></textarea> 
+        <td colspan="2"><div name="text_detail" class="textarea3"><%=detail %></div> 
         </td>
       </tr>
     </tbody>
