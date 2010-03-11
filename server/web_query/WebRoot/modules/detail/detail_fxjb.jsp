@@ -129,7 +129,7 @@
       <td align="center">  
   		<input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
     	<INPUT type="hidden" id="page" name="page" value="<%=pageNum %>">
-  		<input type="button" name="button" value="打印预览" onclick="if(screen.width==800){window.location='fxjb_print.asp?id=<%=id%>&tbdw=<%=tbdw%>'}else{window.location='fxjb_print_1024.asp?id=<%=id%>&tbdw=<%=tbdw%>'}" class="input1" >
+  		<input type="button" name="button" value="打印预览" onclick="if(screen.width==800){window.location='detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=800'}else{window.location='detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=1024'}" class="input1" >
     	<input type="hidden" name="row_count" value="1">
     	<input type="hidden" name="command" value="-1">
     	<input type="hidden" name="check1" value="<%=id %>">

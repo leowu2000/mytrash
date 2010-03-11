@@ -131,6 +131,25 @@ public class DetailController extends CommonController {
 			mv.addObject("page", page);
 			mv.addObject("mapZq", mapZq);
 			mv.addObject("listZq_m", listZq_m);
+		}else if("fxjb_print".equals(action)){
+			String id = ServletRequestUtils.getStringParameter(request, "id", "");
+			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
+			tbdw = new String(tbdw.getBytes("ISO8859-1"),"UTF-8");
+			
+			int size = ServletRequestUtils.getIntParameter(request, "size", 800);
+			
+			//得到防汛简报和防汛简报多媒体信息
+			Map mapFxjb = detailDAO.getFxjb(id);
+			List listFxjb_m = detailDAO.getFxjb_m(id);
+			
+			mv = new ModelAndView("modules/detail/print_fxjb");
+			
+			mv.addObject("id", id);
+			mv.addObject("tbdw", tbdw);
+			mv.addObject("page", page);
+			mv.addObject("mapFxjb", mapFxjb);
+			mv.addObject("listFxjb_m", listFxjb_m);
+			
 		}
 		
 		return mv;
