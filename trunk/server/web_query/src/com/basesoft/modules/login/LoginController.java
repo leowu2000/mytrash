@@ -21,6 +21,10 @@ public class LoginController extends CommonController {
 		if("login".equals(action)){
 			String username = ServletRequestUtils.getStringParameter(request, "username", "");
 			String password = ServletRequestUtils.getStringParameter(request, "password", "");
+			
+			boolean isAdmin = loginDAO.isAdmin(username, password);
+			
+			request.getSession().setAttribute("isAdmin", isAdmin);
 			response.sendRedirect("/main/mainFrame.jsp");
 		}
 		

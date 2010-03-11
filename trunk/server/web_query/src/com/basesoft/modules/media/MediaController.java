@@ -1,5 +1,7 @@
 package com.basesoft.modules.media;
 
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +38,23 @@ public class MediaController extends CommonController {
 			return null;
 		}else if("video".equals(action)){
 			
+		}else if("download".equals(action)){
+			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
+			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
+			String filename = ServletRequestUtils.getStringParameter(request,"filename","");
+			
+			Map map = mediaDAO.getImage(tablename, media_id);
+			
+			byte[] b = (byte[])map.get("lxzp");
+			
+			response.reset();
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("gbk"),"iso8859-1"));
+            response.setContentType("application/octet-stream");
+            //输出文件
+            OutputStream os = new BufferedOutputStream(response.getOutputStream());
+            os.write(b);
+            os.flush();
+            os.close();
 		}
 		
 		return null;

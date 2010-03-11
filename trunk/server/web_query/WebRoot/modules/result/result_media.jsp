@@ -6,6 +6,8 @@
 PageList pageList = (PageList)request.getAttribute("pageList");
 PageInfo pageInfo = pageList.getPageInfo();
 List list = pageList.getList();
+
+String radiob_gclb = request.getAttribute("radiob_gclb").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -53,19 +55,34 @@ List list = pageList.getList();
 	}                                                                                                                                                                                                                                            
 	for(int i=0;i<list.size();i++){
 		Map map = (Map)list.get(i);
+		String url = "";
+		String imageurl = "";
+		if("xq".equals(radiob_gclb)){//险情
+			url = "detail.do?action=xq&id=" + map.get("dncno") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
+			imageurl = "media.do?action=image&tablename=TB_STDNC_M&media_id=" + map.get("ZLBM");
+		}else if("yxzt".equals(radiob_gclb)){//运行状态
+			url = "detail.do?action=yxzt&id=" + map.get("PJRNO") + "&tbdw=" + map.get("WTDPCD");
+			imageurl = "media.do?action=image&tablename=TB_PJR_M&media_id=" + map.get("ZLBM");
+		}else if("zq".equals(radiob_gclb)){//灾情
+			url = "detail.do?action=zq&id=" + map.get("RPJINCD") + "curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
+			imageurl = "media.do?action=image&tablename=TB_SD_M&media_id=" + map.get("ZLBM");
+		}else if("fxxd".equals(radiob_gclb)){//防汛行动
+			url = "detail.do?action=fxxd&id=" + map.get("RPJINCD") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
+			imageurl = "media.do?action=image&tablename=TB_FPACTI_M&media_id=" + map.get("ZLBM");
+		}
 %>                                                                                                                               
 	<tr>
        <td align="center">
-	       <a href="javascript:openUrl('../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD")%>&WJGS=<%=map.get("WJGS")%>',800,550,0)">
-		   <%if("JPG".equals(map.get("WJGS").toString().toUpperCase())||"JPG".equals(map.get("WJGS").toString().toLowerCase())){ %>
-		       <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" width=30 height=30> 
+	       <a href="javascript:openUrl('<%=url %>',800,550,0)">
+		   <%if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"JPG".equals(map.get("WJGS").toString().trim().toLowerCase())){ %>
+		       <img src="<%=imageurl %>" width=30 height=30> 
 		   <%}else{ %>
 		   	   <img src="../../images/lx.gif" width=30 height=30> 
 		   <%} %>
 		   </a>
 		</td>
         <td align="">
-			<a href="javascript:openUrl('../edit_fold/info_xq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD")%>&WJGS=<%=map.get("WJGS")%>',800,550,0)"><%=map.get("title")%></a>
+			<a href="javascript:openUrl('<%=url %>',800,550,0)"><%=map.get("title")%></a>
 		</td>
         <td align="center"><%=map.get("wjgs")%></td>
 		<td align="center"><%=StringUtil.DateToString((Date)map.get("dtcdt"),"yyyy-MM-dd") %></td>                                                                                        

@@ -198,6 +198,7 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_media");
 			mv.addObject("pageList", pageList);
+			mv.addObject("radiob_gclb", radiob_gclb.trim());
 		}else if("consult".equals(action)){//会商查询
 			//会商类别
 			String type = ServletRequestUtils.getStringParameter(request, "type", "");
