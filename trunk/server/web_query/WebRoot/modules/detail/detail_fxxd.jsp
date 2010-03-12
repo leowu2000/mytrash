@@ -15,6 +15,8 @@
 	if(mediaheight<60){
 		mediaheight	= 60;
 	}
+	
+	String isAdmin = session.getAttribute("isAdmin")==null?"false":session.getAttribute("isAdmin").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -25,6 +27,11 @@
 	<script language="javascript" src="../../script/onmouseover.js"></script>
 	<script language="JavaScript" src="../script/layer10.js"></script>
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<script type="text/javascript">
+		function delete(){
+			window.location.href = "/delete.do?action=fxxd&id=<%=id %>";
+		}
+	</script>
 	<script type="text/javascript">
 	function addConsult(){
 	  if(window.XMLHttpRequest){ //Mozilla 
@@ -124,6 +131,13 @@
       <td align="center">  
   		<input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
   		<input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1">
+<%
+	if("true".equals(isAdmin)){
+%>    	
+		<input type="button" name="button" value="删　　除" onclick="if(confirm('确定删除？')){delete();window.close()}" class="input1">
+<%
+	}
+%>
     	<input type="hidden" name="id" value="<%=id %>">
       </td>
     </tr>

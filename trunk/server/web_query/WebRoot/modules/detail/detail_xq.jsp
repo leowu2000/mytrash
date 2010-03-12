@@ -16,6 +16,8 @@
 	if(mediaheight<60){
 		mediaheight	= 60;
 	}
+	
+	String isAdmin = session.getAttribute("isAdmin")==null?"false":session.getAttribute("isAdmin").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -40,6 +42,10 @@
       }
 	  parent.focus();
 	  window.close();
+	}
+	
+	function delete(){
+			window.location.href = "/delete.do?action=xq&id=<%=id %>";
 	}
 	</script>
 </head>
@@ -144,6 +150,13 @@
           <input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
           <input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="if(this.value=='详细信息'){aa=window.open('detail.do?action=xq1&id=<%=id %>','详细信息','height=300,width=400,top=150,left=300,resizable=no,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no,dependent=yes,alwaysLowered=yes');this.value='关闭信息'}else{this.value='详细信息';aa.close();}" class="input1">
           <input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1">
+<%
+	if("true".equals(isAdmin)){
+%>    	
+		<input type="button" name="button" value="删　　除" onclick="if(confirm('确定删除？')){delete();window.close()}" class="input1">
+<%
+	}
+%>
         </td>
       </tr>
     </table>
