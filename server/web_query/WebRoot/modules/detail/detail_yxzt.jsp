@@ -15,6 +15,8 @@
 	if(mediaheight<60){
 		mediaheight	= 60;
 	}
+	
+	String isAdmin = session.getAttribute("isAdmin")==null?"false":session.getAttribute("isAdmin").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -40,6 +42,10 @@
 	  parent.focus();
 	  window.close();
 	}
+	
+	function delete(){
+			window.location.href = "/delete.do?action=yxzt&id=<%=id %>";
+		}
 	</script>
 </head>
 <body background="../../images/back.gif">
@@ -128,6 +134,13 @@
       <td align="center">
         <input type="button" name="button2" value="返　　回" onClick="parent.focus();window.close()" class="input1">
         <input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1"> 
+<%
+	if("true".equals(isAdmin)){
+%>    	
+		<input type="button" name="button" value="删　　除" onclick="if(confirm('确定删除？')){delete();window.close()}" class="input1">
+<%
+	}
+%>
       </td>
 	</tr>
   </table>

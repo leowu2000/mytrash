@@ -15,6 +15,8 @@
 	if(mediaheight<60){
 		mediaheight	= 60;
 	}
+	
+	String isAdmin = session.getAttribute("isAdmin")==null?"false":session.getAttribute("isAdmin").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -22,9 +24,13 @@
     <title>防汛简报详细信息</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
-<script language="javascript" src="../../script/onmouseover.js">
-</script>
-<link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<script language="javascript" src="../../script/onmouseover.js"></script>
+	<link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<script type="text/javascript">
+		function delete(){
+			window.location.href = "/delete.do?action=fxjb&id=<%=id %>";
+		}
+	</script>
 </head>
 <body background="../../images/back.gif">
 <script language="JavaScript" src="../script/layer10.js"></script>
@@ -130,6 +136,13 @@
   		<input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
     	<INPUT type="hidden" id="page" name="page" value="<%=pageNum %>">
   		<input type="button" name="button" value="打印预览" onclick="if(screen.width==800){window.location='detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=800'}else{window.location='detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=1024'}" class="input1" >
+<%
+	if("true".equals(isAdmin)){
+%>    	
+		<input type="button" name="button" value="删　　除" onclick="if(confirm('确定删除？')){delete();window.close()}" class="input1">
+<%
+	}
+%>
     	<input type="hidden" name="row_count" value="1">
     	<input type="hidden" name="command" value="-1">
     	<input type="hidden" name="check1" value="<%=id %>">
