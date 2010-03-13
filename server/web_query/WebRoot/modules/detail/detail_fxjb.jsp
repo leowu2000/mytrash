@@ -13,7 +13,7 @@
 		mediawidth = 100;
 	}
 	if(mediaheight<60){
-		mediaheight	= 60;
+		mediaheight	= 60; 
 	}
 	
 	String isAdmin = session.getAttribute("isAdmin")==null?"false":session.getAttribute("isAdmin").toString();
