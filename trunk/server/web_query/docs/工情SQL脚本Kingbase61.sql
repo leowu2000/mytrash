@@ -1286,6 +1286,22 @@ NUM                  INT                  not null,
 TBNAME               CHAR(10)             not null
 );
 
+CREATE TABLE TB_TORRENTS(
+	DNCNO INT NOT NULL,	--险情编号
+	PJNO INT NOT NULL,	--工程编号
+	STTPCD INT NOT NULL,	--建筑物编码
+	DAGTM DATE,	--出险时间
+	DNCNM CHAR(40),	--险情名称
+	DSSPN INT,	--受灾人口(人)
+	DSSAREA NUMERIC(12,2),	--受灾面积
+	DTHPN INT,	--死亡人口
+	WRHS INT,	--倒塌房屋
+	DRCECLS NUMERIC(12,2),	--经济损失
+	DAYDP NUMERIC(12,2),	--日最大降雨量
+	TDP NUMERIC(12,2),	--时段最大降雨量
+	DSSTP CHAR(40)	--灾害类型
+);
+
 ALTER TABLE TB_BCSTSDST
    ADD CONSTRAINT FK__TB_BCSTSD__CNTCD__2180FB33 FOREIGN KEY (CNTCD)
       REFERENCES TB_CNT (CNTCD)
