@@ -169,6 +169,7 @@ public class Consts {
 // 23). 洞身破坏 "D023""TB_HBWRDSC"
 // 24). 控导工程局部破坏 "D024" "TB_CLPJPRWR"
 // 25). 控导工程冲毁 "D025" "TB_CLPJSCDN"
+//26). 山洪灾害 "D026" "TB_TORRENTS"
 //   
 // 三.灾情信息
 // 1.灾情表 tb_sd 需要更新rpjincd(来自于服务器)字段
