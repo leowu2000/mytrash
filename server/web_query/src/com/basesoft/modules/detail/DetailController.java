@@ -96,9 +96,14 @@ public class DetailController extends CommonController {
 			//得到险情信息和险情多媒体信息
 			Map mapXq1 = detailDAO.getXq1(id);
 			
+			//得到险情分类信息
+			String tablename = detailDAO.getXqflTable(mapXq1.get("xqfldm").toString());
+			Map mapXqflxx = detailDAO.getXqflxx(tablename, id);
+			
 			mv.addObject("id", id);
 			mv.addObject("page", page);
 			mv.addObject("mapXq1", mapXq1);
+			mv.addObject("mapXqflxx", mapXqflxx);
 		}else if("yxzt".equals(action)){//运行状态
 			mv = new ModelAndView("modules/detail/detail_yxzt");
 			

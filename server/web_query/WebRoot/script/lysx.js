@@ -1,7 +1,6 @@
 document.write("<table width='100%' border='0' cellspacing='0' cellpadding='0' id='lysxtable'>");
 document.write("  <tr id=c1> ");
-document.write("	<td class=tdclass2 >流域:</td>");
-document.write("	<td>");
+document.write("	<td class=tdclass2 >流域:");
 document.write("  <select name='ly' onchange='click6(this.value);click2(this.value);document.all.lysx.value=this.value'>");
 document.write("	<option value=ZZ >全部流域</option>");
 document.write("	<option value=AA >黑龙江流域</option>");
