@@ -17,7 +17,7 @@
       <!--DWLayoutTable-->
       <tr> 
         <td height="30" align="center"><font color="#FFFFFF">查询类别</font></td>
-        <td height="30" align="center" bgcolor="#FFFFFF"> <input type="radio" name="radiob_gclb" id="radiob_gclb" value="xq" checked>
+        <td height="30" bgcolor="#FFFFFF" align="left"> <input type="radio" name="radiob_gclb" id="radiob_gclb" value="xq" checked>
           险情 
           <input type="radio" name="radiob_gclb" id="radiob_gclb"  value="yxzt">
           工程运行 
@@ -26,7 +26,7 @@
           <input type="radio" name="radiob_gclb" id="radiob_gclb"  value="fxxd">
           防汛行动</td>
         <td height="30" align="center"><font color="#FFFFFF">文件格式</font></td>
-        <td height="30" align="center" bgcolor="#FFFFFF"> <input type="radio" name="radiob_gs" id="radiob_gs" value="tp" checked>
+        <td height="30" bgcolor="#FFFFFF" align="left"> <input type="radio" name="radiob_gs" id="radiob_gs" value="tp" checked>
           图片 
           <input type="radio" name="radiob_gs" id="radiob_gs"  value="lx">
           录像 
@@ -37,15 +37,15 @@
       </tr>
       <tr> 
         <td height="30" align="center"><font color="#FFFFFF">标题</font></td>
-        <td height="30" align="center" bgcolor="#FFFFFF"> <input name="text_title" class="input2" > </td>
+        <td height="30" bgcolor="#FFFFFF" align="left"> <input name="text_title" class="input2" > </td>
         <td height="30" align="center"><font color="#FFFFFF">内容描述</font></td>
-        <td height="30" align="center" bgcolor="#FFFFFF"> <input name="text_fill" class="input2" > </td>
+        <td height="30" bgcolor="#FFFFFF" align="left"> <input name="text_fill" class="input2" > </td>
       </tr>
       <tr> 
         <td height="30" align="center"><font color="#FFFFFF">采集时间</font></td>
         <td colspan="3" align="left" bgcolor="#FFFFFF">
-			从<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
-			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
+			<input type="text" id="date_start" name="date_start" class="input2" onClick="WdatePicker({readOnly:true})">到
+			<input type="text" id="date_end" name="date_end" class="input2" onClick="WdatePicker({readOnly:true})">
 		</td>
       </tr>
     </table>

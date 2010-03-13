@@ -1,5 +1,6 @@
 package com.basesoft.modules.detail;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -95,6 +96,22 @@ public class DetailDAO extends CommonDAO {
 	 */
 	public Map getXq_s(String id){
 		return jdbcTemplate.queryForMap("select * from tb_stdnc sc,tb_st st where sc.sttpcd = st.sttpcd  and sc.dncno = '" + id + "'");
+	}
+	
+	/**
+	 * 获取险情分类信息
+	 * @param tablename 险情分类数据表
+	 * @param dncno 险情id
+	 * @return
+	 */
+	public Map getXqflxx(String tablename, String dncno){
+		List list = jdbcTemplate.queryForList("select * from " + tablename + " where DNCNO='" + dncno + "'");
+		
+		if(list.size()>0){
+			return (Map)list.get(0);
+		}else {
+			return new HashMap();
+		}
 	}
 	
 	/**

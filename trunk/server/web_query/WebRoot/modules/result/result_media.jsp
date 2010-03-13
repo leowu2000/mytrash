@@ -70,11 +70,13 @@ String radiob_gclb = request.getAttribute("radiob_gclb").toString();
 			url = "detail.do?action=fxxd&id=" + map.get("RPJINCD") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
 			imageurl = "media.do?action=image&tablename=TB_FPACTI_M&media_id=" + map.get("ZLBM");
 		}
+		
+		String ext = map.get("WJGS")==null?"":map.get("WJGS").toString().trim().toUpperCase();
 %>                                                                                                                               
 	<tr>
        <td align="center">
 	       <a href="javascript:openUrl('<%=url %>',800,550,0)">
-		   <%if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"JPG".equals(map.get("WJGS").toString().trim().toLowerCase())){ %>
+		   <%if("JPG".equals(ext)||"JPEG".equals(ext)){ %>
 		       <img src="<%=imageurl %>" width=30 height=30> 
 		   <%}else{ %>
 		   	   <img src="../../images/lx.gif" width=30 height=30> 

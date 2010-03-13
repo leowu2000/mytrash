@@ -50,7 +50,20 @@ public class SearchController extends CommonController {
 				
 				Map mapQbxx = searchDAO.getAllResults(select_sort, xzqh, lysx, date_start, date_end, text_fill, check_projectname, check_unit, check_title);
 				
-				mv.addObject("mapQbxx", mapQbxx);
+				//mv.addObject("mapQbxx", mapQbxx);
+				List listXq = (List)mapQbxx.get("listXq");
+				List listZq = (List)mapQbxx.get("listZq");
+				List listHq = (List)mapQbxx.get("listHq");
+				List listYxzt = (List)mapQbxx.get("listYxzt");
+				List listFxxd = (List)mapQbxx.get("listFxxd");
+				List listFxjb = (List)mapQbxx.get("listFxjb");
+				
+				request.getSession().setAttribute("listXq", listXq);
+				request.getSession().setAttribute("listZq", listZq);
+				request.getSession().setAttribute("listHq", listHq);
+				request.getSession().setAttribute("listYxzt", listYxzt);
+				request.getSession().setAttribute("listFxxd", listFxxd);
+				request.getSession().setAttribute("listFxjb", listFxjb);
 			}else {
 				//根据检索条件检索出的结果
 				PageList listResult = searchDAO.getResult(select_sortinfo,select_sort,xzqh,lysx,date_start,date_end,text_fill,check_projectname,check_unit,check_title, page);
@@ -64,7 +77,7 @@ public class SearchController extends CommonController {
 				}else if("fxxd".equals(select_sortinfo)){//查询防汛行动
 					mv = new ModelAndView("modules/result/result_fxxd");
 				}else if("zqbg".equals(select_sortinfo)){//查询灾情报告
-					mv = new ModelAndView("modules/result/result_zqg");
+					mv = new ModelAndView("modules/result/result_zqbg");
 				}else if("hqbg".equals(select_sortinfo)){//查询旱情报告
 					mv = new ModelAndView("modules/result/result_hqbg");
 				}

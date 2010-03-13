@@ -31,12 +31,12 @@ function init(){
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>信息类型</strong></font></td>
         <td align="left" bgcolor="#FFFFFF"> <select name="select_sortinfo" id=select_sortinfo size="1" >
             <option value="qbxx" selected>全部信息</option>
-            <OPTION value="yxzt">运行状态</OPTION>
             <OPTION value="xqxx">险情</OPTION>
-            <OPTION value="fxjb">防汛简报</OPTION>
+            <OPTION value="zqbg">灾情</OPTION>
+            <OPTION value="hqbg">旱情</OPTION>
+            <OPTION value="yxzt">运行状态</OPTION>
             <OPTION value="fxxd">防汛行动</OPTION>
-            <OPTION value="zqbg">灾情报告</OPTION>
-            <OPTION value="hqbg">旱情报告</OPTION>
+            <OPTION value="fxjb">防汛简报</OPTION>
           </select> 
           <!--input type="checkbox" name="checkbox_media" value="true"-->
         </td>
@@ -55,27 +55,19 @@ function init(){
         <td rowspan="5" bgcolor="#FFFFFF"> <input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
         </td>
       </tr>
-      <tr > 
-        <td bgcolor="#336699" align="center"><font color="#FFFFFF"><strong>行政区域</strong></font></td>
-        <td colspan="3" bgcolor="#FFFFFF" align="left"> <div  name='xzqu_table'> 
-            <script language="JavaScript" src="../../script/xzqh.js"></script>
-          </div></td>
-      </tr>
       <tr align="center"> 
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>河流水系</strong></font></td>
-        <td colspan="3" bgcolor="#FFFFFF" align="left"> <script language="JavaScript" src="../../script/lysx.js"></script> 
+        <td colspan="3" bgcolor="#FFFFFF" align="left"><script language="JavaScript" src="../../script/lysx.js"></script> 
         </td>
       </tr>
       <tr align="center"> 
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
-        <td colspan="3" align="left" bgcolor="#FFFFFF">
-			从<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
+        <td align="left" bgcolor="#FFFFFF">
+			<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
 			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
 		</td>
-      </tr>
-      <tr align="center"> 
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>关键字</strong></font></td>
-        <td colspan="3" align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" > 
+		<td bgcolor="#336699"><font color="#FFFFFF"><strong>关键字</strong></font></td>
+        <td align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" > 
           <input type="checkbox" name="check_projectname" value="true">
           工程名称 
           <input type="checkbox" name="check_unit" value="true">

@@ -17,7 +17,7 @@ MM_reloadPage(true);
 </script>
 </head>
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize(50);" onLoad="IFrameResize(50)"  >
-<iframe name="queryFrame" height='50' width='100%' style="display:none" scrolling="NO" frameborder='0' src="/search.do?action=search_consult" ></iframe>
+<iframe name="queryFrame" height='50' width='100%' scrolling="NO" frameborder='0' src="/search.do?action=search_consult" ></iframe>
 <iframe name="result" width="100%" frameborder='0' src="/search.do?action=consult&type=a"></iframe>
 </body>
 </html>

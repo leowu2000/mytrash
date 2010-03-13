@@ -65,7 +65,7 @@
       </td>
       <td height="25" ><div align="right"></div>
         <div align="right">
-          <font color=#000000><%=mapXq.get("dagtm") %></font>
+          <font color=#000000><%=StringUtil.DateToString((Date)mapXq.get("dagtm"),"yyyy-MM-dd") %></font>
         </div>
       </td>
     </tr>

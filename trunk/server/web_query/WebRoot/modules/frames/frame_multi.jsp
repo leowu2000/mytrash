@@ -26,8 +26,8 @@ MM_reloadPage(true);
 	//'session("select_sortinfo") = "default"
 
 %>
-<body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize(170);" onLoad="IFrameResize(170)" >
-<iframe name="queryFrame" height='170' width='100%' style="display:none" scrolling="NO" frameborder='0' src="../search/search_multi.jsp" ></iframe>
+<body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize(89);" onLoad="IFrameResize(89)" >
+<iframe name="queryFrame" height='80' width='100%' style="" scrolling="NO" frameborder='0' src="../search/search_multi.jsp" ></iframe>
 <iframe name="result" width="100%" frameborder='0' height=""></iframe>
 </body>
 </html>
