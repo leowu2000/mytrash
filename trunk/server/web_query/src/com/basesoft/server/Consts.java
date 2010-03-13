@@ -116,13 +116,15 @@ public class Consts {
 		{"P","穿堤建筑物","TB_DKR"}
 	};
 
+	public static final String[][] TB={
+	};
 
 }
 
 
 //对数据分类处理时涉及的表和相关字段：
 //
-// 一.工情信息
+// 一.工情信息 
 // 1.工程表 tb_pj 需要更新pjno字段(来自服务器)
 // 2.运行信息表 tb_pjrcn 需要更新pjno字段(来自tb_pj表)和pjrno字段(来自于服务器)
 // 3.运行信息表对应的多媒体表 tb_pjr_m 需要更新pjrno(来自于tb_pj)和zlbm(来自于服务器)两个字段
@@ -172,7 +174,7 @@ public class Consts {
 // 1.灾情表 tb_sd 需要更新rpjincd(来自于服务器)字段
 // 2.灾情多媒体表 tb_sd_m 需要更新和rpjincd(新值来自于tb_sd)和zlbm(新值来自于服务器)两个字段
 //
-// 四.其他信息
+// 四.其他信息 旱情
 // 1.其他表 tb_QT 需要更新rpjincd(新值来自于服务器)字段
 // 2.其他多媒体表 tb_qt_m 需要更新和rpjincd(新值来自于tb_QT)和zlbm(新值来自于服务器)两个字段
 //
