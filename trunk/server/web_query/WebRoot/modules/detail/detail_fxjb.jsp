@@ -27,7 +27,7 @@
 	<script language="javascript" src="../../script/onmouseover.js"></script>
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
 	<script type="text/javascript">
-		function delete(){
+		function del(){
 			window.location.href = "/delete.do?action=fxjb&id=<%=id %>";
 		}
 	</script>
@@ -55,6 +55,7 @@
 	    String altStr6 = "长 度:" + size + "kb";
 	    String altStr7 = ""; 
 
+	    String ext = mapFxjb_m.get("WJGS")==null?"":mapFxjb_m.get("WJGS").toString().trim().toUpperCase();
 %>
     <tr width="100%">
 	  <td>
@@ -64,7 +65,7 @@
 	      </tr>
 		  <tr align="middle" height="80"> 
 	        <td class="bordercolor"  height="80">		
-		    <%if("JPG".equals(mapFxjb_m.get("WJGS").toString().toUpperCase())||"JPG".equals(mapFxjb_m.get("WJGS").toString().toLowerCase())){ %>
+		    <%if("JPG".equals(ext)||"JPEG".equals(ext)){ %>
 	       	  <img src="media.do?action=image&tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='../modules/view/view_fxjb.jsp?media_id=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE") %>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapFxjb_m.get("WJGS") %>&DETAIL=<%=mapFxjb_m.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight %>;width=<%=mediawidth %>; z-index:8;"> 
 	        <%}else{%>
 	       	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE")%>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapFxjb_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
@@ -139,7 +140,7 @@
 <%
 	if("true".equals(isAdmin)){
 %>    	
-		<input type="button" name="button" value="删　　除" onclick="if(confirm('确定删除？')){delete();window.close()}" class="input1">
+		<input type="button" name="button" value="删　　除" onclick="if(confirm('确定删除？')){del();window.close()}" class="input1">
 <%
 	}
 %>
