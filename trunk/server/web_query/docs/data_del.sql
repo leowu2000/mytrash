@@ -67,25 +67,14 @@ delete from TB_WDMPJS;
 delete from TB_WDMPJS1;
 delete from TB_WDMPJS2;
 --以上61张表，以下未使用
-8
+1
 TB_JZWFL    建筑物分类
--TB_DK   堤防(段)
--TB_TS   穿堤建筑物
--TB_DAM  大坝
--TB_ES   泄水建筑物
--TB_WL   水闸
--TB_SPUR 控导工程
--TB_PRRISI   护坡护岸
 4
 TB_WT   填报单位
 TB_USER 用户登记
 TB_PICKREC  挑选表
 TB_VP   省流域对照
-
-+V_HOME
-+TB_ZBJL
+--序列及会商
 +TB_SEQUENCE
-+TB_REPORTEDDATA
 +TB_HS
 +TB_HS_M
-+TB_HS_BAK

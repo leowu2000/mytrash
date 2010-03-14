@@ -56,8 +56,6 @@ DROP TABLE TB_HOMLFDSC;
 
 DROP TABLE TB_HS;
 
-DROP TABLE TB_HS_BAK;
-
 DROP TABLE TB_HS_M;
 
 DROP TABLE TB_HYWDMS;
@@ -97,8 +95,6 @@ DROP TABLE TB_RDEST1;
 DROP TABLE TB_RDEST2;
 
 DROP TABLE TB_RSR;
-
-DROP TABLE TB_ReportedData;
 
 DROP TABLE TB_SD;
 
@@ -143,10 +139,6 @@ DROP TABLE TB_WLR;
 DROP TABLE TB_WT;
 
 DROP TABLE TB_XQFL;
-
-DROP TABLE TB_ZBJL;
-
-DROP TABLE V_HOME;
 
 /*==============================================================*/
 /* Table: TB_BCSTSDST                                           */
@@ -588,17 +580,6 @@ TABLENAME            CHAR(12)
 );
 
 /*==============================================================*/
-/* Table: TB_HS_BAK                                             */
-/*==============================================================*/
-CREATE TABLE TB_HS_BAK (
-BH                   INT,
-TYPE                 INT,
-TABLENAME            CHAR(12),
-HSDATE               CHAR(12),
-HSTIME               CHAR(12)
-);
-
-/*==============================================================*/
 /* Table: TB_HS_M                                               */
 /*==============================================================*/
 CREATE TABLE TB_HS_M (
@@ -894,18 +875,6 @@ EDDPFCN              VARCHAR(255),
 GTHOPFCN             VARCHAR(255),
 COMMCN               VARCHAR(255),
 CONSTRAINT PK__TB_RSR__117F9D94 PRIMARY KEY (PJRNO)
-);
-
-/*==============================================================*/
-/* Table: TB_ReportedData                                       */
-/*==============================================================*/
-CREATE TABLE TB_ReportedData (
-RecID                INT                  not null,
-RepTbName            CHAR(40),
-RepID                CHAR(20),
-RepDate              TIMESTAMP,
-RepIP                CHAR(128),
-CONSTRAINT PK_TB_ReportedData PRIMARY KEY (RecID)
 );
 
 /*==============================================================*/
@@ -1258,32 +1227,6 @@ XQFLDM               CHAR(4)              not null,
 XQFLMC               CHAR(40),
 TBNAME               CHAR(40),
 CONSTRAINT PK__TB_XQFL__7F60ED59 PRIMARY KEY (XQFLDM)
-);
-
-/*==============================================================*/
-/* Table: TB_ZBJL                                               */
-/*==============================================================*/
-CREATE TABLE TB_ZBJL (
-ZBBH                 INT                  not null,
-ZBRQ                 TIMESTAMP,
-ZBJL                 TEXT,
-QF                   CHAR(30),
-SH                   CHAR(30),
-NG                   CHAR(30),
-CONSTRAINT PK__TB_ZBJL__03F0984C PRIMARY KEY (ZBBH)
-);
-
-/*==============================================================*/
-/* Table: V_HOME                                                */
-/*==============================================================*/
-CREATE TABLE V_HOME (
-TITLE                CHAR(40)             not null,
-WTDPDT               TIMESTAMP            not null,
-WTDPCD               CHAR(40)             not null,
-FENLEI               CHAR(8)              not null,
-FENLEI1              CHAR(8),
-NUM                  INT                  not null,
-TBNAME               CHAR(10)             not null
 );
 
 CREATE TABLE TB_TORRENTS(
