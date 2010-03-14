@@ -1,6 +1,7 @@
 package com.basesoft.modules.media;
 
 import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -19,13 +20,14 @@ public class MediaController extends CommonController {
 	@Override
 	protected ModelAndView doHandleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response, ModelAndView mv) throws Exception {
+		final String realpath = request.getSession().getServletContext().getRealPath("/");
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
 		
 		if("image".equals(action)){
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
-			Map map = mediaDAO.getImage(tablename, media_id);
+			Map map = mediaDAO.getBlob(tablename, media_id);
 			
 			byte[] b = (byte[])map.get("lxzp");
 			
@@ -37,13 +39,32 @@ public class MediaController extends CommonController {
 			response.getOutputStream().close();
 			return null;
 		}else if("video".equals(action)){
+			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
+			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
+			Map map = mediaDAO.getBlob(tablename, media_id);
+			Map mapMedia = mediaDAO.getMedia(tablename, media_id);
+			
+			byte[] b = (byte[])map.get("lxzp");
+			
+			String path = realpath + "\\video\\" + mapMedia.get("TITLE").toString().trim() + "." + mapMedia.get("WJGS").toString().trim();
+			
+			FileOutputStream fs = new FileOutputStream(path);
+	        int byteread = b.length;    
+	        fs.write(b,0,byteread);   
+	        fs.flush();   
+	        fs.close(); 
+	        
+			mv = new ModelAndView("modules/media/player");
+			mv.addObject("filepath", path);
+			
+			return mv;
 		}else if("download".equals(action)){
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			String filename = ServletRequestUtils.getStringParameter(request,"filename","");
 			
-			Map map = mediaDAO.getImage(tablename, media_id);
+			Map map = mediaDAO.getBlob(tablename, media_id);
 			
 			byte[] b = (byte[])map.get("lxzp");
 			

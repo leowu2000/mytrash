@@ -1,4 +1,4 @@
-#Thu Jan 14 21:35:49 CST 2010
+#Sun Mar 14 15:23:35 CST 2010
 eclipse.preferences.version=1
 encoding//WebRoot/index.jsp=UTF-8
 encoding//WebRoot/script/My97DatePicker/readme.txt=GBK
@@ -21,4 +21,10 @@ encoding//WebRoot/script/xq.js=UTF-8
 encoding//WebRoot/script/xzqh.js=UTF-8
 encoding//WebRoot/script/yxzt.js=UTF-8
 encoding//WebRoot/script/zq.js=UTF-8
+encoding//docs/TB_CNT.sql=GBK
+encoding//docs/TB_GCLB.SQL=GBK
+encoding//docs/TB_LYSX.SQL=GBK
+encoding//docs/TB_LYSX1.SQL=GBK
+encoding//docs/TB_XQFL.SQL=GBK
+encoding//docs/\u5DE5\u60C5SQL\u811A\u672CKingbase6_\u5305\u542B\u6CE8\u91CA.sql=GBK
 encoding/<project>=UTF-8

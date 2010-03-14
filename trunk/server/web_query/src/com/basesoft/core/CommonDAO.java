@@ -31,4 +31,23 @@ public class CommonDAO {
 		
 		return tablename;
 	}
+	
+	/**
+	 * 获取工程分类对应的数据库表
+	 * @param gcfldm 工程分类代码
+	 * @return
+	 */
+	public String getGcflTable(String gcfldm){
+		String tablename = "";
+		String sql = "select * from TB_GCLB where GCFLDM='" + gcfldm + "'";
+		
+		List list = jdbcTemplate.queryForList(sql);
+		
+		if(list.size()>0){
+			Map map = (Map)list.get(0);
+			tablename = map.get("TBNAME")==null?"":map.get("TBNAME").toString().trim();
+		}
+		
+		return tablename;
+	}
 }

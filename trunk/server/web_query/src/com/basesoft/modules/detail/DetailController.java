@@ -99,11 +99,13 @@ public class DetailController extends CommonController {
 			//得到险情分类信息
 			String tablename = detailDAO.getXqflTable(mapXq1.get("xqfldm").toString());
 			Map mapXqflxx = detailDAO.getXqflxx(tablename, id);
+			String xqflmc = detailDAO.getXqflmc(id);
 			
 			mv.addObject("id", id);
 			mv.addObject("page", page);
 			mv.addObject("mapXq1", mapXq1);
 			mv.addObject("mapXqflxx", mapXqflxx);
+			mv.addObject("xqflmc", xqflmc);
 		}else if("yxzt".equals(action)){//运行状态
 			mv = new ModelAndView("modules/detail/detail_yxzt");
 			
@@ -120,6 +122,25 @@ public class DetailController extends CommonController {
 			mv.addObject("page", page);
 			mv.addObject("mapYxzt", mapYxzt);
 			mv.addObject("listYxzt_m", listYxzt_m);
+		}else if("yxzt1".equals(action)){//运行状态
+			mv = new ModelAndView("modules/detail/detail_yxzt1");
+			
+			String id = ServletRequestUtils.getStringParameter(request, "id", "");
+			
+			//得到运行状态和运行状态多媒体信息
+			Map mapYxzt = detailDAO.getYxzt(id);
+			List listYxzt_m = detailDAO.getYxzt_m(id);
+			
+			//得到工程分类信息
+			String tablename = detailDAO.getGcflTable(mapYxzt.get("GCFLDM").toString());
+			Map mapGcflxx = detailDAO.getGcflxx(tablename, id);
+			String gcflmc = detailDAO.getGcflmc(id);
+			
+			mv.addObject("id", id);
+			mv.addObject("mapYxzt", mapYxzt);
+			mv.addObject("listYxzt_m", listYxzt_m);
+			mv.addObject("mapGcflxx", mapGcflxx);
+			mv.addObject("gcflmc", gcflmc);
 		}else if("zq".equals(action)){//灾情
 			mv = new ModelAndView("modules/detail/detail_zq");
 			

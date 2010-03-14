@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="org.springframework.web.context.support.*,org.springframework.context.*,org.springframework.jdbc.core.JdbcTemplate" %>
+<%@ page import="com.basesoft.util.*" %>
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -68,7 +69,7 @@ MM_reloadPage(true);
     </tr>
     <tr> 
       <td height="20" ><%=mapYxzt.get("provnm")%></td>
-      <td height="20" align="right"><%=mapYxzt.get("wtdpdt")%></td>
+      <td height="20" align="right"><%=mapYxzt.get("wtdpdt")==null?"":StringUtil.DateToString((Date)mapYxzt.get("wtdpdt"),"yyyy-MM-dd")%></td>
     </tr>
   </table>	
   <table width="68%" border="0"  align="center"   cellpadding="0" cellspacing="0" class="bordercolor">
@@ -94,7 +95,7 @@ MM_reloadPage(true);
 	    
 				if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 %>
-        <img src="media.do?action=image&tablename=TB_PJR_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_yxzt.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapYxzt.get("wtdpdt") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
+        <img src="media.do?action=image&tablename=TB_PJR_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../modules/view/view_yxzt.jsp?media_id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE") %>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapYxzt.get("wtdpdt") %>&fileName=<%=fileName %>&WJGS=<%=map.get("WJGS") %>&DETAIL=<%=map.get("NRMS") %>'"> 
 <% 		
         		}else
 %>
@@ -110,7 +111,7 @@ MM_reloadPage(true);
   <table width="68%" border="0"  align="center" cellpadding="1" cellspacing="1" bgcolor="#336699"  class="bordercolor" valign="top">
     <tr align="center"> 
       <td height="23" bgcolor="#E4E1D6">检测时间</td>
-      <td height="23" bgcolor="#FFFFFF"><%=mapYxzt.get("dtcdt")%></td>
+      <td height="23" bgcolor="#FFFFFF"><%=mapYxzt.get("dtcdt")==null?"":StringUtil.DateToString((Date)mapYxzt.get("dtcdt"),"yyyy-MM-dd")%></td>
       <td height="20" bgcolor="#E4E1D6">工程所在地</td>
       <td height="20" bgcolor="#FFFFFF"><%=mapYxzt.get("provnm")%></td>
     </tr>
@@ -161,7 +162,7 @@ MM_reloadPage(true);
     </tr>
     <tr > 
       <td width="50%" height="29"><%=mapXq.get("pjnm")%></td>
-      <td width="50%" height="28" align="right"><%=mapXq.get("dagtm")%></td>
+      <td width="50%" height="28" align="right"><%=mapXq.get("dagtm")==null?"":StringUtil.DateToString((Date)mapXq.get("dagtm"),"yyyy-MM-dd")%></td>
     </tr>
   </table>
 	<table width="68%" border="0" cellspacing="0"  align="center"   cellpadding="0"  class="bordercolor">
@@ -185,7 +186,7 @@ MM_reloadPage(true);
 
 	    		if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 		 %>
-        <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)"  onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=image_detail&id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapXq.get("wtdpcd") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
+        <img src="media.do?action=image&tablename=TB_STDNC_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)"  onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../modules/view/view_xq.jsp?media_id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE") %>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapXq.get("WTDPCD") %>&fileName=<%=fileName %>&WJGS=<%=map.get("WJGS") %>&DETAIL=<%=map.get("NRMS") %>'"> 
         <% 
 	    		}else{
 	    %>
@@ -253,7 +254,7 @@ MM_reloadPage(true);
     </tr>
     <tr> 
       <td width="50%" ><%=mapFxxd.get("WTDPCD")%></td>
-      <td width="50%" align="right">&nbsp;<%=mapFxxd.get("WTDT")%></td>
+      <td width="50%" align="right">&nbsp;<%=mapFxxd.get("WTDT")==null?"":StringUtil.DateToString((Date)mapFxxd.get("WTDT"),"yyyy-MM-dd")%></td>
     </tr>
   </table>
 	<table width="68%" border="0" cellspacing="0"  align="center"   cellpadding="0"  class="bordercolor">
@@ -271,7 +272,7 @@ MM_reloadPage(true);
         		int size = 8000/1024;
 	    		String altStr1 = "编 号:" + map.get("ZLBM");
 	    		String altStr2 = "标  题:" + map.get("TITLE");
-	    		String altStr3 = "采集单位:" + map.get("WTDPCD");
+	    		String altStr3 = "采集单位:" + mapFxxd.get("WTDPCD");
 	    		String altStr4 = "采集时间:" + map.get("DTCDT");
 	    		String altStr5 = "文件名:" + fileName;
 	    		String altStr6 = "长 度:" + size + "kb";
@@ -279,7 +280,7 @@ MM_reloadPage(true);
 	    
 	        	if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 	%>
-        <img src="media.do?action=image&tablename=TB_FPACTI_M&amp;media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=image_detail&id=<%=map.get("ZLBM")%>&amp;title=<%=map.get("TITLE")%>&amp;dtcdt=<%=map.get("DTCDT")%>&amp;tbdw=<%=map.get("WTDPCD") %>&amp;fileName=<%=fileName%>&amp;WJGS=<%=map.get("WJGS")%>'"> 
+        <img src="media.do?action=image&tablename=TB_FPACTI_M&amp;media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../modules/view/view_fxxd.jsp?media_id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE") %>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapFxxd.get("WTDPCD") %>&fileName=<%=fileName %>&WJGS=<%=map.get("WJGS") %>&DETAIL=<%=map.get("NRMS") %>'"> 
         <% 	}else{  %>
         <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_fxxd.asp?fxxd_pId=<%=map.get("ZLBM")%>&amp;title=<%=map.get("TITLE")%>&amp;dtcdt=<%=map.get("DTCDT")%>&amp;tbdw=<%=map.get("WTDPCD") %>&amp;fileName=<%=fileName%>&amp;WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
         <%
@@ -289,11 +290,11 @@ MM_reloadPage(true);
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" cellspacing="0"  align="center" cellpadding="0" height="60%" class="bordercolor">
+  <table width="68%" border="0" cellspacing="0"  align="center" cellpadding="0" class="bordercolor">
     <tr> 
-      <td height="80" align="center"> <textarea name="text_detail" cols="60" style="border=1 solid #002200;" rows="15" wrap="VIRTUAL" class="button_query" onchange="javascript:alter('hello');textfield.value='记录未修改'">
+      <td align="center"> <div name="text_detail" style="border=0 solid #002200;" wrap="VIRTUAL" class="button_query" >
 			<%=ACTICO%> 
-          </textarea> 
+          </div> 
       </td>
     </tr>
   </table>
@@ -324,7 +325,7 @@ MM_reloadPage(true);
     </tr>
     <tr> 
       <td width="50%" height="11"><%=mapZq.get("WTDPCD")%></td>
-      <td width="50%" height="11" align="right"> <%=mapZq.get("WTDT")%>&nbsp; </td>
+      <td width="50%" height="11" align="right"> <%=mapZq.get("WTDT")==null?"":StringUtil.DateToString((Date)mapZq.get("WTDT"),"yyyy-MM-dd")%>&nbsp; </td>
     </tr>
   </table>	
 	<table width="68%" border="0"  align="center" cellpadding="0" cellspacing="0" bordercolor="#336699" class="bordercolor">
@@ -341,7 +342,7 @@ MM_reloadPage(true);
         		int size = 8000/1024;
 	    		String altStr1 = "编 号:" + map.get("ZLBM");
 	    		String altStr2 = "标  题:" + map.get("TITLE");
-	    		String altStr3 = "采集单位:" + map.get("WTDPCD");
+	    		String altStr3 = "采集单位:" + mapZq.get("WTDPCD");
 	    		String altStr4 = "采集时间:" + map.get("DTCDT");
 	    		String altStr5 = "文件名:" + fileName;
 	    		String altStr6 = "长 度:" + size + "kb";
@@ -349,7 +350,7 @@ MM_reloadPage(true);
 	    
 	    		if("JPG".equals(map.get("WJGS").toString().trim().toUpperCase())||"jpg".equals(map.get("WJGS").toString().trim().toLowerCase())){
 		 %>
-       		<img src="media.do?action=image&tablename=TB_SD_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=image_detail&id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'"> 
+       		<img src="media.do?action=image&tablename=TB_SD_M&media_id=<%=map.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../modules/view/view_zq.jsp?media_id=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE") %>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=mapZq.get("WTDPCD") %>&fileName=<%=fileName %>&WJGS=<%=map.get("WJGS") %>&DETAIL=<%=map.get("NRMS") %>'"> 
          <% 	}else{  %>
             <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../edit_fold/info_zq.asp?fxxd_pId=<%=map.get("ZLBM")%>&title=<%=map.get("TITLE")%>&dtcdt=<%=map.get("DTCDT")%>&tbdw=<%=map.get("WTDPCD") %>&fileName=<%=fileName%>&WJGS=<%=map.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
          <%
@@ -362,10 +363,10 @@ MM_reloadPage(true);
 
   <table width="68%" border="0" cellspacing="0"  align="center" cellpadding="0" class="bordercolor">
     <tr>
-      <td height="80"><div align="center"> 
-          <textarea name="text_detail" cols="60%" style="border=1 solid #002200 " rows="8" readonly wrap="VIRTUAL" class="button_query" onclick="">
+      <td><div align="center"> 
+          <div name="text_detail" style="border=0 solid #002200 " readonly wrap="VIRTUAL" class="button_query" onclick="">
 			<%=SDDSC%>
-          </textarea>
+          </div>
         </div></td>
     </tr>
   </table>    
