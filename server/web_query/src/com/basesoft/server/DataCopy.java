@@ -137,7 +137,7 @@ public class DataCopy {
 				myStmt = cnTarget.prepareStatement(strSql.toUpperCase());
 				myStmt.executeUpdate();
 				myStmt.close();
-				return 10001;
+				return 10000;
 			} else {
 				nSequence = rsCursor.getInt("NEXTVALUE");
 				rsCursor.close();
