@@ -118,7 +118,15 @@ public class Consts {
 
 	public static final String[][] TB={
 	};
-
+	
+public static void main(String[] args) {
+	System.out.println(XQFL.length);
+	for (int i = 0; i < XQFL.length; i++) {
+		String s[] = XQFL[i];
+//		System.out.println("INSERT INTO TB_XQFL(XQFLDM,XQFLMC,TBNAME)VALUES('"+s[0]+"','"+s[1]+"','"+s[2]+"');");
+		System.out.println("delete from "+s[2]+";");
+	}
+}
 }
 
 
