@@ -88,7 +88,7 @@
 			  <%if("JPG".equals(ext)||"JPEG".equals(ext)){%>
         	  <img src="media.do?action=image&tablename=TB_PJR_M&media_id=<%=mapYxzt_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='../modules/view/view_yxzt.jsp?media_id=<%=mapYxzt_m.get("ZLBM")%>&title=<%=mapYxzt_m.get("TITLE") %>&dtcdt=<%=mapYxzt_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapYxzt_m.get("WJGS") %>&DETAIL=<%=mapYxzt_m.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight%>;width=<%=mediawidth%>;; z-index:8;"> 
         	  <%}else{%>
-        	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=vedio&pid=<%=mapYxzt_m.get("ZLBM")%>&title=<%=mapYxzt_m.get("TITLE")%>&dtcdt=<%=mapYxzt_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapYxzt_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+        	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='../media/player.jsp?tablename=TB_PJR_M&media_id=<%=mapYxzt_m.get("ZLBM")%>'" WIDTH="80" HEIGHT="53"> 
         	  <%}%>
 			</td>
 		  </tr>
@@ -135,6 +135,7 @@
     <tr>
       <td align="center">
         <input type="button" name="button2" value="返　　回" onClick="parent.focus();window.close()" class="input1">
+        <input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="if(this.value=='详细信息'){bb=window.open('detail.do?action=yxzt1&id=<%=id %>','详细信息','height=300,width=400,top=150,left=300,resizable=no,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no,dependent=yes,alwaysLowered=yes');}else{this.value='详细信息';bb.close();}" class="input1">
         <input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1"> 
 <%
 	if("true".equals(isAdmin)){

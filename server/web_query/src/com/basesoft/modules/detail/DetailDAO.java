@@ -115,6 +115,23 @@ public class DetailDAO extends CommonDAO {
 	}
 	
 	/**
+	 * 获取险情分类名称
+	 * @param dncno 险情编码
+	 * @return
+	 */
+	public String getXqflmc(String dncno){
+		String xqflmc = "";
+		
+		List list = jdbcTemplate.queryForList("select * from TB_XQFL where XQFLDM=(select XQFLDM from TB_STDNC where DNCNO='" + dncno + "')");
+	
+		if(list.size()>0){
+			xqflmc = ((Map)list.get(0)).get("XQFLMC").toString().trim();
+		}
+		
+		return xqflmc;
+	}
+	
+	/**
 	 * 获取运行状态
 	 * @param id
 	 * @return
@@ -130,6 +147,39 @@ public class DetailDAO extends CommonDAO {
 	 */
 	public List<?> getYxzt_m(String id){
 		return jdbcTemplate.queryForList("SELECT * FROM TB_PJR_M WHERE PJRNO = '" + id + "'");
+	}
+	
+	/**
+	 * 获取工程分类信息
+	 * @param tablename 工程分类数据表
+	 * @param dncno 险情id
+	 * @return
+	 */
+	public Map getGcflxx(String tablename, String pjrno){
+		List list = jdbcTemplate.queryForList("select * from " + tablename + " where PJRNO='" + pjrno + "'");
+		
+		if(list.size()>0){
+			return (Map)list.get(0);
+		}else {
+			return new HashMap();
+		}
+	}
+	
+	/**
+	 * 获取工程分类名称
+	 * @param pjrno 运行状态编码
+	 * @return
+	 */
+	public String getGcflmc(String pjrno){
+		String gcflmc = "";
+		
+		List list = jdbcTemplate.queryForList("select * from TB_GCLB where GCFLDM=(select GCFLDM from TB_PJRCN where PJRNO='" + pjrno + "')");
+	
+		if(list.size()>0){
+			gcflmc = ((Map)list.get(0)).get("GCFLMC").toString();
+		}
+		
+		return gcflmc;
 	}
 	
 	/**

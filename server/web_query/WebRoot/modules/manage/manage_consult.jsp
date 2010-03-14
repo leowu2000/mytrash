@@ -13,7 +13,7 @@ int rowcount = listFxxd.size() + listXq.size() + listYxzt.size() + listZq.size()
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>防汛行动</title>
+    <title>会商管理</title>
     
 	<script language="javascript" src="../../script/openurl.js"></script>
 	<script language="javascript" src="../../script/common.js"></script>
@@ -86,7 +86,7 @@ int rowcount = listFxxd.size() + listXq.size() + listYxzt.size() + listZq.size()
 				</td>
 				<td><a href="javascript:openUrl('detail.do?action=yxzt&id=<%=mapYxzt.get("PJRNO")%>&fromfile=hsgl',800,550,0)"><%=mapYxzt.get("pjnm")%></a></td>
 				<td><a href="javascript:openUrl('detail.do?action=yxzt&id=<%=mapYxzt.get("PJRNO")%>&fromfile=hsgl',800,550,0)"><%=mapYxzt.get("wtdpcd")%></a></td>
-				<td><%=mapYxzt.get("wtdpdt")%></td>
+				<td><%=mapYxzt.get("wtdpdt")==null?"":StringUtil.DateToString((Date)mapYxzt.get("wtdpdt"),"yyyy-MM-dd")%></td>
 			  </tr>
 <%
 	}
@@ -110,7 +110,7 @@ int rowcount = listFxxd.size() + listXq.size() + listYxzt.size() + listZq.size()
 				<td><input type="checkbox" id="checkbox" name="checkbox<%=listYxzt.size() + i + 1 %>" value="<%=mapXq.get("dncno")%>"><input name="typename<%=listYxzt.size() + i + 1 %>" type="hidden" value="2" size="3"></td>
 				<td><a href="javascript:openUrl('detail.do?action=xq&id=<%=mapXq.get("dncno")%>&tbdw=<%=mapXq.get("WTDPCD")%>&fromfile=hsgl',800,550,0)"><%=mapXq.get("dncnm")%></a></td>
 				<td><a href="javascript:openUrl('detail.do?action=xq&id=<%=mapXq.get("dncno")%>&tbdw=<%=mapXq.get("WTDPCD")%>&fromfile=hsgl',800,550,0)"><%=mapXq.get("wtdpcd")%></a></td>
-				<td><%=mapXq.get("wtdpdt")%></td>
+				<td><%=mapXq.get("wtdpdt")==null?"":StringUtil.DateToString((Date)mapXq.get("wtdpdt"),"yyyy-MM-dd")%></td>
 			  </tr>
 <%
 	}
@@ -134,7 +134,7 @@ int rowcount = listFxxd.size() + listXq.size() + listYxzt.size() + listZq.size()
 				<td><input type="checkbox" id="checkbox" name="checkbox<%=listXq.size() + listYxzt.size() + i + 1 %>" value="<%=mapFxxd.get("rpjincd")%>"><input name="typename<%=listXq.size() + listYxzt.size() + i + 1 %>" type="hidden" value="3" size="3"></td>
 				<td><a href="javascript:openUrl('../edit_fold/edit_fxxd.asp?id=<%=mapFxxd.get("RPJINCD")%>&tbdw=<%=mapFxxd.get("WTDPCD")%>&fromfile=hsgl',800,550,0)"><%=mapFxxd.get("wttt")%></a></td>
 				<td><a href="javascript:openUrl('../edit_fold/edit_fxxd.asp?id=<%=mapFxxd.get("RPJINCD")%>&tbdw=<%=mapFxxd.get("WTDPCD")%>&fromfile=hsgl',800,550,0)"><%=mapFxxd.get("wtdpcd")%></a></td>
-				<td><%=mapFxxd.get("wtdt")%></td>
+				<td><%=mapFxxd.get("wtdt")==null?"":StringUtil.DateToString((Date)mapFxxd.get("wtdt"),"yyyy-MM-dd")%></td>
 			  </tr>
 <%
 	}
@@ -158,7 +158,7 @@ int rowcount = listFxxd.size() + listXq.size() + listYxzt.size() + listZq.size()
 				<td><input type="checkbox" id="checkbox" name="checkbox<%=listFxxd.size() + listXq.size() + listYxzt.size() + i + 1 %>" value="<%=mapZq.get("rpjincd")%>"><input name="typename<%=listFxxd.size() + listXq.size() + listYxzt.size() + i + 1 %>" type="hidden" value="4" size="3"></td>
 				<td><a href="javascript:openUrl('../edit_fold/edit_zq.asp?id=<%=mapZq.get("RPJINCD")%>&tbdw=<%=mapZq.get("WTDPCD")%>&fromfile=hsgl',800,550,0)"><%=mapZq.get("wttt")%></a></td>
 				<td><a href="javascript:openUrl('../edit_fold/edit_zq.asp?id=<%=mapZq.get("RPJINCD")%>&tbdw=<%=mapZq.get("WTDPCD")%>&fromfile=hsgl',800,550,0)"><%=mapZq.get("wtdpcd")%></a></td>
-				<td><%=mapZq.get("wtdt")%></td>
+				<td><%=mapZq.get("wtdt")==null?"":StringUtil.DateToString((Date)mapZq.get("wtdt"),"yyyy-MM-dd")%></td>
 			  </tr>
 <%
 	}

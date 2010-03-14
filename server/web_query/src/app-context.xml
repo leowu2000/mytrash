@@ -53,4 +53,5 @@
 	<bean id="mediaDAO" class="com.basesoft.modules.media.MediaDAO"></bean>
 	<bean id="consultDAO" class="com.basesoft.modules.consult.ConsultDAO"></bean>
 	<bean id="loginDAO" class="com.basesoft.modules.login.LoginDAO"></bean>
+	<bean id="deleteDAO" class="com.basesoft.modules.delete.DeleteDAO"></bean>
 </beans>

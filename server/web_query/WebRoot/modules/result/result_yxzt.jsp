@@ -56,7 +56,7 @@ List list = pageList.getList();
 	<tr>
 	<td align='center'> <a href="javascript:openUrl('detail.do?action=yxzt&id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("PJNM")%></a></td>  
 	<td align='center'> <a href="javascript:openUrl('detail.do?action=yxzt&id=<%=map.get("PJRNO")%>&tbdw=<%=map.get("WTDPCD")%>',800,550,0)"><%=map.get("WTDPCD")%></a></td>                                                                                              
-	<td align='center'> <%=map.get("WTDPDT")%></td>                                                                                                
+	<td align='center'> <%=map.get("WTDPDT")==null?"":StringUtil.DateToString((Date)map.get("WTDPDT"),"yyyy-MM-dd")%></td>                                                                                                
 	</tr>                                                                                                                    
 <%            
 	}                                                                                                       

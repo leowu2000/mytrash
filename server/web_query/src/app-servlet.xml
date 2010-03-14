@@ -13,6 +13,7 @@
 				/media.do=MediaController
 				/consult.do=ConsultController
 				/login.do=LoginController
+				/delete.do=DeleteController
 			</value>
 		</property>
 	</bean>
@@ -38,5 +39,6 @@
 	<bean name="MediaController" class="com.basesoft.modules.media.MediaController" />
 	<bean name="ConsultController" class="com.basesoft.modules.consult.ConsultController"></bean>
 	<bean name="LoginController" class="com.basesoft.modules.login.LoginController"></bean>
+	<bean name="DeleteController" class="com.basesoft.modules.delete.DeleteController"></bean>
 </beans>
 

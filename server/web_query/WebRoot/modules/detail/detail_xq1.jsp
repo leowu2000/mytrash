@@ -8,6 +8,7 @@
 	Map mapXqflxx = (Map)request.getAttribute("mapXqflxx");
 	
 	String xqfldm = mapXq1.get("xqfldm").toString();
+	String xqflmc = request.getAttribute("xqflmc").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -19,6 +20,28 @@
   </head>
 <body  leftmargin="10" topmargin="10" background="../../images/back.gif" onunload="window.opener.form1.button_detail.value='详细信息';" >
 <br><br>
+<table  width="68%"  border="0" cellspacing="1" align="center"  cellpadding="0">
+    <tr> 
+      <td  height="30"  colspan="2" align="center" class="title"><%=mapXq1.get("dncnm")%></td>
+    </tr>
+    <tr align="center"> 
+      <td height="25" ><div align="left"></div>
+        <div align="left">
+          <font color=#000000><%=mapXq1.get("wtdpcd") %></font>
+        </div>
+      </td>
+      <td height="25" ><div align="left"></div>
+        <div align="left">
+          <font color=#000000><%=StringUtil.DateToString((Date)mapXq1.get("dagtm"),"yyyy-MM-dd") %></font>
+        </div>
+      </td>
+      <td height="25" ><div align="right"></div>
+        <div align="right">
+          <font color=#000000><%=xqflmc %></font>
+        </div>
+      </td>
+    </tr>
+  </table>
 <table width='70%' border='0'  align='center' cellpadding='0' cellspacing='1' >
 <tr><td width="50%">
 <table width='100%' border='0'  align='center' cellpadding='0' cellspacing='1' bgcolor='#336699' >
