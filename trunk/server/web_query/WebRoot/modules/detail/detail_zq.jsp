@@ -78,7 +78,7 @@
 			  <%if("JPG".equals(ext)||"JPEG".equals(ext)){%>
         	  <img src="media.do?action=image&tablename=TB_SD_M&media_id=<%=mapZq_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='../modules/view/view_zq.jsp?media_id=<%=mapZq_m.get("ZLBM")%>&title=<%=mapZq_m.get("TITLE") %>&dtcdt=<%=mapZq_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapZq_m.get("WJGS") %>&DETAIL=<%=mapZq_m.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight%>;width=<%=mediawidth%>;; z-index:8;"> 
         	  <%}else{%>
-          	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=viedo&pid=<%=mapZq_m.get("ZLBM")%>&title=<%=mapZq_m.get("TITLE")%>&dtcdt=<%=mapZq_m.get("DTCDT")%>&tbdw=<%=tbdw%>&fileName=<%=fileName%>&WJGS=<%=mapZq_m.get("WJGS")%>'" WIDTH="80" HEIGHT="53"> 
+          	  <img src="../../images/lx.gif" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" style="cursor:hand; border=0; height=60;width=100; z-index:8;" onClick="window.location='media.do?action=video&tablename=TB_SD_M&media_id=<%=mapZq_m.get("ZLBM")%>'" WIDTH="80" HEIGHT="53"> 
         	  <%}%>
 			</td>
 		  </tr>
