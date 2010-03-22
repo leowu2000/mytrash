@@ -39,7 +39,7 @@ function toBack(){
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">旱情信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">新增旱情信息</span></td></tr>
 </table>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="DNCNO" value="<%=uuid%>"/>

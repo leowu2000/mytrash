@@ -509,6 +509,9 @@ public class UploadDB {
                      }
                  }
                  pStat.execute();
+                 fields="";
+                 params="";
+                 
 			 }
 			
 		}catch(Exception ex){ex.printStackTrace();}

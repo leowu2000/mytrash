@@ -66,11 +66,11 @@ function submiting(){
 	</td>
 	</tr>
 	<tr height="25" >
-		<td nowrap align="center" class="title">Ç©·¢(Q):</td>
+		<td nowrap align="center" class="title">Ç©·¢:</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="QF" value="<%=configBean.getQF() %>" /></td>
-		<td nowrap align="center" class="title">ÉóºË(H):</td>
+		<td nowrap align="center" class="title">ÉóºË:</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="SH" value="<%=configBean.getSH() %>"/></td>
-		<td nowrap align="center" class="title">Äâ¸å(N):</td>
+		<td nowrap align="center" class="title">Äâ¸å:</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="NG" value="<%=configBean.getNG() %>" /></td>
 	</tr>
 </table>

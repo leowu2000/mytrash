@@ -46,6 +46,11 @@
 	HEIGHT:400;
 	TEXT-ALIGN:left
 }
+
+.x-window-dlg .ext-mb-download {
+    background:transparent url(/images/download.gif) no-repeat top left;
+    height:46px;
+}
 </style>
 <script language="JAVASCRIPT">
 function showDetail(id,tbname){
@@ -174,6 +179,7 @@ function rcheckall2() {
 <table width="95%" align="center">
 	<tr><td align="center" ><span  class="style4">数 据 上 传</span></td></tr>
 </table>
+
 <form name="frm" action="" method="post">
 <input type="hidden" value="" name="IDs"/>
 <input type="hidden" value="" name="actionType"/>
@@ -196,7 +202,8 @@ function rcheckall2() {
 		</table>
 <table border="0" align="center" width="98%" >
 	<tr>
-		<td width=100% bgcolor="#FFFFFF" align="right"> 
+		<td width=40% bgcolor="#FFFFFF" align="center"><div align="center" id="SERVERTSTATES"></div></td>
+		<td width=60% bgcolor="#FFFFFF" align="right"> 
 		共有可选择上传数据<font color="red"> <%=pUtil.getRecordCount()%> </font>条  每页显示<%=pUtil.getPageSize()%>条 
 		<%if(currentPage>1) {%>
 		<a href="javascript:doQuery(1)" ><img src="/images/shouye.GIF" border="0"></a> 
@@ -241,8 +248,6 @@ function rcheckall2() {
 	<tr align="left">
 	<td>
 	<input type="button" name="" value="加入上传列表" onclick="javascript:update_submit('1')">
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" name="" value="查看上传列表" onclick="javascript:view_submit()">
 	</td>
 	</tr>
 </table>
