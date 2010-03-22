@@ -38,13 +38,9 @@ public class UploadServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
-		// cntcd,PROVNM
-		String result = "";
 		String path = request.getSession().getServletContext().getRealPath("/");
 		String type=request.getParameter("type");
 		if("zip".trim().equals(type)){
-			request.getSession().setAttribute("servletState", "正在准备数据...");
 			String delSQL = "delete from TB_PICKREC";
 			BuinessDao.updateDB(delSQL, path);
 			// 将上传数据信息拷备到TB_PICKREC中
@@ -59,8 +55,6 @@ public class UploadServlet extends HttpServlet {
 							+ ",#" + bean.getWTDPDT() + "#)";
 					BuinessDao.insertDB(insertSQL, path);
 				}
-				request.getSession().setAttribute("servletState", "正在复制数据...");
-				result = "正在复制数据...";
 			}
 			// 删除temp_result临时表数据
 			delSQL = "delete from temp_result";
@@ -90,7 +84,7 @@ public class UploadServlet extends HttpServlet {
 			response.setHeader("Charset", "gb2312");
 			response.addHeader("Cache-Control", "no-cache");
 			response.getWriter().write(
-					new String(result.getBytes("utf-8"), "iso-8859-1"));
+					new String("1".getBytes("utf-8"), "iso-8859-1"));
 		}
 		// 连接远程服务器，开始传送数据
 		if("connect".trim().equals(type)){
@@ -101,7 +95,6 @@ public class UploadServlet extends HttpServlet {
 			if("".trim().equals(ip)||ip==null
 					|| "".trim().equals(name)||name==null
 					|| "".trim().equals(port)||port==null){
-				result = "error,连接远程服务器错误，请检查系统运行参数设置！";
 				OutputLog.outputLog(path,
 				"============连接远程服务器错误=======上传失败！=======");
 			}else{

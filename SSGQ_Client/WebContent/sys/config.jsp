@@ -84,10 +84,10 @@ function changeValue(style,type,obj){
 		}
 	}
 function pre_submit(){
-	if(getRadioValue()==""){
-		alert("请选择安装位置!");
-		return false;
-	}
+	//if(getRadioValue()==""){
+	//	alert("请选择安装位置!");
+	//	return false;
+	//}
 	if(document.forms[0].TBDW.value==""){
 		alert("请填写填报单位！");
 		return false;
@@ -108,17 +108,26 @@ function pre_submit(){
 		alert("请填写服务器端口！");
 		return false;
 	}
+	if(document.forms[0].SERVER_IP.value!=""){
+		var exp=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+	    var reg = document.forms[0].SERVER_IP.value.match(exp);
+	    if(reg==null)
+	    {
+	        alert("你输入的是一个非法的IP地址段！\nIP段为：:xxx.xxx.xxx.xxx（xxx为0-255)！");
+	        return false;
+	    }
+	}
 	document.forms[0].submit();
 }
-function getRadioValue(){
-	var objs = document.getElementsByName('CLIENT_TYPE');
-	for(var i=0;i<objs.length;i++){
-		if(objs[i].checked)
-			return objs[i].value;
-	}
-	return "";
+//function getRadioValue(){
+//	var objs = document.getElementsByName('CLIENT_TYPE');
+//	for(var i=0;i<objs.length;i++){
+//		if(objs[i].checked)
+//			return objs[i].value;
+//	}
+//	return "";
 
-}
+//}
 </script>
 <body  onload="loadSelect()">
 <table width="90%" align="center">
@@ -126,20 +135,22 @@ function getRadioValue(){
 </table>
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="parames"/>
+<input type="hidden" name="CLIENT_TYPE" value="采集点"/>
 <table width="90%" align="center">
 	<tr><td align="center" style='FONT-SIZE: 12px;color:red'><%=msg %></td></tr>
 </table>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
+		<!--  
 		<td nowrap class="title">安装位置</td>
 		<td bgcolor="#FFFFFF">
 		<input type="radio" name="CLIENT_TYPE" id="CLIENT_TYPE"  value="分中心" <%if(bean.getCLIENT_TYPE().trim().equals("分中心")){ %>checked<%} %>/>分中心
 		<input type="radio" name="CLIENT_TYPE" id="CLIENT_TYPE"  value="采集点" <%if(bean.getCLIENT_TYPE().trim().equals("采集点")){ %>checked<%} %>/>采集点<font color="red">*</font>
-		</td>
+		</td>-->
 		<td nowrap class="title">填报单位</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="TBDW" value="<%=bean.getTBDW()==null?"":bean.getTBDW() %>"/><font color="red">*</font></td>
 		<td nowrap class="title">报送单位</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="BSDW" value="<%=bean.getBSDW()==null?"":bean.getBSDW() %>"/><font color="red">*</font></td>
+		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="BSDW" value="<%=bean.getBSDW()==null?"":bean.getBSDW() %>"/><font color="red">*</font></td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title">行政区划</td>
