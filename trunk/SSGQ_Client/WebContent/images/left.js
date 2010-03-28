@@ -19,10 +19,10 @@ function switchTo(which){
 	var navli="#menu-nav .nav"+which;
 	var nava="#menu-nav .nav"+which+" a";
 	var navspan="#menu-nav .nav"+which+" span";
-	$("#menu-nav span").animate({opacity: '.65'}, { "duration": 300 } );	
+	$("#menu-nav span").animate({opacity: '.65'}, { "duration": 200 } );	
 	$("#menu-nav a").css("cursor", "pointer");		
 	$(nava).css("cursor", "default");			
-	$("#menu-nav .current").animate({top: (which-1)*36+"px"  }, { "duration": 300 } );
-	$(navspan).animate({opacity: '1.0'}, { "duration": 300 } );
+	$("#menu-nav .current").animate({top: (which-1)*36+"px"  }, { "duration": 200 } );
+	$(navspan).animate({opacity: '1.0'}, { "duration": 200 } );
 	curSect = which;
 }
