@@ -1,16 +1,20 @@
-<%@ page contentType="text/html;charset=GBK"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<html> 
 <head> 
+<base target="mainFrame"/>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312"> 
 <title>Div+CSS+JS树型菜单，可刷新</title> 
-<meta name="description" content="http://www.livepo.com"> 
+<meta name="description" content="http://www.livepo.com">
+<link rel="stylesheet" href="images/main.css" type="text/css">
+<script type="text/javascript" src="images/jquery.js"></script>
+<script type="text/javascript" src="images/left.js"></script>
+ 
 <style type="text/css"> 
 <!-- 
 *{margin:0;padding:0;border:0;} 
 body { 
     font-family: arial, 宋体, serif; 
     font-size:12px; 
+    background-image: url("images/left-bg.png");
 } 
 #nav { 
     width:180px; 
@@ -106,7 +110,7 @@ body {
 
 
 <body  background="/images/0729left_bg.jpg"> 
-<div id="PARENT"> 
+<!-- <div id="PARENT"> 
 <ul id="nav"> 
 <li><a href="#Menu=ChildMenu1"  onclick="DoMenu('ChildMenu1')"><b>数据维护</b></a> 
     <ul id="ChildMenu1" class="collapsed"> 
@@ -140,6 +144,24 @@ body {
 </li> 
 </ul> 
 </div> 
+ -->
+ 
+<div id="menu">
+	<ul id="menu-nav">
+		<li class="nav1">
+			<a href="/project/prgManage.jsp" style="cursor: default;"><span style="opacity: 1;">工程管理</span></a>
+		</li>
+		<li class="nav2"><a href="/project/xq/gqxqManage.jsp"><span>险&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;情</span></a></li>
+		<li class="nav3"><a href="/project/yx/gqyxManage.jsp"><span>运行状态</span></a></li>
+		<li class="nav4"><a href="/report/TB_SDManage.jsp"><span>灾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;情</span></a></li>
+		<li class="nav5"><a href="/report/TB_QTManage.jsp"><span>旱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;情</span></a></li>
+		<li class="nav6"><a href="/report/fxjbManage.jsp"><span>防汛简报</span></a></li>
+		<li class="nav7"><a href="/report/TB_FPACTIManage.jsp"><span>防汛行动</span></a></li>
+		<li class="nav8"><a href="/sys/config.jsp"><span>参数设置</span></a></li>
+		<li class="nav9"><a href="/sys/syslog.jsp"><span>系统日志</span></a></li>
+		<li style="top: 0px;" class="current"></li>
+	</ul>
+</div>
 
 </body> 
 </html> 
@@ -229,6 +251,6 @@ function GetMenuID()
     } 
 } 
 
-GetMenuID();    //*这两个function的顺序要注意一下，不然在Firefox里GetMenuID()不起效果 
-menuFix(); 
+//GetMenuID();    //*这两个function的顺序要注意一下，不然在Firefox里GetMenuID()不起效果 
+//menuFix(); 
 </script>

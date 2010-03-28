@@ -6,7 +6,8 @@
 <style type="text/css">
 <!--
 body {
-	background-image: url(/images/0729main_bg.jpg);
+	background-color: #ECEDED;
+	/*background-image: url(/images/0729main_bg.jpg);*/
 }
 -->
 </style>
