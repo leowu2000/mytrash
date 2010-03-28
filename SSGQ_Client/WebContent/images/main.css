@@ -16,7 +16,7 @@ a:visited{
 
 #menu-nav{
 	width:160px;
-	margin-top:10px;
+	margin-top:6px;
 	float:left;
 	font-size:14px;
 	font-weight:bold;
@@ -66,3 +66,10 @@ a:visited{
 	left:0px;
 	z-index: -100;
 } 
+
+#top-nav td a span{
+	width:48px;
+	color:white;
+	font-size: 14px;
+	text-align: center;
+	}
