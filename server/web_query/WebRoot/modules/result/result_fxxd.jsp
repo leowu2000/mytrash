@@ -6,6 +6,21 @@
 PageList pageList = (PageList)request.getAttribute("pageList");
 PageInfo pageInfo = pageList.getPageInfo();
 List list = pageList.getList();
+
+String qbxx = request.getAttribute("qbxx")==null?"":request.getAttribute("qbxx").toString();
+
+String text_title = request.getAttribute("text_title")==null?"":request.getAttribute("text_title").toString();
+String text_fill = request.getAttribute("text_fill")==null?"":request.getAttribute("text_fill").toString();
+String date_start = request.getAttribute("date_start")==null?"":request.getAttribute("date_start").toString();
+String date_end = request.getAttribute("date_end")==null?"":request.getAttribute("date_end").toString();
+
+String select_sortinfo = request.getAttribute("select_sortinfo")==null?"":request.getAttribute("select_sortinfo").toString();
+String select_sort = request.getAttribute("select_sort")==null?"":request.getAttribute("select_sort").toString();
+String xzqh = request.getAttribute("xzqh")==null?"":request.getAttribute("xzqh").toString();
+String lysx = request.getAttribute("lysx")==null?"":request.getAttribute("lysx").toString();
+String check_projectname = request.getAttribute("check_projectname")==null?"":request.getAttribute("check_projectname").toString();
+String check_unit = request.getAttribute("check_unit")==null?"":request.getAttribute("check_unit").toString();
+String check_title = request.getAttribute("check_title")==null?"":request.getAttribute("check_title").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -69,7 +84,18 @@ List list = pageList.getList();
 <table  class="font_define" width="100%">
 	<tr>
 	<td align='right'>     
-	<%=pageInfo.getHtml("/search.do?action=main") %>                                                                                                                 
+	<%
+	if("".equals(qbxx)){
+%>   
+	<%=pageInfo.getHtml("/search.do?action=fxjb&text_title=" + text_title + "&text_fill=" + text_fill + "&date_start=" + date_start + "&date_end=" + date_end) %>
+	
+<%
+	}else {
+%>                     
+	<%=pageInfo.getHtml("/search.do?action=main&select_sortinfo=" + select_sortinfo + "&select_sort=" + select_sort + "&xzqh=" + xzqh + "&lysx=" + lysx + "&date_start=" + date_start + "&date_end=" + date_end + "&text_fill=" + text_fill + "&check_projectname=" + check_projectname + "&check_unit=" + check_unit + "&check_title=" + check_title) %>
+<%
+	}
+%>                                                                                                                  
 	</td>	
 	</tr>
 </table>
