@@ -2,6 +2,8 @@ package com.buiness.dao;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -196,7 +198,7 @@ public class BuinessDao {
 		List<PrjBean> list = new ArrayList<PrjBean>();
 		if ("".trim().equals(isWhere))
 			isWhere = "1=1";
-		String sSQL = "select * from TB_PJ where " + isWhere;
+		String sSQL = "select * from TB_PJ where " + isWhere+ " order by PJNM,PJNMCD,CNTCD";
 		Connection conn = null;
 		try {
 			conn = ConnectionPool.getConnection(PATH);
@@ -243,6 +245,41 @@ public class BuinessDao {
 			}
 		}
 		return value;
+	}
+	
+	public static Map getMediaContent(String PATH, String tablename,String mediaid) {
+		Map map = new HashMap();
+		Connection conn = null;
+		try {
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			String sSQL = "select lxzp from " + tablename
+					+ " where zlbm=" + mediaid;
+			InputStream inputStream = null;   
+			ResultSet rs = stmt.executeQuery(sSQL);
+			if (rs.next()) {
+				inputStream = rs.getBinaryStream("lxzp");// ∂¡»°blob   
+				byte[] b = new byte[7500000];
+				try{
+					inputStream.read(b);
+					inputStream.close();
+				}catch(IOException e){
+					System.out.println(e);
+				}
+				map.put("lxzp", b);
+				
+				rs.close();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				ConnectionPool.freeConnection(conn);
+			} catch (Exception fe) {
+				fe.printStackTrace();
+			}
+		}
+		return map;
 	}
 
 	public static String getIdFromNameChange(String PATH, String tablename,
@@ -1212,8 +1249,8 @@ public class BuinessDao {
 			sSQL ="SELECT * FROM TB_STDNC WHERE PJNO IN("+IDs+")";
 			ResultSet rs2 = stmt.executeQuery(sSQL);
 			while(rs2.next()){
-				String xqfldm = rs.getString("XQFLDM");
-				String DNCNO = rs.getString("DNCNO");
+				String xqfldm = rs2.getString("XQFLDM");
+				String DNCNO = rs2.getString("DNCNO");
 				String tablename = getXqFlTabname(path, xqfldm);
 				String delsql = "DELETE FROM "+tablename+" WHERE DNCNO="+DNCNO;
 				delstmt.execute(delsql);

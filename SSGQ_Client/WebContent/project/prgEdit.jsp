@@ -87,6 +87,7 @@ function submiting(){
 	//从数据库中查选查看那是否存在同名同流域的工程信息如果存在返回提示信息否则增加到数据库.
 	var gclb = document.forms[0].selectgcgl.value;
 	var cntcd = document.forms[0].selectx.value;
+
 	var hldm = document.forms[0].selectzl2.value;
 	document.forms[0].gclb.value=gclb;
 	document.forms[0].cntcd.value=cntcd;

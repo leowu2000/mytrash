@@ -36,7 +36,10 @@
 </style>
 <%
 	String path = request.getSession().getServletContext().getRealPath("/");
-	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
+	String pjWhere = "1=1";
+	if(configBean!=null)
+		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
 	String uuid = String.valueOf(UUIdFactory.getMaxId(path, "TB_STDNC","DNCNO"));
 	BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");

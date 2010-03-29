@@ -506,19 +506,19 @@ public class BuinessController implements Controller {
 				}
 				if (!"".trim().equals(dq_s)) {
 					if ("".trim().equals(iswhere))
-						iswhere += " CNTCD like '%" + dq_s.substring(0, 2)
-								+ "%'";
+						iswhere += " MID(CNTCD,1,2) = '" + dq_s.substring(0, 2)
+								+ "'";
 					else
-						iswhere += " and CNTCD like '%" + dq_s.substring(0, 2)
-								+ "%'";
+						iswhere += " and MID(CNTCD,1,2) '" + dq_s.substring(0, 2)
+								+ "'";
 				}
 				if (!"".trim().equals(ly_s)) {
 					if ("".trim().equals(iswhere))
-						iswhere += " PJNMCD like '%" + ly_s.substring(1, 2)
-								+ "%'";
+						iswhere += " MID(PJNMCD,2,1) = '" + ly_s.substring(1, 2)
+								+ "'";
 					else
-						iswhere += " and PJNMCD like '%" + ly_s.substring(1, 2)
-								+ "%'";
+						iswhere += " and MID(PJNMCD,2,1) = '" + ly_s.substring(1, 2)
+								+ "'";
 				}
 				request.setAttribute("gcmc_s", gcmc_s);
 				request.setAttribute("gclb_s", gclb_s);

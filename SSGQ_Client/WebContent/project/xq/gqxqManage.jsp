@@ -180,7 +180,9 @@ function SearchSubmit(){
 <table border="0" align="center" width="95%" >
 	<tr>
 		<td width=100% bgcolor="#FFFFFF" align="right"> 
-		共<%=pUtil.getRecordCount()%>条记录  每页显示<%=pUtil.getPageSize()%>条 
+		共<font color="red">&nbsp;<%=pUtil.getRecordCount()%>&nbsp;</font>条记录,
+		 每页显示<font color="red">&nbsp;<%=pUtil.getPageSize()%>&nbsp;</font>条 
+		,当前第<font color="red">&nbsp;<%=currentPage %>&nbsp;</font>页
 		<%if(currentPage>1) {%>
 		<a href="/project/xq/gqxqManage.jsp?page=1" ><img src="/images/shouye.GIF" border="0"></a> 
 		<a href="/project/xq/gqxqManage.jsp?page=<%=(currentPage - 1)%>"><img src="/images/shangyiye.GIF" border="0"></a> 
