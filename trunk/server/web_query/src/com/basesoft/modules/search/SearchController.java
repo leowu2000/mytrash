@@ -93,6 +93,7 @@ public class SearchController extends CommonController {
 				mv.addObject("check_projectname", check_projectname);
 				mv.addObject("check_unit", check_unit);
 				mv.addObject("check_title", check_title);
+				mv.addObject("qbxx", "qbxx");
 			}
 		}else if("search_consult".equals(action)){//会商查询
 			mv = new ModelAndView("modules/search/search_consult");
