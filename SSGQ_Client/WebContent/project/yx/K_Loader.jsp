@@ -43,7 +43,7 @@ Ext.onReady(function() {
 			resizeTabs      : false,
 			minTabWidth     : 75,
 			border          : false,
-			plugins         : [ scrollerMenu2 ],
+			//plugins         : [ scrollerMenu2 ],
 			items           : [
 				 {
 		            title: '°Ó»ù×´¿ö',
