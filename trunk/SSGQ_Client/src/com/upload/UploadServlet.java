@@ -1,5 +1,6 @@
 package com.upload;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -89,28 +90,31 @@ public class UploadServlet extends HttpServlet {
 		// 连接远程服务器，开始传送数据
 		if("connect".trim().equals(type)){
 			ConfigBean configbean = (ConfigBean)request.getSession().getAttribute("configBean");
+			String zipfilename = (String)request.getSession().getAttribute("zipfilename");
 			String ip = configbean.getSERVER_IP();
 			String name = configbean.getSERVER_NAME();
 			String port = configbean.getSERVER_PORT();
+			String state="";
 			if("".trim().equals(ip)||ip==null
 					|| "".trim().equals(name)||name==null
 					|| "".trim().equals(port)||port==null){
 				OutputLog.outputLog(path,
 				"============连接远程服务器错误=======上传失败！=======");
+				state="0";
 			}else{
 				DataUploader data = new DataUploader();
-				data.upload(ip,Integer.parseInt(port), (String)request.getSession().getAttribute("zipfilename"));
+				state=data.upload(ip,Integer.parseInt(port),zipfilename );
 				OutputLog.outputLog(path,
 				"============连接远程服务器错误=======上传失败！=======");
+				
 			}
-		}
-		if("state".trim().equals(type)){
-			String sate = (String)request.getSession().getAttribute("servletState");
+			File file = new File(zipfilename);
+			file.delete();
 			response.setContentType("text/xml");
 			response.setHeader("Charset", "gb2312");
 			response.addHeader("Cache-Control", "no-cache");
 			response.getWriter().write(
-					new String(sate.getBytes("utf-8"), "iso-8859-1"));
+					new String(state.getBytes("utf-8"), "iso-8859-1"));
 		}
 
 	}

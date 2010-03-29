@@ -14,16 +14,15 @@ var showmsbox =  function(msg1,msg2){
       setTimeout(function(){
     	  GetResult();
       }, 8000);
-      //Ext.TaskMgr.start({
-    	//  run:function(){
-    	//  msgBox.updateText('会动的时间：'+new Date().format('Y-m-d g:i:s A'));
-    	//  },
-    	//  interval:1000
-      //});
 };
 
 function GetResult(){
-	Ext.MessageBox.msg="正在准备上传数据...";
+	Ext.TaskMgr.start({
+	  	  run:function(){
+			Ext.MessageBox.updateText('正在压缩数据，请等待....');
+	  	  },
+	  	  interval:100
+	    });
 	if(window.XMLHttpRequest){ //Mozilla
 	    var xmlHttpReq=new XMLHttpRequest();
 	  }else if(window.ActiveXObject){
@@ -35,22 +34,21 @@ function GetResult(){
 	  
 		Ext.TaskMgr.start({
 	  	  run:function(){
-			Ext.MessageBox.updateText('数据压缩完成，准备上传！');
+			Ext.MessageBox.updateText('数据压缩完成，准备上传....');
 	  	  },
-	  	  interval:10
+	  	  interval:100
 	    });
-	  
+		Ext.TaskMgr.start({
+		  	  run:function(){
+				Ext.MessageBox.updateText('正在连接远程服务器,请等待...');
+		  	  },
+		  	  interval:100
+			});
 	  setTimeout(function(){
-		  connectResult();
+		  uploadData();
 	  }, 2000);
 }
-function connectResult(){
-	Ext.TaskMgr.start({
-  	  run:function(){
-		Ext.MessageBox.updateText('连接远程服务器,发送数据...');
-  	  },
-  	  interval:10
-	});
+function uploadData(){
 	if(window.XMLHttpRequest){ //Mozilla
 	    var xmlHttpReq=new XMLHttpRequest();
 	  }else if(window.ActiveXObject){
@@ -60,6 +58,11 @@ function connectResult(){
 	  xmlHttpReq.send(null);
 	  var result = xmlHttpReq.responseText;
 	  Ext.MessageBox.hide();
+	  if(result=="0"){
+		  alert('远程服务器连接失败，请确认配置参数，并保证网络连通。');
+	  }else{
+		  alert('上传成功!');
+	  }  
 }
 function MyShow() 
 { 
