@@ -8,6 +8,11 @@ PageInfo pageInfo = pageList.getPageInfo();
 List list = pageList.getList();
 
 String radiob_gclb = request.getAttribute("radiob_gclb").toString();
+String radiob_gs = request.getAttribute("radiob_gs").toString();
+String text_title = request.getAttribute("text_title").toString();
+String text_fill = request.getAttribute("text_fill").toString();
+String date_start = request.getAttribute("date_start").toString();
+String date_end = request.getAttribute("date_end").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -100,7 +105,7 @@ String radiob_gclb = request.getAttribute("radiob_gclb").toString();
 <table  class="font_define" width="100%">
 	<tr>
 	<td align='right'>     
-	<%=pageInfo.getHtml("/search.do?action=main") %>                                                                                                                 
+	<%=pageInfo.getHtml("/search.do?action=media&radiob_gclb=" + radiob_gclb + "&radiob_gs=" + radiob_gs + "&text_title=" + text_title + "&text_fill=" + text_fill + "&date_start=" + date_start + "&date_end=" + date_end) %>                                                                                                                 
 	</td>	
 	</tr>
 </table>

@@ -114,10 +114,10 @@ public class SearchDAO extends CommonDAO{
 			sql = "select st.*,pj.pjnm from tb_stdnc st,tb_pj pj where st.pjno = pj.pjno ";
 			//按照区域条件组合查询
 			//除运行状态、险情、建筑物表之外的其他表都不考虑与行政区域表的关系
-			if("".equals(xzqh)){//全部区域
+			if(!"".equals(xzqh)){//全部区域
 				if("000000".equals(xzqh)){
 					
-				}else if("0000".equals(xzqh.substring(2,4))){//如果后四为为0000则全部省级单位
+				}else if("0000".equals(xzqh.substring(2,6))){//如果后四为为0000则全部省级单位
 					sql = sql + " and left(pj.cntcd,2) = '" +  xzqh.substring(0,2) + "' ";
 				}else{
 					sql = sql + " and pj.cntcd = '" + xzqh + "' ";

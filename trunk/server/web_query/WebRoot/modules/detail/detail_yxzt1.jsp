@@ -152,7 +152,7 @@
   	  </tr>
   	  <tr align='center'>
   	    <td width='15%' height='25' bgcolor="#E4E1D6">当前闸上水位</td>
-		<td width='35%' height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable21'><%=mapGcflxx.get("RUPGZ")==null?"":mapGcflxx.get("BRBRUPGZPPFCN")%>米</font></td>        
+		<td width='35%' height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable21'><%=mapGcflxx.get("RUPGZ")==null?"":mapGcflxx.get("RUPGZ")%>米</font></td>        
   	  </tr>
   	  <tr align='center'>
 		<td height='25' bgcolor="#E4E1D6">当前闸下水位</td>
