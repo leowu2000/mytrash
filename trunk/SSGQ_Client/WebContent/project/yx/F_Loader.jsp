@@ -42,7 +42,7 @@ Ext.onReady(function() {
 			resizeTabs      : false,
 			minTabWidth     : 75,
 			border          : false,
-			plugins         : [ scrollerMenu2 ],
+			//plugins         : [ scrollerMenu2 ],
 			items           : [
 				 {
 		            title: '避水救生设施状况',

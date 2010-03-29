@@ -39,7 +39,7 @@ Ext.onReady(function() {
 			resizeTabs      : false,
 			minTabWidth     : 75,
 			border          : false,
-			plugins         : [ scrollerMenu ],
+			//plugins         : [ scrollerMenu ],
 			items           : [
 				{
 			            title: '≤π≥‰√Ë ˆ',
