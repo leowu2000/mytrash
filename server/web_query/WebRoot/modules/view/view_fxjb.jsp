@@ -65,7 +65,7 @@
 	//标题
 	String title = request.getParameter("title")==null?"":new String(request.getParameter("title").getBytes("ISO8859-1"),"UTF-8");
 	//采集时间
-	String dtcdt = request.getParameter("dtcdt")==null?"":request.getParameter("dtcdt").substring(0,10);
+	String dtcdt = request.getParameter("dtcdt")==null?"":request.getParameter("dtcdt").length()<10?"":request.getParameter("dtcdt").substring(0,10);
 	//采集单位
 	String tbdw = request.getParameter("tbdw")==null?"":new String(request.getParameter("tbdw").getBytes("ISO8859-1"),"UTF-8");
 	//多媒体文件名
@@ -95,7 +95,7 @@
   
 </div>
 	<div id="Layer2" style="position:absolute; left:18px; top:40px; width:600px; height:90px; z-index:1;; visibility: visible">
-  	  <img id="img1" name="img1" src="/media.do?action=image&tablename=TB_FPACTI_M&media_id=<%=media_id%>" width="100%" height="400"> 
+  	  <img id="img1" name="img1" src="/media.do?action=image&tablename=TB_FXJB_M&media_id=<%=media_id%>" width="100%" height="400"> 
 	</div>
 <div id="Layer1" style="position:absolute; left:18px; top:200px; width:600px; height:30px; z-index:1; visibility: visible"> 
 	

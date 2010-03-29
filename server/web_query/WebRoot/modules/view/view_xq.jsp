@@ -95,7 +95,7 @@
   
 </div>
 	<div id="Layer2" style="position:absolute; left:18px; top:40px; width:600px; height:90px; z-index:1;; visibility: visible">
-  	  <img id="img1" name="img1" src="/media.do?action=image&tablename=TB_FPACTI_M&media_id=<%=media_id%>" width="100%" height="400"> 
+  	  <img id="img1" name="img1" src="/media.do?action=image&tablename=TB_STDNC_M&media_id=<%=media_id%>" width="100%" height="400"> 
 	</div>
 <div id="Layer1" style="position:absolute; left:18px; top:200px; width:600px; height:30px; z-index:1; visibility: visible"> 
 	

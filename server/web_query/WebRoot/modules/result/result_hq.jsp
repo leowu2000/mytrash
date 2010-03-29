@@ -6,6 +6,11 @@
 PageList pageList = (PageList)request.getAttribute("pageList");
 PageInfo pageInfo = pageList.getPageInfo();
 List list = pageList.getList();
+
+String text_title = request.getAttribute("text_title").toString();
+String text_fill = request.getAttribute("text_fill").toString();
+String date_start = request.getAttribute("date_start").toString();
+String date_end = request.getAttribute("date_end").toString();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -69,7 +74,7 @@ List list = pageList.getList();
 <table  class="font_define" width="100%">
 	<tr>
 	<td align='right'>     
-	<%=pageInfo.getHtml("/search.do?action=main") %>                                                                                                                 
+	<%=pageInfo.getHtml("/search.do?action=hq&text_title=" + text_title + "&text_fill=" + text_fill + "&date_start=" + date_start + "&date_end=" + date_end) %>                                                                                                             
 	</td>	
 	</tr>
 </table>

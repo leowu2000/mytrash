@@ -103,19 +103,19 @@
         <input type="button" name="button" value="打  印" onclick="javascript:print_window();" id=button1 name=button1 class="input1">
         <input type="hidden" name="row_count" value="1">
     <input type="hidden" name="command" value="-1">
-    </td></tr></table> <br>
+    </td></tr></table> <br>附件：
 
         
 <%
 		for(int i=0;i<listFxjb_m.size();i++){
 			Map mapFxjb_m = (Map)listFxjb_m.get(i);
-			String fileName = mapFxjb_m.get("TITLE").toString().trim() + "." + mapFxjb_m.get("WJGS").toString().trim();
+			String fileName = mapFxjb_m.get("TITLE")==null?"":mapFxjb_m.get("TITLE").toString().trim() + "." + mapFxjb_m.get("WJGS")==null?"":mapFxjb_m.get("WJGS").toString().trim();
 %>
-          附件：<a href="media.do?action=download&tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>&filename=<%=fileName %>"><%=fileName %></a> 
-          <font color="#D37A67"  size="2">(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开！）</font> 
+          <a href="media.do?action=download&tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>&filename=<%=fileName %>"><%=fileName %></a> 
 <%
 		}
 %>
+		<font color="#D37A67"  size="2">(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开！）</font> 
         </div>
     </td></tr></table>
   <p>&nbsp;</p>

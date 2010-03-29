@@ -83,6 +83,16 @@ public class SearchController extends CommonController {
 				}
 				
 				mv.addObject("pageList", listResult);
+				mv.addObject("select_sortinfo", select_sortinfo);
+				mv.addObject("select_sort", select_sort);
+				mv.addObject("xzqh", xzqh);
+				mv.addObject("lysx", lysx);
+				mv.addObject("date_start", date_start);
+				mv.addObject("date_end", date_end);
+				mv.addObject("text_fill", text_fill);
+				mv.addObject("check_projectname", check_projectname);
+				mv.addObject("check_unit", check_unit);
+				mv.addObject("check_title", check_title);
 			}
 		}else if("search_consult".equals(action)){//会商查询
 			mv = new ModelAndView("modules/search/search_consult");
@@ -129,6 +139,10 @@ public class SearchController extends CommonController {
 		
 			mv = new ModelAndView("modules/result/result_xq");
 			mv.addObject("pageList", pageList);
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("zq".equals(action)){//灾情查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
@@ -142,6 +156,10 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_zq");
 			mv.addObject("pageList", pageList);
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("hq".equals(action)){//旱情查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
@@ -155,6 +173,10 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_hq");
 			mv.addObject("pageList", pageList);
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("yxzt".equals(action)){//运行状态查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
@@ -168,6 +190,10 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_yxzt2");
 			mv.addObject("pageList", pageList);
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("fxxd".equals(action)){//防汛行动查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
@@ -181,6 +207,10 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_fxxd");
 			mv.addObject("pageList", pageList);
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("fxjb".equals(action)){//防汛简报查询
 			//标题
 			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
@@ -194,6 +224,10 @@ public class SearchController extends CommonController {
 			
 			mv = new ModelAndView("modules/result/result_fxjb");
 			mv.addObject("pageList", pageList);
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("media".equals(action)){//多媒体查询
 			//工程类别
 			String radiob_gclb = ServletRequestUtils.getStringParameter(request, "radiob_gclb", "");
@@ -212,6 +246,11 @@ public class SearchController extends CommonController {
 			mv = new ModelAndView("modules/result/result_media");
 			mv.addObject("pageList", pageList);
 			mv.addObject("radiob_gclb", radiob_gclb.trim());
+			mv.addObject("radiob_gs", radiob_gs.trim());
+			mv.addObject("text_title", text_title);
+			mv.addObject("text_fill", text_fill);
+			mv.addObject("date_start", date_start);
+			mv.addObject("date_end", date_end);
 		}else if("consult".equals(action)){//会商查询
 			//会商类别
 			String type = ServletRequestUtils.getStringParameter(request, "type", "");
