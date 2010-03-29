@@ -1,6 +1,8 @@
 package com.core;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -11,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.ServletRequestUtils;
 
 import com.buiness.dao.BuinessDao;
 import com.buiness.form.PrjBean;
@@ -153,6 +157,24 @@ public class FileUploadServlet extends HttpServlet {
 			response.setHeader("Charset", "gb2312");
 			response.addHeader("Cache-Control", "no-cache");
 			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+			if("download".equals(type)){
+				String tablename = request.getParameter("tablename");
+				String media_id = request.getParameter("media_id");
+				String filename = new String(request.getParameter("filename").getBytes("ISO-8859-1"),"GBK");
+				
+				Map map = BuinessDao.getMediaContent(path,tablename,media_id);
+				
+				byte[] b = (byte[])map.get("lxzp");
+				
+				response.reset();
+	            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("gbk"),"iso8859-1"));
+	            response.setContentType("application/octet-stream");
+	            //Êä³öÎÄ¼þ
+	            OutputStream os = new BufferedOutputStream(response.getOutputStream());
+	            os.write(b);
+	            os.flush();
+	            os.close();
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

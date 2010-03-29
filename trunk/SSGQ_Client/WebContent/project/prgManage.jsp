@@ -100,7 +100,6 @@ function SearchSubmit(){
 	document.frm.submit();
 }
 function doQuery(page){
-	alert(page);
 	document.frm.page.value=page;
 	document.frm.action="/buiness.do";
 	document.frm.actionType.value="topage";
@@ -154,22 +153,24 @@ function todeletePj(){
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap class="title">工程名称:</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="gcmc_s" value="<%=gcmc_s %>"/> </td>
+		<td bgcolor="#ECEDED"><input type="text" name="gcmc_s" value="<%=gcmc_s %>"/> </td>
 		<td nowrap class="title">工程类别:</td>
-		<td bgcolor="#FFFFFF"> <DIV id="GCLB"></DIV></td>
+		<td bgcolor="#ECEDED"> <DIV id="GCLB"></DIV></td>
 		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
 	</tr>
 	<tr>
 		<td nowrap class="title">所属地区:</td>
-		<td bgcolor="#FFFFFF" > <DIV id="XZQH"></DIV> </td>
+		<td bgcolor="#ECEDED" > <DIV id="XZQH"></DIV> </td>
 		<td nowrap class="title">流域:</td>
-		<td bgcolor="#FFFFFF" ><DIV id="LYXX"></DIV>  </td>
+		<td bgcolor="#ECEDED" ><DIV id="LYXX"></DIV>  </td>
 	</tr>
 </table>
 <table border="0" align="center" width="95%" >
 	<tr>
 		<td width=100% bgcolor="#FFFFFF" align="right"> 
-		共<%=pUtil.getRecordCount()%>条记录  每页显示<%=pUtil.getPageSize()%>条 
+		共<font color="red">&nbsp;<%=pUtil.getRecordCount()%>&nbsp;</font>条记录,
+		 每页显示<font color="red">&nbsp;<%=pUtil.getPageSize()%>&nbsp;</font>条 
+		,当前第<font color="red">&nbsp;<%=currentPage %>&nbsp;</font>页
 		<%if(currentPage>1) {%>
 		<a href="javascript:doQuery(1)" ><img src="/images/shouye.GIF" border="0"></a> 
 		<a href="javascript:doQuery(<%=(currentPage - 1)%>)"><img src="/images/shangyiye.GIF" border="0"></a> 

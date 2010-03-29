@@ -14,10 +14,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title></title>
-<link href="/common/css/style.css" rel="stylesheet" type="text/css">
+
 </head>
 <style type="text/css">
 <!--
+td {
+	font-size: 10pt;
+	padding-left: 5px;
+}
+a {
+	text-decoration: none;
+	color: #484833;
+
+}
+a:hover {
+	text-decoration: underline;
+	color: #6B6B4B;
+
+}
+body {
+
+	SCROLLBAR-FACE-COLOR: #E2EFF4;
+	SCROLLBAR-SHADOW-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR: #5C9ABC;
+	SCROLLBAR-ARROW-COLOR: #5C9ABC;
+	SCROLLBAR-DARKSHADOW-COLOR: #5C9ABC;
+	SCROLLBAR-BASE-COLOR: #FFFFFF;
+}
 .newtr1{
 	background-image:url(/images/bottom.jpg);
 }
@@ -37,15 +60,7 @@
 </style>
 
 <script language="JAVASCRIPT">
-function toBack(){
-	location.href="/report/fxjbManage.jsp";
-}
-function submiting(){
-	document.frm.submit();
-}
-function toview(){
-	window.open("view.jsp");
-}
+
 function printpage(m_printpage1){
 
     var printStr = document.all.item(m_printpage1).innerHTML;
@@ -97,9 +112,9 @@ function printpage(m_printpage1){
 		<td colspan="4" valign="middle">
 		<font style="font-size:18px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';padding-left:120px;padding-top:10px;">
 		<%=bean.getQF() %></font>
-		<font style="font-size:18px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';padding-left:178px;">
+		<font style="font-size:18px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';padding-left:193px;">
 		<%=bean.getSH() %></font>
-		<font style="font-size:18px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';padding-left:175px;">
+		<font style="font-size:18px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';padding-left:215px;">
 		<%=bean.getSH() %></font></td>
 	</tr>
 </span>
@@ -110,11 +125,12 @@ function printpage(m_printpage1){
 	</td></tr>
 	<%
 		while(rs.next()){
+			String filename = rs.getString("TITLE")+"."+rs.getString("WJGS");
 	%>
 	<tr>
 	<td width="50">&nbsp;</td>
 	<td colspan="3"><font style="padding-left:60px;">
-	附件：<a href=""><%=rs.getString("TITLE")%>.<%=rs.getString("WJGS")%></a>(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开!)
+	附件：<a href="/FileUploadServlet?type=download&tablename=TB_FXJB_M&media_id=<%=rs.getString("ZLBM") %>&filename=<%=filename %>"><%=filename%></a>(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开!)
 	</font></td></tr>
 	<%} %>
 </table>

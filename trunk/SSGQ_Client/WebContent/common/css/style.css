@@ -1,4 +1,5 @@
 BODY {
+	background-color: F5F5F5;
 	SCROLLBAR-FACE-COLOR: #E2EFF4;
 	SCROLLBAR-SHADOW-COLOR: #FFFFFF;
 	SCROLLBAR-3DLIGHT-COLOR: #5C9ABC;
@@ -7,7 +8,9 @@ BODY {
 	SCROLLBAR-BASE-COLOR: #FFFFFF;
 }
 td {
-	font-size: 9pt;
+	font-size: 10pt;
+	padding-left: 5px;
+	background-color:F5F5F5 ;
 }
 .input1 {
 	height: 21px;
@@ -29,8 +32,6 @@ td {
 	padding-top: 3px;
 	padding-right: 5px;
 	padding-left: 5px;
-
-
 }
 .btn1 {
 	padding-top: 3px;
@@ -69,6 +70,7 @@ a:hover {
 }
 .input3 {
 	border: 0px solid #484833;
+	background-color:#ECEDED ;
 }.z {
 	border: thin groove #DED196;
 }
@@ -85,6 +87,7 @@ a:hover {
 	COLOR: #004F00;
 	POSITION: relative;
 	text-align: left;
+	margin-left:5px;
 	font-weight: normal;
 	padding-left: 15px;
 	padding-right: 10px;
