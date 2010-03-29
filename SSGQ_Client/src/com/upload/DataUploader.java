@@ -29,9 +29,14 @@ public class DataUploader {
 		// System.out.println(aa);
 	}
 
-	public void upload(String ip, int port, String fileName)
+	public String upload(String ip, int port, String fileName)
 			throws UnknownHostException, IOException {
-		Socket server = new Socket(ip, port);
+		Socket server = null;
+		try{
+			server = new Socket(ip, port);
+		}catch(Exception ex){
+			return "0";
+		}
 		File f = new File(fileName);
 		String fName = f.getName();
 		long fLen = f.length();
@@ -62,6 +67,7 @@ public class DataUploader {
 		}
 		in.close();
 		server.close();
+		return "4";
 	}
 
 	public byte[] readFileByRandomAccess(String fileName, int beginIndex) {

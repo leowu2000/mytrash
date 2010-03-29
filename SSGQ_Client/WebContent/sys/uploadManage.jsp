@@ -11,7 +11,7 @@
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/common/ext/examples.css" />
+
 <link rel="stylesheet" type="text/css" href="/common/ext/ext-all.css" />
 <script type="text/javascript" src="/common/ext/ext-base.js"></script>
 <script type="text/javascript" src="/common/ext/ext-all.js"></script>
@@ -51,6 +51,7 @@
     background:transparent url(/images/download.gif) no-repeat top left;
     height:46px;
 }
+body{background-color: #F5F5F5;}
 </style>
 <script language="JAVASCRIPT">
 function showDetail(id,tbname){
@@ -219,7 +220,7 @@ function rcheckall2() {
 
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
+		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 width="4%"></td>
 		<td nowrap align="center" class="title_center">标题</td>
 		<td nowrap align="center" class="title_center">填报时间</td>
 		<td nowrap align="center" class="title_center">类别</td>
