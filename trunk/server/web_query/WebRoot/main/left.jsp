@@ -1,4 +1,8 @@
-<!-- saved from url=(0022)http://internet.e-mail -->
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String isAdmin = session.getAttribute("isAdmin").toString();
+%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -113,6 +117,15 @@ td {
               <tr> 
                 <td><a href="../modules/frames/frame_consult.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb8','images/interb8__.gif',1)" onMouseOver="MM_nbGroup('over','interb8','images/interb8_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb8" src="images/interb8.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
               </tr>
+<%
+	if("true".equals(isAdmin)){
+%>              
+              <tr> 
+                <td><a href="/user.do?action=list" target="mainFrame" >用户管理</a></td>
+              </tr>
+<%
+	}
+%>              
               <tr> 
                 <td height="1" bgcolor="#000000"></td>
               </tr>
@@ -140,3 +153,4 @@ td {
 </table>
 </body>
 </html>
+

@@ -54,4 +54,5 @@
 	<bean id="consultDAO" class="com.basesoft.modules.consult.ConsultDAO"></bean>
 	<bean id="loginDAO" class="com.basesoft.modules.login.LoginDAO"></bean>
 	<bean id="deleteDAO" class="com.basesoft.modules.delete.DeleteDAO"></bean>
+	<bean id="userDAO" class="com.basesoft.modules.user.UserDAO"></bean>
 </beans>
