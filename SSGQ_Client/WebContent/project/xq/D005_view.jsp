@@ -28,9 +28,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">陷坑</td>-->
-		<td nowrap class="title" height="25">陷坑深度:</td>
+		<td nowrap class="title" height="25">陷坑深度</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getSBDSP() %> 米 </td>
-		<td nowrap class="title">陷坑面积:</td>
+		<td nowrap class="title">陷坑面积</td>
 		<td bgcolor="#FFFFFF">
 		 <%=bean.getSBAR() %> 平方米 </td>
 	</tr>

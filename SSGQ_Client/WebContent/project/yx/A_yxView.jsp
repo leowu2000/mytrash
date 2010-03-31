@@ -28,7 +28,7 @@ margin:0px auto; padding:0px;
 <input type="hidden" name="RQ" value=""></input>
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
-		<td class="title" nowrap height="25">堤防级别:</td>
+		<td class="title" nowrap height="25">堤防级别</td>
 		<td  bgcolor="#FFFFFF">
 		<%if(bean.getDKGR().trim().equals("1")){ %>&nbsp;&nbsp;1&nbsp;&nbsp;<%} %>
 		<%if(bean.getDKGR().trim().equals("2")){ %>&nbsp;&nbsp;2&nbsp;&nbsp;<%} %>
@@ -36,20 +36,20 @@ margin:0px auto; padding:0px;
 		<%if(bean.getDKGR().trim().equals("4")){ %>&nbsp;&nbsp;4&nbsp;&nbsp;<%} %>
 		<%if(bean.getDKGR().trim().equals("5")){ %>&nbsp;&nbsp;5&nbsp;&nbsp;<%} %>
 		</td>
-		<td class="title" nowrap height="25">所在岸别:</td>
+		<td class="title" nowrap height="25">所在岸别</td>
 		<td  bgcolor="#FFFFFF">
 		<%if(bean.getBKOT().trim().equals("1")){ %>&nbsp;&nbsp;左&nbsp;&nbsp;<%} %>
 		<%if(bean.getBKOT().trim().equals("2")){ %>&nbsp;&nbsp;右&nbsp;&nbsp;<%} %>
 		</td>
-		<td nowrap class="title">起止桩号:</td>
+		<td nowrap class="title">起止桩号</td>
 		<td bgcolor="#FFFFFF" ><%=bean.getSTECH() %></td>
 	</tr>
 	<tr>
-		<td class="title"  height="25">当前水位:</td>
+		<td class="title"  height="25">当前水位</td>
 		<td  bgcolor="#FFFFFF"><%=bean.getRZ() %>米</td>
-		<td nowrap class="title">当前流量:</td>
+		<td nowrap class="title">当前流量</td>
 		<td bgcolor="#FFFFFF" ><%=bean.getRQ() %> 立方米/秒</td>
-		<td nowrap class="title">水面距堤顶距离:</td>
+		<td nowrap class="title">水面距堤顶距离</td>
 		<td bgcolor="#FFFFFF" ><%=bean.getWSTODC() %> 米</td>
 	</tr>
 </table>

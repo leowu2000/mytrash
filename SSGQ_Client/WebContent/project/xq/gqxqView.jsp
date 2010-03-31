@@ -106,51 +106,51 @@ function updateXQFLFRAME(obj){
 		</td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">工程名称:</td>
+		<td height="25" nowrap class="title">工程名称</td>
 		<td height="25" bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_PJ", "PJNM", "PJNO="+PJNO) %>
 		<input type="hidden" name="GCNAME" value="<%=PJNO %>"></td>
-		<td height="25" nowrap class="title">险情分类:</td>
+		<td height="25" nowrap class="title">险情分类</td>
 		<td height="25" bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_XQFL", "XQFLMC", "XQFLDM='"+XQFLDM+"'")%>
 		<input type="hidden" name="XQFLDM" value="<%= XQFLDM%>"></td>
-		<td height="25" nowrap class="title">填报单位:</td>
+		<td height="25" nowrap class="title">填报单位</td>
 		<td height="25" bgcolor="#FFFFFF"><%=stdncbean.getWTDPCD() %></td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">险情标题:</td>
+		<td height="25" nowrap class="title">险情标题</td>
 		<td height="25" bgcolor="#FFFFFF"><%=stdncbean.getDNCNM() %></td>
-		<td height="25" nowrap class="title">建筑物:</td>
+		<td height="25" nowrap class="title">建筑物</td>
 		<td height="25" bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_ST","STNM","STTPCD="+stdncbean.getSTTPCD()) %></td>
-		<td height="25" nowrap class="title">采集时间:</td>
+		<td height="25" nowrap class="title">采集时间</td>
 		<td height="25" bgcolor="#FFFFFF"><%=stdncbean.getDAGTM() %></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title">险情级别:</td>
+		<td nowrap class="title">险情级别</td>
 		<td bgcolor="#FFFFFF"><%=stdncbean.getDNCGR().trim()%></td>
-		<td nowrap class="title">出险地点:</td>
+		<td nowrap class="title">出险地点</td>
 		<td bgcolor="#FFFFFF"> <%=stdncbean.getDAGPLCCH() %> </td>
-		<td nowrap class="title">出险部位:</td>
+		<td nowrap class="title">出险部位</td>
 		<td bgcolor="#FFFFFF" > <%=stdncbean.getDAGLO() %> </td>
 		
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title">解放军投入:</td>
+		<td nowrap class="title">解放军投入</td>
 		<td bgcolor="#FFFFFF"> <%=stdncbean.getPLAPN() %> 人</td>
-		<td nowrap class="title">武警投入:</td>
+		<td nowrap class="title">武警投入</td>
 		<td bgcolor="#FFFFFF"><%=stdncbean.getPLIPN() %> 人</td>
-		<td nowrap class="title">群众投入:</td>
+		<td nowrap class="title">群众投入</td>
 		<td bgcolor="#FFFFFF"><%=stdncbean.getTPN() %> 人 </td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title" >当前水位:</td>
+		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><%=stdncbean.getRZ() %> 米</td>
 		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片标题:</td> 
+		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF" colspan="4"><div id="TITLE">&nbsp;</div></td>
 	</tr>
 	<tr bgcolor="#FFFFFF" height="50" >
-		<td nowrap class="title">照片描述:</td> 
+		<td nowrap class="title">照片描述</td> 
 		<td bgcolor="#FFFFFF" colspan="4"><div id="NRMS">&nbsp;</div></td>		
 	</tr>
 	<tr height="25" >

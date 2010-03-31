@@ -117,7 +117,10 @@ function SearchSubmit(){
 	xqmc_s=xqmc_s==null?"":xqmc_s;
 	xqfldm_s=xqfldm_s==null?"":xqfldm_s;
 	iswhere=iswhere==null?"":iswhere;
-	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
+	String pjWhere = "1=1";
+	if(configBean!=null)
+		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	List<STDNCBean> records = BuinessDao.getAllStdncList(path,iswhere," order by DAGTM desc"); 
 	String pageStr = (String)request.getAttribute("page"); 
@@ -197,7 +200,7 @@ function SearchSubmit(){
 </table>
 <table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
+		<td class="title"><input name=all class="inputAll" onclick=rcheckall() type=checkbox value=9999 ></td>
 		<td nowrap align="center" class="title">工程名称</td>
 		<td nowrap align="center" class="title">险情名称</td>
 		<td nowrap align="center" class="title">险情分类</td>

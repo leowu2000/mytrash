@@ -28,17 +28,17 @@ margin:0px auto; padding:0px;
 <div align="center"> 
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
-		<td class="title" nowrap height="25">所在岸别:</td>
+		<td class="title" nowrap height="25">所在岸别</td>
 		<td  bgcolor="#FFFFFF">
 			<select name="BKOT">
 				<option value="1" <%if(bean.getBKOT().trim().equals("1")){ %>selected<%} %>>左</option>
 				<option value="2" <%if(bean.getBKOT().trim().equals("2")){ %>selected<%} %>>右</option>
 			</select>
 		</td>
-		<td class="title"  height="25">蓄滞洪水位:</td>
-		<td  bgcolor="#FFFFFF"><input type="text" name="DSFLWZ" value="<%=bean.getDSFLWZ() %>" size="8"/>米</td>
-		<td nowrap class="title">蓄滞洪量:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="DSFLW" value="<%=bean.getDSFLW() %>" size="8"/>万立方米</td>
+		<td class="title"  height="25">蓄滞洪水位</td>
+		<td  bgcolor="#FFFFFF"><input type="text" name="DSFLWZ" value="<%=bean.getDSFLWZ() %>" size="8" onblur="javascript:checkNan(this,'蓄滞洪水位')"/>米</td>
+		<td nowrap class="title">蓄滞洪量</td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="DSFLW" value="<%=bean.getDSFLW() %>" size="8" onblur="javascript:checkNan(this,'蓄滞洪量')"/>万立方米</td>
 		
 	</tr>
 </table>

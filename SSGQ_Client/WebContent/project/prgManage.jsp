@@ -167,7 +167,7 @@ function todeletePj(){
 </table>
 <table border="0" align="center" width="95%" >
 	<tr>
-		<td width=100% bgcolor="#FFFFFF" align="right"> 
+		<td width=100%  align="right"> 
 		共<font color="red">&nbsp;<%=pUtil.getRecordCount()%>&nbsp;</font>条记录,
 		 每页显示<font color="red">&nbsp;<%=pUtil.getPageSize()%>&nbsp;</font>条 
 		,当前第<font color="red">&nbsp;<%=currentPage %>&nbsp;</font>页
@@ -184,7 +184,7 @@ function todeletePj(){
 </table>
 <table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=all class="input3" onclick="rcheckall()" type="checkbox" value="9999" ></td>
+		<td class="title"><input name=all class="inputAll" onclick="rcheckall()" type="checkbox" value="9999" ></td>
 		<td nowrap align="center" class="title_center">工程名称</td>
 		<td nowrap align="center" class="title_center">工程类别</td>
 		<td nowrap align="center" class="title_center">所属地区</td>

@@ -29,15 +29,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="3">控导工程局部破坏</td>-->
-		<td class="title" height="25">破坏面积:</td>
+		<td class="title" height="25">破坏面积</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="WRAR" value="<%=bean.getWRAR() %>" onblur="javascript:checkNan(this,'破坏面积')"/>米</td>
-		<td class="title" height="25">破坏深度:</td>
+		<td class="title" height="25">破坏深度</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="WRD" value="<%=bean.getWRD() %>" onblur="javascript:checkNan(this,'破坏深度')"/>米</td>
-		<td class="title" height="25">破坏长度:</td>
+		<td class="title" height="25">破坏长度</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="WRL" value="<%=bean.getWRL() %>" onblur="javascript:checkNan(this,'破坏长度')"/>米</td>
 	</tr>
 	<tr>
-		<td nowrap class="title">破坏地质情况:</td>
+		<td nowrap class="title">破坏地质情况</td>
 		<td  bgcolor="#FFFFFF" colspan="5"><textarea rows="3" cols="80" name="WRGLCN" style="width:100%"><%=bean.getWRGLCN() %></textarea></td>
 	</tr>
 

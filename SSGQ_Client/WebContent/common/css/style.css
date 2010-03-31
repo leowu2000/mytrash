@@ -70,8 +70,13 @@ a:hover {
 }
 .input3 {
 	border: 0px solid #484833;
-	background-color:#ECEDED ;
-}.z {
+	background-color: #F5F5F5;
+}
+.inputAll {
+	border: 0px solid #484833;
+	background-color: #E8EFFF;
+}
+.z {
 	border: thin groove #DED196;
 }
 .inputwh {

@@ -29,15 +29,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">裂缝</td>-->
-		<td nowrap class="title" height="25">裂缝方向:</td>
+		<td nowrap class="title" height="25">裂缝方向</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="CRDR" value="<%=bean.getCRDR() %>" /></td>
-		<td nowrap class="title" height="25">裂缝深度:</td>
+		<td nowrap class="title" height="25">裂缝深度</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="CRD" value="<%=bean.getCRD() %>" size="8" onblur="javascript:checkNan(this,'裂缝深度')"/>米 </td>
 	<tr height="25" >
-		<td nowrap class="title">裂缝长度:</td>
+		<td nowrap class="title">裂缝长度</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="CRL" value="<%=bean.getCRL() %>" onblur="javascript:checkNan(this,'裂缝长度')"/>米 </td>
-		<td nowrap class="title">裂缝宽度:</td>
+		<td nowrap class="title">裂缝宽度</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="CRW" value="<%=bean.getCRW() %>" onblur="javascript:checkNan(this,'裂缝宽度')"/>米 </td>
 	</tr>

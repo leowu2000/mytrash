@@ -41,7 +41,7 @@ public class BuinessController implements Controller {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(searchSql);
 			if (rs.next())
-				return new ModelAndView("rightmenu");
+				return new ModelAndView("/project/xq/gqxqManage");
 			else
 				return new ModelAndView("sys/config");
 		}
@@ -395,18 +395,20 @@ public class BuinessController implements Controller {
 				BuinessDao.updateDB(sSQL, path);
 				// 如果需要更新多媒体信息
 				if ("1".trim().equals(mediaflag)) {
-					String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,LXZP,TITLE) values(?,?,?,?)";
-					PreparedStatement pstmt = conn.prepareStatement(sql);
-					File f = new File(filepath);
-					FileInputStream fis = new FileInputStream(f);
-					pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
-							"ZLBM"));
-					pstmt.setString(2, String.valueOf(RPJINCD));
-					pstmt.setBinaryStream(3, fis, (int) f.length());
-					pstmt.setString(4, f.getName());
-					pstmt.executeUpdate();
-					pstmt.close();
-					conn.close();
+					if(!"".trim().equals(filepath)){
+						String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,LXZP,TITLE) values(?,?,?,?)";
+						PreparedStatement pstmt = conn.prepareStatement(sql);
+						File f = new File(filepath);
+						FileInputStream fis = new FileInputStream(f);
+						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
+								"ZLBM"));
+						pstmt.setString(2, String.valueOf(RPJINCD));
+						pstmt.setBinaryStream(3, fis, (int) f.length());
+						pstmt.setString(4, f.getName());
+						pstmt.executeUpdate();
+						pstmt.close();
+						conn.close();
+					}
 				}
 
 			} else {
@@ -419,24 +421,28 @@ public class BuinessController implements Controller {
 						+ "','" + WTTT + "')";
 				// 主表
 				BuinessDao.insertDB(sSQL, path);
-				int poi = filepath.lastIndexOf(".");
-				String detail = filepath.substring(poi+1,filepath.length()).toUpperCase();
-				
-				String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,DTCDT,WJGS,TITLE,LXZP) values(?,?,?,?,?,?)";
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				File f = new File(filepath);
-				String name = f.getName().substring(0,f.getName().lastIndexOf("."));
-				FileInputStream fis = new FileInputStream(f);
-				pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
-								"ZLBM"));
-				pstmt.setString(2, String.valueOf(RPJINCD));
-				pstmt.setString(3, UtilDateTime.nowDateString());
-				pstmt.setString(4, detail);
-				pstmt.setString(5, name);
-				pstmt.setBinaryStream(6, fis, (int) f.length());
-				pstmt.executeUpdate();
-				pstmt.close();
-				conn.close();
+				if(!"".trim().equals(filepath)){
+					int poi = filepath.lastIndexOf(".");
+					String detail = filepath.substring(poi+1,filepath.length()).toUpperCase();
+					
+					String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,DTCDT,WJGS,TITLE,LXZP) values(?,?,?,?,?,?)";
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+					
+						
+					File f = new File(filepath);
+					String name = f.getName().substring(0,f.getName().lastIndexOf("."));
+					FileInputStream fis = new FileInputStream(f);
+					pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
+									"ZLBM"));
+					pstmt.setString(2, String.valueOf(RPJINCD));
+					pstmt.setString(3, UtilDateTime.nowDateString());
+					pstmt.setString(4, detail);
+					pstmt.setString(5, name);
+					pstmt.setBinaryStream(6, fis, (int) f.length());
+					pstmt.executeUpdate();
+					pstmt.close();
+					conn.close();
+				}
 			}
 			return new ModelAndView("report/fxjbManage");
 		}
@@ -572,10 +578,10 @@ public class BuinessController implements Controller {
 				if (!"".trim().equals(jcsj_s) && !"".trim().equals(jcsj_e)) {
 					if ("".trim().equals(iswhere))
 						iswhere += " DTCDT >= #" + jcsj_s
-								+ "# and DTCDT <=#" + jcsj_e + "#";
+								+ " 00:00:00# and DTCDT <=#" + jcsj_e + " 23:59:59#";
 					else
 						iswhere += " and DTCDT >= #" + jcsj_s
-								+ "# and DTCDT <=#" + jcsj_e + "#";
+								+ " 00:00:00# and DTCDT <=#" + jcsj_e + " 23:59:59#";
 				}
 				request.setAttribute("gcmc_s", gcmc_s);
 				request.setAttribute("jcsj_s", jcsj_s);
@@ -596,11 +602,11 @@ public class BuinessController implements Controller {
 				}
 				if (!"".trim().equals(tbsj_s) && !"".trim().equals(tbsj_e)) {
 					if ("".trim().equals(iswhere))
-						iswhere += " WTDT >= #" + tbsj_s + "# and WTDT <=#"
-								+ tbsj_e + "#";
+						iswhere += " WTDT >= #" + tbsj_s + " 00:00:00# and WTDT <=#"
+								+ tbsj_e + " 23:59:59#";
 					else
 						iswhere += " and WTDT >= #" + tbsj_s
-								+ "# and WTDT <=#" + tbsj_e + "#";
+								+ " 00:00:00# and WTDT <=#" + tbsj_e + " 23:59:59#";
 				}
 				request.setAttribute("bt_s", jbbt_s);
 				request.setAttribute("tbsj_s", tbsj_s);
@@ -624,11 +630,11 @@ public class BuinessController implements Controller {
 				}
 				if (!"".trim().equals(tbsj_s) && !"".trim().equals(tbsj_e)) {
 					if ("".trim().equals(iswhere))
-						iswhere += " WTDT >= #" + tbsj_s + "# and WTDT <=#"
-								+ tbsj_e + "#";
+						iswhere += " WTDT >= #" + tbsj_s + " 00:00:00# and WTDT <=#"
+								+ tbsj_e + " 23:59:59#";
 					else
 						iswhere += " and WTDT >= #" + tbsj_s
-								+ "# and WTDT <=#" + tbsj_e + "#";
+								+ " 00:00:00# and WTDT <=#" + tbsj_e + " 23:59:59#";
 				}
 				request.setAttribute("bt_s", bt_s);
 				request.setAttribute("tbsj_s", tbsj_s);

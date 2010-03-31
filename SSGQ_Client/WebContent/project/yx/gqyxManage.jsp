@@ -93,7 +93,10 @@ function SearchSubmit(){
 	jcsj_e=jcsj_e==null?"":jcsj_e;
 	jcsj_s=jcsj_s==null?"":jcsj_s;
 	gcmc_s=gcmc_s==null?"":gcmc_s;
-	List<PrjBean> beanList = BuinessDao.getAllList(path,"1=1");
+	String pjWhere = "1=1";
+	if(configBean!=null)
+		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
 	List<PJRCNBean> records = BuinessDao.getAllPjrcnList(path,iswhere); 
 	String pageStr = (String)request.getAttribute("page"); 
 	pageStr=pageStr==null?request.getParameter("page"):pageStr;
@@ -158,7 +161,7 @@ function SearchSubmit(){
 </table>
 <table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
+		<td class="title"><input name=all class="inputAll" onclick=rcheckall() type=checkbox value=9999 ></td>
 		<td nowrap align="center" class="title">工程名称</td>
 		<td nowrap align="center" class="title">检测时间</td>
 		<td nowrap align="center" class="title">险情预测</td>

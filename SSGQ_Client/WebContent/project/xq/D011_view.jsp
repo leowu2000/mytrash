@@ -28,11 +28,11 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">浪坎</td>-->
-		<td nowrap class="title" height="25">河道流量:</td>
+		<td nowrap class="title" height="25">河道流量</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getWDQ() %> 立方米/秒 </td>
-		<td nowrap class="title" height="25">浪高:</td>
+		<td nowrap class="title" height="25">浪高</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getBLH() %> 米 </td>
-		<td nowrap class="title">风力:</td>
+		<td nowrap class="title">风力</td>
 		<td bgcolor="#FFFFFF">
 		 <%=bean.getWNS() %> 级 </td>
 	</tr>

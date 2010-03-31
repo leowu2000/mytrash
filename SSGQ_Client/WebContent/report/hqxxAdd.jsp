@@ -53,28 +53,28 @@ function toBack(){
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td align="center" class="title" >旱情标题:</td>
+		<td align="center" class="title" >旱情标题</td>
 		<td  bgcolor="#FFFFFF" colspan="2">
 		<input type="text" name="MAINTITLE" value="" size="30"/></td>
 		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title" >选择照片:</td>
+		<td nowrap class="title" >选择照片</td>
 		<td bgcolor="#FFFFFF" width="45%">
 		<div id="thfiles"  style="display:none"></div>
 		<div id="showupfile" style="display:inline"><input type="file" id="UpFile" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </div>
 		</td>
-		<td nowrap class="title" width="35%">照片描述:</td> 
+		<td nowrap class="title" width="35%">照片描述</td> 
 	</tr>
 	<tr bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片标题:</td> 
+		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value="" size="30"/></td>
 		<td rowspan=2 bgcolor="#FFFFFF">
 		<textarea rows="3" cols="3" name="NRMS" style="width:100%"></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td nowrap class="title">拍摄时间:</td> 
+		<td nowrap class="title">拍摄时间</td> 
 		<td bgcolor="#FFFFFF" >
 			<input type="text" name="DTCDT" onClick="WdatePicker({startDate:'%y-%M-01 00:00',dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:false})" readonly value="" size="30"/>
 				<input type="button" name="addbutton" value="添加" onclick="javascript:uplaodReportPhotos('TB_QT_M')"/>

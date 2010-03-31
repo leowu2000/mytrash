@@ -28,7 +28,7 @@ margin:0px auto; padding:0px;
 <div align="center"> 
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
-		<td class="title" nowrap height="25">水闸级别:</td>
+		<td class="title" nowrap height="25">水闸级别</td>
 		<td  bgcolor="#FFFFFF">
 			<select name="WLGR">
 				<option value="1" <%if(bean.getWLGR().trim().equals("1")){ %>selected<%} %>>大</option>
@@ -36,10 +36,10 @@ margin:0px auto; padding:0px;
 				<option value="3" <%if(bean.getWLGR().trim().equals("3")){ %>selected<%} %>>小</option>
 			</select>
 		</td>
-		<td class="title"  height="25">当前闸上水位:</td>
-		<td  bgcolor="#FFFFFF"><input type="text" name="RUPGZ" value="<%=bean.getRUPGZ() %>" size="8"/>米</td>
-		<td nowrap class="title">当前闸下水位:</td>
-		<td bgcolor="#FFFFFF" ><input type="text" name="RDWGZ" value="<%=bean.getRDWGZ() %>" size="8"/> 米</td>
+		<td class="title"  height="25">当前闸上水位</td>
+		<td  bgcolor="#FFFFFF"><input type="text" name="RUPGZ" value="<%=bean.getRUPGZ() %>" size="8" onblur="javascript:checkNan(this,'当前闸上水位')"/>米</td>
+		<td nowrap class="title">当前闸下水位</td>
+		<td bgcolor="#FFFFFF" ><input type="text" name="RDWGZ" value="<%=bean.getRDWGZ() %>" size="8" onblur="javascript:checkNan(this,'当前闸下水位')"/> 米</td>
 		
 	</tr>
 	<tr>

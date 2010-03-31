@@ -502,6 +502,28 @@ public class BuinessDao {
 		}
 		return bean;
 	}
+	public static FXJBBean findFxjbcByISSUE(String PATH, String ISSUE) {
+		FXJBBean bean = null;
+		String sSQL = "select * from TB_FXJB where ISSUE=" + ISSUE;
+		Connection conn = null;
+		try {
+			conn = ConnectionPool.getConnection(PATH);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sSQL);
+			while (rs.next()) {
+				bean = FXJBBean.getFXJBBeanFromRs(rs);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				ConnectionPool.freeConnection(conn);
+			} catch (Exception fe) {
+				fe.printStackTrace();
+			}
+		}
+		return bean;
+	}
 
 	public static FPACTIBean findFpactiByID(String PATH, String RPJINCD) {
 		FPACTIBean bean = new FPACTIBean();

@@ -29,31 +29,31 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="4">溃坝</td>-->
-		<td class="title" height="25">溃坝宽度:</td>
+		<td class="title" height="25">溃坝宽度</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="BRDMW" value="<%=bean.getBRDMW() %>" size="8" onblur="javascript:checkNan(this,'溃坝宽度')"/>米</td>
-		<td class="title"  height="25">溃坝时库容:</td>
+		<td class="title"  height="25">溃坝时库容</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="BRV" value="<%=bean.getBRV() %>" size="8" onblur="javascript:checkNan(this,'溃坝时库容')"/>万立方米</td>
-		<td class="title"  height="25">溃坝流量:</td>
+		<td class="title"  height="25">溃坝流量</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="BRDMQ" value="<%=bean.getBRDMQ() %>" size="8" onblur="javascript:checkNan(this,'溃坝流量)"/>米</td>
-		<td class="title"  height="25">库水位距坝鼎高差:</td>
+		<td class="title"  height="25">库水位距坝鼎高差</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="BRZDMCDI" value="<%=bean.getBRZDMCDI() %>" size="8" onblur="javascript:checkNan(this,'库水位距坝鼎高差')"/>米</td>
 	</tr>
 	<tr>
-		<td class="title"  height="25">受灾人口:</td>
+		<td class="title"  height="25">受灾人口</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="DSSPN" value="<%=bean.getDSSPN() %>" size="8" onblur="javascript:checkNumber(this,'受灾人口')"/>人</td>
-		<td class="title"  height="25">受伤人口:</td>
+		<td class="title"  height="25">受伤人口</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="INPN" value="<%=bean.getINPN() %>" size="8" onblur="javascript:checkNumber(this,'受伤人口')"/>人</td>
-		<td class="title"  height="25">死亡人口:</td>
+		<td class="title"  height="25">死亡人口</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="DTHPN" value="<%=bean.getDTHPN() %>" size="8" onblur="javascript:checkNumber(this,'死亡人口')"/>人</td>
-		<td class="title"  height="25">倒塌房屋:</td>
+		<td class="title"  height="25">倒塌房屋</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="WRHS" value="<%=bean.getWRHS() %>" size="8" onblur="javascript:checkNan(this,'倒塌房屋')"/>间</td>
 	</tr>
 	<tr>
-		<td class="title"  colspan="2" height="25">农作物受害面积:</td>
+		<td class="title"  colspan="2" height="25">农作物受害面积</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="CRPDSSAR" value="<%=bean.getCRPDSSAR() %>" size="8" onblur="javascript:checkNan(this,'农作物受害面积')"/>公顷</td>
-		<td class="title"  height="25">毁坏耕地面积:</td>
+		<td class="title"  height="25">毁坏耕地面积</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="SCDMFMAR" value="<%=bean.getSCDMFMAR() %>" size="8" onblur="javascript:checkNan(this,'毁坏耕地面积')"/>公顷</td>
-		<td class="title" colspan="2" height="25">直接经济损失:</td>
+		<td class="title" colspan="2" height="25">直接经济损失</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="DRCECLS" value="<%=bean.getDRCECLS() %>" size="8" onblur="javascript:checkNan(this,'直接经济损失')"/>万元</td>
 	</tr>
 	<tr>

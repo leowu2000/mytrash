@@ -29,9 +29,9 @@ margin:0px auto; padding:0px;
 	
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">滑坡</td>-->
-		<td nowrap class="title" height="25">滑坡体积:</td>
+		<td nowrap class="title" height="25">滑坡体积</td>
 		<td bgcolor="#FFFFFF"><%=bean.getSLBU() %> 立方米 </td>
-		<td nowrap class="title">滑坡角度:</td>
+		<td nowrap class="title">滑坡角度</td>
 		<td bgcolor="#FFFFFF">
 		 <%=bean.getSLUPAG() %> 度 </td>
 	</tr>

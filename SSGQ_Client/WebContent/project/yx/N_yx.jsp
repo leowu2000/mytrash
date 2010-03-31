@@ -28,7 +28,7 @@ margin:0px auto; padding:0px;
 <div align="center"> 
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
-		<td class="title" nowrap height="25" width="25%">所在岸别:</td>
+		<td class="title" nowrap height="25" width="25%">所在岸别</td>
 		<td  bgcolor="#FFFFFF">
 			<select name="BKOT">
 				<option value="1" <%if(bean.getBKOT().trim().equals("1")){ %>selected<%} %>>左</option>

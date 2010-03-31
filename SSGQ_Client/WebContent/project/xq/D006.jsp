@@ -30,9 +30,9 @@ margin:0px auto; padding:0px;
 	
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">滑坡</td>-->
-		<td nowrap class="title" height="25">滑坡体积:</td>
+		<td nowrap class="title" height="25">滑坡体积</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="SLBU" value="<%=bean.getSLBU() %>" size="8" onblur="javascript:checkNan(this,'滑坡体积')"/>立方米 </td>
-		<td nowrap class="title">滑坡角度:</td>
+		<td nowrap class="title">滑坡角度</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="SLUPAG" value="<%=bean.getSLUPAG() %>" onblur="javascript:checkNan(this,'滑坡角度')"/>度 </td>
 	</tr>

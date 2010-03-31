@@ -29,9 +29,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="2">허림</td>-->
-		<td class="title" height="25">허림렘蕨:</td>
+		<td class="title" height="25">허림렘蕨</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="OVTUDR" value="<%=bean.getOVTUDR() %>" /></td>
-		<td class="title" height="25">허림실똑:</td>
+		<td class="title" height="25">허림실똑</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="OVTUAG" value="<%=bean.getOVTUAG() %>"  onblur="javascript:checkNan(this,'허림실똑')"/>똑</td>
 		
 	</tr>
