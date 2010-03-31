@@ -58,6 +58,7 @@ function uploadData(){
 	  xmlHttpReq.send(null);
 	  var result = xmlHttpReq.responseText;
 	  Ext.MessageBox.hide();
+	  alert(result);
 	  if(result=="0"){
 		  alert('远程服务器连接失败，请确认配置参数，并保证网络连通。');
 	  }else{

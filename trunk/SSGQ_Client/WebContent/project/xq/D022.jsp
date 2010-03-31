@@ -28,9 +28,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">基础排水失效</td>-->
-		<td class="title" height="25">排水孔堵塞:</td>
+		<td class="title" height="25">排水孔堵塞</td>
 		<td bgcolor="#FFFFFF" width="35%"><textarea rows="3" cols="40" name="WPPLU"  style="width:100%"><%=bean.getWPPLU() %></textarea></td>
-		<td class="title">排水设备失灵:</td>
+		<td class="title">排水设备失灵</td>
 		<td bgcolor="#FFFFFF" width="35%">
 		<textarea rows="3" cols="40" name="WPEQML" style="width:100%"><%=bean.getWPEQML() %></textarea></td>
 	</tr>

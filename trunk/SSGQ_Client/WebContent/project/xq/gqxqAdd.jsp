@@ -122,7 +122,7 @@ function updateXQFLFRAME(obj){
 		</td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">工程名称:</td>
+		<td height="25" nowrap class="title">工程名称</td>
 		<td height="25"  bgcolor="#FFFFFF">
 				<select name="GCNAME" onchange="javascript:getGcmessage2(this.value)">
 				<option value="">--工程名称--</option>
@@ -135,7 +135,7 @@ function updateXQFLFRAME(obj){
 						}
 					} %>
 				</select></td>
-		<td height="25" nowrap class="title">险情分类:</td>
+		<td height="25" nowrap class="title">险情分类</td>
 		<td height="25"  bgcolor="#FFFFFF">
 					<select name="XQFLDM" onchange="javascript:updateXQFLFRAME(this)">
 					<%if(resultList!=null && resultList.size()>0){
@@ -146,22 +146,22 @@ function updateXQFLFRAME(obj){
 						<%
 					}} %>
 					</select></td>
-		<td height="25" nowrap class="title">填报单位:</td>
+		<td height="25" nowrap class="title">填报单位</td>
 		<td height="25"  bgcolor="#FFFFFF"><%=configBean.getTBDW() %>
 		<input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 		</td>
 		
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">险情标题:</td>
+		<td height="25" nowrap class="title">险情标题</td>
 		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DNCNM" value=""/></td>
-		<td height="25" nowrap class="title">建筑物:</td>
+		<td height="25" nowrap class="title">建筑物</td>
 		<td height="25"  bgcolor="#FFFFFF"><div id="show"></div></td>
-		<td nowrap class="title">出险部位:</td>
+		<td nowrap class="title">出险部位</td>
 		<td bgcolor="#FFFFFF" ><input type="text" name="DAGLO" value="" /></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title">险情级别:</td>
+		<td nowrap class="title">险情级别</td>
 		<td bgcolor="#FFFFFF">
 			<select name="DNCGR">
 				<option value="一般险情">一般险情</option>
@@ -169,31 +169,31 @@ function updateXQFLFRAME(obj){
 				<option value="重大险情">重大险情</option>
 			</select>
 		</td>
-		<td nowrap class="title">出险地点:</td>
+		<td nowrap class="title">出险地点</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value=""/></td>
-		<td nowrap class="title">出险时间:</td>
+		<td nowrap class="title">出险时间</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>" onClick="WdatePicker({startDate:'%y-%M-01 00:00',dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:false})" readonly /></td>
 	</tr>
 	<tr height="25" >
-	<td nowrap class="title">解放军投入:</td>
+	<td nowrap class="title">解放军投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" size="10" name="PLAPN" value="0" />人<font color="red">*</font></td>
-		<td nowrap class="title">武警投入:</td>
+		<td nowrap class="title">武警投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" size="10" name="PLIPN" value="0" />人<font color="red">*</font></td>
-		<td nowrap class="title">群众投入:</td>
+		<td nowrap class="title">群众投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" size="10" name="TPN" value="0"/>人<font color="red">*</font></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title" >当前水位:</td>
+		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="0" />米<font color="red">*</font></td>
 		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title" >选择照片:</td>
+		<td nowrap class="title" >选择照片</td>
 		<td bgcolor="#FFFFFF" colspan="2">
 		<div id="thfiles"  style="display:none"></div>
 		<div id="showupfile" style="display:inline"><input type="file" id="UpFile" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </div>
 		</td>
-		<td nowrap class="title">照片标题:</td> 
+		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF" >
 			<input type="text" name="TITLE" value=""/>
 		</td>
@@ -201,7 +201,7 @@ function updateXQFLFRAME(obj){
 		
 	</tr>
 	<tr bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片描述:</td> 
+		<td nowrap class="title">照片描述</td> 
 		<td bgcolor="#FFFFFF" colspan="4">
 		<textarea rows="3" cols="10" name="NRMS" style="width:100%"></textarea>
 		</td>		

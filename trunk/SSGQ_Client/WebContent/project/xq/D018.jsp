@@ -29,9 +29,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="2">坍塌</td>-->
-		<td class="title" height="25">坍塌面积:</td>
+		<td class="title" height="25">坍塌面积</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="SLIAR" value="<%=bean.getSLIAR() %>" onblur="javascript:checkNan(this,'坍塌面积')"/>平方米 </td>
-		<td class="title" height="25">坍塌方量:</td>
+		<td class="title" height="25">坍塌方量</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="SLIMS" value="<%=bean.getSLIMS() %>" onblur="javascript:checkNan(this,'坍塌方量')"/>立方米 </td>
 		
 	</tr>

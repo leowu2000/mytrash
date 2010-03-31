@@ -28,9 +28,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="2">倾覆</td>-->
-		<td class="title" height="25">倾覆方向:</td>
+		<td class="title" height="25">倾覆方向</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getOVTUDR() %> </td>
-		<td class="title" height="25">倾覆角度:</td>
+		<td class="title" height="25">倾覆角度</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getOVTUAG() %> 度</td>
 		
 	</tr>

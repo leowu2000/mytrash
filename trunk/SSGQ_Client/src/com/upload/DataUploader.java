@@ -42,7 +42,7 @@ public class DataUploader {
 		long fLen = f.length();
 		String fTime = "";
 		String fDepart = "±Ï½Ú·À°ì";
-
+		
 		DataOutputStream out = new DataOutputStream(server.getOutputStream());
 		InputStreamReader in = new InputStreamReader(server.getInputStream());
 		String head = "SSGQ" + "#" + fName + "#" + fLen + "#" + fTime + "#"

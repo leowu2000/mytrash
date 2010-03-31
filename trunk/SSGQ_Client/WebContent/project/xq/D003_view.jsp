@@ -28,22 +28,22 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">漏洞</td>-->
-		<td nowrap class="title">距堤顶高程:</td>
+		<td nowrap class="title">距堤顶高程</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getTODFTDI() %> 米 </td>
-		<td nowrap class="title">最大漏洞直径:</td>
+		<td nowrap class="title">最大漏洞直径</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getLKDMT() %> 米 </td>
-		<td nowrap class="title">漏洞流量:</td>
+		<td nowrap class="title">漏洞流量</td>
 		<td bgcolor="#FFFFFF" > <%=bean.getLKQ() %> 升/秒 </td>
 		
 	<tr height="25" >
-		<td nowrap class="title">漏洞浑清:</td>
+		<td nowrap class="title">漏洞浑清</td>
 		<td bgcolor="#FFFFFF">
 			<%if(bean.getLKGTU().trim().equals("1")) {%>清<%} %>
 			<%if(bean.getLKGTU().trim().equals("2")) {%>浑<%} %>
 		</td>
-		<td nowrap class="title">漏洞群面积:</td>
+		<td nowrap class="title">漏洞群面积</td>
 		<td bgcolor="#FFFFFF"><%=bean.getLKSAR() %> 平方米</td>
-		<td nowrap class="title">漏洞水柱高:</td>
+		<td nowrap class="title">漏洞水柱高</td>
 		<td bgcolor="#FFFFFF" ><%=bean.getLKWTLH() %> 米</td>
 	</tr>
 </table>

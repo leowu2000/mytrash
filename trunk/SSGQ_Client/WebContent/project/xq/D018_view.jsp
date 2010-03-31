@@ -28,9 +28,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="2">坍塌</td>-->
-		<td class="title" height="25">坍塌面积:</td>
+		<td class="title" height="25">坍塌面积</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getSLIAR() %> 平方米 </td>
-		<td class="title" height="25">坍塌方量:</td>
+		<td class="title" height="25">坍塌方量</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getSLIMS() %> 立方米 </td>
 		
 	</tr>

@@ -29,24 +29,24 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">漏洞</td>-->
-		<td nowrap class="title">距堤顶高程:</td>
+		<td nowrap class="title">距堤顶高程</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="TODFTDI" value="<%=bean.getTODFTDI() %>" size="8" onblur="javascript:checkNan(this,'距堤顶高程')"/>米</td>
-		<td nowrap class="title">最大漏洞直径:</td>
+		<td nowrap class="title">最大漏洞直径</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="LKDMT" value="<%=bean.getLKDMT() %>" size="8" onblur="javascript:checkNan(this,'最大漏洞直径')"/>米</td>
-		<td nowrap class="title">漏洞流量:</td>
+		<td nowrap class="title">漏洞流量</td>
 		<td bgcolor="#FFFFFF" ><input type="text" name="LKQ" value="<%=bean.getLKQ() %>" onblur="javascript:checkNan(this,'漏洞流量')"/>升/秒</td>
 		
 	<tr height="25" >
-		<td nowrap class="title">漏洞浑清:</td>
+		<td nowrap class="title">漏洞浑清</td>
 		<td bgcolor="#FFFFFF">
 			<select name="LKGTU">
 				<option value="1"<%if(bean.getLKGTU().trim().equals("1")) {%>selected<%} %>>清</option>
 				<option value="2"<%if(bean.getLKGTU().trim().equals("2")) {%>selected<%} %>>浑</option>
 			</select>
 		</td>
-		<td nowrap class="title">漏洞群面积:</td>
+		<td nowrap class="title">漏洞群面积</td>
 		<td bgcolor="#FFFFFF"><input type="text" size="8" name="LKSAR" value="<%=bean.getLKSAR() %>" onblur="javascript:checkNan(this,'漏洞群面积')"/>平方米</td>
-		<td nowrap class="title">漏洞水柱高:</td>
+		<td nowrap class="title">漏洞水柱高</td>
 		<td bgcolor="#FFFFFF" ><input type="text" name="LKWTLH" value="<%=bean.getLKWTLH() %>" size="10"  onblur="javascript:checkNan(this,'漏洞水柱高')"/>米</td>
 	</tr>
 </table>

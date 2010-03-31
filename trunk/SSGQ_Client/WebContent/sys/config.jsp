@@ -108,6 +108,10 @@ function pre_submit(){
 		alert("请填写服务器端口！");
 		return false;
 	}
+	if(isNaN(document.forms[0].SERVER_PORT.value)){
+		alert("端口号只能填写数字！");
+		return false;
+	}
 	if(document.forms[0].SERVER_IP.value!=""){
 		var exp=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
 	    var reg = document.forms[0].SERVER_IP.value.match(exp);
@@ -117,7 +121,9 @@ function pre_submit(){
 	        return false;
 	    }
 	}
-	document.forms[0].submit();
+	if(confirm("保存参数设置，请确认！")){
+		document.forms[0].submit();
+	}
 }
 //function getRadioValue(){
 //	var objs = document.getElementsByName('CLIENT_TYPE');

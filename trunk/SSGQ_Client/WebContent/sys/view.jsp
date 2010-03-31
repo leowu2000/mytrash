@@ -6,7 +6,7 @@
 <%@ page import="java.util.*" %>
 <html>
 <head>
-<title>国家水文基础数据库系统</title>
+<title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>

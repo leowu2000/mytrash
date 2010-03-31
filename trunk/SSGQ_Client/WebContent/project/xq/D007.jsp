@@ -29,15 +29,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">淘刷</td>-->
-		<td nowrap class="title" height="25">距堤脚距离:</td>
+		<td nowrap class="title" height="25">距堤脚距离</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="TODFTDI" value="<%=bean.getTODFTDI() %>" size="8" onblur="javascript:checkNan(this,'距堤脚距离')"/> </td>
-		<td nowrap class="title" height="25">淘刷面积:</td>
+		<td nowrap class="title" height="25">淘刷面积</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="UNDAR" value="<%=bean.getUNDAR() %>" size="8" onblur="javascript:checkNan(this,'淘刷面积')"/>平方米 </td>
 	<tr height="25" >
-		<td nowrap class="title">淘刷深度:</td>
+		<td nowrap class="title">淘刷深度</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="UNDD" value="<%=bean.getUNDD() %>" onblur="javascript:checkNan(this,'淘刷深度')"/>米 </td>
-		<td nowrap class="title">淘刷长度:</td>
+		<td nowrap class="title">淘刷长度</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="UNDL" value="<%=bean.getUNDL() %>" onblur="javascript:checkNan(this,'淘刷长度')"/>米 </td>
 	</tr>

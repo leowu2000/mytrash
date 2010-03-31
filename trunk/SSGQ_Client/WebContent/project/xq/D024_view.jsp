@@ -28,15 +28,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="3">控导工程局部破坏</td>-->
-		<td class="title" height="25">破坏面积:</td>
+		<td class="title" height="25">破坏面积</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getWRAR() %> 米</td>
-		<td class="title" height="25">破坏深度:</td>
+		<td class="title" height="25">破坏深度</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getWRD() %> 米</td>
-		<td class="title" height="25">破坏长度:</td>
+		<td class="title" height="25">破坏长度</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getWRL() %> 米</td>
 	</tr>
 	<tr>
-		<td nowrap class="title">破坏地质情况:</td>
+		<td nowrap class="title">破坏地质情况</td>
 		<td  bgcolor="#FFFFFF" colspan="5"> <%=bean.getWRGLCN() %> </td>
 	</tr>
 

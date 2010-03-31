@@ -57,17 +57,17 @@ function toBack(){
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 
 	<tr bgcolor="#FFFFFF" >
-		<td nowrap class="title" width="20%">照片标题:</td> 
+		<td nowrap class="title" width="20%">照片标题</td> 
 		<td bgcolor="#FFFFFF" width="40%"><div id="TITLE">&nbsp;</div></td>
 		
 		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr>
-		<td nowrap class="title">拍摄时间:</td> 
+		<td nowrap class="title">拍摄时间</td> 
 		<td bgcolor="#FFFFFF" ><div id="DTCDT">&nbsp;</div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片描述:</td> 
+		<td nowrap class="title">照片描述</td> 
 		<td bgcolor="#FFFFFF"><div id="NRMS">&nbsp;</div></td>
 	</tr>
 	<tr height="25" >

@@ -28,9 +28,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">渗水</td>-->
-		<td nowrap class="title" height="25">渗水面积:</td>
+		<td nowrap class="title" height="25">渗水面积</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getSPAR() %> 平方米 </td>
-		<td nowrap class="title">渗水流量:</td>
+		<td nowrap class="title">渗水流量</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getSPQ() %> 升/秒 </td>
 	</tr>
 </table>

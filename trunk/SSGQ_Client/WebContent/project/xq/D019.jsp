@@ -29,9 +29,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="2">堵塞</td>-->
-		<td class="title" height="25">堵塞物名称:</td>
+		<td class="title" height="25">堵塞物名称</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="PLTNM" value="<%=bean.getPLTNM() %>" /></td>
-		<td class="title" height="25">堵塞物体积:</td>
+		<td class="title" height="25">堵塞物体积</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="PLTBU" value="<%=bean.getPLTBU() %>" onblur="javascript:checkNan(this,'堵塞物体积')"/>立方米</td>
 		
 	</tr>

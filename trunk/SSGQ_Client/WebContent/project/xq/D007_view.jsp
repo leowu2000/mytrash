@@ -28,14 +28,14 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">淘刷</td>-->
-		<td nowrap class="title" height="25">距堤脚距离:</td>
+		<td nowrap class="title" height="25">距堤脚距离</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getTODFTDI() %> </td>
-		<td nowrap class="title" height="25">淘刷面积:</td>
+		<td nowrap class="title" height="25">淘刷面积</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getUNDAR() %> 平方米 </td>
 	<tr height="25" >
-		<td nowrap class="title">淘刷深度:</td>
+		<td nowrap class="title">淘刷深度</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getUNDD() %> 米 </td>
-		<td nowrap class="title">淘刷长度:</td>
+		<td nowrap class="title">淘刷长度</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getUNDL() %> 米 </td>
 	</tr>
 </table>

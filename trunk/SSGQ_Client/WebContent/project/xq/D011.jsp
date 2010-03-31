@@ -29,11 +29,11 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">浪坎</td>-->
-		<td nowrap class="title" height="25">河道流量:</td>
+		<td nowrap class="title" height="25">河道流量</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="WDQ" value="<%=bean.getWDQ() %>" size="8" onblur="javascript:checkNan(this,'河道流量')"/>立方米/秒 </td>
-		<td nowrap class="title" height="25">浪高:</td>
+		<td nowrap class="title" height="25">浪高</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="BLH" value="<%=bean.getBLH() %>" size="8" onblur="javascript:checkNan(this,'浪高')"/>米 </td>
-		<td nowrap class="title">风力:</td>
+		<td nowrap class="title">风力</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="WNS" value="<%=bean.getWNS() %>" onblur="javascript:checkNan(this,'风力')"/>级 </td>
 	</tr>

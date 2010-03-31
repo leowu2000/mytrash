@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.buiness.dao.BuinessDao;
+import com.buiness.form.FXJBBean;
 import com.buiness.form.STDNCBean;
 
 public class BaseServlet extends HttpServlet{
@@ -451,6 +452,21 @@ public class BaseServlet extends HttpServlet{
 			response.setHeader("Charset", "gb2312");
 			response.addHeader("Cache-Control", "no-cache");
 			response.getWriter().write(new String("true".getBytes("utf-8"), "iso-8859-1"));
+		}
+		if("checkIssue".trim().equals(type)){
+			String ISSUE = request.getParameter("ISSUE");
+			String checkResult = "";
+			if(!ISSUE.trim().equals("")){
+				FXJBBean bean = BuinessDao.findFxjbcByISSUE(path,ISSUE);
+				if(bean==null)
+					checkResult="1";
+				else
+					checkResult="0";
+				response.setContentType("text/xml");
+				response.setHeader("Charset", "gb2312");
+				response.addHeader("Cache-Control", "no-cache");
+				response.getWriter().write(new String(checkResult.getBytes("utf-8"), "iso-8859-1"));
+			}
 		}
 	}
 	public void init() throws ServletException {

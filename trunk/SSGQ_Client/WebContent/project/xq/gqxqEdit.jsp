@@ -3,13 +3,17 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
 
 	String path = request.getSession().getServletContext().getRealPath("/");
-	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
+	String pjWhere = "1=1";
+	if(configBean!=null)
+		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
 	BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	RandomAccessFileTool.delAllFile(path+"\\\\common\\\\pic");
@@ -156,26 +160,26 @@ function updateXQFLFRAME(obj){
 		</td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">工程名称:</td>
+		<td height="25" nowrap class="title">工程名称</td>
 		<td height="25"  bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_PJ", "PJNM", "PJNO="+PJNO) %>
 		<input type="hidden" name="GCNAME" value="<%=PJNO %>"></td>
-		<td height="25" nowrap class="title">险情分类:</td>
+		<td height="25" nowrap class="title">险情分类</td>
 		<td height="25"  bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_XQFL", "XQFLMC", "XQFLDM='"+XQFLDM+"'")%>
 		<input type="hidden" name="XQFLDM" value="<%= XQFLDM%>"></td>
-		<td height="25" nowrap class="title">填报单位:</td>
+		<td height="25" nowrap class="title">填报单位</td>
 		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="WTDPCD" value="<%=stdncbean.getWTDPCD() %>"/></td>
 		
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">险情标题:</td>
+		<td height="25" nowrap class="title">险情标题</td>
 		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DNCNM" value="<%=stdncbean.getDNCNM() %>"/></td>
-		<td height="25" nowrap class="title">建筑物:</td>
+		<td height="25" nowrap class="title">建筑物</td>
 		<td height="25"  bgcolor="#FFFFFF"><div id="show"></div></td>
-		<td height="25" nowrap class="title">出险时间:</td>
+		<td height="25" nowrap class="title">出险时间</td>
 		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=stdncbean.getDAGTM() %>" onClick="WdatePicker({startDate:'%y-%M-01 00:00',dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:false})" readonly /></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title">险情级别:</td>
+		<td nowrap class="title">险情级别</td>
 		<td bgcolor="#FFFFFF">
 			<select name="DNCGR">
 				<option value="一般险情" <%if(stdncbean.getDNCGR().trim().equals("一般险情")){ %>selected<%} %>>一般险情</option>
@@ -183,31 +187,31 @@ function updateXQFLFRAME(obj){
 				<option value="重大险情" <%if(stdncbean.getDNCGR().trim().equals("重大险情")){ %>selected<%} %>>重大险情</option>
 			</select>
 		</td>
-		<td nowrap class="title">出险地点:</td>
+		<td nowrap class="title">出险地点</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value="<%=stdncbean.getDAGPLCCH() %>"/></td>
-		<td nowrap class="title">出险部位:</td>
+		<td nowrap class="title">出险部位</td>
 		<td bgcolor="#FFFFFF" ><input type="text" name="DAGLO" value="<%=stdncbean.getDAGLO() %>"/></td>
 	</tr>
 	<tr height="25" >
-	<td nowrap class="title">解放军投入:</td>
+	<td nowrap class="title">解放军投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="<%=stdncbean.getPLAPN() %>" />人<font color="red">*</font></td>
-		<td nowrap class="title">武警投入:</td>
+		<td nowrap class="title">武警投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="PLIPN" value="<%=stdncbean.getPLIPN() %>" />人<font color="red">*</font></td>
-		<td nowrap class="title">群众投入:</td>
+		<td nowrap class="title">群众投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="<%=stdncbean.getTPN() %>"/>人<font color="red">*</font></td>
 	</tr>
 	<tr height="25" >
-		<td nowrap class="title" >当前水位:</td>
+		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="<%=stdncbean.getRZ() %>" />米<font color="red">*</font></td>
 		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title" >选择照片:</td>
+		<td nowrap class="title" >选择照片</td>
 		<td bgcolor="#FFFFFF" colspan="2">
 		<div id="thfiles"  style="display:none"></div>
 		<div id="showupfile" style="display:inline"><input type="file" id="UpFile" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </div>
 		</td>
-		<td nowrap class="title">照片标题:</td> 
+		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF" >
 			<input type="text" name="TITLE" value=""/>
 		</td>
@@ -215,7 +219,7 @@ function updateXQFLFRAME(obj){
 		
 	</tr>
 	<tr bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片描述:</td> 
+		<td nowrap class="title">照片描述</td> 
 		<td bgcolor="#FFFFFF" colspan="4">
 		<textarea rows="3" cols="10" name="NRMS" style="width:100%"></textarea>
 		</td>		

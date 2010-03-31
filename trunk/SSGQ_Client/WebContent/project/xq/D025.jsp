@@ -29,15 +29,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="3">控导工程冲毁</td>-->
-		<td class="title" height="25">冲毁体积:</td>
+		<td class="title" height="25">冲毁体积</td>
 		<td  bgcolor="#FFFFFF" ><input type="text" name="SCDMBU" value="<%=bean.getSCDMBU() %>" onblur="javascript:checkNan(this,'冲毁体积')"/>立方米</td>
-		<td class="title" height="25">冲毁长度:</td>
+		<td class="title" height="25">冲毁长度</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="SCDML" value="<%=bean.getSCDML() %>" onblur="javascript:checkNan(this,'冲毁长度')"/>米</td>
-		<td class="title" height="25">冲毁深度:</td>
+		<td class="title" height="25">冲毁深度</td>
 		<td  bgcolor="#FFFFFF"><input type="text" name="SCDMD" value="<%=bean.getSCDMD() %>" onblur="javascript:checkNan(this,'冲毁深度')"/>米</td>
 	</tr>
 	<tr>
-		<td nowrap class="title">冲毁处地质情况:</td>
+		<td nowrap class="title">冲毁处地质情况</td>
 		<td  bgcolor="#FFFFFF" colspan="5"><textarea rows="5" cols="80" name="SCDMGLCN" style="width:100%"><%=bean.getSCDMGLCN() %></textarea></td>
 	</tr>
 

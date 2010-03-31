@@ -127,9 +127,9 @@ function submiting(){
 <input type="hidden" name="hldm" value="">
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
-		<td nowrap align="center" class="title">工程名称:</td>
+		<td nowrap align="center" class="title">工程名称</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="PJNM" value="<%=bean.getPJNM() %>"/></td>
-		<td nowrap align="center" class="title">工程类别:</td>
+		<td nowrap align="center" class="title">工程类别</td>
 		<td  bgcolor="#FFFFFF">
 			<DIV id="GCLB"></DIV>
 		</td>
@@ -139,26 +139,26 @@ function submiting(){
 		<td colspan="2">所属流域水系</td>
 	</tr>
 	<tr>
-		<td nowrap align="center" class="title">省/直辖市:</td>
+		<td nowrap align="center" class="title">省/直辖市</td>
 		<td bgcolor="#FFFFFF"><DIV id="SHENG"></DIV></td>
-		<td nowrap align="center" class="title">流域:</td>
+		<td nowrap align="center" class="title">流域</td>
 		<td bgcolor="#FFFFFF" ><DIV id="LY"></DIV></td>
 	</tr>
 	<tr>
-		<td nowrap align="center" class="title">市/地区:</td>
+		<td nowrap align="center" class="title">市/地区</td>
 		<td  bgcolor="#FFFFFF"><DIV id="SHI"></DIV></td>
-		<td nowrap align="center" class="title">水系:</td>
+		<td nowrap align="center" class="title">水系</td>
 		<td  bgcolor="#FFFFFF"><DIV id="SX"></DIV></td>
 	</tr>
 	<tr align="left" class="title2" height="30">
-		<td nowrap align="center" class="title">区/县:</td>
+		<td nowrap align="center" class="title">区/县</td>
 		<td  bgcolor="#FFFFFF"><DIV id="XIAN"></DIV></td>
-		<td nowrap align="center" class="title">一级支流:</td>
+		<td nowrap align="center" class="title">一级支流</td>
 		<td  bgcolor="#FFFFFF"><DIV id="ZL1"></DIV></td>
 	</tr>
 	<tr>
 		<td  bgcolor="#FFFFFF" colspan="2"></td>
-		<td nowrap align="center" class="title">二级支流:</td>
+		<td nowrap align="center" class="title">二级支流</td>
 		<td  bgcolor="#FFFFFF"><DIV id="ZL2"></DIV></td>
 	</tr>
 </table>

@@ -72,20 +72,20 @@ function toBack(){
 		</td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">工程名称:</td>
+		<td height="25" nowrap class="title">工程名称</td>
 		<td height="25"  bgcolor="#FFFFFF"><%=pjrcbbean.getPJNM() %>
 		</td>
-		<td height="25" nowrap class="title">工程类别:</td>
+		<td height="25" nowrap class="title">工程类别</td>
 		<td height="25" bgcolor="#FFFFFF" >
 		<%=BuinessDao.idToNameChange(path,"TB_GCLB", "GCFLMC",  "GCFLDM='"+gcfldm+"'")%></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片标题:</td> 
+		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF" colspan="2"><div id="TITLE">&nbsp;</div></td>
 		<td bgcolor="#FFFFFF" rowspan="2" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr bgcolor="#FFFFFF" height="60" >
-		<td nowrap class="title">照片描述:</td> 
+		<td nowrap class="title">照片描述</td> 
 		<td bgcolor="#FFFFFF" colspan="2"><div id="NRMS">&nbsp;</div></td>		
 	</tr>
 	<tr height="25" >

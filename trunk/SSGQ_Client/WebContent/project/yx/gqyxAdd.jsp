@@ -33,7 +33,11 @@
 </style>
 <%
 	String path = request.getSession().getServletContext().getRealPath("/");
-	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
+	String pjWhere = "1=1";
+	if(configBean!=null)
+		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+
 	String uuid = String.valueOf(UUIdFactory.getMaxId(path, "TB_PJRCN","PJRNO"));
 	BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
@@ -81,7 +85,7 @@ function getGcmessageForyx(id){
 		</td>
 	</tr>
 	<tr>
-		<td height="25" nowrap class="title">工程名称:</td>
+		<td height="25" nowrap class="title">工程名称</td>
 		<td height="25"  bgcolor="#FFFFFF">
 			<select name="GCNAME" onchange="javascript:getGcmessageForyx(this.value)">
 			<option value="">--工程名称--</option>
@@ -95,21 +99,21 @@ function getGcmessageForyx(id){
 				} %>
 			</select>
 		</td>
-		<td nowrap class="title">工程类别:</td>
+		<td nowrap class="title">工程类别</td>
 		<td bgcolor="#FFFFFF" colspan="2"><div id="GCLBS"></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
-		<td nowrap class="title" >选择照片:</td>
+		<td nowrap class="title" >选择照片</td>
 		<td bgcolor="#FFFFFF">
 		<div id="thfiles"  style="display:none"></div>
 		<div id="showupfile" style="display:inline"><input type="file" id="UpFile" name="UpFile" size="20" onchange="javascript:PreviewImg(this);"> </div>
 		</td>
-		<td nowrap class="title">照片标题:</td> 
+		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF" ><input type="text" name="TITLE" value=""/></td>
 		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
 	</tr>
 	<tr bgcolor="#FFFFFF" >
-		<td nowrap class="title">照片描述:</td> 
+		<td nowrap class="title">照片描述</td> 
 		<td bgcolor="#FFFFFF" colspan="3">
 		<textarea rows="3" cols="10" name="NRMS" style="width:100%"></textarea>
 		</td>		

@@ -220,7 +220,7 @@ function rcheckall2() {
 
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 width="4%"></td>
+		<td class="title_center"><input name=all class="inputAll" onclick=rcheckall() type=checkbox value=9999 width="4%"></td>
 		<td nowrap align="center" class="title_center">标题</td>
 		<td nowrap align="center" class="title_center">填报时间</td>
 		<td nowrap align="center" class="title_center">类别</td>
@@ -255,7 +255,7 @@ function rcheckall2() {
 <div class="divStyle">
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=allid class="input3" onclick=rcheckall2() type=checkbox value=9999 ></td>
+		<td class="title_center"><input name=allid class="inputAll" onclick=rcheckall2() type=checkbox value=9999 ></td>
 		<td nowrap align="center" class="title_center">标题</td>
 		<td nowrap align="center" class="title_center">填报时间</td>
 		<td nowrap align="center" class="title_center">类别</td>

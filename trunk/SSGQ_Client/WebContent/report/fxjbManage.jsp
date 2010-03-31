@@ -124,7 +124,7 @@ function doQuery(page){
 </table>
 <table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
-		<td><input name=all class="input3" onclick=rcheckall() type=checkbox value=9999 ></td>
+		<td class="title"><input name=all class="inputAll" onclick=rcheckall() type=checkbox value=9999 ></td>
 		<td nowrap align="center" class="title_center">简报标题</td>
 		<td nowrap align="center" class="title_center">简报期数</td>
 		<td nowrap align="center" class="title_center">填报单位</td>

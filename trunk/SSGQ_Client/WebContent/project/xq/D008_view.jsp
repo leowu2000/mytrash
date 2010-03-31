@@ -28,14 +28,14 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">裂缝</td>-->
-		<td nowrap class="title" height="25">裂缝方向:</td>
+		<td nowrap class="title" height="25">裂缝方向</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getCRDR() %> </td>
-		<td nowrap class="title" height="25">裂缝深度:</td>
+		<td nowrap class="title" height="25">裂缝深度</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getCRD() %> 米 </td>
 	<tr height="25" >
-		<td nowrap class="title">裂缝长度:</td>
+		<td nowrap class="title">裂缝长度</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getCRL() %> 米 </td>
-		<td nowrap class="title">裂缝宽度:</td>
+		<td nowrap class="title">裂缝宽度</td>
 		<td bgcolor="#FFFFFF"> <%=bean.getCRW() %> 米 </td>
 	</tr>
 </table>

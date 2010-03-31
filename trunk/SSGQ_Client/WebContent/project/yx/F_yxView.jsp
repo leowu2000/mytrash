@@ -27,14 +27,14 @@ margin:0px auto; padding:0px;
 <div align="center"> 
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
-		<td class="title" nowrap height="25">所在岸别:</td>
+		<td class="title" nowrap height="25">所在岸别</td>
 		<td  bgcolor="#FFFFFF">
 			<%if(bean.getBKOT().trim().equals("1")){ %>&nbsp;&nbsp;左&nbsp;&nbsp;   <%} %>
 			<%if(bean.getBKOT().trim().equals("2")){ %>&nbsp;&nbsp;右&nbsp;&nbsp;   <%} %>
 		</td>
-		<td class="title"  height="25">蓄滞洪水位:</td>
+		<td class="title"  height="25">蓄滞洪水位</td>
 		<td  bgcolor="#FFFFFF"><%=bean.getDSFLWZ() %> 米</td>
-		<td nowrap class="title">蓄滞洪量:</td>
+		<td nowrap class="title">蓄滞洪量</td>
 		<td bgcolor="#FFFFFF" ><%=bean.getDSFLW() %> 万立方米</td>
 		
 	</tr>

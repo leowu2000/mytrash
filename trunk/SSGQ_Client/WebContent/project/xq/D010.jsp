@@ -29,9 +29,9 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<!-- <td rowspan="2" class="title">渗水</td>-->
-		<td nowrap class="title" height="25">渗水面积:</td>
+		<td nowrap class="title" height="25">渗水面积</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="SPAR" value="<%=bean.getSPAR() %>" size="8" onblur="javascript:checkNan(this,'渗水面积')"/>平方米 </td>
-		<td nowrap class="title">渗水流量:</td>
+		<td nowrap class="title">渗水流量</td>
 		<td bgcolor="#FFFFFF">
 		<input type="text" name="SPQ" value="<%=bean.getSPQ() %>" onblur="javascript:checkNan(this,'渗水流量')"/>升/秒 </td>
 	</tr>

@@ -28,15 +28,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="3">洞身破坏</td>-->
-		<td class="title" height="25">破坏面积:</td>
+		<td class="title" height="25">破坏面积</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getWRAR() %> 米</td>
-		<td class="title" height="25">破坏方量:</td>
+		<td class="title" height="25">破坏方量</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getWRMS() %> 立方米</td>
 	</tr>
 	<tr>
-		<td class="title"  height="25">对衬砌造成的影响:</td>
+		<td class="title"  height="25">对衬砌造成的影响</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getLNINF() %> </td>
-		<td class="title">洞身地质情况:</td>
+		<td class="title">洞身地质情况</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getHBGLCN() %> </td>
 	</tr>
 

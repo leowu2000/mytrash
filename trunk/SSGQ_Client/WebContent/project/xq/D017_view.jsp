@@ -28,15 +28,15 @@ margin:0px auto; padding:0px;
 <table border="0" align="center" height="30" width="100%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr>
 		<!-- <td class="title" rowspan="2">应力过大</td>-->
-		<td class="title" height="25">最大拉应力:</td>
+		<td class="title" height="25">最大拉应力</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getMXTNST() %> 牛/平方毫米</td>
-		<td class="title" height="25">最大压应力:</td>
+		<td class="title" height="25">最大压应力</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getMXCMST() %> 牛/平方毫米</td>
 	</tr>
 	<tr>
-		<td class="title" height="25">混凝土标号:</td>
+		<td class="title" height="25">混凝土标号</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getCONGR() %> </td>
-		<td class="title" height="25">允许应力值:</td>
+		<td class="title" height="25">允许应力值</td>
 		<td  bgcolor="#FFFFFF"> <%=bean.getASTR() %> 牛/平方毫米</td>
 		
 	</tr>

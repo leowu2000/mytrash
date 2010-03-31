@@ -81,11 +81,11 @@ function toview(){
 	</tr>
 	<%} %>
 	<tr height="25" >
-		<td nowrap align="center" class="title">Ç©·¢:</td>
+		<td nowrap align="center" class="title">Ç©·¢</td>
 		<td bgcolor="#FFFFFF"><%=bean.getQF() %></td>
-		<td nowrap align="center" class="title">ÉóºË:</td>
+		<td nowrap align="center" class="title">ÉóºË</td>
 		<td bgcolor="#FFFFFF"><%=bean.getSH() %></td>
-		<td nowrap align="center" class="title">Äâ¸å:</td>
+		<td nowrap align="center" class="title">Äâ¸å</td>
 		<td bgcolor="#FFFFFF"><%=bean.getNG() %></td>
 	</tr>
 </table>
