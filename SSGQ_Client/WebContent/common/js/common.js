@@ -206,6 +206,14 @@ function viewDataImg(value)
 }
 function PreviewImg(imgFile) 
 { 
+
+	var filepath = imgFile.value;
+	var poi = filepath.lastIndexOf(".");
+	detail = filepath.substring(poi+1,filepath.length).toUpperCase();
+	if(detail!="JPG" && detail!="JPEG" && detail!="MPG"){
+		alert("不支持的文件格式，请重新选择！");
+		return false;
+	}
 	//新的预览代码，支持 IE6、IE7。 
 	var newPreview = document.getElementById("newPreview"); 
 	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgFile.value; 
@@ -277,7 +285,6 @@ function delMeditSubmit(id,tablename){
 			showupfile.style.display="inline";
 			thfiles.style.display="none";
 			document.frm.TITLE.value="";
-			document.frm.DTCDT.value="";
 			document.frm.NRMS.value="";
 			showupfile.style.display="inline";
 			thfiles.style.display="none";
