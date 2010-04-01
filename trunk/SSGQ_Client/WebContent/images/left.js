@@ -1,5 +1,5 @@
  $(document).ready(function(){
-	switchTo('1');	
+	switchTo('2');	
     $("#menu .nav1 a ").bind("click", function(){ switchTo("1");});
     $("#menu .nav2 a ").bind("click", function(){ switchTo("2");});
     $("#menu .nav3 a ").bind("click", function(){ switchTo("3");}); 
