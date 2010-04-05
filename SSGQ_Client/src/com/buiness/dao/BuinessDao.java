@@ -1133,7 +1133,6 @@ public class BuinessDao {
 		try {
 			conn = ConnectionPool.getConnection(path);
 			String sSQL = "update TEMP_RESULT set upload='"+updateType+"' where ID=" + id;
-			System.out.println(sSQL);
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sSQL);
 		} catch (Exception ex) {

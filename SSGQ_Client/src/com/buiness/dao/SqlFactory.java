@@ -181,7 +181,6 @@ public class SqlFactory {
 						+bean.getBRBPPFCN()+"')";	//护坡护岸稳定情况========TB_RSR===TB_DKR
 						
 		}
-		System.out.println(insertSql);
 		return insertSql;
 	}
 	
@@ -376,7 +375,6 @@ public class SqlFactory {
 						+dinarySubsql
 						+","+bean.getDSSPN()+","+bean.getDSSAREA()+","+bean.getDTHPN()+","+bean.getWRHS()+","
 						+bean.getDRCECLS()+","+bean.getDAYDP()+","+bean.getTDP()+",'"+bean.getDSSTP()+"')";
-		System.out.println(XQFLDM+"::"+insertSql);
 		return insertSql;
 	}
 

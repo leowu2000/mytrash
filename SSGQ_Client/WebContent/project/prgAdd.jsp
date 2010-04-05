@@ -27,7 +27,7 @@ function loadSelects(){
 	  }else if(window.ActiveXObject){
 	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	  }
-	  xmlHttpReq.open("GET", "/BaseServlet?type=load", false);
+	  xmlHttpReq.open("GET", "/BaseServlet?type=load&from=add", false);
 	  xmlHttpReq.send(null);
 	 var result = xmlHttpReq.responseText;
 	 var val = result.split(";");

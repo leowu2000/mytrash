@@ -30,16 +30,17 @@ function submiting(){
 		alert("请填写简报期数！");
 		return false;
 	}
-	if(document.frm.WTTT.value==""){
+	else if(document.frm.WTTT.value==""){
 		alert("请填写简报标题！");
 		return false;
 	}
-	if(document.frm.UpFile.value==""){
+	else if(document.frm.UpFile.value==""){
 		if(confirm("没有添加附件，是否继续保存？")){
 			document.frm.submit();
 		}
+	}else{
+		document.frm.submit();
 	}
-	document.frm.submit();
 }
 function checkNumber(obj,name){
 	if(obj.vlaue==""){

@@ -111,7 +111,7 @@ function printpage(m_printpage1){
 		<td colspan="3" align="left">
 		<font style="font-size:20px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';">
 		报送单位：</font>
-		<font style="font-size:20px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
+		<font style="font-size:18px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
 		<%=configBean.getBSDW() %></font>
 		</td>
 		<td width="30">&nbsp;</td>
@@ -122,17 +122,17 @@ function printpage(m_printpage1){
 		<td align="left">
 		<font style="font-size:20px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';">
 		签发：</font>
-		<font style="font-size:20px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
+		<font style="font-size:18px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
 		<%=bean.getQF() %></font></td>
 		<td align="center">
 		<font style="font-size:20px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';">
 		审核：</font>
-		<font style="font-size:20px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
+		<font style="font-size:18px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
 		<%=bean.getSH() %></font></td>
 		<td align="right">
 		<font style="font-size:20px;color:#4B4B4B;font-weight:bold;font-family:'楷体_GB2312';">
 		拟搞：</font>
-		<font style="font-size:20px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
+		<font style="font-size:18px;color:#000000;font-weight:bold;font-family:'楷体_GB2312';">
 		<%=bean.getNG() %></font></td>
 		<td width="30">&nbsp;</td>
 	</tr>
@@ -149,7 +149,7 @@ function printpage(m_printpage1){
 	</td></tr>
 	<%
 		while(rs.next()){
-			String filename = rs.getString("TITLE")+"."+rs.getString("WJGS");
+			String filename = rs.getString("TITLE");
 	%>
 	<tr>
 	<td width="50">&nbsp;</td>
