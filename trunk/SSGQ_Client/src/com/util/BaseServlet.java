@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.buiness.dao.BuinessDao;
+import com.buiness.form.ConfigBean;
 import com.buiness.form.FXJBBean;
 import com.buiness.form.STDNCBean;
 
@@ -38,9 +39,12 @@ public class BaseServlet extends HttpServlet{
 		String type = request.getParameter("type");
 		String val = request.getParameter("val");
 		String cntcd = request.getParameter("cntcd");
-		
+		ConfigBean cfbean = (ConfigBean)request.getSession().getAttribute("configBean");
 		String hlxx[]={"","","",""};
 		String xzqh[] = {"","",""};
+		boolean disableFlg = false;
+		
+		if("add".trim().equals(from))disableFlg = true;
 		if("config".trim().equals(from)){
 			hlxx = cntcd.split("-");
 			xzqh = val.split("-");
@@ -55,29 +59,51 @@ public class BaseServlet extends HttpServlet{
 		if("load".trim().equals(type)){
 			String result="";
 			String result_z="";
-			String result_head_z="<select name='selectz' onchange='javascript:changeValue("+"\"sx"+"\","+"\"1"+"\",this)'>";
+			String result_head_z="";
+			String result_head_s="";
+			String result_head_x="";
+			String result_head_lysx1="";
+			String result_head_lysx2="";
+			String result_head_zl1="";
+			String result_head_zl2="";
+			
+			if(disableFlg){
+				result_head_z="<select name='selectz' disabled>";
+				result_head_s="<select name='selects' disabled>";
+				result_head_x="<select name='selectx' disabled>";
+				
+				result_head_lysx1="<select name='selectlysx1' disabled>";
+				result_head_lysx2="<select name='selectlysx2' disabled>";
+				result_head_zl1="<select name='selectzl1' disabled>";
+				result_head_zl2="<select name='selectzl2' disabled>";
+			}
+			else{
+				result_head_z="<select name='selectz' onchange='javascript:changeValue("+"\"sx"+"\","+"\"1"+"\",this)'>";
+				result_head_s="<select name='selects' onchange='javascript:changeValue("+"\"sx"+"\","+"\"2"+"\",this)'>";
+				result_head_x="<select name='selectx'>";
+				
+				result_head_lysx1="<select name='selectlysx1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"1"+"\",this)'>";
+				result_head_lysx2="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'>";
+				result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
+				result_head_zl2="<select name='selectzl2'>";
+			}
 			String result_detail_z="</select>";
 			String result_s="";
-			String result_head_s="<select name='selects' onchange='javascript:changeValue("+"\"sx"+"\","+"\"2"+"\",this)'>";
+			
 			String result_detail_s="</select>";
 			String result_x="";
-			String result_head_x="<select name='selectx'>";
 			String result_detail_x="</select>";
 			
 			String result_gcgl="";
 			String result_head_gcgl="<select name='selectgcgl'>";
 			String result_detail_gcgl="</select>";
 			String result_lysx1="";
-			String result_head_lysx1="<select name='selectlysx1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"1"+"\",this)'>";
 			String result_detail_lysx1="</select>";
 			String result_lysx2="";
-			String result_head_lysx2="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'>";
 			String result_detail_lysx2="</select>";
 			String result_zl1="";
-			String result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
 			String result_detail_zl1="</select>";
 			String result_zl2="";
-			String result_head_zl2="<select name='selectzl2'>";
 			String result_detail_zl2="</select>";
 
 			List<TbcntBean> sxList = BaseUtil.getAllSXList(path);
@@ -85,9 +111,10 @@ public class BaseServlet extends HttpServlet{
 			String sbm = "";
 			String xianbm = "";
 			
-			if("config".trim().equals(from)){
+			if("config".trim().equals(from))
 				shbm = xzqh[0].trim();
-			}
+			else if("add".trim().equals(from))
+				shbm = cfbean.getXZQH_S();
 			else
 				shbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[0]+"'");
 			if(sxList !=null && sxList.size()>0){
@@ -104,6 +131,8 @@ public class BaseServlet extends HttpServlet{
 			List<TbcntBean> sList = BaseUtil.getAllSHList(path, shbm);
 			if("config".trim().equals(from))
 				sbm = xzqh[1].trim();
+			else if("add".trim().equals(from))
+				sbm = cfbean.getXZQH_SI();
 			else
 				sbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[1]+"'");
 			if(sList !=null && sList.size()>0){
@@ -120,6 +149,8 @@ public class BaseServlet extends HttpServlet{
 			List<TbcntBean> xList = BaseUtil.getAllXList(path, sbm);
 			if("config".trim().equals(from))
 				xianbm = xzqh[2].trim();
+			else if("add".trim().equals(from))
+				xianbm = cfbean.getXZQH_X();
 			else
 				xianbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[2]+"'");
 			if(xList !=null && xList.size()>0){
@@ -147,19 +178,25 @@ public class BaseServlet extends HttpServlet{
 			String LY_one="";
 			String LY_two = "";
 			String LY_zone = "";
-			
+			String LY_ztwo = "";
 			
 			List<LysxBean> lysl1List = BaseUtil.getLysxList_one(path);
 			if("config".trim().equals(from)){
 				LY_one = hlxx[0].trim();
 				LY_two = hlxx[1].trim();
 				LY_zone = hlxx[2].trim();
-				
+				LY_ztwo = hlxx[3].trim();
+			}else if("add".trim().equals(from)){
+				LY_one = cfbean.getLYSX_LY();
+				LY_two = cfbean.getLYSX_SX();
+				LY_zone = cfbean.getLYSX_YJZL();
+				LY_ztwo = cfbean.getLYSX_EJZL();
 			}
 			else{
 				LY_one = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[0]+"'");
 				LY_two = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[1]+"'");
 				LY_zone = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[2]+"'");
+				LY_ztwo = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[3]+"'");
 			}
 			if(lysl1List !=null && lysl1List.size()>0){
 				for(int i=0;i<lysl1List.size();i++){
@@ -200,7 +237,7 @@ public class BaseServlet extends HttpServlet{
 			if(zl2List !=null && zl2List.size()>0){
 				for(int i=0;i<zl2List.size();i++){
 					LysxBean bean = (LysxBean)zl2List.get(i);
-					if(hlxx[3].trim().equals(bean.getCTNM().trim()))
+					if(LY_ztwo.trim().equals(bean.getCTCD().trim()))
 						result_zl2 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
 					else
 						result_zl2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";

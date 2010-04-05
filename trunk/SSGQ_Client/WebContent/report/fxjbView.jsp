@@ -73,10 +73,11 @@ function toview(){
 	</tr>
 	<%
 		while(rs.next()){
+			String filename = rs.getString("TITLE");
 	%>
 	<tr>
 	<td colspan="6" bgcolor="#FFFFFF">
-	附件：<a href=""><%=rs.getString("TITLE")%>.<%=rs.getString("WJGS")%></a>(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开!)
+	附件：<a href="/FileUploadServlet?type=download&tablename=TB_FXJB_M&media_id=<%=rs.getString("ZLBM") %>&filename=<%=filename %>"><%=filename%></a>(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开!)
 	</td>
 	</tr>
 	<%} %>
