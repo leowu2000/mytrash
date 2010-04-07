@@ -95,7 +95,7 @@ public class MainServer implements ActionListener, MouseListener {
 
             PopupMenu menuConsole = new PopupMenu();
 
-            MenuItem itemConsole = new MenuItem("打开系统");
+            MenuItem itemConsole = new MenuItem("打开信息采集系统");
             itemConsole.setActionCommand("console");
             itemConsole.addActionListener(this);
             menuConsole.add(itemConsole);
@@ -117,7 +117,7 @@ public class MainServer implements ActionListener, MouseListener {
             Dimension d = (Dimension) Class.forName("java.awt.SystemTray").getMethod("getTrayIconSize").invoke(tray);
             Image icon = (d.width >= 24 && d.height >= 24) ? icon24 : icon16;
             // TrayIcon icon = new TrayIcon(image, "H2 Database Engine", menuConsole);
-            Object trayIcon = Class.forName("java.awt.TrayIcon").getConstructor(Image.class, String.class, PopupMenu.class).newInstance(icon, "H2 Database Engine", menuConsole);
+            Object trayIcon = Class.forName("java.awt.TrayIcon").getConstructor(Image.class, String.class, PopupMenu.class).newInstance(icon, "防汛抗旱信息采集系统", menuConsole);
             // trayIcon.addMouseListener(this);
             trayIcon.getClass().getMethod("addMouseListener", MouseListener.class).invoke(trayIcon, this);
             // tray.add(icon);
