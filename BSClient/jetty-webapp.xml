@@ -21,7 +21,7 @@
             <Set name="contextPath">/</Set>
             <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps</Set>
             <!-- <Set name="war">U:\\IdeaProjects\\swdb\\out\\artifacts\\swdb</Set> -->
-            <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml</Set>
+            <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/webdefault.xml</Set>
         </New>
     </Set>
 
