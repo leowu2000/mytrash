@@ -563,7 +563,7 @@ public class BuinessController implements Controller {
 				request.setAttribute("xqmc_s", xqmc_s);
 				request.setAttribute("xqfldm_s", xqfldm_s);
 				request.setAttribute("isWhere", iswhere);
-				return new ModelAndView("project/gqxqManage");
+				return new ModelAndView("project/xq/gqxqManage");
 			}
 			if ("yxzt".trim().equals(searchType)) {// ÔËÐÐ×´Ì¬
 				String gcmc_s = request.getParameter("gcmc_s");
@@ -587,7 +587,7 @@ public class BuinessController implements Controller {
 				request.setAttribute("jcsj_s", jcsj_s);
 				request.setAttribute("jcsj_e", jcsj_e);
 				request.setAttribute("isWhere", iswhere);
-				return new ModelAndView("project/gqyxManage");
+				return new ModelAndView("project/yx/gqyxManage");
 			}
 			if ("fxjb".trim().equals(searchType)) {// ·ÀÑ´¼ò±¨
 				String jbbt_s = new String(request.getParameter("bt_s")
