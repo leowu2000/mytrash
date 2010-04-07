@@ -364,22 +364,14 @@ public class BuinessController implements Controller {
 		if ("add_fxjb".trim().equals(actionType)) {//
 			String subAction = request.getParameter("subActionType");
 			String ISSUE = request.getParameter("ISSUE");
-			String QF = new String(request.getParameter("QF").getBytes(
-					"ISO-8859-1"), "GBK");
-			String SH = new String(request.getParameter("SH").getBytes(
-					"ISO-8859-1"), "GBK");
-			String NG = new String(request.getParameter("NG").getBytes(
-					"ISO-8859-1"), "GBK");
-			String WTTT = new String(request.getParameter("WTTT").getBytes(
-					"ISO-8859-1"), "GBK");
-			String WTDT = new String(request.getParameter("WTDT").getBytes(
-					"ISO-8859-1"), "GBK");
-			String ACTICO = new String(request.getParameter("ACTICO").getBytes(
-					"ISO-8859-1"), "GBK");
-			String WTDPCD = new String(request.getParameter("WTDPCD").getBytes(
-					"ISO-8859-1"), "GBK");
-			String filepath = new String(request.getParameter("UpFile")
-					.getBytes("ISO-8859-1"), "GBK");
+			String QF = request.getParameter("QF");
+			String SH = request.getParameter("SH");
+			String NG = request.getParameter("NG");
+			String WTTT = request.getParameter("WTTT");
+			String WTDT = request.getParameter("WTDT");
+			String ACTICO = request.getParameter("ACTICO");
+			String WTDPCD = request.getParameter("WTDPCD");
+			String filepath = request.getParameter("UpFile");
 			String mediaflag = request.getParameter("mediaflag");
 			Connection conn = ConnectionPool.getConnection(path);
 
@@ -451,14 +443,11 @@ public class BuinessController implements Controller {
 		 */
 		if ("add_report".trim().equals(actionType)) {
 			String DNCNO = request.getParameter("DNCNO");
-			String WTDPCD = new String(request.getParameter("WTDPCD").getBytes(
-					"ISO-8859-1"), "GBK");
+			String WTDPCD = request.getParameter("WTDPCD");
 			String TABLENAME = request.getParameter("TABLENAME");
 			String WTDT = request.getParameter("WTDT");
-			String MAINTITLE = new String(request.getParameter("MAINTITLE")
-					.getBytes("ISO-8859-1"), "GBK");
-			String CONTENT = new String(request.getParameter("CONTENT")
-					.getBytes("ISO-8859-1"), "GBK");
+			String MAINTITLE = request.getParameter("MAINTITLE");
+			String CONTENT = request.getParameter("CONTENT");
 			String FILEDNAME = request.getParameter("FILEDNAME");
 			String subAction = request.getParameter("subAction");
 			String newSQL = "";
@@ -492,8 +481,7 @@ public class BuinessController implements Controller {
 
 			String iswhere = "";
 			if ("prj".trim().equals(searchType)) {// 工程管理
-				String gcmc_s = new String(request.getParameter("gcmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String gcmc_s = request.getParameter("gcmc_s");
 				String gclb_s = request.getParameter("gclb_s");
 				String dq_s = request.getParameter("dq_s");
 				String ly_s = request.getParameter("ly_s");
@@ -534,11 +522,9 @@ public class BuinessController implements Controller {
 				return new ModelAndView("project/prgManage");
 			}
 			if ("gcxq".trim().equals(searchType)) {// 工程险情
-				String gcmc_s = new String(request.getParameter("gcmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String gcmc_s =request.getParameter("gcmc_s");
 				String xqfldm_s = request.getParameter("xqfldm_s");
-				String xqmc_s = new String(request.getParameter("xqmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String xqmc_s = request.getParameter("xqmc_s");
 				if (!"".trim().equals(gcmc_s)) {
 					if ("".trim().equals(iswhere))
 						iswhere += " PJNO = " + gcmc_s;
@@ -590,8 +576,7 @@ public class BuinessController implements Controller {
 				return new ModelAndView("project/yx/gqyxManage");
 			}
 			if ("fxjb".trim().equals(searchType)) {// 防汛简报
-				String jbbt_s = new String(request.getParameter("bt_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String jbbt_s = request.getParameter("bt_s");
 				String tbsj_s = request.getParameter("tbsj_s");
 				String tbsj_e = request.getParameter("tbsj_e");
 				if (!"".trim().equals(jbbt_s)) {
@@ -618,8 +603,7 @@ public class BuinessController implements Controller {
 					|| "TB_QT".trim().equals(searchType)// 旱情
 					|| "TB_SD".trim().equals(searchType)) {// 灾
 				String towhere = request.getParameter("towhere");
-				String bt_s = new String(request.getParameter("bt_s").getBytes(
-						"ISO-8859-1"), "GBK");
+				String bt_s = request.getParameter("bt_s");
 				String tbsj_s = request.getParameter("tbsj_s");
 				String tbsj_e = request.getParameter("tbsj_e");
 				if (!"".trim().equals(bt_s)) {
@@ -648,12 +632,10 @@ public class BuinessController implements Controller {
 		 */
 		if ("topage".trim().equals(actionType)) {
 			String towhere = request.getParameter("towhere");
-			String iswhere = new String(request.getParameter("iswhere")
-					.getBytes("ISO-8859-1"), "GBK");
+			String iswhere = request.getParameter("iswhere");
 			String page = request.getParameter("page");
 			if ("prg".trim().equals(towhere)) {
-				String gcmc_s = new String(request.getParameter("gcmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String gcmc_s = request.getParameter("gcmc_s");
 				String gclb_s = request.getParameter("gclb_s");
 				String dq_s = request.getParameter("dq_s");
 				String ly_s = request.getParameter("ly_s");
@@ -666,11 +648,9 @@ public class BuinessController implements Controller {
 				return new ModelAndView("project/" + towhere + "Manage");
 			}
 			if ("gqxq".trim().equals(towhere)) {
-				String gcmc_s = new String(request.getParameter("gcmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String gcmc_s = request.getParameter("gcmc_s");
 				String xqfldm_s = request.getParameter("xqfldm_s");
-				String xqmc_s = new String(request.getParameter("xqmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String xqmc_s = request.getParameter("xqmc_s");
 				request.setAttribute("gcmc_s", gcmc_s);
 				request.setAttribute("xqmc_s", xqmc_s);
 				request.setAttribute("xqfldm_s", xqfldm_s);
@@ -679,8 +659,7 @@ public class BuinessController implements Controller {
 				return new ModelAndView("project/xq/" + towhere + "Manage");
 			}
 			if ("gqyx".trim().equals(towhere)) {
-				String gcmc_s = new String(request.getParameter("gcmc_s")
-						.getBytes("ISO-8859-1"), "GBK");
+				String gcmc_s = request.getParameter("gcmc_s");
 				String jcsj_s = request.getParameter("jcsj_s");
 				String jcsj_e = request.getParameter("jcsj_e");
 				request.setAttribute("gcmc_s", gcmc_s);
@@ -694,8 +673,7 @@ public class BuinessController implements Controller {
 					|| "TB_FPACTI".trim().equals(towhere)// 防汛行动
 					|| "TB_QT".trim().equals(towhere)// 旱情
 					|| "TB_SD".trim().equals(towhere)) {
-				String bt_s = new String(request.getParameter("bt_s").getBytes(
-						"ISO-8859-1"), "GBK");
+				String bt_s = request.getParameter("bt_s");
 				String tbsj_s = request.getParameter("tbsj_s");
 				String tbsj_e = request.getParameter("tbsj_e");
 				request.setAttribute("bt_s", bt_s);
@@ -706,8 +684,7 @@ public class BuinessController implements Controller {
 				return new ModelAndView("report/" + towhere + "Manage");
 			}
 			if("upload".trim().equals(towhere)){
-				String bt_s = new String(request.getParameter("bt_s").getBytes(
-				"ISO-8859-1"), "GBK");
+				String bt_s = request.getParameter("bt_s");
 				String tbsj_s = request.getParameter("tbsj_s");
 				String tbsj_e = request.getParameter("tbsj_e");
 				request.setAttribute("bt_s", bt_s);
@@ -731,14 +708,10 @@ public class BuinessController implements Controller {
 	public static PJRCNBean _getPJRCNBeanFromRequest(HttpServletRequest request)
 			throws Exception {
 		PJRCNBean bean = new PJRCNBean();
-		String DNCFC = new String(request.getParameter("XQYC").getBytes(
-				"ISO-8859-1"), "GBK");
-		String RDERESCN = new String(request.getParameter("DFJZZK").getBytes(
-				"ISO-8859-1"), "GBK");
-		String WTDPCD = new String(request.getParameter("WTDPCD").getBytes(
-				"ISO-8859-1"), "GBK");
-		String NT = new String(request.getParameter("QT")
-				.getBytes("ISO-8859-1"), "GBK");
+		String DNCFC = request.getParameter("XQYC");
+		String RDERESCN = request.getParameter("DFJZZK");
+		String WTDPCD = request.getParameter("WTDPCD");
+		String NT = request.getParameter("QT");
 
 		bean.setPJRNO(request.getParameter("PJRNO") == null ? "" : request
 				.getParameter("PJRNO"));// 运行编号
@@ -766,36 +739,21 @@ public class BuinessController implements Controller {
 	public static STDNCBean _getSTDNCeanFromRequest(HttpServletRequest request)
 			throws Exception {
 		STDNCBean bean = new STDNCBean();
-		String DNCNM = new String(request.getParameter("DNCNM").getBytes(
-				"ISO-8859-1"), "GBK");// 险情名称
-		String RDEPL = new String(request.getParameter("QXFA").getBytes(
-				"ISO-8859-1"), "GBK");// 抢险方案
-		String RDERESCN = new String(request.getParameter("QXZYPB").getBytes(
-				"ISO-8859-1"), "GBK");// 抢险资源配备
-		String RDECNRL = new String(request.getParameter("JZJJG").getBytes(
-				"ISO-8859-1"), "GBK");// 进展及结果
-		String DNCCUAN = new String(request.getParameter("XQYYFX").getBytes(
-				"ISO-8859-1"), "GBK");// 险情原因分析
-		String DNCESTDV = new String(request.getParameter("XQFZQS").getBytes(
-				"ISO-8859-1"), "GBK");// 险情发展趋势
-		String DNCPBNFZ = new String(request.getParameter("KNYXFW").getBytes(
-				"ISO-8859-1"), "GBK");// 可能影响范围
-		String WTHCN = new String(request.getParameter("QXSQX").getBytes(
-				"ISO-8859-1"), "GBK");// 抢险时气象情况
-		String FHYWTHCN = new String(request.getParameter("WLSWQX").getBytes(
-				"ISO-8859-1"), "GBK");// 未来水文气象情况
-		String DNCADDSC = new String(request.getParameter("BCMS").getBytes(
-				"ISO-8859-1"), "GBK");// 补充描述
-		String WTDPCD = new String(request.getParameter("WTDPCD").getBytes(
-				"ISO-8859-1"), "GBK");// 填报单位名称
-		String DNCGR = new String(request.getParameter("DNCGR").getBytes(
-				"ISO-8859-1"), "GBK");// 险情级别
-		String DAGPLCCH = new String(request.getParameter("DAGPLCCH").getBytes(
-				"ISO-8859-1"), "GBK");// 出险地点桩号
-		String DAGLO = new String(request.getParameter("DAGLO").getBytes(
-				"ISO-8859-1"), "GBK");// 出险部位
-		String STTPCD = new String(request.getParameter("STTPCD").getBytes(
-				"ISO-8859-1"), "GBK");
+		String DNCNM = request.getParameter("DNCNM");// 险情名称
+		String RDEPL = request.getParameter("QXFA");// 抢险方案
+		String RDERESCN = request.getParameter("QXZYPB");// 抢险资源配备
+		String RDECNRL = request.getParameter("JZJJG");// 进展及结果
+		String DNCCUAN = request.getParameter("XQYYFX");// 险情原因分析
+		String DNCESTDV = request.getParameter("XQFZQS");// 险情发展趋势
+		String DNCPBNFZ = request.getParameter("KNYXFW");// 可能影响范围
+		String WTHCN = request.getParameter("QXSQX");// 抢险时气象情况
+		String FHYWTHCN = request.getParameter("WLSWQX");// 未来水文气象情况
+		String DNCADDSC = request.getParameter("BCMS");// 补充描述
+		String WTDPCD = request.getParameter("WTDPCD");// 填报单位名称
+		String DNCGR = request.getParameter("DNCGR");// 险情级别
+		String DAGPLCCH = request.getParameter("DAGPLCCH");// 出险地点桩号
+		String DAGLO = request.getParameter("DAGLO");// 出险部位
+		String STTPCD = request.getParameter("STTPCD");
 		bean.setDNCNM(DNCNM == null ? "" : DNCNM);// 险情名称
 		bean.setDNCGR(DNCGR == null ? "" : DNCGR);// 险情级别
 		bean.setRDEPL(RDEPL == null ? "" : RDEPL);// 抢险方案
@@ -843,20 +801,13 @@ public class BuinessController implements Controller {
 	public static RSRBean _getRSRBeanFromRquest(HttpServletRequest request)
 			throws Exception {
 		RSRBean bean = new RSRBean();
-		String BJWHZK = new String(request.getParameter("BJWHZK").getBytes(
-				"ISO-8859-1"), "GBK");// 坝基完好状况
-		String BTWDZK = new String(request.getParameter("BTWDZK").getBytes(
-				"ISO-8859-1"), "GBK");// 坝体稳定情况
-		String HPHAWDQK = new String(request.getParameter("HPHAWDQK").getBytes(
-				"ISO-8859-1"), "GBK");// 护坡护岸稳定情况
-		String XSJZWZK = new String(request.getParameter("XSJZWZK").getBytes(
-				"ISO-8859-1"), "GBK");// 泄水建筑物完好状况
-		String XNGWHZK = new String(request.getParameter("XNGWHZK").getBytes(
-				"ISO-8859-1"), "GBK");// 消能工完好状况
-		String ZMQBJZK = new String(request.getParameter("ZMQBJZK").getBytes(
-				"ISO-8859-1"), "GBK");// 闸门、启闭机完好状况
-		String TXSDJZK = new String(request.getParameter("TXSDJZK").getBytes(
-				"ISO-8859-1"), "GBK");// 通讯手段及状况
+		String BJWHZK = request.getParameter("BJWHZK");// 坝基完好状况
+		String BTWDZK = request.getParameter("BTWDZK");// 坝体稳定情况
+		String HPHAWDQK = request.getParameter("HPHAWDQK");// 护坡护岸稳定情况
+		String XSJZWZK = request.getParameter("XSJZWZK");// 泄水建筑物完好状况
+		String XNGWHZK = request.getParameter("XNGWHZK");// 消能工完好状况
+		String ZMQBJZK = request.getParameter("ZMQBJZK");// 闸门、启闭机完好状况
+		String TXSDJZK = request.getParameter("TXSDJZK");// 通讯手段及状况
 
 		bean.setPJRNO(request.getParameter("PJRNO") == null ? "" : request
 				.getParameter("PJRNO"));// 运行编号
@@ -904,11 +855,9 @@ public class BuinessController implements Controller {
 		bean.setSTTPCD(STTPCD); // 建筑物编码
 
 		bean.setDAGTM(request.getParameter("DAGTM")); // 出险时间
-		bean.setDNCNM(new String(request.getParameter("DNCNM").getBytes(
-				"ISO-8859-1"), "GBK")); // 险情名称
+		bean.setDNCNM(request.getParameter("DNCNM")); // 险情名称
 		if ("D004".trim().equals(XQFL) || "D003".trim().equals(XQFL)) {
-			String LKGTU = new String(request.getParameter("LKGTU").getBytes(
-					"ISO-8859-1"), "GBK");
+			String LKGTU = request.getParameter("LKGTU");
 			bean.setLKGTU(LKGTU == null ? "" : LKGTU); // 漏水混清 ==D004==D003
 		}
 		if ("D006".trim().equals(XQFL) || "D012".trim().equals(XQFL)) {
@@ -958,8 +907,7 @@ public class BuinessController implements Controller {
 					.getParameter("BUZDF")); // 决口水头差(米)
 			bean.setBUQ(request.getParameter("BUQ") == "" ? "0" : request
 					.getParameter("BUQ")); // 决口流量(立方米/秒)
-			String BURLDGL = new String(request.getParameter("BURLDGL")
-					.getBytes("ISO-8859-1"), "GBK");
+			String BURLDGL = request.getParameter("BURLDGL");
 			bean.setBURLDGL(BURLDGL == null ? "" : BURLDGL); // 决口处地形地质条件
 		}
 		if ("D002".trim().equals(XQFL)) {
@@ -1014,8 +962,7 @@ public class BuinessController implements Controller {
 		}
 		if ("D008".trim().equals(XQFL)) {
 			// D008 裂缝 TB_CRDSC
-			String CRDR = new String(request.getParameter("CRDR").getBytes(
-					"ISO-8859-1"), "GBK");
+			String CRDR = request.getParameter("CRDR");
 			bean.setCRDR(CRDR == null ? "" : CRDR); // 裂缝方向
 			bean.setCRD(request.getParameter("CRD") == "" ? "0" : request
 					.getParameter("CRD")); // 裂缝深度(米)
@@ -1032,8 +979,7 @@ public class BuinessController implements Controller {
 					.getParameter("CVBU")); // 崩塌体积(立方米)
 			bean.setRVH(request.getParameter("RVH") == "" ? "0" : request
 					.getParameter("RVH")); // 河岸高度(米)
-			String FLCNDSC = new String(request.getParameter("FLCNDSC")
-					.getBytes("ISO-8859-1"), "GBK");
+			String FLCNDSC = request.getParameter("FLCNDSC");
 			bean.setFLCNDSC(FLCNDSC == null ? "" : FLCNDSC); // 水流情况描述
 		}
 		if ("D010".trim().equals(XQFL)) {
@@ -1054,23 +1000,17 @@ public class BuinessController implements Controller {
 			// D012 滑动 TB_SLUDSC
 			bean.setSLUDSP(request.getParameter("SLUDSP") == "" ? "0" : request
 					.getParameter("SLUDSP")); // 滑动位移(米)
-			String SLUTP = new String(request.getParameter("SLUTP").getBytes(
-			"ISO-8859-1"), "GBK");
+			String SLUTP = request.getParameter("SLUTP");
 			bean.setSLUTP(SLUTP); // 滑动类型
-			String SLUGLCN = new String(request.getParameter("SLUGLCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String SLUGLCN = request.getParameter("SLUGLCN");
 			bean.setSLUGLCN(SLUGLCN == null ? "" : SLUGLCN); // 滑动面地质情况
 		}
 		if ("D013".trim().equals(XQFL)) {
 			// D013 启闭失灵 TB_HOMLFDSC
-			String POWCUT = new String(request.getParameter("POWCUT").getBytes(
-					"ISO-8859-1"), "GBK");
-			String HOMLF = new String(request.getParameter("HOMLF").getBytes(
-					"ISO-8859-1"), "GBK");
-			String GSDST = new String(request.getParameter("GSDST").getBytes(
-					"ISO-8859-1"), "GBK");
-			String MLFCN = new String(request.getParameter("MLFCN").getBytes(
-					"ISO-8859-1"), "GBK");
+			String POWCUT = request.getParameter("POWCUT");
+			String HOMLF = request.getParameter("HOMLF");
+			String GSDST = request.getParameter("GSDST");
+			String MLFCN = request.getParameter("MLFCN");
 			bean.setPOWCUT(POWCUT == null ? "" : POWCUT); // 停电
 			bean.setHOMLF(HOMLF == null ? "" : HOMLF); // 启闭机失灵
 			bean.setGSDST(GSDST == null ? "" : GSDST); // 闸门井变形
@@ -1078,18 +1018,15 @@ public class BuinessController implements Controller {
 		}
 		if ("D014".trim().equals(XQFL)) {
 			// D014 闸门破坏 TB_GTWRDSC
-			String WRDSC = new String(request.getParameter("WRDSC").getBytes(
-					"ISO-8859-1"), "GBK");
+			String WRDSC = request.getParameter("WRDSC");
 			bean.setWRDSC(WRDSC == null ? "" : WRDSC); // 破坏形式
 			bean.setWRQ(request.getParameter("WRQ") == "" ? "0" : request
 					.getParameter("WRQ")); // 失事时流量(立方米/秒)
 		}
 		if ("D015".trim().equals(XQFL)) {
 			// D015 溃坝 TB_BRDMDSC
-			String PJPS = new String(request.getParameter("PJPS").getBytes(
-					"ISO-8859-1"), "GBK");
-			String BRDMLDGL = new String(request.getParameter("BRDMLDGL")
-					.getBytes("ISO-8859-1"), "GBK");
+			String PJPS = request.getParameter("PJPS");
+			String BRDMLDGL = request.getParameter("BRDMLDGL");
 			bean.setBRDMW(request.getParameter("BRDMW")); // 溃坝宽度(米)
 			bean.setPJPS(PJPS == null ? "" : PJPS); // 工程现状
 			bean.setBRZDMCDI(request.getParameter("BRZDMCDI") == "" ? "0"
@@ -1102,16 +1039,14 @@ public class BuinessController implements Controller {
 		}
 		if ("D016".trim().equals(XQFL)) {
 			// D016 倾覆 TB_OVTUDSC
-			String OVTUDR = new String(request.getParameter("OVTUDR").getBytes(
-					"ISO-8859-1"), "GBK");
+			String OVTUDR = request.getParameter("OVTUDR");
 			bean.setOVTUDR(OVTUDR == null ? "" : OVTUDR); // 倾覆方向
 			bean.setOVTUAG(request.getParameter("OVTUAG") == "" ? "0" : request
 					.getParameter("OVTUAG")); // 倾覆角度(度)
 		}
 		if ("D017".trim().equals(XQFL)) {
 			// D017 应力过大 TB_STREXDSC
-			String CONGR = new String(request.getParameter("CONGR").getBytes(
-					"ISO-8859-1"), "GBK");
+			String CONGR = request.getParameter("CONGR");
 			bean.setMXTNST(request.getParameter("MXTNST") == "" ? "0" : request
 					.getParameter("MXTNST")); // 最大拉应力(牛/平方毫米)
 			bean.setMXCMST(request.getParameter("MXCMST") == "" ? "0" : request
@@ -1129,19 +1064,15 @@ public class BuinessController implements Controller {
 		}
 		if ("D019".trim().equals(XQFL)) {
 			// D019 堵塞 TB_PLUDSC
-			String PLTNM = new String(request.getParameter("PLTNM").getBytes(
-					"ISO-8859-1"), "GBK");
-			String PLTBU = new String(request.getParameter("PLTBU").getBytes(
-					"ISO-8859-1"), "GBK");
+			String PLTNM = request.getParameter("PLTNM");
+			String PLTBU = request.getParameter("PLTBU");
 			bean.setPLTNM(PLTNM == null ? "" : PLTNM); // 堵塞物名称
 			bean.setPLTBU(PLTBU == "" ? "0" : PLTBU); // 堵塞物体积(立方米)
 		}
 		if ("D020".trim().equals(XQFL)) {
 			// D020 基础破坏 TB_BSWRDSC
-			String GRNSPDSC = new String(request.getParameter("GRNSPDSC")
-					.getBytes("ISO-8859-1"), "GBK");
-			String GROVCHWR = new String(request.getParameter("GROVCHWR")
-					.getBytes("ISO-8859-1"), "GBK");
+			String GRNSPDSC = request.getParameter("GRNSPDSC");
+			String GROVCHWR = request.getParameter("GROVCHWR");
 			bean.setGRNSPDSC(GRNSPDSC == null ? "" : GRNSPDSC); // 基础渗漏描述
 			bean.setGRNUSB(request.getParameter("GRNUSB") == "" ? "0" : request
 					.getParameter("GRNUSB")); // 据传不均匀沉降(米)
@@ -1149,28 +1080,22 @@ public class BuinessController implements Controller {
 		}
 		if ("D021".trim().equals(XQFL)) {
 			// D021 消能工破坏 TB_EDDWRDSC
-			String APWR = new String(request.getParameter("APWR").getBytes(
-					"ISO-8859-1"), "GBK");
-			String WSTWR = new String(request.getParameter("WSTWR").getBytes(
-					"ISO-8859-1"), "GBK");
+			String APWR = request.getParameter("APWR");
+			String WSTWR = request.getParameter("WSTWR");
 			bean.setAPWR(APWR == null ? "" : APWR); // 底板掀起
 			bean.setWSTWR(WSTWR == null ? "" : WSTWR); // 止水破坏
 		}
 		if ("D022".trim().equals(XQFL)) {
 			// D022 基础排水失效 TB_BSWPLPDS
-			String WPPLU = new String(request.getParameter("WPPLU").getBytes(
-					"ISO-8859-1"), "GBK");
-			String WPEQML = new String(request.getParameter("WPEQML").getBytes(
-					"ISO-8859-1"), "GBK");
+			String WPPLU = request.getParameter("WPPLU");
+			String WPEQML = request.getParameter("WPEQML");
 			bean.setWPPLU(WPPLU == null ? "" : WPPLU); // 排水孔堵塞
 			bean.setWPEQML(WPEQML == null ? "" : WPEQML); // 排水设备失灵
 		}
 		if ("D023".trim().equals(XQFL)) {
 			// D023 洞身破坏 TB_HBWRDSC
-			String LNINF = new String(request.getParameter("LNINF").getBytes(
-					"ISO-8859-1"), "GBK");
-			String HBGLCN = new String(request.getParameter("HBGLCN").getBytes(
-					"ISO-8859-1"), "GBK");
+			String LNINF = request.getParameter("LNINF");
+			String HBGLCN = request.getParameter("HBGLCN");
 			bean.setWRMS(request.getParameter("WRMS") == "" ? "0" : request
 					.getParameter("WRMS"));// 破坏方量(立方米)
 			bean.setLNINF(LNINF == null ? "" : LNINF);// 对衬砌造成的影响
@@ -1178,8 +1103,7 @@ public class BuinessController implements Controller {
 		}
 		if ("D024".trim().equals(XQFL)) {
 			// D024 控导工程局部破坏 TB_CLPJPRWR
-			String WRGLCN = new String(request.getParameter("WRGLCN").getBytes(
-					"ISO-8859-1"), "GBK");
+			String WRGLCN = request.getParameter("WRGLCN");
 			bean.setWRD(request.getParameter("WRD") == "" ? "0" : request
 					.getParameter("WRD")); // 破坏深度(米)
 			bean.setWRL(request.getParameter("WRL") == "" ? "0" : request
@@ -1188,8 +1112,7 @@ public class BuinessController implements Controller {
 		}
 		if ("D025".trim().equals(XQFL)) {
 			// D025 控导工程冲毁 TB_CLPJSCDN
-			String SCDMGLCN = new String(request.getParameter("SCDMGLCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String SCDMGLCN = request.getParameter("SCDMGLCN");
 			bean.setSCDMBU(request.getParameter("SCDMBU") == "" ? "0" : request
 					.getParameter("SCDMBU")); // 冲毁体积(立方米)
 			bean.setSCDML(request.getParameter("SCDML") == "" ? "0" : request
@@ -1199,8 +1122,7 @@ public class BuinessController implements Controller {
 			bean.setSCDMGLCN(SCDMGLCN == null ? "" : SCDMGLCN); // 冲毁处地质情况
 		}
 		if("D026".trim().equals(XQFL)){
-			String DSSTP = new String(request.getParameter("DSSTP")
-					.getBytes("ISO-8859-1"), "GBK");
+			String DSSTP = request.getParameter("DSSTP");
 			bean.setDSSPN(request.getParameter("DSSPN")==""?"0":request.getParameter("DSSPN"));
 			bean.setDSSAREA(request.getParameter("DSSAREA")==""?"0":request.getParameter("DSSAREA"));
 			bean.setDTHPN(request.getParameter("DTHPN")==""?"0":request.getParameter("DTHPN"));
@@ -1227,8 +1149,7 @@ public class BuinessController implements Controller {
 				||"E".trim().equals(GCFL)
 				||"H".trim().equals(GCFL)
 				||"P".trim().equals(GCFL)){
-			String BRBPPFCN =  new String(request.getParameter("BRBPPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String BRBPPFCN = request.getParameter("BRBPPFCN");
 			String RZ = request.getParameter("RZ");
 			String RQ = request.getParameter("RQ");
 			RZ=RZ==""?"0":RZ;RQ=RQ==""?"0":RQ;
@@ -1237,12 +1158,9 @@ public class BuinessController implements Controller {
 			bean.setBRBPPFCN(BRBPPFCN);	//护坡护岸稳定情况========TB_RSR===TB_DKR
 		}
 		if("B".trim().equals(GCFL)||"K".trim().equals(GCFL)){
-			String EDDPFCN = new String(request.getParameter("EDDPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String GTHOPFCN = new String(request.getParameter("GTHOPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String COMMCN = new String(request.getParameter("COMMCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String EDDPFCN = request.getParameter("EDDPFCN");
+			String GTHOPFCN = request.getParameter("GTHOPFCN");
+			String COMMCN = request.getParameter("COMMCN");
 			bean.setEDDPFCN(EDDPFCN);	//消能工完好状况==========TB_RSR===TB_WLR
 			bean.setGTHOPFCN(GTHOPFCN);	//闸门、启闭机完好状况====TB_RSR===TB_WLR
 			bean.setCOMMCN(COMMCN);	//通讯手段及状况==========TB_RSR===TB_WLR
@@ -1257,12 +1175,9 @@ public class BuinessController implements Controller {
 		}
 		if("B".trim().equals(GCFL)){
 			//TB_RSR=水库=B
-			String DFPFCN = new String(request.getParameter("DFPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String DBSTBCN = new String(request.getParameter("DBSTBCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String ESPFCN = new String(request.getParameter("ESPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String DFPFCN = request.getParameter("DFPFCN");
+			String DBSTBCN = request.getParameter("DBSTBCN");
+			String ESPFCN = request.getParameter("ESPFCN");
 			bean.setRSCLS(request.getParameter("RSCLS"));	//水库类别(良好/尚好/病险库)
 			bean.setRV(request.getParameter("RV"));			//当前库容(万立方米)
 			bean.setDFPFCN(DFPFCN);							//坝基完好状况
@@ -1272,10 +1187,8 @@ public class BuinessController implements Controller {
 		}
 		if("K".trim().equals(GCFL)){
 			//TB_WLR=水闸=K
-			String GFPFCN = new String(request.getParameter("GFPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String STPFCN = new String(request.getParameter("STPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String GFPFCN = request.getParameter("GFPFCN");
+			String STPFCN = request.getParameter("STPFCN");
 			String RUPGZ = request.getParameter("RUPGZ");
 			String RDWGZ = request.getParameter("RDWGZ");
 			String RQO = request.getParameter("RQO");
@@ -1292,16 +1205,11 @@ public class BuinessController implements Controller {
 		}
 		if("N".trim().equals(GCFL)){
 			//TB_COWAPJ=治河工程=N
-			String FLCNDSC = new String(request.getParameter("FLCNDSC")
-					.getBytes("ISO-8859-1"), "GBK");
-			String WDCNDSC = new String(request.getParameter("WDCNDSC")
-					.getBytes("ISO-8859-1"), "GBK");
-			String PRCCLR = new String(request.getParameter("PRCCLR")
-					.getBytes("ISO-8859-1"), "GBK");
-			String SPURDSC = new String(request.getParameter("SPURDSC")
-					.getBytes("ISO-8859-1"), "GBK");
-			String BPPJCN = new String(request.getParameter("BPPJCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String FLCNDSC = request.getParameter("FLCNDSC");
+			String WDCNDSC = request.getParameter("WDCNDSC");
+			String PRCCLR = request.getParameter("PRCCLR");
+			String SPURDSC = request.getParameter("SPURDSC");
+			String BPPJCN = request.getParameter("BPPJCN");
 			bean.setFLCNDSC(FLCNDSC);								//水流情况描述
 			bean.setWDCNDSC(WDCNDSC);								//河道情况描述
 			bean.setPRCCLR(PRCCLR);								//清障的落实
@@ -1310,18 +1218,12 @@ public class BuinessController implements Controller {
 		}
 		if("F".trim().equals(GCFL)){
 			//TB_STOFLER=蓄滞=F
-			String TRFCN = new String(request.getParameter("TRFCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String DKCN = new String(request.getParameter("DKCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String CWFCCN = new String(request.getParameter("CWFCCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String SFSRCN = new String(request.getParameter("SFSRCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String FLFADSC = new String(request.getParameter("FLFADSC")
-					.getBytes("ISO-8859-1"), "GBK");
-			String IDSTCN = new String(request.getParameter("IDSTCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String TRFCN = request.getParameter("TRFCN");
+			String DKCN = request.getParameter("DKCN");
+			String CWFCCN = request.getParameter("CWFCCN");
+			String SFSRCN = request.getParameter("SFSRCN");
+			String FLFADSC = request.getParameter("FLFADSC");
+			String IDSTCN = request.getParameter("IDSTCN");
 			String DSFLW = request.getParameter("DSFLW");
 			String DSFLWZ = request.getParameter("DSFLWZ");
 			DSFLW=DSFLW==""?"0":DSFLW;
@@ -1340,14 +1242,10 @@ public class BuinessController implements Controller {
 				||"H".trim().equals(GCFL)
 				||"P".trim().equals(GCFL)){
 			//TB_DKR=堤防==海堤==圩垸==穿堤
-			String STECH = new String(request.getParameter("STECH")
-					.getBytes("ISO-8859-1"), "GBK");
-			String WSTODC = new String(request.getParameter("WSTODC")
-					.getBytes("ISO-8859-1"), "GBK");
-			String DKPFCN = new String(request.getParameter("DKPFCN")
-					.getBytes("ISO-8859-1"), "GBK");
-			String TSCN = new String(request.getParameter("TSCN")
-					.getBytes("ISO-8859-1"), "GBK");
+			String STECH = request.getParameter("STECH");
+			String WSTODC = request.getParameter("WSTODC");
+			String DKPFCN = request.getParameter("DKPFCN");
+			String TSCN = request.getParameter("TSCN");
 			String RV = request.getParameter("RV");
 			RV=RV==""?"0":RV;WSTODC=WSTODC==""?"0":WSTODC;
 			bean.setRV(RV);			//当前库容(万立方米)
@@ -1371,56 +1269,41 @@ public class BuinessController implements Controller {
 			throws Exception {
 		ConfigBean bean = new ConfigBean();
 		String CLIENT_TYPE = request.getParameter("CLIENT_TYPE");
-		CLIENT_TYPE = CLIENT_TYPE == null ? "" : new String(CLIENT_TYPE
-				.getBytes("ISO-8859-1"), "GBK");
+		CLIENT_TYPE = CLIENT_TYPE == null ? "" : CLIENT_TYPE;
 		String XZQH_S = request.getParameter("selectz");
-		XZQH_S = XZQH_S == null ? "" : new String(
-				XZQH_S.getBytes("ISO-8859-1"), "GBK");
+		XZQH_S = XZQH_S == null ? "" :XZQH_S;
 		String XZQH_SI = request.getParameter("selects");
-		XZQH_SI = XZQH_SI == null ? "" : new String(XZQH_SI
-				.getBytes("ISO-8859-1"), "GBK");
+		XZQH_SI = XZQH_SI == null ? "" : XZQH_SI;
 		String XZQH_X = request.getParameter("selectx");
-		XZQH_X = XZQH_X == null ? "" : new String(
-				XZQH_X.getBytes("ISO-8859-1"), "GBK");
+		XZQH_X = XZQH_X == null ? "" : XZQH_X;
 		String LYSX_LY = request.getParameter("selectlysx1");
-		LYSX_LY = LYSX_LY == null ? "" : new String(LYSX_LY
-				.getBytes("ISO-8859-1"), "GBK");
+		LYSX_LY = LYSX_LY == null ? "" : LYSX_LY;
 		String LYSX_SX = request.getParameter("selectlysx2");
-		LYSX_SX = LYSX_SX == null ? "" : new String(LYSX_SX
-				.getBytes("ISO-8859-1"), "GBK");
+		LYSX_SX = LYSX_SX == null ? "" : LYSX_SX;
 		String LYSX_YJZL = request.getParameter("selectzl1");
-		LYSX_YJZL = LYSX_YJZL == null ? "" : new String(LYSX_YJZL
-				.getBytes("ISO-8859-1"), "GBK");
+		LYSX_YJZL = LYSX_YJZL == null ? "" : LYSX_YJZL;
 		String LYSX_EJZL = request.getParameter("selectzl2");
-		LYSX_EJZL = LYSX_EJZL == null ? "" : new String(LYSX_EJZL
-				.getBytes("ISO-8859-1"), "GBK");
+		LYSX_EJZL = LYSX_EJZL == null ? "" : LYSX_EJZL;
 		String SERVER_NAME = request.getParameter("SERVER_NAME");
-		SERVER_NAME = SERVER_NAME == null ? "" : new String(SERVER_NAME
-				.getBytes("ISO-8859-1"), "GBK");
+		SERVER_NAME = SERVER_NAME == null ? "" : SERVER_NAME;
 		String SERVER_IP = request.getParameter("SERVER_IP");
-		SERVER_IP = SERVER_IP == null ? "" : new String(SERVER_IP
-				.getBytes("ISO-8859-1"), "GBK");
+		SERVER_IP = SERVER_IP == null ? "" : SERVER_IP;
 		String SERVER_PORT = request.getParameter("SERVER_PORT");
-		SERVER_PORT = SERVER_PORT == null ? "" : new String(SERVER_PORT
-				.getBytes("ISO-8859-1"), "GBK");
+		SERVER_PORT = SERVER_PORT == null ? "" : SERVER_PORT;
 		String TBDW = request.getParameter("TBDW");
-		TBDW = TBDW == null ? "" : new String(TBDW.getBytes("ISO-8859-1"),
-				"GBK");
+		TBDW = TBDW == null ? "" : TBDW;
 		String BSDW = request.getParameter("BSDW");
-		BSDW = BSDW == null ? "" : new String(BSDW.getBytes("ISO-8859-1"),
-				"GBK");
+		BSDW = BSDW == null ? "" : BSDW;
 		String FXZRR = request.getParameter("FXZRR");
-		FXZRR = FXZRR == null ? "" : new String(FXZRR.getBytes("ISO-8859-1"),
-				"GBK");
+		FXZRR = FXZRR == null ? "" : FXZRR;
 		String LXDH = request.getParameter("LXDH");
-		LXDH = LXDH == null ? "" : new String(LXDH.getBytes("ISO-8859-1"),
-				"GBK");
+		LXDH = LXDH == null ? "" : LXDH;
 		String QF = request.getParameter("QF");
-		QF = QF == null ? "" : new String(QF.getBytes("ISO-8859-1"), "GBK");
+		QF = QF == null ? "" : QF;
 		String NG = request.getParameter("NG");
-		NG = NG == null ? "" : new String(NG.getBytes("ISO-8859-1"), "GBK");
+		NG = NG == null ? "" : NG;
 		String SH = request.getParameter("SH");
-		SH = SH == null ? "" : new String(SH.getBytes("ISO-8859-1"), "GBK");
+		SH = SH == null ? "" : SH;
 		bean.setCLIENT_TYPE(CLIENT_TYPE);
 		bean.setXZQH_S(XZQH_S);
 		bean.setXZQH_SI(XZQH_SI);
