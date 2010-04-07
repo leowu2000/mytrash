@@ -10,6 +10,7 @@
 	String path = request.getSession().getServletContext().getRealPath("/");
 	String dncno = request.getParameter("DNCNO");
 	STDNCBean bean = BuinessDao.findStdncById(path,dncno);
+
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk">

@@ -153,10 +153,15 @@ public class FileUploadServlet extends HttpServlet {
 				
 				result="sucess";
 			}
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0L);
+			response.setContentType("text ml; charset=GBK");
+			response.getWriter().write(result);
 			if("download".equals(type)){
 				String tablename = request.getParameter("tablename");
 				String media_id = request.getParameter("media_id");
