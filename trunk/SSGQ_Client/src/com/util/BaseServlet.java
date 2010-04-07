@@ -483,10 +483,10 @@ public class BaseServlet extends HttpServlet{
 		if("updatepic".trim().equals(type)){
 			String zlbm=request.getParameter("zlbm");
 			String name=request.getParameter("name");
-			name=name==null?"":new String(name.getBytes("ISO-8859-1"),"GBK");
+			name=name==null?"":name;
 			String sj=request.getParameter("sj");
 			String ms=request.getParameter("ms");
-			ms=ms==null?"":new String(ms.getBytes("ISO-8859-1"),"GBK");
+			ms=ms==null?"":ms;
 			String TBID=request.getParameter("TBID");
 			String updateSQL = "update "+TBID+" set dtcdt=#"+sj+"#,TITLE='"+name+"' ,NRMS='"+ms+"' WHERE ZLBM="+zlbm;
 			BuinessDao.updateDB(updateSQL, path);

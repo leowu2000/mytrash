@@ -52,7 +52,7 @@ public class CheckSpecification extends HttpServlet {
 			 * ＋Mid(工程所在地区的行政区划代码,1,2)
 			 */
 			String result="false";
-			String gcnm=new String(request.getParameter("gcnm").getBytes("ISO-8859-1"),"GBK");
+			String gcnm=request.getParameter("gcnm");
 			String gclb=request.getParameter("gclb");
 			String cntcd=request.getParameter("cntcd");
 			String hldm=request.getParameter("hldm");
@@ -66,10 +66,15 @@ public class CheckSpecification extends HttpServlet {
 				if(rs.next())
 					result="true";
 			}catch(Exception ex){ex.printStackTrace();}
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0L);
+			response.setContentType("text ml; charset=GBK");
+			response.getWriter().write(result);
 		}
 		
 	}
