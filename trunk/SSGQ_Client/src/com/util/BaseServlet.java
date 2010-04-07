@@ -31,6 +31,9 @@ public class BaseServlet extends HttpServlet{
 		doPost(request, response);
 	}
 
+	
+
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//cntcd,PROVNM
@@ -42,6 +45,7 @@ public class BaseServlet extends HttpServlet{
 		ConfigBean cfbean = (ConfigBean)request.getSession().getAttribute("configBean");
 		String hlxx[]={"","","",""};
 		String xzqh[] = {"","",""};
+		String result="";
 		boolean disableFlg = false;
 		
 		if("add".trim().equals(from))disableFlg = true;
@@ -57,7 +61,6 @@ public class BaseServlet extends HttpServlet{
 			}
 		}
 		if("load".trim().equals(type)){
-			String result="";
 			String result_z="";
 			String result_head_z="";
 			String result_head_s="";
@@ -252,13 +255,17 @@ public class BaseServlet extends HttpServlet{
 			result_zl1 = result_head_zl1+result_zl1+result_detail_zl1;
 			result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//			response.setHeader("Pragma", "No-cache");
+//			response.setHeader("Cache-Control", "no-cache");
+//			response.setDateHeader("Expires", 0L);
+//			response.setContentType("text ml; charset=GBK");
+//			response.getWriter().write(result);
 		}
 		if("viewload".trim().equals(type)){
-			String result="";
 			String result_z=xzqh[0];
 			String result_s=xzqh[1];
 			String result_x=xzqh[2];
@@ -271,17 +278,16 @@ public class BaseServlet extends HttpServlet{
 			String result_zl2=hlxx[3];
 
 			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 			
 		}
 		if("change".trim().equals(type)){
 			String changeObjName = request.getParameter("changeObjName");
 			String changeType = request.getParameter("changeType");
 			String changeVal = request.getParameter("changeVal");
-			String result="";
 			if("sx".trim().equals(changeObjName)){
 				if("1".trim().equals(changeType)){
 					String result_s="";
@@ -324,10 +330,10 @@ public class BaseServlet extends HttpServlet{
 					result_x = result_head_x+result_x+result_detail_x;
 					result = result_x;
 				}
-				response.setContentType("text/xml");
-				response.setHeader("Charset", "gb2312");
-				response.addHeader("Cache-Control", "no-cache");
-				response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//				response.setContentType("text/xml");
+//				response.setHeader("Charset", "gb2312");
+//				response.addHeader("Cache-Control", "no-cache");
+//				response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 			}
 			if("ly".trim().equals(changeObjName)){
 				if("1".trim().equals(changeType)){
@@ -405,10 +411,10 @@ public class BaseServlet extends HttpServlet{
 					result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 					result=result_zl2;
 				}
-				response.setContentType("text/xml");
-				response.setHeader("Charset", "gb2312");
-				response.addHeader("Cache-Control", "no-cache");
-				response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//				response.setContentType("text/xml");
+//				response.setHeader("Charset", "gb2312");
+//				response.addHeader("Cache-Control", "no-cache");
+//				response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 			}
 			
 		}
@@ -416,7 +422,6 @@ public class BaseServlet extends HttpServlet{
 			String lb = request.getParameter("lb");
 			String dq = request.getParameter("dq");
 			String ly = request.getParameter("ly");
-			String result = "";
 			String result_gcgl="";
 			String result_head_gcgl="<select name='gclb_s'><option value=''>--</option>";
 			String result_detail_gcgl="</select>";
@@ -461,19 +466,19 @@ public class BaseServlet extends HttpServlet{
 			result_z=result_head_z+result_z+result_detail_z;
 			result_lysx1=result_head_lysx1+result_lysx1+result_detail_lysx1;
 			result = result_gcgl+";"+result_z+";"+result_lysx1;
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 		}
 		if("uploadView".trim().equals(type)){
 			String id = request.getParameter("RPJINCD");
 			STDNCBean bean = BuinessDao.findStdncById(path,id);
-			String result = bean.getPJNO()+";"+bean.getDNCNO()+";"+bean.getXQFLDM();
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
+			result = bean.getPJNO()+";"+bean.getDNCNO()+";"+bean.getXQFLDM();
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 		}
 		if("updatepic".trim().equals(type)){
 			String zlbm=request.getParameter("zlbm");
@@ -485,10 +490,11 @@ public class BaseServlet extends HttpServlet{
 			String TBID=request.getParameter("TBID");
 			String updateSQL = "update "+TBID+" set dtcdt=#"+sj+"#,TITLE='"+name+"' ,NRMS='"+ms+"' WHERE ZLBM="+zlbm;
 			BuinessDao.updateDB(updateSQL, path);
-			response.setContentType("text/xml");
-			response.setHeader("Charset", "gb2312");
-			response.addHeader("Cache-Control", "no-cache");
-			response.getWriter().write(new String("true".getBytes("utf-8"), "iso-8859-1"));
+			result = "true";
+//			response.setContentType("text/xml");
+//			response.setHeader("Charset", "gb2312");
+//			response.addHeader("Cache-Control", "no-cache");
+//			response.getWriter().write(new String("true".getBytes("utf-8"), "iso-8859-1"));
 		}
 		if("checkIssue".trim().equals(type)){
 			String ISSUE = request.getParameter("ISSUE");
@@ -499,12 +505,22 @@ public class BaseServlet extends HttpServlet{
 					checkResult="1";
 				else
 					checkResult="0";
-				response.setContentType("text/xml");
-				response.setHeader("Charset", "gb2312");
-				response.addHeader("Cache-Control", "no-cache");
-				response.getWriter().write(new String(checkResult.getBytes("utf-8"), "iso-8859-1"));
+//				response.setContentType("text/xml");
+//				response.setHeader("Charset", "gb2312");
+//				response.addHeader("Cache-Control", "no-cache");
+//				response.getWriter().write(new String(checkResult.getBytes("utf-8"), "iso-8859-1"));
+				response.setHeader("Pragma", "No-cache");
+				response.setHeader("Cache-Control", "no-cache");
+				response.setDateHeader("Expires", 0L);
+				response.setContentType("text ml; charset=GBK");
+				response.getWriter().write(checkResult);
 			}
 		}
+		response.setHeader("Pragma", "No-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0L);
+		response.setContentType("text ml; charset=GBK");
+		response.getWriter().write(result);
 	}
 	public void init() throws ServletException {
 		// Put your code here

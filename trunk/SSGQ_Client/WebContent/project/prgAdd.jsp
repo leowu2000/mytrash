@@ -6,7 +6,7 @@
 %> 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
 <title></title>
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>
