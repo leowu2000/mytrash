@@ -19,8 +19,8 @@
     <Set name="handler">
         <New class="org.mortbay.jetty.webapp.WebAppContext">
             <Set name="contextPath">/</Set>
-            <!--        <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps/test</Set>        -->
-            <Set name="war">U:\\IdeaProjects\\swdb\\out\\artifacts\\swdb</Set>
+            <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps/client</Set>
+            <!-- <Set name="war">U:\\IdeaProjects\\swdb\\out\\artifacts\\swdb</Set> -->
             <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml</Set>
         </New>
     </Set>
