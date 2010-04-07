@@ -9,7 +9,7 @@
             <Item>
                 <New class="org.mortbay.jetty.nio.SelectChannelConnector">
                     <Set name="port">
-                        <SystemProperty name="jetty.port" default="9999"/>
+                        <SystemProperty name="jetty.port" default="80"/>
                     </Set>
                 </New>
             </Item>
@@ -19,7 +19,7 @@
     <Set name="handler">
         <New class="org.mortbay.jetty.webapp.WebAppContext">
             <Set name="contextPath">/</Set>
-            <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps/client</Set>
+            <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps</Set>
             <!-- <Set name="war">U:\\IdeaProjects\\swdb\\out\\artifacts\\swdb</Set> -->
             <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml</Set>
         </New>

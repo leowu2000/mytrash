@@ -1,2 +1,2 @@
-@start D:\jre6\bin\javaw.exe -cp ./lib/jetty-6.1.22.jar;./lib/jetty-util-6.1.22.jar;./lib/servlet-api-2.5-20081211.jar;./lib/ant-1.6.5.jar;./lib/core-3.1.1.jar;./lib/jsp-2.1-glassfish-9.1.1.B60.25.p2.jar;./lib/jsp-2.1-jetty-6.1.22.jar;./lib/jsp-api-2.1-glassfish-9.1.1.B60.25.p2.jar;./bin;%CLASSPATH% com.mmstart.bsclient.MainServer
+@start .\jre6\bin\javaw.exe -cp ./lib/jetty-6.1.22.jar;./lib/jetty-util-6.1.22.jar;./lib/servlet-api-2.5-20081211.jar;./lib/ant-1.6.5.jar;./lib/core-3.1.1.jar;./lib/jsp-2.1-glassfish-9.1.1.B60.25.p2.jar;./lib/jsp-2.1-jetty-6.1.22.jar;./lib/jsp-api-2.1-glassfish-9.1.1.B60.25.p2.jar;./bin;%CLASSPATH% com.mmstart.bsclient.MainServer
 @if errorlevel 1 pause
