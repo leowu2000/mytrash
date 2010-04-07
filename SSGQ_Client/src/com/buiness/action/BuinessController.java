@@ -96,8 +96,7 @@ public class BuinessController implements Controller {
 		 * 新增工程信息
 		 */
 		if ("add".trim().equals(actionType)) {
-			String gcnm = new String(request.getParameter("PJNM").getBytes(
-					"ISO-8859-1"), "GBK");
+			String gcnm = request.getParameter("PJNM");
 			String gclb = request.getParameter("gclb");
 			String cntcd = request.getParameter("cntcd");
 			String hldm = request.getParameter("hldm");
@@ -126,8 +125,7 @@ public class BuinessController implements Controller {
 		 */
 		if ("edit".trim().equals(actionType)) {
 			String gclsh = request.getParameter("gclsh");
-			String gcnm = new String(request.getParameter("PJNM").getBytes(
-					"ISO-8859-1"), "GBK");
+			String gcnm = request.getParameter("PJNM");
 			String gclb = request.getParameter("gclb");
 			String cntcd = request.getParameter("cntcd");
 			String hldm = request.getParameter("hldm");
@@ -849,8 +847,7 @@ public class BuinessController implements Controller {
 		DetailBean bean = new DetailBean();
 		bean.setDNCNO(request.getParameter("DNCNO")); // 险情编号
 		bean.setPJNO(request.getParameter("GCNAME")); // 工程编号
-		String STTPCD = (new String(request.getParameter("STTPCD").getBytes(
-				"ISO-8859-1"), "GBK"));
+		String STTPCD = request.getParameter("STTPCD");
 
 		bean.setSTTPCD(STTPCD); // 建筑物编码
 
