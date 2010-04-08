@@ -12,7 +12,7 @@
   <frameset rows="*" cols="134,*" framespacing="0" frameborder="NO" border="0">
     <frame src="left.jsp" name="leftFrame" scrolling="NO" noresize>
     <frameset rows="20,*" cols="*" framespacing="0" frameborder="no" border="0">
-      <frame src="line.jsp" scrolling="no" name="lineFrame" >
+      <frame src="line.htm" scrolling="no" name="lineFrame" >
       <frame src="../modules/frames/frame_multi.jsp" name="mainFrame" >
    </frameset>
   </frameset>

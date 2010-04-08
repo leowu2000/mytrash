@@ -117,6 +117,9 @@ td {
               <tr> 
                 <td><a href="../modules/frames/frame_consult.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb8','images/interb8__.gif',1)" onMouseOver="MM_nbGroup('over','interb8','images/interb8_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb8" src="images/interb8.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
               </tr>
+              <tr>
+              	<td><a href="../modules/frames/frame_gcxx.jsp" target="mainFrame" >工程信息</a></td>
+              </tr>
 <%
 	if("true".equals(isAdmin)){
 %>              

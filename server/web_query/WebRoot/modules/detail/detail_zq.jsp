@@ -28,6 +28,21 @@
 	<script language="JavaScript" src="../script/layer10.js"></script>
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
 	<script type="text/javascript">
+		function addConsult(){
+	  		if(window.XMLHttpRequest){ //Mozilla 
+      			var xmlHttpReq=new XMLHttpRequest();
+ 	     	}else if(window.ActiveXObject){
+ 		    	var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+      		}
+      		xmlHttpReq.open("GET", "consult.do?action=add&type=zq&id=<%=id %>", false);
+      		xmlHttpReq.send();
+      		if(xmlHttpReq.responseText!=''){
+        		alert(xmlHttpReq.responseText);
+      		}
+	  		parent.focus();
+	  		window.close();
+		}
+		
 		function del(){
 			window.location.href = "/delete.do?action=zq&id=<%=id %>";
 		}
@@ -111,6 +126,7 @@
     <tr align="center">
       <td>
         <input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
+        <input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1">
 <%
 	if("true".equals(isAdmin)){
 %>    	
