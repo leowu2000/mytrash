@@ -934,9 +934,9 @@ public class SearchDAO extends CommonDAO{
 		}
 		//图片格式
 		if("tp".equals(radiob_gs.trim())){//图片
-			sql = sql + " wjgs = 'jpg' and ";
+			sql = sql + " (wjgs = 'jpg' or wjgs = 'JPG') and ";
 		}else if("lx".equals(radiob_gs.trim())){
-			sql = sql + " wjgs <> 'jpg' and ";
+			sql = sql + " wjgs <> 'jpg' and wjgs = 'JPG' and ";
 		}
 		//按日期区间查询
 		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
@@ -997,5 +997,32 @@ public class SearchDAO extends CommonDAO{
 	 */
 	public List<?> getConsultZq(){
 		return jdbcTemplate.queryForList("select * from tb_sd where rpjincd in (select bh from tb_hs where type = 4)");
+	}
+	
+	/**
+	 * 获取工程信息中的市县
+	 * @return
+	 */
+	public List<?> getGcxxSx(){
+		return jdbcTemplate.queryForList("select distinct SXBM, SXMC from TB_GCLJ order by SXBM");
+	}
+	
+	/**
+	 * 获取工程信息中的类别
+	 * @param sxbm 市县编码
+	 * @return
+	 */
+	public List<?> getGcxxLb(String sxbm){
+		return jdbcTemplate.queryForList("select distinct LXBM, LXMC from TB_GCLJ where SXBM='" + sxbm + "' order by LXBM");
+	}
+	
+	/**
+	 * 获取工程信息
+	 * @param sxbm 市县编码
+	 * @param lxbm 类型编码
+	 * @return
+	 */
+	public List<?> getGcxxGc(String sxbm, String lxbm){
+		return jdbcTemplate.queryForList("select GCMC, GCLJ from TB_GCLJ where SXBM='" + sxbm + "' and LXBM='" + lxbm + "'");
 	}
 }

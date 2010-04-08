@@ -284,6 +284,62 @@ public class SearchController extends CommonController {
 			mv.addObject("listXq", listXq);
 			mv.addObject("listFxxd", listFxxd);
 			mv.addObject("listZq", listZq);
+		}else if("search_gcxx".equals(action)){//工程信息检索条件页面
+			mv = new ModelAndView("modules/search/search_gcxx");
+			
+			List listSx = searchDAO.getGcxxSx();
+			
+			mv.addObject("listSx", listSx);
+			return mv;
+		}else if("search_gcxx_sxajax".equals(action)){//市县选择ajax
+			String sxbm = ServletRequestUtils.getStringParameter(request, "sxbm", "1");
+			
+			List listLx = searchDAO.getGcxxLb(sxbm);
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append("<select name='lx' id='lx' onchange='changeLx();'>");
+			for(int i=0;i<listLx.size();i++){
+				Map mapLx = (Map)listLx.get(i);
+				sb.append("<option value='")
+				  .append(mapLx.get("LXBM"))
+				  .append("'>")
+				  .append(mapLx.get("LXMC"))
+				  .append("</option>");
+			}
+			sb.append("</select>");
+			
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expiresponse", 0L);
+			response.setContentType("application/*;charset=utf-8");
+			response.getWriter().write(sb.toString());
+			response.getWriter().close();
+			return null;
+		}else if("search_gcxx_lxajax".equals(action)){//类型选择ajax
+			String sxbm = ServletRequestUtils.getStringParameter(request, "sxbm", "1");
+			String lxbm = ServletRequestUtils.getStringParameter(request, "lxbm", "1");
+			
+			List listGc = searchDAO.getGcxxGc(sxbm, lxbm);
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append("<select name='gc' id='gc' onchange='changeGc();'>");
+			for(int i=0;i<listGc.size();i++){
+				Map mapGc = (Map)listGc.get(i);
+				sb.append("<option value='")
+				  .append(mapGc.get("GCLJ"))
+				  .append("'>")
+				  .append(mapGc.get("GCMC"))
+				  .append("</option>");
+			}
+			sb.append("</select>");
+			
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expiresponse", 0L);
+			response.setContentType("application/*;charset=utf-8");
+			response.getWriter().write(sb.toString());
+			response.getWriter().close();
+			return null;
 		}
 		
 		return mv;
