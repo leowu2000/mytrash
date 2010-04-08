@@ -1176,7 +1176,7 @@ public class BuinessController implements Controller {
 			String DBSTBCN = request.getParameter("DBSTBCN");
 			String ESPFCN = request.getParameter("ESPFCN");
 			bean.setRSCLS(request.getParameter("RSCLS"));	//水库类别(良好/尚好/病险库)
-			bean.setRV(request.getParameter("RV"));			//当前库容(万立方米)
+			bean.setRV(request.getParameter("RV")==""?"0":request.getParameter("RV"));			//当前库容(万立方米)
 			bean.setDFPFCN(DFPFCN);							//坝基完好状况
 			bean.setDBSTBCN(DBSTBCN);						//坝体稳定情况
 			bean.setESPFCN(ESPFCN);							//泄水建筑物完好状况

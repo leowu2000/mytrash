@@ -25,7 +25,8 @@
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery("select ZLBM,DTCDT,TITLE,WJGS,LXZP,NRMS from TB_FXJB_M where RPJINCD="+RPJINCD);
 %> 
-<html>
+
+<%@page import="java.net.URLEncoder"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title></title>
@@ -73,11 +74,11 @@ function toview(){
 	</tr>
 	<%
 		while(rs.next()){
-			String filename = rs.getString("TITLE");
+			String filename = rs.getString("TITLE")+"."+rs.getString("WJGS");
 	%>
 	<tr>
 	<td colspan="6" bgcolor="#FFFFFF">
-	附件：<a href="/FileUploadServlet?type=download&tablename=TB_FXJB_M&media_id=<%=rs.getString("ZLBM") %>&filename=<%=filename %>"><%=filename%></a>(注：保存附件时，请一定将在此显示的附件文件的名称和扩展名作为保存文件的名称和扩展名，否则可能出现文件类型错误，而无法打开!)
+	附件：<a href="/FileUploadServlet?type=download&tablename=TB_FXJB_M&media_id=<%=rs.getInt("ZLBM") %>&filename=<%=filename%>"><%=filename%></a>
 	</td>
 	</tr>
 	<%} %>
