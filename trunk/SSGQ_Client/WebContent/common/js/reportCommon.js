@@ -68,6 +68,7 @@ function toDel(){
 }
 
 function uplaodReportPhotos(tbname){
+	var url;
 	var check = document.frm.check.value;
 	var title = document.getElementById('TITLE').value;
 	var time = document.getElementById('DTCDT').value;
@@ -101,9 +102,13 @@ function uplaodReportPhotos(tbname){
 	}else if(window.ActiveXObject){
 		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	}
-	xmlHttpReq.open("GET", "/FileUploadServlet?type=report&tabname="+tbname+"&zpbtvalue="+title+"&cjsjvalue="+time
+	url = "/FileUploadServlet?type=report&tabname="+tbname+"&zpbtvalue="+title+"&cjsjvalue="+time
 			+"&zpmsvalue="+zpms+"&filepath="+filepath+"&detailvalue="+detail+"&DNCNO="
-			+dncid+"&delFlg="+check, false);
+			+dncid+"&delFlg="+check;
+	
+	url = encodeURI(url);
+	url = encodeURI(url);
+	xmlHttpReq.open("get", url, false);
 	xmlHttpReq.send(null);
 	var result = xmlHttpReq.responseText;
 	document.frm.check.value="2";

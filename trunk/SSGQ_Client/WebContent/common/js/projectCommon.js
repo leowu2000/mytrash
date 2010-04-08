@@ -306,6 +306,7 @@ function getRadioValue(name){
 	return document.getElementById('myradio').value;
 }
 function uplaodReportPhotos(tbname){
+	var url;
 	var gcmc = document.getElementById('GCNAME').value;
 	if(gcmc==""){
 		alert("请选择工程名称！");
@@ -346,22 +347,28 @@ function uplaodReportPhotos(tbname){
 			alert("请填写险情标题！");
 			return false;
 		} 
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=report&saveType="+type+"&filepath="+filepath+"&cjsjvalue="+cjsj
+		url = "/FileUploadServlet?type=report&saveType="+type+"&filepath="+ filepath+"&cjsjvalue="+cjsj
 				+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcmc+"" +
-						"&xqfldm="+document.getElementById('XQFLDM').value+"" +
-						"&STTPCD="+document.getElementById('STTPCD').value+"" +
-						"&xqbt="+document.getElementById('DNCNM').value+"" +
-						"&WTDPCD="+document.getElementById('WTDPCD').value+
-						"&DNCNO="+document.getElementById("DNCNO").value+
-						"&delFlg="+check+"&tabname="+tbname, false);
+				"&xqfldm="+document.getElementById('XQFLDM').value+"" +
+				"&STTPCD="+document.getElementById('STTPCD').value+"" +
+				"&xqbt="+document.getElementById('DNCNM').value+"" +
+				"&WTDPCD="+document.getElementById('WTDPCD').value+
+				"&DNCNO="+document.getElementById("DNCNO").value+
+				"&delFlg="+check+"&tabname="+tbname;
+		url = encodeURI(url);
+		url = encodeURI(url);
+		xmlHttpReq.open("get", url, false);
 		xmlHttpReq.send(null);
 		var result = xmlHttpReq.responseText;
 	}
 	else{
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=report&saveType="+type+"&tabname="+tbname
-				+"&zpbtvalue="+zpbt+"&cjsjvalue="+cjsj+"&zpmsvalue="+zpms+"&filepath="+filepath
-				+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&DNCNO="+document.getElementById("DNCNO").value
-				+"&delFlg="+check, false);
+		url = "/FileUploadServlet?type=report&saveType="+type+"&tabname="+tbname
+			+"&zpbtvalue="+zpbt+"&cjsjvalue="+cjsj+"&zpmsvalue="+zpms+"&filepath="+filepath
+			+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&DNCNO="+document.getElementById("DNCNO").value
+			+"&delFlg="+check;
+		url = encodeURI(url);
+		url = encodeURI(url);
+		xmlHttpReq.open("GET",url , false);
 		xmlHttpReq.send(null);
 		var result = xmlHttpReq.responseText;
 	}

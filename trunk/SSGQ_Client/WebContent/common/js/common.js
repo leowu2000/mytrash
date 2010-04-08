@@ -306,7 +306,7 @@ function updateMediaMsg(tablename){
 	var cjsj = document.frm.DTCDT.value;
 	var desc = document.frm.NRMS.value;
 	var type = document.frm.uptype.value;
-
+	var url ;
 	if(name==""){
 		alert("标题不能为空.");
 		return false;
@@ -324,12 +324,20 @@ function updateMediaMsg(tablename){
 	}else if(window.ActiveXObject){
 		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	}
-	if(type==1)
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=updateMediaMsg&tablename="+tablename+"&picid="
-					+document.frm.picid.value+"&title="+name+"&dtcdt="+cjsj+"&nrms="+desc, false);
-	if(type==2)
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=updateMediaMsg&tablename=TB_SUB_TEMP&picid="
-				+document.frm.picid.value+"&title="+name+"&dtcdt="+cjsj+"&nrms="+desc, false);
+	if(type==1){
+		url = "/FileUploadServlet?type=updateMediaMsg&tablename="+tablename+"&picid="
+				+document.frm.picid.value+"&title="+name+"&dtcdt="+cjsj+"&nrms="+desc;
+		url = encodeURI(url);
+		url = encodeURI(url);
+		xmlHttpReq.open("get", url, false);
+	}
+	if(type==2){
+		url = "/FileUploadServlet?type=updateMediaMsg&tablename=TB_SUB_TEMP&picid="
+			+document.frm.picid.value+"&title="+name+"&dtcdt="+cjsj+"&nrms="+desc;
+		url = encodeURI(url);
+		url = encodeURI(url);
+		xmlHttpReq.open("get", url, false);
+	}
 	xmlHttpReq.send(null);
 	var results = xmlHttpReq.responseText;
 	if("sucess"==results){
@@ -356,6 +364,7 @@ function playTheMedia(picid,tablename,tempPath,filePath,pkname){
 	}else if(window.ActiveXObject){
 		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	}
+
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
 	xmlHttpReq.send(null);
 	var results = xmlHttpReq.responseText;

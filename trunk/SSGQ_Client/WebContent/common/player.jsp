@@ -19,7 +19,7 @@
 	Connection conn = ConnectionPool.getConnection(path);
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery("select ZLBM,LXZP from "+tablename+" where zlbm="+zlbm);
-	System.out.println("select ZLBM,LXZP from "+tablename+" where "+pkname+"="+zlbm);
+	//System.out.println("select ZLBM,LXZP from "+tablename+" where "+pkname+"="+zlbm);
 	java.io.InputStream in = null;
 	OutputStream fos = null;
 	String medianame = "";

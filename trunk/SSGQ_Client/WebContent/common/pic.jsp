@@ -14,9 +14,9 @@
 <% 
 	String relPath = request.getSession().getServletContext().getRealPath("/");
 	String picpath = request.getSession().getServletContext().getRealPath("/").replaceAll("\\\\","\\\\\\\\\\\\\\\\");
-    response.setHeader("Pragma","No-cache"); 
-    response.setHeader("Cache-Control","no-cache"); 
-    response.setDateHeader("Expires", 0); 
+   // response.setHeader("Pragma","No-cache"); 
+   // response.setHeader("Cache-Control","no-cache"); 
+   // response.setDateHeader("Expires", 0); 
     String pkvalue = request.getParameter("pkvalue");
     String tablename = request.getParameter("tablename");
     String pkname = request.getParameter("pkname");
