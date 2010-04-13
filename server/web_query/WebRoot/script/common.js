@@ -11,6 +11,9 @@ function changeimg(){
   }
   mytd.innerHTML = "<a href='#' onClick='backimg();'><img src='images/up.gif' border='0' width='51' height='15'></a>";
   parent.mainFrame.document.getElementById('queryFrame').style.display='';
+  var h = parent.mainFrame.document.getElementById("result").height;
+  h = parseInt(h);
+  parent.mainFrame.document.getElementById("result").height = h - 60;
 }
 
 /**
@@ -23,6 +26,9 @@ function backimg(){
   }
   mytd.innerHTML = "<a href='#' onClick='changeimg();'><img src='images/down.gif' border='0' width='51' height='15'></a>";
   parent.mainFrame.document.getElementById('queryFrame').style.display='none';
+  var h = parent.mainFrame.document.getElementById("result").height;
+  h = parseInt(h);
+  parent.mainFrame.document.getElementById("result").height = h + 60;
 }
 
 /**
@@ -31,7 +37,8 @@ function backimg(){
  */
 function IFrameResize(qHeight){
 	document.getElementById("queryFrame").height = qHeight;
-	document.getElementById("result").height = document.body.offsetHeight - qHeight - 30;
+	document.getElementById("result").height = document.body.offsetHeight - 30;
+	changeimg();
 }
 
 //初始化为0，为折叠状态
