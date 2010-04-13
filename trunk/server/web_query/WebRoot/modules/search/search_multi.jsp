@@ -51,29 +51,30 @@ function init(){
             <option value="k" >水闸</option>
             <option value="n" >治河工程</option>
             <option value="p" >穿堤建筑物</option>
-          </select> </td>
-        <td rowspan="5" bgcolor="#FFFFFF"> <input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
+          </select>
+        </td>
+        <td bgcolor="#336699"><font color="#FFFFFF"><strong>关键字</strong></font></td>
+        <td align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" > 
+        <div style="display:none;">
+          <input type="checkbox" name="check_projectname" value="true" checked="checked">
+          工程名称 
+          <input type="checkbox" name="check_unit" value="true" checked="checked">
+          填报单位 
+          <input type="checkbox" name="check_title" value="true" checked="checked">
+          信息标题
+        </div>
+        </td>
+        <td rowspan="3" bgcolor="#FFFFFF"> <input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
         </td>
       </tr>
       <tr align="center"> 
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>河流水系</strong></font></td>
-        <td colspan="3" bgcolor="#FFFFFF" align="left"><script language="JavaScript" src="../../script/lysx.js"></script> 
-        </td>
-      </tr>
-      <tr align="center"> 
+        <td bgcolor="#FFFFFF" align="left" colspan="3"><script language="JavaScript" src="../../script/lysx.js"></script></td>
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
         <td align="left" bgcolor="#FFFFFF">
 			<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
 			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
 		</td>
-		<td bgcolor="#336699"><font color="#FFFFFF"><strong>关键字</strong></font></td>
-        <td align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" > 
-          <input type="checkbox" name="check_projectname" value="true">
-          工程名称 
-          <input type="checkbox" name="check_unit" value="true">
-          填报单位 
-          <input type="checkbox" name="check_title" value="true">
-          信息标题</td>
       </tr>
     </table>
   </div>
