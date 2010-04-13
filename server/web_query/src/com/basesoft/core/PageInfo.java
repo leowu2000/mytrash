@@ -51,16 +51,16 @@ public class PageInfo implements Serializable {
 	}
 
 	public String getHtml(String servletURL) {
-		return getHtml(servletURL, "fxxq");
+		return getHtml(servletURL, "pageForm");
 	}
 	
 	public String getHtml(String servletURL, String formName) {
 		StringBuffer sb = new StringBuffer();
-		String inlineJS = "<script type='text/javascript'>function submitTo(url,formName){var sForm=parent.queryFrame.document.getElementById(formName);sForm.action=url;sForm.submit();}</script>";
+		String inlineJS = "<script type='text/javascript'>function submitTo(url,formName){window.location.href=url;}</script>";
 		sb.append(inlineJS);
 		sb.append("<span class=\"fountblack14\">");
-		sb.append("共" + maxRowCount + "条" + maxPage + "页，" + rowsPerPage + "条/页；当前页：<strong>" + curPage
-				+ "</strong></span><span class=\"fountblack14\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		sb.append("共" + maxRowCount + "条" + maxPage + "页，" + rowsPerPage + "条/页；当前页：" + curPage
+				+ "</span><span class=\"fountblack14\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		if (curPage > 1) {
 			sb.append("<A HREF=\"javascript:submitTo('" + servletURL + "&page=1','" + formName + "');\" >首页</A>&nbsp;");
 			sb.append("<A HREF=\"javascript:submitTo('" + servletURL + "&page=" + (curPage - 1) + "','" + formName
