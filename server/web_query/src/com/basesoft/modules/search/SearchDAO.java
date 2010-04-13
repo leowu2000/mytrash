@@ -103,7 +103,7 @@ public class SearchDAO extends CommonDAO{
 			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
 				sql = sql + " and  (p.WTDPDT >= '" + tempstr1 + "' and  p.WTDPDT <= '" + tempstr2 + "') and ";
 			}
-			sql = sql + " order by p.WTDPDT desc ";
+			sql = sql + " 1=1 order by p.WTDPDT desc ";
 			//set rs = conn.Execute (UCASE(sql))
 			
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			
@@ -185,7 +185,7 @@ public class SearchDAO extends CommonDAO{
 			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
 				sql = sql + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "')  and ";
 			}
-			sql = sql + " order by st.WTDPDT desc ";
+			sql = sql + " 1=1 order by st.WTDPDT desc ";
 			//set rs = conn.Execute (UCASE(sql))
 					
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			
