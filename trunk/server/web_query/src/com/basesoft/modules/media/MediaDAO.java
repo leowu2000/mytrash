@@ -22,6 +22,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.CallableStatementCallback;
 
 import com.basesoft.core.CommonDAO;
+import com.kingbase.largeobject.BlobInputStream;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -33,33 +34,55 @@ public class MediaDAO extends CommonDAO {
 	 * @param pId 编号
 	 * @return
 	 */
-	public Map getBlob(String tablename, String pId){
+	public InputStream getBlob(String tablename, String pId){
 		String sql = "select lxzp from " + tablename + " where zlbm ='" + pId + "'";
-		Map map = (Map) jdbcTemplate.execute(sql, new CallableStatementCallback() {   
+		InputStream inputstream = (InputStream) jdbcTemplate.execute(sql, new CallableStatementCallback() {   
 			public Object doInCallableStatement(CallableStatement stmt)throws SQLException,DataAccessException {   
 				ResultSet rs = stmt.executeQuery();   
 				Map map = new HashMap();   
-				InputStream inputStream = null;   
 				String name = "";   
 				
 				rs.next();
-				inputStream = rs.getBinaryStream("lxzp");// 读取blob  
-				byte[] b = new byte[500000];
-				try{
-					inputStream.read(b);
-					inputStream.close();
-				}catch(IOException e){
-					System.out.println(e);
-				}
-				map.put("lxzp", b);
-				
+				InputStream inputStream = rs.getBinaryStream("lxzp");// 读取blob 
 				rs.close();
 				
-				return map;  
+				return inputStream;  
 			}   
 				  
 		});   
-		return map; 
+		return inputstream; 
+	}
+	
+	/**
+	 * 将流存为文件
+	 * @param ins 输入流
+	 * @param path 文件路径
+	 * @return 返回文件比特数组
+	 */
+	public byte[] saveAsFile(InputStream ins, String path) throws Exception{
+		//写入文件
+		File file = new File(path);
+		if(!file.exists()){
+			file.createNewFile();
+    	}
+		//流中数据写入文件
+		FileOutputStream fos = new FileOutputStream(file);
+    	BufferedOutputStream buffOut = new BufferedOutputStream(fos);
+    	byte buf[]=new byte[1024];
+        for(int i=0;(i=ins.read(buf))>0;){
+        	buffOut.write(buf,0,i);
+        }
+        buffOut.close();
+        fos.close();
+        ins.close();
+
+        //将文件读为byte[]
+        FileInputStream fis = new FileInputStream(file);
+        byte[] b = new byte[fis.available()];
+        fis.read(b);
+        fis.close();
+        
+		return b;
 	}
 	
 	/**
@@ -85,54 +108,32 @@ public class MediaDAO extends CommonDAO {
 	 * @param newPic 生成的缩略图
 	 * @return
 	 */
-	public byte[] getNewPic(byte[] oldPic, String path) {
-        byte[] newPic = new byte[5000];
-		
-        try {
-        	//生成原图的文件
-        	String oldPath = path + "\\oldFile.jpg";
-        	File oldFile = new File(oldPath);
-        	if(!oldFile.exists()){
-        		oldFile.createNewFile();
-        	}
-        	FileOutputStream oldStr = new FileOutputStream(oldPath);
-        	BufferedOutputStream buffOut = new BufferedOutputStream(oldStr);
-        	buffOut.write(oldPic);
-        	buffOut.close();
-        	oldStr.close();
-        	
-            //新图文件
-            String newPath = path + "\\newFile.jpg";
-            File newFile = new File(newPath);
-            if(!newFile.exists()){
-            	newFile.createNewFile();
-        	}
-            
-            // 构造Image对象
-            Image src = ImageIO.read(oldFile); 
-            BufferedImage tag = new BufferedImage(30, 30,BufferedImage.TYPE_INT_RGB);
-            tag.getGraphics().drawImage(src, 0, 0, 30, 30, null); // 绘制缩小后的图
-            
-            FileOutputStream newStrOut = new FileOutputStream(newFile);// 输出到文件流
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newStrOut);
-            encoder.encode(tag); // 近JPEG编码
-            
-            FileInputStream newStrIn = new FileInputStream(newFile);
-            BufferedInputStream buffIn= new BufferedInputStream(newStrIn);
-            newPic = new byte[Integer.parseInt(String.valueOf(newFile.length()))];
-            buffIn.read(newPic);
-            
-            buffIn.close();
-            newStrIn.close();
-            newStrOut.close();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
+	public byte[] getNewPic(String path)throws Exception {
+        //原图文件
+    	File oldFile = new File(path + "\\temp.jpg");
+        //新图文件
+        String newPath = path + "\\temp2.jpg";
+        File newFile = new File(newPath);
+        if(!newFile.exists()){
+        	newFile.createNewFile();
+    	}
+        
+        // 构造Image对象
+        Image src = ImageIO.read(oldFile); 
+        BufferedImage tag = new BufferedImage(30, 30,BufferedImage.TYPE_INT_RGB);
+        tag.getGraphics().drawImage(src, 0, 0, 30, 30, null); // 绘制缩小后的图
+        
+        FileOutputStream newStrOut = new FileOutputStream(newFile);// 输出到文件流
+        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newStrOut);
+        encoder.encode(tag); // JPEG编码
+        
+        FileInputStream newStrIn = new FileInputStream(newFile);
+        byte[] newPic = new byte[newStrIn.available()];
+        newStrIn.read(newPic);
+        
+        newStrIn.close();
+        newStrOut.close();
         
         return newPic;
-        
-    }
-
+	}
 }

@@ -2,6 +2,7 @@ package com.basesoft.modules.media;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -22,14 +23,15 @@ public class MediaController extends CommonController {
 			HttpServletResponse response, ModelAndView mv) throws Exception {
 		final String realpath = request.getSession().getServletContext().getRealPath("/");
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
+		String path = request.getRealPath("\\images\\");
 		
 		if("image".equals(action)){
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
-			Map map = mediaDAO.getBlob(tablename, media_id);
-			
-			byte[] b = (byte[])map.get("lxzp");
+			InputStream ins = mediaDAO.getBlob(tablename, media_id);
+			path = path + "\\temp.jpg";
+			byte[] b = mediaDAO.saveAsFile(ins, path);
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
@@ -42,12 +44,10 @@ public class MediaController extends CommonController {
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
-			Map map = mediaDAO.getBlob(tablename, media_id);
-			
-			byte[] b = (byte[])map.get("lxzp");
-			
-			String path = request.getRealPath("\\images\\");
-			byte[] newPic = mediaDAO.getNewPic(b, path);
+			InputStream ins = mediaDAO.getBlob(tablename, media_id);
+			path = path + "\\temp.jpg";
+			byte[] b = mediaDAO.saveAsFile(ins, path);
+			byte[] newPic = mediaDAO.getNewPic(request.getRealPath("\\images\\"));
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
@@ -60,19 +60,12 @@ public class MediaController extends CommonController {
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			
-			Map map = mediaDAO.getBlob(tablename, media_id);
 			Map mapMedia = mediaDAO.getMedia(tablename, media_id);
 			
-			byte[] b = (byte[])map.get("lxzp");
+			path = realpath + "\\video\\" + mapMedia.get("TITLE").toString().trim() + "." + mapMedia.get("WJGS").toString().trim();
+			InputStream ins = mediaDAO.getBlob(tablename, media_id);
+			mediaDAO.saveAsFile(ins, path);
 			
-			String path = realpath + "\\video\\" + mapMedia.get("TITLE").toString().trim() + "." + mapMedia.get("WJGS").toString().trim();
-			
-			FileOutputStream fs = new FileOutputStream(path);
-	        int byteread = b.length;    
-	        fs.write(b,0,byteread);   
-	        fs.flush();   
-	        fs.close(); 
-	        
 			mv = new ModelAndView("modules/media/player");
 			mv.addObject("filepath", path);
 			
@@ -82,9 +75,9 @@ public class MediaController extends CommonController {
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
 			String filename = ServletRequestUtils.getStringParameter(request,"filename","");
 			
-			Map map = mediaDAO.getBlob(tablename, media_id);
-			
-			byte[] b = (byte[])map.get("lxzp");
+			InputStream ins = mediaDAO.getBlob(tablename, media_id);
+			path = path + "\\temp.jpg";
+			byte[] b = mediaDAO.saveAsFile(ins, path);
 			
 			response.reset();
             response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("gbk"),"iso8859-1"));
