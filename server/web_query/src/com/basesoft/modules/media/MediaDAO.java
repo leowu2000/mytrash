@@ -2,7 +2,10 @@ package com.basesoft.modules.media;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,10 +43,9 @@ public class MediaDAO extends CommonDAO {
 				String name = "";   
 				
 				rs.next();
-				inputStream = rs.getBinaryStream("lxzp");// 读取blob   
-				byte[] b = new byte[7500000];
+				inputStream = rs.getBinaryStream("lxzp");// 读取blob  
+				byte[] b = new byte[500000];
 				try{
-					b = new byte[inputStream.available()];
 					inputStream.read(b);
 					inputStream.close();
 				}catch(IOException e){
@@ -77,33 +79,59 @@ public class MediaDAO extends CommonDAO {
 		return map;
 	}
 	
-	public byte[] build(File oldPic, File newPic) {
-        byte[] b = new byte[500];
+	/**
+	 * 获取缩略图
+	 * @param oldPic 原图
+	 * @param newPic 生成的缩略图
+	 * @return
+	 */
+	public byte[] getNewPic(byte[] oldPic, String path) {
+        byte[] newPic = new byte[5000];
 		
-		FileOutputStream newimage = null;
         try {
-            Image src = ImageIO.read(oldPic); // 构造Image对象
-            //float tagsize = 200;    //限制宽度为200
-            int old_w = src.getWidth(null); // 得到源图宽
-            int old_h = src.getHeight(null);// 得到源图高
+        	//生成原图的文件
+        	String oldPath = path + "\\oldFile.jpg";
+        	File oldFile = new File(oldPath);
+        	if(!oldFile.exists()){
+        		oldFile.createNewFile();
+        	}
+        	FileOutputStream oldStr = new FileOutputStream(oldPath);
+        	BufferedOutputStream buffOut = new BufferedOutputStream(oldStr);
+        	buffOut.write(oldPic);
+        	buffOut.close();
+        	oldStr.close();
+        	
+            //新图文件
+            String newPath = path + "\\newFile.jpg";
+            File newFile = new File(newPath);
+            if(!newFile.exists()){
+            	newFile.createNewFile();
+        	}
             
-            int new_w = 30;    //缩略图宽,
-            int new_h = 30;  //缩略图高
+            // 构造Image对象
+            Image src = ImageIO.read(oldFile); 
+            BufferedImage tag = new BufferedImage(30, 30,BufferedImage.TYPE_INT_RGB);
+            tag.getGraphics().drawImage(src, 0, 0, 30, 30, null); // 绘制缩小后的图
             
-            BufferedImage tag = new BufferedImage(new_w, new_h,BufferedImage.TYPE_INT_RGB);
-            tag.getGraphics().drawImage(src, 0, 0, new_w, new_h, null); // 绘制缩小后的图
-            
-            newimage = new FileOutputStream(newPic);// 输出到文件流
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newimage);
+            FileOutputStream newStrOut = new FileOutputStream(newFile);// 输出到文件流
+            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newStrOut);
             encoder.encode(tag); // 近JPEG编码
             
-            newimage.write(b);
+            FileInputStream newStrIn = new FileInputStream(newFile);
+            BufferedInputStream buffIn= new BufferedInputStream(newStrIn);
+            newPic = new byte[Integer.parseInt(String.valueOf(newFile.length()))];
+            buffIn.read(newPic);
+            
+            buffIn.close();
+            newStrIn.close();
+            newStrOut.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return null;
         }
         
-        return b ;
+        return newPic;
         
     }
 
