@@ -38,6 +38,24 @@ public class MediaController extends CommonController {
 			response.getOutputStream().write(b);
 			response.getOutputStream().close();
 			return null;
+		}if("image_small".equals(action)){
+			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
+			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
+			
+			Map map = mediaDAO.getBlob(tablename, media_id);
+			
+			byte[] b = (byte[])map.get("lxzp");
+			
+			String path = request.getRealPath("\\images\\");
+			byte[] newPic = mediaDAO.getNewPic(b, path);
+			
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expiresponse", 0L);
+			response.setContentType("image/*");
+			response.getOutputStream().write(newPic);
+			response.getOutputStream().close();
+			return null;
 		}else if("video".equals(action)){
 			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
 			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
