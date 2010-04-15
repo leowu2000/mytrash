@@ -75,6 +75,10 @@ function checkNumber(obj,name){
 			return false;
 		}
 }
+function updateFileValue(fileobj){
+	fileobj.select();//该对象选取 
+	document.getElementById("upFileValues").value=document.selection.createRange().text;//返回选取项的文本内容
+}
 </script>
 <body >
 <table width="90%" align="center">
@@ -84,6 +88,7 @@ function checkNumber(obj,name){
 <input type="hidden" name="actionType" value="add_fxjb"/>
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
+<input type="hidden" name="upFileValues" value=""/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<!-- <tr height="25" >
 		<td nowrap align="center" class="title" width="30%" >单位</td>
@@ -98,7 +103,7 @@ function checkNumber(obj,name){
 		<input type="text" name="WTTT" value="" size="25"/></td>
 		<td align="center" class="title">附件</td>
 		<td bgcolor="#FFFFFF">
-		<input type="file" name="UpFile" size="20"> 
+		<input type="file" name="UpFile" size="20" onchange="javascript:updateFileValue(this);"> 
 		</td>
 	</tr>
 	<tr height="25" >

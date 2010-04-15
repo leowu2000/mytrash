@@ -58,9 +58,7 @@ margin:0px auto; padding:0px;
 	<tr>
 		<td class="title" >决口处地质地形条件</td>
 		<td  bgcolor="#FFFFFF" colspan="7">
-		<textarea id="BURLDGL" name="BURLDGL" rows="4" cols="80" style="width:100%">
-		<%=bean.getBURLDGL().trim() %>
-		</textarea></td>
+		<textarea id="BURLDGL" name="BURLDGL" rows="4" cols="80" style="width:100%"><%=bean.getBURLDGL().trim() %></textarea></td>
 	</tr>
 </table>
 </div>

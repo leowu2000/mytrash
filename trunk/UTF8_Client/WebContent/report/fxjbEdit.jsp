@@ -97,6 +97,10 @@ function delMeditSubmit(id){
 		}
 	}
 }
+function updateFileValue(fileobj){
+	fileobj.select();//该对象选取 
+	document.getElementById("upFileValues").value=document.selection.createRange().text;//返回选取项的文本内容
+}
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
@@ -113,6 +117,7 @@ function delMeditSubmit(id){
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="RPJINCD" value="<%=RPJINCD %>">
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
+<input type="hidden" name="upFileValues" value=""/>
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
 	<!-- <tr height="25" >
 		<td nowrap align="center" class="title" width="30%" >单位</td>
@@ -130,10 +135,10 @@ function delMeditSubmit(id){
 		<td bgcolor="#FFFFFF">
 		<%if(detailBean!=null){ %>
 		<div id="thfiles"  style="display:inline">
-			<%=detailBean.getTITLE() %>&nbsp;&nbsp;&nbsp;<a href="javascript:delMeditSubmit('<%=detailBean.getZLBM()%>')"><img src="/images/small_delete.gif" border="0"></img></a>
+			<%=detailBean.getTITLE() %>.<%=detailBean.getWJGS() %>&nbsp;&nbsp;&nbsp;<a href="javascript:delMeditSubmit('<%=detailBean.getZLBM()%>')"><img src="/images/small_delete.gif" border="0"></img></a>
 		</div>
 		<%} %>
-		<div id="showupfile" <%if(detailBean!=null){ %>style="display:none"<%} %>><input type="file" name="UpFile" size="20"> </div>
+		<div id="showupfile" <%if(detailBean!=null){ %>style="display:none"<%} %>><input type="file" name="UpFile" size="20"  onchange="javascript:updateFileValue(this);"> </div>
 		</td>
 	</tr>
 	<tr height="25" >

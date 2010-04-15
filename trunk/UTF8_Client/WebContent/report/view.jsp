@@ -149,7 +149,7 @@ function printpage(m_printpage1){
 	</td></tr>
 	<%
 		while(rs.next()){
-			String filename = rs.getString("TITLE");
+			String filename = rs.getString("TITLE")+"."+rs.getString("WJGS");
 	%>
 	<tr>
 	<td width="50">&nbsp;</td>
