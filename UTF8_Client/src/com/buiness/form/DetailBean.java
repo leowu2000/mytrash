@@ -954,7 +954,7 @@ public class DetailBean {
 				bean.setBUVL(String.valueOf(rs.getFloat("BUVL")));		//决口流速(米/秒)
 				bean.setBUZDF(String.valueOf(rs.getFloat("BUZDF")));		//决口水头差(米)
 				bean.setBUQ(String.valueOf(rs.getFloat("BUQ")));			//决口流量(立方米/秒)
-				bean.setBURLDGL(rs.getString("BURLDGL"));		//决口处地形地质条件
+				bean.setBURLDGL(rs.getString("BURLDGL").trim());		//决口处地形地质条件
 			}
 			if("D002".trim().equals(XQFL)){
 				//D002	漫溢				TB_OVFLDSC
