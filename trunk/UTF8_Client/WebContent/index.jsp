@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=GBK"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-<title>实时工情信息采集传输管理</title>
+<title>瀹炴椂宸ユ儏淇℃伅閲囬泦浼犺緭绠＄悊</title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 </head>
 <frameset rows="80,*" cols="*" frameborder="NO" border="2" framespacing="0" > 
