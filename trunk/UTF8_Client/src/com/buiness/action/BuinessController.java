@@ -29,6 +29,7 @@ import com.core.UUIdFactory;
 import com.util.UtilDateTime;
 
 public class BuinessController implements Controller {
+	
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -369,7 +370,7 @@ public class BuinessController implements Controller {
 			String WTDT = request.getParameter("WTDT");
 			String ACTICO = request.getParameter("ACTICO");
 			String WTDPCD = request.getParameter("WTDPCD");
-			String filepath = request.getParameter("UpFile");
+			String filepath = request.getParameter("upFileValues");
 			String mediaflag = request.getParameter("mediaflag");
 			Connection conn = ConnectionPool.getConnection(path);
 
@@ -386,15 +387,20 @@ public class BuinessController implements Controller {
 				// 如果需要更新多媒体信息
 				if ("1".trim().equals(mediaflag)) {
 					if(!"".trim().equals(filepath)){
-						String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,LXZP,TITLE) values(?,?,?,?)";
+						String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,DTCDT,WJGS,TITLE,LXZP) values(?,?,?,?,?,?)";
 						PreparedStatement pstmt = conn.prepareStatement(sql);
 						File f = new File(filepath);
+						int poi = filepath.lastIndexOf(".");
+						String detail = filepath.substring(poi+1,filepath.length()).toUpperCase();
+						String name = f.getName().substring(0,f.getName().lastIndexOf("."));
 						FileInputStream fis = new FileInputStream(f);
 						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
-								"ZLBM"));
+							"ZLBM"));
 						pstmt.setString(2, String.valueOf(RPJINCD));
-						pstmt.setBinaryStream(3, fis, (int) f.length());
-						pstmt.setString(4, f.getName());
+						pstmt.setString(3, UtilDateTime.nowDateString());
+						pstmt.setString(4, detail);
+						pstmt.setString(5, name);
+						pstmt.setBinaryStream(6, fis, (int) f.length());
 						pstmt.executeUpdate();
 						pstmt.close();
 						conn.close();
@@ -537,11 +543,11 @@ public class BuinessController implements Controller {
 				}
 				if (!"".trim().equals(xqmc_s)) {
 					if ("".trim().equals(iswhere))
-						iswhere += " DNCNM like '%" + xqmc_s.substring(0, 2)
+						iswhere += " DNCNM like '%" + xqmc_s
 								+ "%'";
 					else
 						iswhere += " and DNCNM like '%"
-								+ xqmc_s.substring(0, 2) + "%'";
+								+ xqmc_s + "%'";
 				}
 				request.setAttribute("gcmc_s", gcmc_s);
 				request.setAttribute("xqmc_s", xqmc_s);
@@ -618,6 +624,7 @@ public class BuinessController implements Controller {
 						iswhere += " and WTDT >= #" + tbsj_s
 								+ " 00:00:00# and WTDT <=#" + tbsj_e + " 23:59:59#";
 				}
+				
 				request.setAttribute("bt_s", bt_s);
 				request.setAttribute("tbsj_s", tbsj_s);
 				request.setAttribute("tbsj_e", tbsj_e);
