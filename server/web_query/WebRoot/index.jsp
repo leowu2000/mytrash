@@ -77,8 +77,8 @@ function MM_swapImage() { //v3.0
       </table>
       <img src="images/ssgqindex_r2_c1.gif" width="202" height="18"> <br>
       <form action="/login.do?action=login" name="loginForm" id="loginForm" method="POST">
-      用户名：<input type="text" name="username" style="width:85"><br>
-      密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" style="width:85"><br></form>
+      &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FFFFFF" size="2">用户名：</font><input type="text" name="username" style="width:85"><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<font color="#FFFFFF" size="2">密&nbsp;&nbsp;&nbsp;&nbsp;码：</font><input type="password" name="password" style="width:85"><br></form>
       <a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image8','','images/ssgqindex_r3_c1_.gif',1)"  onClick="login();"><img src="images/ssgqindex_r3_c1.gif" name="Image8" width="202" height="33" border="0"></a><br>
       <a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image9','','images/ssgqindex_r4_c1_.gif',1)"  onClick="self.close()"><img src="images/ssgqindex_r4_c1.gif" name="Image9" width="202" height="31" border="0"></a> 
       <br> 
