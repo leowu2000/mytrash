@@ -153,6 +153,7 @@ function updateXQFLFRAME(obj){
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 <input type="hidden" name="upFileValues" value=""/>
+<input type="hidden" name="WTDPCD" value="<%=stdncbean.getWTDPCD() %>"></input>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title_center" colspan="6">
@@ -167,7 +168,7 @@ function updateXQFLFRAME(obj){
 		<td height="25"  bgcolor="#FFFFFF"><%=BuinessDao.idToNameChange(path,"TB_XQFL", "XQFLMC", "XQFLDM='"+XQFLDM+"'")%>
 		<input type="hidden" name="XQFLDM" value="<%= XQFLDM%>"></td>
 		<td height="25" nowrap class="title">Ìî±¨µ¥Î»</td>
-		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="WTDPCD" value="<%=stdncbean.getWTDPCD() %>"/></td>
+		<td height="25"  bgcolor="#FFFFFF"><%=stdncbean.getWTDPCD() %></td>
 		
 	</tr>
 	<tr>
