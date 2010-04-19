@@ -33,7 +33,6 @@
 <title></title>
 </head>
 
-</style>
 
-</BODY> </html>	
+</html>	
 
