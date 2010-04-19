@@ -30,6 +30,7 @@ margin:0px auto; padding:0px;
 	<tr>
 		<td class="title" nowrap height="25" width="25%">ËùÔÚ°¶±ğ</td>
 		<td  bgcolor="#FFFFFF">
+		  <select>
 			<%if(bean.getBKOT().trim().equals("1")){ %>&nbsp;&nbsp;×ó&nbsp;&nbsp;<%} %>
 			<%if(bean.getBKOT().trim().equals("2")){ %>&nbsp;&nbsp;ÓÒ&nbsp;&nbsp;<%} %>
 			</select>
