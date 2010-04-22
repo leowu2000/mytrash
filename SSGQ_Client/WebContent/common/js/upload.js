@@ -69,6 +69,5 @@ function MyShow()
 { 
 	if(confirm("将上传上传列表中的所有数据，请确认！")){
 		  showmsbox("正在准备上传数据...","压缩...");
-		 
 	}
 }
