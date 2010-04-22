@@ -209,12 +209,18 @@ function getValue(id){
     return document.selection.createRange().text;//返回选取项的文本内容 
     
 }
+function divHref() { 
+	 //onclick="divHref()" style="cursor:pointer;"
+	alert(document.getElementById("PicServerUrl").value);
+	var url = "/common/mirrorPic.jsp?filepath="+document.getElementById("PicServerUrl").value;
+	window.open(url,'','toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');
+}
 function PreviewImg(imgFile) 
 { 
 	var filepath = getValue(imgFile);
 	var poi = filepath.lastIndexOf(".");
 	detail = filepath.substring(poi+1,filepath.length).toUpperCase();
-	if(detail!="JPG" && detail!="JPEG" && detail!="MPG"){
+	if(detail!="JPG" && detail!="JPEG" && detail!="MPG" && detail != "PNG" && detail != "GIF" && detail != "BMP"){
 		alert("不支持的文件格式，请重新选择！");
 		return false;
 	}
@@ -228,6 +234,7 @@ function PreviewImg(imgFile)
 	newPreview.style.border= "6px double #ccc";
 }
 function pre_updateThePic(picid,type,tablename,filePath){
+	
 	document.frm.uptype.value=type;
 	if(window.XMLHttpRequest){ //Mozilla
 		var xmlHttpReq=new XMLHttpRequest();
