@@ -19,6 +19,7 @@ function submitingReport(tbname){
 	
 }
 function viewThePic(picid,tablename,filePath){
+	document.getElementById("PicServerUrl").value = filePath;
 	if(window.XMLHttpRequest){ //Mozilla
 		var xmlHttpReq=new XMLHttpRequest();
 	}else if(window.ActiveXObject){

@@ -22,15 +22,13 @@
 </style>
 <title></title>
 <script language="javascript">
-//<BODY onload="viewThePic('')"> 
-//function viewThePic(url){
-//	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = url; 
-//}
+function viewThePic(url){
+	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = url; 
+}
 </script>
 </head>
-<BODY> 
-<!-- <div id="newPreview"></div>-->
-<img src="<%=newpath %>"></img>
+<BODY onload="viewThePic('<%=newpath %>')"> 
+<div id="newPreview"></div>
 </BODY> 
 </html>	
 

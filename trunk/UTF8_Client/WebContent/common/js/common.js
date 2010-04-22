@@ -210,9 +210,13 @@ function getValue(id){
     
 }
 function divHref() { 
-	 //onclick="divHref()" style="cursor:pointer;"
-	alert(document.getElementById("PicServerUrl").value);
-	var url = "/common/mirrorPic.jsp?filepath="+document.getElementById("PicServerUrl").value;
+	var url;
+	var towhere = document.getElementById("toviewpic").value;
+	if(towhere=="1")
+		url = "/common/mirrorPicForAdd.jsp?filepath="+document.getElementById("PicServerUrl").value;
+	else
+		url = "/common/mirrorPic.jsp?filepath="+document.getElementById("PicServerUrl").value;
+	url=encodeURI(encodeURI(url));
 	window.open(url,'','toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');
 }
 function PreviewImg(imgFile) 
@@ -256,6 +260,7 @@ function pre_updateThePic(picid,type,tablename,filePath){
 		document.frm.TITLE.value=val[0];
 		document.frm.DTCDT.value=val[1];
 		document.frm.NRMS.value=val[2];
+		document.getElementById("PicServerUrl").value = filePath;
 		showupfile.style.display="none";
 		thfiles.style.display="inline";
 		document.frm.addbutton.disabled=true;
@@ -294,16 +299,20 @@ function delMeditSubmit(id,tablename){
 			xmlHttpReq.open("GET", "/FileUploadServlet?type=delpic&tablename=TB_SUB_TEMP&picid="+id, false);
 		xmlHttpReq.send(null);
 		var results = xmlHttpReq.responseText;
+		
 		if("sucess"==results){
 			showupfile.style.display="inline";
 			thfiles.style.display="none";
 			document.frm.TITLE.value="";
 			document.frm.NRMS.value="";
+			document.frm.PicServerUrl.value="";
+			document.frm.upFileValues.value="";
 			showupfile.style.display="inline";
 			thfiles.style.display="none";
 			document.frm.addbutton.disabled=false;
 			document.frm.editbutton.disabled=true;
 			document.frm.cancelbutton.disabled=true;
+			//alert("123");
 			//清空file值
 			var obj = document.getElementById("UpFile");
 			obj.outerHTML = obj.outerHTML;

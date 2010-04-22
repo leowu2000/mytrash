@@ -54,7 +54,9 @@ function toBack(){
 <input type="hidden" name="picid" value=""/>
 <input type="hidden" name="check" value="1"/><!-- 是否删除多媒体临时表数据标志1,删除,2不删除 -->
 <input type="hidden" name="uptype" value=""/>
+<input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="subAction" value="edit"/>
+<input type="hidden" name="toviewpic" value="1"/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
 <input type="hidden" name="upFileValues" value=""/>
@@ -65,7 +67,7 @@ function toBack(){
 		<input type="text" name="MAINTITLE" value="<%=bean.getWTTT() %>" size="30"/></td>
 		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value="" size="30"/></td>
-		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title" >选择照片</td>
