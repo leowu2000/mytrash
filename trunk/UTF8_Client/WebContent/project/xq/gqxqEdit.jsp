@@ -204,7 +204,7 @@ function updateXQFLFRAME(obj){
 	<tr height="25" >
 		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="<%=stdncbean.getRZ() %>" />米<font color="red">*</font></td>
-		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title" >选择照片</td>
