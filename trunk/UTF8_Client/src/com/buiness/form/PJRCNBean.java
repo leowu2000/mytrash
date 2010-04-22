@@ -9,7 +9,7 @@ public class PJRCNBean {
 	private String PJNM;//工程名称
 	private String GCFLDM;//工程分类代码
 	private String DNCFC="险情预测：";//险情预测
-	private String RDERESCN="抢险资源配备：";//抢险资源配备
+	private String RDERESCN="堤防建筑状况：";//抢险资源配备
 	private String WTDPCD;//填报单位名称
 	private String WTDPDT;//填报时间
 	private String NT="其它：";//其它

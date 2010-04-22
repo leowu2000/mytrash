@@ -31,13 +31,10 @@ public class BaseServlet extends HttpServlet{
 		doPost(request, response);
 	}
 
-	
-
-
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//cntcd,PROVNM
-		String from = request.getParameter("from");
+		String from = request.getParameter("from");//用于区分请求下拉框的来源
 		String path = request.getSession().getServletContext().getRealPath("/");
 		String type = request.getParameter("type");
 		String val = request.getParameter("val");
@@ -48,8 +45,8 @@ public class BaseServlet extends HttpServlet{
 		String result="";
 		boolean disableFlg = false;
 		
-		if("add".trim().equals(from))disableFlg = true;
-		if("config".trim().equals(from)){
+		if("add".trim().equals(from))disableFlg = true;//新增工程的时候显示下来框，不允许选择其他省和地区
+		if("config".trim().equals(from)){//参数设置页
 			hlxx = cntcd.split("-");
 			xzqh = val.split("-");
 		}else{
@@ -60,7 +57,7 @@ public class BaseServlet extends HttpServlet{
 				xzqh= BuinessDao.getXzqhxx(cntcd,path).split("-");
 			}
 		}
-		if("load".trim().equals(type)){
+		if("load".trim().equals(type)){//新增页
 			String result_z="";
 			String result_head_z="";
 			String result_head_s="";
@@ -77,12 +74,12 @@ public class BaseServlet extends HttpServlet{
 				
 				result_head_lysx1="<select name='selectlysx1' disabled>";
 				result_head_lysx2="<select name='selectlysx2' disabled>";
-				result_head_zl1="<select name='selectzl1' disabled>";
-				result_head_zl2="<select name='selectzl2' disabled>";
+				result_head_zl1="<select name='selectzl1'>";
+				result_head_zl2="<select name='selectzl2'>";
 			}
 			else{
-				result_head_z="<select name='selectz' onchange='javascript:changeValue("+"\"sx"+"\","+"\"1"+"\",this)'>";
-				result_head_s="<select name='selects' onchange='javascript:changeValue("+"\"sx"+"\","+"\"2"+"\",this)'>";
+				result_head_z="<select name='selectz' onchange='javascript:changeValue("+"\"sx"+"\","+"\"1"+"\",this)' disabled>";
+				result_head_s="<select name='selects' onchange='javascript:changeValue("+"\"sx"+"\","+"\"2"+"\",this)' disabled>";
 				result_head_x="<select name='selectx'>";
 				
 				result_head_lysx1="<select name='selectlysx1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"1"+"\",this)'>";
@@ -114,12 +111,54 @@ public class BaseServlet extends HttpServlet{
 			String sbm = "";
 			String xianbm = "";
 			
-			if("config".trim().equals(from))
+			String LY_one="";
+			String LY_two = "";
+			String LY_zone = "";
+			String LY_ztwo = "";
+			
+			List<GclbBean> gcglList = BaseUtil.getGclbList(path);
+			if("config".trim().equals(from)){
 				shbm = xzqh[0].trim();
-			else if("add".trim().equals(from))
+				sbm = xzqh[1].trim();
+				xianbm = xzqh[2].trim();
+				
+				LY_one = hlxx[0].trim();
+				LY_two = hlxx[1].trim();
+				LY_zone = hlxx[2].trim();
+				LY_ztwo = hlxx[3].trim();
+				if(!"config".trim().equals(from)){
+					String gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
+					if(gcglList !=null && gcglList.size()>0){
+						for(int i=0;i<gcglList.size();i++){
+							GclbBean bean = (GclbBean)gcglList.get(i);
+							if(gclb.trim().equals(bean.getGCFLDM()))
+								result_gcgl +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
+							else
+								result_gcgl +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
+						}
+					}
+				}
+			}
+			else if("add".trim().equals(from)){
 				shbm = cfbean.getXZQH_S();
-			else
+				sbm = cfbean.getXZQH_SI();
+				xianbm = cfbean.getXZQH_X();
+				
+				LY_one = cfbean.getLYSX_LY();
+				LY_two = cfbean.getLYSX_SX();
+				LY_zone = cfbean.getLYSX_YJZL();
+				LY_ztwo = cfbean.getLYSX_EJZL();
+			}
+			else{
 				shbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[0]+"'");
+				sbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[1]+"'");
+				xianbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[2]+"'");
+				
+				LY_one = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[0]+"'");
+				LY_two = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[1]+"'");
+				LY_zone = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[2]+"'");
+				LY_ztwo = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[3]+"'");
+			}
 			if(sxList !=null && sxList.size()>0){
 				for(int i=0;i<sxList.size();i++){
 					TbcntBean bean = (TbcntBean)sxList.get(i);
@@ -131,13 +170,7 @@ public class BaseServlet extends HttpServlet{
 			}
 			if("".trim().equals(shbm))
 				shbm=((TbcntBean)sxList.get(0)).getCntcd();
-			List<TbcntBean> sList = BaseUtil.getAllSHList(path, shbm);
-			if("config".trim().equals(from))
-				sbm = xzqh[1].trim();
-			else if("add".trim().equals(from))
-				sbm = cfbean.getXZQH_SI();
-			else
-				sbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[1]+"'");
+			List<TbcntBean> sList = BaseUtil.getAllSHList(path, shbm);				
 			if(sList !=null && sList.size()>0){
 				for(int i=0;i<sList.size();i++){
 					TbcntBean bean = (TbcntBean)sList.get(i);
@@ -150,12 +183,6 @@ public class BaseServlet extends HttpServlet{
 			if("".trim().equals(sbm))
 				sbm=((TbcntBean)sList.get(0)).getCntcd();
 			List<TbcntBean> xList = BaseUtil.getAllXList(path, sbm);
-			if("config".trim().equals(from))
-				xianbm = xzqh[2].trim();
-			else if("add".trim().equals(from))
-				xianbm = cfbean.getXZQH_X();
-			else
-				xianbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[2]+"'");
 			if(xList !=null && xList.size()>0){
 				for(int i=0;i<xList.size();i++){
 					TbcntBean bean = (TbcntBean)xList.get(i);
@@ -165,42 +192,8 @@ public class BaseServlet extends HttpServlet{
 						result_x +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 			}
-			List<GclbBean> gcglList = BaseUtil.getGclbList(path);
-			if(!"config".trim().equals(from)){
-				String gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
-				if(gcglList !=null && gcglList.size()>0){
-					for(int i=0;i<gcglList.size();i++){
-						GclbBean bean = (GclbBean)gcglList.get(i);
-						if(gclb.trim().equals(bean.getGCFLDM()))
-							result_gcgl +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
-						else
-							result_gcgl +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
-					}
-				}
-			}
-			String LY_one="";
-			String LY_two = "";
-			String LY_zone = "";
-			String LY_ztwo = "";
 			
 			List<LysxBean> lysl1List = BaseUtil.getLysxList_one(path);
-			if("config".trim().equals(from)){
-				LY_one = hlxx[0].trim();
-				LY_two = hlxx[1].trim();
-				LY_zone = hlxx[2].trim();
-				LY_ztwo = hlxx[3].trim();
-			}else if("add".trim().equals(from)){
-				LY_one = cfbean.getLYSX_LY();
-				LY_two = cfbean.getLYSX_SX();
-				LY_zone = cfbean.getLYSX_YJZL();
-				LY_ztwo = cfbean.getLYSX_EJZL();
-			}
-			else{
-				LY_one = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[0]+"'");
-				LY_two = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[1]+"'");
-				LY_zone = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[2]+"'");
-				LY_ztwo = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[3]+"'");
-			}
 			if(lysl1List !=null && lysl1List.size()>0){
 				for(int i=0;i<lysl1List.size();i++){
 					LysxBean bean = (LysxBean)lysl1List.get(i);
@@ -255,17 +248,8 @@ public class BaseServlet extends HttpServlet{
 			result_zl1 = result_head_zl1+result_zl1+result_detail_zl1;
 			result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
-//			response.setContentType("text/xml");
-//			response.setHeader("Charset", "gb2312");
-//			response.addHeader("Cache-Control", "no-cache");
-//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
-//			response.setHeader("Pragma", "No-cache");
-//			response.setHeader("Cache-Control", "no-cache");
-//			response.setDateHeader("Expires", 0L);
-//			response.setContentType("text ml; charset=GBK");
-//			response.getWriter().write(result);
 		}
-		if("viewload".trim().equals(type)){
+		if("viewload".trim().equals(type)){//查看工程信息
 			String result_z=xzqh[0];
 			String result_s=xzqh[1];
 			String result_x=xzqh[2];
@@ -278,18 +262,14 @@ public class BaseServlet extends HttpServlet{
 			String result_zl2=hlxx[3];
 
 			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
-//			response.setContentType("text/xml");
-//			response.setHeader("Charset", "gb2312");
-//			response.addHeader("Cache-Control", "no-cache");
-//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
-			
+		
 		}
-		if("change".trim().equals(type)){
-			String changeObjName = request.getParameter("changeObjName");
-			String changeType = request.getParameter("changeType");
-			String changeVal = request.getParameter("changeVal");
-			if("sx".trim().equals(changeObjName)){
-				if("1".trim().equals(changeType)){
+		if("change".trim().equals(type)){//处理下拉框onchange事件请求
+			String changeObjName = request.getParameter("changeObjName");//确定点击行政区划请求还是流域请求
+			String changeType = request.getParameter("changeType");//确定点击下拉框目标
+			String changeVal = request.getParameter("changeVal");//选中的value
+			if("sx".trim().equals(changeObjName)){//行政区划请求
+				if("1".trim().equals(changeType)){//选择省，请求市级单位
 					String result_s="";
 					String result_head_s="<select name='selects' onchange='javascript:changeValue("+"\"sx"+"\","+"\"2"+"\",this)'>";
 					String result_detail_s="</select>";
@@ -302,8 +282,6 @@ public class BaseServlet extends HttpServlet{
 							TbcntBean bean = (TbcntBean)sList.get(i);
 							result_s +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 						}
-//						TbcntBean bean = (TbcntBean)sList.get(0);
-//						result_s+="<option value='"+bean.getCntcd().substring(0,3)+"200'>"+bean.getProvnm().trim().substring(0,3)+"郊区县</option>";
 					}
 					List<TbcntBean> xList = BaseUtil.getAllXList(path, ((TbcntBean)sList.get(0)).getCntcd());
 					if(xList !=null && xList.size()>0){
@@ -316,7 +294,7 @@ public class BaseServlet extends HttpServlet{
 					result_x = result_head_x+result_x+result_detail_x;
 					result=result_s+";"+result_x;
 					
-				}else{
+				}else{//选择市，请求县级单位
 					String result_x="";
 					String result_head_x="<select name='selectx'>";
 					String result_detail_x="</select>";
@@ -330,13 +308,9 @@ public class BaseServlet extends HttpServlet{
 					result_x = result_head_x+result_x+result_detail_x;
 					result = result_x;
 				}
-//				response.setContentType("text/xml");
-//				response.setHeader("Charset", "gb2312");
-//				response.addHeader("Cache-Control", "no-cache");
-//				response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 			}
-			if("ly".trim().equals(changeObjName)){
-				if("1".trim().equals(changeType)){
+			if("ly".trim().equals(changeObjName)){//流域请求
+				if("1".trim().equals(changeType)){//选择流域，请求下属水系信息
 					String result_lysx2="";
 					String result_head_lysx2="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'>";
 					String result_detail_lysx2="</select>";
@@ -372,7 +346,7 @@ public class BaseServlet extends HttpServlet{
 					result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 					result=result_lysx2+";"+result_zl1+";"+result_zl2;
 				}
-				if("2".trim().equals(changeType)){
+				if("2".trim().equals(changeType)){//选择水系，请求下属一级支流
 					String result_zl1="";
 					String result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
 					String result_detail_zl1="</select>";
@@ -397,7 +371,7 @@ public class BaseServlet extends HttpServlet{
 					result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 					result=result_zl1+";"+result_zl2;
 				}
-				if("3".trim().equals(changeType)){
+				if("3".trim().equals(changeType)){//选择一级支流请求二级支流
 					String result_zl2="";
 					String result_head_zl2="<select name='selectzl2'>";
 					String result_detail_zl2="</select>";
@@ -411,14 +385,10 @@ public class BaseServlet extends HttpServlet{
 					result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 					result=result_zl2;
 				}
-//				response.setContentType("text/xml");
-//				response.setHeader("Charset", "gb2312");
-//				response.addHeader("Cache-Control", "no-cache");
-//				response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 			}
 			
 		}
-		if("loadSearch".trim().equals(type)){
+		if("loadSearch".trim().equals(type)){//查询页面，下拉联动
 			String lb = request.getParameter("lb");
 			String dq = request.getParameter("dq");
 			String ly = request.getParameter("ly");
@@ -466,19 +436,11 @@ public class BaseServlet extends HttpServlet{
 			result_z=result_head_z+result_z+result_detail_z;
 			result_lysx1=result_head_lysx1+result_lysx1+result_detail_lysx1;
 			result = result_gcgl+";"+result_z+";"+result_lysx1;
-//			response.setContentType("text/xml");
-//			response.setHeader("Charset", "gb2312");
-//			response.addHeader("Cache-Control", "no-cache");
-//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 		}
 		if("uploadView".trim().equals(type)){
 			String id = request.getParameter("RPJINCD");
 			STDNCBean bean = BuinessDao.findStdncById(path,id);
 			result = bean.getPJNO()+";"+bean.getDNCNO()+";"+bean.getXQFLDM();
-//			response.setContentType("text/xml");
-//			response.setHeader("Charset", "gb2312");
-//			response.addHeader("Cache-Control", "no-cache");
-//			response.getWriter().write(new String(result.getBytes("utf-8"), "iso-8859-1"));
 		}
 		if("updatepic".trim().equals(type)){
 			String zlbm=request.getParameter("zlbm");
@@ -491,10 +453,6 @@ public class BaseServlet extends HttpServlet{
 			String updateSQL = "update "+TBID+" set dtcdt=#"+sj+"#,TITLE='"+name+"' ,NRMS='"+ms+"' WHERE ZLBM="+zlbm;
 			BuinessDao.updateDB(updateSQL, path);
 			result = "true";
-//			response.setContentType("text/xml");
-//			response.setHeader("Charset", "gb2312");
-//			response.addHeader("Cache-Control", "no-cache");
-//			response.getWriter().write(new String("true".getBytes("utf-8"), "iso-8859-1"));
 		}
 		if("checkIssue".trim().equals(type)){
 			String ISSUE = request.getParameter("ISSUE");
@@ -505,10 +463,6 @@ public class BaseServlet extends HttpServlet{
 					checkResult="1";
 				else
 					checkResult="0";
-//				response.setContentType("text/xml");
-//				response.setHeader("Charset", "gb2312");
-//				response.addHeader("Cache-Control", "no-cache");
-//				response.getWriter().write(new String(checkResult.getBytes("utf-8"), "iso-8859-1"));
 				response.setHeader("Pragma", "No-cache");
 				response.setHeader("Cache-Control", "no-cache");
 				response.setDateHeader("Expires", 0L);
