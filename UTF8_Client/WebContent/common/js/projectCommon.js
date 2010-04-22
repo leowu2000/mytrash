@@ -325,7 +325,7 @@ function uplaodReportPhotos(tbname){
 	if(filepath!=""){
 		var poi = filepath.lastIndexOf(".");
 		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
-		if(detail!="JPG" && detail!="JPEG" && detail!="MPG"){
+		if(detail!="JPG" && detail!="JPEG" && detail!="MPG" && detail != "GIF" && detail != "PNG" && detail != "BMP"){
 			alert("不支持的文件格式，请重新选择！");
 			return false;
 		}

@@ -112,6 +112,7 @@ function updateXQFLFRAME(obj){
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(path, "TB_STDNC","DNCNO") %>"/>
 <input type="hidden" name="myradio" value="2"></input>
 <input type="hidden" name="uptype" value=""/>
+<input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 <input type="hidden" name="upFileValues" value=""/>
@@ -185,7 +186,7 @@ function updateXQFLFRAME(obj){
 	<tr height="25" >
 		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="0" />米<font color="red">*</font></td>
-		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title" >选择照片</td>
