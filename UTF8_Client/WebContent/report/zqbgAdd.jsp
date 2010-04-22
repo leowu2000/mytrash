@@ -49,9 +49,11 @@ function toBack(){
 <input type="hidden" name="DNCNO" value="<%=uuid%>"/>
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="FILEDNAME" value="SDDSC"/>
+<input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
 <input type="hidden" name="upFileValues" value=""/>
+<input type="hidden" name="toviewpic" value="1"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td align="center" class="title" >灾情标题</td>
@@ -59,7 +61,7 @@ function toBack(){
 		<input type="text" name="MAINTITLE" value="" size="30"/></td>
 		<td nowrap class="title">照片标题</td> 
 		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value="" size="30"/></td>
-		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title" >选择照片</td>

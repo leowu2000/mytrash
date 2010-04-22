@@ -65,6 +65,8 @@ function toBack(){
 <input type="hidden" name="myradio" value="1"/>
 <input type="hidden" name="WTDPCD" value=""/>
 <input type="hidden" name="tabname" value="TB_PJR_M"></input>
+<input type="hidden" name="PicServerUrl" value=""/>
+<input type="hidden" name="toviewpic" value="2"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title" colspan="4">
@@ -82,7 +84,7 @@ function toBack(){
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title">’’∆¨±ÍÃ‚</td> 
 		<td bgcolor="#FFFFFF" colspan="2"><div id="TITLE">&nbsp;</div></td>
-		<td bgcolor="#FFFFFF" rowspan="2" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="2" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
 	</tr>
 	<tr bgcolor="#FFFFFF" height="60" >
 		<td nowrap class="title">’’∆¨√Ë ˆ</td> 

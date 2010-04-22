@@ -65,6 +65,7 @@
 <title></title>
 <script language="javascript">
 function viewThePic(url,divid){
+	parent.document.getElementById("PicServerUrl").value = url;
 	var newPreview = document.getElementById(divid); 
 	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = url; 
 	newPreview.style.width = "100px"; 

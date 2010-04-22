@@ -95,10 +95,10 @@ function updateXQFLFRAME(obj){
 <form name="frm" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="myradio" value="2"></input>
-
+<input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="STTNM" value=""></input>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
-
+<input type="hidden" name="toviewpic" value="2"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title_center" colspan="6">
@@ -143,7 +143,9 @@ function updateXQFLFRAME(obj){
 	<tr height="25" >
 		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><%=stdncbean.getRZ() %> 米</td>
-		<td bgcolor="#FFFFFF" rowspan="3" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="3" align="center">
+		<div id="newPreview"  onclick="divHref()" style="cursor:pointer;"></div>
+		</td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title">照片标题</td> 

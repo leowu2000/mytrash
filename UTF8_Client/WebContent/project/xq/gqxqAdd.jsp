@@ -31,7 +31,6 @@
 	height:70px; 
 	borde:6px double #ccc;
 }
-
 -->
 </style>
 <%
@@ -113,6 +112,7 @@ function updateXQFLFRAME(obj){
 <input type="hidden" name="myradio" value="2"></input>
 <input type="hidden" name="uptype" value=""/>
 <input type="hidden" name="PicServerUrl" value=""/>
+<input type="hidden" name="toviewpic" value="1"/>
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 <input type="hidden" name="upFileValues" value=""/>

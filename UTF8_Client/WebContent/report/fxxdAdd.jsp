@@ -51,6 +51,8 @@ function toBack(){
 <input type="hidden" name="uptype" value=""/>
 <input type="hidden" name="FILEDNAME" value="ACTICO"/>
 <input type="hidden" name="upFileValues" value=""/>
+<input type="hidden" name="PicServerUrl" value=""/>
+<input type="hidden" name="toviewpic" value="1"/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
@@ -59,7 +61,7 @@ function toBack(){
 		<input type="text" name="MAINTITLE" value=""/></td>
 		<td nowrap class="title">’’∆¨±ÍÃ‚</td> 
 		<td bgcolor="#FFFFFF"><input type="text" name="TITLE" value="" size="30"/></td>
-		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" ></div></td>
+		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title" >—°‘Ò’’∆¨</td>

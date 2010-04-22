@@ -153,6 +153,8 @@ function updateXQFLFRAME(obj){
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 <input type="hidden" name="upFileValues" value=""/>
+<input type="hidden" name="PicServerUrl" value=""/>
+<input type="hidden" name="toviewpic" value="1"/>
 <input type="hidden" name="WTDPCD" value="<%=stdncbean.getWTDPCD() %>"></input>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
@@ -204,7 +206,9 @@ function updateXQFLFRAME(obj){
 	<tr height="25" >
 		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="<%=stdncbean.getRZ() %>" />米<font color="red">*</font></td>
-		<td bgcolor="#FFFFFF" rowspan="4" align="center"><div id="newPreview" onclick="divHref()" style="cursor:pointer;"></div></td>
+		<td bgcolor="#FFFFFF" rowspan="4" align="center">
+		<div id="newPreview" onclick="divHref()" style="cursor:pointer;">
+		</div></td>
 	</tr>
 	<tr height="25" bgcolor="#FFFFFF" >
 		<td nowrap class="title" >选择照片</td>

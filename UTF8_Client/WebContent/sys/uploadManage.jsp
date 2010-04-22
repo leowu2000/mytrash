@@ -92,7 +92,7 @@ function showDetail(id,tbname){
 	 window.parent.open (src, '', 'height=500, width=800, top=100, left=200, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');
 }
 function SearchSubmit(){
-	document.frm.gclsh.value=id;
+	//document.frm.gclsh.value=id;
 	document.frm.action="/buiness.do";
 	document.frm.actionType.value="search";
 	document.frm.submit();
