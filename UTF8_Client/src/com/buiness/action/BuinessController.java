@@ -29,7 +29,6 @@ import com.core.UUIdFactory;
 import com.util.UtilDateTime;
 
 public class BuinessController implements Controller {
-	
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -631,6 +630,33 @@ public class BuinessController implements Controller {
 				request.setAttribute("isWhere", iswhere);
 				return new ModelAndView("report/" + towhere + "Manage");
 			}
+			if ("upload".trim().equals(searchType)) {// 数据上传查询
+				String towhere = request.getParameter("towhere");
+				String bt_s = request.getParameter("bt_s");
+				String tbsj_s = request.getParameter("tbsj_s");
+				String tbsj_e = request.getParameter("tbsj_e");
+				if (!"".trim().equals(bt_s)) {
+					if ("".trim().equals(iswhere))
+						iswhere += " Title like '%" + bt_s + "%'";
+					else
+						iswhere += " and Title like '%" + bt_s + "%'";
+				}
+				if (!"".trim().equals(tbsj_s) && !"".trim().equals(tbsj_e)) {
+					if ("".trim().equals(iswhere))
+						iswhere += " WTDPDT >= #" + tbsj_s + " 00:00:00# and WTDPDT <=#"
+								+ tbsj_e + " 23:59:59#";
+					else
+						iswhere += " and WTDPDT >= #" + tbsj_s
+								+ " 00:00:00# and WTDPDT <=#" + tbsj_e + " 23:59:59#";
+				}
+				
+				request.setAttribute("bt_s", bt_s);
+				request.setAttribute("tbsj_s", tbsj_s);
+				request.setAttribute("tbsj_e", tbsj_e);
+				request.setAttribute("isWhere", iswhere);
+				return new ModelAndView("sys/uploadManage");
+			}
+
 		}
 		/**
 		 * 翻页

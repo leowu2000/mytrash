@@ -77,7 +77,7 @@ public class UploadDB {
 			ResultSet rs2 = stmt.executeQuery(allSQL);
 			while(rs2.next()){
 				UploadBean bean = new UploadBean();
-				bean.setTitle(rs2.getString("Title"));
+				bean.setTitle(rs2.getString("TITLE"));
 				bean.setWTDPDT(rs2.getString("WTDPDT"));
 				bean.setFENLEI(rs2.getString("FENLEI"));
 				bean.setWTDPCD(rs2.getString("WTDPCD"));
