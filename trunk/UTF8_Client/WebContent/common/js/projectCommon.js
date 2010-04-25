@@ -327,7 +327,6 @@ function uplaodReportPhotos(tbname){
 			alert("请填写险情标题！");
 			return false;
 		} 
-		alert("==come here==");
 		url = "/FileUploadServlet?type=report&saveType="+type+"&filepath="+ filepath+"&cjsjvalue="+cjsj
 				+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcmc+"" +
 				"&xqfldm="+document.getElementById('XQFLDM').value+"" +
