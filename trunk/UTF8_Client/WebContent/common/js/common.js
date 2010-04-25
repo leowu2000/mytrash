@@ -266,7 +266,6 @@ function cancelPhotos(){
 function delMeditSubmit(id,tablename){
 	if(confirm("删除后不能恢复,是否继续?")){
 		var type = document.frm.uptype.value;
-		alert("==="+type);
 		if(type==1)
 			xmlHttpReq.open("GET", "/FileUploadServlet?type=delpic&tablename="+tablename+"&picid="+id, false);
 		if(type==2)
@@ -286,7 +285,6 @@ function delMeditSubmit(id,tablename){
 			document.frm.addbutton.disabled=false;
 			document.frm.editbutton.disabled=true;
 			document.frm.cancelbutton.disabled=true;
-			//alert("123");
 			//清空file值
 			var obj = document.getElementById("UpFile");
 			obj.outerHTML = obj.outerHTML;
@@ -299,7 +297,6 @@ function delMeditSubmit(id,tablename){
 }
 //点击进行修改
 function pre_updateThePic(picid,type,tablename,filePath){
-	alert("pre_updateThePic=="+type);
 	if(type==1)
 		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
 	if(type==2)
@@ -328,10 +325,8 @@ function pre_updateThePic(picid,type,tablename,filePath){
 function updateMediaMsg(tablename){
 	var name = document.frm.TITLE.value;
 	var cjsj = document.frm.DTCDT.value;
-	alert(cjsj);
 	var desc = document.frm.NRMS.value;
 	var type = document.frm.uptype.value;
-	alert("updateMediaMsg=="+type);
 	var url ;
 	if(name==""){
 		alert("标题不能为空.");

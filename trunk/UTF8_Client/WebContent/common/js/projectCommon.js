@@ -301,7 +301,6 @@ function getRadioValue(name){
 	return document.getElementById('myradio').value;
 }
 function uplaodReportPhotos(tbname){
-	alert("come here uplaodReportPhotos==");
 	var url;
 	var gcmc = document.getElementById('GCNAME').value;
 	if(gcmc==""){
@@ -316,7 +315,6 @@ function uplaodReportPhotos(tbname){
 	var zpms = document.getElementById('NRMS').value;
 	var dncid = document.getElementById('DNCNO').value;
 	var cjsj = document.getElementById('DTCDT').value;
-	alert("cjsj=="+cjsj);
 	var detail;
 	if(filepath==""){alert("请选择上传照片！");return false;}
 
@@ -324,7 +322,6 @@ function uplaodReportPhotos(tbname){
 		alert("请填写照片标题.");
 		return false;
 	}
-	alert("==uplaodReportPhotos=="+type);
 	if(type==2){
 		if(document.getElementById('DNCNM').value==""){
 			alert("请填写险情标题！");
@@ -339,7 +336,6 @@ function uplaodReportPhotos(tbname){
 				"&WTDPCD="+document.getElementById('WTDPCD').value+
 				"&DNCNO="+document.getElementById("DNCNO").value+
 				"&delFlg="+check+"&tabname="+tbname;
-		alert(url);
 		url = encodeURI(url);
 		url = encodeURI(url);
 		xmlHttpReq.open("get", url, false);
