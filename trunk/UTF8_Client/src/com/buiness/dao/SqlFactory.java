@@ -377,5 +377,215 @@ public class SqlFactory {
 						+bean.getDRCECLS()+","+bean.getDAYDP()+","+bean.getTDP()+",'"+bean.getDSSTP()+"')";
 		return insertSql;
 	}
+	/**
+	 * 
+	 * @param gcmc_s 工程名称
+	 * @param xqfl_s	险情分类
+	 * @param gclb_s	工程类别
+	 * @param xqmc_s	险情名称
+	 * @param selectlysx1	流域
+	 * @param selectlysx2	水系
+	 * @param selectzl1		一级支流	
+	 * @param selectzl2		二级支流
+	 * @param jcsj_s		检测开始时间
+	 * @param jcsj_e		检测结束时间
+	 * @param type			类型
+	 * @return
+	 */
+	public static String makeSearchSQL(String gcmc_s,String xqfl_s,
+			String gclb_s,String xqmc_s,
+			String selectlysx1,String selectlysx2,String selectzl1,
+			String selectzl2,String jcsj_s,
+			String jcsj_e,String type){
+		String sSQL = "";
+		if("upload".trim().equals(type)){
+			if(!"".trim().equals(gcmc_s)){
+				if ("".trim().equals(sSQL))
+					sSQL += "  TITLE LIKE '%"+gcmc_s+"%'";
+				else
+					sSQL += " AND TITLE LIKE '%"+gcmc_s+"%'";
+			}
+			if(!"".trim().equals(gclb_s)){
+				if ("".trim().equals(sSQL))
+					sSQL += "  TBCNAME ='"+gclb_s+"'";
+				else
+					sSQL += " AND TBCNAME='"+gclb_s+"'";
+			}
+			if (!"".trim().equals(jcsj_s) && !"".trim().equals(jcsj_e)) {
+				if ("".trim().equals(sSQL))
+					sSQL += " WTDPDT >= #" + jcsj_s + " 00:00:00# and WTDPDT <=#"
+							+ jcsj_e + " 23:59:59#";
+				else
+					sSQL += " and WTDPDT >= #" + jcsj_s
+							+ " 00:00:00# and WTDPDT <=#" + jcsj_e + " 23:59:59#";
+			}else {
+				if (!"".trim().equals(jcsj_s) && "".trim().equals(jcsj_e)) {
+					if ("".trim().equals(sSQL))
+						sSQL += " WTDPDT >= #" + jcsj_s + " 00:00:00# ";
+					else
+						sSQL += " and WTDPDT >= #" + jcsj_s+ " 00:00:00#";
+				}
+				if ("".trim().equals(jcsj_s) && !"".trim().equals(jcsj_e)) {
+					if ("".trim().equals(sSQL))
+						sSQL += "  WTDPDT <=#"+ jcsj_e + " 23:59:59#";
+					else
+						sSQL += " and WTDPDT <=#" + jcsj_e + " 23:59:59#";
+				}
+			}
+			if(!"".trim().equals(selectzl2)){
+				if("".trim().equals(sSQL))
+					sSQL += " (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"')))";
+				else
+					sSQL += " and (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"')))";
+			}else if(!"".trim().equals(selectzl1)){
+				if("".trim().equals(sSQL))
+					sSQL += " (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"')))";
+				else
+					sSQL += " and (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"')))";
+			}else if(!"".trim().equals(selectlysx2)){
+				if("".trim().equals(sSQL))
+					sSQL += " (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"')))";
+				else
+					sSQL += " and (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"')))";
+			}else if(!"".trim().equals(selectlysx1)){
+				if("".trim().equals(sSQL))
+					sSQL += " (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"')))";
+				else
+					sSQL += " and (NUM IN ( SELECT PJRNO FROM TB_PJRCN WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"'))" +
+							" OR NUM IN( SELECT DNCNO FROM TB_STDNC WHERE PJNO IN(" +
+							"SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"')))";
+			}
+		}
+		if("prj".trim().equals(type)){
+			if(!"".trim().equals(selectzl2)){
+				if("".trim().equals(sSQL))
+					sSQL += " Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"'";
+				else
+					sSQL += " and Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"'";
+			}else if(!"".trim().equals(selectzl1)){
+				if("".trim().equals(sSQL))
+					sSQL += " Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"'";
+				else
+					sSQL += " and Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"'";
+			}else if(!"".trim().equals(selectlysx2)){
+				if("".trim().equals(sSQL))
+					sSQL += " Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"'";
+				else
+					sSQL += " and Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"'";
+			}else if(!"".trim().equals(selectlysx1)){
+				if("".trim().equals(sSQL))
+					sSQL += " Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"'";
+				else
+					sSQL += " and Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"'";
+			}
+		}
+		if("gcxq".trim().equals(type) || "yxzt".trim().equals(type)){
+			if(!"".trim().equals(selectzl2)){
+				if("".trim().equals(sSQL))
+					sSQL += " PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"')";
+				else
+					sSQL += " and PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,6)='"+selectzl2.substring(1,7)+"')";
+			}else if(!"".trim().equals(selectzl1)){
+				if("".trim().equals(sSQL))
+					sSQL += " PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"')";
+				else
+					sSQL += " and PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,3)='"+selectzl1.substring(1,4)+"')";
+			}else if(!"".trim().equals(selectlysx2)){
+				if("".trim().equals(sSQL))
+					sSQL += " PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"')";
+				else
+					sSQL += " and PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,2)='"+selectlysx2.substring(1,3)+"')";
+			}else if(!"".trim().equals(selectlysx1)){
+				if("".trim().equals(sSQL))
+					sSQL += " PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"')";
+				else
+					sSQL += " and PJNO IN (SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"')";
+			}
+			if(!"".trim().equals(gcmc_s)){
+				if ("".trim().equals(sSQL))
+					sSQL += " PJNO = "+gcmc_s;
+				else
+					sSQL += " and PJNO = "+gcmc_s;
+			}
+			if(!"".trim().equals(gclb_s)){
+				if ("".trim().equals(sSQL))
+					sSQL += " PJNO IN(SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,1,1)='"+gclb_s+"')";
+				else
+					sSQL += " and PJNO IN(SELECT PJNO FROM TB_PJ WHERE Mid(PJNMCD,1,1)='"+gclb_s+"')";
+			}
+			if("gcxq".trim().equals(type)){
+				if(!"".trim().equals(xqmc_s)){
+					if("".trim().equals(sSQL))
+						sSQL += " DNCNM LIKE '%"+xqmc_s+"%'";
+					else
+						sSQL += " AND DNCNM LIKE '%"+xqmc_s+"%'";
+				}
+				if(!"".trim().equals(xqfl_s)){
+					if ("".trim().equals(sSQL))
+						sSQL += " XQFLDM = '"+xqfl_s+"'";
+					else
+						sSQL += " and XQFLDM = '"+xqfl_s+"'";
+				}
+			}
+			if("yxzt".trim().equals(type)){
+				if (!"".trim().equals(jcsj_s) && !"".trim().equals(jcsj_e)) {
+					if ("".trim().equals(sSQL))
+						sSQL += " DTCDT >= #" + jcsj_s + " 00:00:00# and DTCDT <=#"
+								+ jcsj_e + " 23:59:59#";
+					else
+						sSQL += " and DTCDT >= #" + jcsj_s
+								+ " 00:00:00# and DTCDT <=#" + jcsj_e + " 23:59:59#";
+				}
+				else if (!"".trim().equals(jcsj_s) && "".trim().equals(jcsj_e)) {
+					if ("".trim().equals(sSQL))
+						sSQL += " DTCDT >= #" + jcsj_s + " 00:00:00# ";
+					else
+						sSQL += " and DTCDT >= #" + jcsj_s+ " 00:00:00#";
+				}else if ("".trim().equals(jcsj_s) && !"".trim().equals(jcsj_e)) {
+					if ("".trim().equals(sSQL))
+						sSQL += "  DTCDT <=#"+ jcsj_e + " 23:59:59#";
+					else
+						sSQL += " and DTCDT <=#" + jcsj_e + " 23:59:59#";
+				}
+			}
+		}
+		if("prj".trim().equals(type)){
+			if(!"".trim().equals(gcmc_s)){
+				if ("".trim().equals(sSQL))
+					sSQL += " PJNM like '%"+gcmc_s+"%'";
+				else
+					sSQL += " and PJNM like '%"+gcmc_s+"%'";
+			}
+			if(!"".trim().equals(gclb_s)){
+				if ("".trim().equals(sSQL))
+					sSQL += " Mid(PJNMCD,1,1)='"+gclb_s+"'";
+				else
+					sSQL += " and Mid(PJNMCD,1,1)='"+gclb_s+"'";
+			}
+		}
 
+		return sSQL;
+	}
 }
