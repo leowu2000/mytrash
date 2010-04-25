@@ -194,11 +194,11 @@ public class BuinessDao {
 		return bean;
 	}
 
-	public static List<PrjBean> getAllList(String PATH, String isWhere) {
+	public static List<PrjBean> getAllList(String PATH, String isWhere,String xzqh) {
 		List<PrjBean> list = new ArrayList<PrjBean>();
 		if ("".trim().equals(isWhere))
 			isWhere = "1=1";
-		String sSQL = "select * from TB_PJ where " + isWhere+ " order by PJNM,PJNMCD,CNTCD";
+		String sSQL = "select * from TB_PJ where CNTCD='"+xzqh+"' AND " + isWhere+ " order by PJNM,PJNMCD,CNTCD";
 		Connection conn = null;
 		try {
 			conn = ConnectionPool.getConnection(PATH);

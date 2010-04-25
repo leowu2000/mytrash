@@ -3,7 +3,6 @@
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -15,11 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.ServletRequestUtils;
-
 import com.buiness.dao.BuinessDao;
 import com.buiness.form.PrjBean;
 import com.buiness.form.SubTempBean;
+import com.util.UtilDateTime;
 
 public class FileUploadServlet extends HttpServlet {
 
@@ -79,10 +77,11 @@ public class FileUploadServlet extends HttpServlet {
 					String zpbt = request.getParameter("zpbtvalue");//report 共用
 					zpbt = java.net.URLDecoder.decode(zpbt,"utf-8");
 					String zpms = request.getParameter("zpmsvalue");
-					zpms = java.net.URLDecoder.decode(zpms,"utf-8");
-					time=time==""?request.getParameter("time"):time;
-					time = java.net.URLDecoder.decode(time,"utf-8");
-	//				conn = ConnectionPool.getConnection(path);
+					if(!"".trim().equals(zpms))
+						zpms = java.net.URLDecoder.decode(zpms,"utf-8");
+					time=request.getParameter("cjsjvalue");
+					if(!"".trim().equals(time))time = java.net.URLDecoder.decode(time,"utf-8");
+					else time = UtilDateTime.nowDateString();
 					if("1".trim().equals(delFlg))
 						BuinessDao.deleteTempMedia(path);
 					BuinessDao.insertTempMedia(path, DNCNO, time, zpbt, detail, zpms, filedir, tabname);
@@ -175,6 +174,7 @@ public class FileUploadServlet extends HttpServlet {
 					String dtcdt= request.getParameter("dtcdt");
 					dtcdt = java.net.URLDecoder.decode(dtcdt,"utf-8");
 					String nrms= request.getParameter("nrms");
+					if(!"".trim().equals(nrms))
 					nrms = java.net.URLDecoder.decode(nrms,"utf-8");
 					BuinessDao.updateDB("update "+tablename+" set title='"+title+"',dtcdt=#"+dtcdt
 							+"#,nrms='"+nrms+"' where zlbm="+picid, path);

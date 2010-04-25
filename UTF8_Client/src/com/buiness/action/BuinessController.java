@@ -67,11 +67,9 @@ public class BuinessController implements Controller {
 				// 取得详情代码表名称
 				String tablename = BuinessDao.getXqFlTabname(path, groupArr[2]);
 				// 删除多媒体表数据
-				BuinessDao.deleteDB("delete from TB_STDNC_M where DNCNO="
-						+ groupArr[1], path);
+				BuinessDao.deleteDB("delete from TB_STDNC_M where DNCNO="+ groupArr[1], path);
 				// 删除详情分类表数据
-				BuinessDao.deleteDB("delete from " + tablename
-						+ " where DNCNO=" + groupArr[1], path);
+				BuinessDao.deleteDB("delete from " + tablename+ " where DNCNO=" + groupArr[1], path);
 				// 删除主表数据
 				BuinessDao.deleteDB("delete from TB_STDNC where DNCNO="
 						+ groupArr[1] + " and PJNO=" + groupArr[0], path);
@@ -99,13 +97,12 @@ public class BuinessController implements Controller {
 			String gcnm = request.getParameter("PJNM");
 			String gclb = request.getParameter("gclb");
 			String cntcd = request.getParameter("cntcd");
+			
 			String hldm = request.getParameter("hldm");
 			String gcdm = gclb + hldm.substring(1, 7) + cntcd.substring(0, 1);
 			String SQL = "INSERT INTO TB_PJ(PJNO,PJNMCD,PJNM,CNTCD,FPDUTY,FPDUTYPH)VALUES("
 					+ UUIdFactory.getMaxId(path, "TB_PJ", "PJNO")
-					+ ",'"
-					+ gcdm
-					+ "','" + gcnm + "','" + cntcd + "','','')";
+					+ ",'"+ gcdm+ "','" + gcnm + "','" + cntcd + "','','')";
 			BuinessDao.insertDB(SQL, path);
 
 			return new ModelAndView("project/prgManage");
@@ -162,8 +159,7 @@ public class BuinessController implements Controller {
 			String fileds[] = PKFILED.split(",");
 			if (tbs.length > 0) {
 				for (int i = 0; i < tbs.length; i++) {
-					String SQL = "DELETE FROM " + tbs[i] + " WHERE "
-							+ fileds[i] + " IN(" + IDs + ")";
+					String SQL = "DELETE FROM " + tbs[i] + " WHERE "+ fileds[i] + " IN(" + IDs + ")";
 					BuinessDao.deleteDB(SQL, path);
 				}
 			}
@@ -200,7 +196,6 @@ public class BuinessController implements Controller {
 				bean.setPJRNO(String.valueOf(DNCNO));
 				String sSQL = SqlFactory.insertSQL_PJRCNBean(bean, path,
 						prjBean);
-//				RSRBean rsrbean = _getRSRBeanFromRquest(request);
 				PjrDetailBean pjdbean = _getPjrDetailBeanFormReqeust(request,bean.getGCFLDM());
 				pjdbean.setPJRNO(String.valueOf(DNCNO));
 				String sSQL2 = SqlFactory.insertSQL_PjrBean(pjdbean, path,
@@ -241,15 +236,11 @@ public class BuinessController implements Controller {
 				bean.setSTTPCD(String.valueOf(id));
 				mainSQL = SqlFactory.insertSQL_STDNCBean(bean, path);
 				// 获取并保存资表信息
-				DetailBean dBean = _getDetailBeanFromRquest(request, bean
-						.getXQFLDM());
+				DetailBean dBean = _getDetailBeanFromRquest(request, bean.getXQFLDM());
 				dBean.setSTTPCD(String.valueOf(id));
-				subSQL = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean
-						.getXQFLDM());
-				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,
-						DNCNO, TABLENAME);
-				BuinessDao.toInsertDbList(path, TABLENAME, mainSQL, subSQL,
-						beanlist);
+				subSQL = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean.getXQFLDM());
+				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,DNCNO, TABLENAME);
+				BuinessDao.toInsertDbList(path, TABLENAME, mainSQL, subSQL,beanlist);
 				BuinessDao.deleteTempMedia(path);
 				return new ModelAndView("project/xq/gqxqManage");
 			}
@@ -272,8 +263,7 @@ public class BuinessController implements Controller {
 				STDNCBean bean = _getSTDNCeanFromRequest(request);
 				String sttpcd = bean.getSTTPCD();
 				String code = BuinessDao.getIdFromNameChange(path, "TB_ST",
-						"STTPCD", "STNM='" + sttpcd + "' AND PJNO="
-								+ bean.getPJNO());
+						"STTPCD", "STNM='" + sttpcd + "' AND PJNO="+ bean.getPJNO());
 				if (!"".trim().equals(code)) {
 					bean.setSTTPCD(code);
 					id = new Integer(code).intValue();
@@ -285,73 +275,50 @@ public class BuinessController implements Controller {
 					BuinessDao.insertDB(mainSQL, path);
 				}
 				// 保存主表信息
-				BuinessDao.deleteDB(
-						"delete from TB_STDNC WHERE DNCNO=" + DNCNO, path);
-
+				BuinessDao.deleteDB("delete from TB_STDNC WHERE DNCNO=" + DNCNO, path);
 				bean.setDNCNO(String.valueOf(DNCNO));
 				mainSQL = SqlFactory.insertSQL_STDNCBean(bean, path);
 				// 取子表名称
-				String detailTablename = BuinessDao
-						.getXqFlTabname(path, XQFLDM);
-				BuinessDao.deleteDB("delete from " + detailTablename
-						+ " WHERE DNCNO=" + DNCNO, path);
+				String detailTablename = BuinessDao.getXqFlTabname(path, XQFLDM);
+				BuinessDao.deleteDB("delete from " + detailTablename+ " WHERE DNCNO=" + DNCNO, path);
 				// 获取并保存资表信息
 
 				DetailBean dBean = _getDetailBeanFromRquest(request, XQFLDM);
 				dBean.setSTTPCD(String.valueOf(id));
-				subSQL = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean
-						.getXQFLDM());
-				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,
-						DNCNO, "TB_STDNC_M");
-				BuinessDao.toInsertDbList(path, "TB_STDNC_M", mainSQL, subSQL,
-						beanlist);
+				subSQL = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean.getXQFLDM());
+				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,DNCNO, "TB_STDNC_M");
+				BuinessDao.toInsertDbList(path, "TB_STDNC_M", mainSQL, subSQL,beanlist);
 				BuinessDao.deleteTempMedia(path);
 				return new ModelAndView("project/xq/gqxqManage");
 			} else {
 				//反回主表数据的运行状态码
 				String GCFL = BuinessDao.idToNameChange(path, "TB_PJRCN", "GCFLDM", " PJRNO="+DNCNO);
 				String detailTname="";
-				if("B".trim().equals(GCFL))
-					detailTname = "TB_RSR";
-				if("K".trim().equals(GCFL))
-					detailTname = "TB_WLR";
-				if("N".trim().equals(GCFL))
-					detailTname = "TB_COWAPJ";//=治河工程=N
-				if("F".trim().equals(GCFL))
-					detailTname = "TB_STOFLER";//=蓄滞=F
+				if("B".trim().equals(GCFL))detailTname = "TB_RSR";
+				if("K".trim().equals(GCFL))detailTname = "TB_WLR";
+				if("N".trim().equals(GCFL))detailTname = "TB_COWAPJ";//=治河工程=N
+				if("F".trim().equals(GCFL))detailTname = "TB_STOFLER";//=蓄滞=F
 				if("D".trim().equals(GCFL)
 						||"E".trim().equals(GCFL)
 						||"H".trim().equals(GCFL)
 						||"P".trim().equals(GCFL))
 					detailTname = "TB_DKR";
 				// 删除主表数据
-				
-				BuinessDao.deleteDB(
-						"delete from TB_PJRCN WHERE PJRNO=" + DNCNO, path);
+				BuinessDao.deleteDB("delete from TB_PJRCN WHERE PJRNO=" + DNCNO, path);
 				// 更新主表
 				PJRCNBean bean = _getPJRCNBeanFromRequest(request);
-				PrjBean prjBean = BuinessDao.findBySql(
-						"select * from TB_PJ where PJNO="
+				PrjBean prjBean = BuinessDao.findBySql("select * from TB_PJ where PJNO="
 								+ request.getParameter("GCNAME"), path);
 				bean.setPJRNO(DNCNO);
-				String sSQL = SqlFactory.insertSQL_PJRCNBean(bean, path,
-						prjBean);
+				String sSQL = SqlFactory.insertSQL_PJRCNBean(bean, path,prjBean);
 				// 删除子表数据
-				BuinessDao.deleteDB("delete from "+detailTname+" WHERE PJRNO=" + DNCNO,
-						path);
+				BuinessDao.deleteDB("delete from "+detailTname+" WHERE PJRNO=" + DNCNO,path);
 				// 更新子表数据
-//				RSRBean rsrbean = _getRSRBeanFromRquest(request);
-//				rsrbean.setPJRNO(String.valueOf(DNCNO));
-//				String sSQL2 = SqlFactory.insertSQL_RSRBean(rsrbean, path,
-//						prjBean);
 				PjrDetailBean pjdbean = _getPjrDetailBeanFormReqeust(request,bean.getGCFLDM());
 				pjdbean.setPJRNO(String.valueOf(DNCNO));
-				String sSQL2 = SqlFactory.insertSQL_PjrBean(pjdbean, path,
-						prjBean,bean.getGCFLDM());
-				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,
-						DNCNO, "TB_PJR_M");
-				BuinessDao.toInsertDbList(path, "TB_PJR_M", sSQL, sSQL2,
-						beanlist);
+				String sSQL2 = SqlFactory.insertSQL_PjrBean(pjdbean, path,prjBean,bean.getGCFLDM());
+				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,DNCNO, "TB_PJR_M");
+				BuinessDao.toInsertDbList(path, "TB_PJR_M", sSQL, sSQL2,beanlist);
 				BuinessDao.deleteTempMedia(path);
 				return new ModelAndView("project/yx/gqyxManage");
 			}
@@ -393,8 +360,7 @@ public class BuinessController implements Controller {
 						String detail = filepath.substring(poi+1,filepath.length()).toUpperCase();
 						String name = f.getName().substring(0,f.getName().lastIndexOf("."));
 						FileInputStream fis = new FileInputStream(f);
-						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
-							"ZLBM"));
+						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M","ZLBM"));
 						pstmt.setString(2, String.valueOf(RPJINCD));
 						pstmt.setString(3, UtilDateTime.nowDateString());
 						pstmt.setString(4, detail);
@@ -465,14 +431,11 @@ public class BuinessController implements Controller {
 						+ DNCNO + ",'" + MAINTITLE + "',#" + WTDT + "#,'"
 						+ WTDPCD + "','" + CONTENT + "')";
 			}
-			List<SubTempBean> beanlist = BuinessDao.getMediaList(path, DNCNO,
-					TABLENAME + "_M");
+			List<SubTempBean> beanlist = BuinessDao.getMediaList(path, DNCNO,TABLENAME + "_M");
 			if ("edit".trim().equals(subAction))
-				BuinessDao.toUpdateDbList(path, TABLENAME + "_M", newSQL, "",
-						beanlist);// 更新
+				BuinessDao.toUpdateDbList(path, TABLENAME + "_M", newSQL, "",beanlist);// 更新
 			else
-				BuinessDao.toInsertDbList(path, TABLENAME + "_M", newSQL, "",
-						beanlist);// 增加
+				BuinessDao.toInsertDbList(path, TABLENAME + "_M", newSQL, "",beanlist);// 增加
 			BuinessDao.deleteTempMedia(path);
 			return new ModelAndView("report/" + TABLENAME + "Manage");
 		}
@@ -481,102 +444,81 @@ public class BuinessController implements Controller {
 		 */
 		if ("search".trim().equals(actionType)) {
 			String searchType = request.getParameter("searchType");
-
+			String gcmc_s = "";
+			String gclb_s = "";
+			String xqfl_s ="";
+			String selectlysx1 = "";
+			String selectlysx2 = "";
+			String selectzl1 = "";
+			String selectzl2 = "";
 			String iswhere = "";
+			if("prj".trim().equals(searchType) 
+					|| "gcxq".trim().equals(searchType) 
+					|| "yxzt".trim().equals(searchType)
+					|| "upload".trim().equals(searchType)){//获取流域信息
+				gcmc_s = request.getParameter("gcmc_s");
+				selectlysx1 = request.getParameter("selectlysx1");
+				selectlysx2 = request.getParameter("selectlysx2");
+				selectzl1 = request.getParameter("selectzl1");
+				selectzl2 = request.getParameter("selectzl2");
+				gclb_s = request.getParameter("gclb_s");
+				request.setAttribute("gclb_s",gclb_s );
+				request.setAttribute("ly_s", selectlysx1);
+				request.setAttribute("sx_s", selectlysx2);
+				request.setAttribute("yjzl_s", selectzl1);
+				request.setAttribute("ejzl_s", selectzl2);
+				request.setAttribute("gcmc_s",gcmc_s );
+			}
 			if ("prj".trim().equals(searchType)) {// 工程管理
-				String gcmc_s = request.getParameter("gcmc_s");
-				String gclb_s = request.getParameter("gclb_s");
-				String dq_s = request.getParameter("dq_s");
-				String ly_s = request.getParameter("ly_s");
-
-				if (!"".trim().equals(gcmc_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " PJNM like '%" + gcmc_s + "%'";
-					else
-						iswhere += " and PJNM like '%" + gcmc_s + "%'";
-				}
-				if (!"".trim().equals(gclb_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " PJNMCD like '" + gclb_s + "%'";
-					else
-						iswhere += " and PJNMCD like '" + gclb_s + "%'";
-				}
-				if (!"".trim().equals(dq_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " MID(CNTCD,1,2) = '" + dq_s.substring(0, 2)
-								+ "'";
-					else
-						iswhere += " and MID(CNTCD,1,2) '" + dq_s.substring(0, 2)
-								+ "'";
-				}
-				if (!"".trim().equals(ly_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " MID(PJNMCD,2,1) = '" + ly_s.substring(1, 2)
-								+ "'";
-					else
-						iswhere += " and MID(PJNMCD,2,1) = '" + ly_s.substring(1, 2)
-								+ "'";
-				}
-				request.setAttribute("gcmc_s", gcmc_s);
-				request.setAttribute("gclb_s", gclb_s);
-				request.setAttribute("ly_s", ly_s);
-				request.setAttribute("dq_s", dq_s);
+				//工程名称（输入like）、工程类别、流域、水系、一级支流、二级支流
+				iswhere = SqlFactory.makeSearchSQL(gcmc_s,"",gclb_s,"",
+							selectlysx1,selectlysx2,selectzl1,selectzl2,"",
+							"",searchType);
 				request.setAttribute("isWhere", iswhere);
 				return new ModelAndView("project/prgManage");
 			}
 			if ("gcxq".trim().equals(searchType)) {// 工程险情
-				String gcmc_s =request.getParameter("gcmc_s");
-				String xqfldm_s = request.getParameter("xqfldm_s");
+				//险情名称（输入like）、工程名称、工程类别、险情分类、流域、水系、一级支流、二级支流
 				String xqmc_s = request.getParameter("xqmc_s");
-				if (!"".trim().equals(gcmc_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " PJNO = " + gcmc_s;
-					else
-						iswhere += " and PJNO =" + gcmc_s;
-				}
-				if (!"".trim().equals(xqfldm_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " XQFLDM = '" + xqfldm_s + "'";
-					else
-						iswhere += " and XQFLDM = '" + xqfldm_s + "'";
-				}
-				if (!"".trim().equals(xqmc_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " DNCNM like '%" + xqmc_s
-								+ "%'";
-					else
-						iswhere += " and DNCNM like '%"
-								+ xqmc_s + "%'";
-				}
-				request.setAttribute("gcmc_s", gcmc_s);
+				xqfl_s = request.getParameter("xqfl_s");
+				
+				iswhere = SqlFactory.makeSearchSQL(gcmc_s,"",gclb_s,xqmc_s,
+						selectlysx1,selectlysx2,selectzl1,selectzl2,"",
+						"",searchType);
 				request.setAttribute("xqmc_s", xqmc_s);
-				request.setAttribute("xqfldm_s", xqfldm_s);
+				request.setAttribute("xqfl_s", xqfl_s);
 				request.setAttribute("isWhere", iswhere);
 				return new ModelAndView("project/xq/gqxqManage");
 			}
 			if ("yxzt".trim().equals(searchType)) {// 运行状态
-				String gcmc_s = request.getParameter("gcmc_s");
+				//工程名称、工程类别、检测时间、流域、水系、一级支流、二级支流
 				String jcsj_s = request.getParameter("jcsj_s");
 				String jcsj_e = request.getParameter("jcsj_e");
-				if (!"".trim().equals(gcmc_s)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " PJNO = " + gcmc_s;
-					else
-						iswhere += " and PJNO =" + gcmc_s;
-				}
-				if (!"".trim().equals(jcsj_s) && !"".trim().equals(jcsj_e)) {
-					if ("".trim().equals(iswhere))
-						iswhere += " DTCDT >= #" + jcsj_s
-								+ " 00:00:00# and DTCDT <=#" + jcsj_e + " 23:59:59#";
-					else
-						iswhere += " and DTCDT >= #" + jcsj_s
-								+ " 00:00:00# and DTCDT <=#" + jcsj_e + " 23:59:59#";
-				}
-				request.setAttribute("gcmc_s", gcmc_s);
+				iswhere = SqlFactory.makeSearchSQL(gcmc_s,"",gclb_s,"",
+						selectlysx1,selectlysx2,selectzl1,selectzl2,jcsj_s,
+						jcsj_e,searchType);
 				request.setAttribute("jcsj_s", jcsj_s);
 				request.setAttribute("jcsj_e", jcsj_e);
 				request.setAttribute("isWhere", iswhere);
 				return new ModelAndView("project/yx/gqyxManage");
+			}
+			if("upload".trim().equals(searchType)){
+				//标题（输入like）、类别（险情、运行、灾情等）、填报时间
+				//工程名称、工程类别、险情分类、流域、水系、一级支流、二级支流
+				String bt_s = request.getParameter("bt_s");
+				String lb_s = request.getParameter("LB");
+				String jcsj_s = request.getParameter("jcsj_s");
+				String jcsj_e = request.getParameter("jcsj_e");
+				iswhere = SqlFactory.makeSearchSQL(bt_s,"",lb_s,"",
+						selectlysx1,selectlysx2,selectzl1,selectzl2,jcsj_s,
+						jcsj_e,searchType);
+				
+				request.setAttribute("lb", lb_s);
+				request.setAttribute("bt_s", bt_s);
+				request.setAttribute("jcsj_s", jcsj_s);
+				request.setAttribute("jcsj_e", jcsj_e);
+				request.setAttribute("isWhere", iswhere);
+				return new ModelAndView("sys/uploadManage");
 			}
 			if ("fxjb".trim().equals(searchType)) {// 防汛简报
 				String jbbt_s = request.getParameter("bt_s");
@@ -631,7 +573,6 @@ public class BuinessController implements Controller {
 				return new ModelAndView("report/" + towhere + "Manage");
 			}
 			if ("upload".trim().equals(searchType)) {// 数据上传查询
-				String towhere = request.getParameter("towhere");
 				String bt_s = request.getParameter("bt_s");
 				String tbsj_s = request.getParameter("tbsj_s");
 				String tbsj_e = request.getParameter("tbsj_e");
