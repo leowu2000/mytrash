@@ -90,6 +90,15 @@ function SearchSubmit(){
 	String gcmc_s =  (String)request.getAttribute("gcmc_s");
 	String jcsj_s =  (String)request.getAttribute("jcsj_s");
 	String jcsj_e =  (String)request.getAttribute("jcsj_e");
+	String gclb_s = (String)request.getAttribute("gclb_s");
+	String ly_s = (String)request.getAttribute("ly_s");
+	String sx_s = (String)request.getAttribute("sx_s");
+	String yjzl_s = (String)request.getAttribute("yjzl_s");
+	String ejzl_s = (String)request.getAttribute("ejzl_s");
+	gcmc_s=gcmc_s==null?"":gcmc_s;
+	iswhere=iswhere==null?"":iswhere;
+	ly_s=ly_s==null?"":ly_s;sx_s=sx_s==null?"":sx_s;
+	yjzl_s=yjzl_s==null?"":yjzl_s;ejzl_s=ejzl_s==null?"":ejzl_s;
 	String xzqh = configBean.getXZQH_X();
 	iswhere=iswhere==null?"":iswhere;
 	jcsj_e=jcsj_e==null?"":jcsj_e;
@@ -108,7 +117,7 @@ function SearchSubmit(){
 	PageUtil pUtil = new PageUtil(10, records.size(), currentPage); 
 	currentPage = pUtil.getCurrentPage(); 
 %> 
-<body  onload="loadSearchSelect('','','','','','','','yx')">
+<body  onload="loadSearchSelect('<%=gcmc_s %>','<%=gclb_s %>','','<%=ly_s %>','<%=sx_s %>','<%=yjzl_s %>','<%=ejzl_s %>','yx')">
 <table width="95%" align="center">
 	<tr><td align="center" ><span  class="style4">工程运行状态</span></td></tr>
 </table>
