@@ -154,17 +154,28 @@ function rcheckall2() {
 	   document.forms[0].allid.checked=val;
 	 }
 	}
+
 </script>
 
 <% 
 	String path = request.getSession().getServletContext().getRealPath("/");
 	String bt_s = (String)request.getAttribute("bt_s");
-	String tbsj_s = (String)request.getAttribute("tbsj_s");
-	String tbsj_e = (String)request.getAttribute("tbsj_e");
+	String lb = (String)request.getAttribute("lb");
+	String jcsj_s = (String)request.getAttribute("jcsj_s");
+	String jcsj_e = (String)request.getAttribute("jcsj_e");
+	String gcmc_s = (String)request.getAttribute("gcmc_s");
+	String gclb_s = (String)request.getAttribute("gclb_s");
+	String xqfl_s = (String)request.getAttribute("xqfl_s");
+	String ly_s = (String)request.getAttribute("ly_s");
+	String sx_s = (String)request.getAttribute("sx_s");
+	String yjzl = (String)request.getAttribute("yjzl_s");
+	String ejzl = (String)request.getAttribute("ejzl_s");
 	String iswhere = (String)request.getAttribute("isWhere");
-	bt_s=bt_s==null?"":bt_s;
-	tbsj_s=tbsj_s==null?"":tbsj_s;
-	tbsj_e=tbsj_e==null?"":tbsj_e;
+	bt_s=bt_s==null?"":bt_s;lb=lb==null?"":lb;
+	jcsj_s=jcsj_s==null?"":jcsj_s;jcsj_e=jcsj_e==null?"":jcsj_e;
+	gclb_s=gclb_s==null?"":gclb_s;xqfl_s=xqfl_s==null?"":xqfl_s;
+	ly_s=ly_s==null?"":ly_s;sx_s=sx_s==null?"":sx_s;
+	yjzl=yjzl==null?"":yjzl;ejzl=ejzl==null?"":ejzl;
 	iswhere=iswhere==null?"":iswhere;
 	
 	List<UploadBean> records = UploadDB.getAllRecords(path,iswhere);
@@ -176,7 +187,7 @@ function rcheckall2() {
 	PageUtil pUtil = new PageUtil(10, records.size(), currentPage); 
 	currentPage = pUtil.getCurrentPage(); 
 %> 
-<body>
+<body onload="loadSearchSelect('','','','<%=ly_s %>','<%=sx_s %>','<%=yjzl %>','<%=ejzl %>','upload')">
 <table width="95%" align="center">
 	<tr><td align="center" ><span  class="style4">数 据 上 传</span></td></tr>
 </table>
@@ -190,17 +201,47 @@ function rcheckall2() {
 <input type="hidden" value="<%=iswhere %>" name="iswhere"/>
 <input type="hidden" value="upload" name="searchType"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
-<table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
-		<tr height="25" >
-			<td nowrap class="title">标题:</td>
-			<td bgcolor=#FFFFFF><input type=text size="15" name="bt_s" value="<%=bt_s %>"></td>
-			<td nowrap class="title">填报时间:</td>
-			<td bgcolor="#FFFFFF">
-			<input type="text" value="" size="15" name="tbsj_s" onClick="WdatePicker({skin:'blue'})"  value="<%=tbsj_s %>" readonly>至
-			<input type="text" value="" size="15" name="tbsj_e" onClick="WdatePicker({skin:'blue'})"  value="<%=tbsj_e %>" readonly></td>
-			<td bgcolor="#FFFFFF" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
-		</tr>
-		</table>
+<table border="0" align="center" height="30" width="98%" cellspacing="1" bgcolor="#CCCCCC">
+	<tr height="25" >
+		<td nowrap class="title">标题:</td>
+		<td bgcolor=#FFFFFF><input type=text size="15" name="bt_s" value="<%=bt_s %>"></td>
+		<td nowrap class="title">类别:</td>
+		<td bgcolor=#FFFFFF>
+			<select name="LB">
+				<option value="" <%if("".trim().equals(lb)){ %>selected<%} %>>--</option>
+				<option value="险情" <%if("险情".trim().equals(lb)){ %>selected<%} %>>工程险情</option>
+				<option value="运行状态" <%if("运行状态".trim().equals(lb)){ %>selected<%} %>>运行状态</option>
+				<option value="灾情" <%if("灾情".trim().equals(lb)){ %>selected<%} %>>灾  情</option>
+				<option value="旱情" <%if("旱情".trim().equals(lb)){ %>selected<%} %>>旱  情</option>
+				<option value="防汛行动" <%if("防汛行动".trim().equals(lb)){ %>selected<%} %>>防汛行动</option>
+				<option value="防汛简报" <%if("防汛简报".trim().equals(lb)){ %>selected<%} %>>防汛简报</option>
+			</select>
+		</td>
+		<td nowrap class="title">填报时间:</td>
+		<td bgcolor="#FFFFFF" colspan="3">
+		<input type="text" size="15" name="jcsj_s" onClick="WdatePicker({skin:'blue'})"  value="<%=jcsj_s %>" readonly>至
+		<input type="text" size="15" name="jcsj_e" onClick="WdatePicker({skin:'blue'})"  value="<%=jcsj_e %>" readonly></td>
+		<td bgcolor="#FFFFFF" align="center" rowspan="2"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
+	</tr>
+	<!--  <tr height="25" >
+		<td nowrap class="title">工程名称:</td>
+		<td bgcolor="#FFFFFF"><div id="GCMC_S"></div></td>
+		<td nowrap class="title">工程类别:</td>
+		<td bgcolor="#FFFFFF"><DIV id="GCLB_S"></DIV></td>
+		<td nowrap class="title">险情分类:</td>
+		<td bgcolor="#FFFFFF" colspan="5"><DIV id="XQFL_S"></DIV></td></td>
+	</tr>-->
+	<tr height="25" >
+		<td nowrap class="title">流域:</td>
+		<td bgcolor="#FFFFFF"><DIV id="LY_S"></DIV></td>
+		<td nowrap class="title">水系:</td>
+		<td bgcolor="#FFFFFF"><DIV id="SX_S"></DIV></td>
+		<td nowrap class="title">一级支流:</td>
+		<td bgcolor="#FFFFFF"><DIV id="YJZL_S"></DIV></td>
+		<td nowrap class="title">二级支流:</td>
+		<td bgcolor="#FFFFFF"><DIV id="EJZL_S"></DIV></td>
+	</tr>
+</table>
 <table border="0" align="center" width="98%" >
 	<tr>
 		<td width=40% bgcolor="#FFFFFF" align="center"><div align="center" id="SERVERTSTATES"></div></td>

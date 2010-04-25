@@ -291,11 +291,6 @@ function per_Submit(type){
 
 function getGcmessage(id){
 	var type = getRadioValue("myradio");
-	if(window.XMLHttpRequest){ //Mozilla
-    	var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=gqcj&saveType="+type+"&changeVal="+id, false);
 	xmlHttpReq.send(null);
   	GCMESSAGE.innerHTML = xmlHttpReq.responseText;
@@ -306,6 +301,7 @@ function getRadioValue(name){
 	return document.getElementById('myradio').value;
 }
 function uplaodReportPhotos(tbname){
+	alert("come here uplaodReportPhotos==");
 	var url;
 	var gcmc = document.getElementById('GCNAME').value;
 	if(gcmc==""){
@@ -320,34 +316,21 @@ function uplaodReportPhotos(tbname){
 	var zpms = document.getElementById('NRMS').value;
 	var dncid = document.getElementById('DNCNO').value;
 	var cjsj = document.getElementById('DTCDT').value;
+	alert("cjsj=="+cjsj);
 	var detail;
 	if(filepath==""){alert("请选择上传照片！");return false;}
-	if(filepath!=""){
-		var poi = filepath.lastIndexOf(".");
-		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
-		if(detail!="JPG" && detail!="JPEG" && detail!="MPG" && detail != "GIF" && detail != "PNG" && detail != "BMP"){
-			alert("不支持的文件格式，请重新选择！");
-			return false;
-		}
-	}
-	if(filepath==""){
-		alert("请选择文件.");
-		return false;
-	}
+
 	if(zpbt==""){
 		alert("请填写照片标题.");
 		return false;
 	}
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
+	alert("==uplaodReportPhotos=="+type);
 	if(type==2){
 		if(document.getElementById('DNCNM').value==""){
 			alert("请填写险情标题！");
 			return false;
 		} 
+		alert("==come here==");
 		url = "/FileUploadServlet?type=report&saveType="+type+"&filepath="+ filepath+"&cjsjvalue="+cjsj
 				+"&zpbtvalue="+zpbt+"&zpmsvalue="+zpms+"&detailvalue="+detail+"&gclsh="+gcmc+"" +
 				"&xqfldm="+document.getElementById('XQFLDM').value+"" +
@@ -356,6 +339,7 @@ function uplaodReportPhotos(tbname){
 				"&WTDPCD="+document.getElementById('WTDPCD').value+
 				"&DNCNO="+document.getElementById("DNCNO").value+
 				"&delFlg="+check+"&tabname="+tbname;
+		alert(url);
 		url = encodeURI(url);
 		url = encodeURI(url);
 		xmlHttpReq.open("get", url, false);
@@ -386,11 +370,7 @@ function uplaodReportPhotos(tbname){
 }
 function viewThePic(picid,tablename,filePath){
 	document.getElementById("PicServerUrl").value = filePath;
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
+
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
 	xmlHttpReq.send(null);
 	var results = xmlHttpReq.responseText;

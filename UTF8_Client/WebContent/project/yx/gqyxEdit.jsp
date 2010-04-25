@@ -14,7 +14,8 @@
 	String pjWhere = "1=1";
 	if(configBean!=null)
 		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
-	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+	String xzqh = configBean.getXZQH_X();
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere,xzqh);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	RandomAccessFileTool.delAllFile(path+"\\\\common\\\\pic");
 	String RPJINCD = request.getParameter("RPJINCD");
@@ -74,6 +75,7 @@ function toBack(){
 <input type="hidden" name="upFileValues" value=""/>
 <input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="toviewpic" value="1"/>
+<input type="hidden" name="uptype" value=""/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title" colspan="6">

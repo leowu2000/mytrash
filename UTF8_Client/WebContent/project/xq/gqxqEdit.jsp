@@ -13,7 +13,8 @@
 	String pjWhere = "1=1";
 	if(configBean!=null)
 		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
-	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+	String xzqh = configBean.getXZQH_X();
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere,xzqh);
 	BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	RandomAccessFileTool.delAllFile(path+"\\\\common\\\\pic");
@@ -179,7 +180,7 @@ function updateXQFLFRAME(obj){
 		<td height="25" nowrap class="title">建筑物</td>
 		<td height="25"  bgcolor="#FFFFFF"><div id="show"></div></td>
 		<td height="25" nowrap class="title">出险时间</td>
-		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=stdncbean.getDAGTM() %>" onClick="WdatePicker({startDate:'%y-%M-01 00:00',dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:false})" readonly /></td>
+		<td height="25"  bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=stdncbean.getDAGTM() %>" onClick="WdatePicker({skin:'blue'})" readonly /></td>
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title">险情级别</td>

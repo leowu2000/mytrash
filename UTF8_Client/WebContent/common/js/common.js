@@ -1,4 +1,9 @@
-﻿
+﻿var xmlHttpReq;
+if(window.XMLHttpRequest){ //Mozilla
+	xmlHttpReq=new XMLHttpRequest();
+}else if(window.ActiveXObject){
+	xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+}
 var oldbgcolor = "#ffffff";
 function turngray(num,bgcolor)
 {
@@ -210,6 +215,9 @@ function getValue(id){
     
 }
 function divHref() { 
+	if(document.getElementById("PicServerUrl").value==""){
+		return false;
+	}
 	var url;
 	var towhere = document.getElementById("toviewpic").value;
 	if(towhere=="1")
@@ -236,39 +244,9 @@ function PreviewImg(imgFile)
 	newPreview.style.width = "150px"; 
 	newPreview.style.height = "100px"; 
 	newPreview.style.border= "6px double #ccc";
-}
-function pre_updateThePic(picid,type,tablename,filePath){
 	
-	document.frm.uptype.value=type;
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
-	if(type==1)
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
-	if(type==2)
-		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename=TB_SUB_TEMP&picid="+picid, false);
-	xmlHttpReq.send(null);
-	var results = xmlHttpReq.responseText;
-	if(val=="")
-		alert("数据查询失败,请重试!");
-	else{
-		viewDataImg(filePath);
-		var val = results.split(";");
-		document.frm.picid.value=picid;
-		document.frm.TITLE.value=val[0];
-		document.frm.DTCDT.value=val[1];
-		document.frm.NRMS.value=val[2];
-		document.getElementById("PicServerUrl").value = filePath;
-		showupfile.style.display="none";
-		thfiles.style.display="inline";
-		document.frm.addbutton.disabled=true;
-		document.frm.editbutton.disabled=false;
-		document.frm.cancelbutton.disabled=false;
-		thfiles.innerHTML=val[0]+"&nbsp;&nbsp;&nbsp;&nbsp;<a href=javascript:delMeditSubmit('"+picid+"','"+tablename+"') title='点击删除多媒体信息'><img src='/images/small_delete.gif' border='0'></img></a>";
-	}
 }
+
 function cancelPhotos(){
 	document.frm.TITLE.value="";
 	document.frm.DTCDT.value="";
@@ -287,12 +265,8 @@ function cancelPhotos(){
 }
 function delMeditSubmit(id,tablename){
 	if(confirm("删除后不能恢复,是否继续?")){
-		if(window.XMLHttpRequest){ //Mozilla
-			var xmlHttpReq=new XMLHttpRequest();
-		}else if(window.ActiveXObject){
-			var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-		}
 		var type = document.frm.uptype.value;
+		alert("==="+type);
 		if(type==1)
 			xmlHttpReq.open("GET", "/FileUploadServlet?type=delpic&tablename="+tablename+"&picid="+id, false);
 		if(type==2)
@@ -323,11 +297,41 @@ function delMeditSubmit(id,tablename){
 		}
 	}
 }
+//点击进行修改
+function pre_updateThePic(picid,type,tablename,filePath){
+	alert("pre_updateThePic=="+type);
+	if(type==1)
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
+	if(type==2)
+		xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename=TB_SUB_TEMP&picid="+picid, false);
+	xmlHttpReq.send(null);
+	var results = xmlHttpReq.responseText;
+	if(val=="")
+		alert("数据查询失败,请重试!");
+	else{
+		viewDataImg(filePath);
+		var val = results.split(";");
+		document.frm.picid.value=picid;
+		document.frm.TITLE.value=val[0];
+		document.frm.DTCDT.value=val[1];
+		document.frm.NRMS.value=val[2];
+		document.getElementById("PicServerUrl").value = filePath;
+		showupfile.style.display="none";
+		thfiles.style.display="inline";
+		document.frm.addbutton.disabled=true;
+		document.frm.editbutton.disabled=false;
+		document.frm.cancelbutton.disabled=false;
+		thfiles.innerHTML=val[0]+"&nbsp;&nbsp;&nbsp;&nbsp;<a href=javascript:delMeditSubmit('"+picid+"','"+tablename+"') title='点击删除多媒体信息'><img src='/images/small_delete.gif' border='0'></img></a>";
+		document.frm.uptype.value=type;
+	}
+}
 function updateMediaMsg(tablename){
 	var name = document.frm.TITLE.value;
 	var cjsj = document.frm.DTCDT.value;
+	alert(cjsj);
 	var desc = document.frm.NRMS.value;
 	var type = document.frm.uptype.value;
+	alert("updateMediaMsg=="+type);
 	var url ;
 	if(name==""){
 		alert("标题不能为空.");
@@ -336,15 +340,6 @@ function updateMediaMsg(tablename){
 	if(cjsj==""){
 		alert("拍摄时间不能为空.");
 		return false;
-	}
-	if(desc==""){
-		alert("照片描述不能为空.");
-		return false;
-	}
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	}
 	if(type==1){
 		url = "/FileUploadServlet?type=updateMediaMsg&tablename="+tablename+"&picid="
@@ -381,11 +376,6 @@ function updateMediaMsg(tablename){
 	}
 }
 function playTheMedia(picid,tablename,tempPath,filePath,pkname){
-	if(window.XMLHttpRequest){ //Mozilla
-		var xmlHttpReq=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-		var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	}
 
 	xmlHttpReq.open("GET", "/FileUploadServlet?type=pre_updatepic&tablename="+tablename+"&picid="+picid, false);
 	xmlHttpReq.send(null);
@@ -401,4 +391,51 @@ function playTheMedia(picid,tablename,tempPath,filePath,pkname){
 		DTCDT.innerHTML=val[1];
 		NRMS.innerHTML=val[2];
 	}
+}
+function loadSearchSelect(mc,lb,xqfl,ly,sx,yjzl,ejzl,type){
+	  xmlHttpReq.open("GET", "/BaseServlet?type=loadSearch&mc="+mc+"&lb="+lb+"&xqfl="+xqfl+"&ly="+ly+"&sx="+sx+"&yjzl="+yjzl+"&ejzl="+ejzl, false);
+	  xmlHttpReq.send(null);
+	 var result = xmlHttpReq.responseText;
+	//result=工程名称+工程类别+险情分类+流域+水系+一级支流+二级支流
+
+	 var val = result.split(";");
+	 if("gc"==type){
+		 GCLB_S.innerHTML=val[1];
+	 }else if("xq"==type){
+		 GCMC_S.innerHTML=val[0];
+		 GCLB_S.innerHTML=val[1];
+		 XQFL_S.innerHTML=val[2];
+	 }else if("yx"==type){
+		 GCMC_S.innerHTML=val[0];
+		 GCLB_S.innerHTML=val[1];
+	 }
+	 LY_S.innerHTML=val[3];
+	 SX_S.innerHTML=val[4];
+	 YJZL_S.innerHTML=val[5];
+	 EJZL_S.innerHTML=val[6];
+}
+function changeValue(style,type,obj){
+	if(obj.value==""){
+		return false;
+	}
+
+	  xmlHttpReq.open("GET", "/BaseServlet?type=change&changeObjName="+style+"&changeType="+type+"&changeVal="+obj.value+"&from=search", false);
+	  xmlHttpReq.send(null);
+	  var result = xmlHttpReq.responseText;
+	  if(style=="ly"){
+			if(type=="1"){
+				 var val = result.split(";");
+				 SX_S.innerHTML=val[0];
+				 YJZL_S.innerHTML=val[1];
+				 EJZL_S.innerHTML=val[2];
+			}
+			if(type=="2"){
+				 var val = result.split(";");
+				 YJZL_S.innerHTML=val[0];
+				 EJZL_S.innerHTML=val[1];
+			}
+			if(type=="3"){
+				EJZL_S.innerHTML=result;
+			}
+		}
 }

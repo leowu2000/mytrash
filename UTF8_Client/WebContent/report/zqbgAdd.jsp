@@ -71,7 +71,7 @@ function toBack(){
 		</td>
 		<td nowrap class="title">едиЦй╠╪Д</td> 
 		<td >
-		<input type="text" name="DTCDT" onClick="WdatePicker({startDate:'%y-%M-01 00:00',dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:false})" readonly value="" size="30"/>
+		<input type="text" name="DTCDT" onClick="WdatePicker({skin:'blue'})" readonly value="" size="30"/>
 		</td>
 		
 	</tr>

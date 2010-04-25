@@ -36,7 +36,8 @@
 	String pjWhere = "1=1";
 	if(configBean!=null)
 		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
-	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+	String xzqh = configBean.getXZQH_X();
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere,xzqh);
 
 	String uuid = String.valueOf(UUIdFactory.getMaxId(path, "TB_PJRCN","PJRNO"));
 	BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
@@ -74,6 +75,7 @@ function getGcmessageForyx(id){
 <input type="hidden" name="myradio" value="1"></input>
 <input type="hidden" name="GCLB" value="1"></input>
 <input type="hidden" name="GCFLDM" value="1"></input>
+<input type="hidden" name="uptype" value="2"/>
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="DNCNO" value="<%=uuid %>"/>
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>

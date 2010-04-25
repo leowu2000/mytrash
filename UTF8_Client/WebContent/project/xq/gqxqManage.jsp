@@ -106,21 +106,29 @@ function SearchSubmit(){
 	document.frm.actionType.value="search";
 	document.frm.submit();
 }
+
 </script>
 <% 
 	String path = request.getSession().getServletContext().getRealPath("/");
 	String iswhere = (String)request.getAttribute("isWhere");
 	String gcmc_s = (String)request.getAttribute("gcmc_s");
-	String xqfldm_s = (String)request.getAttribute("xqfldm_s");
+	String xqfl_s = (String)request.getAttribute("xqfl_s");
 	String xqmc_s = (String)request.getAttribute("xqmc_s");
+	String gclb_s = (String)request.getAttribute("gclb_s");
+	String ly_s = (String)request.getAttribute("ly_s");
+	String sx_s = (String)request.getAttribute("sx_s");
+	String yjzl_s = (String)request.getAttribute("yjzl_s");
+	String ejzl_s = (String)request.getAttribute("ejzl_s");
+	String xzqh = configBean.getXZQH_X();
 	gcmc_s=gcmc_s==null?"":gcmc_s;
 	xqmc_s=xqmc_s==null?"":xqmc_s;
-	xqfldm_s=xqfldm_s==null?"":xqfldm_s;
 	iswhere=iswhere==null?"":iswhere;
+	ly_s=ly_s==null?"":ly_s;sx_s=sx_s==null?"":sx_s;
+	yjzl_s=yjzl_s==null?"":yjzl_s;ejzl_s=ejzl_s==null?"":ejzl_s;
 	String pjWhere = "1=1";
 	if(configBean!=null)
 		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
-	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere,xzqh);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	List<STDNCBean> records = BuinessDao.getAllStdncList(path,iswhere," order by DAGTM desc"); 
 	String pageStr = (String)request.getAttribute("page"); 
@@ -131,7 +139,7 @@ function SearchSubmit(){
 	PageUtil pUtil = new PageUtil(10, records.size(), currentPage); 
 	currentPage = pUtil.getCurrentPage(); 
 %> 
-<body>
+<body onload="loadSearchSelect('<%=gcmc_s %>','<%=gclb_s %>','<%=xqfl_s %>','<%=ly_s %>','<%=sx_s %>','<%=yjzl_s %>','<%=ejzl_s %>','xq')">
 <table width="95%" align="center">
 	<tr><td align="center" ><span  class="style4">工程险情</span></td></tr>
 </table>
@@ -144,43 +152,30 @@ function SearchSubmit(){
 <input type="hidden" value="DNCNO,DNCNO" name="PKFILED"/>
 <input type="hidden" value="TB_STDNC,TB_STDNC_M" name="TBID"/>
 <input type="hidden" value="<%=currentPage %>" name="currentPage"/>
-<table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
+<table border="0" align="center" height="30" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
+		<td nowrap class="title">险情名称:</td>
+		<td bgcolor="#FFFFF"><input type="text" name="xqmc_s" value="<%= xqmc_s%>"></input></td>
 		<td nowrap class="title">工程名称:</td>
-		<td bgcolor="#FFFFFF">
-		<select name="gcmc_s">
-				<option value="">--</option>
-					<%if(beanList!=null && beanList.size()>0){
-						for(int i=0;i<beanList.size();i++){
-							PrjBean bean = beanList.get(i);
-				%>
-					<option value="<%=bean.getPJNO() %>" <%if(gcmc_s.trim().equals(bean.getPJNO())){ %>selected=true<%} %>><%=bean.getPJNM() %></option>
-				<%
-						}
-					} %>
-				</select>
-		</td>
+		<td bgcolor="#FFFFFF"><div id="GCMC_S"></div></td>
+		<td nowrap class="title">工程类别</td>
+		<td bgcolor="#FFFFFF"><DIV id="GCLB_S"></DIV></td>
 		<td nowrap class="title">险情分类:</td>
-		<td bgcolor="#FFFFFF"> 
-		<select name="xqfldm_s" >
-		<option value="">--</option>
-			<%if(resultList!=null && resultList.size()>0){
-			for(int i=0;i<resultList.size();i++){
-				Map<Object,Object> map = (Map<Object,Object>)resultList.get(i);
-				%>
-					<option value="<%=map.get("id")%>" <%if(xqfldm_s.trim().equals(map.get("id"))){ %>selected=true<%} %>><%=map.get("value")%></option>
-				<%
-			}} %>
-			</select>
-		</td>
+		<td bgcolor="#FFFFFF"><DIV id="XQFL_S"></DIV></td></td>
 		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
 	</tr>
 	<tr>
-		<td nowrap class="title">险情名称:</td>
-		<td bgcolor="#FFFFF" colspan="3"><input type="text" name="xqmc_s" value="<%= xqmc_s%>"></input></td>
+		<td nowrap class="title">流域</td>
+		<td bgcolor="#FFFFFF"><DIV id="LY_S"></DIV></td>
+		<td nowrap class="title">水系</td>
+		<td bgcolor="#FFFFFF"><DIV id="SX_S"></DIV></td>
+		<td nowrap class="title">一级支流</td>
+		<td bgcolor="#FFFFFF"><DIV id="YJZL_S"></DIV></td>
+		<td nowrap class="title">二级支流</td>
+		<td bgcolor="#FFFFFF"><DIV id="EJZL_S"></DIV></td>
 	</tr>
 </table>
-<table border="0" align="center" width="95%" >
+<table border="0" align="center" width="98%" >
 	<tr>
 		<td width=100% bgcolor="#FFFFFF" align="right"> 
 		共<font color="red">&nbsp;<%=pUtil.getRecordCount()%>&nbsp;</font>条记录,
@@ -198,7 +193,7 @@ function SearchSubmit(){
 	</td>
 	</tr>
 </table>
-<table border="0" align="center" width="95%" cellspacing="1" bgcolor="#CCCCCC">
+<table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr bgcolor="#E8EFFF" height="30" >
 		<td class="title"><input name=all class="inputAll" onclick=rcheckall() type=checkbox value=9999 ></td>
 		<td nowrap align="center" class="title">工程名称</td>

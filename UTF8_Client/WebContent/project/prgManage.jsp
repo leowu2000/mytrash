@@ -23,13 +23,17 @@
 	String gcmc_s = (String)request.getAttribute("gcmc_s");
 	String gclb_s = (String)request.getAttribute("gclb_s");
 	String ly_s = (String)request.getAttribute("ly_s");
-	String dq_s = (String)request.getAttribute("dq_s");
+	String sx_s = (String)request.getAttribute("sx_s");
+	String yjzl = (String)request.getAttribute("yjzl_s");
+	String ejzl = (String)request.getAttribute("ejzl_s");
+	
+	String xzqh = configBean.getXZQH_X();
 	gcmc_s=gcmc_s==null?"":gcmc_s;
 	gclb_s=gclb_s==null?"":gclb_s;
-	ly_s=ly_s==null?"":ly_s;
-	dq_s=dq_s==null?"":dq_s;
+	ly_s=ly_s==null?"":ly_s;sx_s=sx_s==null?"":sx_s;
+	yjzl=yjzl==null?"":yjzl;ejzl=ejzl==null?"":ejzl;
 	iswhere=iswhere==null?"":iswhere;
-	List<PrjBean> records = BuinessDao.getAllList(path,iswhere); 
+	List<PrjBean> records = BuinessDao.getAllList(path,iswhere,xzqh); 
 	String pageStr = request.getParameter("page"); 
 	pageStr=pageStr==null?"1":pageStr;
 	int currentPage = 1; 
@@ -50,20 +54,7 @@ function viewThePrg(id){
 	document.frm.actionType.value="view";
 	document.frm.submit();
 }
-function loadGclb(lb,dq,ly){
-	if(window.XMLHttpRequest){ //Mozilla
-	    var xmlHttpReq=new XMLHttpRequest();
-	  }else if(window.ActiveXObject){
-	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
-	  }
-	  xmlHttpReq.open("GET", "/BaseServlet?type=loadSearch&lb="+lb+"&dq="+dq+"&ly="+ly, false);
-	  xmlHttpReq.send(null);
-	 var result = xmlHttpReq.responseText;
-	 var val = result.split(";");
-	 GCLB.innerHTML=val[0];
-	 XZQH.innerHTML=val[1];
-	 LYXX.innerHTML=val[2];
-}
+
 function toEdit(){
 	var result="";
 	var str = document.forms[0].RECORDID;
@@ -134,7 +125,7 @@ function todeletePj(){
 	}
 }
 </script>
-<body onload="loadGclb('<%=gclb_s %>','<%=dq_s %>','<%=ly_s %>')">
+<body onload="loadSearchSelect('','<%=gclb_s%>','','<%= ly_s%>','<%= sx_s%>','<%= yjzl%>','<%= ejzl%>','gc')">
 <table width="95%" align="center">
 	<tr><td align="center" ><span  class="style4">工程管理</span></td></tr>
 </table>
@@ -153,16 +144,20 @@ function todeletePj(){
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap class="title">工程名称:</td>
-		<td bgcolor="#ECEDED"><input type="text" name="gcmc_s" value="<%=gcmc_s %>"/> </td>
+		<td bgcolor="#ECEDED" ><input type="text" name="gcmc_s" value="<%=gcmc_s %>"/> </td>
 		<td nowrap class="title">工程类别:</td>
-		<td bgcolor="#ECEDED"> <DIV id="GCLB"></DIV></td>
+		<td bgcolor="#ECEDED"> <DIV id="GCLB_S"></DIV></td>
+		<td nowrap class="title">流域</td>
+		<td bgcolor="#FFFFFF"><DIV id="LY_S"></DIV></td>
 		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
 	</tr>
 	<tr>
-		<td nowrap class="title">所属地区:</td>
-		<td bgcolor="#ECEDED" > <DIV id="XZQH"></DIV> </td>
-		<td nowrap class="title">流域:</td>
-		<td bgcolor="#ECEDED" ><DIV id="LYXX"></DIV>  </td>
+		<td nowrap class="title">水系</td>
+		<td bgcolor="#FFFFFF"><DIV id="SX_S"></DIV></td>
+		<td nowrap class="title">一级支流</td>
+		<td bgcolor="#FFFFFF"><DIV id="YJZL_S"></DIV></td>
+		<td nowrap class="title">二级支流</td>
+		<td bgcolor="#FFFFFF"><DIV id="EJZL_S"></DIV></td>
 	</tr>
 </table>
 <table border="0" align="center" width="95%" >

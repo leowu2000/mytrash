@@ -9,6 +9,7 @@
 <input type="hidden" name="XQYC" value=""/>
 <input type="hidden" name="DFJZZK" value=""/>
 <input type="hidden" name="QT" value=""/>
+<input type="hidden" name="uptype" value=""/>
 <!-- TB_RSR	水库	B -->
 <input type="hidden" name="RSCLS" value=""/>	<!-- 水库类别(良好/尚好/病险库) -->
 <input type="hidden" name="RV" value=""/>		<!-- 当前库容(万立方米) -->
