@@ -3,13 +3,15 @@
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="com.util.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="/common/session.jsp"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
     String fromwhere = request.getParameter("fromwhere");
 	String path = request.getSession().getServletContext().getRealPath("/");
-	List<PrjBean> beanList = BuinessDao.getAllList(path,"");
+	String xzqh = configBean.getXZQH_X();
+	List<PrjBean> beanList = BuinessDao.getAllList(path,"",xzqh);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
 	RandomAccessFileTool.delAllFile(path+"\\\\common\\\\pic");
     String RPJINCD = request.getParameter("RPJINCD");

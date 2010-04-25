@@ -82,6 +82,7 @@ function SearchSubmit(){
 	document.frm.actionType.value="search";
 	document.frm.submit();
 }
+
 </script>
 <% 
 	String path = request.getSession().getServletContext().getRealPath("/");
@@ -89,6 +90,7 @@ function SearchSubmit(){
 	String gcmc_s =  (String)request.getAttribute("gcmc_s");
 	String jcsj_s =  (String)request.getAttribute("jcsj_s");
 	String jcsj_e =  (String)request.getAttribute("jcsj_e");
+	String xzqh = configBean.getXZQH_X();
 	iswhere=iswhere==null?"":iswhere;
 	jcsj_e=jcsj_e==null?"":jcsj_e;
 	jcsj_s=jcsj_s==null?"":jcsj_s;
@@ -96,7 +98,7 @@ function SearchSubmit(){
 	String pjWhere = "1=1";
 	if(configBean!=null)
 		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
-	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere,xzqh);
 	List<PJRCNBean> records = BuinessDao.getAllPjrcnList(path,iswhere); 
 	String pageStr = (String)request.getAttribute("page"); 
 	pageStr=pageStr==null?request.getParameter("page"):pageStr;
@@ -106,7 +108,7 @@ function SearchSubmit(){
 	PageUtil pUtil = new PageUtil(10, records.size(), currentPage); 
 	currentPage = pUtil.getCurrentPage(); 
 %> 
-<body>
+<body  onload="loadSearchSelect('','','','','','','','yx')">
 <table width="95%" align="center">
 	<tr><td align="center" ><span  class="style4">工程运行状态</span></td></tr>
 </table>
@@ -114,24 +116,24 @@ function SearchSubmit(){
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap class="title">工程名称:</td>
-		<td bgcolor="#FFFFFF">
-		<select name="gcmc_s">
-				<option value="">--</option>
-					<%if(beanList!=null && beanList.size()>0){
-						for(int i=0;i<beanList.size();i++){
-							PrjBean bean = beanList.get(i);
-				%>
-					<option value="<%=bean.getPJNO() %>" <%if(gcmc_s.trim().equals(bean.getPJNO())) {%>selected<%} %>><%=bean.getPJNM() %></option>
-				<%
-						}
-					} %>
-				</select>
-		</td>
+		<td bgcolor="#FFFFFF"><div id="GCMC_S"></div></td>
+		<td nowrap class="title">工程类别</td>
+		<td bgcolor="#FFFFFF"><DIV id="GCLB_S"></DIV></td>
 		<td nowrap class="title">检测时间:</td>
-		<td bgcolor="#FFFFFF">
-		<input type="text" value="" size="15" onClick="WdatePicker({skin:'blue'})"  name="jcsj_s" value="<%=jcsj_s %>" readonly>至
-		<input type="text" value="" size="15" onClick="WdatePicker({skin:'blue'})"  name="jcsj_e" value="<%=jcsj_e %>" readonly></td>
-		<td bgcolor="#FFFFFF" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
+		<td bgcolor="#FFFFFF" colspan="3">
+		<input type="text" size="15" onClick="WdatePicker({skin:'blue'})"  name="jcsj_s" value="<%=jcsj_s %>" readonly>至
+		<input type="text" size="15" onClick="WdatePicker({skin:'blue'})"  name="jcsj_e" value="<%=jcsj_e %>" readonly></td>
+		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
+	</tr>
+	<tr height="25" >
+		<td nowrap class="title">流域</td>
+		<td bgcolor="#FFFFFF"><DIV id="LY_S"></DIV></td>
+		<td nowrap class="title">水系</td>
+		<td bgcolor="#FFFFFF"><DIV id="SX_S"></DIV></td>
+		<td nowrap class="title">一级支流</td>
+		<td bgcolor="#FFFFFF"><DIV id="YJZL_S"></DIV></td>
+		<td nowrap class="title">二级支流</td>
+		<td bgcolor="#FFFFFF"><DIV id="EJZL_S"></DIV></td>
 	</tr>
 </table>
 <input type="hidden" value="" name="actionType"/>

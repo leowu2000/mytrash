@@ -38,7 +38,8 @@
 	String pjWhere = "1=1";
 	if(configBean!=null)
 		pjWhere = "CNTCD='"+configBean.getXZQH_X()+"'";
-	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere);
+	String xzqh = configBean.getXZQH_X();
+	List<PrjBean> beanList = BuinessDao.getAllList(path,pjWhere,xzqh);
 	String uuid = String.valueOf(UUIdFactory.getMaxId(path, "TB_STDNC","DNCNO"));
 	BuinessDao.deleteDB("delete from TB_SUB_TEMP",path);
 	List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
@@ -110,8 +111,7 @@ function updateXQFLFRAME(obj){
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(path, "TB_STDNC","DNCNO") %>"/>
 <input type="hidden" name="myradio" value="2"></input>
-<input type="hidden" name="uptype" value=""/>
-<input type="hidden" name="PicServerUrl" value=""/>
+<input type="hidden" name="PicServerUrl" id="PicServerUrl" value=""/>
 <input type="hidden" name="toviewpic" value="1"/>
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
@@ -173,7 +173,7 @@ function updateXQFLFRAME(obj){
 		<td nowrap class="title">出险地点</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="DAGPLCCH" value=""/></td>
 		<td nowrap class="title">出险时间</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>" onClick="WdatePicker({startDate:'%y-%M-01 00:00',dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:false})" readonly /></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>" onClick="WdatePicker({skin:'blue'})" readonly /></td>
 	</tr>
 	<tr height="25" >
 	<td nowrap class="title">解放军投入</td>
