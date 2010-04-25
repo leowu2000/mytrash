@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.buiness.dao.BuinessDao;
 import com.buiness.form.ConfigBean;
 import com.buiness.form.FXJBBean;
+import com.buiness.form.PrjBean;
 import com.buiness.form.STDNCBean;
 
 public class BaseServlet extends HttpServlet{
@@ -74,10 +76,11 @@ public class BaseServlet extends HttpServlet{
 				
 				result_head_lysx1="<select name='selectlysx1' disabled>";
 				result_head_lysx2="<select name='selectlysx2' disabled>";
-				result_head_zl1="<select name='selectzl1'>";
+				result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
 				result_head_zl2="<select name='selectzl2'>";
 			}
 			else{
+				
 				result_head_z="<select name='selectz' onchange='javascript:changeValue("+"\"sx"+"\","+"\"1"+"\",this)' disabled>";
 				result_head_s="<select name='selects' onchange='javascript:changeValue("+"\"sx"+"\","+"\"2"+"\",this)' disabled>";
 				result_head_x="<select name='selectx'>";
@@ -126,18 +129,7 @@ public class BaseServlet extends HttpServlet{
 				LY_two = hlxx[1].trim();
 				LY_zone = hlxx[2].trim();
 				LY_ztwo = hlxx[3].trim();
-				if(!"config".trim().equals(from)){
-					String gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
-					if(gcglList !=null && gcglList.size()>0){
-						for(int i=0;i<gcglList.size();i++){
-							GclbBean bean = (GclbBean)gcglList.get(i);
-							if(gclb.trim().equals(bean.getGCFLDM()))
-								result_gcgl +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
-							else
-								result_gcgl +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
-						}
-					}
-				}
+				
 			}
 			else if("add".trim().equals(from)){
 				shbm = cfbean.getXZQH_S();
@@ -158,6 +150,18 @@ public class BaseServlet extends HttpServlet{
 				LY_two = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[1]+"'");
 				LY_zone = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[2]+"'");
 				LY_ztwo = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[3]+"'");
+			}
+			if(!"config".trim().equals(from)){
+				String gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
+				if(gcglList !=null && gcglList.size()>0){
+					for(int i=0;i<gcglList.size();i++){
+						GclbBean bean = (GclbBean)gcglList.get(i);
+						if(gclb.trim().equals(bean.getGCFLDM()))
+							result_gcgl +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
+						else
+							result_gcgl +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
+					}
+				}
 			}
 			if(sxList !=null && sxList.size()>0){
 				for(int i=0;i<sxList.size();i++){
@@ -310,18 +314,24 @@ public class BaseServlet extends HttpServlet{
 				}
 			}
 			if("ly".trim().equals(changeObjName)){//流域请求
+				String result_lysx2="";
+				String result_head_lysx2="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'>";
+				String result_detail_lysx2="</select>";
+				String result_zl1="";
+				String result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
+				String result_detail_zl1="</select>";
+				String result_zl2="";
+				String result_head_zl2="<select name='selectzl2'>";
+				String result_detail_zl2="</select>";
+				if("search".trim().equals(from)){//构造查询列表下拉框时候，允许下来选项条件为空
+					result_lysx2 = "<option value=''>--</option>";
+					result_zl1 = "<option value=''>--</option>";
+					result_zl2 = "<option value=''>--</option>";
+				}
 				if("1".trim().equals(changeType)){//选择流域，请求下属水系信息
-					String result_lysx2="";
-					String result_head_lysx2="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'>";
-					String result_detail_lysx2="</select>";
-					String result_zl1="";
-					String result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
-					String result_detail_zl1="</select>";
-					String result_zl2="";
-					String result_head_zl2="<select name='selectzl2'>";
-					String result_detail_zl2="</select>";
 					List<LysxBean> lysl2List = BaseUtil.getLysxList_two(path,changeVal);
 					if(lysl2List !=null && lysl2List.size()>0){
+						
 						for(int i=0;i<lysl2List.size();i++){
 							LysxBean bean = (LysxBean)lysl2List.get(i);
 							result_lysx2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
@@ -329,6 +339,7 @@ public class BaseServlet extends HttpServlet{
 					}
 					List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, ((LysxBean)lysl2List.get(0)).getCTCD());
 					if(zl1List !=null && zl1List.size()>0){
+							
 						for(int i=0;i<zl1List.size();i++){
 							LysxBean bean = (LysxBean)zl1List.get(i);
 							result_zl1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
@@ -347,12 +358,6 @@ public class BaseServlet extends HttpServlet{
 					result=result_lysx2+";"+result_zl1+";"+result_zl2;
 				}
 				if("2".trim().equals(changeType)){//选择水系，请求下属一级支流
-					String result_zl1="";
-					String result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
-					String result_detail_zl1="</select>";
-					String result_zl2="";
-					String result_head_zl2="<select name='selectzl2'>";
-					String result_detail_zl2="</select>";
 					List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, changeVal);
 					if(zl1List !=null && zl1List.size()>0){
 						for(int i=0;i<zl1List.size();i++){
@@ -372,9 +377,6 @@ public class BaseServlet extends HttpServlet{
 					result=result_zl1+";"+result_zl2;
 				}
 				if("3".trim().equals(changeType)){//选择一级支流请求二级支流
-					String result_zl2="";
-					String result_head_zl2="<select name='selectzl2'>";
-					String result_detail_zl2="</select>";
 					List<LysxBean> zl2List = BaseUtil.getZliuList_two(path, changeVal);
 					if(zl2List !=null && zl2List.size()>0){
 						for(int i=0;i<zl2List.size();i++){
@@ -388,54 +390,117 @@ public class BaseServlet extends HttpServlet{
 			}
 			
 		}
-		if("loadSearch".trim().equals(type)){//查询页面，下拉联动
+		if("loadSearch".trim().equals(type)){//查询页面，下拉联动/只构造工程类别、险情分类、工程名称、流域信息
+			String mc = request.getParameter("mc");
 			String lb = request.getParameter("lb");
-			String dq = request.getParameter("dq");
+			String xqfl = request.getParameter("xqfl");
 			String ly = request.getParameter("ly");
-			String result_gcgl="";
-			String result_head_gcgl="<select name='gclb_s'><option value=''>--</option>";
-			String result_detail_gcgl="</select>";
-			String result_z="";
-			String result_head_z="<select name='dq_s'><option value=''>--</option>";
-			String result_detail_z="</select>";
-			String result_lysx1="";
-			String result_head_lysx1="<select name='ly_s'><option value=''>--</option>";
-			String result_detail_lysx1="</select>";
+			String sx = request.getParameter("sx");
+			String yjzl = request.getParameter("yjzl");
+			String ejzl = request.getParameter("ejzl");
+			String result_detail="</select>";
+			String result_gcmc="";
+			String result_gclb="";
+			String result_xqfl="";
+			String result_ly="";
+			String result_sx="";
+			String result_yjzl="";
+			String result_ejzl="";
+			String result_head_gcmc="<select name='gcmc_s'><option value=''>--</option>";
+			String result_head_gclb="<select name='gclb_s'><option value=''>--</option>";
+			String result_head_xqfl="<select name='xqfl_s'><option value=''>--</option>";
+
+			String result_head_ly="<select name='selectlysx1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"1"+"\",this)'><option value=''>--</option>";
+			String result_head_sx="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'><option value=''>--</option>";
+			String result_head_yjzl="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'><option value=''>--</option>";
+			String result_head_ejzl="<select name='selectzl2'><option value=''>--</option>";
+			ConfigBean configBean = (ConfigBean)request.getSession().getAttribute("configBean");
+			List<PrjBean> prjBeanList = BuinessDao.getAllList(path,"1=1",configBean.getXZQH_X());
+			if(prjBeanList != null && prjBeanList.size()>0){
+				for(int i=0;i<prjBeanList.size();i++){
+					PrjBean bean = (PrjBean)prjBeanList.get(i);
+					if(mc.trim().equals(bean.getPJNO()))
+						result_gcmc +="<option value='"+bean.getPJNO()+"' selected=true>"+bean.getPJNM()+"</option>";
+					else
+						result_gcmc +="<option value='"+bean.getPJNO()+"'>"+bean.getPJNM()+"</option>";
+				}
+			}
 			List<GclbBean> gcglList = BaseUtil.getGclbList(path);
 			if(gcglList !=null && gcglList.size()>0){
 				for(int i=0;i<gcglList.size();i++){
 					GclbBean bean = (GclbBean)gcglList.get(i);
 					if(lb.trim().equals(bean.getGCFLDM()))
-						result_gcgl +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
+						result_gclb +="<option value='"+bean.getGCFLDM()+"' selected=true>"+bean.getGCFLMC().trim()+"</option>";
 					else
-						result_gcgl +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
+						result_gclb +="<option value='"+bean.getGCFLDM()+"'>"+bean.getGCFLMC().trim()+"</option>";
 				}
 			}
-			List<TbcntBean> sxList = BaseUtil.getAllSXList(path);
-			if(sxList !=null && sxList.size()>0){
-				for(int i=0;i<sxList.size();i++){
-					TbcntBean bean = (TbcntBean)sxList.get(i);
-					if(dq.trim().equals(bean.getCntcd()))
-						result_z +="<option value='"+bean.getCntcd()+"' selected=true>"+bean.getProvnm().trim()+"</option>";
+			List<Map<Object,Object>> resultList = BuinessDao.getSelectList("TB_XQFL",new String[]{"XQFLDM","XQFLMC"},path,"");
+			if(resultList != null && resultList.size()>0){
+				for(int i=0;i<resultList.size();i++){
+					Map<Object,Object> map = (Map<Object,Object>)resultList.get(i);
+					if(xqfl.trim().equals(map.get("id")))
+						result_xqfl += "<option value='"+map.get("id")+"' selected=true>"+map.get("value")+"</option>";
 					else
-						result_z +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
-				}
+						result_xqfl += "<option value='"+map.get("id")+"'>"+map.get("value")+"</option>";
+				} 
 			}
 			List<LysxBean> lysl1List = BaseUtil.getLysxList_one(path);
 			if(lysl1List !=null && lysl1List.size()>0){
 				for(int i=0;i<lysl1List.size();i++){
 					LysxBean bean = (LysxBean)lysl1List.get(i);
-					if(ly.trim().equals(bean.getCTCD()))
-						result_lysx1 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					if(ly.trim().equals(bean.getCTCD().trim()))
+						result_ly +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
 					else
-						result_lysx1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+						result_ly +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+				}
+			}
+			if("".trim().equals(ly))
+				ly = ((LysxBean)lysl1List.get(0)).getCTCD();
+			List<LysxBean> lysl2List = BaseUtil.getLysxList_two(path,ly);
+			if(lysl2List !=null && lysl2List.size()>0){
+				for(int i=0;i<lysl2List.size();i++){
+					LysxBean bean = (LysxBean)lysl2List.get(i);
+					if(sx.trim().equals(bean.getCTCD().trim()))
+						result_sx +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_sx +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+				}
+			}
+			if("".trim().equals(sx))
+				sx = ((LysxBean)lysl2List.get(0)).getCTCD();
+			List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, sx);
+			if(zl1List !=null && zl1List.size()>0){
+				for(int i=0;i<zl1List.size();i++){
+					LysxBean bean = (LysxBean)zl1List.get(i);
+					if(yjzl.trim().equals(bean.getCTCD().trim()))
+						result_yjzl +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_yjzl +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
+				}
+			}
+			if("".trim().equals(yjzl))
+				yjzl = ((LysxBean)zl1List.get(0)).getCTCD();
+			List<LysxBean> zl2List = BaseUtil.getZliuList_two(path, yjzl);
+			if(zl2List !=null && zl2List.size()>0){
+				for(int i=0;i<zl2List.size();i++){
+					LysxBean bean = (LysxBean)zl2List.get(i);
+					if(ejzl.trim().equals(bean.getCTCD().trim()))
+						result_ejzl +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
+					else
+						result_ejzl +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
 			
-			result_gcgl=result_head_gcgl+result_gcgl+result_detail_gcgl;
-			result_z=result_head_z+result_z+result_detail_z;
-			result_lysx1=result_head_lysx1+result_lysx1+result_detail_lysx1;
-			result = result_gcgl+";"+result_z+";"+result_lysx1;
+			result_gcmc = result_head_gcmc+result_gcmc+result_detail;
+			result_gclb = result_head_gclb+result_gclb+result_detail;
+			result_xqfl = result_head_xqfl+result_xqfl+result_detail;
+			result_ly = result_head_ly+result_ly+result_detail;
+			result_sx = result_head_sx+result_sx+result_detail;
+			result_yjzl = result_head_yjzl+result_yjzl+result_detail;
+			result_ejzl = result_head_ejzl+result_ejzl+result_detail;
+			//result=工程名称+工程类别+险情分类+流域+水系+一级支流+二级支流
+			result = result_gcmc+";"+result_gclb+";"+result_xqfl+";"+result_ly+";"+result_sx+";"+result_yjzl+";"+result_ejzl;
 		}
 		if("uploadView".trim().equals(type)){
 			String id = request.getParameter("RPJINCD");
