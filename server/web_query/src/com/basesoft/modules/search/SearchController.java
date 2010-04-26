@@ -24,26 +24,29 @@ public class SearchController extends CommonController {
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
 		int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 		
+		//信息类型
+		String select_sortinfo = ServletRequestUtils.getStringParameter(request, "select_sortinfo", "");
+		//工程类别
+		String select_sort = ServletRequestUtils.getStringParameter(request, "select_sort", "");
+		//行政区域
+		String xzqh = ServletRequestUtils.getStringParameter(request, "xzqh", "");
+		//河流水系
+		String lysx = ServletRequestUtils.getStringParameter(request, "lysx", "");
+		//上报时间
+		String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
+		String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
+		//关键字
+		String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
+		//工程名称
+		String check_projectname = ServletRequestUtils.getStringParameter(request, "check_projectname", "");
+		//填报单位
+		String check_unit = ServletRequestUtils.getStringParameter(request, "check_unit", "");
+		//信息标题
+		String check_title = ServletRequestUtils.getStringParameter(request, "check_title", "");
+		//险情标题
+		String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
+		
 		if("main".equals(action)){//主页查询
-			//信息类型
-			String select_sortinfo = ServletRequestUtils.getStringParameter(request, "select_sortinfo", "");
-			//工程类别
-			String select_sort = ServletRequestUtils.getStringParameter(request, "select_sort", "");
-			//行政区域
-			String xzqh = ServletRequestUtils.getStringParameter(request, "xzqh", "");
-			//河流水系
-			String lysx = ServletRequestUtils.getStringParameter(request, "lysx", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			//关键字
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//工程名称
-			String check_projectname = ServletRequestUtils.getStringParameter(request, "check_projectname", "");
-			//填报单位
-			String check_unit = ServletRequestUtils.getStringParameter(request, "check_unit", "");
-			//信息标题
-			String check_title = ServletRequestUtils.getStringParameter(request, "check_title", "");
 			
 			if("qbxx".equals(select_sortinfo)){//全部信息
 				mv = new ModelAndView("modules/result/result_qbxx");
@@ -126,16 +129,7 @@ public class SearchController extends CommonController {
 			mv.addObject("fx_count", fx_count);
 			mv.addObject("zq_count", zq_count);
 			mv.addObject("total_count", total_count);
-			return mv;
 		}else if("xq".equals(action)){//险情查询
-			//险情标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//填报单位
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			
 			PageList pageList = searchDAO.getXq(text_title, text_fill, date_start, date_end, page);
 		
 			mv = new ModelAndView("modules/result/result_xq");
@@ -145,14 +139,6 @@ public class SearchController extends CommonController {
 			mv.addObject("date_start", date_start);
 			mv.addObject("date_end", date_end);
 		}else if("zq".equals(action)){//灾情查询
-			//标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//填报单位
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			
 			PageList pageList = searchDAO.getZq(text_title, text_fill, date_start, date_end, page);
 			
 			mv = new ModelAndView("modules/result/result_zq");
@@ -162,14 +148,6 @@ public class SearchController extends CommonController {
 			mv.addObject("date_start", date_start);
 			mv.addObject("date_end", date_end);
 		}else if("hq".equals(action)){//旱情查询
-			//标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//填报单位
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			
 			PageList pageList = searchDAO.getHq(text_title, text_fill, date_start, date_end, page);
 			
 			mv = new ModelAndView("modules/result/result_hq");
@@ -179,14 +157,6 @@ public class SearchController extends CommonController {
 			mv.addObject("date_start", date_start);
 			mv.addObject("date_end", date_end);
 		}else if("yxzt".equals(action)){//运行状态查询
-			//标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//填报单位
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			
 			PageList pageList = searchDAO.getYxzt(text_title, text_fill, date_start, date_end, page);
 			
 			mv = new ModelAndView("modules/result/result_yxzt2");
@@ -196,14 +166,6 @@ public class SearchController extends CommonController {
 			mv.addObject("date_start", date_start);
 			mv.addObject("date_end", date_end);
 		}else if("fxxd".equals(action)){//防汛行动查询
-			//标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//填报单位
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			
 			PageList pageList = searchDAO.getFxxd(text_title, text_fill, date_start, date_end, page);
 			
 			mv = new ModelAndView("modules/result/result_fxxd");
@@ -213,14 +175,6 @@ public class SearchController extends CommonController {
 			mv.addObject("date_start", date_start);
 			mv.addObject("date_end", date_end);
 		}else if("fxjb".equals(action)){//防汛简报查询
-			//标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//填报单位
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//上报时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
-			
 			PageList pageList = searchDAO.getFxjb(text_title, text_fill, date_start, date_end, page);
 			
 			mv = new ModelAndView("modules/result/result_fxjb");
@@ -234,13 +188,6 @@ public class SearchController extends CommonController {
 			String radiob_gclb = ServletRequestUtils.getStringParameter(request, "radiob_gclb", "");
 			//文件格式
 			String radiob_gs = ServletRequestUtils.getStringParameter(request, "radiob_gs", "");
-			//标题
-			String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
-			//内容描述
-			String text_fill = ServletRequestUtils.getStringParameter(request, "text_fill", "");
-			//采集时间
-			String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
-			String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
 			
 			PageList pageList = searchDAO.getMedia(radiob_gclb, radiob_gs, text_title, text_fill, date_start, date_end, page);
 			
@@ -290,7 +237,6 @@ public class SearchController extends CommonController {
 			List listSx = searchDAO.getGcxxSx();
 			
 			mv.addObject("listSx", listSx);
-			return mv;
 		}else if("search_gcxx_sxajax".equals(action)){//市县选择ajax
 			String sxbm = ServletRequestUtils.getStringParameter(request, "sxbm", "1");
 			
@@ -340,6 +286,12 @@ public class SearchController extends CommonController {
 			response.getWriter().write(sb.toString());
 			response.getWriter().close();
 			return null;
+		}else if("search_index".equals(action)){//首页面左侧列表
+			mv = new ModelAndView("modules/search/result_index");
+			
+			List listIndex = searchDAO.getIndex();
+			
+			mv.addObject("listIndex", listIndex);
 		}
 		
 		return mv;
