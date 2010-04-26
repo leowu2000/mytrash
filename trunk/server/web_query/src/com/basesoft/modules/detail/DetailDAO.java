@@ -199,4 +199,14 @@ public class DetailDAO extends CommonDAO {
 	public List<?> getZq_m(String id){
 		return jdbcTemplate.queryForList("SELECT * FROM TB_SD_M WHERE RPJINCD = '" + id + "'");
 	}
+	
+	/**
+	 * 获取首页信息详细
+	 * @param id 信息id
+	 * @param tablename 信息表名
+	 * @return
+	 */
+	public Map getIndexDetail(String id, String tablename){
+		return null;
+	}
 }

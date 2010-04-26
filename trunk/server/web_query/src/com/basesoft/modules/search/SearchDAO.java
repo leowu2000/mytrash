@@ -1025,4 +1025,28 @@ public class SearchDAO extends CommonDAO{
 	public List<?> getGcxxGc(String sxbm, String lxbm){
 		return jdbcTemplate.queryForList("select GCMC, GCLJ from TB_GCLJ where SXBM='" + sxbm + "' and LXBM='" + lxbm + "'");
 	}
+	
+	/**
+	 * 获取首页面列表,取最新的10条数据
+	 * @return list
+	 */
+	public List<?> getIndex(){
+		//生成临时表TEMP_TABLE  TB_FPACTI防汛行动
+		jdbcTemplate.execute("select * into TEMP_TABLE from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FPACTI' as TABLENAME from TB_FPACTI order by DT desc) A where ROWNUM<=10) WHERE RN>=1");
+		//TB_FXJB防汛简报
+		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FXJB' as TABLENAME from TB_FXJB order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+		//TB_PJRCN运行状态
+		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select PJRNO as ID, PJNM as TITLE, WTDPDT as DT, 'TB_PJRCN' as TABLENAME from TB_PJRCN order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+		//TB_QT旱情
+		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_QT' as TABLENAME from TB_QT order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+		//TB_SD灾情
+		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_SD' as TABLENAME from TB_SD order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+		//TB_STDNC险情
+		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select DNCNO as ID, DNCNM as TITLE, WTDPDT as DT, 'TB_STDNC' as TABLENAME from TB_STDNC order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+		
+		List list = jdbcTemplate.queryForList("select * from (select A.*, ROWNUM RN1 from (select * from TEMP_TABLE order by DT desc) A where ROWNUM<=10) WHERE RN1>=1");
+		
+		jdbcTemplate.execute("drop table TEMP_TABLE");
+		return list;
+	}
 }

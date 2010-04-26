@@ -22,12 +22,11 @@ public class DetailController extends CommonController {
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
 		int page = ServletRequestUtils.getIntParameter(request, "page", 1);
 		
+		String id = ServletRequestUtils.getStringParameter(request, "id", "");
+		String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
+		tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
 		if("fxjb".equals(action)){//防汛简报
 			mv = new ModelAndView("modules/detail/detail_fxjb");
-			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
 			
 			//得到防汛简报和防汛简报多媒体信息
 			Map mapFxjb = detailDAO.getFxjb(id);
@@ -41,10 +40,6 @@ public class DetailController extends CommonController {
 		}else if("fxxd".equals(action)){//防汛行动
 			mv = new ModelAndView("modules/detail/detail_fxxd");
 			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
-			
 			//得到防汛行动和防汛行动多媒体信息
 			Map mapFxxd = detailDAO.getFxxd(id);
 			List listFxxd_m = detailDAO.getFxxd_m(id);
@@ -57,10 +52,6 @@ public class DetailController extends CommonController {
 		}else if("hq".equals(action)){//旱情
 			mv = new ModelAndView("modules/detail/detail_hq");
 			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
-			
 			//得到旱情信息和旱情多媒体信息
 			Map mapHq = detailDAO.getHq(id);
 			List listHq_m = detailDAO.getHq_m(id);
@@ -72,10 +63,6 @@ public class DetailController extends CommonController {
 			mv.addObject("listHq_m", listHq_m);
 		}else if("xq".equals(action)){//险情
 			mv = new ModelAndView("modules/detail/detail_xq");
-			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
 			
 			//得到险情信息和险情多媒体信息
 			Map mapXq = detailDAO.getXq(id);
@@ -90,8 +77,6 @@ public class DetailController extends CommonController {
 			mv.addObject("listXq_m", listXq_m);
 		}else if("xq1".equals(action)){//险情
 			mv = new ModelAndView("modules/detail/detail_xq1");
-			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
 			
 			//得到险情信息和险情多媒体信息
 			Map mapXq1 = detailDAO.getXq1(id);
@@ -109,10 +94,6 @@ public class DetailController extends CommonController {
 		}else if("yxzt".equals(action)){//运行状态
 			mv = new ModelAndView("modules/detail/detail_yxzt");
 			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
-			
 			//得到运行状态和运行状态多媒体信息
 			Map mapYxzt = detailDAO.getYxzt(id);
 			List listYxzt_m = detailDAO.getYxzt_m(id);
@@ -124,8 +105,6 @@ public class DetailController extends CommonController {
 			mv.addObject("listYxzt_m", listYxzt_m);
 		}else if("yxzt1".equals(action)){//运行状态
 			mv = new ModelAndView("modules/detail/detail_yxzt1");
-			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
 			
 			//得到运行状态和运行状态多媒体信息
 			Map mapYxzt = detailDAO.getYxzt(id);
@@ -144,10 +123,6 @@ public class DetailController extends CommonController {
 		}else if("zq".equals(action)){//灾情
 			mv = new ModelAndView("modules/detail/detail_zq");
 			
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"GBK");
-			
 			//得到灾情信息和灾情多媒体信息
 			Map mapZq = detailDAO.getZq(id);
 			List listZq_m = detailDAO.getZq_m(id);
@@ -158,10 +133,6 @@ public class DetailController extends CommonController {
 			mv.addObject("mapZq", mapZq);
 			mv.addObject("listZq_m", listZq_m);
 		}else if("fxjb_print".equals(action)){
-			String id = ServletRequestUtils.getStringParameter(request, "id", "");
-			String tbdw = ServletRequestUtils.getStringParameter(request, "tbdw", "");
-			tbdw = new String(tbdw.getBytes("ISO8859-1"),"UTF-8");
-			
 			int size = ServletRequestUtils.getIntParameter(request, "size", 800);
 			
 			//得到防汛简报和防汛简报多媒体信息
@@ -176,6 +147,13 @@ public class DetailController extends CommonController {
 			mv.addObject("mapFxjb", mapFxjb);
 			mv.addObject("listFxjb_m", listFxjb_m);
 			
+		}else if("index".equals(action)){//获取首页面信息详细
+			String tablename = ServletRequestUtils.getStringParameter(request, "tablename", "");
+			
+			Map mapIndex = detailDAO.getIndexDetail(id, tablename);
+			
+			mv = new ModelAndView("modules/detail/detail_index");
+			mv.addObject("mapIndex", mapIndex);
 		}
 		
 		return mv;
