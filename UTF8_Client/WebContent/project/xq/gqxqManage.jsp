@@ -161,7 +161,7 @@ function SearchSubmit(){
 		<td nowrap class="title">工程类别</td>
 		<td bgcolor="#FFFFFF"><DIV id="GCLB_S"></DIV></td>
 		<td nowrap class="title">险情分类:</td>
-		<td bgcolor="#FFFFFF"><DIV id="XQFL_S"></DIV></td></td>
+		<td bgcolor="#FFFFFF"><DIV id="XQFL_S"></DIV></td>
 		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
 	</tr>
 	<tr>
