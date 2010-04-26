@@ -75,7 +75,6 @@ function toBack(){
 <input type="hidden" name="upFileValues" value=""/>
 <input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="toviewpic" value="1"/>
-<input type="hidden" name="uptype" value=""/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title" colspan="6">
