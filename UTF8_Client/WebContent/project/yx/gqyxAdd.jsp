@@ -75,7 +75,6 @@ function getGcmessageForyx(id){
 <input type="hidden" name="myradio" value="1"></input>
 <input type="hidden" name="GCLB" value="1"></input>
 <input type="hidden" name="GCFLDM" value="1"></input>
-<input type="hidden" name="uptype" value="2"/>
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="DNCNO" value="<%=uuid %>"/>
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>

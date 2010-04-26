@@ -182,12 +182,16 @@ function SearchSubmit(){
 	<%if(records!=null && records.size()>0){
 		for(int i=pUtil.getFromIndex();i<pUtil.getToIndex();i++){
 			PJRCNBean bean = (PJRCNBean)records.get(i);
+			String xqyc = bean.getDNCFC();
+			if(!"".trim().equals(xqyc))
+				if(xqyc.length()>9)
+					xqyc = xqyc.substring(0,9)+"...";
 	%>
 	<tr  bgcolor="#FFFFFF">
 		<td><input name="RECORDID" onclick=runChkAll() type=checkbox class="input3" value="<%=bean.getPJRNO() %>"></td>
 		<td><a href="/project/yx/gqyxView.jsp?RPJINCD=<%=bean.getPJRNO() %>" title="点击查看详细信息"><%=bean.getPJNM() %></a></td>
 		<td><%=bean.getDTCDT() %></td>
-		<td><%=bean.getDNCFC() %></td>
+		<td><%=xqyc %></td>
 		<td><%=bean.getWTDPCD() %></td>
 		<td><%=bean.getWTDPDT() %></td>
 	</tr>
