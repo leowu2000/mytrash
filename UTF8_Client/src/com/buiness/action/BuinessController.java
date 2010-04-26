@@ -1109,11 +1109,12 @@ public class BuinessController implements Controller {
 	public static PjrDetailBean _getPjrDetailBeanFormReqeust(
 			HttpServletRequest request, String GCFL) throws Exception {
 		PjrDetailBean bean = new PjrDetailBean();
-//		String PJNM = new String(request.getParameter("PJNM")
-//				.getBytes("ISO-8859-1"), "GBK");
+		String dtcdt = request.getParameter("DTCDT");
+		if("".trim().equals(dtcdt))
+			dtcdt = UtilDateTime.nowDateString();
 		bean.setPJNO(request.getParameter("DNCNO"));		//运行编号
 		bean.setPJNO(request.getParameter("GCNAME"));			//工程编号
-		bean.setDTCDT(request.getParameter("DTCDT"));		//检测时间
+		bean.setDTCDT(dtcdt);		//检测时间
 //		bean.setPJNM(PJNM);			//工程名称
 		if("B".trim().equals(GCFL)
 				||"D".trim().equals(GCFL)
