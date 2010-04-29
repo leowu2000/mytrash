@@ -28,7 +28,7 @@ String tablename = ((Map)listIndex.get(0)).get("TABLENAME").toString();
   </head>
   
   <body>
-    <table width="100%">
+    <table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 <%
 	for(int i=0;i<listIndex.size();i++){
 		Map mapIndex = (Map)listIndex.get(i);

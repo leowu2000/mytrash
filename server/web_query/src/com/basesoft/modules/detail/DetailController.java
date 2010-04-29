@@ -1,5 +1,7 @@
 package com.basesoft.modules.detail;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -150,10 +152,33 @@ public class DetailController extends CommonController {
 		}else if("index".equals(action)){//获取首页面信息详细
 			String tablename = ServletRequestUtils.getStringParameter(request, "tablename", "");
 			
-			Map mapIndex = detailDAO.getIndexDetail(id, tablename);
+			Map mapIndex = new HashMap();
+			List listIndex_m = new ArrayList();
+			
+			if("TB_FPACTI".equals(tablename)){//防汛行动
+				mapIndex = detailDAO.getFxxd(id);
+				listIndex_m = detailDAO.getFxxd_m(id);
+			}else if("TB_FXJB".equals(tablename)){//防汛简报
+				mapIndex = detailDAO.getFxjb(id);
+				listIndex_m = detailDAO.getFxjb_m(id);
+			}else if("TB_QT".equals(tablename)){//旱情
+				mapIndex = detailDAO.getHq(id);
+				listIndex_m = detailDAO.getHq_m(id);
+			}else if("TB_SD".equals(tablename)){//灾情
+				mapIndex = detailDAO.getZq(id);
+				listIndex_m = detailDAO.getZq_m(id);
+			}else if("TB_PJRCN".equals(tablename)){//运行状态
+				mapIndex = detailDAO.getYxzt(id);
+				listIndex_m = detailDAO.getYxzt_m(id);
+			}else if("TB_STDNC".equals(tablename)){//险情
+				mapIndex = detailDAO.getXq(id);
+				listIndex_m = detailDAO.getXq_m(id);
+			}
 			
 			mv = new ModelAndView("modules/detail/detail_index");
 			mv.addObject("mapIndex", mapIndex);
+			mv.addObject("listIndex_m", listIndex_m);
+			mv.addObject("tablename", tablename);
 		}
 		
 		return mv;
