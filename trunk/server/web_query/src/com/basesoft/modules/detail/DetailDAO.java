@@ -207,6 +207,17 @@ public class DetailDAO extends CommonDAO {
 	 * @return
 	 */
 	public Map getIndexDetail(String id, String tablename){
-		return null;
+		String sql = "select * from " + tablename;
+		if("TB_FPACTI".equals(tablename)||"TB_FXJB".equals(tablename)||"TB_QT".equals(tablename)||"TB_SD".equals(tablename)){//防汛行动，防汛简报，旱情，灾情
+			sql = sql + " where RPJINCD='" + id + "'";
+		}else if("TB_PJRCN".equals(tablename)){//运行状态
+			sql = sql + " where PJRNO='" + id + "'";
+		}else if("TB_STDNC".equals(tablename)){//险情
+			sql = sql + " where DNCNO='" + id + "'";
+		}
+		
+		Map mapIndex = jdbcTemplate.queryForMap(sql);
+		
+		return mapIndex;
 	}
 }
