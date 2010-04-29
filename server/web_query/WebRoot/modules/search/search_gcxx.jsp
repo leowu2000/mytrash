@@ -43,7 +43,10 @@ function changeLx(){
 
 function changeGc(){
 	var gclj = document.getElementById('gc').value;
-	parent.document.getElementById('result').src = "/modules/gcdata/" + gclj;
+	//parent.document.getElementById('result').src = "/modules/gcdata/" + gclj;
+	
+	document.getElementById('a_gcjj').href='/modules/gcdata/' + gclj;
+	document.getElementById('a_fxya').href='/modules/gcdata/' + gclj;
 }
 </script>
 </head>
@@ -71,6 +74,12 @@ function changeGc(){
         <td bgcolor="#FFFFFF" align="left" name="lxsel" id="lxsel"></td>
         <td bgcolor="#336699"><font color="#FFFFFF">选择工程</font></td>
         <td bgcolor="#FFFFFF" name="gcsel" id="gcsel"></td>
+      </tr>
+      <tr>
+      	<td colspan="6">
+      		<a href="#" name="a_gcjj" id="a_gcjj" target="result">查看工程简介</a>
+      		<a href="#" name="a_fxya" id="a_fxya" target="result">查看防汛预案</a>
+      	</td>
       </tr>
     </table>
   </div>  

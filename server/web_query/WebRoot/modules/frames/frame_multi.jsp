@@ -13,6 +13,7 @@ function MM_reloadPage(init) {  //reloads the window if Nav4 resized
   else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
 }
 MM_reloadPage(true);
+parent.document.getElementById('lineFrame').src = 'line.htm';
 // -->
 </script>
 </head>
@@ -27,7 +28,7 @@ MM_reloadPage(true);
 
 %>
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize(60);" onLoad="IFrameResize(60)" >
-<iframe name="queryFrame" height='60' width='100%' style="" scrolling="NO" frameborder='0' src="../search/search_multi.jsp" ></iframe>
+<iframe name="queryFrame" height='60' width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?aciton=search_multi" ></iframe>
 <iframe name="result" width="100%" frameborder='0' height=""></iframe>
 </body>
 </html>

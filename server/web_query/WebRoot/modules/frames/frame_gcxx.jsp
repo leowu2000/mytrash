@@ -13,6 +13,7 @@ function MM_reloadPage(init) {  //reloads the window if Nav4 resized
   else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
 }
 MM_reloadPage(true);
+parent.document.getElementById('lineFrame').src = 'line.htm';
 // -->
 </script>
 </head>

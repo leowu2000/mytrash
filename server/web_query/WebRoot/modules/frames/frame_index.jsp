@@ -7,9 +7,10 @@
 
 <script language="JavaScript">
 function IFrameResize1(qHeight){
-	document.getElementById("infotitle").height = document.body.offsetHeight - 30;
-	document.getElementById("detail").height = document.body.offsetHeight - 30;
+	document.getElementById("infotitle").height = document.body.offsetHeight - 35;
+	document.getElementById("detail").height = document.body.offsetHeight - 35;
 }
+parent.document.getElementById('lineFrame').src = '';
 </script>
 </head>
 <%
@@ -25,11 +26,11 @@ function IFrameResize1(qHeight){
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize1();" onLoad="IFrameResize1();" >
 	<table width="100%" border="0" cellpadding="0">
 		<tr>
-			<td width="30%">
-				<iframe name="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="search.do?action=search_index" ></iframe>
+			<td width="20%">
+				<iframe name="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index" ></iframe>
 			</td>
-			<td width="70%">
-				<iframe name="detail" width="100%" frameborder='0' height=""></iframe>
+			<td width="80%">
+				<iframe name="detail" width="100%" frameborder='0' height="" src=""></iframe>
 			</td>
 		</tr>
 	</table>
