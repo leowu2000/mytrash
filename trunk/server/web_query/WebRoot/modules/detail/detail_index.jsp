@@ -26,6 +26,8 @@ if(mediaheight<60){
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<script language="javascript" src="../../script/onmouseover.js"></script>
+	<script language="JavaScript" src="../script/layer10.js"></script>
   </head>
   
   <body>

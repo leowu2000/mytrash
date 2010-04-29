@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Util类
@@ -162,4 +164,25 @@ public class StringUtil {
 		
 	}
 	
+	/**
+	 * 生成select的options
+	 * @param list
+	 * @param value
+	 * @param name
+	 * @return
+	 */
+	public static String createOptions(List list, String value, String name){
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i=0;i<list.size();i++){
+			Map map = (Map)list.get(i);
+			sb.append("<option value='")
+			  .append(map.get(value))
+			  .append("'>")
+			  .append(map.get(name))
+			  .append("</option>");
+		}
+		
+		return sb.toString();
+	}
 }

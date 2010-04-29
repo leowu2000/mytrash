@@ -74,7 +74,6 @@ public class MediaDAO extends CommonDAO {
         }
         buffOut.close();
         fos.close();
-        ins.close();
 
         //将文件读为byte[]
         FileInputStream fis = new FileInputStream(file);

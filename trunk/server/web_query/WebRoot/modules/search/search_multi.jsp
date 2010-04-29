@@ -1,4 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.basesoft.util.*" %>
+<%
+	List listLy = (List)request.getAttribute("listLy");
+%>
 <html>
 <head>
 <title>综合查询面板</title>
@@ -16,7 +20,49 @@ function init(){
     document.getElementById('check_unit').checked = 'true';
     document.getElementById('check_title').checked = 'true';
   }
+  changeLy(document.getElementById('ly').value);
   document.getElementById('fxxq').submit();
+}
+
+function changeLy(value){
+	if(window.XMLHttpRequest){ //Mozilla 
+      var xmlHttpReq=new XMLHttpRequest();
+    }else if(window.ActiveXObject){
+ 	  var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    }
+    xmlHttpReq.open("GET", "/river.do?action=AJAX_LY&ly=" + value, false);
+    xmlHttpReq.send();
+    if(xmlHttpReq.responseText!=''){
+        document.getElementById('selsx').innerHTML = xmlHttpReq.responseText;
+    }
+    changeSx(document.getElementById('sx').value);
+}
+
+function changeSx(value){
+	if(window.XMLHttpRequest){ //Mozilla 
+      var xmlHttpReq=new XMLHttpRequest();
+    }else if(window.ActiveXObject){
+ 	  var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    }
+    xmlHttpReq.open("GET", "/river.do?action=AJAX_SX&sx=" + value, false);
+    xmlHttpReq.send();
+    if(xmlHttpReq.responseText!=''){
+        document.getElementById('selzl1').innerHTML = xmlHttpReq.responseText;
+    }
+    changeZl(document.getElementById('zl1').value);
+}
+
+function changeZl(value){
+	if(window.XMLHttpRequest){ //Mozilla 
+      var xmlHttpReq=new XMLHttpRequest();
+    }else if(window.ActiveXObject){
+ 	  var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    }
+    xmlHttpReq.open("GET", "/river.do?action=AJAX_ZL&zl1=" + value, false);
+    xmlHttpReq.send();
+    if(xmlHttpReq.responseText!=''){
+        document.getElementById('selzl2').innerHTML = xmlHttpReq.responseText;
+    }
 }
 </script>
 <link rel="stylesheet" href="../../css/main.css" type="text/css">
@@ -69,7 +115,14 @@ function init(){
       </tr>
       <tr align="center"> 
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>河流水系</strong></font></td>
-        <td bgcolor="#FFFFFF" align="left" colspan="3"><script language="JavaScript" src="../../script/lysx.js"></script></td>
+        <td bgcolor="#FFFFFF" align="left" colspan="3">
+        	流域<select name="ly" id="ly" onchange="changeLy(this.value);">
+				<%=StringUtil.createOptions(listLy, "CTCD", "CTNM") %>      		
+        	</select>
+        	水系<span name="selsx" id="selsx"></span>
+        	一级支流<span name="selzl1" id="selzl1"></span>
+        	二级支流<span name="selzl2" id="selzl2"></span>
+        </td>
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
         <td align="left" bgcolor="#FFFFFF">
 			<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到

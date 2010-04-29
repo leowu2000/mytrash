@@ -15,6 +15,7 @@
 				/login.do=LoginController
 				/delete.do=DeleteController
 				/user.do=UserController
+				/river.do=RiverController
 			</value>
 		</property>
 	</bean>
@@ -42,5 +43,6 @@
 	<bean name="LoginController" class="com.basesoft.modules.login.LoginController"></bean>
 	<bean name="DeleteController" class="com.basesoft.modules.delete.DeleteController"></bean>
 	<bean name="UserController" class="com.basesoft.modules.user.UserController"></bean>
+	<bean name="RiverController" class="com.basesoft.modules.search.RiverController"></bean>
 </beans>
 

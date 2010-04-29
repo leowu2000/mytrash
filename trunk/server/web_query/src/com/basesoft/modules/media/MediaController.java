@@ -32,6 +32,7 @@ public class MediaController extends CommonController {
 			InputStream ins = mediaDAO.getBlob(tablename, media_id);
 			path = path + "\\temp.jpg";
 			byte[] b = mediaDAO.saveAsFile(ins, path);
+			ins.close();
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
@@ -47,6 +48,7 @@ public class MediaController extends CommonController {
 			InputStream ins = mediaDAO.getBlob(tablename, media_id);
 			path = path + "\\temp.jpg";
 			byte[] b = mediaDAO.saveAsFile(ins, path);
+			ins.close();
 			byte[] newPic = mediaDAO.getNewPic(request.getRealPath("\\images\\"));
 			
 			response.setHeader("Pragma", "No-cache");
@@ -65,6 +67,7 @@ public class MediaController extends CommonController {
 			path = realpath + "\\video\\" + mapMedia.get("TITLE").toString().trim() + "." + mapMedia.get("WJGS").toString().trim();
 			InputStream ins = mediaDAO.getBlob(tablename, media_id);
 			mediaDAO.saveAsFile(ins, path);
+			ins.close();
 			
 			mv = new ModelAndView("modules/media/player");
 			mv.addObject("filepath", path);
@@ -78,6 +81,7 @@ public class MediaController extends CommonController {
 			InputStream ins = mediaDAO.getBlob(tablename, media_id);
 			path = path + "\\temp.jpg";
 			byte[] b = mediaDAO.saveAsFile(ins, path);
+			ins.close();
 			
 			response.reset();
             response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("gbk"),"iso8859-1"));

@@ -14,6 +14,7 @@ function MM_reloadPage(init) {  //reloads the window if Nav4 resized
 }
 MM_reloadPage(true);
 // -->
+parent.document.getElementById('lineFrame').src = 'line.htm';
 </script>
 </head>
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize(60);" onLoad="IFrameResize(60)"  >

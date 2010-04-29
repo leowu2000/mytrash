@@ -91,7 +91,7 @@ td {
                 <td><img src="images/lt.gif" width="134" height="20"></td>
               </tr>
 			  <tr> 
-                <td><a href="../modules/frames/frame_multi.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb1','images/interb1__.gif',1);" onMouseOver="MM_nbGroup('over','interb1','images/interb1_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb1" src="images/interb1.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
+                <td><a href="../modules/frames/frame_index.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb1','images/interb1__.gif',1);" onMouseOver="MM_nbGroup('over','interb1','images/interb1_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb1" src="images/interb1.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
               </tr>
               <tr> 
                 <td><a href="../modules/frames/frame_xq.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb2','images/interb2__.gif',1)" onMouseOver="MM_nbGroup('over','interb2','images/interb2_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb2" src="images/interb2.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>

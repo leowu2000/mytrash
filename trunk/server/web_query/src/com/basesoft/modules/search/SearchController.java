@@ -16,6 +16,7 @@ import com.basesoft.core.PageList;
 public class SearchController extends CommonController {
 
 	SearchDAO searchDAO;
+	RiverDAO riverDAO;
 	
 	@Override
 	protected ModelAndView doHandleRequestInternal(HttpServletRequest request,
@@ -31,7 +32,7 @@ public class SearchController extends CommonController {
 		//行政区域
 		String xzqh = ServletRequestUtils.getStringParameter(request, "xzqh", "");
 		//河流水系
-		String lysx = ServletRequestUtils.getStringParameter(request, "lysx", "");
+		String lysx = ServletRequestUtils.getStringParameter(request, "zl2", "");
 		//上报时间
 		String date_start = ServletRequestUtils.getStringParameter(request, "date_start", "");
 		String date_end = ServletRequestUtils.getStringParameter(request, "date_end", "");
@@ -48,7 +49,13 @@ public class SearchController extends CommonController {
 		
 		if("main".equals(action)){//主页查询
 			
-			if("qbxx".equals(select_sortinfo)){//全部信息
+			if("search_multi".equals(action)){//主页查询面板
+				mv = new ModelAndView("modules/search/search_multi");
+				
+				List listLy = riverDAO.getLy();
+				
+				mv.addObject("listLy", listLy);
+			}else if("qbxx".equals(select_sortinfo)){//全部信息
 				mv = new ModelAndView("modules/result/result_qbxx");
 				
 				Map mapQbxx = searchDAO.getAllResults(select_sort, xzqh, lysx, date_start, date_end, text_fill, check_projectname, check_unit, check_title);
@@ -287,7 +294,7 @@ public class SearchController extends CommonController {
 			response.getWriter().close();
 			return null;
 		}else if("search_index".equals(action)){//首页面左侧列表
-			mv = new ModelAndView("modules/search/result_index");
+			mv = new ModelAndView("modules/result/result_index");
 			
 			List listIndex = searchDAO.getIndex();
 			
@@ -301,4 +308,7 @@ public class SearchController extends CommonController {
 		this.searchDAO = searchDAO;
 	}
 	
+	public void setRiverDAO(RiverDAO riverDAO){
+		this.riverDAO = riverDAO;
+	}
 }

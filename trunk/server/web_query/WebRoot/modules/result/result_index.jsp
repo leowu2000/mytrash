@@ -18,23 +18,23 @@ String tablename = ((Map)listIndex.get(0)).get("TABLENAME").toString();
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
 	<script type="text/javascript">
 		function init(){
-			parent.detail.src = 'detail.do?action=index&id=<%=id %>&tablename=<%=tablename %>';
+			parent.document.getElementById('detail').src = '/detail.do?action=index&id=<%=id %>&tablename=<%=tablename %>';
 		}
 		
 		function changeInfo(id,tablename){
-			parent.detail.src = 'detail.do?action=index&id=' + id + '&tablename=' + tablename;
+			parent.document.getElementById('detail').src = '/detail.do?action=index&id=' + id + '&tablename=' + tablename;
 		}
 	</script>
   </head>
   
-  <body>
-    <table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
+  <body onload="init();">
+    <table width="100%" height="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 <%
 	for(int i=0;i<listIndex.size();i++){
 		Map mapIndex = (Map)listIndex.get(i);
 %>    
     	<tr>
-    		<td><span onmouseover="changeInfo(<%=mapIndex.get("ID") %>,<%=mapIndex.get("TABLENAME") %>);"><%=mapIndex.get("TITLE") %></span></td>
+    		<td height="30" align="center" vlign="middle"><span onmouseover="changeInfo('<%=mapIndex.get("ID") %>','<%=mapIndex.get("TABLENAME") %>');" style="cursor: hand;"><%=mapIndex.get("TITLE") %></span></td>
     	</tr>
 <%
 	}
