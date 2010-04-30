@@ -26,13 +26,11 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="/hello.do">helloController</prop>
 				<prop key="/buiness.do">BuinessController</prop>
 				<prop key="/upload.do">UploadDbController</prop>
 			</props>
 		</property>
 	</bean>
-	<bean id="helloController" class="com.buiness.action.HelloController" />
 	<bean id="BuinessController" class="com.buiness.action.BuinessController" />
 	<bean id="UploadDbController" class="com.buiness.action.UploadDbController" />
 </beans>
