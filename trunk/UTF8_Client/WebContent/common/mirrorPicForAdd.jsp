@@ -6,7 +6,7 @@
 	filepath = java.net.URLDecoder.decode(filepath , "UTF-8");
 	String newpath = filepath.replaceAll("\\\\","\\\\\\\\");
 	String teail = newpath.substring(newpath.lastIndexOf("."),newpath.length());
-	String filename = UtilDateTime.nowString()+teail;
+	String filename = System.currentTimeMillis()+teail;
 	String realpath = request.getRealPath("/")+"/common/pic/"+filename;
 	try{
 		FileInputStream fis = new FileInputStream(filepath);
