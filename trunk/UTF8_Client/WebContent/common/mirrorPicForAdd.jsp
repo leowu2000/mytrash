@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page import="java.io.*" %>
+<%@ page import="com.util.RandomAccessFileTool" %>
 <%@ page import="com.util.UtilDateTime" %>
 <%
 	String filepath=request.getParameter("filepath");
@@ -9,6 +10,7 @@
 	String filename = System.currentTimeMillis()+teail;
 	String realpath = request.getRealPath("/")+"/common/pic/"+filename;
 	try{
+		RandomAccessFileTool.delAllFile(request.getRealPath("/")+"/common/pic/");
 		FileInputStream fis = new FileInputStream(filepath);
 		FileOutputStream fos = new FileOutputStream(realpath);
 		byte[] buff = new byte[1024];
