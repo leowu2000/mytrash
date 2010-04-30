@@ -14,43 +14,43 @@ public class PjrDetailBean {
 	private String RV="";			//当前库容(万立方米)
 	private String RZ="";			//z当前运行水位(米)========TB_RSR===TB_DKR
 	private String RQ="";			//当前泻量(立方米/秒)========TB_RSR===TB_DKR
-	private String DFPFCN="坝基完好状况:";			//坝基完好状况
-	private String DBSTBCN="坝体稳定情况:";			//坝体稳定情况
-	private String BRBPPFCN="护坡护岸完好状况:";			//护坡护岸稳定情况========TB_RSR===TB_DKR
-	private String ESPFCN="泄水建筑物状况:";			//泄水建筑物完好状况
-	private String EDDPFCN="消能工完好状况:";			//消能工完好状况==========TB_RSR===TB_WLR
-	private String GTHOPFCN="闸门、启闭机状况:";			//闸门、启闭机完好状况====TB_RSR===TB_WLR
-	private String COMMCN="通讯手段及状况:";			//通讯手段及状况==========TB_RSR===TB_WLR
+	private String DFPFCN="";			//坝基完好状况
+	private String DBSTBCN="";			//坝体稳定情况
+	private String BRBPPFCN="";			//护坡护岸稳定情况========TB_RSR===TB_DKR
+	private String ESPFCN="";			//泄水建筑物完好状况
+	private String EDDPFCN="";			//消能工完好状况==========TB_RSR===TB_WLR
+	private String GTHOPFCN="";			//闸门、启闭机完好状况====TB_RSR===TB_WLR
+	private String COMMCN="";			//通讯手段及状况==========TB_RSR===TB_WLR
 	//TB_WLR 	水闸	K
 	private String WLGR="";			 //水闸等别(一/二/三/四/五)
 	private String RUPGZ="";			//当前闸上水位(米)
 	private String RDWGZ="";			//当前闸下水位(米)
 	private String RQO="";			//当前过闸流量(立方米/秒)
 	private String RWSTOWLT="";			//当前水面距闸顶距离(米)
-	private String GFPFCN="坝基状况:";			//坝基完好状况
-	private String STPFCN="建筑物状况:";			//建筑物完好状况
+	private String GFPFCN="";			//坝基完好状况
+	private String STPFCN="";			//建筑物完好状况
 	//TB_COWAPJ 治河工程	N
 	private String BKOT="";			//所在岸别(左/右)======TB_DKR====TB_COWAPJ===TB_STOFLER
-	private String FLCNDSC="水流情况状况:";			//水流情况描述
-	private String WDCNDSC="河道情况状况:";			//河道情况描述
-	private String PRCCLR="清障状况:";			//清障的落实
-	private String SPURDSC="控导工程状况:";			//控导工程描述
-	private String BPPJCN="护岸工程状况:";			//护岸工程情况
+	private String FLCNDSC="";			//水流情况描述
+	private String WDCNDSC="";			//河道情况描述
+	private String PRCCLR="";			//清障的落实
+	private String SPURDSC="";			//控导工程描述
+	private String BPPJCN="";			//护岸工程情况
 	//TB_STOFLER	蓄滞	F
 	private String DSFLWZ="";			//设计行(蓄)洪水位(米)
 	private String DSFLW="";			//设计行(蓄)洪量(万立方米)
-	private String TRFCN="人员转移情况:";			//交通状况
-	private String DKCN="圩堤状况:";				//圩堤状况
-	private String CWFCCN="通讯预警设施状况:";			//通讯预警设施状况
-	private String SFSRCN="避水救生设施状况:";			//避水救生设施状况
-	private String FLFADSC="分洪设施状况:";			//分洪设施状况
-	private String IDSTCN="退水设施状况:";			//排水站状况
+	private String TRFCN="";			//交通状况
+	private String DKCN="";				//圩堤状况
+	private String CWFCCN="";			//通讯预警设施状况
+	private String SFSRCN="";			//避水救生设施状况
+	private String FLFADSC="";			//分洪设施状况
+	private String IDSTCN="";			//排水站状况
 	//TB_DKR	堤防==海堤==圩垸==穿堤
 	private String DKGR="";			//堤防级别(1/2/3/4/5)
 	private String STECH="";			//起止桩号
 	private String WSTODC="";			//水面距堤顶距离(米)
-	private String DKPFCN="堤防完好状况:";			//堤防完好状况
-	private String TSCN="穿堤建筑物状况:";				//穿堤建筑物状况
+	private String DKPFCN="";			//堤防完好状况
+	private String TSCN="";				//穿堤建筑物状况
 	public String getPJRNO() {
 		return PJRNO;
 	}
