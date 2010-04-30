@@ -6,31 +6,14 @@
 %>
 <html>
 <head>
-<style type="text/css">
-<!--
-
-#newPreview
-{
-	position:relative;
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=sSize);
-	width :100%; 
-	height:100%; 
-	borde:6px double #ccc;
-}
-
--->
-</style>
 <title></title>
-<script language="javascript">
-//<BODY onload="viewThePic('')"> 
-//function viewThePic(url){
-//	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = url; 
-//}
-</script>
+<script type="text/javascript" src="/common/js/jquery1.3.2.js"></script>
 </head>
 <BODY> 
-<!-- <div id="newPreview"></div>-->
-<img src="<%=newpath %>"></img>
+<div contentEditable=true>
+<img src="<%=newpath %>"  name="image" 
+ title="先点击一下图片，然后可以拖动改变图片大小"></img></div>
+ 
 </BODY> 
 </html>	
 
