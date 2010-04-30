@@ -12,19 +12,19 @@ public class STDNCBean {
 	private String DNCGR;//险情级别
 	private String DAGPLCCH;//出险地点桩号	
 	private String DAGLO;//出险部位
-	private String RDEPL="抢险方案";//抢险方案
-	private String RDERESCN="抢险资源配备";//抢险资源配备
+	private String RDEPL="";//抢险方案
+	private String RDERESCN="";//抢险资源配备
 	private String TPN;//群众投入(人)
 	private String PLAPN;//解放军投入(人)
 	private String PLIPN;//武警投入(人)
-	private String RDECNRL="进展及结果";//进展及结果
-	private String DNCCUAN="险情原因分析";//险情原因分析
-	private String DNCESTDV="险情发展趋势";//险情发展趋势
-	private String DNCPBNFZ="可能影响范围";//可能影响范围
+	private String RDECNRL="";//进展及结果
+	private String DNCCUAN="";//险情原因分析
+	private String DNCESTDV="";//险情发展趋势
+	private String DNCPBNFZ="";//可能影响范围
 	private String RZ;//当前运行水位(米)
-	private String WTHCN="抢险时气象情况";//抢险时气象情况
-	private String FHYWTHCN="未来水文气象情况";//未来水文气象情况
-	private String DNCADDSC="补充描述";//补充描述
+	private String WTHCN="";//抢险时气象情况
+	private String FHYWTHCN="";//未来水文气象情况
+	private String DNCADDSC="";//补充描述
 	private String WTDPCD;//填报单位名称
 	private String WTDPDT;//填报时间
 	

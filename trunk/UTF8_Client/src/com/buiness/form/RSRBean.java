@@ -11,13 +11,13 @@ public class RSRBean {
 	private String RV;								// 当前库容(万立方米)
 	private String RZ;								// 当前运行水位(米)
 	private String RQ;								// 当前泻量(立方米/秒)
-	private String DFPFCN="坝基完好状况：";			// 坝基完好状况
-	private String DBSTBCN="坝体稳定情况：";			// 坝体稳定情况
-	private String BRBPPFCN="护坡护岸稳定情况：";		// 护坡护岸稳定情况
-	private String ESPFCN="泄水建筑物完好状况：";		// 泄水建筑物完好状况
-	private String EDDPFCN="消能工完好状况：";			// 消能工完好状况
-	private String GTHOPFCN="闸门、启闭机完好状况：";	// 闸门、启闭机完好状况
-	private String COMMCN="通讯手段及状况：";			// 通讯手段及状况
+	private String DFPFCN="";			// 坝基完好状况
+	private String DBSTBCN="";			// 坝体稳定情况
+	private String BRBPPFCN="";		// 护坡护岸稳定情况
+	private String ESPFCN="";		// 泄水建筑物完好状况
+	private String EDDPFCN="";			// 消能工完好状况
+	private String GTHOPFCN="";	// 闸门、启闭机完好状况
+	private String COMMCN="";			// 通讯手段及状况
 
 	public String getPJRNO() {
 		return PJRNO;
