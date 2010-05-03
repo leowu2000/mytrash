@@ -100,7 +100,7 @@ function changeZl(value){
           </select>
         </td>
         <td bgcolor="#336699"><font color="#FFFFFF"><strong>关键字</strong></font></td>
-        <td align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" > 
+        <td align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" style="width:178;"> 
         <div style="display:none;">
           <input type="checkbox" name="check_projectname" value="true" checked="checked">
           工程名称 

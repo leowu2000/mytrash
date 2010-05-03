@@ -34,6 +34,7 @@ public class MediaController extends CommonController {
 			byte[] b = mediaDAO.saveAsFile(ins, path);
 			ins.close();
 			
+			response.reset();
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
 			response.setDateHeader("Expiresponse", 0L);

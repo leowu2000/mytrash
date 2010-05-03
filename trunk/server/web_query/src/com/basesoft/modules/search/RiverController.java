@@ -28,7 +28,8 @@ public class RiverController extends CommonController {
 			StringBuffer sb = new StringBuffer();
 			sb.append("<select name='sx' id='sx' onchange='changeSx(this.value);'>");
 			String options = StringUtil.createOptions(listSx, "CTCD", "CTNM");
-			sb.append("</select>");
+			sb.append(options)
+			  .append("</select>");
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
@@ -45,7 +46,8 @@ public class RiverController extends CommonController {
 			StringBuffer sb = new StringBuffer();
 			sb.append("<select name='zl1' id='zl1' onchange='changeZl(this.value);'>");
 			String options = StringUtil.createOptions(listSx, "CTCD", "CTNM");
-			sb.append("</select>");
+			sb.append(options)
+			  .append("</select>");
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
@@ -62,7 +64,8 @@ public class RiverController extends CommonController {
 			StringBuffer sb = new StringBuffer();
 			sb.append("<select name='zl2' id='zl2'>");
 			String options = StringUtil.createOptions(listSx, "CTCD", "CTNM");
-			sb.append("</select>");
+			sb.append(options)
+			  .append("</select>");
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");

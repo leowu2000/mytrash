@@ -101,9 +101,9 @@ public class SearchDAO extends CommonDAO{
 			String tempstr1 = date_start;
 			String tempstr2 = date_end;
 			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-				sql = sql + " and  (p.WTDPDT >= '" + tempstr1 + "' and  p.WTDPDT <= '" + tempstr2 + "') and ";
+				sql = sql + " and  (p.WTDPDT >= '" + tempstr1 + "' and  p.WTDPDT <= '" + tempstr2 + "') ";
 			}
-			sql = sql + " 1=1 order by p.WTDPDT desc ";
+			sql = sql + " and 1=1 order by p.WTDPDT desc ";
 			//set rs = conn.Execute (UCASE(sql))
 			
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			
@@ -183,9 +183,9 @@ public class SearchDAO extends CommonDAO{
 			String tempstr1 = date_start;
 			String tempstr2 = date_end;
 			if(!"".equals(tempstr1)&&!"".equals(tempstr2)){
-				sql = sql + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "')  and ";
+				sql = sql + " and (st.WTDPDT >= '" + tempstr1 + "' and  st.WTDPDT <= '" + tempstr2 + "') ";
 			}
-			sql = sql + " 1=1 order by st.WTDPDT desc ";
+			sql = sql + " and 1=1 order by st.WTDPDT desc ";
 			//set rs = conn.Execute (UCASE(sql))
 					
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			

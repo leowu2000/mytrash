@@ -76,7 +76,7 @@ function changeGc(){
         <td bgcolor="#FFFFFF" name="gcsel" id="gcsel"></td>
       </tr>
       <tr>
-      	<td colspan="6">
+      	<td colspan="6" bgcolor="#FFFFFF">
       		<a href="#" name="a_gcjj" id="a_gcjj" target="result">查看工程简介</a>
       		<a href="#" name="a_fxya" id="a_fxya" target="result">查看防汛预案</a>
       	</td>
