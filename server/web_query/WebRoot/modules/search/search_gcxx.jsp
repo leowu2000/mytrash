@@ -73,13 +73,13 @@ function changeGc(){
         <td bgcolor="#336699"><font color="#FFFFFF">选择类型</font></td>
         <td bgcolor="#FFFFFF" align="left" name="lxsel" id="lxsel"></td>
         <td bgcolor="#336699"><font color="#FFFFFF">选择工程</font></td>
-        <td bgcolor="#FFFFFF" name="gcsel" id="gcsel"></td>
+        <td bgcolor="#FFFFFF" align="left" name="gcsel" id="gcsel"></td>
       </tr>
-      <tr>
-      	<td colspan="6" bgcolor="#FFFFFF">
-      		<a href="#" name="a_gcjj" id="a_gcjj" target="result">查看工程简介</a>
-      		<a href="#" name="a_fxya" id="a_fxya" target="result">查看防汛预案</a>
-      	</td>
+      <tr align="center">
+      	<td bgcolor="#336699"><font color="#FFFFFF">工程简介</font></td>
+        <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_gcjj" id="a_gcjj" target="result">查看工程简介</a></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">基本特性</font></td>
+        <td bgcolor="#FFFFFF" align="left" colspan="3"><a href="#" name="a_fxya" id="a_fxya" target="result">查看基本特性</a></td>
       </tr>
     </table>
   </div>  
