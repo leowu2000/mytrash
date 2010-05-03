@@ -118,13 +118,13 @@ td {
                 <td><a href="../modules/frames/frame_consult.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb8','images/interb8__.gif',1)" onMouseOver="MM_nbGroup('over','interb8','images/interb8_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb8" src="images/interb8.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
               </tr>
               <tr>
-              	<td><a href="../modules/frames/frame_gcxx.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb10','images/interb10__.gif',1)" onMouseOver="MM_nbGroup('over','interb10','images/interb10_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb10" src="images/interb10.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
+              	<td><a href="../modules/frames/frame_gcxx.jsp" target="mainFrame" onClick="MM_nbGroup('down','group1','interb10','images/interb10__.jpg',1)" onMouseOver="MM_nbGroup('over','interb10','images/interb10_.jpg','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb10" src="images/interb10.jpg" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
               </tr>
 <%
 	if("true".equals(isAdmin)){
 %>              
               <tr> 
-                <td><a href="/user.do?action=list" target="mainFrame" onClick="MM_nbGroup('down','group1','interb11','images/interb11__.gif',1)" onMouseOver="MM_nbGroup('over','interb11','images/interb11_.gif','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb11" src="images/interb11.gif" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
+                <td><a href="/user.do?action=list" target="mainFrame" onClick="MM_nbGroup('down','group1','interb11','images/interb11__.jpg',1)" onMouseOver="MM_nbGroup('over','interb11','images/interb11_.jpg','',1)" onMouseOut="MM_nbGroup('out')"><img name="interb11" src="images/interb11.jpg" border="0" alt onLoad WIDTH="134" HEIGHT="30"></a></td>
               </tr>
 <%
 	}
