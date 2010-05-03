@@ -47,15 +47,14 @@ public class SearchController extends CommonController {
 		//险情标题
 		String text_title =  ServletRequestUtils.getStringParameter(request, "text_title", "");
 		
-		if("main".equals(action)){//主页查询
+		if("search_multi".equals(action)){//主页查询面板
+			mv = new ModelAndView("modules/search/search_multi");
 			
-			if("search_multi".equals(action)){//主页查询面板
-				mv = new ModelAndView("modules/search/search_multi");
-				
-				List listLy = riverDAO.getLy();
-				
-				mv.addObject("listLy", listLy);
-			}else if("qbxx".equals(select_sortinfo)){//全部信息
+			List listLy = riverDAO.getLy();
+			
+			mv.addObject("listLy", listLy);
+		}else if("main".equals(action)){//主页查询
+			if("qbxx".equals(select_sortinfo)){//全部信息
 				mv = new ModelAndView("modules/result/result_qbxx");
 				
 				Map mapQbxx = searchDAO.getAllResults(select_sort, xzqh, lysx, date_start, date_end, text_fill, check_projectname, check_unit, check_title);

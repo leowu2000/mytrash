@@ -177,9 +177,9 @@ public class StringUtil {
 		for(int i=0;i<list.size();i++){
 			Map map = (Map)list.get(i);
 			sb.append("<option value='")
-			  .append(map.get(value))
+			  .append(map.get(value)==null?"":map.get(value).toString().trim())
 			  .append("'>")
-			  .append(map.get(name))
+			  .append(map.get(name)==null?"":map.get(name).toString().trim())
 			  .append("</option>");
 		}
 		
