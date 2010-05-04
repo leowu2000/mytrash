@@ -49,7 +49,7 @@ Ext.onReady(function() {
 				 {
 		            title: '坝基完好状况',
 		            iconCls: 'tabs',
-		            html: '<%=bean.getDFPFCN()%>',
+		            html: '<%=bean.getDFPFCN().replaceAll("\r\n","<br/>")%>',
 		            closable:false
 		        }
 			]
@@ -58,37 +58,37 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '坝体稳定状况',
         iconCls: 'tabs',
-        html: '<%=bean.getDBSTBCN()%>',
+        html: '<%=bean.getDBSTBCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '护坡护岸稳定情况',
         iconCls: 'tabs',
-        html: '<%=bean.getBRBPPFCN()%>',
+        html: '<%=bean.getBRBPPFCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '通讯手段及状况',
         iconCls: 'tabs',
-        html: '<%=bean.getCOMMCN()%>',
+        html: '<%=bean.getCOMMCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '泄水建筑物状况',
         iconCls: 'tabs',
-        html: '<%=bean.getESPFCN()%>',
+        html: '<%=bean.getESPFCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '泄能工完好状况',
         iconCls: 'tabs',
-        html: '<%=bean.getEDDPFCN()%>',
+        html: '<%=bean.getEDDPFCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '闸门、起闭机状况',
         iconCls: 'tabs',
-        html: '<%=bean.getGTHOPFCN()%>',
+        html: '<%=bean.getGTHOPFCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

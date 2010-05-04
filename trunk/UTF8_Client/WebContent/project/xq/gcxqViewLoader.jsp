@@ -44,7 +44,7 @@ Ext.onReady(function() {
 				{
 			            title: '补充描述',
 			            iconCls: 'tabs',
-			            html: '<%=bean.getDNCADDSC()%>',
+			            html: '<%=bean.getDNCADDSC().replaceAll("\r\n","<br/>")%>',
 			            closable:false
 					}
 			]
@@ -53,49 +53,49 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel').add({
         title: '抢险方案',
         iconCls: 'tabs',
-        html: '<%=bean.getRDEPL()%>',
+        html: '<%=bean.getRDEPL().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '抢险资源配备',
         iconCls: 'tabs',
-        html: '<%=bean.getRDERESCN()%>',
+        html: '<%=bean.getRDERESCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '进展及结果',
         iconCls: 'tabs',
-        html: '<%=bean.getRDECNRL()%>',
+        html: '<%=bean.getRDECNRL().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '险情原因分析',
         iconCls: 'tabs',
-        html: '<%=bean.getDNCCUAN()%>',
+        html: '<%=bean.getDNCCUAN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '险情发展趋势',
         iconCls: 'tabs',
-        html: '<%=bean.getDNCESTDV()%>',
+        html: '<%=bean.getDNCESTDV().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '可能影响范围',
         iconCls: 'tabs',
-        html: '<%=bean.getDNCPBNFZ()%>',
+        html: '<%=bean.getDNCPBNFZ().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '抢险时气象',
         iconCls: 'tabs',
-        html: '<%=bean.getWTHCN()%>',
+        html: '<%=bean.getWTHCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '未来水文气象',
         iconCls: 'tabs',
-        html: '<%=bean.getFHYWTHCN()%>',
+        html: '<%=bean.getFHYWTHCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

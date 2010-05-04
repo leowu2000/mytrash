@@ -44,7 +44,7 @@ Ext.onReady(function() {
 				{
 			            title: '补充描述',
 			            iconCls: 'tabs',
-			            html: '<textarea cols="50" rows="5" name="BCMS" style="width:99%"><%=bean.getDNCADDSC()%></textarea>',
+			            html: '<textarea cols="50" rows="5" name="BCMS" style="width:99%"><%=bean.getDNCADDSC().replaceAll("\r\n","")%></textarea>',
 			            closable:false
 					}
 			]
@@ -53,49 +53,49 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel').add({
         title: '抢险方案',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="QXFA" style="width:99%"><%=bean.getRDEPL()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="QXFA" style="width:99%"><%=bean.getRDEPL().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '抢险资源配备',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="JXZYPB" style="width:99%"><%=bean.getRDERESCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="JXZYPB" style="width:99%"><%=bean.getRDERESCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '进展及结果',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="JZJJG" style="width:99%"><%=bean.getRDECNRL()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="JZJJG" style="width:99%"><%=bean.getRDECNRL().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '险情原因分析',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="XQYYFX" style="width:99%"><%=bean.getDNCCUAN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="XQYYFX" style="width:99%"><%=bean.getDNCCUAN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '险情发展趋势',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="XQFZQS" style="width:99%"><%=bean.getDNCESTDV()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="XQFZQS" style="width:99%"><%=bean.getDNCESTDV().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '可能影响范围',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="KNYXFW" style="width:99%"><%=bean.getDNCPBNFZ()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="KNYXFW" style="width:99%"><%=bean.getDNCPBNFZ().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '抢险时气象',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="QXSQX" style="width:99%"><%=bean.getWTHCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="QXSQX" style="width:99%"><%=bean.getWTHCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
         title: '未来水文气象',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="WLSWQS"  style="width:99%"><%=bean.getFHYWTHCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="WLSWQS"  style="width:99%"><%=bean.getFHYWTHCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

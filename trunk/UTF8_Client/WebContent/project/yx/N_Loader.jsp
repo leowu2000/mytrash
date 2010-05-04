@@ -49,7 +49,7 @@ Ext.onReady(function() {
 				 {
 		            title: '护岸工程状况',
 		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="BPPJCN" style="width:99%"><%=bean.getBPPJCN()%></textarea>',
+		            html: '<textarea cols="50" rows="5" name="BPPJCN" style="width:99%"><%=bean.getBPPJCN().replaceAll("\r\n","")%></textarea>',
 		            closable:false
 		        }
 			]
@@ -58,25 +58,25 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '清障状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="PRCCLR" style="width:99%"><%=bean.getPRCCLR()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="PRCCLR" style="width:99%"><%=bean.getPRCCLR().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '水流情况状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="FLCNDSC" style="width:99%"><%=bean.getFLCNDSC()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="FLCNDSC" style="width:99%"><%=bean.getFLCNDSC().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '河道情况状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="WDCNDSC" style="width:99%"><%=bean.getWDCNDSC()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="WDCNDSC" style="width:99%"><%=bean.getWDCNDSC().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '控导工程状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="SPURDSC" style="width:99%"><%=bean.getSPURDSC()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="SPURDSC" style="width:99%"><%=bean.getSPURDSC().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

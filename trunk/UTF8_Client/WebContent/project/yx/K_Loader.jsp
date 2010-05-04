@@ -48,7 +48,7 @@ Ext.onReady(function() {
 				 {
 		            title: '坝基状况',
 		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="GFPFCN" style="width:99%"><%=bean.getGFPFCN() %></textarea>',
+		            html: '<textarea cols="50" rows="5" name="GFPFCN" style="width:99%"><%=bean.getGFPFCN().replaceAll("\r\n","") %></textarea>',
 		            closable:false
 		        }
 			]
@@ -57,25 +57,25 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '建筑物状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="STPFCN" style="width:99%"><%=bean.getSTPFCN() %></textarea>',
+        html: '<textarea cols="50" rows="5" name="STPFCN" style="width:99%"><%=bean.getSTPFCN().replaceAll("\r\n","") %></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '消能工状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="EDDPFCN" style="width:99%"><%=bean.getEDDPFCN() %></textarea>',
+        html: '<textarea cols="50" rows="5" name="EDDPFCN" style="width:99%"><%=bean.getEDDPFCN().replaceAll("\r\n","") %></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '闸门、起闭机状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="GTHOPFCN" style="width:99%"><%=bean.getGTHOPFCN() %></textarea>',
+        html: '<textarea cols="50" rows="5" name="GTHOPFCN" style="width:99%"><%=bean.getGTHOPFCN().replaceAll("\r\n","") %></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '通讯手段及状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="COMMCN" style="width:99%"><%=bean.getCOMMCN() %></textarea>',
+        html: '<textarea cols="50" rows="5" name="COMMCN" style="width:99%"><%=bean.getCOMMCN().replaceAll("\r\n","") %></textarea>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

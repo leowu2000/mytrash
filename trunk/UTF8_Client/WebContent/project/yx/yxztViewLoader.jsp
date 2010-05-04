@@ -44,19 +44,19 @@ Ext.onReady(function() {
 				 {
 		            title: '险情预测',
 		            iconCls: 'tabs',
-		            html: '<%=pjrcbbean.getDNCFC()%>',
+		            html: '<%=pjrcbbean.getDNCFC().replaceAll("\r\n","<br/>")%>',
 		            closable:false
 		        },
 		        {
 		            title: '堤防建筑状况',
 		            iconCls: 'tabs',
-		            html: '<%=pjrcbbean.getRDERESCN()%>',
+		            html: '<%=pjrcbbean.getRDERESCN().replaceAll("\r\n","<br/>")%>',
 		            closable:false
 		        },
 		        {
 		            title: '其他',
 		            iconCls: 'tabs',
-		            html: '<%=pjrcbbean.getNT()%>',
+		            html: '<%=pjrcbbean.getNT().replaceAll("\r\n","<br/>")%>',
 		            closable:false
 		        }
 			]

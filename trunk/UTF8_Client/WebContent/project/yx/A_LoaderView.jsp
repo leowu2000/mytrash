@@ -49,7 +49,7 @@ Ext.onReady(function() {
 				 {
 		            title: '堤防完好状况',
 		            iconCls: 'tabs',
-		            html: '<%=bean.getDKPFCN() %>',
+		            html: '<%=bean.getDKPFCN().replaceAll("\r\n","<br/>") %>',
 		            closable:false
 		        }
 			]
@@ -58,13 +58,13 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '堤防建筑物状况',
         iconCls: 'tabs',
-        html: '<%=bean.getTSCN() %>',
+        html: '<%=bean.getTSCN().replaceAll("\r\n","<br/>") %>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '护坡护岸完好状况',
         iconCls: 'tabs',
-        html: '<%=bean.getBRBPPFCN() %>',
+        html: '<%=bean.getBRBPPFCN().replaceAll("\r\n","<br/>") %>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

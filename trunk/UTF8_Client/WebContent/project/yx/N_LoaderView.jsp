@@ -49,7 +49,7 @@ Ext.onReady(function() {
 				 {
 		            title: '护岸工程状况',
 		            iconCls: 'tabs',
-		            html: '<%=bean.getBPPJCN()%>',
+		            html: '<%=bean.getBPPJCN().replaceAll("\r\n","<br/>")%>',
 		            closable:false
 		        }
 			]
@@ -58,25 +58,25 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '清障状况',
         iconCls: 'tabs',
-        html: '<%=bean.getPRCCLR()%>',
+        html: '<%=bean.getPRCCLR().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '水流情况状况',
         iconCls: 'tabs',
-        html: '<%=bean.getFLCNDSC()%>',
+        html: '<%=bean.getFLCNDSC().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '河道情况状况',
         iconCls: 'tabs',
-        html: '<%=bean.getWDCNDSC()%>',
+        html: '<%=bean.getWDCNDSC().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '控导工程状况',
         iconCls: 'tabs',
-        html: '<%=bean.getSPURDSC()%>',
+        html: '<%=bean.getSPURDSC().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

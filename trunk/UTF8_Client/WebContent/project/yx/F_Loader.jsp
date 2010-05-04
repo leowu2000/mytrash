@@ -47,7 +47,7 @@ Ext.onReady(function() {
 				 {
 		            title: '避水救生设施状况',
 		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="SFSRCN" style="width:99%"><%=bean.getSFSRCN()%></textarea>',
+		            html: '<textarea cols="50" rows="5" name="SFSRCN" style="width:99%"><%=bean.getSFSRCN().replaceAll("\r\n","")%></textarea>',
 		            closable:false
 		        }
 			]
@@ -56,31 +56,31 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '分洪设施描述',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="FLFADSC" style="width:99%"><%=bean.getFLFADSC()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="FLFADSC" style="width:99%"><%=bean.getFLFADSC().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '退水设施状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="IDSTCN" style="width:99%"><%=bean.getIDSTCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="IDSTCN" style="width:99%"><%=bean.getIDSTCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '人员转移情况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="TRFCN" style="width:99%"><%=bean.getTRFCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="TRFCN" style="width:99%"><%=bean.getTRFCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '圩堤状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="DKCN" style="width:99%"><%=bean.getDKCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="DKCN" style="width:99%"><%=bean.getDKCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '通讯预警设施状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="CWFCCN" style="width:99%"><%=bean.getCWFCCN()%></textarea>',
+        html: '<textarea cols="50" rows="5" name="CWFCCN" style="width:99%"><%=bean.getCWFCCN().replaceAll("\r\n","")%></textarea>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically
