@@ -47,7 +47,7 @@ Ext.onReady(function() {
 				 {
 		            title: '避水救生设施状况',
 		            iconCls: 'tabs',
-		            html: '<%=bean.getSFSRCN()%>',
+		            html: '<%=bean.getSFSRCN().replaceAll("\r\n","<br/>")%>',
 		            closable:false
 		        }
 			]
@@ -56,31 +56,31 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '分洪设施描述',
         iconCls: 'tabs',
-        html: '<%=bean.getFLFADSC()%>',
+        html: '<%=bean.getFLFADSC().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '退水设施状况',
         iconCls: 'tabs',
-        html: '<%=bean.getIDSTCN()%>',
+        html: '<%=bean.getIDSTCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '人员转移情况',
         iconCls: 'tabs',
-        html: '<%=bean.getTRFCN()%>',
+        html: '<%=bean.getTRFCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '圩堤状况',
         iconCls: 'tabs',
-        html: '<%=bean.getDKCN()%>',
+        html: '<%=bean.getDKCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '通讯预警设施状况',
         iconCls: 'tabs',
-        html: '<%=bean.getCWFCCN()%>',
+        html: '<%=bean.getCWFCCN().replaceAll("\r\n","<br/>")%>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically

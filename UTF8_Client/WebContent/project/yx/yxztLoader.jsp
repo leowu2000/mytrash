@@ -43,7 +43,7 @@ Ext.onReady(function() {
 				 {
 		            title: '险情预测',
 		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="XQYC" style="width:99%"><%=pjrcbbean.getDNCFC()%></textarea>',
+		            html: '<textarea cols="50" rows="5" name="XQYC" style="width:99%"><%=pjrcbbean.getDNCFC().replaceAll("\r\n","")%></textarea>',
 		            closable:false
 		        }		        
 			]
@@ -53,7 +53,7 @@ Ext.onReady(function() {
 			{
 	            title: '堤防建筑状况',
 	            iconCls: 'tabs',
-	            html: '<textarea cols="50" rows="5" name="DFJZZK" style="width:99%"><%=pjrcbbean.getRDERESCN()%></textarea>',
+	            html: '<textarea cols="50" rows="5" name="DFJZZK" style="width:99%"><%=pjrcbbean.getRDERESCN().replaceAll("\r\n","")%></textarea>',
 	            closable:false
 	        }
 	).show();
@@ -61,7 +61,7 @@ Ext.onReady(function() {
 			{
 	            title: '其他',
 	            iconCls: 'tabs',
-	            html: '<textarea cols="50" rows="5" name="QT" style="width:99%"><%=pjrcbbean.getNT()%></textarea>',
+	            html: '<textarea cols="50" rows="5" name="QT" style="width:99%"><%=pjrcbbean.getNT().replaceAll("\r\n","")%></textarea>',
 	            closable:false
 	        }
 	).show();

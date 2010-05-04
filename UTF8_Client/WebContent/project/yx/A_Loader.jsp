@@ -50,7 +50,7 @@ Ext.onReady(function() {
 				 {
 		            title: '堤防完好状况',
 		            iconCls: 'tabs',
-		            html: '<textarea cols="50" rows="5" name="DKPFCN" style="width:99%"><%=bean.getDKPFCN() %></textarea>',
+		            html: '<textarea cols="50" rows="5" name="DKPFCN" style="width:99%"><%=bean.getDKPFCN().replaceAll("\r\n","") %></textarea>',
 		            closable:false
 		        }
 			]
@@ -59,13 +59,13 @@ Ext.onReady(function() {
 	Ext.getCmp('myTPanel2').add({
         title: '堤防建筑物状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="TSCN" style="width:99%"><%=bean.getTSCN() %></textarea>',
+        html: '<textarea cols="50" rows="5" name="TSCN" style="width:99%"><%=bean.getTSCN().replaceAll("\r\n","") %></textarea>',
         closable:false
     }).show();
 	Ext.getCmp('myTPanel2').add({
         title: '护坡护岸完好状况',
         iconCls: 'tabs',
-        html: '<textarea cols="50" rows="5" name="BRBPPFCN" style="width:99%"><%=bean.getBRBPPFCN() %></textarea>',
+        html: '<textarea cols="50" rows="5" name="BRBPPFCN" style="width:99%"><%=bean.getBRBPPFCN().replaceAll("\r\n","") %></textarea>',
         closable:false
     }).show();
 	// Add a bunch of tabs dynamically
