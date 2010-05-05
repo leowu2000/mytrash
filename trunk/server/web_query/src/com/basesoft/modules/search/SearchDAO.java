@@ -72,10 +72,9 @@ public class SearchDAO extends CommonDAO{
 			}*/
 			
 			if(!"".equals(lysx)){
-				lysx = lysx.substring(2, 7);
+				lysx = lysx.substring(2, 8);
+				sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
 			}
-			
-			sql = sql = sql + " and pj.pjnmcd like '%" + lysx + "'%";
 			
 			//按照关键字组合条件
 			boolean yxzt_flage = false;
@@ -154,10 +153,9 @@ public class SearchDAO extends CommonDAO{
 			}*/
 			
 			if(!"".equals(lysx)){
-				lysx = lysx.substring(2, 7);
+				lysx = lysx.substring(2, 8);
+				sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
 			}
-			
-			sql = sql = sql + " and pj.pjnmcd like '%" + lysx + "'%";
 			
 			//按照关键字组合条件
 			boolean xqxx_flage = false;
@@ -384,7 +382,7 @@ public class SearchDAO extends CommonDAO{
 			}						
 		}
 			//按照河流水系条件组合查询
-		if(!"".equals(lysx)){
+		/*if(!"".equals(lysx)){
 			if(lysx.length() == 2){//流域级
 				if("ZZ".equals(lysx)){//全国全部流域
 				
@@ -404,6 +402,11 @@ public class SearchDAO extends CommonDAO{
 					sql1 = sql1 + " and pj.pjnmcd = '" + lysx + "'";
 				}
 			}
+		}*/
+		
+		if(!"".equals(lysx)){
+			lysx = lysx.substring(2, 8);
+			sql1 = sql1 + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
 		//按照关键字组合条件
@@ -463,7 +466,7 @@ public class SearchDAO extends CommonDAO{
 		}
 		
 		//按照河流水系条件组合查询
-		if(!"".equals(lysx)){
+		/*if(!"".equals(lysx)){
 			if(lysx.length() == 2){//流域级
 				if("ZZ".equals(lysx)){//全国全部流域
 				
@@ -483,6 +486,11 @@ public class SearchDAO extends CommonDAO{
 					sql2 = sql2 + " and pj.pjnmcd = '" + lysx + "'";
 				}
 			}
+		}*/
+		
+		if(!"".equals(lysx)){
+			lysx = lysx.substring(2, 8);
+			sql2 = sql2 + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
 		//按照关键字组合条件
@@ -670,7 +678,7 @@ public class SearchDAO extends CommonDAO{
 	 * @param page 页码
 	 * @return
 	 */
-	public PageList getXq(String text_title, String text_fill, String date_start, String date_end, int page){
+	public PageList getXq(String text_title, String text_fill, String date_start, String date_end, String lysx, int page){
 		String sql = "";
 		int pagesize = 10;
 		int start = pagesize*(page - 1) + 1;
@@ -685,6 +693,11 @@ public class SearchDAO extends CommonDAO{
 		}
 		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
 			sql = sql + " and sc.WTDPDT >= '" + date_start + "' and  sc.WTDPDT <= '" + date_end + "' ";
+		}
+		
+		if(!"".equals(lysx)){
+			lysx = lysx.substring(2, 8);
+			sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
 		sql = sql + " order by sc.wtdpdt desc";
@@ -798,7 +811,7 @@ public class SearchDAO extends CommonDAO{
 	 * @param page 页码
 	 * @return
 	 */
-	public PageList getYxzt(String text_title, String text_fill, String date_start, String date_end, int page){
+	public PageList getYxzt(String text_title, String text_fill, String date_start, String date_end, String lysx, int page){
 		String sql = "";
 		int pagesize = 10;
 		int start = pagesize*(page - 1) + 1;
@@ -817,6 +830,11 @@ public class SearchDAO extends CommonDAO{
 		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询
 			sql = sql + " pj.WTDPDT >= '" + date_start + "' and  pj.WTDPDT <= '" + date_end + "' and";
 		}
+		if(!"".equals(lysx)){
+			lysx = lysx.substring(2, 8);
+			sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
+		}
+		
 		sql = sql + " 1=1 order by pj.wtdpdt desc";
 		
 		String sqlData = "select * from( select A.*, ROWNUM RN from (" + sql + ") A where ROWNUM<=" + end + ") WHERE RN>=" + start;

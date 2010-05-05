@@ -136,7 +136,7 @@ public class SearchController extends CommonController {
 			mv.addObject("zq_count", zq_count);
 			mv.addObject("total_count", total_count);
 		}else if("xq".equals(action)){//险情查询
-			PageList pageList = searchDAO.getXq(text_title, text_fill, date_start, date_end, page);
+			PageList pageList = searchDAO.getXq(text_title, text_fill, date_start, date_end, lysx, page);
 		
 			mv = new ModelAndView("modules/result/result_xq");
 			mv.addObject("pageList", pageList);
@@ -163,7 +163,8 @@ public class SearchController extends CommonController {
 			mv.addObject("date_start", date_start);
 			mv.addObject("date_end", date_end);
 		}else if("yxzt".equals(action)){//运行状态查询
-			PageList pageList = searchDAO.getYxzt(text_title, text_fill, date_start, date_end, page);
+			
+			PageList pageList = searchDAO.getYxzt(text_title, text_fill, date_start, date_end, lysx, page);
 			
 			mv = new ModelAndView("modules/result/result_yxzt2");
 			mv.addObject("pageList", pageList);
