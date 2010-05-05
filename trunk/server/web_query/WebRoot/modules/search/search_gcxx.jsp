@@ -43,10 +43,26 @@ function changeLx(){
 
 function changeGc(){
 	var gclj = document.getElementById('gc').value;
+
+	if(window.XMLHttpRequest){ //Mozilla 
+      var xmlHttpReq=new XMLHttpRequest();
+    }else if(window.ActiveXObject){
+ 	  var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    }
+    xmlHttpReq.open("GET", "/search.do?action=search_gcxx_ljajax&gclj=" + gclj, false);
+    xmlHttpReq.send();
+    if(xmlHttpReq.responseText!=''){
+        var gclj = xmlHttpReq.responseText.split(';');
+        
+        document.getElementById('a_gcjj').href='/modules/gcdata/' + gclj[0];
+		document.getElementById('a_fxya').href='/modules/gcdata/' + gclj[1];
+    }
+
+	//var gclj = document.getElementById('gc').value;
 	//parent.document.getElementById('result').src = "/modules/gcdata/" + gclj;
 	
-	document.getElementById('a_gcjj').href='/modules/gcdata/' + gclj;
-	document.getElementById('a_fxya').href='/modules/gcdata/' + gclj;
+	//document.getElementById('a_gcjj').href='/modules/gcdata/' + gclj;
+	//document.getElementById('a_fxya').href='/modules/gcdata/' + gclj;
 }
 </script>
 </head>
