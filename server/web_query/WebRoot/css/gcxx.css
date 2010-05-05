@@ -1,0 +1,12 @@
+body { margin-top: 0px; background-color: rgb(218, 233, 250); }
+table { font-family: "ËÎÌו"; font-size: 9pt; }
+a:link, a:active, a:visited { font-size: 9pt; color: rgb(0, 0, 0); text-decoration: none; }
+a:hover { font-size: 9pt; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(6, 108, 210); text-decoration: underline; }
+.subtable { border: 1px solid rgb(85, 142, 202); background-image: url('bt.gif'); }
+td { font-size: 9pt; }
+.subtable { border: 1px solid rgb(123, 158, 189); padding-right: 2px; padding-left: 2px; font-size: 12px; color: black; padding-top: 2px; }
+.btn_2k3 { border: 1px solid rgb(0, 45, 150); padding-right: 2px; padding-left: 2px; font-size: 12px; color: black; padding-top: 2px; }
+#stuff ul { list-style: none outside none; width: 980px; margin: 2px; }
+#stuff ul li { float: left; width: 93px; margin: 0pt 5px; }
+#apDiv1 { position: absolute; top: 4px; z-index: 1; left: 20px; }
+#apDiv2 { position: absolute; left: 17px; top: 55px; z-index: 2; }

@@ -49,7 +49,7 @@ public class SearchDAO extends CommonDAO{
 			}
 			
 			//按照河流水系条件组合查询
-			if(!"".equals(lysx)){
+			/*if(!"".equals(lysx)){
 				if(lysx.length() == 2){//流域级
 					if("ZZ".equals(lysx)){//全国全部流域
 							
@@ -69,7 +69,13 @@ public class SearchDAO extends CommonDAO{
 						sql = sql + " and pj.pjnmcd = '" + lysx + "'";
 					}
 				}
+			}*/
+			
+			if(!"".equals(lysx)){
+				lysx = lysx.substring(2, 7);
 			}
+			
+			sql = sql = sql + " and pj.pjnmcd like '%" + lysx + "'%";
 			
 			//按照关键字组合条件
 			boolean yxzt_flage = false;
@@ -125,7 +131,7 @@ public class SearchDAO extends CommonDAO{
 			}
 			
 			//按照河流水系条件组合查询
-			if("".equals(lysx)){
+			/*if(!"".equals(lysx)){
 				if(lysx.length() == 2){//流域级
 					if("ZZ".equals(lysx)){//全国全部流域
 					
@@ -145,7 +151,13 @@ public class SearchDAO extends CommonDAO{
 						sql = sql + " and pj.pjnmcd = '" + lysx + "'";
 					}							
 				}			
+			}*/
+			
+			if(!"".equals(lysx)){
+				lysx = lysx.substring(2, 7);
 			}
+			
+			sql = sql = sql + " and pj.pjnmcd like '%" + lysx + "'%";
 			
 			//按照关键字组合条件
 			boolean xqxx_flage = false;
@@ -1024,6 +1036,23 @@ public class SearchDAO extends CommonDAO{
 	 */
 	public List<?> getGcxxGc(String sxbm, String lxbm){
 		return jdbcTemplate.queryForList("select GCMC, GCLJ from TB_GCLJ where SXBM='" + sxbm + "' and LXBM='" + lxbm + "'");
+	}
+	
+	/**
+	 * 获取工程链接2
+	 * @param gclj 工程链接
+	 * @return
+	 */
+	public String getGcxxLj2(String gclj){
+		String gclj2 = "";
+		
+		List list = jdbcTemplate.queryForList("select GCLJ2 from TB_GCLJ where GCLJ='" + gclj + "'");
+		if(list.size()>0){
+			Map map = (Map)list.get(0);
+			gclj2 = map.get("GCLJ2").toString();
+		}
+		
+		return gclj2;
 	}
 	
 	/**
