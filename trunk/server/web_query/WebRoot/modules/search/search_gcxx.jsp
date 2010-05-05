@@ -56,6 +56,7 @@ function changeGc(){
         
         document.getElementById('a_gcjj').href='/modules/gcdata/' + gclj[0];
 		document.getElementById('a_fxya').href='/modules/gcdata/' + gclj[1];
+		parent.document.getElementById('result').src = document.getElementById('a_gcjj').href;
     }
 
 	//var gclj = document.getElementById('gc').value;
