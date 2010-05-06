@@ -7,8 +7,8 @@
 
 <script language="JavaScript">
 function IFrameResize1(qHeight){
-	document.getElementById("infotitle").height = document.body.offsetHeight - 35;
-	document.getElementById("detail").height = document.body.offsetHeight - 35;
+	document.getElementById("infotitle").height = document.body.offsetHeight - 190;
+	document.getElementById("detail").height = document.body.offsetHeight - 190;
 }
 parent.document.getElementById('lineFrame').src = '';
 </script>
@@ -31,6 +31,11 @@ parent.document.getElementById('lineFrame').src = '';
 			</td>
 			<td width="80%">
 				<iframe name="detail" width="100%" frameborder='0' height="" src=""></iframe>
+			</td>
+		</tr>
+		<tr>
+			<td width="100%" colspan="2">
+				<iframe name="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index_m" ></iframe>
 			</td>
 		</tr>
 	</table>

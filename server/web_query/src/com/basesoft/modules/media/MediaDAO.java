@@ -34,7 +34,7 @@ public class MediaDAO extends CommonDAO {
 	 * @param pId 编号
 	 * @return
 	 */
-	public InputStream getBlob(String tablename, String pId){
+	synchronized public InputStream getBlob(String tablename, String pId){
 		String sql = "select lxzp from " + tablename + " where zlbm ='" + pId + "'";
 		InputStream inputstream = (InputStream) jdbcTemplate.execute(sql, new CallableStatementCallback() {   
 			public Object doInCallableStatement(CallableStatement stmt)throws SQLException,DataAccessException {   
@@ -59,7 +59,7 @@ public class MediaDAO extends CommonDAO {
 	 * @param path 文件路径
 	 * @return 返回文件比特数组
 	 */
-	public byte[] saveAsFile(InputStream ins, String path) throws Exception{
+	synchronized public byte[] saveAsFile(InputStream ins, String path) throws Exception{
 		//写入文件
 		File file = new File(path);
 		if(!file.exists()){
@@ -68,7 +68,7 @@ public class MediaDAO extends CommonDAO {
 		//流中数据写入文件
 		FileOutputStream fos = new FileOutputStream(file);
     	BufferedOutputStream buffOut = new BufferedOutputStream(fos);
-    	byte buf[]=new byte[1024];
+    	byte buf[]=new byte[2048];
         for(int i=0;(i=ins.read(buf))>0;){
         	buffOut.write(buf,0,i);
         }
@@ -107,7 +107,7 @@ public class MediaDAO extends CommonDAO {
 	 * @param newPic 生成的缩略图
 	 * @return
 	 */
-	public byte[] getNewPic(String path)throws Exception {
+	synchronized public byte[] getNewPic(String path, int size)throws Exception {
         //原图文件
     	File oldFile = new File(path + "\\temp.jpg");
         //新图文件
@@ -119,8 +119,8 @@ public class MediaDAO extends CommonDAO {
         
         // 构造Image对象
         Image src = ImageIO.read(oldFile); 
-        BufferedImage tag = new BufferedImage(30, 30,BufferedImage.TYPE_INT_RGB);
-        tag.getGraphics().drawImage(src, 0, 0, 30, 30, null); // 绘制缩小后的图
+        BufferedImage tag = new BufferedImage(size, size,BufferedImage.TYPE_INT_RGB);
+        tag.getGraphics().drawImage(src, 0, 0, size, size, null); // 绘制缩小后的图
         
         FileOutputStream newStrOut = new FileOutputStream(newFile);// 输出到文件流
         JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(newStrOut);

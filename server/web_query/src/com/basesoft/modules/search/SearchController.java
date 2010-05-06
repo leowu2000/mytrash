@@ -318,6 +318,12 @@ public class SearchController extends CommonController {
 			List listIndex = searchDAO.getIndex();
 			
 			mv.addObject("listIndex", listIndex);
+		}else if("search_index_m".equals(action)){//首页面左侧列表
+			mv = new ModelAndView("modules/result/result_index_m");
+			
+			List listIndex_m = searchDAO.getIndexMedia();
+			
+			mv.addObject("listIndex_m", listIndex_m);
 		}
 		
 		return mv;

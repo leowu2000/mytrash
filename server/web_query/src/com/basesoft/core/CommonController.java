@@ -13,7 +13,7 @@ public abstract class CommonController extends AbstractController {
 	protected final Log log = LogFactory.getLog(getClass());
 	
 	@Override
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
+	synchronized protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
 		ModelAndView mv = null;

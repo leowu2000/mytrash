@@ -489,7 +489,6 @@ public class SearchDAO extends CommonDAO{
 		}*/
 		
 		if(!"".equals(lysx)){
-			lysx = lysx.substring(1, 7);
 			sql2 = sql2 + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
@@ -508,7 +507,7 @@ public class SearchDAO extends CommonDAO{
 			}
 		}
 		if("true".equals(check_title)){//信息标题
-			sql2 = sql2 + " and 1 = 2 ";
+			sql2 = sql2 + " and 1 = 1 ";
 		}
 		if(zh_temp_flage2 == true){
 			sql2 = sql2 + ") ";
@@ -1078,22 +1077,93 @@ public class SearchDAO extends CommonDAO{
 	 * @return list
 	 */
 	public List<?> getIndex(){
-		//生成临时表TEMP_TABLE  TB_FPACTI防汛行动
-		jdbcTemplate.execute("select * into TEMP_TABLE from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FPACTI' as TABLENAME from TB_FPACTI order by DT desc) A where ROWNUM<=10) WHERE RN>=1");
-		//TB_FXJB防汛简报
-		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FXJB' as TABLENAME from TB_FXJB order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
-		//TB_PJRCN运行状态
-		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select PJRNO as ID, PJNM as TITLE, WTDPDT as DT, 'TB_PJRCN' as TABLENAME from TB_PJRCN order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
-		//TB_QT旱情
-		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_QT' as TABLENAME from TB_QT order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
-		//TB_SD灾情
-		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_SD' as TABLENAME from TB_SD order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
-		//TB_STDNC险情
-		jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select DNCNO as ID, DNCNM as TITLE, WTDPDT as DT, 'TB_STDNC' as TABLENAME from TB_STDNC order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+		List list = new ArrayList();
 		
-		List list = jdbcTemplate.queryForList("select * from (select A.*, ROWNUM RN1 from (select * from TEMP_TABLE order by DT desc) A where ROWNUM<=10) WHERE RN1>=1");
+		try{
+			//生成临时表TEMP_TABLE  TB_FPACTI防汛行动
+			jdbcTemplate.execute("select * into TEMP_TABLE from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FPACTI' as TABLENAME from TB_FPACTI order by DT desc) A where ROWNUM<=10) WHERE RN>=1");
+			//TB_FXJB防汛简报
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FXJB' as TABLENAME from TB_FXJB order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_PJRCN运行状态
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select PJRNO as ID, PJNM as TITLE, WTDPDT as DT, 'TB_PJRCN' as TABLENAME from TB_PJRCN order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_QT旱情
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_QT' as TABLENAME from TB_QT order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_SD灾情
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_SD' as TABLENAME from TB_SD order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_STDNC险情
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select DNCNO as ID, DNCNM as TITLE, WTDPDT as DT, 'TB_STDNC' as TABLENAME from TB_STDNC order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			
+			list = jdbcTemplate.queryForList("select * from (select A.*, ROWNUM RN1 from (select * from TEMP_TABLE order by DT desc) A where ROWNUM<=10) WHERE RN1>=1");
+			
+			jdbcTemplate.execute("drop table TEMP_TABLE");
+		}catch(Exception e){
+			jdbcTemplate.execute("drop table TEMP_TABLE");
+			
+			//生成临时表TEMP_TABLE  TB_FPACTI防汛行动
+			jdbcTemplate.execute("select * into TEMP_TABLE from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FPACTI' as TABLENAME from TB_FPACTI order by DT desc) A where ROWNUM<=10) WHERE RN>=1");
+			//TB_FXJB防汛简报
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_FXJB' as TABLENAME from TB_FXJB order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_PJRCN运行状态
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select PJRNO as ID, PJNM as TITLE, WTDPDT as DT, 'TB_PJRCN' as TABLENAME from TB_PJRCN order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_QT旱情
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_QT' as TABLENAME from TB_QT order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_SD灾情
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select RPJINCD as ID, WTTT as TITLE, WTDT as DT, 'TB_SD' as TABLENAME from TB_SD order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_STDNC险情
+			jdbcTemplate.execute("insert into TEMP_TABLE (select * from (select A.*, ROWNUM RN from (select DNCNO as ID, DNCNM as TITLE, WTDPDT as DT, 'TB_STDNC' as TABLENAME from TB_STDNC order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			
+			list = jdbcTemplate.queryForList("select * from (select A.*, ROWNUM RN1 from (select * from TEMP_TABLE order by DT desc) A where ROWNUM<=10) WHERE RN1>=1");
+			
+			jdbcTemplate.execute("drop table TEMP_TABLE");
+		}
 		
-		jdbcTemplate.execute("drop table TEMP_TABLE");
+		return list;
+	}
+	
+	/**
+	 * 获取首页面图片列表，获取最新的十个图片
+	 * @return
+	 */
+	public List<?> getIndexMedia(){
+		List list = new ArrayList();
+		
+		try{
+			//生成临时表TEMP_TABLE  TB_FPACTI防汛行动
+			jdbcTemplate.execute("select * into TEMP_TABLE_MEDIA from (select A.*, ROWNUM RN from (select fp.RPJINCD as ID, fp.WTTT as TITLE, fp.WTDT as DT, fm.ZLBM as ZLBM, 'TB_FPACTI_M' as TABLENAME from TB_FPACTI fp,TB_FPACTI_M fm where fm.RPJINCD = fp.RPJINCD and fm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1");
+			//TB_FXJB防汛简报
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select jb.RPJINCD as ID, jb.WTTT as TITLE, jb.WTDT as DT, jm.ZLBM as ZLBM, 'TB_FXJB_M' as TABLENAME from TB_FXJB jb, TB_FXJB_M jm where jm.RPJINCD = jb.RPJINCD and jm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_PJRCN运行状态
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select pj.PJRNO as ID, pj.PJNM as TITLE, pj.WTDPDT as DT, pm.ZLBM as ZLBM, 'TB_PJR_M' as TABLENAME from TB_PJRCN pj, TB_PJR_M pm where pm.PJRNO = pj.PJRNO and pm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_QT旱情
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select qt.RPJINCD as ID, qt.WTTT as TITLE, qt.WTDT as DT, qm.ZLBM as ZLBM, 'TB_QT_M' as TABLENAME from TB_QT qt, TB_QT_M qm where qm.RPJINCD = qt.RPJINCD and qm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_SD灾情
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select sd.RPJINCD as ID, sd.WTTT as TITLE, sd.WTDT as DT, sm.ZLBM as ZLBM, 'TB_SD_M' as TABLENAME from TB_SD sd, TB_SD_M sm where sm.RPJINCD = sd.RPJINCD and sm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_STDNC险情
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select st.DNCNO as ID, st.DNCNM as TITLE, st.WTDPDT as DT, sm.ZLBM as ZLBM, 'TB_STDNC_M' as TABLENAME from TB_STDNC st, TB_STDNC_M sm where sm.DNCNO = st.DNCNO and sm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			
+			list = jdbcTemplate.queryForList("select * from (select A.*, ROWNUM RN1 from (select * from TEMP_TABLE_MEDIA order by DT desc) A where ROWNUM<=10) WHERE RN1>=1");
+			
+			jdbcTemplate.execute("drop table TEMP_TABLE_MEDIA");
+		}catch(Exception e){
+			jdbcTemplate.execute("drop table TEMP_TABLE_MEDIA");
+			
+			//生成临时表TEMP_TABLE  TB_FPACTI防汛行动
+			jdbcTemplate.execute("select * into TEMP_TABLE_MEDIA from (select A.*, ROWNUM RN from (select fp.RPJINCD as ID, fp.WTTT as TITLE, fp.WTDT as DT, fm.ZLBM as ZLBM, 'TB_FPACTI_M' as TABLENAME from TB_FPACTI fp,TB_FPACTI_M fm where fm.RPJINCD = fp.RPJINCD and fm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1");
+			//TB_FXJB防汛简报
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select jb.RPJINCD as ID, jb.WTTT as TITLE, jb.WTDT as DT, jm.ZLBM as ZLBM, 'TB_FXJB_M' as TABLENAME from TB_FXJB jb, TB_FXJB_M jm where jm.RPJINCD = jb.RPJINCD and jm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_PJRCN运行状态
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select pj.PJRNO as ID, pj.PJNM as TITLE, pj.WTDPDT as DT, pm.ZLBM as ZLBM, 'TB_PJR_M' as TABLENAME from TB_PJRCN pj, TB_PJR_M pm where pm.PJRNO = pj.PJRNO and pm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_QT旱情
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select qt.RPJINCD as ID, qt.WTTT as TITLE, qt.WTDT as DT, qm.ZLBM as ZLBM, 'TB_QT_M' as TABLENAME from TB_QT qt, TB_QT_M qm where qm.RPJINCD = qt.RPJINCD and qm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_SD灾情
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select sd.RPJINCD as ID, sd.WTTT as TITLE, sd.WTDT as DT, sm.ZLBM as ZLBM, 'TB_SD_M' as TABLENAME from TB_SD sd, TB_SD_M sm where sm.RPJINCD = sd.RPJINCD and sm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			//TB_STDNC险情
+			jdbcTemplate.execute("insert into TEMP_TABLE_MEDIA (select * from (select A.*, ROWNUM RN from (select st.DNCNO as ID, st.DNCNM as TITLE, st.WTDPDT as DT, sm.ZLBM as ZLBM, 'TB_STDNC_M' as TABLENAME from TB_STDNC st, TB_STDNC_M sm where sm.DNCNO = st.DNCNO and sm.WJGS like '%JPG%' order by DT desc) A where ROWNUM<=10) WHERE RN>=1)");
+			
+			list = jdbcTemplate.queryForList("select * from (select A.*, ROWNUM RN1 from (select * from TEMP_TABLE_MEDIA order by DT desc) A where ROWNUM<=10) WHERE RN1>=1");
+			jdbcTemplate.execute("drop table TEMP_TABLE_MEDIA");
+		}
+		
 		return list;
 	}
 }

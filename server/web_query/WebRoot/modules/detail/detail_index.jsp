@@ -30,7 +30,7 @@ if(mediaheight<60){
 	<script language="JavaScript" src="../script/layer10.js"></script>
   </head>
   
-  <body>
+  <body background="../../images/back.gif">
   	<table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 <%
 	if("TB_FPACTI".equals(tablename)||"TB_FXJB".equals(tablename)||"TB_QT".equals(tablename)||"TB_SD".equals(tablename)){//防汛行动,旱情,灾情
@@ -188,6 +188,9 @@ if(mediaheight<60){
       <td width="30%" height="25" bgcolor="#FFFFFF"></td>
     </tr>
   </table>
+  <center>
+  	<input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="window.open('detail.do?action=yxzt1&id=<%=mapIndex.get("PJRNO") %>','详细信息','height=300,width=400,top=150,left=300,resizable=no,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no,dependent=yes,alwaysLowered=yes')" class="input1">
+  </center>
 <%
 	}else if("TB_STDNC".equals(tablename)){
 %>
@@ -274,6 +277,9 @@ if(mediaheight<60){
         </td>
       </tr>
     </table>
+    <center>
+  		<input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="window.open('detail.do?action=xq1&id=<%=mapIndex.get("DNCNO") %>','详细信息','height=300,width=400,top=150,left=300,resizable=no,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no,dependent=yes,alwaysLowered=yes')" class="input1">
+  	</center>
   </div>
 <%
 	}
