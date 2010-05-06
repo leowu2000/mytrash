@@ -74,7 +74,7 @@ function changeZl(value){
     <table width="98%" border="0" align="left" cellpadding="2" cellspacing="1" bgcolor="#336699">
       <!--DWLayoutTable-->
       <tr align="center"> 
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>信息类型</strong></font></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">信息类型</font></td>
         <td align="left" bgcolor="#FFFFFF"> <select name="select_sortinfo" id=select_sortinfo size="1" >
             <option value="qbxx" selected>全部信息</option>
             <OPTION value="xqxx">险情</OPTION>
@@ -86,7 +86,7 @@ function changeZl(value){
           </select> 
           <!--input type="checkbox" name="checkbox_media" value="true"-->
         </td>
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>工程类别</strong></font></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">工程类别</font></td>
         <td align="left" bgcolor="#FFFFFF"> <select name="select_sort" size="1" >
             <option value="0" selected>全部信息</option>
             <option value="b" >水库</option>
@@ -99,7 +99,7 @@ function changeZl(value){
             <option value="p" >穿堤建筑物</option>
           </select>
         </td>
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>关键字</strong></font></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">关键字</font></td>
         <td align="left" bgcolor="#FFFFFF"> <input name="text_fill"  class="input2" style="width:178;"> 
         <div style="display:none;">
           <input type="checkbox" name="check_projectname" value="true" checked="checked">
@@ -110,24 +110,27 @@ function changeZl(value){
           信息标题
         </div>
         </td>
-        <td rowspan="3" bgcolor="#FFFFFF"> <input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
-        </td>
-      </tr>
-      <tr align="center"> 
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>河流水系</strong></font></td>
-        <td bgcolor="#FFFFFF" align="left" colspan="3">
-        	流域<select name="ly" id="ly" onchange="changeLy(this.value);">
-				<%=StringUtil.createOptions(listLy, "CTCD", "CTNM") %>      		
-        	</select>
-        	水系<span name="selsx" id="selsx"></span>
-        	一级支流<span name="selzl1" id="selzl1"></span>
-        	二级支流<span name="selzl2" id="selzl2"></span>
-        </td>
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">上报时间</font></td>
         <td align="left" bgcolor="#FFFFFF">
 			<input type="text" id="date_start" name="date_start" style="width:80;" onClick="WdatePicker({readOnly:true})">到
 			<input type="text" id="date_end" name="date_end" style="width:80;" onClick="WdatePicker({readOnly:true})">
 		</td>
+        <td rowspan="2" bgcolor="#FFFFFF"> <input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
+        </td>
+      </tr>
+      <tr align="center"> 
+        <td bgcolor="#336699"><font color="#FFFFFF">流域</font></td>
+        <td bgcolor="#FFFFFF" align="left" >
+        	<select name="ly" id="ly" onchange="changeLy(this.value);">
+				<%=StringUtil.createOptions(listLy, "CTCD", "CTNM") %>      		
+        	</select>
+        </td>
+        <td bgcolor="#336699"><font color="#FFFFFF">水系</font></td>
+        <td bgcolor="#FFFFFF" align="left" ><span name="selsx" id="selsx"></span></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">一级支流</font></td>
+        <td bgcolor="#FFFFFF" align="left" ><span name="selzl1" id="selzl1"></span></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">二级支流</font></td>
+        <td bgcolor="#FFFFFF" align="left" ><span name="selzl2" id="selzl2"></span></td>
       </tr>
     </table>
   </div>

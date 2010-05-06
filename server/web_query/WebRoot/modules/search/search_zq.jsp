@@ -19,14 +19,12 @@
         <td bgcolor="#FFFFFF" align="left"> <input name="text_title" class="input2" > </td>
         <td><font color="#FFFFFF">填报单位</font></td>
         <td bgcolor="#FFFFFF" align="left"> <input name="text_fill" class="input2" > </td>
-        <td rowspan="2" bgcolor="#FFFFFF"><input id=submit_query name=submit_query type=submit value=查询 class="input1"></td>
-      </tr>
-      <tr align="center"> 
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
-        <td colspan="3" align="left" bgcolor="#FFFFFF">
+        <td bgcolor="#336699"><font color="#FFFFFF">上报时间</font></td>
+        <td align="left" bgcolor="#FFFFFF">
 			从<input type="text" id="date_start" name="date_start" class="input2" onClick="WdatePicker({readOnly:true})">到
 			<input type="text" id="date_end" name="date_end" class="input2" onClick="WdatePicker({readOnly:true})">
 		</td>
+        <td bgcolor="#FFFFFF"><input id=submit_query name=submit_query type=submit value=查询 class="input1"></td>
       </tr>
     </table> 
   </div>  
