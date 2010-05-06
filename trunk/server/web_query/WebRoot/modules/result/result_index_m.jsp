@@ -18,6 +18,7 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
   </head>
   
   <body background="../../images/back.gif">
+  <marquee id="mar" name="mar">
     <table width="100%" height="100%" align="center" border="0" cellspacing="1" cellpadding="0">
     	<tr>
 <%
@@ -42,7 +43,7 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
 		
 %>    
     		<td height="30" align="center" vlign="middle">
-    			<img src="media.do?action=image_middle&tablename=<%=mapIndex_m.get("TABLENAME") %>&media_id=<%=mapIndex_m.get("ZLBM")%>" style="cursor:hand;border=0; height=80;width=80; z-index:8;" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)">
+    			<img onmouseover="document.getElementById('mar').stop();" onmouseout="document.getElementById('mar').start();" src="media.do?action=image_middle&tablename=<%=mapIndex_m.get("TABLENAME") %>&media_id=<%=mapIndex_m.get("ZLBM")%>" style="cursor:hand;border=0; height=80;width=80; z-index:8;" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)">
     			<br><a href="#" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)"><%=mapIndex_m.get("TITLE") %></a>
     		</td>
 <%
@@ -50,5 +51,6 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
 %>    	
 		</tr>
     </table>
+  </marquee>
   </body>
 </html>
