@@ -72,7 +72,7 @@ public class SearchDAO extends CommonDAO{
 			}*/
 			
 			if(!"".equals(lysx)){
-				lysx = lysx.substring(2, 8);
+				lysx = lysx.substring(1, 7);
 				sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
 			}
 			
@@ -153,7 +153,7 @@ public class SearchDAO extends CommonDAO{
 			}*/
 			
 			if(!"".equals(lysx)){
-				lysx = lysx.substring(2, 8);
+				lysx = lysx.substring(1, 7);
 				sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
 			}
 			
@@ -405,7 +405,7 @@ public class SearchDAO extends CommonDAO{
 		}*/
 		
 		if(!"".equals(lysx)){
-			lysx = lysx.substring(2, 8);
+			lysx = lysx.substring(1, 7);
 			sql1 = sql1 + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
@@ -489,7 +489,7 @@ public class SearchDAO extends CommonDAO{
 		}*/
 		
 		if(!"".equals(lysx)){
-			lysx = lysx.substring(2, 8);
+			lysx = lysx.substring(1, 7);
 			sql2 = sql2 + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
@@ -684,7 +684,7 @@ public class SearchDAO extends CommonDAO{
 		int start = pagesize*(page - 1) + 1;
 		int end = pagesize*page;
 		
-		sql = "select * from tb_stdnc sc,tb_st st where sc.sttpcd = st.sttpcd ";
+		sql = "select * from tb_stdnc sc,tb_st st,tb_pj pj where sc.sttpcd = st.sttpcd and st.pjno=pj.pjno";
 		if(!"".equals(text_title)){//按标题查询
 			sql = sql + " and sc.dncnm like  '%" + text_title + "%' ";
 		}
@@ -696,7 +696,7 @@ public class SearchDAO extends CommonDAO{
 		}
 		
 		if(!"".equals(lysx)){
-			lysx = lysx.substring(2, 8);
+			lysx = lysx.substring(1, 7);
 			sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
 		}
 		
@@ -817,7 +817,7 @@ public class SearchDAO extends CommonDAO{
 		int start = pagesize*(page - 1) + 1;
 		int end = pagesize*page;
 		
-		sql = "select * from tb_pjrcn pj,tb_gclb gc where pj.gcfldm = gc.gcfldm and ";
+		sql = "select * from tb_pjrcn pj,tb_gclb gc,tb_pj proj where pj.gcfldm = gc.gcfldm and pj.pjno=proj.pjno and ";
 		//按工程名查询
 		if(!"".equals(text_title)){
 			sql = sql + " pj.PJNM like  '%" +  text_title + "%' and ";
@@ -831,8 +831,8 @@ public class SearchDAO extends CommonDAO{
 			sql = sql + " pj.WTDPDT >= '" + date_start + "' and  pj.WTDPDT <= '" + date_end + "' and";
 		}
 		if(!"".equals(lysx)){
-			lysx = lysx.substring(2, 8);
-			sql = sql + " and pj.pjnmcd like '%" + lysx + "%'";
+			lysx = lysx.substring(1, 7);
+			sql = sql + " proj.pjnmcd like '%" + lysx + "%' and ";
 		}
 		
 		sql = sql + " 1=1 order by pj.wtdpdt desc";
