@@ -78,18 +78,7 @@ function uplaodReportPhotos(tbname){
 	var dncid = document.getElementById('DNCNO').value;
 	var detail;
 	if(filepath==""){alert("请选择上传照片！");return false;}
-	if(filepath!=""){
-		var poi = filepath.lastIndexOf(".");
-		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
-		if(detail!="JPG" && detail!="JPEG" && detail!="MPG"){
-			alert("不支持的文件格式，请重新选择！");
-			return false;
-		}
-	}
-	if(filepath==""){
-		alert("请选择文件.");
-		return false;
-	}
+
 	if(title==""){
 		alert("请填写照片标题.");
 		return false;
