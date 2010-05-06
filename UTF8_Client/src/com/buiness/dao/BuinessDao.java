@@ -894,6 +894,7 @@ public class BuinessDao {
 
 	public static void toInsertDbList(String path, String tbid, String mainSql,
 			String subsql, List<SubTempBean> beanlist) {
+//		System.out.println(mainSql);
 		String parentName = "";
 		Connection conn = null;
 		try {

@@ -105,7 +105,7 @@ public class UploadServlet extends HttpServlet {
 				DataUploader data = new DataUploader();
 				state=data.upload(ip,Integer.parseInt(port),zipfilename );
 				OutputLog.outputLog(path,
-				"============连接远程服务器错误=======上传失败！=======");
+				"============数据上传成功！=======");
 				
 			}
 			File file = new File(zipfilename);
