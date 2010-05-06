@@ -267,7 +267,7 @@
   	<table  width="68%" border="0"  align="center">
       <tr height="25"><td height="25" align="center"></td></tr>
       <tr align="center">
-        <td align='center' colspan="2"><br><br><input type='button' name='button' value='关  闭' onclick='self.close();' class='input1'></td>
+        <td align='center' colspan="2"><br><br><input type='button' name='button' value='关  闭' onclick="self.close();" class='input1'></td>
       </tr>
     </table>    
   <p>&nbsp;</p>

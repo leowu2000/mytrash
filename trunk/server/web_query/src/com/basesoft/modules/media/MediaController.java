@@ -15,11 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.basesoft.core.CommonController;
 
 public class MediaController extends CommonController {
-
 	MediaDAO mediaDAO;
 	
 	@Override
-	protected ModelAndView doHandleRequestInternal(HttpServletRequest request,
+	synchronized protected ModelAndView doHandleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response, ModelAndView mv) throws Exception {
 		final String realpath = request.getSession().getServletContext().getRealPath("/");
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
@@ -50,7 +49,24 @@ public class MediaController extends CommonController {
 			path = path + "\\temp.jpg";
 			byte[] b = mediaDAO.saveAsFile(ins, path);
 			ins.close();
-			byte[] newPic = mediaDAO.getNewPic(request.getRealPath("\\images\\"));
+			byte[] newPic = mediaDAO.getNewPic(request.getRealPath("\\images\\"), 30);
+			
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expiresponse", 0L);
+			response.setContentType("image/*");
+			response.getOutputStream().write(newPic);
+			response.getOutputStream().close();
+			return null;
+		}if("image_middle".equals(action)){
+			String tablename = ServletRequestUtils.getStringParameter(request,"tablename","");
+			String media_id = ServletRequestUtils.getStringParameter(request,"media_id","");
+			
+			InputStream ins = mediaDAO.getBlob(tablename, media_id);
+			path = path + "\\temp.jpg";
+			byte[] b = mediaDAO.saveAsFile(ins, path);
+			ins.close();
+			byte[] newPic = mediaDAO.getNewPic(request.getRealPath("\\images\\"), 80);
 			
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");
