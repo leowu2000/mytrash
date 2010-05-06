@@ -1,8 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 List listIndex = (List)request.getAttribute("listIndex");
-String id = ((Map)listIndex.get(0)).get("ID").toString();
-String tablename = ((Map)listIndex.get(0)).get("TABLENAME").toString();
+String id = "";
+String tablename = "";
+if(listIndex.size()>0){
+	Map mapIndex0 = (Map)listIndex.get(0);
+	id = mapIndex0.get("ID")==null?"":mapIndex0.get("ID").toString();
+	tablename = mapIndex0.get("TABLENAME")==null?"":mapIndex0.get("TABLENAME").toString();
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
