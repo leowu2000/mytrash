@@ -416,7 +416,7 @@ public class BuinessController implements Controller {
 			String TABLENAME = request.getParameter("TABLENAME");
 			String WTDT = request.getParameter("WTDT");
 			String MAINTITLE = request.getParameter("MAINTITLE");
-			String CONTENT = request.getParameter("CONTENT");
+			String CONTENT = request.getParameter("CONTENT").replaceAll("'", "‘");
 			String FILEDNAME = request.getParameter("FILEDNAME");
 			String subAction = request.getParameter("subAction");
 			String newSQL = "";
