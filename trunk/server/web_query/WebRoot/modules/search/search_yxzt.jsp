@@ -76,24 +76,27 @@ function changeZl(value){
         <td><font color="#FFFFFF">填报单位</font></td>
         <td bgcolor="#FFFFFF" align="left"> <input name="text_fill" class="input2" > 
         </td>
-        <td rowspan="3" bgcolor="#FFFFFF"><input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
-        </td>
-      </tr>
-      <tr align="center"> 
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>河流水系</strong></font></td>
-        <td bgcolor="#FFFFFF" align="left">
-        	流域<select name="ly" id="ly" onchange="changeLy(this.value);">
-				<%=StringUtil.createOptions(listLy, "CTCD", "CTNM") %>      		
-        	</select>
-        	水系<span name="selsx" id="selsx"></span>
-        	一级支流<span name="selzl1" id="selzl1"></span>
-        	二级支流<span name="selzl2" id="selzl2"></span>
-        </td>
-        <td bgcolor="#336699"><font color="#FFFFFF"><strong>上报时间</strong></font></td>
-        <td align="left" bgcolor="#FFFFFF">
+        <td bgcolor="#336699"><font color="#FFFFFF">上报时间</font></td>
+        <td align="left" bgcolor="#FFFFFF" colspan="3">
 			<input type="text" id="date_start" name="date_start" class="input2" onClick="WdatePicker({readOnly:true})">到
 			<input type="text" id="date_end" name="date_end" class="input2" onClick="WdatePicker({readOnly:true})">
 		</td>
+        <td rowspan="2" bgcolor="#FFFFFF"><input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
+        </td>
+      </tr>
+      <tr align="center"> 
+        <td bgcolor="#336699"><font color="#FFFFFF">流域</font></td>
+        <td bgcolor="#FFFFFF" align="left" >
+        	<select name="ly" id="ly" onchange="changeLy(this.value);">
+				<%=StringUtil.createOptions(listLy, "CTCD", "CTNM") %>      		
+        	</select>
+        </td>
+        <td bgcolor="#336699"><font color="#FFFFFF">水系</font></td>
+        <td bgcolor="#FFFFFF" align="left" ><span name="selsx" id="selsx"></span></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">一级支流</font></td>
+        <td bgcolor="#FFFFFF" align="left" ><span name="selzl1" id="selzl1"></span></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">二级支流</font></td>
+        <td bgcolor="#FFFFFF" align="left" ><span name="selzl2" id="selzl2"></span></td>
       </tr>
     </table>
   </div>  
