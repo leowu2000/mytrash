@@ -58,7 +58,7 @@ function showDetail(id,tbname){
 	var src;
 	if("TB_PJRCN"==tbname){//运行
 		//window.frames["detailFrame"].location.href="/project/gqyxView.jsp?RPJINCD="+id+"&fromwhere=upload";
-		src="/project/gqyxView.jsp?RPJINCD="+id+"&fromwhere=upload";
+		src="/project/yx/gqyxView.jsp?RPJINCD="+id+"&fromwhere=upload";
 	}
 	if("TB_STDNC"==tbname){//险情
 		if(window.XMLHttpRequest){ //Mozilla
@@ -70,7 +70,7 @@ function showDetail(id,tbname){
 		xmlHttpReq.send(null);
 		var results = xmlHttpReq.responseText;
 		//window.frames["detailFrame"].location.href="/project/gqxqView.jsp?RPJINCD="+results+"&fromwhere=upload";
-		src="/project/gqxqView.jsp?RPJINCD="+results+"&fromwhere=upload";
+		src="/project/xq/gqxqView.jsp?RPJINCD="+results+"&fromwhere=upload";
 	}
 	
 	if("TB_FPACTI"==tbname){//行动
