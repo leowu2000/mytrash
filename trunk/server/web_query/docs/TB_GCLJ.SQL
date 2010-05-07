@@ -50,7 +50,7 @@ INSERT INTO TB_GCLJ VALUES('1','毕节市','1','小型水库','松山大塘水库','blank_315
 INSERT INTO TB_GCLJ VALUES('1','毕节市','1','小型水库','鸭子塘水库','blank_3155.html','blank_1911.html');
 INSERT INTO TB_GCLJ VALUES('1','毕节市','1','小型水库','石板沟水库','blank_3156.html','blank_1917.html');
 INSERT INTO TB_GCLJ VALUES('1','毕节市','1','小型水库','野鸡水库','blank_3157.html','blank_1923.html');
-INSERT INTO TB_GCLJ VALUES('1','毕节市','4','灰渣坝(尾矿坝)','毕节市头步电厂灰库','blank_3158.html','');
+INSERT INTO TB_GCLJ VALUES('1','毕节市','4','灰渣坝(尾矿坝)','毕节市头步电厂灰库','blank_3158.html','blank_1924.html');
 INSERT INTO TB_GCLJ VALUES('2','大方县','2','中型水库','落脚河电站水库','blank_3159.html','blank_1937.html');
 INSERT INTO TB_GCLJ VALUES('2','大方县','2','中型水库','东风水电站水库','blank_3160.html','blank_1943.html');
 INSERT INTO TB_GCLJ VALUES('2','大方县','1','小型水库','小箐沟水库','blank_3161.html','blank_1950.html');
@@ -84,7 +84,7 @@ INSERT INTO TB_GCLJ VALUES('2','大方县','1','小型水库','白瓦厂水库','blank_3188.
 INSERT INTO TB_GCLJ VALUES('2','大方县','1','小型水库','龙王庙水库','blank_3189.html','blank_2118.html');
 INSERT INTO TB_GCLJ VALUES('2','大方县','1','小型水库','九股水水库','blank_3190.html','blank_2124.html');
 INSERT INTO TB_GCLJ VALUES('2','大方县','1','小型水库','杨家湾水库','blank_3191.html','blank_2130.html');
-INSERT INTO TB_GCLJ VALUES('2','大方县','4','灰渣坝(尾矿坝)','大方县灰渣坝','blank_3192.html','');
+INSERT INTO TB_GCLJ VALUES('2','大方县','4','灰渣坝(尾矿坝)','大方县灰渣坝','blank_3192.html','blank_2131.html');
 INSERT INTO TB_GCLJ VALUES('3','黔西县','3','大型水库','洪家渡电站水库','blank_3193.html','blank_2144.html');
 INSERT INTO TB_GCLJ VALUES('3','黔西县','2','中型水库','附廓水库','blank_3194.html','blank_2151.html');
 INSERT INTO TB_GCLJ VALUES('3','黔西县','2','中型水库','沙坝河水电站水库','blank_3195.html','blank_2157.html');
@@ -148,7 +148,7 @@ INSERT INTO TB_GCLJ VALUES('4','金沙县','1','小型水库','民族水库','blank_3252.ht
 INSERT INTO TB_GCLJ VALUES('4','金沙县','1','小型水库','大湾水库','blank_3253.html','blank_2510.html');
 INSERT INTO TB_GCLJ VALUES('4','金沙县','1','小型水库','小沟水库','blank_3254.html','blank_2516.html');
 INSERT INTO TB_GCLJ VALUES('4','金沙县','1','小型水库','鱼箐沟水库','blank_3255.html','blank_2522.html');
-INSERT INTO TB_GCLJ VALUES('4','金沙县','4','灰渣坝(尾矿坝)','金沙县灰渣坝','blank_3256.html','');
+INSERT INTO TB_GCLJ VALUES('4','金沙县','4','灰渣坝(尾矿坝)','金沙县灰渣坝','blank_3256.html','blank_2523.html');
 INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','红阳水库','blank_3257.html','blank_2536.html');
 INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','吹聋水库','blank_3258.html','blank_2542.html');
 INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','自强电站水库','blank_3259.html','blank_2548.html');
@@ -164,7 +164,7 @@ INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','杉树寨水库','blank_3268.
 INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','群丰水库','blank_3269.html','blank_2608.html');
 INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','白泥塘水电站','blank_3270.html','blank_2614.html');
 INSERT INTO TB_GCLJ VALUES('5','织金县','1','小型水库','险峰水库','blank_3271.html','blank_2620.html');
-INSERT INTO TB_GCLJ VALUES('5','织金县','4','灰渣坝(尾矿坝)','织金县灰渣坝','blank_3272.html','');
+INSERT INTO TB_GCLJ VALUES('5','织金县','4','灰渣坝(尾矿坝)','织金县灰渣坝','blank_3272.html','blank_2621.html');
 INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','红旗水库','blank_3273.html','blank_2634.html');
 INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','鞍山水库','blank_3274.html','blank_2640.html');
 INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','吊水岩水库','blank_3275.html','blank_2646.html');
@@ -172,7 +172,7 @@ INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','过狮河水库','blank_3276.
 INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','小坝水库','blank_3277.html','blank_2658.html');
 INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','大海坝水库','blank_3278.html','blank_2664.html');
 INSERT INTO TB_GCLJ VALUES('6','纳雍县','1','小型水库','小湖坝水库','blank_3279.html','blank_2670.html');
-INSERT INTO TB_GCLJ VALUES('6','纳雍县','4','灰渣坝(尾矿坝)','纳雍县灰渣坝','blank_3280.html','');
+INSERT INTO TB_GCLJ VALUES('6','纳雍县','4','灰渣坝(尾矿坝)','纳雍县灰渣坝','blank_3280.html','blank_2671.html');
 INSERT INTO TB_GCLJ VALUES('7','威宁县','2','中型水库','杨湾桥水库','blank_3281.html','blank_2684.html');
 INSERT INTO TB_GCLJ VALUES('7','威宁县','1','小型水库','长海水库','blank_3282.html','blank_2691.html');
 INSERT INTO TB_GCLJ VALUES('7','威宁县','1','小型水库','邓家营水库','blank_3283.html','blank_2697.html');
@@ -218,5 +218,5 @@ INSERT INTO TB_GCLJ VALUES('8','赫章县','1','小型水库','中坝水库','blank_3322.ht
 INSERT INTO TB_GCLJ VALUES('8','赫章县','1','小型水库','袁家滩电站一级水库','blank_3323.html','blank_2941.html');
 INSERT INTO TB_GCLJ VALUES('8','赫章县','1','小型水库','袁家滩电站二级水库','blank_3324.html','blank_2947.html');
 INSERT INTO TB_GCLJ VALUES('8','赫章县','1','小型水库','龙场坝水库','blank_3325.html','blank_2953.html');
-INSERT INTO TB_GCLJ VALUES('8','赫章县','4','灰渣坝(尾矿坝)','赫章县灰渣坝','blank_3326.html','');
+INSERT INTO TB_GCLJ VALUES('8','赫章县','4','灰渣坝(尾矿坝)','赫章县灰渣坝','blank_3326.html','blank_2954.html');
 
