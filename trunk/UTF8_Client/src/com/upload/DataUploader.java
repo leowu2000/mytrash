@@ -31,6 +31,7 @@ public class DataUploader {
 
 	public String upload(String ip, int port, String fileName)
 			throws UnknownHostException, IOException {
+		System.out.println("文件名称：" + fileName);
 		Socket server = null;
 		try{
 			server = new Socket(ip, port);
