@@ -71,7 +71,7 @@ public class UploadServlet extends HttpServlet {
 				newfile = UtilDateTime.nowString() + ".mdb";
 				RandomAccessFileTool.doAccess(path, oldfile, newfile);
 				try {
-					ToZipFile.zipFile(path + newfile, path + newfile + ".zip");
+					ToZipFile.zipFile(path +"/"+newfile, path +"/"+newfile + ".zip");
 					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()
 							+ "\t压缩数据成功...");
 					request.getSession().setAttribute("zipfilename", path + newfile + ".zip");
