@@ -19,7 +19,7 @@ public class RandomAccessFileTool {
             byte[] b = new byte[(int)i];   
             raf.seek(0);   
             raf.readFully(b);   
-            File f =new File(path,newname);  
+            File f =new File(path+"/"+newname);  
 
             RandomAccessFile paste = new RandomAccessFile(f,"rw");   
             paste.write(b);   
