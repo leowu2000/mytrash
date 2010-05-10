@@ -457,7 +457,7 @@ public class UploadDB {
 				sql = "INSERT INTO "+tablename+" (ZLBM,"+pkfiled+",TITLE,WJGS,DTCDT,NRMS,LXZP)VALUES(?,?,?,?,?,?,?)";
 				PreparedStatement pStat = conn.prepareStatement(sql);
 				String filegs = rs.getString("WJGS");
-				fos = new FileOutputStream(new File(path+"demo."+filegs));
+				fos = new FileOutputStream(new File(path+"/demo."+filegs));
 				in = (InputStream)rs.getBinaryStream("LXZP");
 				int a = 0; 
 				

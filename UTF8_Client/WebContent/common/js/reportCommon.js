@@ -78,7 +78,10 @@ function uplaodReportPhotos(tbname){
 	var dncid = document.getElementById('DNCNO').value;
 	var detail;
 	if(filepath==""){alert("请选择上传照片！");return false;}
-
+	if(filepath!=""){
+		var poi = filepath.lastIndexOf(".");
+		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
+	}
 	if(title==""){
 		alert("请填写照片标题.");
 		return false;

@@ -317,7 +317,10 @@ function uplaodReportPhotos(tbname){
 	var cjsj = document.getElementById('DTCDT').value;
 	var detail;
 	if(filepath==""){alert("请选择上传照片！");return false;}
-
+	if(filepath!=""){
+		var poi = filepath.lastIndexOf(".");
+		detail = filepath.substring(poi+1,filepath.length).toUpperCase();
+	}
 	if(zpbt==""){
 		alert("请填写照片标题.");
 		return false;

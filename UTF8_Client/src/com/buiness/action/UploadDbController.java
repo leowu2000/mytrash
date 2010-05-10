@@ -55,7 +55,7 @@ public class UploadDbController implements Controller {
 				String oldfile="upload.mdb";
 				newfile=UtilDateTime.nowString()+".mdb";
 				RandomAccessFileTool.doAccess(path,oldfile, newfile);
-				ToZipFile.zipFile(path+newfile,path+newfile+".zip");
+				ToZipFile.zipFile(path+"/"+newfile,path+"/"+newfile+".zip");
 				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t准备上传数据\t压缩数据成功...");
 			}
 			OutputLog.outputLog(path, "============================================================");
