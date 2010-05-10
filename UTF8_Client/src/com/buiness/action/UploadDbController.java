@@ -49,7 +49,7 @@ public class UploadDbController implements Controller {
 			UploadDB.DAO_MODE_ZAP(path);
 			//开始拷备数据
 			String newfile = "";
-			String file = path+newfile+".zip";
+			String file = path+"/"+newfile+".zip";
 			boolean flg = UploadDB.copySendDataToUploadDatabase(path);
 			if(flg){//压缩数据库
 				String oldfile="upload.mdb";
