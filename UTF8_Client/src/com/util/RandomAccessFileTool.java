@@ -10,7 +10,7 @@ public class RandomAccessFileTool {
 
     public static void doAccess(String path,String oldname,String newname) {
         try {
-            File file = new File(path+oldname);
+            File file = new File(path+"/"+oldname);
 
             RandomAccessFile raf = new RandomAccessFile(file, "r");
   
