@@ -40,22 +40,40 @@ if(listIndex.size()>0){
 		Map mapIndex = (Map)listIndex.get(i);
 		String tablename1 = mapIndex.get("TABLENAME").toString();
 		String action = "";
+		String type = "";
 		if("TB_FPACTI".equals(tablename1)){
+			type = "防汛行动";
 			action = "fxxd";
 		}else if("TB_FXJB".equals(tablename1)){
+			type = "防汛简报";
 			action = "fxjb";
 		}else if("TB_PJRCN".equals(tablename1)){
+			type = "运行状态";
 			action = "yxzt";
 		}else if("TB_QT".equals(tablename1)){
+			type = "旱情";
 			action = "hq";
 		}else if("TB_SD".equals(tablename1)){
+			type = "灾情";
 			action = "zq";
 		}else if("TB_STDNC".equals(tablename1)){
+			type = "险情";
 			action = "xq";
+		}
+		
+		String title = mapIndex.get("TITLE")==null?"":mapIndex.get("TITLE").toString().trim();
+		if(title.length()>10){
+			title = title.substring(0,9) + "...";
+		}
+		String dt = mapIndex.get("DT")==null?"":mapIndex.get("DT").toString().trim();
+		if(!"".equals(dt)){
+			dt = dt.substring(0,10);
 		}
 %>    
     	<tr>
-    		<td height="30" align="center" vlign="middle"><a href="#" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex.get("ID") %>',800,550,0)" onmouseover="changeInfo('<%=mapIndex.get("ID") %>','<%=mapIndex.get("TABLENAME") %>');" style="cursor: hand;"><%=mapIndex.get("TITLE") %></a></td>
+    		<td height="30" align="left" vlign="middle" nowrap="nowrap">[<%=type %>]</td>
+    		<td nowrap="nowrap"><a href="#" onclick="changeInfo('<%=mapIndex.get("ID") %>','<%=mapIndex.get("TABLENAME") %>');" style="cursor: hand;"><%=title %></a></td>
+    		<td align="right" nowrap="nowrap">[<%=dt %>]</td>
     	</tr>
 <%
 	}
