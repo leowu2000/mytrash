@@ -44,7 +44,7 @@ if(mediaheight<60){
     </tr>
     <tr> 
       <td width="49%" height="25" align="center" bgcolor="#FFFFFF">
-        <div align="left"><%=mapIndex.get("WTDPCD") %></div>
+        <div align="left">&nbsp;&nbsp;&nbsp;&nbsp;<%=mapIndex.get("WTDPCD") %></div>
       </td>
       <td width="51%" height="25" align="center" bgcolor="#FFFFFF"><div align="right"></div>
         <div align="right"><%=StringUtil.DateToString((Date)mapIndex.get("WTDT"),"yyyy-MM-dd") %></div>
