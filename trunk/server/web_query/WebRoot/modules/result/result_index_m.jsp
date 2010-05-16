@@ -50,7 +50,7 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
 		
 		
 %>    
-    		<td width="171" height="30" align="center" vlign="middle">
+    		<td width="100" height="30" align="center" vlign="middle">
     			<img src="media.do?action=image_middle&tablename=<%=mapIndex_m.get("TABLENAME") %>&media_id=<%=mapIndex_m.get("ZLBM")%>" style="cursor:hand;border=0; height=80;width=80; z-index:8;" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)">
     			<br><a href="#" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)"><%=mapIndex_m.get("TITLE") %></a>
     		</td>
