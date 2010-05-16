@@ -34,7 +34,7 @@ if(listIndex.size()>0){
   </head>
   
   <body onload="init();" background="../../images/back.gif">
-    <table width="100%" height="100%" align="center" border="0" cellspacing="1" cellpadding="0">
+    <table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 <%
 	for(int i=0;i<listIndex.size();i++){
 		Map mapIndex = (Map)listIndex.get(i);
@@ -70,8 +70,8 @@ if(listIndex.size()>0){
 			dt = dt.substring(0,10);
 		}
 %>    
-    	<tr>
-    		<td height="30" align="left" vlign="middle" nowrap="nowrap">[<%=type %>]</td>
+    	<tr valign="top">
+    		<td height="26" align="left" nowrap="nowrap">[<%=type %>]</td>
     		<td nowrap="nowrap"><a href="#" onclick="changeInfo('<%=mapIndex.get("ID") %>','<%=mapIndex.get("TABLENAME") %>');" style="cursor: hand;"><%=title %></a></td>
     		<td align="right" nowrap="nowrap">[<%=dt %>]</td>
     	</tr>

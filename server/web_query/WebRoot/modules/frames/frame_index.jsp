@@ -26,10 +26,10 @@ parent.document.getElementById('lineFrame').src = '';
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize1();" onLoad="IFrameResize1();" >
 	<table width="100%" border="0" cellpadding="0">
 		<tr>
-			<td width="20%">
+			<td width="40%">
 				<iframe name="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index" ></iframe>
 			</td>
-			<td width="80%">
+			<td width="60%">
 				<iframe name="detail" width="100%" frameborder='0' height="" src=""></iframe>
 			</td>
 		</tr>
