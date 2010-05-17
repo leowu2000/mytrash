@@ -1,0 +1,1 @@
+INSERT INTO TB_USER VALUES('admin','0','admin','系统管理员');
