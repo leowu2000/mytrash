@@ -18,6 +18,9 @@
 		th {
 			white-space: nowrap;
 		}
+		.blk {
+			margin-left: 20px;
+		}
 		-->
 		</style>		
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -119,9 +122,9 @@ function validate(){
 </script>
 	</head>
 	<body>
-	<h1>用户管理</h1>
-	<div id="toolbar"></div>
-		<div id="tabs1">
+	<h1 class="blk">用户管理</h1>
+	<div id="toolbar" class="blk"></div>
+		<div id="tabs1" class="blk">
 			<div id="address" class="tab-content">
 <form id="listForm" name="listForm" action="" method="post">
 <%=pageList.getPageInfo().getHtml("/user.do?action=list") %>
