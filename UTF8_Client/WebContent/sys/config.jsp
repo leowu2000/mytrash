@@ -196,7 +196,7 @@ function pre_submit(){
 		<td nowrap class="title">服务器地址</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_IP" value="<%=bean.getSERVER_IP()==null?"":bean.getSERVER_IP() %>"/><font color="red">*</font></td>
 		<td nowrap class="title">服务器端口</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_PORT" value="<%=bean.getSERVER_PORT()==""?"9292":bean.getSERVER_PORT() %>"/><font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_PORT" value="<%=bean.getSERVER_PORT()==""?"5001":bean.getSERVER_PORT() %>"/><font color="red">*</font></td>
 	</tr>
 </table>
 </form>
