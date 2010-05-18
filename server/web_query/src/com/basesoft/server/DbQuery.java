@@ -1,11 +1,14 @@
 package com.basesoft.server;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import com.basesoft.core.Constants;
 
 public class DbQuery {
 	Connection DbConn = null;
@@ -54,7 +57,7 @@ public class DbQuery {
 	public boolean beginCopyData() {
 		boolean executeResult = true;
 		System.out.println("要处理的文件是：" + strInputMdbFileName);
-		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + strInputMdbFileName;
+		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + Constants.ROOTPATH+File.separator+"..\\..\\bin\\"+strInputMdbFileName;
 		Connection cnSource, cnTarget;
 		Properties p = new Properties();
 		try {
@@ -62,6 +65,7 @@ public class DbQuery {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		System.out.println(sURL);
 		cnSource = newConnection(sURL, "admin", "");
 		cnTarget = newConnection(p.getProperty("datasource.jdbcUrl"), p
 				.getProperty("datasource.username"), p
