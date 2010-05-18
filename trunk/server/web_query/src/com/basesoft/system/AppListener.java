@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.basesoft.core.Constants;
 import com.basesoft.server.MainThread;
 import com.basesoft.util.DBUpgrade;
 
@@ -16,6 +17,7 @@ public class AppListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent sce) {
 		System.out.println("系统根目录：" + sce.getServletContext().getRealPath(""));
+		Constants.ROOTPATH=sce.getServletContext().getRealPath("");
 
 		try {
 			WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
