@@ -49,7 +49,7 @@ public class ToZipFile {
 	                zipOut.write(nNumber);   
 	            }   
 	            in.close();  
-	            f.delete();
+//	            f.delete();
             } catch (IOException e) {   
                 e.printStackTrace();
             }   
