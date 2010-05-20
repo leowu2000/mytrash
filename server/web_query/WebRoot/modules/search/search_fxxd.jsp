@@ -10,7 +10,7 @@
 </head>
 
 <BODY topmargin="3"  class="font_define" onload="init();">
-<form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=fxxd" target="result">
+<form name="fxxq" id="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=fxxd" target="result">
   <div id="query" > 
     <div id="Layer3" style="position:absolute; width:400px; height:20px; z-index:2; left: 280px; top: 93px; background-color: #00CC33; layer-background-color: #00CC33; border: 1px none #000000; visibility: hidden"></div>
     <table width="98%" border="0" cellspacing="1" bgcolor="#336699" class="font_define">

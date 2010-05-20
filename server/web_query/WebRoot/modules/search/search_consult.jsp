@@ -17,7 +17,7 @@
 </head>
 
 <BODY topmargin="3"  class="font_define">
-<form name="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=fxjb" target="result">
+<form name="fxxq" id="fxxq" method="post" onsubmit="return checkall() " action="/search.do?action=fxjb" target="result">
   <div id="query" > 
     <table width="100%" border="0" cellspacing="1" bgcolor="#336699" class="font_define">
       <tr align="center" bgcolor="#FFFFFF"> 

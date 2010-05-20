@@ -69,7 +69,7 @@ function changeZl(value){
 </head>
 
 <body topmargin="3" onload="init();">
-<form name="fxxq" method="post" action="/search.do?action=main" target="result">
+<form name="fxxq" id="fxxq" method="post" action="/search.do?action=main" target="result">
   <div id="query" > 
     <table width="98%" border="0" align="left" cellpadding="2" cellspacing="1" bgcolor="#336699">
       <!--DWLayoutTable-->
