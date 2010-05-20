@@ -9,6 +9,10 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
+
 %> 
 <html>
 <head>
@@ -109,6 +113,7 @@ function updateXQFLFRAME(obj){
  </form>
 <form name="frm" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <input type="hidden" name="DNCNO" value="<%=UUIdFactory.getMaxId(path, "TB_STDNC","DNCNO") %>"/>
 <input type="hidden" name="myradio" value="2"></input>
 <input type="hidden" name="PicServerUrl" id="PicServerUrl" value=""/>
