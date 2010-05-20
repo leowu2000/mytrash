@@ -18,6 +18,9 @@
     if(sublist!=null && sublist.size()>0)
     	detailBean = (SubTempBean)sublist.get(0);
     String content = bean.getACTICO();
+  //防止刷新页面重复提交
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
 %> 
 <html>
 <head>
@@ -109,6 +112,7 @@ function updateFileValue(fileobj){
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="add_fxjb"/>
 <input type="hidden" name="subActionType" value="update"/>
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <%if(detailBean!=null){%>
 <input type="hidden" name="mediaflag" value="0"/>
 <%}else{ %>
@@ -126,8 +130,8 @@ function updateFileValue(fileobj){
 	</tr>-->
 	<tr height="25" >
 	<td nowrap class="title"><%=configBean.getTBDW() %></td>
-		<td nowrap align="center" class="title_center">第<input type="text" class="lines" name="ISSUE" value="<%=bean.getISSUE() %>" size="8" onblur="javascript:checkNumber(this,'期数')"/> 期</td>
-
+		<td nowrap align="center" class="title_center">第  <%=bean.getISSUE() %> 期</td>
+		<input type="hidden" class="" name="ISSUE" value="<%=bean.getISSUE() %>" />
 		<td align="center" class="title">标题</td>
 		<td align="center" class="title">
 		<input type="text" name="WTTT" value="<%=bean.getWTTT() %>" size="25"/></td>

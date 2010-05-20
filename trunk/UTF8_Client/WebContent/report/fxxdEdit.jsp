@@ -21,6 +21,9 @@
     String content = bean.getACTICO();
     RandomAccessFileTool.delAllFile(relPath+"\\\\common\\\\pic");
     BuinessDao.deleteDB("delete from TB_SUB_TEMP",relPath);
+  //防止刷新页面重复提交
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
     //List<SubTempBean> sublist = BuinessDao.getMediaBeanList(relPath,bean.getRPJINCD(),"TB_FPACTI_M","RPJINCD");
 %> 
 <html>
@@ -54,6 +57,7 @@ function toBack(){
 	<tr><td align="center" ><span  class="style4">修改防汛行动</span></td></tr>
 </table>
 <form name="frm" action="/buiness.do"  method="post">
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <input type="hidden" name="DNCNO" value="<%=bean.getRPJINCD() %>"/>
 <input type="hidden" name="actionType" value="add_report"/>
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>

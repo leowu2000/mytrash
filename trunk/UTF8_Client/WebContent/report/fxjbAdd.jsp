@@ -6,6 +6,9 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+    //刷新页面重复提交
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
 %> 
 <html>
 <head>
@@ -86,6 +89,7 @@ function updateFileValue(fileobj){
 </table>
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="add_fxjb"/>
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="WTDT" value="<%=UtilDateTime.nowDateString() %>"/>
 <input type="hidden" name="upFileValues" value=""/>
