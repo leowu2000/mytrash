@@ -18,7 +18,7 @@ parent.document.getElementById('lineFrame').src = 'line.htm';
 </script>
 </head>
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize(50);" onLoad="IFrameResize(50)"  >
-<iframe name="queryFrame" height='50' width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_gcxx" ></iframe>
-<iframe name="result" width="100%" frameborder='0'></iframe>
+<iframe name="queryFrame" id="queryFrame" height='50' width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_gcxx" ></iframe>
+<iframe name="result" id="result" width="100%" frameborder='0'></iframe>
 </body>
 </html>
