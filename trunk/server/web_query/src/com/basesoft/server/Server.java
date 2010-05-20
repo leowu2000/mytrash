@@ -22,11 +22,11 @@ public class Server extends ServerFrame {
 			while (true) {
 				request = rServer.accept();
 				System.out.println("sock is connected");
-				receiveThread = new ServerThread(this, request);
-
-				receiveThread.setDaemon(true);// 设置线程为后台线程，使tomcat重启的时候自动退出。
-
-				receiveThread.start();
+//				receiveThread = new ServerThread(this, request);
+//
+//				receiveThread.setDaemon(true);// 设置线程为后台线程，使tomcat重启的时候自动退出。
+//
+//				receiveThread.start();
 			}
 		} catch (IOException e) {
 			try {

@@ -1,6 +1,5 @@
 package com.basesoft.server;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -57,7 +56,7 @@ public class DbQuery {
 	public boolean beginCopyData() {
 		boolean executeResult = true;
 		System.out.println("要处理的文件是：" + strInputMdbFileName);
-		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + Constants.ROOTPATH+File.separator+"..\\..\\bin\\"+strInputMdbFileName;
+		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + Constants.ROOTPATH+"/upload/"+strInputMdbFileName;
 		Connection cnSource, cnTarget;
 		Properties p = new Properties();
 		try {
