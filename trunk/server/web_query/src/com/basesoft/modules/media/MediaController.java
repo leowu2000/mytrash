@@ -83,8 +83,10 @@ public class MediaController extends CommonController {
 			
 			path = realpath + "\\video\\" + mapMedia.get("TITLE").toString().trim() + "." + mapMedia.get("WJGS").toString().trim();
 			InputStream ins = mediaDAO.getBlob(tablename, media_id);
-			mediaDAO.saveAsFile(ins, path);
-			ins.close();
+			if(ins != null){
+				mediaDAO.saveAsFile(ins, path);
+				ins.close();
+			}
 			
 			mv = new ModelAndView("modules/media/player");
 			mv.addObject("filepath", path);

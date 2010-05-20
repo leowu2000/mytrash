@@ -17,7 +17,8 @@
       <!--DWLayoutTable-->
       <tr> 
         <td align="center"><font color="#FFFFFF">查询类别</font></td>
-        <td bgcolor="#FFFFFF" align="left"> <input type="radio" name="radiob_gclb" id="radiob_gclb" value="xq" checked>
+        <td bgcolor="#FFFFFF" align="left"> 
+          <input type="radio" name="radiob_gclb" id="radiob_gclb" value="xq" checked>
           险情 
           <input type="radio" name="radiob_gclb" id="radiob_gclb"  value="yxzt">
           工程运行 
@@ -26,12 +27,14 @@
           <input type="radio" name="radiob_gclb" id="radiob_gclb"  value="fxxd">
           防汛行动</td>
         <td align="center"><font color="#FFFFFF">文件格式</font></td>
-        <td bgcolor="#FFFFFF" align="left"> <input type="radio" name="radiob_gs" id="radiob_gs" value="tp" checked>
+        <td bgcolor="#FFFFFF" align="left"> 
+          <input type="radio" name="radiob_gs" id="radiob_gs"  value="all" checked>
+          所有格式 
+          <input type="radio" name="radiob_gs" id="radiob_gs" value="tp" >
           图片 
           <input type="radio" name="radiob_gs" id="radiob_gs"  value="lx">
           录像 
-          <input type="radio" name="radiob_gs" id="radiob_gs"  value="all">
-          所有格式 </td>
+        </td>
         <td align="center"><font color="#FFFFFF">标题</font></td>
         <td bgcolor="#FFFFFF" align="left"> <input name="text_title" class="input2" > </td>
         <td rowspan="3" align="center" bgcolor="#FFFFFF"> <input id=submit_query name=submit_query type=submit value=查询 class="input1"> 
