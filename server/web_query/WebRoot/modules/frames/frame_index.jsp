@@ -27,15 +27,15 @@ parent.document.getElementById('lineFrame').src = '';
 	<table width="100%" border="0" cellpadding="0">
 		<tr>
 			<td width="35%">
-				<iframe name="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index" ></iframe>
+				<iframe name="infotitle" id="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index" ></iframe>
 			</td>
 			<td width="65%">
-				<iframe name="detail" width="100%" frameborder='0' height="" src=""></iframe>
+				<iframe name="detail" id="detail" width="100%" frameborder='0' height="" src=""></iframe>
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" colspan="2">
-				<iframe name="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index_m" ></iframe>
+				<iframe name="infomedia" id="infomedia" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index_m" ></iframe>
 			</td>
 		</tr>
 	</table>

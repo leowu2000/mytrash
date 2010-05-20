@@ -963,9 +963,9 @@ public class SearchDAO extends CommonDAO{
 		}
 		//图片格式
 		if("tp".equals(radiob_gs.trim())){//图片
-			sql = sql + " (wjgs = 'jpg' or wjgs = 'JPG') and ";
+			sql = sql + " UPPER(wjgs) like '%JPG%' and ";
 		}else if("lx".equals(radiob_gs.trim())){
-			sql = sql + " wjgs <> 'jpg' and wjgs = 'JPG' and ";
+			sql = sql + " UPPER(wjgs) not like '%JPG%' and ";
 		}
 		//按日期区间查询
 		if(!"".equals(date_start)&&!"".equals(date_end)){//按时间查询

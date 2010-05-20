@@ -30,7 +30,7 @@ if(mediaheight<60){
 	<script language="JavaScript" src="../script/layer10.js"></script>
   </head>
   
-  <body background="../../images/back.gif">
+  <body>
   	<table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 <%
 	if("TB_FPACTI".equals(tablename)||"TB_FXJB".equals(tablename)||"TB_QT".equals(tablename)||"TB_SD".equals(tablename)){//防汛行动,旱情,灾情

@@ -17,7 +17,7 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
 	<link rel="stylesheet" href="../../css/main.css" type="text/css">
   </head>
   
-  <body background="../../images/back.gif">
+  <body>
   <CENTER>
     <TABLE style="BORDER: #ccc 1px solid;" cellSpacing=0 cellPadding=0 width=100% align=center border=0>
   <TBODY>
@@ -62,6 +62,9 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
           <TD id=demo2 vAlign=top>&nbsp;</TD></TR></TBODY></TABLE></DIV>
 <script language=JavaScript >
 var speed3=20//速度数值越大速度越慢
+var demo = document.getElementById('demo');
+var demo1 = document.getElementById('demo1');
+var demo2 = document.getElementById('demo2');
 demo2.innerHTML=demo1.innerHTML
 function Marquee(){
 if(demo2.offsetWidth-demo.scrollLeft<=0)

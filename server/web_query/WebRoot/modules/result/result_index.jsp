@@ -33,7 +33,7 @@ if(listIndex.size()>0){
 	</script>
   </head>
   
-  <body onload="init();" background="../../images/back.gif">
+  <body onload="init();">
     <table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 <%
 	for(int i=0;i<listIndex.size();i++){
