@@ -13,6 +13,9 @@
     String RPJINCD = request.getParameter("RPJINCD");
     HQBean bean = BuinessDao.findHQByID(relPath,RPJINCD);
     String content = bean.getACTICO();
+  //防止刷新页面重复提交
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
 %> 
 <html>
 <head>
@@ -46,6 +49,7 @@ function toBack(){
 </table>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="DNCNO" value="<%=RPJINCD%>"/>
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <input type="hidden" name="actionType" value="add_report"/>
 <input type="hidden" name="WTDPCD" value="<%=configBean.getTBDW() %>"/>
 <input type="hidden" name="FILEDNAME" value="ACTICO"/>

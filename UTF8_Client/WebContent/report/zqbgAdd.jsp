@@ -10,6 +10,10 @@
     response.setDateHeader("Expires", 0); 
     BuinessDao.deleteDB("delete from TB_SUB_TEMP",relPath);
     String uuid = String.valueOf(UUIdFactory.getMaxId(relPath, "TB_SD","RPJINCD")) ;
+    
+  //防止刷新页面重复提交
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
 %> 
 <html>
 <head>
@@ -43,6 +47,7 @@ function toBack(){
 </table>
 <form name="frm" action="/buiness.do"  method="POST">
 <input type="hidden" name="TABLENAME" value=""/>
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <input type="hidden" name="picid" value=""/>
 <input type="hidden" name="check" value="1"/><!-- 是否删除多媒体临时表数据标志1,删除,2不删除 -->
 <input type="hidden" name="uptype" value=""/>

@@ -3,6 +3,9 @@
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
+  //防止刷新页面重复提交
+    long _nowtime = System.currentTimeMillis();
+    session.setAttribute("sessiontime",_nowtime);
 %> 
 <html>
 <head>
@@ -112,6 +115,7 @@ function submiting(){
 	<tr><td align="center" ><span  class="style4">新增工程信息</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
+<INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
 <input type="hidden" name="actionType" value=""/>
 <input type="hidden" name="gclb" value="">
 <input type="hidden" name="cntcd" value="">
