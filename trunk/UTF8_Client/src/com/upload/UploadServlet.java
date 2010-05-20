@@ -69,9 +69,9 @@ public class UploadServlet extends HttpServlet {
 			if (flg) {// 压缩数据库
 				String oldfile = "upload.mdb";
 				newfile = UtilDateTime.nowString() + ".mdb";
-				RandomAccessFileTool.doAccess(path, oldfile, newfile);
+//				RandomAccessFileTool.doAccess(path, oldfile, newfile);
 				try {
-					ToZipFile.zipFile(path +"/"+newfile, path +"/"+newfile + ".zip");
+					ToZipFile.zipFile(path +"/upload.mdb", path +"/"+newfile + ".zip");
 					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()
 							+ "\t压缩数据成功...");
 					request.getSession().setAttribute("zipfilename", path +"/"+ newfile + ".zip");
@@ -109,6 +109,7 @@ public class UploadServlet extends HttpServlet {
 				
 			}
 			File file = new File(zipfilename);
+			//删除上传的文件
 			file.delete();
 			response.setContentType("text/xml");
 			response.setHeader("Charset", "gb2312");
