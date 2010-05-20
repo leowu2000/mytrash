@@ -15,6 +15,8 @@ import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import com.basesoft.core.Constants;
+
 class ServerThread extends Thread {
 	Socket clientSocket;
         DataInputStream DataIn;
@@ -45,12 +47,6 @@ class ServerThread extends Thread {
 	int ExistPack=0;
 	boolean LogFileExist=false;
 
-        public ServerThread(ServerFrame parent,Socket s) {
-//           this.serverMyFrame=parent;
-//           serverMyFrame.ConnectNum++;
-//           ContentLogFile("数据接收编号："+serverMyFrame.ConnectNum);
-           this.clientSocket=s;
-        }
         public ServerThread(Socket s) {
           this.clientSocket=s;
        }
@@ -99,7 +95,7 @@ class ServerThread extends Thread {
                 						curPack=ExistPack+1;
                 						System.out.println("续传！返回客户端包数:"+curPack);
                 						SendPack(curPack);
-                						outputFile=new FileOutputStream(SockFileName,true);
+                						outputFile=new FileOutputStream(Constants.ROOTPATH+"/upload/"+SockFileName,true);
                 						System.out.println("开始发送的包数："+curPack);
 										for(int i=curPack;i<totalPack;i++){
 											DataIn.readFully(buffer,0,MAX_SIZE);
@@ -164,7 +160,7 @@ class ServerThread extends Thread {
                 	}
 			if (curPack<totalPack){
 				System.out.println("新的传输数据");
-				outputFile=new FileOutputStream(SockFileName);
+				outputFile=new FileOutputStream(Constants.ROOTPATH+"/upload/"+SockFileName);
 	
 				for(int i=curPack;i<totalPack;i++){
 					DataIn.readFully(buffer,0,MAX_SIZE);
@@ -259,7 +255,7 @@ class ServerThread extends Thread {
   				DataIn.readFully(buffer,0,MAX_SIZE);
 				DataIn.skip(1);
 
-  				outputFile=new FileOutputStream(SockFileName);
+  				outputFile=new FileOutputStream(Constants.ROOTPATH+"/upload/"+SockFileName);
 
   				outputFile.write(buffer,0,MAX_SIZE);
 				DeleteLogFile(SockFileName);
@@ -426,7 +422,7 @@ class ServerThread extends Thread {
 	//写日志文件
 	public void WriteLog(String info,String strFileName){
 		try{
-			fWriter=new FileWriter((strFileName+".log"),true);
+			fWriter=new FileWriter((Constants.ROOTPATH+"/upload/"+strFileName+".log"),true);
 			BufferedWriter logBufferedWriter = new BufferedWriter(fWriter, 256);
       			logBufferedWriter.write(info,0,info.length());
       			logBufferedWriter.newLine();
@@ -441,7 +437,7 @@ class ServerThread extends Thread {
 	public void WriteLog(int infoPack,String strFileName){
 		try{
 			String info=Integer.toString(infoPack);
-			fWriter=new FileWriter((strFileName+".log"),true);
+			fWriter=new FileWriter((Constants.ROOTPATH+"/upload/"+strFileName+".log"),true);
 			BufferedWriter logBufferedWriter = new BufferedWriter(fWriter, 512);
       			logBufferedWriter.write(info,0,info.length());
       			logBufferedWriter.newLine();
@@ -455,7 +451,7 @@ class ServerThread extends Thread {
 	}
 	//判断文件是否存在
 	public void checkLogFileExist(String strFileName){
-		logFile=new File(strFileName+".log");
+		logFile=new File(Constants.ROOTPATH+"/upload/"+strFileName+".log");
 		if (logFile.exists()){
 			LogFileExist=true;
 		}
@@ -469,7 +465,7 @@ class ServerThread extends Thread {
 	public void DeleteMdbFile(String strFileName){
 		File fmdb=null;
 		//fmdb=new File(strFileName+".mdb");
-		fmdb=new File(strFileName);
+		fmdb=new File(Constants.ROOTPATH+"/upload/"+strFileName);
 			if (fmdb.exists()){
 				if(fmdb.delete()){
 					//System.out.println("已成功地删除了数据库文件!");
@@ -481,7 +477,7 @@ class ServerThread extends Thread {
 	}
 	//写日志文件作为判断
 	public void DeleteLogFile(String strFileName){
-		logFile=new File(strFileName+".log");
+		logFile=new File(Constants.ROOTPATH+"/upload/"+strFileName+".log");
 		if (logFile.exists()){
 			try{
 				if(!logFile.delete()){
@@ -497,14 +493,14 @@ class ServerThread extends Thread {
 	//写主要的日志的文件
 	public void ContentLogFile(String info) {
 		try {
-			File f = new File("人大金仓发送日志文件.log");
+			File f = new File(Constants.ROOTPATH+"/upload/"+"人大金仓发送日志文件.log");
 			long maxSizeOfLogFile = 1000000;
 			if (f.length() >= maxSizeOfLogFile) {
-				File fLogBak = new File("人大金仓发送日志文件" + f.lastModified()
+				File fLogBak = new File(Constants.ROOTPATH+"/upload/"+"人大金仓发送日志文件" + f.lastModified()
 						+ ".log");
 				f.renameTo(fLogBak);
 			}
-			FileWriter logWriter = new FileWriter(("人大金仓发送日志文件.log"), true);
+			FileWriter logWriter = new FileWriter((Constants.ROOTPATH+"/upload/"+"人大金仓发送日志文件.log"), true);
 			BufferedWriter logBuffered = new BufferedWriter(logWriter, 512);
 			DateFormat dFull = DateFormat.getDateTimeInstance();
 			logBuffered.write("接收时间是："
@@ -526,7 +522,7 @@ class ServerThread extends Thread {
 		String strFileDanWei = null;
 		String strFilePack = null;
 		try {
-			FileReader fReader = new FileReader(strFileName + ".log");
+			FileReader fReader = new FileReader(Constants.ROOTPATH+"/upload/"+strFileName + ".log");
 			BufferedReader bufReader = new BufferedReader(fReader, 512);
 			try {
 				strFileFlag = (bufReader.readLine()).trim();
@@ -602,44 +598,44 @@ class ServerThread extends Thread {
 		try //1
 		{
 			//open archive file
-			FileInputStream stream = new FileInputStream(zipFileName);
+			FileInputStream stream = new FileInputStream(Constants.ROOTPATH+"/upload/"+zipFileName);
 			System.out.println("\nzipFileName :" + zipFileName);
 
 			ZipInputStream zipStream = new ZipInputStream(stream);
 
 			//find archive entry
-			ZipEntry zipExtract = null;
+			ZipEntry zipEntry = null;
 			while (true) {
 				try {
-					zipExtract = zipStream.getNextEntry();
+					zipEntry = zipStream.getNextEntry();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				if (zipExtract == null) {
+				if (zipEntry == null) {
 					System.out.println("\n\nZIP包中没有文件：" + sourceFileName
 							+ "\n\n");
 					break;
 				}
-				if (zipExtract.getName().equals(sourceFileName)) {
-					System.out.println("\n\nZIP包中的文件名：" + sourceFileName
+				if (zipEntry.getName().equals("upload.mdb")) {
+					System.out.println("\n\nZIP包中的文件名：" + "upload.mdb"
 							+ "\n\n");
 					break;
 				}
 				zipStream.closeEntry();
 			}
 
-			if (zipExtract == null
-					|| !zipExtract.getName().equals(sourceFileName)) {
+			if (zipEntry == null
+					|| !zipEntry.getName().equals("upload.mdb")) {
 				stream.close();
 				System.out.println("在" + zipFileName + "中找不到要展开的文件："
 						+ sourceFileName);
 				return false;
 			}
 			//create output file
-			FileOutputStream output = new FileOutputStream(outputFileName);
+			FileOutputStream output = new FileOutputStream(Constants.ROOTPATH+"/upload/"+outputFileName);
 
 			//check store CRC
-			long crcReq = zipExtract.getCrc();
+			long crcReq = zipEntry.getCrc();
 			CRC32 crc = new CRC32();
 
 			//read input & write to output
