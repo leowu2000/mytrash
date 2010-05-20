@@ -1,35 +1,55 @@
 ﻿package com.util;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
+import java.io.InputStreamReader;
+import java.util.zip.CRC32;
+import java.util.zip.CheckedOutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class RandomAccessFileTool {
 
-    public static void doAccess(String path,String oldname,String newname) {
-        try {
-            File file = new File(path+"/"+oldname);
-
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-  
-            long i =raf.length();   
-            
-            byte[] b = new byte[(int)i];   
-            raf.seek(0);   
-            raf.readFully(b);   
-            File f =new File(path+"/"+newname);  
-
-            RandomAccessFile paste = new RandomAccessFile(f,"rw");   
-            paste.write(b);   
-            raf.close();
-            paste.close();   
-        } catch (IOException e) {
-            System.out.println("IOException:");
-            e.printStackTrace();
-        }
-    }
+//    public static void doAccess(String path,String oldname,String newname) {
+//        try {
+////            File file = new File(path+"/"+oldname);
+//
+////            RandomAccessFile raf = new RandomAccessFile(file, "r");
+////  
+////            long i =raf.length();   
+////            
+////            byte[] b = new byte[(int)i];   
+////            raf.seek(0);   
+////            raf.readFully(b);   
+//            File newfile =new File(path+"/"+newname);  
+//
+////            RandomAccessFile paste = new RandomAccessFile(f,"rw");   
+////            paste.write(b);   
+////            raf.close();
+////            paste.close();   
+//            
+//            BufferedReader in=new BufferedReader(
+//                    new InputStreamReader(new FileInputStream(path+"/"+oldname),"ISO8859_1"));
+//			FileOutputStream f=new FileOutputStream(newfile);
+//			CheckedOutputStream ch=new CheckedOutputStream(f,new CRC32());
+//			ZipOutputStream out=new ZipOutputStream(
+//			                       new BufferedOutputStream(ch));
+//			
+//			int c;
+//			out.putNextEntry(new ZipEntry(path+"/"+oldname));
+//			while((c=in.read())!=-1)
+//			   out.write(c);
+//			 in.close();
+//			 out.close();
+//        } catch (IOException e) {
+//            System.out.println("IOException:");
+//            e.printStackTrace();
+//        }
+//    }
   //删除指定文件夹下所有文件
   //param path 文件夹完整绝对路径
      public static boolean delAllFile(String path) {
