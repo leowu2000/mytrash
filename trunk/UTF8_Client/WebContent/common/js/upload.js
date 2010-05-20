@@ -63,7 +63,8 @@ function uploadData(){
 		  alert('远程服务器连接失败，请确认配置参数，并保证网络连通。');
 	  }else{
 		  alert('数据已经成功上传至服务器!');
-	  }  
+	  }
+	  document.location="/upload.do?actionType=manage";
 }
 function MyShow() 
 { 
