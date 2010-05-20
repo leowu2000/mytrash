@@ -26,7 +26,7 @@ public class RiverController extends CommonController {
 			List listSx = riverDAO.getSx(ly);
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<select name='sx' id='sx' onchange='changeSx(this.value);'>");
+			sb.append("<select name='sx' id='sx' onchange='changeSx(this.value);'><option value=''>全部水系</option>");
 			String options = StringUtil.createOptions(listSx, "CTCD", "CTNM");
 			sb.append(options)
 			  .append("</select>");
@@ -44,7 +44,7 @@ public class RiverController extends CommonController {
 			List listSx = riverDAO.getZl1(sx);
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<select name='zl1' id='zl1' onchange='changeZl(this.value);'>");
+			sb.append("<select name='zl1' id='zl1' onchange='changeZl(this.value);'><option value=''>全部一级支流</option>");
 			String options = StringUtil.createOptions(listSx, "CTCD", "CTNM");
 			sb.append(options)
 			  .append("</select>");
@@ -62,7 +62,7 @@ public class RiverController extends CommonController {
 			List listSx = riverDAO.getZl2(zl1);
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<select name='zl2' id='zl2'>");
+			sb.append("<select name='zl2' id='zl2'><option value=''>全部二级支流</option>");
 			String options = StringUtil.createOptions(listSx, "CTCD", "CTNM");
 			sb.append(options)
 			  .append("</select>");

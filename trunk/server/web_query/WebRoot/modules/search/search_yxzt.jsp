@@ -88,6 +88,7 @@ function changeZl(value){
         <td bgcolor="#336699"><font color="#FFFFFF">流域</font></td>
         <td bgcolor="#FFFFFF" align="left" >
         	<select name="ly" id="ly" onchange="changeLy(this.value);">
+        		<option value="">全部流域</option>
 				<%=StringUtil.createOptions(listLy, "CTCD", "CTNM") %>      		
         	</select>
         </td>
