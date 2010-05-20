@@ -34,6 +34,7 @@ public class BuinessController implements Controller {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		String actionType = request.getParameter("actionType");
 		request.setCharacterEncoding("GBK");
+		
 		if ("login".trim().equals(actionType)) {
 			// 登陆的时候判断是否进行 了系统运行参数配置
 			String searchSql = "select * from TB_CONFIG";
@@ -94,18 +95,25 @@ public class BuinessController implements Controller {
 		 * 新增工程信息
 		 */
 		if ("add".trim().equals(actionType)) {
-			String gcnm = request.getParameter("PJNM");
-			String gclb = request.getParameter("gclb");
-			String cntcd = request.getParameter("cntcd");
-			
-			String hldm = request.getParameter("hldm");
-			String gcdm = gclb + hldm.substring(1, 7) + cntcd.substring(0, 1);
-			String SQL = "INSERT INTO TB_PJ(PJNO,PJNMCD,PJNM,CNTCD,FPDUTY,FPDUTYPH)VALUES("
-					+ UUIdFactory.getMaxId(path, "TB_PJ", "PJNO")
-					+ ",'"+ gcdm+ "','" + gcnm + "','" + cntcd + "','','')";
-			BuinessDao.insertDB(SQL, path);
-
-			return new ModelAndView("project/prgManage");
+			String strTicketA = request.getParameter("sessiontime");
+			Long strTicketB = (Long) request.getSession().getAttribute("sessiontime");
+			if (strTicketA.equals(strTicketB.toString())) 
+			{
+				request.getSession().setAttribute("sessiontime",System.currentTimeMillis());
+				String gcnm = request.getParameter("PJNM");
+				String gclb = request.getParameter("gclb");
+				String cntcd = request.getParameter("cntcd");
+				
+				String hldm = request.getParameter("hldm");
+				String gcdm = gclb + hldm.substring(1, 7) + cntcd.substring(0, 1);
+				String SQL = "INSERT INTO TB_PJ(PJNO,PJNMCD,PJNM,CNTCD,FPDUTY,FPDUTYPH)VALUES("
+						+ UUIdFactory.getMaxId(path, "TB_PJ", "PJNO")
+						+ ",'"+ gcdm+ "','" + gcnm + "','" + cntcd + "','','')";
+				BuinessDao.insertDB(SQL, path);
+				return new ModelAndView("project/prgManage");
+			}else{
+				return new ModelAndView("project/prgManage");
+			}
 		}
 		/**
 		 * 修改工程信息前查看数据
@@ -188,61 +196,72 @@ public class BuinessController implements Controller {
 			PrjBean prjBean = BuinessDao.findBySql(
 					"select * from TB_PJ where PJNO="
 							+ request.getParameter("GCNAME"), path);
-			// 工程运行信息
-			if ("1".trim().equals(SAVETYPES)) {
-				PJRCNBean bean = GetParametsUtil._getPJRCNBeanFromRequest(request);
-
-				String DNCNO = request.getParameter("DNCNO");
-				bean.setPJRNO(String.valueOf(DNCNO));
-				String sSQL = SqlFactory.insertSQL_PJRCNBean(bean, path,
-						prjBean);
-				PjrDetailBean pjdbean = GetParametsUtil._getPjrDetailBeanFormReqeust(request,bean.getGCFLDM());
-				pjdbean.setPJRNO(String.valueOf(DNCNO));
-				String sSQL2 = SqlFactory.insertSQL_PjrBean(pjdbean, path,
-						prjBean,bean.getGCFLDM());
-				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,
-						DNCNO, "TB_PJR_M");
-				BuinessDao.toInsertDbList(path, "TB_PJR_M", sSQL, sSQL2,
-						beanlist);
-				BuinessDao.deleteTempMedia(path);
-				return new ModelAndView("project/yx/gqyxManage");
-			}
-			// 工程险情信息
-			if ("2".trim().equals(SAVETYPES)) {
-				String mainSQL = "";
-				String subSQL = "";
-				String DNCNO = request.getParameter("DNCNO");
-				// 根据名称查询，如果返回编码说明是原来的旧的建筑物
-				// 如果返回为空，则说明是新添加的建筑物编码
-				int id = 1;
-				STDNCBean bean = GetParametsUtil._getSTDNCeanFromRequest(request);
-				String sttpcd = bean.getSTTPCD();
-				String code = BuinessDao.getIdFromNameChange(path, "TB_ST",
-						"STTPCD", "STNM='" + sttpcd + "' AND PJNO="
-								+ bean.getPJNO());
-				if (!"".trim().equals(code)) {
-					bean.setSTTPCD(code);
-					id = new Integer(code).intValue();
-				} else {
-					// 执行插入操作，并且重置STDNCBean的建筑物编码字段。
-					id = UUIdFactory.getMaxId(path, "TB_ST", "STTPCD");
-					mainSQL = "INSERT INTO TB_ST (STTPCD,PJNO,STNM)VALUES("
-							+ id + "," + bean.getPJNO() + ",'" + sttpcd + "')";
-					BuinessDao.insertDB(mainSQL, path);
-					bean.setSTTPCD(String.valueOf(id));
+			String strTicketA = request.getParameter("sessiontime");
+			Long strTicketB = (Long) request.getSession().getAttribute("sessiontime");
+			if (strTicketA.equals(strTicketB.toString())) 
+			{
+				request.getSession().setAttribute("sessiontime",System.currentTimeMillis());
+				// 工程运行信息
+				if ("1".trim().equals(SAVETYPES)) {
+					PJRCNBean bean = GetParametsUtil._getPJRCNBeanFromRequest(request);
+	
+					String DNCNO = request.getParameter("DNCNO");
+					bean.setPJRNO(String.valueOf(DNCNO));
+					String sSQL = SqlFactory.insertSQL_PJRCNBean(bean, path,
+							prjBean);
+					PjrDetailBean pjdbean = GetParametsUtil._getPjrDetailBeanFormReqeust(request,bean.getGCFLDM());
+					pjdbean.setPJRNO(String.valueOf(DNCNO));
+					String sSQL2 = SqlFactory.insertSQL_PjrBean(pjdbean, path,
+							prjBean,bean.getGCFLDM());
+					List<SubTempBean> beanlist = BuinessDao.getMediaList(path,
+							DNCNO, "TB_PJR_M");
+					BuinessDao.toInsertDbList(path, "TB_PJR_M", sSQL, sSQL2,
+							beanlist);
+					BuinessDao.deleteTempMedia(path);
+					return new ModelAndView("project/yx/gqyxManage");
 				}
-				// 保存主表信息
-				bean.setDNCNO(String.valueOf(DNCNO));
-				bean.setSTTPCD(String.valueOf(id));
-				mainSQL = SqlFactory.insertSQL_STDNCBean(bean, path);
-				// 获取并保存资表信息
-				DetailBean dBean = GetParametsUtil._getDetailBeanFromRquest(request, bean.getXQFLDM());
-				dBean.setSTTPCD(String.valueOf(id));
-				subSQL = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean.getXQFLDM());
-				List<SubTempBean> beanlist = BuinessDao.getMediaList(path,DNCNO, TABLENAME);
-				BuinessDao.toInsertDbList(path, TABLENAME, mainSQL, subSQL,beanlist);
-				BuinessDao.deleteTempMedia(path);
-				return new ModelAndView("project/xq/gqxqManage");
+				// 工程险情信息
+				if ("2".trim().equals(SAVETYPES)) {
+					String mainSQL = "";
+					String subSQL = "";
+					String DNCNO = request.getParameter("DNCNO");
+					// 根据名称查询，如果返回编码说明是原来的旧的建筑物
+					// 如果返回为空，则说明是新添加的建筑物编码
+					int id = 1;
+					STDNCBean bean = GetParametsUtil._getSTDNCeanFromRequest(request);
+					String sttpcd = bean.getSTTPCD();
+					String code = BuinessDao.getIdFromNameChange(path, "TB_ST",
+							"STTPCD", "STNM='" + sttpcd + "' AND PJNO="
+									+ bean.getPJNO());
+					if (!"".trim().equals(code)) {
+						bean.setSTTPCD(code);
+						id = new Integer(code).intValue();
+					} else {
+						// 执行插入操作，并且重置STDNCBean的建筑物编码字段。
+						id = UUIdFactory.getMaxId(path, "TB_ST", "STTPCD");
+						mainSQL = "INSERT INTO TB_ST (STTPCD,PJNO,STNM)VALUES("
+								+ id + "," + bean.getPJNO() + ",'" + sttpcd + "')";
+						BuinessDao.insertDB(mainSQL, path);
+						bean.setSTTPCD(String.valueOf(id));
+					}
+					// 保存主表信息
+					bean.setDNCNO(String.valueOf(DNCNO));
+					bean.setSTTPCD(String.valueOf(id));
+					mainSQL = SqlFactory.insertSQL_STDNCBean(bean, path);
+					// 获取并保存资表信息
+					DetailBean dBean = GetParametsUtil._getDetailBeanFromRquest(request, bean.getXQFLDM());
+					dBean.setSTTPCD(String.valueOf(id));
+					subSQL = SqlFactory.insertSQL_DNCDetailBean(dBean, path, bean.getXQFLDM());
+					List<SubTempBean> beanlist = BuinessDao.getMediaList(path,DNCNO, TABLENAME);
+					BuinessDao.toInsertDbList(path, TABLENAME, mainSQL, subSQL,beanlist);
+					BuinessDao.deleteTempMedia(path);
+					return new ModelAndView("project/xq/gqxqManage");
+				}
+			}else{
+				if ("1".trim().equals(SAVETYPES)) 
+					return new ModelAndView("project/yx/gqyxManage");
+				else
+					return new ModelAndView("project/xq/gqxqManage");
 			}
 
 		}
@@ -371,41 +390,48 @@ public class BuinessController implements Controller {
 						conn.close();
 					}
 				}
-
+				return new ModelAndView("report/fxjbManage");
 			} else {
-				int RPJINCD = UUIdFactory.getMaxId(path, "TB_FXJB", "RPJINCD");
-				sSQL = "INSERT INTO TB_FXJB(RPJINCD,ISSUE,WTDT,ACTICO,QF,SH,NG,WTDPCD,WTTT)VALUES("
-						+ RPJINCD
-						+ ","+ ISSUE+ ",#"+ WTDT+ "#,'"
-						+ ACTICO+ "','"+ QF+ "','"+ SH
-						+ "','"+ NG+ "','"+ WTDPCD
-						+ "','" + WTTT + "')";
-				// 主表
-				BuinessDao.insertDB(sSQL, path);
-				if(!"".trim().equals(filepath)){
-					int poi = filepath.lastIndexOf(".");
-					String detail = filepath.substring(poi+1,filepath.length()).toUpperCase();
-					
-					String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,DTCDT,WJGS,TITLE,LXZP) values(?,?,?,?,?,?)";
-					PreparedStatement pstmt = conn.prepareStatement(sql);
-					
+				String strTicketA = request.getParameter("sessiontime");
+				Long strTicketB = (Long) request.getSession().getAttribute("sessiontime");
+				if (strTicketA.equals(strTicketB.toString())) 
+				{
+					request.getSession().setAttribute("sessiontime",System.currentTimeMillis());
+					int RPJINCD = UUIdFactory.getMaxId(path, "TB_FXJB", "RPJINCD");
+					sSQL = "INSERT INTO TB_FXJB(RPJINCD,ISSUE,WTDT,ACTICO,QF,SH,NG,WTDPCD,WTTT)VALUES("
+							+ RPJINCD
+							+ ","+ ISSUE+ ",#"+ WTDT+ "#,'"
+							+ ACTICO+ "','"+ QF+ "','"+ SH
+							+ "','"+ NG+ "','"+ WTDPCD
+							+ "','" + WTTT + "')";
+					// 主表
+					BuinessDao.insertDB(sSQL, path);
+					if(!"".trim().equals(filepath)){
+						int poi = filepath.lastIndexOf(".");
+						String detail = filepath.substring(poi+1,filepath.length()).toUpperCase();
 						
-					File f = new File(filepath);
-					String name = f.getName().substring(0,f.getName().lastIndexOf("."));
-					FileInputStream fis = new FileInputStream(f);
-					pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
-									"ZLBM"));
-					pstmt.setString(2, String.valueOf(RPJINCD));
-					pstmt.setString(3, UtilDateTime.nowDateString());
-					pstmt.setString(4, detail);
-					pstmt.setString(5, name);
-					pstmt.setBinaryStream(6, fis, (int) f.length());
-					pstmt.executeUpdate();
-					pstmt.close();
-					conn.close();
+						String sql = "INSERT INTO TB_FXJB_M(ZLBM,RPJINCD,DTCDT,WJGS,TITLE,LXZP) values(?,?,?,?,?,?)";
+						PreparedStatement pstmt = conn.prepareStatement(sql);
+						
+						File f = new File(filepath);
+						String name = f.getName().substring(0,f.getName().lastIndexOf("."));
+						FileInputStream fis = new FileInputStream(f);
+						pstmt.setInt(1, UUIdFactory.getMaxId(path, "TB_FXJB_M",
+										"ZLBM"));
+						pstmt.setString(2, String.valueOf(RPJINCD));
+						pstmt.setString(3, UtilDateTime.nowDateString());
+						pstmt.setString(4, detail);
+						pstmt.setString(5, name);
+						pstmt.setBinaryStream(6, fis, (int) f.length());
+						pstmt.executeUpdate();
+						pstmt.close();
+						conn.close();
+					}
+					return new ModelAndView("report/fxjbManage");
+				}else{
+					return new ModelAndView("report/fxjbManage");
 				}
 			}
-			return new ModelAndView("report/fxjbManage");
 		}
 		/**
 		 * 报告管理新增、修改：防汛行动、旱情信息、灾情报告
@@ -431,13 +457,21 @@ public class BuinessController implements Controller {
 						+ DNCNO + ",'" + MAINTITLE + "',#" + WTDT + "#,'"
 						+ WTDPCD + "','" + CONTENT + "')";
 			}
-			List<SubTempBean> beanlist = BuinessDao.getMediaList(path, DNCNO,TABLENAME + "_M");
-			if ("edit".trim().equals(subAction))
-				BuinessDao.toUpdateDbList(path, TABLENAME + "_M", newSQL, "",beanlist);// 更新
-			else
-				BuinessDao.toInsertDbList(path, TABLENAME + "_M", newSQL, "",beanlist);// 增加
-			BuinessDao.deleteTempMedia(path);
-			return new ModelAndView("report/" + TABLENAME + "Manage");
+			String strTicketA = request.getParameter("sessiontime");
+			Long strTicketB = (Long) request.getSession().getAttribute("sessiontime");
+			if (strTicketA.equals(strTicketB.toString())) 
+			{
+				request.getSession().setAttribute("sessiontime",System.currentTimeMillis());
+				List<SubTempBean> beanlist = BuinessDao.getMediaList(path, DNCNO,TABLENAME + "_M");
+				if ("edit".trim().equals(subAction))
+					BuinessDao.toUpdateDbList(path, TABLENAME + "_M", newSQL, "",beanlist);// 更新
+				else
+					BuinessDao.toInsertDbList(path, TABLENAME + "_M", newSQL, "",beanlist);// 增加
+				BuinessDao.deleteTempMedia(path);
+				return new ModelAndView("report/" + TABLENAME + "Manage");
+			}else{
+				return new ModelAndView("report/" + TABLENAME + "Manage");
+			}
 		}
 		/**
 		 * 通用查询
