@@ -175,7 +175,8 @@ public class UploadDB {
 			upload_Conn = ConnectionPool.getUploadConnection(path);//'打开上传数据库（upload.mdb）中的工程表
 			dbname_conn = ConnectionPool.getDbNameConnection(path);//工程分类代码对应表名称
 			Statement local_stmt = local_Conn.createStatement();
-			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_stdnc where DNCNO="+num+")";
+//			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_stdnc where DNCNO="+num+")";
+			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_stdnc where DNCNO="+num+") and pjno not in ("+getPJIDFromTBPJ(upload_Conn)+")";
 	        //将传送的工程信息拷贝到上传数据库upload.mdb中工程表
 			copyDataFromRs("tb_pj",sSQL,local_Conn,upload_Conn);
 			OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t险情相关工程数据成功...");
@@ -232,7 +233,8 @@ public class UploadDB {
 		try {
 			local_Conn = ConnectionPool.getConnection(path);//打开将要被传送的信息所在的数据库中的工程表
 			upload_Conn = ConnectionPool.getUploadConnection(path);//'打开上传数据库（upload.mdb）中的工程表
-			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_pjrcn where PJRNO="+pjno+")";
+//			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_pjrcn where PJRNO="+pjno+")";
+			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_stdnc where PJRNO="+pjno+") and pjno not in ("+getPJIDFromTBPJ(upload_Conn)+")";
 			Statement local_Stmt = local_Conn.createStatement();
 			
 			ResultSet local_Rs = local_Stmt.executeQuery(sSQL);
@@ -517,6 +519,18 @@ public class UploadDB {
 			 }
 			
 		}catch(Exception ex){ex.printStackTrace();}
+	}
+
+	public static String getPJIDFromTBPJ(Connection localconn){
+		String s="";
+		try{
+			Statement stmt = localconn.createStatement();
+			ResultSet rs = stmt.executeQuery("select pjno from tb_pj");
+			 while(rs.next()){
+				 s+=rs.getObject(1)+",";
+             }
+		}catch(Exception ex){ex.printStackTrace();}
+		return s+"0";
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
