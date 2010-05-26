@@ -24,7 +24,7 @@ parent.document.getElementById('lineFrame').src = '';
 
 %>
 <body bgcolor="#FFFFFF" text="#000000" onresize="IFrameResize1();" onLoad="IFrameResize1();" >
-	<table width="100%" border="0" cellpadding="0">
+	<table width="100%" height="100%" border="0" cellpadding="0">
 		<tr>
 			<td width="35%">
 				<iframe name="infotitle" id="infotitle" width='100%' style="" scrolling="NO" frameborder='0' src="/search.do?action=search_index" ></iframe>
