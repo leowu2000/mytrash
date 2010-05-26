@@ -27,7 +27,7 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
       <TABLE cellSpacing=0 cellPadding=0 align=left border=0 cellspace="0">
         <TBODY>
         <TR>
-          <TD id=demo1 vAlign=top><table width="1710" height="116"  border="0" cellpadding="0" cellspacing="0">
+          <TD id=demo1 vAlign=top><table width="1100" height="116"  border="0" cellpadding="0" cellspacing="0">
             <tr>
 <%
 	for(int i=0;i<listIndex_m.size();i++){
@@ -50,7 +50,7 @@ List listIndex_m = (List)request.getAttribute("listIndex_m");
 		
 		
 %>    
-    		<td width="100" height="30" align="center" vlign="middle">
+    		<td width="80" height="30" align="center" vlign="middle">
     			<img src="media.do?action=image_middle&tablename=<%=mapIndex_m.get("TABLENAME") %>&media_id=<%=mapIndex_m.get("ZLBM")%>" style="cursor:hand;border=0; height=80;width=80; z-index:8;" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)">
     			<br><a href="#" onclick="openUrl('/detail.do?action=<%=action %>&id=<%=mapIndex_m.get("ID") %>',800,550,0)"><%=mapIndex_m.get("TITLE") %></a>
     		</td>
