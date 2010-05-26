@@ -71,7 +71,7 @@ if(listIndex.size()>0){
 		}
 %>    
     	<tr valign="top">
-    		<td height="26" align="left" nowrap="nowrap">[<%=type %>]</td>
+    		<td height="25" align="left" nowrap="nowrap">[<%=type %>]</td>
     		<td nowrap="nowrap" width="50%"><a href="#" onclick="changeInfo('<%=mapIndex.get("ID") %>','<%=mapIndex.get("TABLENAME") %>');" style="cursor: hand;"><%=title %></a></td>
     		<td align="right" nowrap="nowrap">[<%=dt %>]</td>
     	</tr>
