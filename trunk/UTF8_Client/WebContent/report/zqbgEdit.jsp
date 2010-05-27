@@ -3,7 +3,7 @@
 <%@ page import="com.core.*" %>
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
-<%@ page import="com.fredck.FCKeditor.FCKeditor"%>
+<%@ page import="net.fckeditor.*"%>
 <%@ include file="/common/session.jsp"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
@@ -106,15 +106,12 @@ function toBack(){
 	</tr>
 	<tr height="25" >
 	<td class="title" colspan="5">
-	<%	           
-	    FCKeditor oFCKeditor ;
-	    oFCKeditor = new FCKeditor( request, "CONTENT") ;
-	    oFCKeditor.setBasePath( "/FCKeditor/" ) ;
-		oFCKeditor.setToolbarSet( "NowUse" ) ;
-	    oFCKeditor.setHeight("200");
-	    oFCKeditor.setValue( content==null?"":content );
-	    out.println(oFCKeditor.create());
-     %>
+	<%
+		FCKeditor fckEditor = new FCKeditor(request, "CONTENT");
+		fckEditor.setToolbarSet("NowUse");
+     	fckEditor.setValue(content);
+		out.println(fckEditor);
+	%>
 	</td>
 	</tr>
 </table>

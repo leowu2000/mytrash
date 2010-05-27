@@ -3,7 +3,7 @@
 <%@ page import="com.core.*" %>
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
-<%@ page import="com.fredck.FCKeditor.FCKeditor"%>
+<%@ page import="net.fckeditor.*"%>
 <% 
 	String relPath = request.getSession().getServletContext().getRealPath("/");
 	String fromwhere = request.getParameter("fromwhere");
