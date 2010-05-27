@@ -3,7 +3,6 @@
 <%@ page import="com.core.*" %>
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
-<%@ page import="com.fredck.FCKeditor.FCKeditor"%>
 <%@ page import="com.core.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>

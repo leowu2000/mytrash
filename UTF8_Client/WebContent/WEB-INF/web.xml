@@ -44,6 +44,7 @@
     <servlet-name>Check</servlet-name>
     <servlet-class>com.util.CheckSpecification</servlet-class>
   </servlet>
+  <!--
   <servlet>
     <servlet-name>Connector</servlet-name>
     <servlet-class>com.fredck.FCKeditor.connector.ConnectorServlet</servlet-class>
@@ -56,7 +57,20 @@
   <servlet-mapping>
     <servlet-name>Connector</servlet-name>
     <url-pattern>/FCKeditor/editor/filemanager/browser/default/connectors/jsp/connector</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>-->
+  <servlet>
+		<servlet-name>Connector</servlet-name>
+		<servlet-class>
+			net.fckeditor.connector.ConnectorServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Connector</servlet-name>
+		<!-- Do not wrap this line otherwise Glassfish will fail to load this file -->
+		<url-pattern>/fckeditor/editor/filemanager/connectors/*</url-pattern>
+	</servlet-mapping>
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>

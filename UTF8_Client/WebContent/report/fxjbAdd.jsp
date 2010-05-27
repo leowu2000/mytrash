@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=GBK"%>
 <%@ page import="com.util.*" %>
-<%@ page import="com.fredck.FCKeditor.FCKeditor"%>
+<%@ page import="net.fckeditor.*"%>
 <%@ include file="/common/session.jsp"%>
 <% 
     response.setHeader("Pragma","No-cache"); 
@@ -25,6 +25,7 @@
 </style>
 
 <script language="JAVASCRIPT">
+
 function toBack(){
 	location.href="/report/fxjbManage.jsp";
 }
@@ -113,14 +114,20 @@ function updateFileValue(fileobj){
 	<tr height="25" >
 	<td class="title" colspan="6">
 	<%	           
-	    FCKeditor oFCKeditor3 ;
-	    oFCKeditor3 = new FCKeditor( request, "ACTICO") ;
-	    oFCKeditor3.setBasePath( "/FCKeditor/" ) ;
-		oFCKeditor3.setToolbarSet( "NowUse" ) ;
-	    oFCKeditor3.setHeight("260");
+	    //FCKeditor oFCKeditor3 ;
+	    //oFCKeditor3 = new FCKeditor( request, "ACTICO") ;
+	    //oFCKeditor3.setBasePath( "/FCKeditor/" ) ;
+		//oFCKeditor3.setToolbarSet( "NowUse" ) ;
+	    //oFCKeditor3.setHeight("260");
 	    //oFCKeditor.setValue( content==null?"":content );
-	    out.println(oFCKeditor3.create());
+	    //out.println(oFCKeditor3.create());
      %>
+     <%
+		FCKeditor fckEditor = new FCKeditor(request, "ACTICO");
+     	fckEditor.setToolbarSet("NowUse");
+     	fckEditor.setValue("");
+		out.println(fckEditor);
+	%>
 	</td>
 	</tr>
 	<tr height="25" >

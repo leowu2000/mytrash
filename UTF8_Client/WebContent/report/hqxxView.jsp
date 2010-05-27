@@ -3,7 +3,7 @@
 <%@ page import="com.core.*" %>
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
-<%@ page import="com.fredck.FCKeditor.FCKeditor"%>
+<%@ page import="net.fckeditor.*"%>
 <%@ include file="/common/session.jsp"%>
 <% 
 	String fromwhere = request.getParameter("fromwhere");
