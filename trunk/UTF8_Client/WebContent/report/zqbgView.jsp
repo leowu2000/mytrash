@@ -89,7 +89,6 @@ function toBack(){
 <table border="0"  width="95%" align="center">
 	<tr align="center">
 	<td>
-	<input type="button" name="" value="±£  ´æ" onclick="javascript:submitingReport('TB_SD')">
 	&nbsp;
 	<input type="button" name="" value="·µ  »Ø" onclick="javascript:toBack()">
 	</tr>
