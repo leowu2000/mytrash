@@ -75,10 +75,10 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
+  <!--s<servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>-->
   <servlet-mapping>
     <servlet-name>FileUploadServlet</servlet-name>
     <url-pattern>/FileUploadServlet</url-pattern>
