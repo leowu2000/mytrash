@@ -239,8 +239,11 @@ function PreviewImg(imgFile)
 	document.getElementById("upFileValues").value=filepath;
 	//新的预览代码，支持 IE6、IE7。 
 	var newPreview = document.getElementById("newPreview"); 
-	//newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod ='image'; 
-	newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = filepath; 
+	//newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod ='image';
+	if("MPG"==detail)
+		newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = "/images/pink-system-28.png"
+	else
+		newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = filepath; 
 	newPreview.style.width = "150px"; 
 	newPreview.style.height = "100px"; 
 	newPreview.style.border= "6px double #ccc";
