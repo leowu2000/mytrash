@@ -34,7 +34,12 @@ public class BuinessController implements Controller {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		String actionType = request.getParameter("actionType");
 		request.setCharacterEncoding("GBK");
-		
+		if("media".trim().equals(actionType)){
+			String filename = request.getParameter("filename");
+			System.out.println(filename);
+			request.setAttribute("filename", filename);
+			return new ModelAndView("common/player");
+		}
 		if ("login".trim().equals(actionType)) {
 			// 登陆的时候判断是否进行 了系统运行参数配置
 			String searchSql = "select * from TB_CONFIG";
@@ -700,6 +705,7 @@ public class BuinessController implements Controller {
 				request.setAttribute("page", page);
 				return new ModelAndView("sys/uploadManage");
 			}
+			
 		}
 		return null;
 	}
