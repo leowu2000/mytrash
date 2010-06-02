@@ -25,6 +25,7 @@
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery("select ZLBM,DTCDT,TITLE,WJGS,LXZP,NRMS from "+tablename+" where "+pkname+"="+pkvalue);
 	//RandomAccessFileExample.delAllFile(picpath+"\\\\common\\\\pic");
+	
 	Map<String,String> map=new HashMap<String,String>();
 	java.io.InputStream in = null;
 	OutputStream fos = null;
@@ -34,7 +35,7 @@
 		String zlcode =String.valueOf(rs.getInt("ZLBM"));
 		String filename = picpath+"\\\\common\\\\pic\\\\"+zlcode+"_"+current+"_demo."+wjgs;
 		String picname = zlcode+"_"+current+"_demo."+wjgs;
-		if(!"MPG".equals(wjgs.toUpperCase().trim())){
+		//if(!"MPG".equals(wjgs.toUpperCase().trim())){
 			in = (InputStream)rs.getBinaryStream("LXZP");
 			fos = new FileOutputStream(new File(filename));
 	
@@ -45,7 +46,7 @@
 			b+=a; 
 			fos.write(temp,0,b); 
 			}
-		}
+		//}
 		map.put(zlcode,picname);
 	}
 	if(fos!=null){
@@ -95,13 +96,13 @@ div
 	<%if(sublist!=null && sublist.size()>0){
 		int i=0;
 		for(SubTempBean dbean: sublist){
-			String filename="";
+			String filename=map.get(dbean.getZLBM());
 			if("MPG".equals(dbean.getWJGS().trim())){
 	%>
 		<td>
 		<table>
-			<tr><td><a href="#" title="点击播放视频文件" onclick="document.parentWindow.parent.playTheMedia('<%=dbean.getZLBM() %>','<%=tablename %>','/images/pink-system-28.png','/common/pic/<%=map.get(dbean.getZLBM()) %>','<%=pkname %>');return false;"><img src="/images/pink-system-28.png?temp=<%=System.currentTimeMillis()%>" style="width=60;height=60;border:0" /></a></td></tr>
-			<tr><td align="center" style='FONT-SIZE: 12px;'><a href="#" title="点击播放视频文件" onclick="document.parentWindow.parent.playTheMedia('<%=dbean.getZLBM() %>','<%=tablename %>','/images/pink-system-28.png','/common/pic/<%=map.get(dbean.getZLBM()) %>','<%=pkname %>');"><%=dbean.getTITLE() %></a></td></tr>
+			<tr><td><a href="/buiness.do?actionType=media&filename=<%=filename %>" target="_blank" title="点击播放视频文件" ><img src="/images/pink-system-28.png?temp=<%=System.currentTimeMillis()%>" style="width=60;height=60;border:0" /></a></td></tr>
+			<tr><td align="center" style='FONT-SIZE: 12px;'><a href="/common/player.jsp&filename=<%=filename %>" target="_blank"  title="点击播放视频文件"><%=dbean.getTITLE() %></a></td></tr>
 		</table>
 		</td>
 	<%

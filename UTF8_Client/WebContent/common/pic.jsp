@@ -108,8 +108,8 @@ div
 		%>
 			<td>
 			<table>
-				<tr><td><a href="#" title="点击播放视频文件" onclick="document.parentWindow.parent.playTheMedia('<%=dbean.getZLBM() %>','<%=tablename %>','/images/pink-system-28.png','/common/pic/<%=map.get(dbean.getZLBM()) %>','<%=pkname %>');return false;"><img src="/images/pink-system-28.png?temp=<%=System.currentTimeMillis()%>" style="width=60;height=60;border:0" /></a></td></tr>
-				<tr><td align="center" style='FONT-SIZE: 12px;'><a href="#" title="点击播放视频文件" onclick="document.parentWindow.parent.playTheMedia('<%=dbean.getZLBM() %>','<%=tablename %>','/images/pink-system-28.png','/common/pic/<%=map.get(dbean.getZLBM()) %>','<%=pkname %>');"><%=dbean.getTITLE() %></a></td></tr>
+				<tr><td><a href="#" title="点击进行修改" onclick="document.parentWindow.parent.pre_updateThePic('<%=dbean.getZLBM() %>','1','<%=tablename %>','/images/pink-system-28.png');return false;"><img src="/images/pink-system-28.png?temp=<%=System.currentTimeMillis()%>" style="width=60;height=60;border:0" /></a></td></tr>
+				<tr><td align="center" style='FONT-SIZE: 12px;'><a href="#" title="点击进行修改" onclick="document.parentWindow.parent.pre_updateThePic('<%=dbean.getZLBM() %>','1','<%=tablename %>','/images/pink-system-28.png');"><%=dbean.getTITLE() %></a></td></tr>
 			</table>
 			</td>
 		<%
@@ -129,8 +129,8 @@ div
 	%>
 		<td>
 		<table>
-			<tr><td><a href="#" title="点击播放视频文件" onclick="document.parentWindow.parent.playTheMedia('<%=dbean2.getZLBM() %>','<%=tablename %>','/images/pink-system-28.png','/common/pic/<%=map.get(dbean2.getZLBM()) %>','<%=pkname %>');return false;"><img src="/images/pink-system-28.png?temp=<%=System.currentTimeMillis()%>" style="width=60;height=60;border:0" /></a></td></tr>
-			<tr><td align="center" style='FONT-SIZE: 12px;'><a href="#" title="点击播放视频文件" onclick="document.parentWindow.parent.playTheMedia('<%=dbean2.getZLBM() %>','<%=tablename %>','/images/pink-system-28.png','/common/pic/<%=map.get(dbean2.getZLBM()) %>','<%=pkname %>');"><%=dbean2.getTITLE() %></a></td></tr>
+			<tr><td><a href="#" title="点击进行修改" onclick="document.parentWindow.parent.pre_updateThePic('<%=dbean2.getZLBM() %>','2','<%=tablename %>','/images/pink-system-28.png');return false;"><img src="/images/pink-system-28.png?temp=<%=System.currentTimeMillis()%>" style="width=60;height=60;border:0" /></a></td></tr>
+			<tr><td align="center" style='FONT-SIZE: 12px;'><a href="#" title="点击进行修改" onclick="document.parentWindow.parent.pre_updateThePic('<%=dbean2.getZLBM() %>','2','<%=tablename %>','/images/pink-system-28.png');"><%=dbean2.getTITLE() %></a></td></tr>
 		</table>
 		</td>
 	<%
