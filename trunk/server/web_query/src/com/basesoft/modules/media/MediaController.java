@@ -110,6 +110,21 @@ public class MediaController extends CommonController {
             os.write(b);
             os.flush();
             os.close();
+		}else if("gctp".equals(action)){//工程图片
+			String id = ServletRequestUtils.getStringParameter(request, "id", "");
+			InputStream ins = mediaDAO.getGctpBlob(id);
+			path = path + "gctp.jpg";
+			byte[] b = mediaDAO.saveAsFile(ins, path);
+			ins.close();
+			
+			response.reset();
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expiresponse", 0L);
+			response.setContentType("image/*");
+			response.getOutputStream().write(b);
+			response.getOutputStream().close();
+			return null;
 		}
 		
 		return null;

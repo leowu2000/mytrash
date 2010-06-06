@@ -55,7 +55,7 @@
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" cellspacing="0" align="center"cellpadding="0"  class="bordercolor">
+  <table width="68%" border="0" cellspacing="0" align="center"cellpadding="0"  >
 <%
 	for(int i=0;i<listHq_m.size();i++){
 		Map mapHq_m = (Map)listHq_m.get(i);
@@ -102,7 +102,7 @@
     </tr>
     <tr>
       <td height="80">
-    	<div align="center">
+    	<div align="left">
     	  <div name="text_detail" style="border=0 solid #002200" readonly wrap="VIRTUAL" class="button_query" > 
 				<%=mapHq.get("ACTICO") %> 
           </div>

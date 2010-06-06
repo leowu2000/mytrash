@@ -54,6 +54,30 @@ public class MediaDAO extends CommonDAO {
 	}
 	
 	/**
+	 * 取得工程图片BLOB信息
+	 * @param id 
+	 * @return
+	 */
+	synchronized public InputStream getGctpBlob(String id){
+		String sql = "select CONTENT from TB_GCTP where ID ='" + id + "'";
+		InputStream inputstream = (InputStream) jdbcTemplate.execute(sql, new CallableStatementCallback() {   
+			public Object doInCallableStatement(CallableStatement stmt)throws SQLException,DataAccessException {   
+				ResultSet rs = stmt.executeQuery();   
+				Map map = new HashMap();   
+				String name = "";   
+				
+				rs.next();
+				InputStream inputStream = rs.getBinaryStream("CONTENT");// 读取blob 
+				rs.close();
+				
+				return inputStream;  
+			}   
+				  
+		});   
+		return inputstream; 
+	}
+	
+	/**
 	 * 将流存为文件
 	 * @param ins 输入流
 	 * @param path 文件路径

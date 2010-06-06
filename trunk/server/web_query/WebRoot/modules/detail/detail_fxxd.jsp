@@ -69,7 +69,7 @@
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" align="center" cellspacing="0" cellpadding="0" class="bordercolor">
+  <table width="68%" border="0" align="center" cellspacing="0" cellpadding="0" >
 <%
 	for(int i=0;i<listFxxd_m.size();i++){
 		Map mapFxxd_m = (Map)listFxxd_m.get(i);
@@ -116,8 +116,8 @@
     </tr>
     <tr> 
       <td height="80"> 
-        <div align="center">
-          <div name="text_detail" style="border=0 solid #002200" wrap="VIRTUAL" readonly class="button_query">
+        <div align="left">
+          <div name="text_detail" style="border=0 solid #002200" wrap="VIRTUAL" class="button_query">
 		    <%=mapFxxd.get("ACTICO") %>  
           </div>
         </div>
