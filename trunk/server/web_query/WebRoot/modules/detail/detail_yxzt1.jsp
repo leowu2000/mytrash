@@ -43,7 +43,7 @@
 <body background="../../images/back.gif">
 <p>&nbsp;</p>
 <form name="form1" method="post" action="../interface/result_yxzt.asp" target="result"> 
-  <table  width="38%" border="0"  align="center" cellspacing="1" cellpadding="0" >
+  <table  width="80%" border="0"  align="center" cellspacing="1" cellpadding="0" >
     <tr align="center"> 
       <td height="25" colspan="3" bgcolor="#FFFFFF" class="title"  >
         <div align="left"></div>
@@ -56,7 +56,7 @@
       <td height="30" bgcolor="#FFFFFF"><div align="right"><%=gcflmc %></div></td>
     </tr>
   </table>
-  <table width='40%' border='0'  align='center' cellpadding='0' cellspacing='1' bgcolor='#336699' >
+  <table width='80%' border='0'  align='center' cellpadding='0' cellspacing='1' bgcolor='#336699' >
 <%
 	if("B".equals(gcfldm)){//水库
 %>
