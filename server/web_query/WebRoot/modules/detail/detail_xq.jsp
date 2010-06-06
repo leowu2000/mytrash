@@ -150,7 +150,7 @@
       <tr>
         <td align="center">
           <input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
-          <input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="if(this.value=='详细信息'){aa=window.open('detail.do?action=xq1&id=<%=id %>','详细信息','height=300,width=400,top=150,left=300,resizable=no,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no,dependent=yes,alwaysLowered=yes');this.value='关闭信息'}else{this.value='详细信息';aa.close();}" class="input1">
+          <input type="button" id="button_detail" name="button_detail" value="详细信息" onclick="if(this.value=='详细信息'){aa=window.open('detail.do?action=xq1&id=<%=id %>','详细信息','height=500,width=650,top=150,left=300,resizable=no,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no,dependent=yes,alwaysLowered=yes');this.value='关闭信息'}else{this.value='详细信息';aa.close();}" class="input1">
           <input type="button" name="button" value="加入会商" onclick="addConsult();" class="input1">
 <%
 	if("true".equals(isAdmin)){

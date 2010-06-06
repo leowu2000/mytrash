@@ -42,9 +42,9 @@
       </td>
     </tr>
   </table>
-<table width='70%' border='0'  align='center' cellpadding='0' cellspacing='1' >
+<table width='80%' border='0'  align='center' cellpadding='0' cellspacing='1' >
 <tr><td >
-<table width='50%' border='0'  align='center' cellpadding='0' cellspacing='1' bgcolor='#336699' >
+<table width='80%' border='0'  align='center' cellpadding='0' cellspacing='1' bgcolor='#336699' >
   <tr align='center'>
 	<td width='30%' height='25' bgcolor="#E4E1D6">出险部位</td>
 	<td width='70%' height='25' bgcolor='#FFFFFF' ><font color=#000000 id='lable21'><%=mapXq1.get("daglo")%></font></td>        
