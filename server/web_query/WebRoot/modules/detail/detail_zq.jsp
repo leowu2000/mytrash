@@ -68,7 +68,7 @@
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" cellspacing="0"align="center" cellpadding="0" class="bordercolor">
+  <table width="68%" border="0" cellspacing="0"align="center" cellpadding="0" >
 <%
 	for(int i=0;i<listZq_m.size();i++){
 		Map mapZq_m = (Map)listZq_m.get(i);
@@ -113,7 +113,7 @@
         <font color="#FFFFFF"><b>灾 情 描 述</b></font>
       </td>
     </tr>
-	<tr align="center">
+	<tr align="left">
 	  <td height="80">
     	<div name="text_detail" style="border=0 solid #002200 " readonly wrap="VIRTUAL" class="button_query">
           <%=mapZq.get("SDDSC") %>  

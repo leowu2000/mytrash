@@ -70,7 +70,7 @@
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" cellspacing="0" align="center"  cellpadding="0" class="bordercolor">
+  <table width="68%" border="0" cellspacing="0" align="center"  cellpadding="0" >
 <%
 	for(int i=0;i<listXq_m.size();i++){
 		Map mapXq_m = (Map)listXq_m.get(i);

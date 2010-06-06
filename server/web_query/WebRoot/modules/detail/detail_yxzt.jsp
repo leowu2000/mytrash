@@ -63,7 +63,7 @@
       <td height="30" bgcolor="#FFFFFF" ><div align="right"><%=StringUtil.DateToString((Date)mapYxzt.get("wtdpdt"), "yyyy-MM-dd")%></div></td>
     </tr>
   </table>
-  <table width="68%" border="0"  align="center" cellspacing="0" cellpadding="0" class="bordercolor">
+  <table width="68%" border="0"  align="center" cellspacing="0" cellpadding="0" >
 <%
 	for(int i=0;i<listYxzt_m.size();i++){
 		Map mapYxzt_m = (Map)listYxzt_m.get(i);

@@ -51,7 +51,7 @@ if(mediaheight<60){
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" align="center" cellspacing="0" cellpadding="0" class="bordercolor">
+  <table width="68%" border="0" align="center" cellspacing="0" cellpadding="0" >
 <%
 	for(int i=0;i<listIndex_m.size();i++){
 		Map mapIndex_m = (Map)listIndex_m.get(i);
@@ -98,7 +98,7 @@ if(mediaheight<60){
     </tr>
     <tr> 
       <td height="80"> 
-        <div align="center">
+        <div align="left">
           <div name="text_detail" style="border=0 solid #002200" wrap="VIRTUAL" readonly class="button_query">
 		    <%=mapIndex.get("ACTICO")==null?mapIndex.get("SDDSC"):mapIndex.get("ACTICO") %>  
           </div>
@@ -121,7 +121,7 @@ if(mediaheight<60){
       <td height="30" bgcolor="#FFFFFF" ><div align="right"><%=StringUtil.DateToString((Date)mapIndex.get("wtdpdt"), "yyyy-MM-dd")%></div></td>
     </tr>
   </table>
-  <table width="68%" border="0"  align="center" cellspacing="0" cellpadding="0" class="bordercolor">
+  <table width="68%" border="0"  align="center" cellspacing="0" cellpadding="0" >
 <%
 	for(int i=0;i<listIndex_m.size();i++){
 		Map mapYxzt_m = (Map)listIndex_m.get(i);
@@ -210,7 +210,7 @@ if(mediaheight<60){
       </td>
     </tr>
   </table>
-  <table width="68%" border="0" cellspacing="0" align="center"  cellpadding="0" class="bordercolor">
+  <table width="68%" border="0" cellspacing="0" align="center"  cellpadding="0" >
 <%
 	for(int i=0;i<listIndex_m.size();i++){
 		Map mapIndex_m = (Map)listIndex_m.get(i);

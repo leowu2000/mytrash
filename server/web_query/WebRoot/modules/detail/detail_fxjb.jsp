@@ -1,9 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="java.net.*" %>
 <%@ page import="com.basesoft.util.*" %>
 <%
 	Map mapFxjb = (Map)request.getAttribute("mapFxjb");
 	List listFxjb_m = (List)request.getAttribute("listFxjb_m");
-	String tbdw = request.getAttribute("tbdw").toString();
+	String tbdw = request.getAttribute("tbdw")==null?"":request.getAttribute("tbdw").toString().trim();
 	String pageNum = request.getAttribute("page").toString();
 	String id = request.getAttribute("id").toString();
 	
@@ -36,12 +37,12 @@
 <script language="JavaScript" src="../script/layer10.js"></script>
 <p>&nbsp;</p>
 <form name="form1" method="post" action="../interface/result_fxjb.asp" target="parent.result"> 
-  <table  width="68%"  border="0" cellspacing="0"  align="center" cellpadding="0" class="bordercolor">
-    <tr>
-      <td class="banner"  height="30" ><b>防汛简报多媒体信息</b></td>
+  <table  width="68%"  border="0" cellspacing="0"  align="center" cellpadding="0" >
+    <tr align="center">
+      <td  height="30" ><b>防汛简报多媒体信息</b></td>
     </tr>
   </table>
-  <table width="68%" border="0" cellspacing="0"  align="center" cellpadding="0"  class="bordercolor">
+  <table width="68%" border="0" cellspacing="0"  align="center" cellpadding="0"  >
 <%
 	for(int i=0;i<listFxjb_m.size();i++){
 		Map mapFxjb_m = (Map)listFxjb_m.get(i);
@@ -59,12 +60,12 @@
 %>
     <tr width="100%">
 	  <td>
-	    <table width="100%">
+	    <table width="100%" border="0">
 	      <tr align="middle"> 
-	        <td class="bordercolor"><%=mapFxjb_m.get("TITLE")%></td>
+	        <td ><%=mapFxjb_m.get("TITLE")%></td>
 	      </tr>
 		  <tr align="middle" height="80"> 
-	        <td class="bordercolor"  height="80">		
+	        <td height="80">		
 		    <%if("JPG".equals(ext)||"JPEG".equals(ext)){ %>
 	       	  <img src="media.do?action=image&tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>" onMouseOver="display('<%=altStr1%>','<%=altStr2%>','<%=altStr3%>','<%=altStr4%>','<%=altStr5%>','<%=altStr6%>','<%=altStr7%>',event.x,event.y)" onMouseOut="hide()" onClick="window.location='modules/view/view_fxjb.jsp?media_id=<%=mapFxjb_m.get("ZLBM")%>&title=<%=mapFxjb_m.get("TITLE") %>&dtcdt=<%=mapFxjb_m.get("DTCDT")%>&tbdw=<%=tbdw %>&fileName=<%=fileName %>&WJGS=<%=mapFxjb_m.get("WJGS") %>&DETAIL=<%=mapFxjb_m.get("NRMS") %>'" style="cursor:hand;border=0; height=<%=mediaheight %>;z-index:8;"> 
 	        <%}else if("MPG".equals(ext)||"AVI".equals(ext)){%>
@@ -112,7 +113,7 @@
     	  </tr>
     	  <tr> 
       		<td> 
-        	  <div align="center">
+        	  <div align="left">
           		<div name="text_detail" style="border=0;solid #002200"  readonly ><%=mapFxjb.get("ACTICO") %></div>
         	  </div>
         	  <br>
@@ -138,7 +139,7 @@
       <td align="center">  
   		<input type="button" name="button" value="返　　回" onclick="parent.focus();window.close()" class="input1">
     	<INPUT type="hidden" id="page" name="page" value="<%=pageNum %>">
-  		<input type="button" name="button" value="打印预览" onclick="if(screen.width==800){window.location='detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=800'}else{window.location='detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=1024'}" class="input1" >
+  		<input type="button" name="button" value="打印预览" onclick="if(screen.width==800){openUrl('detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw %>&size=800',800,550,0)}else{openUrl('detail.do?action=fxjb_print&id=<%=id%>&tbdw=<%=tbdw%>&size=1024',800,550,0)}" class="input1" >
 <%
 	if("true".equals(isAdmin)){
 %>    	

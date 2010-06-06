@@ -16,6 +16,7 @@
 				/delete.do=DeleteController
 				/user.do=UserController
 				/river.do=RiverController
+				/gctp.do=GctpController
 			</value>
 		</property>
 	</bean>
@@ -44,5 +45,6 @@
 	<bean name="DeleteController" class="com.basesoft.modules.delete.DeleteController"></bean>
 	<bean name="UserController" class="com.basesoft.modules.user.UserController"></bean>
 	<bean name="RiverController" class="com.basesoft.modules.search.RiverController"></bean>
+	<bean name="GctpController" class="com.basesoft.modules.media.GctpController"></bean>
 </beans>
 

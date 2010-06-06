@@ -57,4 +57,5 @@
 	<bean id="deleteDAO" class="com.basesoft.modules.delete.DeleteDAO"></bean>
 	<bean id="userDAO" class="com.basesoft.modules.user.UserDAO"></bean>
 	<bean id="riverDAO" class="com.basesoft.modules.search.RiverDAO"></bean>
+	<bean id="gctpDAO" class="com.basesoft.modules.media.GctpDAO"></bean>
 </beans>
