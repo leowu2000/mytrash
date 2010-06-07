@@ -106,22 +106,22 @@ Ext.onReady(function(){
 	<body>
 	<div id="toolbar"></div>
 <form id="listForm" name="listForm" action="" method="post">
-<table cellspacing="0" id="the-table" width="98%" align="center">
+<table cellspacing="0" id="the-table" width="70%" align="center">
             <tr style="background-color:#EEEEEE;">
-                <th width="40">选择</th>
-                <th>图片名称</th>
-                <th>图片描述</th>
-                <th>图片</th>
+                <td width="40">选择</td>
+                <td>图片名称</td>
+                <td>图片描述</td>
+                <td>图片</td>
             </tr>
 <%
 for(int i=0;i<listGctp.size();i++){
 	Map map = (Map)listGctp.get(i);
 %>        
             <tr>
-                <td><input type="checkbox" name="check" id="check" value="<%=map.get("ID")%>"></td>
-                <td><%=map.get("NAME") %></td>
+                <td width="20"><input type="checkbox" name="check" id="check" value="<%=map.get("ID")%>"></td>
+                <td width="100"><%=map.get("NAME") %></td>
                 <td width="200"><%=map.get("NOTE") %></td>
-                <td><img src="media.do?action=gctp&id=<%=map.get("ID")%>" style="width:100;"> </td>
+                <td align="center"><img src="media.do?action=gctp&id=<%=map.get("ID")%>" style="width:100;"> </td>
             </tr> 
 <%
 }
