@@ -100,4 +100,25 @@ public class GctpDAO extends CommonDAO {
 		);
 		is.close();
 	}
+	
+	/**
+	 * 更新工程图片
+	 * @param Gctp 工程图片实例
+	 */
+	public void updateGctp(Gctp gctp)throws Exception{
+		final String id = gctp.getId();
+		final String name = gctp.getName();
+		final String note = gctp.getNote();
+		final String gclj = gctp.getGclj();
+		
+		final LobHandler lobHandler=new DefaultLobHandler();
+		jdbcTemplate.execute("update TB_GCTP set name=?,note=? where ID='" + id + "'",
+			new AbstractLobCreatingPreparedStatementCallback(lobHandler){ 
+				protected void setValues(PreparedStatement pstmt,LobCreator lobCreator) throws SQLException{
+					pstmt.setString(1, name);
+					pstmt.setString(2, note);
+				}
+			}
+		);
+	}
 }

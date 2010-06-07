@@ -59,6 +59,7 @@ Ext.onReady(function(){
 
     function onAddClick(btn){
     	action = url+'?action=add';
+    	document.getElementById('sel_image').style.display = '';
     	win.setTitle('增加');
        	Ext.getDom('dataForm').reset();
         win.show(btn.dom);
@@ -76,6 +77,7 @@ Ext.onReady(function(){
 			Ext.get('id').set({'value':data.item.id});
 			Ext.get('name').set({'value':data.item.name});
 			Ext.get('note').set({'value':data.item.note});
+			document.getElementById('sel_image').style.display = 'none';
 	    	action = url+'?action=update';
     		win.setTitle('修改');
 	        win.show(btn.dom);
@@ -102,22 +104,15 @@ Ext.onReady(function(){
 </script>
 	</head>
 	<body>
-	<h1 class="blk">工程图片管理</h1>
-	<div id="toolbar" class="blk"></div>
-		<div id="tabs1" class="blk">
-			<div id="address" class="tab-content">
+	<div id="toolbar"></div>
 <form id="listForm" name="listForm" action="" method="post">
-<div id="div1" style="width:100%;overflow-x:scroll">
-<table cellspacing="0" id="the-table" width="100%" align="center">
-        <thead>
+<table cellspacing="0" id="the-table" width="98%" align="center">
             <tr style="background-color:#EEEEEE;">
                 <th width="40">选择</th>
                 <th>图片名称</th>
                 <th>图片描述</th>
                 <th>图片</th>
             </tr>
-        </thead>
-        <tbody>
 <%
 for(int i=0;i<listGctp.size();i++){
 	Map map = (Map)listGctp.get(i);
@@ -125,18 +120,14 @@ for(int i=0;i<listGctp.size();i++){
             <tr>
                 <td><input type="checkbox" name="check" id="check" value="<%=map.get("ID")%>"></td>
                 <td><%=map.get("NAME") %></td>
-                <td><%=map.get("NOTE") %></td>
+                <td width="200"><%=map.get("NOTE") %></td>
                 <td><img src="media.do?action=gctp&id=<%=map.get("ID")%>" style="width:100;"> </td>
             </tr> 
 <%
 }
  %>                     
-		</tbody>
-</table></div>
+</table>
 </form>
-			</div>
-		</div>
-
 
 <div id="dlg" class="x-hidden">
     <div class="x-window-header">Dialog</div>
@@ -153,7 +144,7 @@ for(int i=0;i<listGctp.size();i++){
 				    <th>图片描述</th>
 				    <td><textarea name="note" id="note" rows="4" style="width:200"></textarea></td>
 				  </tr>
-				  <tr>
+				  <tr name="sel_image" id="sel_image">
 				    <th>选择图片</th>
 				    <td><input type="file" id="file" name="file" style="width: 200"></td>
 				  </tr>

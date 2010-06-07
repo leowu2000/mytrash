@@ -62,49 +62,37 @@
 </head>
 <body background="../../images/back.gif">
 <%	
-	//标题
-	String title = request.getParameter("title")==null?"":new String(request.getParameter("title").getBytes("ISO8859-1"),"UTF-8");
-	//采集时间
-	String dtcdt = request.getParameter("dtcdt")==null?"":request.getParameter("dtcdt").substring(0,10);
-	//采集单位
-	String tbdw = request.getParameter("tbdw")==null?"":new String(request.getParameter("tbdw").getBytes("ISO8859-1"),"UTF-8");
-	//多媒体文件名
-	String fileName = request.getParameter("fileName")==null?"":new String(request.getParameter("fileName").getBytes("ISO8859-1"),"UTF-8");
-	//文件格式
-	String wjgs = request.getParameter("WJGS");
-	//详细内容
-	String detail = request.getParameter("DETAIL")==null?"":new String(request.getParameter("DETAIL").getBytes("ISO8859-1"),"UTF-8");
+	//名称
+	String name = request.getParameter("name")==null?"":new String(request.getParameter("name").getBytes("ISO8859-1"),"UTF-8");
+	//描述
+	String note = request.getParameter("note")==null?"":new String(request.getParameter("note").getBytes("ISO8859-1"),"UTF-8");
 	
-	String media_id = request.getParameter("media_id");
+	String id = request.getParameter("id");
 
 %>
 <div id="Layer3" style="position:absolute; left:20px; top:20px; width:600px; height:90px; z-index:1;; visibility: visible"> 
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tbody>
       <tr> 
-        <td colspan="2"><div name="text_detail" class="textarea3"><%=detail %></div>        </td>
+        <td colspan="2"><div name="text_detail" class="textarea3"><%=note %></div>        </td>
       </tr>
     </tbody>
   </table>
   <table width="100%">
-    <tr><td align="center"><input type="hidden" name="filename" value="<%=fileName%>">
-	<input type="button" value="返  回" onclick="javascript:if(self.filename.value==''){self.close()}else{history.go(-1)}" class="input1" id="button1" name="button1"></td></tr>
+    <tr><td align="center">
+	<input type="button" value="返  回" onclick="history.back(-1);" class="input1" id="button1" name="button1"></td></tr>
     <tr><td height="20" align="center"></td></tr>
   </table>
   
 </div>
 	<div id="Layer2" style="position:absolute; left:18px; top:40px; width:600px; height:90px; z-index:1;; visibility: visible">
-  	  <img id="img1" name="img1" src="/media.do?action=image&tablename=TB_SD_M&media_id=<%=media_id%>" width="100%" height="400"> 
+  	  <img id="img1" name="img1" src="/media.do?action=gctp&id=<%=id %>" width="100%" height="400"> 
 	</div>
 <div id="Layer1" style="position:absolute; left:18px; top:200px; width:600px; height:30px; z-index:1; visibility: visible"> 
 	
   <table width="100%" cellspacing="0" cellpadding="0">
     <tr> 
-      <td colspan="2" bgcolor="#FFFFFF" class="title"><div align="center"><font color="#003366" size="4"><%=title%></font></div></td>
-    </tr>
-    <tr bgcolor="#FFFFFF"> 
-      <td><div align="left"><font color="#003366"><%=tbdw%></font></div></td>
-      <td><div align="right"><font color="#003366"><%=dtcdt%></font></div></td>
+      <td colspan="2" bgcolor="#FFFFFF" class="title"><div align="center"><font color="#003366" size="4"><%=name %></font></div></td>
     </tr>
   </table>
 </div>

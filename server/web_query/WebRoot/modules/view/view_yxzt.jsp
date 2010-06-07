@@ -124,7 +124,7 @@
         </u>缩小</td>
     </tr>
     <tr> 
-      <td width="40" height="40" align="center" bgcolor="#FFFFFF"><input name="ss" type="text" value="1" size="3" maxlength="3" class="input2" readonly></td>
+      <td width="40" height="40" align="center" bgcolor="#FFFFFF"><input name="ss" type="text" value="1" size="3" maxlength="3" class="input2" readonly style="width:40;"></td>
     </tr>
   </table>
 </div>

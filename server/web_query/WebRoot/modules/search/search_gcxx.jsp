@@ -97,13 +97,13 @@ function changeGc(){
         <td bgcolor="#FFFFFF" align="left" name="gcsel" id="gcsel"></td>
       </tr>
       <tr align="center">
-      	<td bgcolor="#336699"><font color="#FFFFFF">工程简介</font></td>
-        <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_gcjj" id="a_gcjj" target="result">查看工程简介</a></td>
-        <td bgcolor="#336699"><font color="#FFFFFF">基本特性</font></td>
-        <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_fxya" id="a_fxya" target="result">查看基本特性</a></td>
-        <td bgcolor="#336699"><font color="#FFFFFF">相关图片</font></td>
-        <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_gctp" id="a_gctp" target="result">查看相关图片</a>
-        <% if("true".equals(session.getAttribute("isAdmin").toString())){ %><a href="#" name="a_gctp1" id="a_gctp1" target="result">图片维护</a><%} %>
+        <td bgcolor="#FFFFFF" align="center" colspan="6">
+        	<a href="#" name="a_gcjj" id="a_gcjj" target="result"><font size="3">查看工程简介</font></a>&nbsp;&nbsp;&nbsp;
+        	<a href="#" name="a_fxya" id="a_fxya" target="result"><font size="3">查看基本特性</font></a>&nbsp;&nbsp;&nbsp;
+            <a href="#" name="a_gctp" id="a_gctp" target="result"><font size="3">查看相关图片</font></a>&nbsp;&nbsp;&nbsp;
+        <% if("true".equals(session.getAttribute("isAdmin").toString())){ %>
+        	<a href="#" name="a_gctp1" id="a_gctp1" target="result"><font size="3">图片维护</font></a>
+        <%} %>
         </td>
       </tr>
     </table>
