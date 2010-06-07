@@ -25,7 +25,7 @@ public class GctpController extends CommonController {
 			HttpServletResponse response, ModelAndView mv) throws Exception {
 		String action = ServletRequestUtils.getStringParameter(request, "action", "");
 		String gclj = ServletRequestUtils.getStringParameter(request, "gclj", "");
-		String returnUrl = "gctp.do?action=gctp&gclj=" + gclj; 
+		String returnUrl = "gctp.do?action=manager&gclj=" + gclj; 
 		
 		if("gctp".equals(action)){//工程图片
 			HttpSession session = request.getSession();
@@ -90,15 +90,16 @@ public class GctpController extends CommonController {
 			gctp.setName(name);
 			gctp.setNote(note);
 			gctp.setGclj(gclj);
-			
-			MultipartHttpServletRequest mpRequest = (MultipartHttpServletRequest)request;
+			gctpDAO.updateGctp(gctp);
+			/**MultipartHttpServletRequest mpRequest = (MultipartHttpServletRequest)request;
 			MultipartFile file = mpRequest.getFile("file");
 			
 			if(file!=null){
 				if(file.getSize()!=0){
 					gctpDAO.updateGctp(gctp, file);
 				}
-			}
+			}**/
+			
 			
 			response.sendRedirect(returnUrl);
 			return null;

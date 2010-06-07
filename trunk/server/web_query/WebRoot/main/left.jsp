@@ -151,7 +151,7 @@ td {
       </table></td>
   </tr>
   <tr> 
-    <td valign="bottom"><a href="javascript:window.close()" target="_parent" onClick="MM_nbGroup('down','group1','exita','images/exitc.gif',1)" onMouseOver="MM_nbGroup('over','exita','images/exit.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="images/exita.gif" alt name="exita" width="134" height="30" border="0" onload></a></td>
+    <td valign="bottom"><a href="/" target="_parent" onMouseOver="MM_nbGroup('over','exita','images/exit.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="images/exita.gif" alt name="exita" width="134" height="30" border="0" onload></a></td>
   </tr>
 </table>
 </body>
