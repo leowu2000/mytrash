@@ -32,11 +32,18 @@ public class GctpController extends CommonController {
 			String isAdmin = session.getAttribute("isAdmin")==null?"false":session.getAttribute("isAdmin").toString();
 			
 			if("true".equals(isAdmin)){
-				mv = new ModelAndView("modules/gctp/list");
+				//mv = new ModelAndView("modules/gctp/list");
+				mv = new ModelAndView("modules/result/result_gctp");
 			}else {
 				mv = new ModelAndView("modules/result/result_gctp");
 			}
 			
+			List<?> listGctp = gctpDAO.findGctp(gclj);
+			
+			mv.addObject("listGctp", listGctp);
+			mv.addObject("gclj", gclj);
+		}else if("manager".equals(action)){//工程图片
+			mv = new ModelAndView("modules/gctp/list");
 			List<?> listGctp = gctpDAO.findGctp(gclj);
 			
 			mv.addObject("listGctp", listGctp);
