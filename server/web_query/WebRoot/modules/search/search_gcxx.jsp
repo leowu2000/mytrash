@@ -57,6 +57,9 @@ function changeGc(){
         document.getElementById('a_gcjj').href='/modules/gcdata/' + gclj[0];
 		document.getElementById('a_fxya').href='/modules/gcdata/' + gclj[1];
 		document.getElementById('a_gctp').href='/gctp.do?action=gctp&gclj=' + gclj[0];
+		<% if("true".equals(session.getAttribute("isAdmin").toString())){ %>
+		document.getElementById('a_gctp1').href='/gctp.do?action=manager&gclj=' + gclj[0];
+		<%}%>
 		parent.document.getElementById('result').src = document.getElementById('a_gcjj').href;
     }
 
@@ -98,8 +101,10 @@ function changeGc(){
         <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_gcjj" id="a_gcjj" target="result">查看工程简介</a></td>
         <td bgcolor="#336699"><font color="#FFFFFF">基本特性</font></td>
         <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_fxya" id="a_fxya" target="result">查看基本特性</a></td>
-        <td bgcolor="#336699"><font color="#FFFFFF">工程图片</font></td>
-        <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_gctp" id="a_gctp" target="result">查看工程图片</a></td>
+        <td bgcolor="#336699"><font color="#FFFFFF">相关图片</font></td>
+        <td bgcolor="#FFFFFF" align="left"><a href="#" name="a_gctp" id="a_gctp" target="result">查看相关图片</a>
+        <% if("true".equals(session.getAttribute("isAdmin").toString())){ %><a href="#" name="a_gctp1" id="a_gctp1" target="result">图片维护</a><%} %>
+        </td>
       </tr>
     </table>
   </div>  
