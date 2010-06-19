@@ -66,10 +66,10 @@ String date_end = request.getAttribute("date_end").toString();
 			url = "detail.do?action=xq&id=" + map.get("dncno") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
 			imageurl = "media.do?action=image_small&tablename=TB_STDNC_M&media_id=" + map.get("ZLBM");
 		}else if("yxzt".equals(radiob_gclb)){//运行状态
-			url = "detail.do?action=yxzt&id=" + map.get("PJRNO") + "&tbdw=" + map.get("WTDPCD");
+			url = "detail.do?action=yxzt&id=" + map.get("PJRNO") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
 			imageurl = "media.do?action=image_small&tablename=TB_PJR_M&media_id=" + map.get("ZLBM");
 		}else if("zq".equals(radiob_gclb)){//灾情
-			url = "detail.do?action=zq&id=" + map.get("RPJINCD") + "curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
+			url = "detail.do?action=zq&id=" + map.get("RPJINCD") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
 			imageurl = "media.do?action=image_small&tablename=TB_SD_M&media_id=" + map.get("ZLBM");
 		}else if("fxxd".equals(radiob_gclb)){//防汛行动
 			url = "detail.do?action=fxxd&id=" + map.get("RPJINCD") + "&curent_pagecount=" + pageList.getPageInfo().getCurPage() + "&tbdw=" + map.get("WTDPCD");
