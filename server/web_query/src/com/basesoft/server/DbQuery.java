@@ -56,7 +56,7 @@ public class DbQuery {
 	public boolean beginCopyData() {
 		boolean executeResult = true;
 		System.out.println("要处理的文件是：" + strInputMdbFileName);
-		String sURL = "jdbc:odbc:MS Access Database;DBQ=" + Constants.ROOTPATH+"/upload/"+strInputMdbFileName;
+		String sURL = "jdbc:odbc:driver={MicroSoft Access Driver (*.mdb)};DBQ=" + Constants.ROOTPATH+"\\upload\\"+strInputMdbFileName;
 		Connection cnSource, cnTarget;
 		Properties p = new Properties();
 		try {
