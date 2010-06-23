@@ -97,7 +97,7 @@ function toBack(){
 	</tr>
 	<tr height="25" >
 		<td nowrap bgcolor="#FFFFFF" colspan="5" align="center">
-		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/pic.jsp?temp= <%=Math.random()%>&tablename=TB_QT_M&pkvalue=<%=RPJINCD %>&pkname=RPJINCD" height="110" width="100%">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/pic.jsp?temp= <%=Math.random()%>&tablename=TB_QT_M&pkvalue=<%=RPJINCD %>&pkname=RPJINCD&from=edit" height="110" width="100%">
 		</iframe>	
 		</td> 
 	</tr>

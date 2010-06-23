@@ -85,7 +85,7 @@ public class SubTempBean {
 		TBNO = tBNO;
 	}
 
-	public static SubTempBean getSubTempBeanFromRs(ResultSet rs) {
+	public static SubTempBean getSubTempBeanFromRs(ResultSet rs,int type) {
 		SubTempBean bean = new SubTempBean();
 		try {
 			bean.setZLBM(String.valueOf(rs.getInt("ZLBM")));
@@ -94,7 +94,8 @@ public class SubTempBean {
 			bean.setTITLE(rs.getString("TITLE"));
 			bean.setWJGS(rs.getString("WJGS"));
 			bean.setNRMS(rs.getString("NRMS"));
-			bean.setLXZP(rs.getString("LXZP"));
+			if(type==1)
+				bean.setLXZP(rs.getString("LXZP"));
 			bean.setTBNO(rs.getString("TBNO"));
 			//bean.setTEMPNAME(rs.getString("TEMPNAME"));
 		} catch (Exception ex) {

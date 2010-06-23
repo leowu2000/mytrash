@@ -240,7 +240,7 @@ function updateXQFLFRAME(obj){
 	</tr>
 	<tr height="25" >
 		<td nowrap bgcolor="#FFFFFF" colspan="6" align="center">
-		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/pic.jsp?temp= <%=Math.random()%>&tablename=TB_STDNC_M&pkvalue=<%=stdncbean.getDNCNO() %>&pkname=DNCNO" height="110" width="100%">
+		<iframe id="ZPFRAME" frameborder="0" scrolling="yes" marginwidth="0" marginheight="0"  src="/common/pic.jsp?temp= <%=Math.random()%>&tablename=TB_STDNC_M&pkvalue=<%=stdncbean.getDNCNO() %>&pkname=DNCNO&from=edit" height="110" width="100%">
 		</iframe>	
 		</td> 
 	</tr>

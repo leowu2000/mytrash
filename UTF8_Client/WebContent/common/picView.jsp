@@ -20,16 +20,17 @@
     String randomNumber = request.getParameter("temp");
     String tablename = request.getParameter("tablename");
     String pkname = request.getParameter("pkname");
-    List<SubTempBean> sublist = BuinessDao.getMediaBeanList(relPath,pkvalue,tablename,pkname);
+    List<SubTempBean> sublist = BuinessDao.getMediaBeanList(relPath,pkvalue,tablename,pkname,0);
     Connection conn = ConnectionPool.getConnection(relPath);
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery("select ZLBM,DTCDT,TITLE,WJGS,LXZP,NRMS from "+tablename+" where "+pkname+"="+pkvalue);
 	//RandomAccessFileExample.delAllFile(picpath+"\\\\common\\\\pic");
 	
 	Map<String,String> map=new HashMap<String,String>();
-	java.io.InputStream in = null;
-	OutputStream fos = null;
+	
 	while (rs.next()) {
+		java.io.InputStream in = null;
+		OutputStream fos = null;
 		long current = System.currentTimeMillis();
 		String wjgs = rs.getString("WJGS");
 		String zlcode =String.valueOf(rs.getInt("ZLBM"));
@@ -48,13 +49,14 @@
 			}
 		//}
 		map.put(zlcode,picname);
+		if(fos!=null){
+			fos.flush();
+			fos.close();
+		}
+		if(in!=null)
+			in.close();
 	}
-	if(fos!=null){
-		fos.flush();
-		fos.close();
-	}
-	if(in!=null)
-		in.close();
+	
 	if(rs!=null)
 		rs.close();
 	conn.close();
