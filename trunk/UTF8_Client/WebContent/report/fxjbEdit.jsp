@@ -14,7 +14,7 @@
     FXJBBean bean = BuinessDao.findFxjbcByID(path,RPJINCD);
     SubTempBean detailBean =null;
     RandomAccessFileTool.delAllFile(path+"\\\\common\\\\pic");
-    List<SubTempBean> sublist = BuinessDao.getMediaBeanList(path,bean.getRPJINCD(),"TB_FXJB_M","RPJINCD");
+    List<SubTempBean> sublist = BuinessDao.getMediaBeanList(path,bean.getRPJINCD(),"TB_FXJB_M","RPJINCD",0);
     if(sublist!=null && sublist.size()>0)
     	detailBean = (SubTempBean)sublist.get(0);
     String content = bean.getACTICO();

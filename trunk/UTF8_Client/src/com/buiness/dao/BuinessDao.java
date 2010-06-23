@@ -846,7 +846,7 @@ public class BuinessDao {
 					+ parentno + " and tbno='" + tbid + "'";
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while (rs.next()) {
-				SubTempBean bean = SubTempBean.getSubTempBeanFromRs(rs);
+				SubTempBean bean = SubTempBean.getSubTempBeanFromRs(rs,1);
 				beanList.add(bean);
 			}
 		} catch (Exception ex) {
@@ -1148,7 +1148,7 @@ public class BuinessDao {
 	}
 
 	public static List<SubTempBean> getMediaBeanList(String path, String id,
-			String table, String pkname) {
+			String table, String pkname,int type) {
 		Connection conn = null;
 		List<SubTempBean> resultList = new ArrayList<SubTempBean>();
 		try {
@@ -1159,7 +1159,7 @@ public class BuinessDao {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sSQL);
 			while (rs.next()) {
-				SubTempBean bean = SubTempBean.getSubTempBeanFromRs(rs);
+				SubTempBean bean = SubTempBean.getSubTempBeanFromRs(rs,type);
 				resultList.add(bean);
 			}
 		} catch (Exception ex) {
@@ -1187,7 +1187,10 @@ public class BuinessDao {
 			
 			if (rs.next()) {
 				bean = new SubTempBean();
-				bean = SubTempBean.getSubTempBeanFromRs(rs);
+				if("TB_SUB_TEMP".trim().equals(table.toUpperCase()))
+					bean = SubTempBean.getSubTempBeanFromRs(rs,1);
+				else
+					bean = SubTempBean.getSubTempBeanFromRs(rs,0);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

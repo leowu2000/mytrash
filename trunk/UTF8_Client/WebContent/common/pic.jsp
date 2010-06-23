@@ -16,18 +16,24 @@
    // response.setHeader("Pragma","No-cache"); 
    // response.setHeader("Cache-Control","no-cache"); 
    // response.setDateHeader("Expires", 0); 
+	String from = request.getParameter("from");
     String pkvalue = request.getParameter("pkvalue");
     String tablename = request.getParameter("tablename");
     String pkname = request.getParameter("pkname");
-    List<SubTempBean> sublist = BuinessDao.getMediaBeanList(relPath,pkvalue,tablename,pkname);
+    List<SubTempBean> sublist = null;
+    if("edit".trim().equals(from))
+    	sublist = BuinessDao.getMediaBeanList(relPath,pkvalue,tablename,pkname,0);
+    else 
+    	sublist = BuinessDao.getMediaBeanList(relPath,pkvalue,tablename,pkname,1);
     Connection conn = ConnectionPool.getConnection(relPath);
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery("select ZLBM,DTCDT,TITLE,WJGS,LXZP,NRMS from "+tablename+" where "+pkname+"="+pkvalue);
 	
 	Map<String,String> map=new HashMap<String,String>();
-	java.io.InputStream in = null;
-	OutputStream fos = null;
+	
 	while (rs.next()) {
+		java.io.InputStream in = null;
+		OutputStream fos = null;
 		long current = System.currentTimeMillis();
 		String wjgs = rs.getString("WJGS");
 		String zlcode =String.valueOf(rs.getInt("ZLBM"));
@@ -46,13 +52,15 @@
 			}
 		}
 		map.put(zlcode,picname);
+		if(fos!=null){
+			fos.flush();
+			fos.close();
+		}
+		if(in!=null){
+			in.close();
+		}
 	}
-	if(fos!=null){
-		fos.flush();
-		fos.close();
-	}
-	if(in!=null)
-		in.close();
+	
 	if(rs!=null)
 		rs.close();
 	conn.close();
