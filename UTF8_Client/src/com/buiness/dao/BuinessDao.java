@@ -29,6 +29,7 @@ import com.buiness.form.SubTempBean;
 import com.core.ConnectionPool;
 import com.core.UUIdFactory;
 import com.upload.UploadBean;
+import com.util.ImageUtils;
 
 public class BuinessDao {
 
@@ -918,7 +919,9 @@ public class BuinessDao {
 				String subSql = "INSERT INTO " + tbid + " (ZLBM," + parentName
 						+ ",DTCDT,TITLE,WJGS,NRMS,LXZP) values(?,?,?,?,?,?,?)";
 				PreparedStatement pstmt = conn.prepareStatement(subSql);
-				File f = new File(bean.getLXZP());
+				ImageUtils img = new ImageUtils(bean.getLXZP());
+				File f = img.resize(1280, 800);
+//				File f = new File(bean.getLXZP());
 				FileInputStream fis = new FileInputStream(f);
 				pstmt.setInt(1, UUIdFactory.getMaxId(path, tbid, "ZLBM"));
 				pstmt.setString(2, bean.getRARENTNO());
@@ -929,6 +932,9 @@ public class BuinessDao {
 				pstmt.setBinaryStream(7, fis, (int) f.length());
 				pstmt.executeUpdate();
 				pstmt.close();
+				fis.close();
+				if(f.exists())
+					f.delete();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -966,7 +972,9 @@ public class BuinessDao {
 				String subSql = "INSERT INTO " + tbid + " (ZLBM," + parentName
 						+ ",DTCDT,TITLE,WJGS,NRMS,LXZP) values(?,?,?,?,?,?,?)";
 				PreparedStatement pstmt = conn.prepareStatement(subSql);
-				File f = new File(bean.getLXZP());
+//				File f = new File(bean.getLXZP());
+				ImageUtils img = new ImageUtils(bean.getLXZP());
+				File f = img.resize(1280, 800);
 				FileInputStream fis = new FileInputStream(f);
 				pstmt.setInt(1, UUIdFactory.getMaxId(path, tbid, "ZLBM"));
 				pstmt.setString(2, bean.getRARENTNO());
@@ -977,6 +985,9 @@ public class BuinessDao {
 				pstmt.setBinaryStream(7, fis, (int) f.length());
 				pstmt.executeUpdate();
 				pstmt.close();
+				fis.close();
+				if(f.exists())
+					f.delete();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
