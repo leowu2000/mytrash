@@ -1,6 +1,6 @@
 ﻿/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -42,7 +42,7 @@ FCKConfig.StartupShowBlocks = false ;
 FCKConfig.Debug = false ;
 FCKConfig.AllowQueryStringDebug = true ;
 
-FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/office2003/' ;
+FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/default/' ;
 FCKConfig.SkinEditorCSS = '' ;	// FCKConfig.SkinPath + "|<minified css>" ;
 FCKConfig.SkinDialogCSS = '' ;	// FCKConfig.SkinPath + "|<minified css>" ;
 
@@ -76,7 +76,7 @@ FCKConfig.FormatSource		= true ;
 FCKConfig.FormatOutput		= true ;
 FCKConfig.FormatIndentator	= '    ' ;
 
-FCKConfig.EMailProtection = 'encode' ; // none | encode | function
+FCKConfig.EMailProtection = 'none' ; // none | encode | function
 FCKConfig.EMailProtectionFunction = 'mt(NAME,DOMAIN,SUBJECT,BODY)' ;
 
 FCKConfig.StartupFocus	= false ;
@@ -116,20 +116,21 @@ FCKConfig.ToolbarSets["Default"] = [
 ] ;
 
 FCKConfig.ToolbarSets["Basic"] = [
-	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','About']
-] ;
+  	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','About']
+  ] ;
 FCKConfig.ToolbarSets["NowUse"] = [
-   	['Preview'],
-   	['Cut','Copy','Paste','PasteText','PasteWord','-','Print'],
-   	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
-   	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
-   	['OrderedList','UnorderedList','-','Outdent','Indent'],
-   	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-   	'/',
-   	['Style','FontFormat','FontName','FontSize'],
-   	['TextColor','BGColor'],
-   	['FitWindow']
-] ;
+ 	['Preview'],
+ 	['Cut','Copy','Paste','PasteText','PasteWord','-','Print'],
+ 	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+ 	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
+ 	['OrderedList','UnorderedList','-','Outdent','Indent'],
+ 	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+ 	'/',
+ 	['Style','FontFormat','FontName','FontSize'],
+ 	['TextColor','BGColor'],
+ 	['FitWindow']
+  ] ;
+
 FCKConfig.EnterMode = 'p' ;			// p | div | br
 FCKConfig.ShiftEnterMode = 'br' ;	// p | div | br
 
@@ -171,7 +172,7 @@ FCKConfig.FontSizes		= 'smaller;larger;xx-small;x-small;small;medium;large;x-lar
 FCKConfig.StylesXmlPath		= FCKConfig.EditorPath + 'fckstyles.xml' ;
 FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
 
-FCKConfig.SpellChecker			= 'ieSpell' ;	// 'ieSpell' | 'SpellerPages'
+FCKConfig.SpellChecker			= 'WSC' ;	// 'WSC' | 'SCAYT' | 'SpellerPages' | 'ieSpell'
 FCKConfig.IeSpellDownloadUrl	= 'http://www.iespell.com/download.php' ;
 FCKConfig.SpellerPagesServerScript = 'server-scripts/spellchecker.php' ;	// Available extension: .php .cfm .pl
 FCKConfig.FirefoxSpellChecker	= false ;
