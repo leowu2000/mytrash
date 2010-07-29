@@ -42,6 +42,8 @@ function changeLx(){
 }
 
 function changeGc(){
+	var sxbm = document.getElementById('sx').value;
+	var lxbm = document.getElementById('lx').value;
 	var gclj = document.getElementById('gc').value;
 
 	if(window.XMLHttpRequest){ //Mozilla 
@@ -49,7 +51,7 @@ function changeGc(){
     }else if(window.ActiveXObject){
  	  var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
     }
-    xmlHttpReq.open("GET", "/search.do?action=search_gcxx_ljajax&gclj=" + gclj, false);
+    xmlHttpReq.open("GET", "/search.do?action=search_gcxx_ljajax&sxbm=" + sxbm + "&lxbm=" + lxbm + "&gclj=" + gclj, false);
     xmlHttpReq.send();
     if(xmlHttpReq.responseText!=''){
         var gclj = xmlHttpReq.responseText.split(';');
@@ -98,7 +100,7 @@ function changeGc(){
       </tr>
       <tr align="center">
         <td bgcolor="#FFFFFF" align="center" colspan="6">
-        	<a href="#" name="a_gcjj" id="a_gcjj" target="result"><font style="font-size:14px">查看工程简介</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#" name="a_gcjj" id="a_gcjj" target="result"><font style="font-size:14px">工程简介</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         	<a href="#" name="a_fxya" id="a_fxya" target="result"><font style="font-size:14px">查看基本特性</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" name="a_gctp" id="a_gctp" target="result"><font style="font-size:14px">查看相关图片</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <% if("true".equals(session.getAttribute("isAdmin").toString())){ %>

@@ -298,7 +298,7 @@ public class SearchController extends CommonController {
 			String lxbm = ServletRequestUtils.getStringParameter(request, "lxbm", "1");
 			String gclj = ServletRequestUtils.getStringParameter(request, "gclj", "");
 			
-			String gclj2 = searchDAO.getGcxxLj2(gclj);
+			String gclj2 = searchDAO.getGcxxLj2(sxbm, lxbm, gclj);
 			
 			StringBuffer sb = new StringBuffer();
 			sb.append(gclj)

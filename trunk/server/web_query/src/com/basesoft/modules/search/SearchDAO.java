@@ -1060,10 +1060,10 @@ public class SearchDAO extends CommonDAO{
 	 * @param gclj 工程链接
 	 * @return
 	 */
-	public String getGcxxLj2(String gclj){
+	public String getGcxxLj2(String sxbm, String lxbm, String gclj){
 		String gclj2 = "";
 		
-		List list = jdbcTemplate.queryForList("select GCLJ2 from TB_GCLJ where GCLJ='" + gclj + "'");
+		List list = jdbcTemplate.queryForList("select GCLJ2 from TB_GCLJ where SXBM='" + sxbm + "' and LXBM='" + lxbm + "' and GCLJ='" + gclj + "'");
 		if(list.size()>0){
 			Map map = (Map)list.get(0);
 			gclj2 = map.get("GCLJ2").toString();
