@@ -316,7 +316,16 @@ public class SearchController extends CommonController {
 			String sxmc = ServletRequestUtils.getStringParameter(request, "sxmc", "1");
 			String lxmc = ServletRequestUtils.getStringParameter(request, "lxmc", "1");
 			String skmc = ServletRequestUtils.getStringParameter(request, "skmc", "");
-			
+			/**
+			 *  2010-07-30
+			 * add by weiiew.zhang
+			 * 解决中文参数乱码问题
+			 */
+			sxmc = java.net.URLDecoder.decode(sxmc,"utf-8");
+			skmc = java.net.URLDecoder.decode(skmc,"utf-8");
+			/**
+			 * add by weiiew.zhang end
+			 */
 			Map mapGcxx = searchDAO.getGcxx(sxmc, lxmc, skmc);
 			
 			StringBuffer sb = new StringBuffer();
