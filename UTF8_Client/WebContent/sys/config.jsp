@@ -2,6 +2,7 @@
 <%@ page import="com.util.*" %>
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
+<%@page import="com.util.StringUtils" %>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
@@ -12,7 +13,12 @@
     String cntcd = bean.getLYSX_LY()+"-"+bean.getLYSX_SX()+"-"+bean.getLYSX_YJZL()+"-"+bean.getLYSX_EJZL();
 	String msg = (String)request.getAttribute("msg");
 	msg=msg==null?"":msg;
-    
+
+	String rootPath = request.getSession().getServletContext().getRealPath("/"); //应用程序根目录
+	String iniPath = rootPath + "/WEB-INF/system.ini"; //配置文件路径
+
+	String ip = StringUtils.getProperty(iniPath, "IP_SH"); //地区系统IP地址
+	ip = ip.substring(0,ip.lastIndexOf(":"));
 %> 
 <html>
 <head>
@@ -137,7 +143,7 @@ function pre_submit(){
 </script>
 <body  onload="loadSelect()">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">参  数  设  置 </span></td></tr>
+	<tr><td align="center" ><span  class="style4">参  数  设  置  </span></td></tr>
 </table>
 <form name="frm" action="/buiness.do" method="post">
 <input type="hidden" name="actionType" value="parames"/>
@@ -192,9 +198,9 @@ function pre_submit(){
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title">服务器名称</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_NAME" value="<%=bean.getSERVER_NAME()==null?"":bean.getSERVER_NAME() %>"/><font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_NAME" value="<%=bean.getSERVER_NAME()==""?"毕节行署服务器":bean.getSERVER_NAME() %>"/><font color="red">*</font></td>
 		<td nowrap class="title">服务器地址</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_IP" value="<%=bean.getSERVER_IP()==null?"":bean.getSERVER_IP() %>"/><font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_IP" value="<%=bean.getSERVER_IP()==""?ip:bean.getSERVER_IP() %>"/><font color="red">*</font></td>
 		<td nowrap class="title">服务器端口</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_PORT" value="<%=bean.getSERVER_PORT()==""?"5001":bean.getSERVER_PORT() %>"/><font color="red">*</font></td>
 	</tr>

@@ -54,6 +54,9 @@
 body{background-color: #F5F5F5;}
 </style>
 <script language="JAVASCRIPT">
+function showdetailGclb(obj){
+	
+}
 function showDetail(id,tbname){
 	var src;
 	if("TB_PJRCN"==tbname){//ÔËÐÐ

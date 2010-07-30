@@ -26,12 +26,16 @@
 	String sx_s = (String)request.getAttribute("sx_s");
 	String yjzl = (String)request.getAttribute("yjzl_s");
 	String ejzl = (String)request.getAttribute("ejzl_s");
+	String gclb_s_d = (String)request.getAttribute("gclb_s_d");
 	
 	String xzqh = configBean.getXZQH_X();
 	gcmc_s=gcmc_s==null?"":gcmc_s;
+	
 	gclb_s=gclb_s==null?"":gclb_s;
 	ly_s=ly_s==null?"":ly_s;sx_s=sx_s==null?"":sx_s;
 	yjzl=yjzl==null?"":yjzl;ejzl=ejzl==null?"":ejzl;
+	gclb_s_d=gclb_s_d==null?"":gclb_s_d;
+	
 	iswhere=iswhere==null?"":iswhere;
 	List<PrjBean> records = BuinessDao.getAllList(path,iswhere,xzqh); 
 	String pageStr = request.getParameter("page"); 
@@ -54,7 +58,13 @@ function viewThePrg(id){
 	document.frm.actionType.value="view";
 	document.frm.submit();
 }
-
+function showdetailGclb(obj){
+	if(obj.value=="B"){
+		GCLB_DETAIL.style.display="inline";	
+	}else{
+		GCLB_DETAIL.style.display="none";	
+	}
+}
 function toEdit(){
 	var result="";
 	var str = document.forms[0].RECORDID;
@@ -147,11 +157,24 @@ function todeletePj(){
 		<td bgcolor="#ECEDED" ><input type="text" name="gcmc_s" value="<%=gcmc_s %>"/> </td>
 		<td nowrap class="title">工程类别:</td>
 		<td bgcolor="#ECEDED"> <DIV id="GCLB_S"></DIV></td>
-		<td nowrap class="title">流域</td>
-		<td bgcolor="#FFFFFF"><DIV id="LY_S"></DIV></td>
+		<td nowrap class="title">水库类型</td>
+		<td bgcolor="#FFFFFF" colspan="3">
+		
+			<DIV id="GCLB_DETAIL" <%if("".trim().equals(gclb_s_d)){%>style="display:none"<%} %>>
+				<select name="sktype">
+					<option value="" <%if("".trim().equals(gclb_s_d)) {%>selected<%} %>>--</option>
+					<option value="大型" <%if("大型".trim().equals(gclb_s_d)) {%>selected<%} %>>大型</option>
+					<option value="中型" <%if("中型".trim().equals(gclb_s_d)) {%>selected<%} %>>中型</option>
+					<option value="小(1)型" <%if("小(1)型".trim().equals(gclb_s_d)) {%>selected<%} %>>小(1)型</option>
+					<option value="小(2)型" <%if("小(2)型".trim().equals(gclb_s_d)) {%>selected<%} %>>小(2)型</option>
+				</select>
+			</DIV>
+		</td>
 		<td bgcolor="#FFFFFF" rowspan="2" align="center"><input type="button" value="查  询" onclick="javascript:SearchSubmit()"></input></td>
 	</tr>
 	<tr>
+		<td nowrap class="title">流域</td>
+		<td bgcolor="#FFFFFF"><DIV id="LY_S"></DIV></td>
 		<td nowrap class="title">水系</td>
 		<td bgcolor="#FFFFFF"><DIV id="SX_S"></DIV></td>
 		<td nowrap class="title">一级支流</td>

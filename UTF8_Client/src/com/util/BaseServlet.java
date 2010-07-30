@@ -36,6 +36,7 @@ public class BaseServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//cntcd,PROVNM
+		String pjno = request.getParameter("pjno");
 		String from = request.getParameter("from");//用于区分请求下拉框的来源
 		String path = request.getSession().getServletContext().getRealPath("/");
 		String type = request.getParameter("type");
@@ -74,8 +75,8 @@ public class BaseServlet extends HttpServlet{
 				result_head_s="<select name='selects' disabled>";
 				result_head_x="<select name='selectx' disabled>";
 				
-				result_head_lysx1="<select name='selectlysx1' disabled>";
-				result_head_lysx2="<select name='selectlysx2' disabled>";
+				result_head_lysx1="<select name='selectlysx1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"1"+"\",this)'>";
+				result_head_lysx2="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'>";
 				result_head_zl1="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'>";
 				result_head_zl2="<select name='selectzl2'>";
 			}
@@ -98,7 +99,7 @@ public class BaseServlet extends HttpServlet{
 			String result_detail_x="</select>";
 			
 			String result_gcgl="";
-			String result_head_gcgl="<select name='selectgcgl'>";
+			String result_head_gcgl="<select name='selectgcgl' onchange='javascript:showdetailGclb(this)'><option value=''>--</option>";
 			String result_detail_gcgl="</select>";
 			String result_lysx1="";
 			String result_detail_lysx1="</select>";
@@ -118,7 +119,7 @@ public class BaseServlet extends HttpServlet{
 			String LY_two = "";
 			String LY_zone = "";
 			String LY_ztwo = "";
-			
+			//请求工程类别信息
 			List<GclbBean> gcglList = BaseUtil.getGclbList(path);
 			if("config".trim().equals(from)){
 				shbm = xzqh[0].trim();
@@ -131,16 +132,16 @@ public class BaseServlet extends HttpServlet{
 				LY_ztwo = hlxx[3].trim();
 				
 			}
-			else if("add".trim().equals(from)){
-				shbm = cfbean.getXZQH_S();
-				sbm = cfbean.getXZQH_SI();
-				xianbm = cfbean.getXZQH_X();
-				
-				LY_one = cfbean.getLYSX_LY();
-				LY_two = cfbean.getLYSX_SX();
-				LY_zone = cfbean.getLYSX_YJZL();
-				LY_ztwo = cfbean.getLYSX_EJZL();
-			}
+//			else if("add".trim().equals(from)){
+//				shbm = cfbean.getXZQH_S();
+//				sbm = cfbean.getXZQH_SI();
+//				xianbm = cfbean.getXZQH_X();
+//				
+//				LY_one = hlxx[0].trim();
+//				LY_two = hlxx[1].trim();
+//				LY_zone = hlxx[2].trim();
+//				LY_ztwo = hlxx[3].trim();
+//			}
 			else{
 				shbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[0]+"'");
 				sbm = BuinessDao.idToNameChange(path,"TB_CNT", "CNTCD",  "PROVNM='"+xzqh[1]+"'");
@@ -148,11 +149,13 @@ public class BaseServlet extends HttpServlet{
 				
 				LY_one = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[0]+"'");
 				LY_two = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[1]+"'");
-				LY_zone = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[2]+"'");
-				LY_ztwo = BuinessDao.idToNameChange(path,"tb_lysx1", "CTCD",  "CTNM='"+hlxx[3]+"'");
+				LY_zone = BuinessDao.idToNameChange(path,"tb_lysx", "CTCD",  "CTNM='"+hlxx[2]+"'");
+				LY_ztwo = BuinessDao.idToNameChange(path,"tb_lysx", "CTCD",  "CTNM='"+hlxx[3]+"'");
 			}
 			if(!"config".trim().equals(from)){
-				String gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
+				String gclb = "";
+				if(val != null && val.length()>0)
+					gclb = BuinessDao.idToNameChange(path,"TB_GCLB", "gcfldm",  "gcfldm=Mid('"+val+"',1,1)");
 				if(gcglList !=null && gcglList.size()>0){
 					for(int i=0;i<gcglList.size();i++){
 						GclbBean bean = (GclbBean)gcglList.get(i);
@@ -196,17 +199,21 @@ public class BaseServlet extends HttpServlet{
 						result_x +="<option value='"+bean.getCntcd()+"'>"+bean.getProvnm().trim()+"</option>";
 				}
 			}
-			
+			//请求流域信息
 			List<LysxBean> lysl1List = BaseUtil.getLysxList_one(path);
 			if(lysl1List !=null && lysl1List.size()>0){
+//				System.out.println(lysl1List.size());
 				for(int i=0;i<lysl1List.size();i++){
 					LysxBean bean = (LysxBean)lysl1List.get(i);
+//					System.out.println(bean.getCTCD()+bean.getCTNM());
 					if(LY_one.trim().equals(bean.getCTCD().trim()))
 						result_lysx1 +="<option value='"+bean.getCTCD()+"' selected=true>"+bean.getCTNM().trim()+"</option>";
 					else
 						result_lysx1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
+//				System.out.println(result_lysx1);
 			}
+			//请求水系信息
 			if("".trim().equals(LY_one))
 				LY_one = ((LysxBean)lysl1List.get(0)).getCTCD();
 			List<LysxBean> lysl2List = BaseUtil.getLysxList_two(path,LY_one);
@@ -218,7 +225,9 @@ public class BaseServlet extends HttpServlet{
 					else
 						result_lysx2 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
+//				System.out.println(result_lysx2);
 			}
+			//请求一级支流
 			if("".trim().equals(LY_two))
 				LY_two = ((LysxBean)lysl2List.get(0)).getCTCD();
 			List<LysxBean> zl1List = BaseUtil.getZliuList_one(path, LY_two);
@@ -231,6 +240,7 @@ public class BaseServlet extends HttpServlet{
 						result_zl1 +="<option value='"+bean.getCTCD()+"'>"+bean.getCTNM().trim()+"</option>";
 				}
 			}
+			//请求二级支流
 			if("".trim().equals(LY_zone))
 				LY_zone = ((LysxBean)zl1List.get(0)).getCTCD();
 			List<LysxBean> zl2List = BaseUtil.getZliuList_two(path, LY_zone);
@@ -252,6 +262,7 @@ public class BaseServlet extends HttpServlet{
 			result_zl1 = result_head_zl1+result_zl1+result_detail_zl1;
 			result_zl2 = result_head_zl2+result_zl2+result_detail_zl2;
 			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
+//			System.out.println(result);
 		}
 		if("viewload".trim().equals(type)){//查看工程信息
 			String result_z=xzqh[0];
@@ -264,8 +275,11 @@ public class BaseServlet extends HttpServlet{
 			String result_lysx2=hlxx[1];
 			String result_zl1=hlxx[2];
 			String result_zl2=hlxx[3];
-
-			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2;
+			String sktype = "";
+			if("水库".equals(result_gcgl.trim()))
+				sktype = BuinessDao.idToNameChange(path, "TB_PJ", "TYPE", "PJNO="+pjno);
+			
+			result=result_z+";"+result_s+";"+result_x+";"+result_gcgl+";"+result_lysx1+";"+result_lysx2+";"+result_zl1+";"+result_zl2+";"+sktype;
 		
 		}
 		if("change".trim().equals(type)){//处理下拉框onchange事件请求
@@ -398,6 +412,7 @@ public class BaseServlet extends HttpServlet{
 			String sx = request.getParameter("sx");
 			String yjzl = request.getParameter("yjzl");
 			String ejzl = request.getParameter("ejzl");
+//			String lb_d = request.getParameter("lb_d");
 			String result_detail="</select>";
 			String result_gcmc="";
 			String result_gclb="";
@@ -406,10 +421,10 @@ public class BaseServlet extends HttpServlet{
 			String result_sx="";
 			String result_yjzl="";
 			String result_ejzl="";
+//			String result_lb_d="";
 			String result_head_gcmc="<select name='gcmc_s'><option value=''>--</option>";
-			String result_head_gclb="<select name='gclb_s'><option value=''>--</option>";
+			String result_head_gclb="<select name='gclb_s' onchange='javascript:showdetailGclb(this)'><option value=''>--</option>";
 			String result_head_xqfl="<select name='xqfl_s'><option value=''>--</option>";
-
 			String result_head_ly="<select name='selectlysx1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"1"+"\",this)'><option value=''>--</option>";
 			String result_head_sx="<select name='selectlysx2' onchange='javascript:changeValue("+"\"ly"+"\","+"\"2"+"\",this)'><option value=''>--</option>";
 			String result_head_yjzl="<select name='selectzl1' onchange='javascript:changeValue("+"\"ly"+"\","+"\"3"+"\",this)'><option value=''>--</option>";
@@ -534,6 +549,27 @@ public class BaseServlet extends HttpServlet{
 				response.setContentType("text ml; charset=GBK");
 				response.getWriter().write(checkResult);
 			}
+		}
+		if("searchGclbdetail".trim().equals(type)){
+			String sktype = BuinessDao.idToNameChange(path, "TB_PJ", "TYPE", "PJNO="+pjno);
+			result="<select name='sktype'><option value='' >--</option>";
+			if("大型".equals(sktype))
+				result+="<option value='大型' selected>大型</option>";
+			else
+				result+="<option value='大型'>大型</option>";
+			if("中型".equals(sktype))
+				result+="<option value='中型' selected>中型</option>";
+			else
+				result+="<option value='中型'>中型</option>";
+			if("小(1)型".equals(sktype))
+				result+="<option value='小(1)型' selected>小(1)型</option>";
+			else
+				result+="<option value='小(1)型'>小(1)型</option>";
+			if("小(2)型".equals(sktype))
+				result+="<option value='小(2)型' selected>小(2)型</option>";
+			else
+				result+="<option value='小(2)型'>小(2)型</option>";
+			result+="</select>";
 		}
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");

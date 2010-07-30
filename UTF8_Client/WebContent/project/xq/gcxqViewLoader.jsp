@@ -57,7 +57,7 @@ Ext.onReady(function() {
         closable:false
     }).show();
 	Ext.getCmp('myTPanel').add({
-        title: '抢险资源配备',
+        title: '抢险投入',
         iconCls: 'tabs',
         html: '<%=bean.getRDERESCN().replaceAll("\r\n","<br/>")%>',
         closable:false

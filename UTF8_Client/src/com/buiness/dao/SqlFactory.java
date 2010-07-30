@@ -396,7 +396,7 @@ public class SqlFactory {
 			String gclb_s,String xqmc_s,
 			String selectlysx1,String selectlysx2,String selectzl1,
 			String selectzl2,String jcsj_s,
-			String jcsj_e,String type){
+			String jcsj_e,String type,String sktype){
 		String sSQL = "";
 		if("upload".trim().equals(type)){
 			if(!"".trim().equals(gcmc_s)){
@@ -499,6 +499,11 @@ public class SqlFactory {
 					sSQL += " Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"'";
 				else
 					sSQL += " and Mid(PJNMCD,2,1)='"+selectlysx1.substring(1,2)+"'";
+			}else if(!"".trim().equals(sktype.trim())){
+				if("".trim().equals(sSQL))
+					sSQL += " TYPE='"+sktype.trim()+"'";
+				else
+					sSQL += " and TYPE='"+sktype.trim()+"'";
 			}
 		}
 		if("gcxq".trim().equals(type) || "yxzt".trim().equals(type)){

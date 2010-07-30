@@ -157,6 +157,9 @@ function updateXQFLFRAME(obj){
 <input type="hidden" name="PicServerUrl" value=""/>
 <input type="hidden" name="toviewpic" value="1"/>
 <input type="hidden" name="WTDPCD" value="<%=stdncbean.getWTDPCD() %>"></input>
+<input type="hidden" size="10" name="PLAPN" value="0" />
+<input type="hidden" size="10" name="PLIPN" value="0" />
+<input type="hidden" size="10" name="TPN" value="0"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title_center" colspan="6">
@@ -196,6 +199,7 @@ function updateXQFLFRAME(obj){
 		<td nowrap class="title">出险部位</td>
 		<td bgcolor="#FFFFFF" ><input type="text" name="DAGLO" value="<%=stdncbean.getDAGLO() %>"/></td>
 	</tr>
+	<!-- 
 	<tr height="25" >
 	<td nowrap class="title">解放军投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="PLAPN" value="<%=stdncbean.getPLAPN() %>" />人<font color="red">*</font></td>
@@ -204,6 +208,7 @@ function updateXQFLFRAME(obj){
 		<td nowrap class="title">群众投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="TPN" value="<%=stdncbean.getTPN() %>"/>人<font color="red">*</font></td>
 	</tr>
+	 -->
 	<tr height="25" >
 		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="<%=stdncbean.getRZ() %>" />米<font color="red">*</font></td>

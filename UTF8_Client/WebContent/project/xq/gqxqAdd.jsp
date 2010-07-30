@@ -121,6 +121,9 @@ function updateXQFLFRAME(obj){
 <input type="hidden" name="DTCDT" value="<%=UtilDateTime.nowDateString()%>"/>
 <input type="hidden" name="tabname" value="TB_STDNC_M"></input>
 <input type="hidden" name="upFileValues" value=""/>
+<input type="hidden" size="10" name="PLAPN" value="0" />
+<input type="hidden" size="10" name="PLIPN" value="0" />
+<input type="hidden" size="10" name="TPN" value="0"/>
 <table border="0" align="center" width="98%" cellspacing="1" bgcolor="#CCCCCC">
 	<tr height="25" >
 		<td nowrap align="center" class="title_center" colspan="6">
@@ -180,6 +183,7 @@ function updateXQFLFRAME(obj){
 		<td nowrap class="title">出险时间</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="DAGTM" value="<%=UtilDateTime.nowDateString() %>" onClick="WdatePicker({skin:'blue'})" readonly /></td>
 	</tr>
+	<!-- 
 	<tr height="25" >
 	<td nowrap class="title">解放军投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" size="10" name="PLAPN" value="0" />人<font color="red">*</font></td>
@@ -188,6 +192,7 @@ function updateXQFLFRAME(obj){
 		<td nowrap class="title">群众投入</td>
 		<td bgcolor="#FFFFFF"><input type="text" size="10" name="TPN" value="0"/>人<font color="red">*</font></td>
 	</tr>
+	 -->
 	<tr height="25" >
 		<td nowrap class="title" >当前水位</td>
 		<td bgcolor="#FFFFFF" colspan="4"><input type="text" name="RZ" value="0" />米<font color="red">*</font></td>

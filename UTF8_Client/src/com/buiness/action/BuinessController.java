@@ -108,12 +108,20 @@ public class BuinessController implements Controller {
 				String gcnm = request.getParameter("PJNM");
 				String gclb = request.getParameter("gclb");
 				String cntcd = request.getParameter("cntcd");
-				
 				String hldm = request.getParameter("hldm");
 				String gcdm = gclb + hldm.substring(1, 7) + cntcd.substring(0, 1);
-				String SQL = "INSERT INTO TB_PJ(PJNO,PJNMCD,PJNM,CNTCD,FPDUTY,FPDUTYPH)VALUES("
+				String SQL = "";
+				//如果是水库需要采集，具体的水库类型，大型，小型，中型
+				if("B".trim().equals(gclb)){
+					String sktype = request.getParameter("sktype");
+					SQL = "INSERT INTO TB_PJ(PJNO,PJNMCD,PJNM,CNTCD,FPDUTY,FPDUTYPH,TYPE)VALUES("
+						+ UUIdFactory.getMaxId(path, "TB_PJ", "PJNO")
+						+ ",'"+ gcdm+ "','" + gcnm + "','" + cntcd + "','','','"+sktype+"')";
+				}else{
+					SQL = "INSERT INTO TB_PJ(PJNO,PJNMCD,PJNM,CNTCD,FPDUTY,FPDUTYPH)VALUES("
 						+ UUIdFactory.getMaxId(path, "TB_PJ", "PJNO")
 						+ ",'"+ gcdm+ "','" + gcnm + "','" + cntcd + "','','')";
+				}
 				BuinessDao.insertDB(SQL, path);
 				return new ModelAndView("project/prgManage");
 			}else{
@@ -140,8 +148,16 @@ public class BuinessController implements Controller {
 			String cntcd = request.getParameter("cntcd");
 			String hldm = request.getParameter("hldm");
 			String gcdm = gclb + hldm.substring(1, 7) + cntcd.substring(0, 1);
-			String SQL = "UPDATE TB_PJ SET PJNMCD='" + gcdm + "',PJNM='" + gcnm
-					+ "',CNTCD='" + cntcd + "' WHERE PJNO=" + gclsh + "";
+			String SQL = "";
+			//如果是水库需要采集，具体的水库类型，大型，小型，中型
+			if("B".trim().equals(gclb)){
+				String sktype = request.getParameter("sktype");
+				SQL = "UPDATE TB_PJ SET PJNMCD='" + gcdm + "',PJNM='" + gcnm
+				+ "',CNTCD='" + cntcd + "',TYPE='"+sktype+"' WHERE PJNO=" + gclsh + "";
+			}else{
+				SQL = "UPDATE TB_PJ SET PJNMCD='" + gcdm + "',PJNM='" + gcnm
+				+ "',CNTCD='" + cntcd + "' WHERE PJNO=" + gclsh + "";
+			}
 			BuinessDao.updateDB(SQL, path);
 			return new ModelAndView("project/prgManage");
 		}
@@ -490,6 +506,7 @@ public class BuinessController implements Controller {
 			String selectlysx2 = "";
 			String selectzl1 = "";
 			String selectzl2 = "";
+			String gclb_s_d = "";
 			String iswhere = "";
 			if("prj".trim().equals(searchType) 
 					|| "gcxq".trim().equals(searchType) 
@@ -501,6 +518,10 @@ public class BuinessController implements Controller {
 				selectzl1 = request.getParameter("selectzl1");
 				selectzl2 = request.getParameter("selectzl2");
 				gclb_s = request.getParameter("gclb_s");
+				
+				if("B".equals(gclb_s)&&"prj".trim().equals(searchType))
+					gclb_s_d = request.getParameter("sktype");
+				request.setAttribute("gclb_s_d", gclb_s_d);
 				request.setAttribute("gclb_s",gclb_s );
 				request.setAttribute("ly_s", selectlysx1);
 				request.setAttribute("sx_s", selectlysx2);
@@ -512,7 +533,7 @@ public class BuinessController implements Controller {
 				//工程名称（输入like）、工程类别、流域、水系、一级支流、二级支流
 				iswhere = SqlFactory.makeSearchSQL(gcmc_s,"",gclb_s,"",
 							selectlysx1,selectlysx2,selectzl1,selectzl2,"",
-							"",searchType);
+							"",searchType,gclb_s_d);
 				request.setAttribute("isWhere", iswhere);
 				return new ModelAndView("project/prgManage");
 			}
@@ -523,7 +544,7 @@ public class BuinessController implements Controller {
 				
 				iswhere = SqlFactory.makeSearchSQL(gcmc_s,"",gclb_s,xqmc_s,
 						selectlysx1,selectlysx2,selectzl1,selectzl2,"",
-						"",searchType);
+						"",searchType,"");
 				request.setAttribute("xqmc_s", xqmc_s);
 				request.setAttribute("xqfl_s", xqfl_s);
 				request.setAttribute("isWhere", iswhere);
@@ -535,7 +556,7 @@ public class BuinessController implements Controller {
 				String jcsj_e = request.getParameter("jcsj_e");
 				iswhere = SqlFactory.makeSearchSQL(gcmc_s,"",gclb_s,"",
 						selectlysx1,selectlysx2,selectzl1,selectzl2,jcsj_s,
-						jcsj_e,searchType);
+						jcsj_e,searchType,"");
 				request.setAttribute("jcsj_s", jcsj_s);
 				request.setAttribute("jcsj_e", jcsj_e);
 				request.setAttribute("isWhere", iswhere);
@@ -550,7 +571,7 @@ public class BuinessController implements Controller {
 				String jcsj_e = request.getParameter("jcsj_e");
 				iswhere = SqlFactory.makeSearchSQL(bt_s,"",lb_s,"",
 						selectlysx1,selectlysx2,selectzl1,selectzl2,jcsj_s,
-						jcsj_e,searchType);
+						jcsj_e,searchType,"");
 				
 				request.setAttribute("lb", lb_s);
 				request.setAttribute("bt_s", bt_s);
