@@ -24,6 +24,13 @@
 function toBack(){
 	location.href="/project/prgManage.jsp";
 }
+function showdetailGclb(obj){
+	if(obj.value=="B"){
+		GCLB_DETAIL.style.display="inline";	
+	}else{
+		GCLB_DETAIL.style.display="none";	
+	}
+}
 function loadSelects(){
 	if(window.XMLHttpRequest){ //Mozilla
 	    var xmlHttpReq=new XMLHttpRequest();
@@ -121,40 +128,51 @@ function submiting(){
 <input type="hidden" name="cntcd" value="">
 <input type="hidden" name="hldm" value="">
 <table border="0" align="center" width="90%" cellspacing="1" bgcolor="#CCCCCC">
-	<tr height="25" >
+	<tr height="25"s>
 		<td nowrap align="center" class="title">工程名称</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="PJNM" value="" /></td>
 		<td nowrap align="center" class="title">工程类别</td>
-		<td  bgcolor="#FFFFFF">
+		<td nowrap bgcolor="#FFFFFF">
 			<DIV id="GCLB"></DIV>
+		</td>
+		<td nowrap bgcolor="#FFFFFF"  width="150">
+			<DIV id="GCLB_DETAIL" style="display:none">
+				<select name="sktype">
+					<option value="大型">大型</option>
+					<option value="中型">中型</option>
+					<option value="小(1)型">小(1)型</option>
+					<option value="小(2)型">小(2)型</option>
+					<option value="小(2)型">尾矿库</option>
+				</select>
+			</DIV>
 		</td>
 	</tr>
 	<tr align="left" class="title_center" height="30">
 		<td colspan="2">所属地区</td>
-		<td colspan="2">所属流域水系</td>
+		<td colspan="3">所属流域水系</td>
 	</tr>
 	<tr>
 		<td nowrap align="center" class="title">省/直辖市</td>
 		<td bgcolor="#FFFFFF"><DIV id="SHENG"></DIV></td>
 		<td nowrap align="center" class="title">流域</td>
-		<td bgcolor="#FFFFFF" ><DIV id="LY"></DIV></td>
+		<td bgcolor="#FFFFFF" colspan="2"><DIV id="LY"></DIV></td>
 	</tr>
 	<tr>
 		<td nowrap align="center" class="title">市/地区</td>
 		<td  bgcolor="#FFFFFF"><DIV id="SHI"></DIV></td>
 		<td nowrap align="center" class="title">水系</td>
-		<td  bgcolor="#FFFFFF"><DIV id="SX"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2"><DIV id="SX"></DIV></td>
 	</tr>
 	<tr align="left" class="title2" height="30">
 		<td nowrap align="center" class="title">区/县</td>
 		<td  bgcolor="#FFFFFF"><DIV id="XIAN"></DIV></td>
 		<td nowrap align="center" class="title">一级支流</td>
-		<td  bgcolor="#FFFFFF"><DIV id="ZL1"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2"><DIV id="ZL1"></DIV></td>
 	</tr>
 	<tr>
 		<td  bgcolor="#FFFFFF" colspan="2"></td>
 		<td nowrap align="center" class="title">二级支流</td>
-		<td  bgcolor="#FFFFFF"><DIV id="ZL2"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2"><DIV id="ZL2"></DIV></td>
 	</tr>
 </table>
 </form>

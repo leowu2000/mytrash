@@ -48,6 +48,9 @@ function toAdd(){
 	document.forms[0].action="/project/xq/gqxqAdd.jsp";
 	document.forms[0].submit();
 }
+function showdetailGclb(obj){
+	
+}
 function toEdit(){
 	var result="";
 	var str = document.forms[0].RECORDID;

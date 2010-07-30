@@ -7,6 +7,7 @@
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
     PrjBean bean = (PrjBean)request.getAttribute("bean");
+    String pjno = bean.getPJNO();
     String val=bean.getPJNMCD();
     String cntcd = bean.getCNTCD();
     
@@ -28,12 +29,20 @@
 function toBack(){
 	location.href="/project/prgManage.jsp";
 }
+function showdetailGclb(obj){
+	if(obj.value=="B"){
+		GCLB_DETAIL.style.display="inline";	
+	}else{
+		GCLB_DETAIL.style.display="none";	
+	}
+}
 function loadSelect(){
 	if(window.XMLHttpRequest){ //Mozilla
 	    var xmlHttpReq=new XMLHttpRequest();
 	  }else if(window.ActiveXObject){
 	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	  }
+
 	 xmlHttpReq.open("GET", "/BaseServlet?type=load&from=add&val=<%=val%>&cntcd=<%=cntcd%>", false);
 	 xmlHttpReq.send(null);
 	 var result = xmlHttpReq.responseText;
@@ -46,8 +55,15 @@ function loadSelect(){
 	 SX.innerHTML=val[5];
 	 ZL1.innerHTML=val[6];
 	 ZL2.innerHTML=val[7];
+
+	 if("B"=="<%=val%>".substring(0,1)){
+		 xmlHttpReq.open("GET", "/BaseServlet?type=searchGclbdetail&from=add&val<%=val%>&pjno=<%=pjno%>&cntcd=<%=cntcd%>", false);
+		 xmlHttpReq.send(null);
+		 GCLB_DETAIL.innerHTML=xmlHttpReq.responseText;
+	}
 }
 function changeValue(style,type,obj){
+
 	if(window.XMLHttpRequest){ //Mozilla
     	var xmlHttpReq=new XMLHttpRequest();
 	  }else if(window.ActiveXObject){
@@ -133,33 +149,36 @@ function submiting(){
 		<td  bgcolor="#FFFFFF">
 			<DIV id="GCLB"></DIV>
 		</td>
+		<td nowrap bgcolor="#FFFFFF"  width="150">
+			<DIV id="GCLB_DETAIL"></DIV>
+		</td>
 	</tr>
 	<tr align="left" class="title_center" height="30">
 		<td colspan="2">所属地区</td>
-		<td colspan="2">所属流域水系</td>
+		<td colspan="3">所属流域水系</td>
 	</tr>
 	<tr>
 		<td nowrap align="center" class="title">省/直辖市</td>
 		<td bgcolor="#FFFFFF"><DIV id="SHENG"></DIV></td>
 		<td nowrap align="center" class="title">流域</td>
-		<td bgcolor="#FFFFFF" ><DIV id="LY"></DIV></td>
+		<td bgcolor="#FFFFFF" colspan="2"><DIV id="LY"></DIV></td>
 	</tr>
 	<tr>
 		<td nowrap align="center" class="title">市/地区</td>
 		<td  bgcolor="#FFFFFF"><DIV id="SHI"></DIV></td>
 		<td nowrap align="center" class="title">水系</td>
-		<td  bgcolor="#FFFFFF"><DIV id="SX"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2"><DIV id="SX"></DIV></td>
 	</tr>
 	<tr align="left" class="title2" height="30">
 		<td nowrap align="center" class="title">区/县</td>
 		<td  bgcolor="#FFFFFF"><DIV id="XIAN"></DIV></td>
 		<td nowrap align="center" class="title">一级支流</td>
-		<td  bgcolor="#FFFFFF"><DIV id="ZL1"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2"><DIV id="ZL1"></DIV></td>
 	</tr>
 	<tr>
 		<td  bgcolor="#FFFFFF" colspan="2"></td>
 		<td nowrap align="center" class="title">二级支流</td>
-		<td  bgcolor="#FFFFFF"><DIV id="ZL2"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2"><DIV id="ZL2"></DIV></td>
 	</tr>
 </table>
 </form>

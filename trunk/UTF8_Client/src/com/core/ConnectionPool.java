@@ -9,7 +9,7 @@ public class ConnectionPool {
 	
 	public static void main(String args[]) throws Exception {
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-		String dburl = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=f:\\hpjdb.mdb";
+		String dburl = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=e:\\workspace\\Client\\WebContent\\hpjdb.mdb";
 		Connection conn = DriverManager.getConnection(dburl);
 		Statement stmt = conn.createStatement();
 //		ResultSet rs = stmt.executeQuery("select Mid('AAA00001',2,6) ,ctcd from tb_lysx1");
@@ -21,7 +21,9 @@ public class ConnectionPool {
 //				aa="";
 			System.out.println("INSERT INTO TB_GCLB(GCFLDM,GCFLMC)VALUES('"+rs.getString("GCFLDM") + "','" + rs.getString("GCFLMC").trim()+"');");
 		}
+		
 		rs.close();
+//		stmt.execute("INSERT INTO TB_GCLJ VALUES('1','毕节市','2','中型水库','倒天河水库','blank_3144.html','blank_1844.html')");
 		stmt.close();
 		conn.close();
 	}

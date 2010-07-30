@@ -9,7 +9,7 @@
   <frame src="top.htm" scrolling="no">
   <frameset rows="*" cols="175,*" framespacing="0" frameborder="NO" border="0">
   	<frame src="leftmenu.htm" name="leftFrame" scrolling="no" noresize>
-    <frame src="/buiness.do?actionType=login" name="mainFrame" scrolling="auto" noresize>
+    <frame src="rightmenu.jsp" name="mainFrame" scrolling="auto" noresize>
     <!-- <frame id="DoAction" name="DoAction" src="About:_blank" noresize> -->
   </frameset>
 </frameset>

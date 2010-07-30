@@ -399,6 +399,7 @@ function loadSearchSelect(mc,lb,xqfl,ly,sx,yjzl,ejzl,type){
 	 var val = result.split(";");
 	 if("gc"==type){
 		 GCLB_S.innerHTML=val[1];
+		 //GCLB_DETAIL.innerHTML=val[2];
 	 }else if("xq"==type){
 		 GCMC_S.innerHTML=val[0];
 		 GCLB_S.innerHTML=val[1];

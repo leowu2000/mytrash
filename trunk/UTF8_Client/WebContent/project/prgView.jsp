@@ -2,11 +2,14 @@
 <%@ page import="com.buiness.dao.*" %>
 <%@ page import="com.buiness.form.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.util.*" %>
 <% 
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
     response.setDateHeader("Expires", 0); 
     PrjBean bean = (PrjBean)request.getAttribute("bean");
+
+    String pjno = bean.getPJNO();
     String val=bean.getPJNMCD();
     String cntcd = bean.getCNTCD();
     
@@ -34,19 +37,26 @@ function loadSelect(){
 	  }else if(window.ActiveXObject){
 	    var xmlHttpReq=new ActiveXObject("MSXML2.XMLHTTP.3.0");
 	  }
-	 xmlHttpReq.open("GET", "/BaseServlet?type=viewload&val=<%=val%>&cntcd=<%=cntcd%>", false);
+	 xmlHttpReq.open("GET", "/BaseServlet?type=viewload&val=<%=val%>&cntcd=<%=cntcd%>&pjno=<%=pjno%>", false);
 	 xmlHttpReq.send(null);
 	 var result = xmlHttpReq.responseText;
 	 var val = result.split(";");
 	 SHENG.innerHTML=val[0];
 	 SHI.innerHTML=val[1];
 	 XIAN.innerHTML=val[2];
-	 GCLB.innerHTML=val[3];
+	 GCLB.innerHTML=val[3]+val[8];
 	 LY.innerHTML=val[4];
 	 SX.innerHTML=val[5];
 	 ZL1.innerHTML=val[6];
 	 ZL2.innerHTML=val[7];
 }
+
+
+
+function toInternetUrl(){
+	window.open("/project/show.jsp?pjno=<%=pjno%>","","height=550,width=800,status=0,toolbar=no,menubar=no,location=no,scrollbars=yes,top=100,left=100,resizable=yes");
+}
+
 </script>
 <body onload="loadSelect()">
 <table width="90%" align="center">
@@ -90,9 +100,18 @@ function loadSelect(){
 		<td  bgcolor="#FFFFFF"><DIV id="ZL1"></DIV></td>
 	</tr>
 	<tr height="30">
-		<td  bgcolor="#FFFFFF" colspan="2"></td>
 		<td nowrap align="center" class="title">二级支流</td>
 		<td  bgcolor="#FFFFFF"><DIV id="ZL2"></DIV></td>
+		<td  bgcolor="#FFFFFF" colspan="2" align="center">
+		<%
+			if(bean.getPJNMCD().substring(0,1).trim().toUpperCase().equals("B")){
+		%>
+		<a href="#" onclick="javascript:toInternetUrl();return false;"><b>联机查看水库详细信息</b></a>
+		<%}else{ %>
+		
+		<%} %>
+		</td>
+		
 	</tr>
 </table>
 </form>

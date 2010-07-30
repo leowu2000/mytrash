@@ -9,8 +9,16 @@ public class PrjBean {
 	private String CNTCD = ""; // 行政区划代码
 	private String FPDUTY = ""; // 防汛责任人
 	private String FPDUTYPH = ""; // 防汛责任人电话
+	private String TYPE="";
 	
-	
+	public String getTYPE() {
+		return TYPE;
+	}
+
+	public void setTYPE(String tYPE) {
+		TYPE = tYPE;
+	}
+
 	public String getPJNO() {
 		return PJNO;
 	}
@@ -68,6 +76,7 @@ public class PrjBean {
 			bean.setFPDUTYPH(rs.getString("FPDUTYPH"));
 			bean.setPJNM(rs.getString("PJNM"));
 			bean.setPJNMCD(rs.getString("PJNMCD"));
+			bean.setTYPE(rs.getString("TYPE"));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
