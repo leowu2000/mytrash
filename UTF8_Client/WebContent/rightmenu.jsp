@@ -16,7 +16,7 @@ body {
 <body>
 <br>
 <table width="100%" align="center">
-	<tr><td align="center" ><span class="style4">欢迎试用实时工情信息采集传输管理系统</span></td></tr>
+	<tr><td align="center" ><span class="style4">欢迎使用实时工情信息采集传输管理系统</span></td></tr>
 </table>
 <br>
 <p style="MARGIN: 20px 5px; "><font size="2"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
