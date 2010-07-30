@@ -101,8 +101,8 @@ function changeGc(){
       <tr align="center">
         <td bgcolor="#FFFFFF" align="center" colspan="6">
         	<a href="#" name="a_gcjj" id="a_gcjj" target="result"><font style="font-size:14px">工程简介</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<a href="#" name="a_fxya" id="a_fxya" target="result"><font style="font-size:14px">查看基本特性</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" name="a_gctp" id="a_gctp" target="result"><font style="font-size:14px">查看相关图片</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="#" name="a_fxya" id="a_fxya" target="result"><font style="font-size:14px">基本特性</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" name="a_gctp" id="a_gctp" target="result"><font style="font-size:14px">相关图片</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <% if("true".equals(session.getAttribute("isAdmin").toString())){ %>
         	<a href="#" name="a_gctp1" id="a_gctp1" target="result"><font style="font-size:14px">图片维护</font></a>
         <%} %>

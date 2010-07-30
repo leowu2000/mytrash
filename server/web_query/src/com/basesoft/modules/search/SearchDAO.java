@@ -1073,6 +1073,23 @@ public class SearchDAO extends CommonDAO{
 	}
 	
 	/**
+	 * 获取工程链接信息
+	 * @param sxmc 市县名称
+	 * @param lxmc 类型名称
+	 * @param gcmc 工程名称
+	 * @return
+	 */
+	public Map getGcxx(String sxmc, String lxmc, String gcmc){
+		Map map = new HashMap();
+		String sql = "select * from TB_GCLJ where SXMC='" + sxmc + "' and GCMC='" + gcmc + "'";
+		List list = jdbcTemplate.queryForList(sql);
+		if(list.size()>0){
+			map = (Map)list.get(0);
+		}
+		return map;
+	}
+	
+	/**
 	 * 获取首页面列表,取最新的10条数据
 	 * @return list
 	 */
