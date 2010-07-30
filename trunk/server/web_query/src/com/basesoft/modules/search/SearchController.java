@@ -312,6 +312,25 @@ public class SearchController extends CommonController {
 			response.getWriter().write(sb.toString());
 			response.getWriter().close();
 			return null;
+		}else if("client_gcxxajax".equals(action)){//工程选择ajax
+			String sxmc = ServletRequestUtils.getStringParameter(request, "sxmc", "1");
+			String lxmc = ServletRequestUtils.getStringParameter(request, "lxmc", "1");
+			String skmc = ServletRequestUtils.getStringParameter(request, "skmc", "");
+			
+			Map mapGcxx = searchDAO.getGcxx(sxmc, lxmc, skmc);
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append(mapGcxx.get("GCLJ"))
+			  .append(";")
+			  .append(mapGcxx.get("GCLJ2"));
+			
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expiresponse", 0L);
+			response.setContentType("application/*;charset=utf-8");
+			response.getWriter().write(sb.toString());
+			response.getWriter().close();
+			return null;
 		}else if("search_index".equals(action)){//首页面左侧列表
 			mv = new ModelAndView("modules/result/result_index");
 			
