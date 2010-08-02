@@ -6,7 +6,7 @@
 <%@ include file="/common/session.jsp"%>
 <html>
 <head>
-<title>实时工情信息采集传输管理</title>
+<title>毕节地区防汛抗旱信息采集传输管理系统</title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="/common/css/style.css" rel="stylesheet" type="text/css">
 <script Language="JavaScript" src="/common/js/common.js"></script>

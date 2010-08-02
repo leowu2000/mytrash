@@ -212,12 +212,12 @@ function rcheckall2() {
 		<td bgcolor=#FFFFFF>
 			<select name="LB">
 				<option value="" <%if("".trim().equals(lb)){ %>selected<%} %>>--</option>
-				<option value="险情" <%if("险情".trim().equals(lb)){ %>selected<%} %>>工程险情</option>
-				<option value="运行状态" <%if("运行状态".trim().equals(lb)){ %>selected<%} %>>运行状态</option>
+				<option value="险情" <%if("险情".trim().equals(lb)){ %>selected<%} %>>险 情</option>
+				<option value="运行状态" <%if("运行状态".trim().equals(lb)){ %>selected<%} %>>工 情</option>
 				<option value="灾情" <%if("灾情".trim().equals(lb)){ %>selected<%} %>>灾  情</option>
 				<option value="旱情" <%if("旱情".trim().equals(lb)){ %>selected<%} %>>旱  情</option>
-				<option value="防汛行动" <%if("防汛行动".trim().equals(lb)){ %>selected<%} %>>防汛行动</option>
-				<option value="防汛简报" <%if("防汛简报".trim().equals(lb)){ %>selected<%} %>>防汛简报</option>
+				<option value="防汛行动" <%if("防汛行动".trim().equals(lb)){ %>selected<%} %>>行 动</option>
+				<option value="防汛简报" <%if("防汛简报".trim().equals(lb)){ %>selected<%} %>>简 报</option>
 			</select>
 		</td>
 		<td nowrap class="title">填报时间:</td>

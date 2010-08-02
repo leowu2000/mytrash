@@ -54,7 +54,7 @@ function toBack(){
 </script>
 <body scroll="auto">
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">修改防汛行动</span></td></tr>
+	<tr><td align="center" ><span  class="style4">修改防汛抗旱行动</span></td></tr>
 </table>
 <form name="frm" action="/buiness.do"  method="post">
 <INPUT type='hidden' name='sessiontime' value="<%=_nowtime%>">
