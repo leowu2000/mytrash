@@ -80,11 +80,11 @@ function showDetail(id,tbname){
 		//window.frames["detailFrame"].location.href="/report/fxxdView.jsp?RPJINCD="+id+"&fromwhere=upload";
 		src="/report/fxxdView.jsp?RPJINCD="+id+"&fromwhere=upload";
 	}
-	if("TB_SD"==tbname){//旱情
+	if("TB_QT"==tbname){//旱情
 		//window.frames["detailFrame"].location.href="/report/hqxxView.jsp?RPJINCD="+id+"&fromwhere=upload";
 		src="/report/hqxxView.jsp?RPJINCD="+id+"&fromwhere=upload";
 	}
-	if("TB_QT"==tbname){//灾情
+	if("TB_SD"==tbname){//灾情
 		//window.frames["detailFrame"].location.href="/report/zqbgView.jsp?RPJINCD="+id+"&fromwhere=upload";
 		src="/report/zqbgView.jsp?RPJINCD="+id+"&fromwhere=upload";
 	}

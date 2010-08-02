@@ -122,7 +122,7 @@ function SearchSubmit(){
 %> 
 <body  onload="loadSearchSelect('<%=gcmc_s %>','<%=gclb_s %>','','<%=ly_s %>','<%=sx_s %>','<%=yjzl_s %>','<%=ejzl_s %>','yx')">
 <table width="95%" align="center">
-	<tr><td align="center" ><span  class="style4">工程运行状态</span></td></tr>
+	<tr><td align="center" ><span  class="style4">工情信息</span></td></tr>
 </table>
 <form name="frm" action="" method="post">
 <table border="0" align="center" height="30" width="95%" cellspacing="1" bgcolor="#CCCCCC">

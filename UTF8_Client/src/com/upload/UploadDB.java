@@ -234,7 +234,7 @@ public class UploadDB {
 			local_Conn = ConnectionPool.getConnection(path);//打开将要被传送的信息所在的数据库中的工程表
 			upload_Conn = ConnectionPool.getUploadConnection(path);//'打开上传数据库（upload.mdb）中的工程表
 //			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_pjrcn where PJRNO="+pjno+")";
-			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_stdnc where PJRNO="+pjno+") and pjno not in ("+getPJIDFromTBPJ(upload_Conn)+")";
+			String sSQL = "SELECT * from tb_pj where pjno=(select PJNO from tb_pjrcn where PJRNO="+pjno+") and pjno not in ("+getPJIDFromTBPJ(upload_Conn)+")";
 			Statement local_Stmt = local_Conn.createStatement();
 			
 			ResultSet local_Rs = local_Stmt.executeQuery(sSQL);

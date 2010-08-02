@@ -71,7 +71,7 @@ function getGcmessageForyx(id){
 </script>
 <body>
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">新增运行状态信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">新增工情信息</span></td></tr>
 </table>
 <form name="frm" method="POST"> 
 <jsp:include page="hiddenParameters.jsp"></jsp:include>

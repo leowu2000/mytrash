@@ -59,7 +59,7 @@ function toBack(){
 <body scroll="auto">
 
 <table width="90%" align="center">
-	<tr><td align="center" ><span  class="style4">查看运行状态信息</span></td></tr>
+	<tr><td align="center" ><span  class="style4">查看工情信息</span></td></tr>
 </table>
 
 <form name="frm" method="POST"> 
