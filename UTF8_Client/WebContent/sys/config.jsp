@@ -198,7 +198,7 @@ function pre_submit(){
 	</tr>
 	<tr height="25" >
 		<td nowrap class="title">服务器名称</td>
-		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_NAME" value="<%=bean.getSERVER_NAME()==""?"毕节行署服务器":bean.getSERVER_NAME() %>"/><font color="red">*</font></td>
+		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_NAME" value="<%=bean.getSERVER_NAME()==""?"毕节地区防汛办":bean.getSERVER_NAME() %>"/><font color="red">*</font></td>
 		<td nowrap class="title">服务器地址</td>
 		<td bgcolor="#FFFFFF"><input type="text" name="SERVER_IP" value="<%=bean.getSERVER_IP()==""?ip:bean.getSERVER_IP() %>"/><font color="red">*</font></td>
 		<td nowrap class="title">服务器端口</td>
