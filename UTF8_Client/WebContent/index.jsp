@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>实时工情信息采集传输管理</title>
+<title>毕节地区防汛抗旱信息采集传输管理系统</title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 </head>
 <frameset rows="96,*" cols="*" frameborder="NO" border="2" framespacing="0" > 

@@ -30,12 +30,12 @@ public class UploadDB {
 			conn = ConnectionPool.getConnection(path);
 			Statement stmt = conn.createStatement();
 			// 查询本的数据库中的有效记录＝所有记录运行表、险情表、防汛行动、旱情、灾情、简报
-			String sql = " select * from (SELECT PJNM  as title, WTDPDT,'TB_PJR_M' as FENLEI,WTDPCD,GCFLDM,PJRNO as num, 'TB_PJRCN' as TbName,'运行状态' as TbCname FROM TB_PJRCN  UNION"
+			String sql = " select * from (SELECT PJNM  as title, WTDPDT,'TB_PJR_M' as FENLEI,WTDPCD,GCFLDM,PJRNO as num, 'TB_PJRCN' as TbName,'工情' as TbCname FROM TB_PJRCN  UNION"
 					+ " SELECT DNCNM as title, WTDPDT, 'TB_STDNC_M' as FENLEI,WTDPCD,XQFLDM,DNCNO as num,'TB_STDNC' as TbName,'险情' as TbCname  FROM TB_STDNC   UNION "
-					+ " SELECT WTTT  as title, WTDT as wtdpdt,'TB_FPACTI_M' as FENLEI,WTDPCD,NULL,RPJINCD as num,'TB_FPACTI' as TbName,'防汛行动' as TbCname  FROM TB_FPACTI UNION "
+					+ " SELECT WTTT  as title, WTDT as wtdpdt,'TB_FPACTI_M' as FENLEI,WTDPCD,NULL,RPJINCD as num,'TB_FPACTI' as TbName,'行动' as TbCname  FROM TB_FPACTI UNION "
 					+ " SELECT WTTT  as title, WTDT as wtdpdt,'TB_SD_M' as FENLEI,WTDPCD, NULL,RPJINCD as num,'TB_SD' as TbName,'灾情' as TbCname  FROM TB_SD UNION "
 					+ " SELECT WTTT  as title, WTDT as wtdpdt,'TB_QT_M' as FENLEI,WTDPCD,NULL,RPJINCD as num, 'TB_QT' as TbName,'旱情' as TbCname  FROM TB_QT UNION "
-					+ " SELECT '第' + trim(cstr(issue)) + '期'  as title, WTDT as wtdpdt,'TB_FXJB_M' as FENLEI,WTDPCD, NULL, Issue as num, 'TB_FXJB' as TbName,'防汛简报' as TbCname  FROM TB_FXJB ) "
+					+ " SELECT '第' + trim(cstr(issue)) + '期'  as title, WTDT as wtdpdt,'TB_FXJB_M' as FENLEI,WTDPCD, NULL, Issue as num, 'TB_FXJB' as TbName,'简报' as TbCname  FROM TB_FXJB ) "
 					+ " order by wtdpdt desc";
 			ResultSet rs = stmt.executeQuery(sql);
 			
@@ -239,7 +239,7 @@ public class UploadDB {
 			
 			ResultSet local_Rs = local_Stmt.executeQuery(sSQL);
 			copyDataFromRs("tb_pj",sSQL,local_Conn,upload_Conn);
-			OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t运行相关工程数据数据成功...");
+			OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t工情相关工程数据数据成功...");
 	        //将传送的工程信息拷贝到上传数据库upload.mdb中工程表
 			//打开保存传送工程运行信息的工程运行表
 			sSQL = "select * from tb_pjrcn where pjrno="+pjno;
@@ -248,7 +248,7 @@ public class UploadDB {
 			while(local_Rs.next()){
 				//拷备工程运行信息
 				copyDataFromRs("tb_pjrcn",sSQL,local_Conn,upload_Conn);
-				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t工程运行\t数据成功...");
+				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t工情行\t数据成功...");
 				//拷备运行表
 				String GCFLDM = local_Rs.getString("GCFLDM");
 				int PJRNO = local_Rs.getInt("PJRNO");
@@ -258,7 +258,7 @@ public class UploadDB {
 				//拷备多媒体表
 				detailsql = "select * from tb_pjr_m WHERE pjrno="+PJRNO;
 					copyData(path,"tb_pjr_m","PJRNO",detailsql,local_Conn,upload_Conn);	
-					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t工程运行\t多媒体数据成功...");
+					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t工情\t多媒体数据成功...");
 			}
 			OutputLog.outputLog(path, "---------------------------------------------------------------------");
 		} catch (Exception ex) {
@@ -286,10 +286,10 @@ public class UploadDB {
 			ResultSet local_Rs = local_Stmt.executeQuery(sSQL);
 			if(local_Rs.next()){
 				copyDataFromRs("tb_fxjb",sSQL,local_Conn,upload_Conn);
-				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t防汛简报\t数据成功...");
+				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t简报\t数据成功...");
 				String detailSQL = "SELECT * from tb_fxjb_m where RPJINCD="+num;
 					copyData(path,"tb_fxjb_m","RPJINCD",detailSQL,local_Conn,upload_Conn);
-					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t防汛简报\t多媒体数据成功...");
+					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t简报\t多媒体数据成功...");
 			}
 			OutputLog.outputLog(path, "---------------------------------------------------------------------");
 		} catch (Exception ex) {
@@ -318,10 +318,10 @@ public class UploadDB {
 			ResultSet local_Rs = local_Stmt.executeQuery(sSQL);
 			if(local_Rs.next()){
 				copyDataFromRs("TB_FPACTI",sSQL,local_Conn,upload_Conn);
-				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t防汛行动\t数据成功...");
+				OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t行动\t数据成功...");
 				String detailSQL = "SELECT * from TB_FPACTI_M where RPJINCD="+num;
 					copyData(path,"TB_FPACTI_M","RPJINCD",detailSQL,local_Conn,upload_Conn);
-					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t防汛行动\t多媒体数据成功...");
+					OutputLog.outputLog(path, UtilDateTime.nowDateStringCN()+"\t导出\t行动\t多媒体数据成功...");
 			}
 			OutputLog.outputLog(path, "---------------------------------------------------------------------");
 		} catch (Exception ex) {
@@ -423,16 +423,16 @@ public class UploadDB {
 				if("旱情".trim().equals(fenli)){
 					copyQTData(path,num);
 				}
-				if("防汛简报".trim().equals(fenli)){
+				if("简报".trim().equals(fenli)){
 					copyFXJBData(path,num);
 				}
-				if("运行状态".trim().equals(fenli)){
+				if("工情".trim().equals(fenli)){
 					CopyRunData(path,num);
 				}
 				if("险情".trim().equals(fenli)){
 					CopyDangerData(path,num);
 				}
-				if("防汛行动".trim().equals(fenli)){
+				if("行动".trim().equals(fenli)){
 					copyFPACTIData(path,num);
 				}
 			}

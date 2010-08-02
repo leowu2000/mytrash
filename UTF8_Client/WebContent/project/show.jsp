@@ -20,7 +20,7 @@
 	String ip = StringUtils.getProperty(iniPath, "IP_SH"); //地区系统IP地址
 
 	String targetURL = "http://" + ip;
-	System.out.println(targetURL);
+	//System.out.println(targetURL);
 
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -43,7 +43,7 @@ function ajaxRequest(){
 	 xmlHttpReq.open("GET", "<%=targetURL%>/search.do?action=client_gcxxajax&sxmc="+encodeURI(encodeURI('<%=sxmc%>'))+"&skmc="+encodeURI(encodeURI('<%=bean.getPJNM()%>')), false);
 	 xmlHttpReq.send(null);
 	 var result = xmlHttpReq.responseText;
-	 alert(result);
+	// alert(result);
 	 var htmls = result.split(";");
 	 window.frames["SHOWCONTENT"].location.href="<%=targetURL%>/modules/gcdata/"+htmls[0];
 	 THEDIV.innerHTML="<table width='100%'><tr>"
