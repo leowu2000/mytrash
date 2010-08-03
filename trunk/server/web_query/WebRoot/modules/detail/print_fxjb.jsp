@@ -109,7 +109,7 @@
 <%
 		for(int i=0;i<listFxjb_m.size();i++){
 			Map mapFxjb_m = (Map)listFxjb_m.get(i);
-			String fileName = mapFxjb_m.get("TITLE")==null?"":mapFxjb_m.get("TITLE").toString().trim() + "." + mapFxjb_m.get("WJGS")==null?"":mapFxjb_m.get("WJGS").toString().trim();
+			String fileName = mapFxjb_m.get("TITLE")==null?"":mapFxjb_m.get("TITLE").toString().trim() + "." + (mapFxjb_m.get("WJGS")==null?"":mapFxjb_m.get("WJGS").toString().trim());
 %>
           <a href="media.do?action=download&tablename=TB_FXJB_M&media_id=<%=mapFxjb_m.get("ZLBM")%>&filename=<%=fileName %>"><%=fileName %></a> 
 <%
